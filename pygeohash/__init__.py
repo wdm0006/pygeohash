@@ -8,13 +8,14 @@
 
 """
 
-from pygeohash.distances import geohash_approximate_distance
-from pygeohash.geohash import encode, decode, decode_exactly
+from .distances import geohash_approximate_distance, geohash_haversine_distance
+from .geohash import encode, decode, decode_exactly
 
 __author__ = 'willmcginnis'
 
 __all__ = [
     'geohash_approximate_distance',
+    'geohash_haversine_distance',
     'encode',
     'decode',
     'decode_exactly'

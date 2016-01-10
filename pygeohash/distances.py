@@ -8,6 +8,9 @@
 
 """
 
+import math
+from pygeohash.geohash import decode
+
 __author__ = 'Will McGinnis'
 
 # the distance between geohashes based on matching characters, in meters.
@@ -56,3 +59,28 @@ def geohash_approximate_distance(geohash_1, geohash_2):
         matching = 10
 
     return _PRECISION[matching]
+
+
+def geohash_haversine_distance(geohash_1, geohash_2):
+    """
+    converts the geohashes to lat/lon and then calculates the haversine great circle distance.
+
+    :param geohash_1:
+    :param geohash_2:
+    :return:
+    """
+
+    lat_1, lon_1 = decode(geohash_1)
+    lat_2, lon_2 = decode(geohash_2)
+
+    R = 6371000
+    phi_1 = math.radians(lat_1)
+    phi_2 = math.radians(lat_2)
+
+    delta_phi = math.radians(lat_2-lat_1)
+    delta_lambda = math.radians(lon_2-lon_1)
+
+    a = math.sin(delta_phi/2.0) * math.sin(delta_phi/2.0) + math.cos(phi_1) * math.cos(phi_2) * math.sin(delta_lambda/2) * math.sin(delta_lambda/2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+    return R * c
