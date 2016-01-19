@@ -10,6 +10,7 @@
 
 from .distances import geohash_approximate_distance, geohash_haversine_distance
 from .geohash import encode, decode, decode_exactly
+from .stats import mean, northern, southern, eastern, western
 
 __author__ = 'willmcginnis'
 
@@ -18,5 +19,10 @@ __all__ = [
     'geohash_haversine_distance',
     'encode',
     'decode',
-    'decode_exactly'
+    'decode_exactly',
+    'mean',
+    'northern',
+    'southern',
+    'eastern',
+    'western'
 ]
