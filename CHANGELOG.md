@@ -1,5 +1,5 @@
-v1.1.0-dev
-==========
+v1.1.0
+======
 
  * Added stats module
  * [stats] added mean geohash
