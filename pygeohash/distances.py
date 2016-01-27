@@ -27,16 +27,24 @@ _PRECISION = {
     9: 3.71,
     10: 0.6,
 }
+__base32 = '0123456789bcdefghjkmnpqrstuvwxyz'
 
 
-def geohash_approximate_distance(geohash_1, geohash_2):
+def geohash_approximate_distance(geohash_1, geohash_2, check_validity=False):
     """
-    Returns the approximate great-circle distance between two geohashes.
+    Returns the approximate great-circle distance between two geohashes in meters.
 
     :param geohash_1:
     :param geohash_2:
     :return:
     """
+
+    if check_validity:
+        if len([x for x in geohash_1 if x in __base32]) != len(geohash_1):
+            raise ValueError('Geohash 1: %s is not a valid geohash' % (geohash_1, ))
+
+        if len([x for x in geohash_2 if x in __base32]) != len(geohash_2):
+            raise ValueError('Geohash 2: %s is not a valid geohash' % (geohash_2, ))
 
     # normalize the geohashes to the length of the shortest
     len_1 = len(geohash_1)
@@ -63,7 +71,7 @@ def geohash_approximate_distance(geohash_1, geohash_2):
 
 def geohash_haversine_distance(geohash_1, geohash_2):
     """
-    converts the geohashes to lat/lon and then calculates the haversine great circle distance.
+    converts the geohashes to lat/lon and then calculates the haversine great circle distance in meters.
 
     :param geohash_1:
     :param geohash_2:

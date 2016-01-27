@@ -27,7 +27,7 @@ To use pygeohash:
     pgh.decode('ezs42')
     # >>> ('42.6', '-5.6')
     
-    pgh.geohash_approximate_distance('shi3u', 'sh83n')
+    pgh.geohash_approximate_distance('bcd3u', 'bc83n')
     # >>> 625441
 
 Installation

@@ -15,12 +15,21 @@ class TestGeohash(unittest.TestCase):
     def test_decode(self):
         self.assertEqual(pgh.decode('ezs42'), (42.6, -5.6))
 
+    def test_check_validity(self):
+        exception_raised = False
+        try:
+            pgh.geohash_approximate_distance('shibu', 'shiba', check_validity=True)
+        except ValueError:
+            exception_raised = True
+
+        self.assertTrue(exception_raised)
+
     def test_distance(self):
         # test the fast geohash distance approximations
-        self.assertEqual(pgh.geohash_approximate_distance('shi3u', 'sh83n'), 625441)
-        self.assertEqual(pgh.geohash_approximate_distance('shi3uasd', 'shi3n'), 19545)
-        self.assertEqual(pgh.geohash_approximate_distance('shi3u', 'shi3uasd'), 3803)
-        self.assertEqual(pgh.geohash_approximate_distance('shi3ua', 'shi3uasdub'), 610)
+        self.assertEqual(pgh.geohash_approximate_distance('bcd3u', 'bc83n'), 625441)
+        self.assertEqual(pgh.geohash_approximate_distance('bcd3uasd', 'bcd3n'), 19545)
+        self.assertEqual(pgh.geohash_approximate_distance('bcd3u', 'bcd3uasd'), 3803)
+        self.assertEqual(pgh.geohash_approximate_distance('bcd3ua', 'bcd3uasdub'), 610)
 
         # test the haversine great circle distance calculations
         self.assertAlmostEqual(pgh.geohash_haversine_distance('testxyz', 'testwxy'), 6339.483649071294, places=4)
