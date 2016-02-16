@@ -57,3 +57,9 @@ class TestGeohash(unittest.TestCase):
         # west
         west = pgh.western(data)
         self.assertEqual(west, '6zurypzpgxcz')
+
+        var = pgh.variance(data)
+        self.assertAlmostEqual(var, 30910779278721.996, places=2)
+
+        std = pgh.std(data)
+        self.assertAlmostEqual(std, 5559746.332227937, places=4)
