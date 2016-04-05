@@ -1,3 +1,9 @@
+v1.2.0
+======
+
+ * [stats] added variance
+ * [stats] added standard deviation
+ 
 v1.1.0
 ======
 
