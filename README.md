@@ -1,4 +1,3 @@
-=========
 pygeohash
 =========
 
@@ -37,7 +36,7 @@ Pygeohash has no requirements outside of the python stdlib, and aims to keep it 
 
     pip install pygeohash
    
-Liscense
+License
 ========
 
 A portion of this codebase (geohash.py), is from Leonard Norrgard's module, which carries the following license:
