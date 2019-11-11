@@ -10,6 +10,7 @@
 
 import math
 from pygeohash.geohash import decode
+from pygeohash.geohash import decode_exactly
 
 __author__ = 'Will McGinnis'
 
@@ -78,8 +79,8 @@ def geohash_haversine_distance(geohash_1, geohash_2):
     :return:
     """
 
-    lat_1, lon_1 = decode(geohash_1)
-    lat_2, lon_2 = decode(geohash_2)
+    lat_1, lon_1, _, _ = decode_exactly(geohash_1)
+    lat_2, lon_2, _, _ = decode_exactly(geohash_2)
 
     R = 6371000
     phi_1 = math.radians(lat_1)
