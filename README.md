@@ -17,16 +17,16 @@ To use pygeohash:
 
     import pygeohash as pgh
     
-    pgh.encode(42.6, -5.6)
+    pgh.encode(latitude=42.6, longitude=-5.6)
     # >>> 'ezs42e44yx96'
     
-    pgh.encode(42.6, -5.6, precision=5)
+    pgh.encode(latitude=42.6, longitude=-5.6, precision=5)
     # >>> 'ezs42'
     
-    pgh.decode('ezs42')
+    pgh.decode(geohash='ezs42')
     # >>> ('42.6', '-5.6')
     
-    pgh.geohash_approximate_distance('bcd3u', 'bc83n')
+    pgh.geohash_approximate_distance(geohash_1='bcd3u', geohash_2='bc83n')
     # >>> 625441
 
 Installation
