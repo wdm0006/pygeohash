@@ -28,6 +28,9 @@ To use pygeohash:
     
     pgh.geohash_approximate_distance(geohash_1='bcd3u', geohash_2='bc83n')
     # >>> 625441
+	
+    pgh.get_adjacent(geohash='kd3ybyu', direction='right')
+    # >>> kd3ybyv
 
 Installation
 ============
