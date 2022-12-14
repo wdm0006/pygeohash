@@ -32,7 +32,7 @@ class TestGeohash(unittest.TestCase):
         self.assertEqual(pgh.geohash_approximate_distance('bcd3ua', 'bcd3uasdub'), 610)
 
         # test the haversine great circle distance calculations
-        self.assertAlmostEqual(pgh.geohash_haversine_distance('testxyz', 'testwxy'), 6339.483649071294, places=4)
+        self.assertAlmostEqual(pgh.geohash_haversine_distance('testxyz', 'testwxy'), 5888.614420771857, places=4)
 
     def test_stats(self):
         data = [(50, 0), (-50, 0), (0, -50), (0, 50)]
@@ -59,7 +59,7 @@ class TestGeohash(unittest.TestCase):
         self.assertEqual(west, '6zurypzpgxcz')
 
         var = pgh.variance(data)
-        self.assertAlmostEqual(var, 30910779278721.996, places=2)
+        self.assertAlmostEqual(var, 30910779169327.953, places=2)
 
         std = pgh.std(data)
-        self.assertAlmostEqual(std, 5559746.332227937, places=4)
+        self.assertAlmostEqual(std, 5559746.322389894, places=4)
