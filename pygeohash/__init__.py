@@ -11,6 +11,7 @@
 from .distances import geohash_approximate_distance, geohash_haversine_distance
 from .geohash import encode, decode, decode_exactly
 from .stats import mean, northern, southern, eastern, western, variance, std
+from .neighbor import get_adjacent
 
 __author__ = 'willmcginnis'
 
@@ -26,5 +27,6 @@ __all__ = [
     'eastern',
     'western',
     'variance',
-    'std'
+    'std',
+    'get_adjacent',
 ]
