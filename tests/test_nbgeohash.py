@@ -3,12 +3,13 @@ import pygeohash as pgh
 
 try:
     import numpy as np
+    import numba as nb
 
 except ImportError:
-    print("Numpy is a soft dependency to use this feature.")
-    raise ImportError("Couldn't import numpy, make sure it is installed properly.")
+    print("Numpy and Numba are soft dependencies, but necessary to test this feature.")
+    raise ImportError("Couldn't import numpy or numba, make sure they are installed properly.")
 
-__author__ = "Ilyas Moutawwakil"
+__author__ = "ilyasmoutawwakil"
 
 
 class TestNumbaPointGeohash(unittest.TestCase):

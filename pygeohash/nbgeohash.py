@@ -1,31 +1,23 @@
 """
 .. module:: nbgeohash
    :platform: Unix, Windows
-   :synopsis: A module for encoding to and decoding from the geohash system
+   :synopsis: A module for encoding to and decoding from the geohash system using numba
 
-.. moduleauthor:: ilyas Moutawwakil <ilyas.moutawwakil@gmail.com>
+.. moduleauthor:: Ilyas Moutawwakil <ilyas.moutawwakil@gmail.com>
 
 
 """
 
 
-from math import log10
-
 __base32 = "0123456789bcdefghjkmnpqrstuvwxyz"
 #  Note: the alphabet in geohash differs from the common base32 alphabet described in IETF's RFC 4648
 # (http://tools.ietf.org/html/rfc4648)
 
-try:
-    # Soft dependency
-    import numpy as np
-    from numba import njit, types
-except ImportError:
-    print("Numpy and Numba are soft dependencies to use this feature.")
-    raise ImportError(
-        "Couldn't import numpy or numba, make sure they are installed properly."
-    )
+import numpy as np
+from math import log10
+from numba import njit, types
 
-__author__ = "Ilyas Moutawwakil"
+__author__ = "ilyasmoutawwakil"
 
 
 @njit(cache=True, fastmath=True)
