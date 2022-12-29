@@ -30,3 +30,19 @@ __all__ = [
     'std',
     'get_adjacent',
 ]
+
+try:
+    # Soft dependency
+    import numpy, numba
+    from .nbgeohash import nb_decode_exactly, nb_encode, nb_decode, nb_vector_encode, nb_vector_decode
+    __all__ += [
+        'nb_encode',
+        'nb_decode',
+        'nb_vector_encode',
+        'nb_vector_decode',
+        'nb_decode_exactly'
+    ]
+
+except ImportError:
+    import logging
+    logging.warn(f"Numpy and Numba are soft dependencies to use the numba geohashing functions. \nCan only import/use native python functions.")
