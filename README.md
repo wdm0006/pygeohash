@@ -15,22 +15,24 @@ Usage
 
 To use pygeohash:
 
-    import pygeohash as pgh
-    
-    pgh.encode(latitude=42.6, longitude=-5.6)
-    # >>> 'ezs42e44yx96'
-    
-    pgh.encode(latitude=42.6, longitude=-5.6, precision=5)
-    # >>> 'ezs42'
-    
-    pgh.decode(geohash='ezs42')
-    # >>> ('42.6', '-5.6')
-    
-    pgh.geohash_approximate_distance(geohash_1='bcd3u', geohash_2='bc83n')
-    # >>> 625441
-	
-    pgh.get_adjacent(geohash='kd3ybyu', direction='right')
-    # >>> kd3ybyv
+```py
+import pygeohash as pgh
+
+pgh.encode(latitude=42.6, longitude=-5.6)
+# >>> 'ezs42e44yx96'
+
+pgh.encode(latitude=42.6, longitude=-5.6, precision=5)
+# >>> 'ezs42'
+
+pgh.decode(geohash='ezs42')
+# >>> ('42.6', '-5.6')
+
+pgh.geohash_approximate_distance(geohash_1='bcd3u', geohash_2='bc83n')
+# >>> 625441
+
+pgh.get_adjacent(geohash='kd3ybyu', direction='right')
+# >>> kd3ybyv
+```
 
 Installation
 ============
