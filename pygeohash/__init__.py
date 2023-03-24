@@ -9,7 +9,7 @@
 """
 
 from .distances import geohash_approximate_distance, geohash_haversine_distance
-from .geohash import encode, decode, decode_exactly
+from .geohash import encode, decode, decode_exactly, encode_strictly
 from .stats import mean, northern, southern, eastern, western, variance, std
 from .neighbor import get_adjacent
 
@@ -19,6 +19,7 @@ __all__ = [
     'geohash_approximate_distance',
     'geohash_haversine_distance',
     'encode',
+    'encode_strictly',
     'decode',
     'decode_exactly',
     'mean',
