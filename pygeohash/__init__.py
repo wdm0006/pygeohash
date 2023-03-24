@@ -34,10 +34,10 @@ __all__ = [
 try:
     # Soft dependency
     import numpy, numba
-    from .nbgeohash import nb_decode_exactly, nb_encode, nb_decode, nb_vector_encode, nb_vector_decode
+    from .nbgeohash import nb_decode_exactly, nb_point_encode, nb_point_decode, nb_vector_encode, nb_vector_decode
     __all__ += [
-        'nb_encode',
-        'nb_decode',
+        'nb_point_encode',
+        'nb_point_decode',
         'nb_vector_encode',
         'nb_vector_decode',
         'nb_decode_exactly'
