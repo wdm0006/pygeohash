@@ -93,14 +93,14 @@ def encode(latitude, longitude, precision=12):
     while len(geohash) < precision:
         if even:
             mid = (lon_interval[0] + lon_interval[1]) / 2
-            if longitude > mid:
+            if longitude >= mid:
                 ch |= bits[bit]
                 lon_interval = (mid, lon_interval[1])
             else:
                 lon_interval = (lon_interval[0], mid)
         else:
             mid = (lat_interval[0] + lat_interval[1]) / 2
-            if latitude > mid:
+            if latitude >= mid:
                 ch |= bits[bit]
                 lat_interval = (mid, lat_interval[1])
             else:
