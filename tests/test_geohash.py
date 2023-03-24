@@ -12,6 +12,11 @@ class TestGeohash(unittest.TestCase):
         self.assertEqual(pgh.encode(42.6, -5.6), 'ezs42e44yx96')
         self.assertEqual(pgh.encode(42.6, -5.6, precision=5), 'ezs42')
 
+    def test_encode_strictly(self):
+        self.assertEqual(pgh.encode(0.0, -5.6, precision=5), '7zupb')
+        self.assertEqual(pgh.encode_strictly(0.0, -5.6, precision=5), 'ebh00')
+
+
     def test_decode(self):
         self.assertEqual(pgh.decode('ezs42'), (42.6, -5.6))
 
