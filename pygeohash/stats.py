@@ -9,14 +9,15 @@
 """
 
 import math
-from pygeohash.geohash import decode, encode
-from pygeohash.distances import geohash_haversine_distance
+from typing import Iterable
 
+from pygeohash.distances import geohash_haversine_distance
+from pygeohash.geohash import decode, encode
 
 __author__ = 'Will McGinnis'
 
 
-def mean(geohashes):
+def mean(geohashes: Iterable[str]):
     """
     Takes in an iterable of geohashes and returns the mean position of the group as a geohash.
 
@@ -29,7 +30,7 @@ def mean(geohashes):
     return encode(float(sum([x[0] for x in latlons])) / count, float(sum([x[1] for x in latlons])) / count)
 
 
-def northern(geohashes):
+def northern(geohashes: Iterable[str]):
     """
     Takes in an iterable of geohashes and returns the northernmost position of the group as a geohash.
 
@@ -37,12 +38,12 @@ def northern(geohashes):
     :return:
     """
 
-    latlons = [decode(x) for x in geohashes]
+    latlons = (decode(x) for x in geohashes)
     latlons = sorted(latlons, key=lambda x: x[0], reverse=True)
     return encode(latlons[0][0], latlons[0][1])
 
 
-def eastern(geohashes):
+def eastern(geohashes: Iterable[str]):
     """
     Takes in an iterable of geohashes and returns the easternmost position of the group as a geohash.
 
@@ -50,12 +51,12 @@ def eastern(geohashes):
     :return:
     """
 
-    latlons = [decode(x) for x in geohashes]
+    latlons = (decode(x) for x in geohashes)
     latlons = sorted(latlons, key=lambda x: x[1], reverse=True)
     return encode(latlons[0][0], latlons[0][1])
 
 
-def western(geohashes):
+def western(geohashes: Iterable[str]):
     """
     Takes in an iterable of geohashes and returns the westernmost position of the group as a geohash.
 
@@ -63,7 +64,7 @@ def western(geohashes):
     :return:
     """
 
-    latlons = [decode(x) for x in geohashes]
+    latlons = (decode(x) for x in geohashes)
     latlons = sorted(latlons, key=lambda x: x[1], reverse=False)
     return encode(latlons[0][0], latlons[0][1])
 
@@ -81,7 +82,7 @@ def southern(geohashes):
     return encode(latlons[0][0], latlons[0][1])
 
 
-def variance(geohashes):
+def variance(geohashes: Iterable[str]):
     """
     Calculates the variance of a set of geohashes (in meters)
 
@@ -95,7 +96,7 @@ def variance(geohashes):
     return var
 
 
-def std(geohashes):
+def std(geohashes: Iterable[str]):
     """
     Calculates the standard deviation of a set of geohashes (in meters)
 

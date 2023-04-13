@@ -8,14 +8,12 @@
 
 """
 
-
-__base32 = "0123456789bcdefghjkmnpqrstuvwxyz"
-#  Note: the alphabet in geohash differs from the common base32 alphabet described in IETF's RFC 4648
-# (http://tools.ietf.org/html/rfc4648)
+from math import log10
 
 import numpy as np
-from math import log10
 from numba import njit, types
+
+from pygeohash.geohash import __base32
 
 __author__ = "ilyasmoutawwakil"
 

@@ -19,20 +19,20 @@ License along with Geohash.  If not, see
 <http://www.gnu.org/licenses/>.
 
 Modified 2015 by Will McGinnis for pygeohash.
+Modified 2023 by Paarth Shah for pygeohash.
 """
 
 from math import log10
+from typing import Dict, Tuple
 
 #  Note: the alphabet in geohash differs from the common base32 alphabet described in IETF's RFC 4648
 # (http://tools.ietf.org/html/rfc4648)
 
 __base32 = '0123456789bcdefghjkmnpqrstuvwxyz'
-__decodemap = dict()
-for i in range(len(__base32)):
-    __decodemap[__base32[i]] = i
+__decodemap: Dict[str, int] = {base32_char: i for i, base32_char in enumerate(__base32)}
 
 
-def decode_exactly(geohash):
+def decode_exactly(geohash: str) -> Tuple[float, float, float, float]:
     """
     Decode the geohash to its exact values, including the error
     margins of the result.  Returns four float values: latitude,
@@ -46,25 +46,25 @@ def decode_exactly(geohash):
     for c in geohash:
         cd = __decodemap[c]
         for mask in [16, 8, 4, 2, 1]:
-            if is_even: # adds longitude info
+            if is_even:  # adds longitude info
                 lon_err /= 2
                 if cd & mask:
-                    lon_interval = ((lon_interval[0]+lon_interval[1])/2, lon_interval[1])
+                    lon_interval = ((lon_interval[0] + lon_interval[1]) / 2, lon_interval[1])
                 else:
-                    lon_interval = (lon_interval[0], (lon_interval[0]+lon_interval[1])/2)
-            else:      # adds latitude info
+                    lon_interval = (lon_interval[0], (lon_interval[0] + lon_interval[1]) / 2)
+            else:  # adds latitude info
                 lat_err /= 2
                 if cd & mask:
-                    lat_interval = ((lat_interval[0]+lat_interval[1])/2, lat_interval[1])
+                    lat_interval = ((lat_interval[0] + lat_interval[1]) / 2, lat_interval[1])
                 else:
-                    lat_interval = (lat_interval[0], (lat_interval[0]+lat_interval[1])/2)
+                    lat_interval = (lat_interval[0], (lat_interval[0] + lat_interval[1]) / 2)
             is_even = not is_even
     lat = (lat_interval[0] + lat_interval[1]) / 2
     lon = (lon_interval[0] + lon_interval[1]) / 2
     return lat, lon, lat_err, lon_err
 
 
-def decode(geohash):
+def decode(geohash: str) -> Tuple[float, float]:
     """
     Decode geohash, returning two float with latitude and longitude
     containing only relevant digits and with trailing zeroes removed.
@@ -78,7 +78,7 @@ def decode(geohash):
     return float(lats), float(lons)
 
 
-def encode(latitude, longitude, precision=12):
+def encode(latitude, longitude, precision=12) -> str:
     """
     Encode a position given in float arguments latitude, longitude to
     a geohash which will have the character count precision.
@@ -113,6 +113,3 @@ def encode(latitude, longitude, precision=12):
             bit = 0
             ch = 0
     return ''.join(geohash)
-
-
-
