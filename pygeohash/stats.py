@@ -10,7 +10,7 @@
 
 import math
 import statistics
-from typing import Iterable, Callable, Generator, Literal, List
+from typing import Iterable, Callable, Generator, List
 
 from pygeohash.distances import geohash_haversine_distance
 from pygeohash.geohash import decode, encode, LatLong

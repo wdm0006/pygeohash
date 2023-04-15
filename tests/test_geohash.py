@@ -13,7 +13,7 @@ class TestGeohash(unittest.TestCase):
         self.assertEqual(pgh.encode(42.6, -5.6, precision=5), 'ezs42')
 
     def test_decode(self):
-        self.assertEqual(pgh.decode('ezs42'), (42.6, -5.6))
+        self.assertEqual(pgh.decode('ezs42'), pgh.LatLong(42.6, -5.6))
 
     def test_check_validity(self):
         exception_raised = False
@@ -35,31 +35,31 @@ class TestGeohash(unittest.TestCase):
         self.assertAlmostEqual(pgh.geohash_haversine_distance('testxyz', 'testwxy'), 5888.614420771857, places=4)
 
     def test_stats(self):
-        data = [(50, 0), (-50, 0), (0, -50), (0, 50)]
-        data = [pgh.encode(lat, lon) for lat, lon in data]
+        coordinates = [pgh.LatLong(50, 0), pgh.LatLong(-50, 0), pgh.LatLong(0, -50), pgh.LatLong(0, 50)]
+        coordinates = [pgh.encode(*coordinate) for coordinate in coordinates]
 
         # mean
-        mean = pgh.mean(data)
+        mean = pgh.mean(coordinates)
         self.assertEqual(mean, '7zzzzzzzzzzz')
 
         # north
-        north = pgh.northern(data)
+        north = pgh.northern(coordinates)
         self.assertEqual(north, 'gbzurypzpgxc')
 
         # south
-        south = pgh.southern(data)
+        south = pgh.southern(coordinates)
         self.assertEqual(south, '5zpgxczbzury')
 
         # east
-        east = pgh.eastern(data)
+        east = pgh.eastern(coordinates)
         self.assertEqual(east, 'mpgxczbzuryp')
 
         # west
-        west = pgh.western(data)
+        west = pgh.western(coordinates)
         self.assertEqual(west, '6zurypzpgxcz')
 
-        var = pgh.variance(data)
+        var = pgh.variance(coordinates)
         self.assertAlmostEqual(var, 30910779169327.953, places=2)
 
-        std = pgh.std(data)
+        std = pgh.std(coordinates)
         self.assertAlmostEqual(std, 5559746.322389894, places=4)
