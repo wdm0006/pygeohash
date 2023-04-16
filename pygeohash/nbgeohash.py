@@ -9,11 +9,12 @@
 """
 
 from math import log10
+from typing import List
 
 import numpy as np
 from numba import njit, types
 
-from pygeohash.geohash import __base32
+from pygeohash.geohash import ExactLatLong, LatLong, __base32
 
 __author__ = "ilyasmoutawwakil"
 
@@ -39,7 +40,7 @@ def base32_to_int(s: types.char) -> types.uint8:
 
 
 @njit(fastmath=True)
-def nb_decode_exactly(geohash: types.string) -> types.Tuple:
+def nb_decode_exactly(geohash: str) -> ExactLatLong:
     """
     Decode the geohash to its exact values, including the error
     margins of the result.  Returns four float values: latitude,
@@ -54,7 +55,7 @@ def nb_decode_exactly(geohash: types.string) -> types.Tuple:
         -180,
         180,
     )
-    lat_err, lon_err = 90, 180
+    lat_err, lon_err = 90.0, 180.0
     is_even = True
     for c in geohash:
         cd = base32_to_int(c)
@@ -74,11 +75,11 @@ def nb_decode_exactly(geohash: types.string) -> types.Tuple:
             is_even = not is_even
     lat = (lat_interval_neg + lat_interval_pos) / 2
     lon = (lon_interval_neg + lon_interval_pos) / 2
-    return lat, lon, lat_err, lon_err
+    return ExactLatLong(lat, lon, lat_err, lon_err)
 
 
 @njit(fastmath=True)
-def nb_point_decode(geohash: types.string) -> types.Tuple:
+def nb_point_decode(geohash: str) -> LatLong:
     """
     Decode geohash, returning two float with latitude and longitude containing only relevant digits.
     """
@@ -90,11 +91,11 @@ def nb_point_decode(geohash: types.string) -> types.Tuple:
     lat = round(lat, lat_dec)
     lon = round(lon, lon_dec)
 
-    return lat, lon
+    return LatLong(lat, lon)
 
 
 @njit(fastmath=True)
-def nb_vector_decode(geohashes: types.Array) -> types.Tuple:
+def nb_vector_decode(geohashes: List[str]) -> types.Tuple:
     """
     Decode geohashes, returning two Arrays of floats with latitudes and longitudes containing only relevant digits.
     This is not exactly a vectorized version of nb_point_decode, but it is way faster and gets faster as the number of geohashes increase.
