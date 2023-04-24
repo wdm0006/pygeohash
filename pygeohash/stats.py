@@ -9,79 +9,88 @@
 """
 
 import math
-from pygeohash.geohash import decode, encode
-from pygeohash.distances import geohash_haversine_distance
+import statistics
+from typing import Iterable, Callable, Generator, List
 
+from pygeohash.distances import geohash_haversine_distance
+from pygeohash.geohash import decode, encode, LatLong
 
 __author__ = 'Will McGinnis'
 
 
-def mean(geohashes):
+def __latitude(coordinate: LatLong) -> float:
+    return coordinate.latitude
+
+
+def __longitude(coordinate: LatLong) -> float:
+    return coordinate.longitude
+
+
+def _max_cardinal(geohashes: Iterable[str], key: Callable[[LatLong], float], reverse: bool) -> str:
     """
-    Takes in an iterable of geohashes and returns the mean position of the group as a geohash.
-
-    :param geohashes:
-    :return:
+    Takes in an iterable of geohashes and returns the furthest position of the group for the cardinality as a geohash.
     """
+    coordinates: Generator[LatLong] = (decode(x) for x in geohashes)
+    m = max if reverse else min
+    coordinate = m(coordinates, key=key)
+    return encode(coordinate.latitude, coordinate.longitude)
 
-    latlons = [decode(x) for x in geohashes]
-    count = len(latlons)
-    return encode(float(sum([x[0] for x in latlons])) / count, float(sum([x[1] for x in latlons])) / count)
 
-
-def northern(geohashes):
+def northern(geohashes: Iterable[str]) -> str:
     """
     Takes in an iterable of geohashes and returns the northernmost position of the group as a geohash.
 
     :param geohashes:
     :return:
     """
-
-    latlons = [decode(x) for x in geohashes]
-    latlons = sorted(latlons, key=lambda x: x[0], reverse=True)
-    return encode(latlons[0][0], latlons[0][1])
+    return _max_cardinal(geohashes, __latitude, reverse=True)
 
 
-def eastern(geohashes):
+def eastern(geohashes: Iterable[str]) -> str:
     """
     Takes in an iterable of geohashes and returns the easternmost position of the group as a geohash.
 
     :param geohashes:
     :return:
     """
-
-    latlons = [decode(x) for x in geohashes]
-    latlons = sorted(latlons, key=lambda x: x[1], reverse=True)
-    return encode(latlons[0][0], latlons[0][1])
+    return _max_cardinal(geohashes, __longitude, reverse=True)
 
 
-def western(geohashes):
+def western(geohashes: Iterable[str]) -> str:
     """
     Takes in an iterable of geohashes and returns the westernmost position of the group as a geohash.
 
     :param geohashes:
     :return:
     """
-
-    latlons = [decode(x) for x in geohashes]
-    latlons = sorted(latlons, key=lambda x: x[1], reverse=False)
-    return encode(latlons[0][0], latlons[0][1])
+    return _max_cardinal(geohashes, __longitude, reverse=False)
 
 
-def southern(geohashes):
+def southern(geohashes: Iterable[str]) -> str:
     """
     Takes in an iterable of geohashes and returns the southernmost position of the group as a geohash.
 
     :param geohashes:
     :return:
     """
-
-    latlons = [decode(x) for x in geohashes]
-    latlons = sorted(latlons, key=lambda x: x[0], reverse=False)
-    return encode(latlons[0][0], latlons[0][1])
+    return _max_cardinal(geohashes, __latitude, reverse=False)
 
 
-def variance(geohashes):
+def mean(geohashes: Iterable[str]) -> str:
+    """
+    Takes in an iterable of geohashes and returns the mean position of the group as a geohash.
+
+    :param geohashes:
+    :return:
+    """
+    coordinates: List[LatLong] = [decode(x) for x in geohashes]
+    return encode(
+        statistics.mean(x.latitude for x in coordinates),
+        statistics.mean(x.longitude for x in coordinates),
+    )
+
+
+def variance(geohashes: Iterable[str]) -> float:
     """
     Calculates the variance of a set of geohashes (in meters)
 
@@ -95,7 +104,7 @@ def variance(geohashes):
     return var
 
 
-def std(geohashes):
+def std(geohashes: Iterable[str]) -> float:
     """
     Calculates the standard deviation of a set of geohashes (in meters)
 

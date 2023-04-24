@@ -9,13 +9,14 @@
 """
 
 import math
-from pygeohash.geohash import decode
-from pygeohash.geohash import decode_exactly
+from typing import Dict
+
+from pygeohash.geohash import decode_exactly, __base32
 
 __author__ = 'Will McGinnis'
 
 # the distance between geohashes based on matching characters, in meters.
-_PRECISION = {
+_PRECISION: Dict[int, float] = {
     0: 20000000,
     1: 5003530,
     2: 625441,
@@ -28,10 +29,9 @@ _PRECISION = {
     9: 3.71,
     10: 0.6,
 }
-__base32 = '0123456789bcdefghjkmnpqrstuvwxyz'
 
 
-def geohash_approximate_distance(geohash_1, geohash_2, check_validity=False):
+def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity: bool = False) -> float:
     """
     Returns the approximate great-circle distance between two geohashes in meters.
 
@@ -42,10 +42,10 @@ def geohash_approximate_distance(geohash_1, geohash_2, check_validity=False):
 
     if check_validity:
         if len([x for x in geohash_1 if x in __base32]) != len(geohash_1):
-            raise ValueError('Geohash 1: %s is not a valid geohash' % (geohash_1, ))
+            raise ValueError(f'Geohash 1: {geohash_1} is not a valid geohash')
 
         if len([x for x in geohash_2 if x in __base32]) != len(geohash_2):
-            raise ValueError('Geohash 2: %s is not a valid geohash' % (geohash_2, ))
+            raise ValueError(f'Geohash 2: {geohash_2} is not a valid geohash')
 
     # normalize the geohashes to the length of the shortest
     len_1 = len(geohash_1)
@@ -64,13 +64,12 @@ def geohash_approximate_distance(geohash_1, geohash_2, check_validity=False):
             break
 
     # we only have precision metrics up to 10 characters
-    if matching > 10:
-        matching = 10
+    matching = min(matching, 10)
 
     return _PRECISION[matching]
 
 
-def geohash_haversine_distance(geohash_1, geohash_2):
+def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
     """
     converts the geohashes to lat/lon and then calculates the haversine great circle distance in meters.
 
@@ -82,7 +81,7 @@ def geohash_haversine_distance(geohash_1, geohash_2):
     lat_1, lon_1, _, _ = decode_exactly(geohash_1)
     lat_2, lon_2, _, _ = decode_exactly(geohash_2)
 
-    R = 6371000
+    R = 6_371_000
     phi_1 = math.radians(lat_1)
     phi_2 = math.radians(lat_2)
 
