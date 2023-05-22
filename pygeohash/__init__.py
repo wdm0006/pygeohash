@@ -9,7 +9,7 @@
 """
 
 from .distances import geohash_approximate_distance, geohash_haversine_distance
-from .geohash import encode, decode, decode_exactly
+from .geohash import LatLong, ExactLatLong, encode, decode, decode_exactly
 from .stats import mean, northern, southern, eastern, western, variance, std
 from .neighbor import get_adjacent
 
@@ -18,6 +18,8 @@ __author__ = 'willmcginnis'
 __all__ = [
     'geohash_approximate_distance',
     'geohash_haversine_distance',
+    'LatLong',
+    'ExactLatLong',
     'encode',
     'decode',
     'decode_exactly',
@@ -34,13 +36,13 @@ __all__ = [
 try:
     # Soft dependency
     import numpy, numba
-    from .nbgeohash import nb_decode_exactly, nb_encode, nb_decode, nb_vector_encode, nb_vector_decode
+    from .nbgeohash import nb_decode_exactly, nb_point_decode, nb_point_encode, nb_vector_encode, nb_vector_decode
     __all__ += [
-        'nb_encode',
-        'nb_decode',
         'nb_vector_encode',
         'nb_vector_decode',
-        'nb_decode_exactly'
+        'nb_decode_exactly',
+        'nb_point_decode',
+        'nb_point_encode'
     ]
 
 except ImportError:
