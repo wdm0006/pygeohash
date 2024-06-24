@@ -47,4 +47,4 @@ try:
 
 except ImportError:
     import logging
-    logging.warn(f"Numpy and Numba are soft dependencies to use the numba geohashing functions. \nCan only import/use native python functions.")
+    logging.warning(f"Numpy and Numba are soft dependencies to use the numba geohashing functions. \nCan only import/use native python functions.")
