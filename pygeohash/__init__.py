@@ -9,7 +9,7 @@
 """
 
 from .distances import geohash_approximate_distance, geohash_haversine_distance
-from .geohash import LatLong, ExactLatLong, encode, decode, decode_exactly
+from .geohash import LatLong, ExactLatLong, encode, decode, decode_exactly, encode_strictly
 from .stats import mean, northern, southern, eastern, western, variance, std
 from .neighbor import get_adjacent
 
@@ -21,6 +21,7 @@ __all__ = [
     'LatLong',
     'ExactLatLong',
     'encode',
+    'encode_strictly',
     'decode',
     'decode_exactly',
     'mean',
@@ -38,6 +39,8 @@ try:
     import numpy, numba
     from .nbgeohash import nb_decode_exactly, nb_point_decode, nb_point_encode, nb_vector_encode, nb_vector_decode
     __all__ += [
+        'nb_point_encode',
+        'nb_point_decode',
         'nb_vector_encode',
         'nb_vector_decode',
         'nb_decode_exactly',
