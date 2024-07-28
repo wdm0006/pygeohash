@@ -11,6 +11,7 @@ class TestGeohash(unittest.TestCase):
     def test_encode(self):
         self.assertEqual(pgh.encode(42.6, -5.6), 'ezs42e44yx96')
         self.assertEqual(pgh.encode(42.6, -5.6, precision=5), 'ezs42')
+        self.assertEqual(pgh.encode(0.0, -5.6, precision=5), 'ebh00')
 
     def test_encode_strictly(self):
         self.assertEqual(pgh.encode(0.0, -5.6, precision=5), '7zupb')
@@ -45,23 +46,23 @@ class TestGeohash(unittest.TestCase):
 
         # mean
         mean = pgh.mean(data)
-        self.assertEqual(mean, '7zzzzzzzzzzz')
+        self.assertEqual(mean, 's00000000000')
 
         # north
         north = pgh.northern(data)
-        self.assertEqual(north, 'gbzurypzpgxc')
+        self.assertEqual(north, 'u0bh2n0p0581')
 
         # south
         south = pgh.southern(data)
-        self.assertEqual(south, '5zpgxczbzury')
+        self.assertEqual(south, 'hp0581b0bh2n')
 
         # east
         east = pgh.eastern(data)
-        self.assertEqual(east, 'mpgxczbzuryp')
+        self.assertEqual(east, 't0581b0bh2n0')
 
         # west
         west = pgh.western(data)
-        self.assertEqual(west, '6zurypzpgxcz')
+        self.assertEqual(west, 'dbh2n0p0581b')
 
         var = pgh.variance(data)
         self.assertAlmostEqual(var, 30910779169327.953, places=2)
