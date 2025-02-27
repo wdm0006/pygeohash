@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help lint format test test-all coverage install dev-install
+.PHONY: clean clean-test clean-pyc clean-build docs help lint format test test-all coverage install dev-install install-dev
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -48,20 +48,22 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 	rm -f coverage.xml
 
-lint: ## check style with ruff
-	uv run ruff check .
+lint: install-dev ## check style with ruff
+	uv run ruff check . --line-length=120
 
-format: ## format code with ruff
-	uv run ruff format .
-	uv run ruff check --fix .
+format: install-dev ## format code with ruff
+	uv run ruff format . --line-length=120
 
-test: ## run tests quickly with the default Python
+install-dev: ## install package in development mode with all dependencies
+	uv pip install -e ".[dev,numba]"
+
+test: install-dev ## run tests quickly with the default Python
 	uv run pytest
 
-test-all: ## run tests on every Python version with tox
+test-all: install-dev ## run tests on every Python version with tox
 	uv run tox
 
-coverage: ## check code coverage quickly with the default Python
+coverage: install-dev ## check code coverage quickly with the default Python
 	uv run pytest --cov=nbgeohash tests/
 	uv run coverage report -m
 	uv run coverage html
@@ -76,16 +78,16 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	$(BROWSER) docs/_build/html/index.html
 
 install: ## install the package to the active Python's site-packages
-	uv pip install .
+	uv pip install ".[dev,numba]"
 
-dev-install: ## install the package in development mode
-	uv pip install -e ".[dev]"
+dev-install: ## install the package in development mode (alias for install-dev)
+	uv pip install -e ".[dev,numba]"
 
 build: clean ## builds source and wheel package
 	uv pip install build
 	python -m build
 	ls -l dist
 
-release: dist ## package and upload a release
+release: build ## package and upload a release
 	uv pip install twine
 	twine upload dist/* 

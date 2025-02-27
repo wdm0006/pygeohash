@@ -1,3 +1,9 @@
+v2.0.0
+======
+
+* [meta] restructured as pyproject.toml based project
+* [meta] added ruff and tox configs 
+
 v1.2.0
 ======
 

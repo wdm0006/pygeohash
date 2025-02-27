@@ -1,41 +1,42 @@
-import unittest
+import importlib.util
+import pytest
+
 import pygeohash as pgh
 
-try:
-    import numpy as np
-    import numba as nb
+# Check if numpy and numba are available
+numpy_available = importlib.util.find_spec("numpy") is not None
+numba_available = importlib.util.find_spec("numba") is not None
 
-except ImportError:
-    print("Numpy and Numba are soft dependencies, but necessary to test this feature.")
-    raise ImportError("Couldn't import numpy or numba, make sure they are installed properly.")
+# Skip the entire module if numpy or numba are not available
+pytestmark = pytest.mark.skipif(
+    not (numpy_available and numba_available),
+    reason="Numpy and Numba are required for these tests"
+)
+
+if numpy_available and numba_available:
+    import numpy as np
 
 __author__ = "ilyasmoutawwakil"
 
 
-class TestNumbaPointGeohash(unittest.TestCase):
-    """ """
-
+class TestNumbaPointGeohash:
     def test_encode(self):
-        self.assertEqual(pgh.nb_point_encode(42.6, -5.6), "ezs42e44yx96")
-        self.assertEqual(pgh.nb_point_encode(42.6, -5.6, precision=5), "ezs42")
+        assert pgh.nb_point_encode(42.6, -5.6) == "ezs42e44yx96"
+        assert pgh.nb_point_encode(42.6, -5.6, precision=5) == "ezs42"
 
     def test_decode(self):
-        self.assertEqual(pgh.nb_point_decode("ezs42"), (42.6, -5.6))
+        assert pgh.nb_point_decode("ezs42") == (42.6, -5.6)
 
 
-class TestNumbaVectorGeohash(unittest.TestCase):
-    """ """
-
+class TestNumbaVectorGeohash:
     def test_encode(self):
         x = np.array([42.6, 2.6732])
         y = np.array([-5.6, -92.1736])
         geohashes_12 = np.array(["ezs42e44yx96", "9bqrnw9hx2w7"])
         geohashes_5 = np.array(["ezs42", "9bqrn"])
 
-        self.assertListEqual(pgh.nb_vector_encode(x, y).tolist(), geohashes_12.tolist())
-        self.assertListEqual(
-            pgh.nb_vector_encode(x, y, precision=5).tolist(), geohashes_5.tolist()
-        )
+        assert pgh.nb_vector_encode(x, y).tolist() == geohashes_12.tolist()
+        assert pgh.nb_vector_encode(x, y, precision=5).tolist() == geohashes_5.tolist()
 
     def test_decode(self):
         latitudes = np.array([-10.299737, -42.279401, 2.673264])
@@ -43,9 +44,5 @@ class TestNumbaVectorGeohash(unittest.TestCase):
         geohashes = np.array(["7ypm3kfxxjvf", "30mpkrmbwhmk", "9bqrnw9hvs8b"])
         results = pgh.nb_vector_decode(geohashes)
 
-        self.assertListEqual(results[0].tolist(), latitudes.tolist())
-        self.assertListEqual(results[1].tolist(), longitudes.tolist())
-
-
-if __name__ == "__main__":
-    unittest.main()
+        assert results[0].tolist() == latitudes.tolist()
+        assert results[1].tolist() == longitudes.tolist()

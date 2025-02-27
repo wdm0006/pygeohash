@@ -11,9 +11,9 @@
 import math
 from typing import Dict
 
-from pygeohash.geohash import decode_exactly, __base32
+from pygeohash.geohash import __base32, decode_exactly
 
-__author__ = 'Will McGinnis'
+__author__ = "Will McGinnis"
 
 # the distance between geohashes based on matching characters, in meters.
 _PRECISION: Dict[int, float] = {
@@ -42,10 +42,10 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
 
     if check_validity:
         if len([x for x in geohash_1 if x in __base32]) != len(geohash_1):
-            raise ValueError(f'Geohash 1: {geohash_1} is not a valid geohash')
+            raise ValueError(f"Geohash 1: {geohash_1} is not a valid geohash")
 
         if len([x for x in geohash_2 if x in __base32]) != len(geohash_2):
-            raise ValueError(f'Geohash 2: {geohash_2} is not a valid geohash')
+            raise ValueError(f"Geohash 2: {geohash_2} is not a valid geohash")
 
     # normalize the geohashes to the length of the shortest
     len_1 = len(geohash_1)
@@ -85,10 +85,12 @@ def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
     phi_1 = math.radians(lat_1)
     phi_2 = math.radians(lat_2)
 
-    delta_phi = math.radians(lat_2-lat_1)
-    delta_lambda = math.radians(lon_2-lon_1)
+    delta_phi = math.radians(lat_2 - lat_1)
+    delta_lambda = math.radians(lon_2 - lon_1)
 
-    a = math.sin(delta_phi/2.0) * math.sin(delta_phi/2.0) + math.cos(phi_1) * math.cos(phi_2) * math.sin(delta_lambda/2) * math.sin(delta_lambda/2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    a = math.sin(delta_phi / 2.0) * math.sin(delta_phi / 2.0) + math.cos(phi_1) * math.cos(phi_2) * math.sin(
+        delta_lambda / 2
+    ) * math.sin(delta_lambda / 2)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
     return R * c

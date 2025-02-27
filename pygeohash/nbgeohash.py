@@ -98,7 +98,8 @@ def nb_point_decode(geohash: str) -> LatLong:
 def nb_vector_decode(geohashes: List[str]) -> types.Tuple:
     """
     Decode geohashes, returning two Arrays of floats with latitudes and longitudes containing only relevant digits.
-    This is not exactly a vectorized version of nb_point_decode, but it is way faster and gets faster as the number of geohashes increase.
+    This is not exactly a vectorized version of nb_point_decode, but it is way faster and gets faster
+    as the number of geohashes increase.
     """
 
     n = len(geohashes)
@@ -116,9 +117,7 @@ def nb_vector_decode(geohashes: List[str]) -> types.Tuple:
 
 
 @njit(fastmath=True)
-def nb_point_encode(
-    latitude: types.float64, longitude: types.float64, precision: types.int8 = 12
-) -> types.string:
+def nb_point_encode(latitude: types.float64, longitude: types.float64, precision: types.int8 = 12) -> types.string:
     """
     Encode a point given by latitude and longitude to a geohash of the specified precision.
     """
@@ -163,12 +162,11 @@ def nb_point_encode(
 
 
 @njit(fastmath=True)
-def nb_vector_encode(
-    latitudes: types.Array, longitudes: types.Array, precision: types.int8 = 12
-) -> types.Array:
+def nb_vector_encode(latitudes: types.Array, longitudes: types.Array, precision: types.int8 = 12) -> types.Array:
     """
     Encode a vector of points given by latitudes and longitudes to a vector of geohashes of the specified precision.
-    This is not exactly a vectorized version of nb_point_encode, but it is way faster and gets faster as the number of points increase.
+    This is not exactly a vectorized version of nb_point_encode, but it is way faster and gets faster
+    as the number of points increase.
     """
     n = len(latitudes)
     geohashes = np.empty(n, dtype="<U12")
