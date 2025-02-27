@@ -1,9 +1,10 @@
-v2.0.0
+v2.0.1
 ======
 
 * [meta] restructured as pyproject.toml based project
 * [meta] added ruff and tox configs 
 * [meta] added gh actions workflows
+* [docs] added proper sphinxdocs and background info 
 
 
 v1.2.0

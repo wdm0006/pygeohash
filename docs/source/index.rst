@@ -57,8 +57,6 @@ Contents
    usage
    api
    examples
-   contributing
-   changelog
 
 Indices and tables
 ==================
