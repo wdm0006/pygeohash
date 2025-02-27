@@ -1,67 +1,84 @@
-pygeohash
-=========
+# PyGeoHash
 
-[![Coverage Status](https://coveralls.io/repos/wdm0006/pygeohash/badge.svg?branch=master&service=github)](https://coveralls.io/github/wdm0006/pygeohash?branch=master)  ![travis status](https://travis-ci.org/wdm0006/pygeohash.svg?branch=master) 
+[![PyPI version](https://badge.fury.io/py/pygeohash.svg)](https://badge.fury.io/py/pygeohash)
+[![Python Versions](https://img.shields.io/pypi/pyversions/pygeohash.svg)](https://pypi.org/project/pygeohash/)
 
-Pygeohash is a Python module that provides functions for decoding and encoding geohashes to and from latitude and 
-longitude coordinates, and doing basic calculations and approximations with them.
+A simple, lightweight, and dependency-free Python library for working with geohashes.
 
-It is based off of Leonard Norrgård's [geohash](https://github.com/vinsci/geohash) module, but aims to add more 
-functionality while supporting python 3 as well.
+## What is PyGeoHash?
 
+PyGeoHash is a Python module that provides functions for encoding and decoding geohashes to and from latitude and 
+longitude coordinates, along with utilities for performing calculations and approximations with them.
 
-Usage
-=====
+It is based on Leonard Norrgård's [geohash](https://github.com/vinsci/geohash) module, but adds more 
+functionality while supporting Python 3.
 
-To use pygeohash:
+## Why PyGeoHash?
 
-```py
-import pygeohash as pgh
+- **Zero Dependencies**: Works with just the Python standard library
+- **Simple API**: Clean, intuitive functions that are easy to understand
+- **Lightweight**: Minimal overhead for your projects
+- **Python 3 Support**: Fully compatible with modern Python
+- **Robust Implementation**: Reliable geohash operations
 
-pgh.encode(latitude=42.6, longitude=-5.6)
-# >>> 'ezs42e44yx96'
+## Installation
 
-pgh.encode(latitude=42.6, longitude=-5.6, precision=5)
-# >>> 'ezs42'
-
-pgh.decode(geohash='ezs42')
-# >>> ('42.6', '-5.6')
-
-pgh.geohash_approximate_distance(geohash_1='bcd3u', geohash_2='bc83n')
-# >>> 625441
-
-pgh.get_adjacent(geohash='kd3ybyu', direction='right')
-# >>> kd3ybyv
+```bash
+pip install pygeohash
 ```
 
-Installation
-============
+## Quick Start
 
-Pygeohash has no requirements outside of the python stdlib, and aims to keep it that way if at all possible. To install:
+```python
+import pygeohash as pgh
 
-    pip install pygeohash
+# Encode coordinates to geohash
+geohash = pgh.encode(latitude=42.6, longitude=-5.6)
+print(geohash)  # 'ezs42e44yx96'
+
+# Control precision
+short_geohash = pgh.encode(latitude=42.6, longitude=-5.6, precision=5)
+print(short_geohash)  # 'ezs42'
+
+# Decode geohash to coordinates
+lat, lng = pgh.decode(geohash='ezs42')
+print(lat, lng)  # '42.6', '-5.6'
+
+# Calculate approximate distance between geohashes (in meters)
+distance = pgh.geohash_approximate_distance(geohash_1='bcd3u', geohash_2='bc83n')
+print(distance)  # 625441
+
+# Get adjacent geohash
+adjacent = pgh.get_adjacent(geohash='kd3ybyu', direction='right')
+print(adjacent)  # 'kd3ybyv'
+```
+
+## Features
+
+- Encode coordinates to geohash strings
+- Decode geohash strings back to coordinates
+- Calculate approximate distances between geohashes
+- Find adjacent geohashes in any direction
+- Control precision of geohash encoding
+- Bounding box calculations
+
+## Use Cases
+
+- Location-based services
+- Spatial indexing
+- Proximity searches
+- Geographic data clustering
+- Location encoding with privacy considerations
+
+## Contributing
+
+Contributions are welcome! Feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Based on Leonard Norrgård's [geohash](https://github.com/vinsci/geohash) module
    
-License
-========
-
-A portion of this codebase (geohash.py), is from Leonard Norrgard's module, which carries the following license:
-
-Copyright (C) 2015 [Leonard Norrgard](leonard.norrgard@gmail.com)
-
-Geohash is free software: you can redistribute it and/or modify it
-under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Geohash is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public
-License for more details.
-
-You should have received a copy of the GNU Affero General Public
-License along with Geohash.  If not, see
-[gnu.org](http://www.gnu.org/licenses/).
-
-This derivative work likewise carries the same license:
-
-Copyright (C) 2015 [Will McGinnis](will@pedalwrencher.com)

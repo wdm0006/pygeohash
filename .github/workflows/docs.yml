@@ -1,0 +1,35 @@
+name: Build Documentation
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+        
+    - name: Create virtual environment and install dependencies
+      run: |
+        uv venv
+        source .venv/bin/activate
+        uv pip install -e ".[dev,numba]"
+        
+    - name: Build documentation
+      run: |
+        source .venv/bin/activate
+        cd docs
+        make html 

@@ -1,1 +1,6 @@
 include README.md
+include LICENSE.txt
+include CHANGELOG.md
+include Makefile
+recursive-include pygeohash *.py
+recursive-include tests *.py

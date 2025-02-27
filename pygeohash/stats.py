@@ -10,12 +10,12 @@
 
 import math
 import statistics
-from typing import Iterable, Callable, Generator, List
+from typing import Callable, Generator, Iterable, List
 
 from pygeohash.distances import geohash_haversine_distance
-from pygeohash.geohash import decode, encode, LatLong
+from pygeohash.geohash import LatLong, decode, encode
 
-__author__ = 'Will McGinnis'
+__author__ = "Will McGinnis"
 
 
 def __latitude(coordinate: LatLong) -> float:
@@ -100,7 +100,7 @@ def variance(geohashes: Iterable[str]) -> float:
 
     mean_v = mean(geohashes)
     dists = [geohash_haversine_distance(x, mean_v) for x in geohashes]
-    var = sum([x ** 2 for x in dists]) / float(len(dists))
+    var = sum([x**2 for x in dists]) / float(len(dists))
     return var
 
 

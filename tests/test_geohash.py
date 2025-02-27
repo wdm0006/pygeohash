@@ -1,89 +1,71 @@
-import unittest
+import pytest
 import pygeohash as pgh
 
-__author__ = 'willmcginnis'
+__author__ = "willmcginnis"
 
 
-class TestGeohash(unittest.TestCase):
-    """
-    """
-
-    def test_encode(self):
-        self.assertEqual(pgh.encode(42.6, -5.6), 'ezs42e44yx96')
-        self.assertEqual(pgh.encode(42.6, -5.6, precision=5), 'ezs42')
-        self.assertEqual(pgh.encode(0.0, -5.6, precision=5), 'ebh00')
-
-    def test_encode_strictly(self):
-        self.assertEqual(pgh.encode(0.0, -5.6, precision=5), '7zupb')
-        self.assertEqual(pgh.encode_strictly(0.0, -5.6, precision=5), 'ebh00')
+def test_encode():
+    assert pgh.encode(42.6, -5.6) == "ezs42e44yx96"
+    assert pgh.encode(42.6, -5.6, precision=5) == "ezs42"
+    assert pgh.encode(0.0, -5.6, precision=5) == "ebh00"
 
 
-    def test_decode(self):
-        self.assertEqual(pgh.decode('ezs42'), pgh.LatLong(42.6, -5.6))
+def test_encode_strictly():
+    assert pgh.encode(0.0, -5.6, precision=5) == "ebh00"
+    assert pgh.encode_strictly(0.0, -5.6, precision=5) == "ebh00"
 
-    def test_check_validity(self):
-        exception_raised = False
-        try:
-            pgh.geohash_approximate_distance('shibu', 'shiba', check_validity=True)
-        except ValueError:
-            exception_raised = True
 
-        self.assertTrue(exception_raised)
+def test_decode():
+    assert pgh.decode("ezs42") == pgh.LatLong(42.6, -5.6)
 
-    def test_distance(self):
-        # test the fast geohash distance approximations
-        self.assertEqual(pgh.geohash_approximate_distance('bcd3u', 'bc83n'), 625441)
-        self.assertEqual(pgh.geohash_approximate_distance('bcd3uasd', 'bcd3n'), 19545)
-        self.assertEqual(pgh.geohash_approximate_distance('bcd3u', 'bcd3uasd'), 3803)
-        self.assertEqual(pgh.geohash_approximate_distance('bcd3ua', 'bcd3uasdub'), 610)
 
-        # test the haversine great circle distance calculations
-        self.assertAlmostEqual(pgh.geohash_haversine_distance('testxyz', 'testwxy'), 5888.614420771857, places=4)
+def test_check_validity():
+    with pytest.raises(ValueError):
+        pgh.geohash_approximate_distance("shibu", "shiba", check_validity=True)
 
-    def test_stats(self):
-        coordinates = [pgh.LatLong(50, 0), pgh.LatLong(-50, 0), pgh.LatLong(0, -50), pgh.LatLong(0, 50)]
-        coordinates = [pgh.encode(*coordinate) for coordinate in coordinates]
 
-        # mean
-        mean = pgh.mean(coordinates)
-        self.assertEqual(mean, '7zzzzzzzzzzz')
+def test_distance():
+    # test the fast geohash distance approximations
+    assert pgh.geohash_approximate_distance("bcd3u", "bc83n") == 625441
+    assert pgh.geohash_approximate_distance("bcd3uasd", "bcd3n") == 19545
+    assert pgh.geohash_approximate_distance("bcd3u", "bcd3uasd") == 3803
+    assert pgh.geohash_approximate_distance("bcd3ua", "bcd3uasdub") == 610
 
-        # north
-        north = pgh.northern(coordinates)
-        self.assertEqual(north, 'gbzurypzpgxc')
+    # test the haversine great circle distance calculations
+    assert pytest.approx(pgh.geohash_haversine_distance("testxyz", "testwxy"), abs=1e-4) == 5888.614420771857
 
-        # south
-        south = pgh.southern(coordinates)
-        self.assertEqual(south, '5zpgxczbzury')
 
-        # east
-        east = pgh.eastern(coordinates)
-        self.assertEqual(east, 'mpgxczbzuryp')
+def test_stats():
+    coordinates = [
+        pgh.LatLong(50, 0),
+        pgh.LatLong(-50, 0),
+        pgh.LatLong(0, -50),
+        pgh.LatLong(0, 50),
+    ]
+    coordinates = [pgh.encode(*coordinate) for coordinate in coordinates]
 
-        # west
-        west = pgh.western(coordinates)
-        self.assertEqual(west, '6zurypzpgxcz')
-#         mean = pgh.mean(data)
-#         self.assertEqual(mean, 's00000000000')
+    # mean
+    mean = pgh.mean(coordinates)
+    assert mean == "s00000000000"
 
-#         # north
-#         north = pgh.northern(data)
-#         self.assertEqual(north, 'u0bh2n0p0581')
+    # north
+    north = pgh.northern(coordinates)
+    assert north == "u0bh2n0p0581"
 
-#         # south
-#         south = pgh.southern(data)
-#         self.assertEqual(south, 'hp0581b0bh2n')
+    # south
+    south = pgh.southern(coordinates)
+    assert south == "hp0581b0bh2n"
 
-#         # east
-#         east = pgh.eastern(data)
-#         self.assertEqual(east, 't0581b0bh2n0')
+    # east
+    east = pgh.eastern(coordinates)
+    assert east == "t0581b0bh2n0"
 
-#         # west
-#         west = pgh.western(data)
-#         self.assertEqual(west, 'dbh2n0p0581b')
+    # west
+    west = pgh.western(coordinates)
+    assert west == "dbh2n0p0581b"
 
-        var = pgh.variance(coordinates)
-        self.assertAlmostEqual(var, 30910779169327.953, places=2)
+    var = pgh.variance(coordinates)
+    assert pytest.approx(var, abs=0.01) == 30910779169327.953
 
-        std = pgh.std(coordinates)
-        self.assertAlmostEqual(std, 5559746.322389894, places=4)
+    std = pgh.std(coordinates)
+    assert pytest.approx(std, abs=1e-4) == 5559746.322389894

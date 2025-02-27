@@ -1,0 +1,102 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pygeohash"
+version = "2.0.0"
+description = "Python module for interacting with geohashes"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "GPL3"}
+authors = [
+    {name = "Will McGinnis", email = "will@pedalwrencher.com"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["geohash", "gis"]
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://github.com/wdm0006/pygeohash"
+"Bug Tracker" = "https://github.com/wdm0006/pygeohash/issues"
+"Download" = "https://github.com/wdm0006/pygeohash/tarball/2.0.0"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pygeohash"]
+
+[project.optional-dependencies]
+numba = [
+    "numpy>=1.20.0",
+    "numba>=0.55.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.0.262",
+    "tox>=4.0.0",
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+    "build>=0.10.0",
+    "twine>=4.0.0",
+    "numpy>=1.20.0",
+    "numba>=0.55.0",
+    "pytest-benchmark",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "--cov=pygeohash --cov-report=term --cov-report=xml"
+
+[tool.coverage.run]
+source = ["pygeohash"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError",
+]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "B"]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["pygeohash"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # Ignore unused imports in __init__.py files
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py38, py39, py310, py311, py312
+isolated_build = True
+
+[testenv]
+deps =
+    pytest
+    pytest-cov
+    pytest-benchmark
+commands =
+    pytest {posargs:tests}
+""" 
