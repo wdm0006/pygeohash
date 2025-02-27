@@ -32,10 +32,7 @@ def test_distance():
     assert pgh.geohash_approximate_distance("bcd3ua", "bcd3uasdub") == 610
 
     # test the haversine great circle distance calculations
-    assert pytest.approx(
-        pgh.geohash_haversine_distance("testxyz", "testwxy"),
-        abs=1e-4
-    ) == 5888.614420771857
+    assert pytest.approx(pgh.geohash_haversine_distance("testxyz", "testwxy"), abs=1e-4) == 5888.614420771857
 
 
 def test_stats():

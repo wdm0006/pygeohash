@@ -1,4 +1,4 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help lint format test test-all coverage install dev-install install-dev
+.PHONY: clean clean-test clean-pyc clean-build docs help lint format test test-all coverage install dev-install install-dev benchmark benchmark-detailed
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -90,4 +90,11 @@ build: clean ## builds source and wheel package
 
 release: build ## package and upload a release
 	uv pip install twine
-	twine upload dist/* 
+	twine upload dist/*
+
+benchmark:
+	uv run pytest tests/test_benchmark.py -v --benchmark-sort=name
+
+# Optionally, add a more detailed benchmark command
+benchmark-detailed:
+	uv run pytest tests/test_benchmark.py -v --benchmark-sort=name --benchmark-columns=min,max,mean,stddev,median,ops,rounds 

@@ -9,8 +9,7 @@ numba_available = importlib.util.find_spec("numba") is not None
 
 # Skip the entire module if numpy or numba are not available
 pytestmark = pytest.mark.skipif(
-    not (numpy_available and numba_available),
-    reason="Numpy and Numba are required for these tests"
+    not (numpy_available and numba_available), reason="Numpy and Numba are required for these tests"
 )
 
 if numpy_available and numba_available:
