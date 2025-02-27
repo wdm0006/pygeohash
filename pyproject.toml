@@ -23,10 +23,10 @@ dependencies = []
 [project.urls]
 "Homepage" = "https://github.com/wdm0006/pygeohash"
 "Bug Tracker" = "https://github.com/wdm0006/pygeohash/issues"
-"Download" = "https://github.com/wdm0006/pygeohash/tarball/1.2.0"
+"Download" = "https://github.com/wdm0006/pygeohash/tarball/2.0.0"
 
 [tool.hatch.build.targets.wheel]
-packages = ["nbgeohash"]
+packages = ["pygeohash"]
 
 [project.optional-dependencies]
 numba = [
@@ -50,7 +50,7 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = "test_*.py"
-addopts = "--cov=nbgeohash --cov-report=term --cov-report=xml"
+addopts = "--cov=pygeohash --cov-report=term --cov-report=xml"
 
 [tool.coverage.run]
 source = ["pygeohash"]
@@ -69,8 +69,6 @@ exclude_lines = [
 [tool.ruff]
 target-version = "py38"
 line-length = 120
-select = ["E", "F", "B"]
-ignore = []
 
 [tool.ruff.lint]
 select = ["E", "F", "B"]
@@ -98,6 +96,7 @@ isolated_build = True
 deps =
     pytest
     pytest-cov
+    pytest-benchmark
 commands =
     pytest {posargs:tests}
 """ 
