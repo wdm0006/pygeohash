@@ -35,7 +35,20 @@ jobs:
         
     - name: Build package
       run: |
-        make build
+        # Clean the build directories first (from the Makefile's clean target)
+        rm -fr build/
+        rm -fr dist/
+        rm -fr .eggs/
+        find . -name '*.egg-info' -exec rm -fr {} +
+        find . -name '*.egg' -exec rm -f {} +
+        find . -name '*.pyc' -exec rm -f {} +
+        find . -name '*.pyo' -exec rm -f {} +
+        find . -name '*~' -exec rm -f {} +
+        find . -name '__pycache__' -exec rm -fr {} +
+        
+        # Build the package using uv run to ensure it uses the virtual environment
+        uv run python -m build
+        ls -l dist
         
     - name: Publish package distributions to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1 
+      uses: pypa/gh-action-pypi-publish@release/v1

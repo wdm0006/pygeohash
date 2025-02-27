@@ -1,4 +1,4 @@
-v2.0.1
+v2.0.2
 ======
 
 * [meta] restructured as pyproject.toml based project
