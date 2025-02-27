@@ -8,17 +8,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
-
+    
     steps:
     - uses: actions/checkout@v3
     
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.12'  # Use the latest Python for running tox
         
     - name: Install uv
       run: |
@@ -33,5 +30,5 @@ jobs:
       run: |
         uv pip install -e ".[dev,numba]"
         
-    - name: Run tests
-      run: make test-all 
+    - name: Run tests with tox
+      run: uv run tox 
