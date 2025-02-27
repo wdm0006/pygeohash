@@ -17,7 +17,10 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath("../.."))
 
 # -- General configuration ------------------------------------------------
 
@@ -104,6 +107,12 @@ pygments_style = "sphinx"
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+# -- Options for autodoc --------------------------------------------------
+# Sort members by type
+autodoc_member_order = "groupwise"
+
+# Ensure that the __init__ method gets documented.
+autoclass_content = "both"
 
 # -- Options for HTML output ----------------------------------------------
 
