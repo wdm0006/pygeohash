@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Usage Guide &#8212; pygeohash 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="Geohash Concepts" href="concepts.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="usage-guide">
+<h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Link to this heading">¶</a></h1>
+<p>This guide covers common use cases and patterns for working with the PyGeoHash library.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>PyGeoHash can be installed from PyPI using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pygeohash
+</pre></div>
+</div>
+</section>
+<section id="basic-operations">
+<h2>Basic Operations<a class="headerlink" href="#basic-operations" title="Link to this heading">¶</a></h2>
+<section id="encoding-coordinates-to-geohash">
+<h3>Encoding Coordinates to Geohash<a class="headerlink" href="#encoding-coordinates-to-geohash" title="Link to this heading">¶</a></h3>
+<p>To convert latitude and longitude coordinates to a geohash string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Default precision (12 characters)</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">42.6</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">5.6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>  <span class="c1"># &#39;ezs42e44yx96&#39;</span>
+
+<span class="c1"># Custom precision (5 characters)</span>
+<span class="n">short_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">42.6</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">5.6</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">short_geohash</span><span class="p">)</span>  <span class="c1"># &#39;ezs42&#39;</span>
+
+<span class="c1"># Strict encoding (validates input coordinates)</span>
+<span class="n">strict_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">42.6</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">5.6</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">strict_geohash</span><span class="p">)</span>  <span class="c1"># &#39;ezs42&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="decoding-geohash-to-coordinates">
+<h3>Decoding Geohash to Coordinates<a class="headerlink" href="#decoding-geohash-to-coordinates" title="Link to this heading">¶</a></h3>
+<p>To convert a geohash string back to latitude and longitude coordinates:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Basic decoding</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;ezs42&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+
+<span class="c1"># Decoding with error margins</span>
+<span class="n">exact_location</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;ezs42&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exact_location</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">exact_location</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exact_location</span><span class="o">.</span><span class="n">latitude_error</span><span class="p">,</span> <span class="n">exact_location</span><span class="o">.</span><span class="n">longitude_error</span><span class="p">)</span>  <span class="c1"># Error margins</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-geohash-precision">
+<h2>Working with Geohash Precision<a class="headerlink" href="#working-with-geohash-precision" title="Link to this heading">¶</a></h2>
+<p>The precision of a geohash determines how accurately it represents a location. Each additional character in a geohash increases precision:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Different precision levels for the same location</span>
+<span class="n">location</span> <span class="o">=</span> <span class="p">(</span><span class="mf">37.371392</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.046208</span><span class="p">)</span>  <span class="c1"># Google headquarters</span>
+
+<span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>
+    <span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
+    <span class="n">decoded</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2"> -&gt; (</span><span class="si">{</span><span class="n">decoded</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">decoded</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="calculating-distances">
+<h2>Calculating Distances<a class="headerlink" href="#calculating-distances" title="Link to this heading">¶</a></h2>
+<p>To calculate the distance between two geohashes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Approximate distance based on matching characters</span>
+<span class="n">approx_distance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohash_approximate_distance</span><span class="p">(</span>
+    <span class="n">geohash_1</span><span class="o">=</span><span class="s1">&#39;bcd3u&#39;</span><span class="p">,</span>
+    <span class="n">geohash_2</span><span class="o">=</span><span class="s1">&#39;bc83n&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Approximate distance: </span><span class="si">{</span><span class="n">approx_distance</span><span class="si">}</span><span class="s2"> meters&quot;</span><span class="p">)</span>
+
+<span class="c1"># More accurate distance using Haversine formula</span>
+<span class="n">haversine_distance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohash_haversine_distance</span><span class="p">(</span>
+    <span class="n">geohash_1</span><span class="o">=</span><span class="s1">&#39;bcd3u&#39;</span><span class="p">,</span>
+    <span class="n">geohash_2</span><span class="o">=</span><span class="s1">&#39;bc83n&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Haversine distance: </span><span class="si">{</span><span class="n">haversine_distance</span><span class="si">}</span><span class="s2"> meters&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="finding-adjacent-geohashes">
+<h2>Finding Adjacent Geohashes<a class="headerlink" href="#finding-adjacent-geohashes" title="Link to this heading">¶</a></h2>
+<p>To find geohashes adjacent to a given geohash:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Get adjacent geohash in a specific direction</span>
+<span class="c1"># Directions: &#39;top&#39;, &#39;right&#39;, &#39;bottom&#39;, &#39;left&#39;</span>
+<span class="n">adjacent_right</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;kd3ybyu&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Right: </span><span class="si">{</span><span class="n">adjacent_right</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get adjacent geohashes in all four directions</span>
+<span class="n">adjacent_top</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;kd3ybyu&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+<span class="n">adjacent_right</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;kd3ybyu&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">adjacent_bottom</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;kd3ybyu&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">adjacent_left</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;kd3ybyu&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Top: </span><span class="si">{</span><span class="n">adjacent_top</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Right: </span><span class="si">{</span><span class="n">adjacent_right</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bottom: </span><span class="si">{</span><span class="n">adjacent_bottom</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Left: </span><span class="si">{</span><span class="n">adjacent_left</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="statistical-functions">
+<h2>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">¶</a></h2>
+<p>PyGeoHash provides several statistical functions for working with groups of geohashes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Sample geohashes</span>
+<span class="n">geohashes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ezs42&#39;</span><span class="p">,</span> <span class="s1">&#39;ezs41&#39;</span><span class="p">,</span> <span class="s1">&#39;ezs43&#39;</span><span class="p">,</span> <span class="s1">&#39;ezs40&#39;</span><span class="p">]</span>
+
+<span class="c1"># Find the mean position</span>
+<span class="n">mean_position</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean position: </span><span class="si">{</span><span class="n">mean_position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Find cardinal extremes</span>
+<span class="n">north</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">northern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+<span class="n">south</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">southern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+<span class="n">east</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">eastern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+<span class="n">west</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">western</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Northernmost: </span><span class="si">{</span><span class="n">north</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Southernmost: </span><span class="si">{</span><span class="n">south</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Easternmost: </span><span class="si">{</span><span class="n">east</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Westernmost: </span><span class="si">{</span><span class="n">west</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calculate statistical measures</span>
+<span class="n">variance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">variance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+<span class="n">std_dev</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variance: </span><span class="si">{</span><span class="n">variance</span><span class="si">}</span><span class="s2"> meters²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard deviation: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">}</span><span class="s2"> meters&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="practical-examples">
+<h2>Practical Examples<a class="headerlink" href="#practical-examples" title="Link to this heading">¶</a></h2>
+<section id="location-based-search">
+<h3>Location-Based Search<a class="headerlink" href="#location-based-search" title="Link to this heading">¶</a></h3>
+<p>Using geohashes for a simple location-based search:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Define a database of points of interest with their geohashes</span>
+<span class="n">pois</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Eiffel Tower&quot;</span><span class="p">,</span> <span class="s2">&quot;geohash&quot;</span><span class="p">:</span> <span class="s2">&quot;u09tvw0f&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Statue of Liberty&quot;</span><span class="p">,</span> <span class="s2">&quot;geohash&quot;</span><span class="p">:</span> <span class="s2">&quot;dr5regw3&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sydney Opera House&quot;</span><span class="p">,</span> <span class="s2">&quot;geohash&quot;</span><span class="p">:</span> <span class="s2">&quot;r3gx2u9b&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Taj Mahal&quot;</span><span class="p">,</span> <span class="s2">&quot;geohash&quot;</span><span class="p">:</span> <span class="s2">&quot;ttmgrbh1&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Great Wall of China&quot;</span><span class="p">,</span> <span class="s2">&quot;geohash&quot;</span><span class="p">:</span> <span class="s2">&quot;wx4g09c6&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># User&#39;s current location</span>
+<span class="n">user_lat</span><span class="p">,</span> <span class="n">user_lng</span> <span class="o">=</span> <span class="mf">48.8584</span><span class="p">,</span> <span class="mf">2.2945</span>  <span class="c1"># Paris</span>
+<span class="n">user_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">user_lat</span><span class="p">,</span> <span class="n">user_lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Find nearby POIs (simplified approach)</span>
+<span class="n">nearby_pois</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">poi</span> <span class="ow">in</span> <span class="n">pois</span><span class="p">:</span>
+    <span class="c1"># Compare the first 3 characters (city-level precision)</span>
+    <span class="k">if</span> <span class="n">poi</span><span class="p">[</span><span class="s2">&quot;geohash&quot;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">user_geohash</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+        <span class="n">nearby_pois</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">poi</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nearby POIs: </span><span class="si">{</span><span class="n">nearby_pois</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># For more accurate results, calculate actual distances</span>
+<span class="k">for</span> <span class="n">poi</span> <span class="ow">in</span> <span class="n">pois</span><span class="p">:</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">poi</span><span class="p">[</span><span class="s2">&quot;geohash&quot;</span><span class="p">])</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohash_haversine_distance</span><span class="p">(</span>
+        <span class="n">user_geohash</span><span class="p">,</span>
+        <span class="n">poi</span><span class="p">[</span><span class="s2">&quot;geohash&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">poi</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span>
+
+<span class="c1"># Sort by distance</span>
+<span class="n">sorted_pois</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pois</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sorted POIs by distance: </span><span class="si">{</span><span class="n">sorted_pois</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="geofencing">
+<h3>Geofencing<a class="headerlink" href="#geofencing" title="Link to this heading">¶</a></h3>
+<p>Using geohashes for simple geofencing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Define a geofence as a set of geohash prefixes</span>
+<span class="n">geofence</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;u09t&quot;</span><span class="p">,</span> <span class="s2">&quot;u09s&quot;</span><span class="p">,</span> <span class="s2">&quot;u09w&quot;</span><span class="p">}</span>  <span class="c1"># Area around Paris</span>
+
+<span class="c1"># Check if a location is within the geofence</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_in_geofence</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">geofence_prefixes</span><span class="p">,</span> <span class="n">prefix_length</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">location_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="n">prefix_length</span><span class="p">)</span>
+    <span class="n">location_prefix</span> <span class="o">=</span> <span class="n">location_geohash</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">location_prefix</span> <span class="ow">in</span> <span class="n">geofence_prefixes</span>
+
+<span class="c1"># Test locations</span>
+<span class="n">test_locations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Eiffel Tower&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">48.8584</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="mf">2.2945</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Notre-Dame&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">48.8530</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="mf">2.3499</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;London Eye&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">51.5033</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1195</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">test_locations</span><span class="p">:</span>
+    <span class="n">in_geofence</span> <span class="o">=</span> <span class="n">is_in_geofence</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">],</span> <span class="n">geofence</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="s1">&#39;inside&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">in_geofence</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;outside&#39;</span><span class="si">}</span><span class="s2"> the geofence&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Geohash operations are generally very fast</p></li>
+<li><p>For large datasets, consider using the Numba-accelerated functions (requires Numba and NumPy)</p></li>
+<li><p>When working with millions of geohashes, consider using a database with geospatial capabilities</p></li>
+<li><p>For high-precision applications, be aware of the limitations of geohashes near poles and the 180° meridian</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pygeohash</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-operations">Basic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-geohash-precision">Working with Geohash Precision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculating-distances">Calculating Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#practical-examples">Practical Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="concepts.html" title="previous chapter">Geohash Concepts</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API Reference</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2016, Will McGinnis.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.1</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

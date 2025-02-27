@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to PyGeoHash’s Documentation! &#8212; pygeohash 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="introduction.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-pygeohash-s-documentation">
+<h1>Welcome to PyGeoHash’s Documentation!<a class="headerlink" href="#welcome-to-pygeohash-s-documentation" title="Link to this heading">¶</a></h1>
+<p><strong>PyGeoHash</strong> is a simple, lightweight, and dependency-free Python library for working with geohashes.</p>
+<a class="reference external image-reference" href="https://badge.fury.io/py/pygeohash"><img alt="https://badge.fury.io/py/pygeohash.svg" src="https://badge.fury.io/py/pygeohash.svg" />
+</a>
+<a class="reference external image-reference" href="https://pypi.org/project/pygeohash/"><img alt="https://img.shields.io/pypi/pyversions/pygeohash.svg" src="https://img.shields.io/pypi/pyversions/pygeohash.svg" />
+</a>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Zero Dependencies</strong>: Works with just the Python standard library</p></li>
+<li><p><strong>Simple API</strong>: Clean, intuitive functions that are easy to understand</p></li>
+<li><p><strong>Lightweight</strong>: Minimal overhead for your projects</p></li>
+<li><p><strong>Python 3 Support</strong>: Fully compatible with modern Python</p></li>
+<li><p><strong>Robust Implementation</strong>: Reliable geohash operations</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<p>Installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pygeohash
+</pre></div>
+</div>
+<p>Basic usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Encode coordinates to geohash</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">42.6</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">5.6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>  <span class="c1"># &#39;ezs42e44yx96&#39;</span>
+
+<span class="c1"># Decode geohash to coordinates</span>
+<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;ezs42&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span>  <span class="c1"># &#39;42.6&#39;, &#39;-5.6&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-pygeohash">What is PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#why-use-pygeohash">Why Use PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#project-history">Project History</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#what-is-a-geohash">What is a Geohash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#how-geohashing-works">How Geohashing Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#visual-representation">Visual Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#precision-and-cell-size">Precision and Cell Size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#properties-of-geohashes">Properties of Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#edge-cases-and-limitations">Edge Cases and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-vs-other-geocoding-systems">Geohash vs. Other Geocoding Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#basic-operations">Basic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#working-with-geohash-precision">Working with Geohash Precision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#calculating-distances">Calculating Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#practical-examples">Practical Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#performance-considerations">Performance Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#core-functions">Core Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#numba-accelerated-functions">Numba-accelerated Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#basic-geohashing">Basic Geohashing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#adjacent-geohashes">Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#statistical-analysis">Statistical Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#geospatial-search">Geospatial Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#clustering-by-geohash-prefix">Clustering by Geohash Prefix</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">pygeohash</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="introduction.html" title="next chapter">Introduction</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2016, Will McGinnis.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.1</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
