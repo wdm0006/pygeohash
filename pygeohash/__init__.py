@@ -1,11 +1,15 @@
-"""
-.. module:: pygeohash
-   :platform: Unix, Windows
-   :synopsis: A module for interacting with geohashes in python
+"""pygeohash: A Python module for geohash encoding and operations.
 
-.. moduleauthor:: Will McGinnis <will@pedalwrencher.com>
+This module provides functionality for encoding and decoding geohashes,
+calculating distances between geohashes, finding adjacent geohashes,
+and performing statistical operations on collections of geohashes.
 
+The module supports both pure Python implementations and optional
+Numba-accelerated implementations for performance-critical operations.
 
+Attributes:
+    __author__ (str): The author of the module.
+    __all__ (list): List of public functions and classes exported by the module.
 """
 
 from .distances import geohash_approximate_distance, geohash_haversine_distance
