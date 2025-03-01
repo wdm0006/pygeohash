@@ -1,4 +1,9 @@
-"""
+"""Geohash encoding and decoding functionality.
+
+This module provides the core functionality for encoding coordinates to geohashes
+and decoding geohashes back to coordinates. It includes both standard and exact
+decoding options, as well as strict encoding.
+
 Copyright (C) 2008 Leonard Norrgard <leonard.norrgard@gmail.com>
 Copyright (C) 2015 Leonard Norrgard <leonard.norrgard@gmail.com>
 
@@ -35,11 +40,27 @@ __decodemap: Dict[str, int] = {base32_char: i for i, base32_char in enumerate(__
 
 
 class LatLong(NamedTuple):
+    """Named tuple representing a latitude/longitude coordinate pair.
+
+    Attributes:
+        latitude (float): The latitude coordinate in decimal degrees.
+        longitude (float): The longitude coordinate in decimal degrees.
+    """
+
     latitude: float
     longitude: float
 
 
 class ExactLatLong(NamedTuple):
+    """Named tuple representing a latitude/longitude coordinate pair with error margins.
+
+    Attributes:
+        latitude (float): The latitude coordinate in decimal degrees.
+        longitude (float): The longitude coordinate in decimal degrees.
+        latitude_error (float): The error margin for latitude in decimal degrees.
+        longitude_error (float): The error margin for longitude in decimal degrees.
+    """
+
     latitude: float
     longitude: float
     latitude_error: float
@@ -47,12 +68,17 @@ class ExactLatLong(NamedTuple):
 
 
 def decode_exactly(geohash: str) -> ExactLatLong:
-    """
-    Decode the geohash to its exact values, including the error
-    margins of the result.  Returns four float values: latitude,
-    longitude, the plus/minus error for latitude (as a positive
-    number) and the plus/minus error for longitude (as a positive
-    number).
+    """Decode a geohash to its exact values, including error margins.
+
+    Args:
+        geohash (str): The geohash string to decode.
+
+    Returns:
+        ExactLatLong: A named tuple containing latitude, longitude, and their respective error margins.
+
+    Example:
+        >>> decode_exactly("u4pruydqqvj")
+        ExactLatLong(latitude=57.64911, longitude=10.40744, latitude_error=0.00001, longitude_error=0.00001)
     """
     lat_interval, lon_interval = (-90.0, 90.0), (-180.0, 180.0)
     lat_err, lon_err = 90.0, 180.0
@@ -91,9 +117,20 @@ def decode_exactly(geohash: str) -> ExactLatLong:
 
 
 def decode(geohash: str) -> LatLong:
-    """
-    Decode geohash, returning two float with latitude and longitude
-    containing only relevant digits and with trailing zeroes removed.
+    """Decode a geohash to latitude and longitude coordinates.
+
+    Decodes a geohash string to a latitude and longitude coordinate pair,
+    with precision appropriate to the length of the geohash.
+
+    Args:
+        geohash (str): The geohash string to decode.
+
+    Returns:
+        LatLong: A named tuple containing latitude and longitude coordinates.
+
+    Example:
+        >>> decode("u4pruyd")
+        LatLong(latitude=57.649, longitude=10.407)
     """
     lat, lon, lat_err, lon_err = decode_exactly(geohash)
     # Format to the number of decimals that are known
@@ -107,9 +144,19 @@ def decode(geohash: str) -> LatLong:
 
 
 def encode(latitude: float, longitude: float, precision=12) -> str:
-    """
-    Encode a position given in float arguments latitude, longitude to
-    a geohash which will have the character count precision.
+    """Encode coordinates to a geohash string.
+
+    Args:
+        latitude (float): The latitude coordinate in decimal degrees (-90 to 90).
+        longitude (float): The longitude coordinate in decimal degrees (-180 to 180).
+        precision (int, optional): The desired length of the geohash string. Defaults to 12.
+
+    Returns:
+        str: The geohash string representation of the coordinates.
+
+    Example:
+        >>> encode(57.64911, 10.40744, 8)
+        'u4pruydq'
     """
     lat_interval = (-90.0, 90.0)
     lon_interval = (-180.0, 180.0)
@@ -143,12 +190,23 @@ def encode(latitude: float, longitude: float, precision=12) -> str:
     return "".join(geohash)
 
 
-def encode_strictly(latitude, longitude, precision=12):
-    """
-    Encode a position given in float arguments latitude, longitude to
-    a geohash which will have the character count precision.
-    When compared to mid, mid should be included.
-    Provide a separate method for backward compatibility.
+def encode_strictly(latitude: float, longitude: float, precision=12) -> str:
+    """Encode coordinates to a geohash string with strict midpoint handling.
+
+    This function is similar to encode() but handles the midpoint differently.
+    When a coordinate is exactly at the midpoint, it is included in the upper interval.
+
+    Args:
+        latitude (float): The latitude coordinate in decimal degrees (-90 to 90).
+        longitude (float): The longitude coordinate in decimal degrees (-180 to 180).
+        precision (int, optional): The desired length of the geohash string. Defaults to 12.
+
+    Returns:
+        str: The geohash string representation of the coordinates.
+
+    Example:
+        >>> encode_strictly(57.64911, 10.40744, 8)
+        'u4pruydq'
     """
     lat_interval = (-90.0, 90.0)
     lon_interval = (-180.0, 180.0)

@@ -26,6 +26,12 @@ Data Types
    :show-inheritance:
    :noindex:
 
+.. autoclass:: pygeohash.BoundingBox
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :noindex:
+
 Distance Calculations
 --------------------
 
@@ -37,6 +43,15 @@ Geohash Navigation
 
 .. autofunction:: pygeohash.get_adjacent
 
+Bounding Box Operations
+---------------------
+
+.. autofunction:: pygeohash.get_bounding_box
+.. autofunction:: pygeohash.is_point_in_box
+.. autofunction:: pygeohash.is_point_in_geohash
+.. autofunction:: pygeohash.do_boxes_intersect
+.. autofunction:: pygeohash.geohashes_in_box
+
 Statistical Functions
 -------------------
 
@@ -47,6 +62,20 @@ Statistical Functions
 .. autofunction:: pygeohash.western
 .. autofunction:: pygeohash.variance
 .. autofunction:: pygeohash.std
+
+Visualization Functions
+---------------------
+
+These functions require additional dependencies that can be installed with:
+``pip install pygeohash[viz]``
+
+The visualization module provides tools for creating static plots with Matplotlib and interactive maps with Folium:
+
+.. autofunction:: pygeohash.plot_geohash
+.. autofunction:: pygeohash.plot_geohashes
+.. autofunction:: pygeohash.folium_map
+
+For detailed examples of how to use these functions, see the :doc:`examples` section.
 
 Numba-accelerated Functions
 -------------------------

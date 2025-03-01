@@ -1,11 +1,8 @@
-"""
-.. module:: distances
-   :platform: Unix, Windows
-   :synopsis: A module for calculating distance measures with geohashes
+"""Distance calculation functionality for geohashes.
 
-.. moduleauthor:: Will McGinnis <will@pedalwrencher.com>
-
-
+This module provides functions for calculating distances between geohashes,
+including both approximate distance based on matching characters and
+precise haversine distance calculation.
 """
 
 import math
@@ -32,14 +29,28 @@ _PRECISION: Dict[int, float] = {
 
 
 def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity: bool = False) -> float:
-    """
-    Returns the approximate great-circle distance between two geohashes in meters.
+    """Calculate the approximate great-circle distance between two geohashes.
 
-    :param geohash_1:
-    :param geohash_2:
-    :return:
-    """
+    This function calculates an approximate distance based on the number of
+    matching characters at the beginning of the geohashes. It's faster but
+    less accurate than haversine distance.
 
+    Args:
+        geohash_1 (str): The first geohash.
+        geohash_2 (str): The second geohash.
+        check_validity (bool, optional): Whether to check if the geohashes are valid.
+            Defaults to False.
+
+    Returns:
+        float: The approximate distance in meters.
+
+    Raises:
+        ValueError: If check_validity is True and either geohash is invalid.
+
+    Example:
+        >>> geohash_approximate_distance("u4pruyd", "u4pruyf")
+        118.0
+    """
     if check_validity:
         if len([x for x in geohash_1 if x in __base32]) != len(geohash_1):
             raise ValueError(f"Geohash 1: {geohash_1} is not a valid geohash")
@@ -70,14 +81,22 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
 
 
 def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
-    """
-    converts the geohashes to lat/lon and then calculates the haversine great circle distance in meters.
+    """Calculate the haversine great-circle distance between two geohashes.
 
-    :param geohash_1:
-    :param geohash_2:
-    :return:
-    """
+    This function provides a more accurate distance calculation using the
+    haversine formula, which accounts for the Earth's curvature.
 
+    Args:
+        geohash_1 (str): The first geohash.
+        geohash_2 (str): The second geohash.
+
+    Returns:
+        float: The distance in meters.
+
+    Example:
+        >>> geohash_haversine_distance("u4pruyd", "u4pruyf")
+        152.3
+    """
     lat_1, lon_1, _, _ = decode_exactly(geohash_1)
     lat_2, lon_2, _, _ = decode_exactly(geohash_2)
 

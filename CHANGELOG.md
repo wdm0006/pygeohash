@@ -1,3 +1,12 @@
+v2.1.0
+======
+
+ * [bounding_box] added bounding box module 
+ * [viz] added visualization module 
+ * [docs] updated docstrings across the library 
+ * [meta] added cursor rulesfiles 
+
+
 v2.0.3
 ======
 

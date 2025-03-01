@@ -1,100 +1,109 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help lint format test test-all coverage install dev-install install-dev benchmark benchmark-detailed
-.DEFAULT_GOAL := help
+.PHONY: help setup install install-dev test test-cov lint format clean build docs lint-fix test-all benchmark viz-examples install-viz
 
-define BROWSER_PYSCRIPT
-import os, webbrowser, sys
-
-from urllib.request import pathname2url
-
-webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
-endef
-export BROWSER_PYSCRIPT
-
-define PRINT_HELP_PYSCRIPT
-import re, sys
-
-for line in sys.stdin:
-	match = re.match(r'^([a-zA-Z_-]+):.*?## (.*)$$', line)
-	if match:
-		target, help = match.groups()
-		print("%-20s %s" % (target, help))
-endef
-export PRINT_HELP_PYSCRIPT
-
-BROWSER := python -c "$$BROWSER_PYSCRIPT"
-
+# Default target
 help:
-	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
+	@echo "Available commands:"
+	@echo "  make setup        - Install uv and other required tools"
+	@echo "  make install      - Install the package"
+	@echo "  make install-dev  - Install the package with development dependencies"
+	@echo "  make install-viz  - Install the package with visualization dependencies"
+	@echo "  make test         - Run tests"
+	@echo "  make test-cov     - Run tests with coverage"
+	@echo "  make test-all     - Run tests on all supported Python versions using tox"
+	@echo "  make benchmark    - Run performance benchmarks"
+	@echo "  make lint         - Run linting checks"
+	@echo "  make lint-fix     - Run linting checks and fix auto-fixable issues"
+	@echo "  make format       - Format code with ruff"
+	@echo "  make clean        - Clean build artifacts"
+	@echo "  make build        - Build package distributions"
+	@echo "  make docs         - Build documentation"
+	@echo "  make viz-examples - Generate visualization examples for documentation"
 
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
+# Setup development environment
+setup:
+	pip install uv
+	uv venv --python=3.8
 
-clean-build: ## remove build artifacts
-	rm -fr build/
-	rm -fr dist/
-	rm -fr .eggs/
-	find . -name '*.egg-info' -exec rm -fr {} +
-	find . -name '*.egg' -exec rm -f {} +
+# Install the package
+install:
+	uv pip install -e .
 
-clean-pyc: ## remove Python file artifacts
-	find . -name '*.pyc' -exec rm -f {} +
-	find . -name '*.pyo' -exec rm -f {} +
-	find . -name '*~' -exec rm -f {} +
-	find . -name '__pycache__' -exec rm -fr {} +
+# Install the package with development dependencies
+install-dev:
+	@echo "Installing development dependencies..."
+	uv pip install -e ".[dev]"
 
-clean-test: ## remove test and coverage artifacts
-	rm -fr .tox/
-	rm -f .coverage
-	rm -fr htmlcov/
-	rm -fr .pytest_cache
-	rm -f coverage.xml
+# Install visualization dependencies
+install-viz:
+	@echo "Installing visualization dependencies..."
+	uv pip install -e ".[viz]"
 
-lint: install-dev ## check style with ruff
-	uv run ruff check . --line-length=120
+# Run tests
+test:
+	uv run pytest $(PYTEST_ARGS)
 
-format: install-dev ## format code with ruff
-	uv run ruff format . --line-length=120
+# Run tests with coverage
+test-cov:
+	uv run pytest --cov=elote --cov-report=term --cov-report=html $(PYTEST_ARGS)
 
-install-dev: ## install package in development mode with all dependencies
-	uv pip install -e ".[dev,numba]"
+# Run linting
+lint:
+	uv run ruff check . 
 
-test: install-dev ## run tests quickly with the default Python
-	uv run pytest
+# Run linting and fix auto-fixable issues
+lint-fix:
+	uv run ruff check --fix .
 
-test-all: install-dev ## run tests on every Python version with tox
-	uv run tox
+# Format code
+format:
+	uv run ruff format .
 
-coverage: install-dev ## check code coverage quickly with the default Python
-	uv run pytest --cov=nbgeohash tests/
-	uv run coverage report -m
-	uv run coverage html
-	$(BROWSER) htmlcov/index.html
+# Clean build artifacts
+clean:
+	rm -rf build/
+	rm -rf dist/
+	rm -rf *.egg-info/
+	rm -rf .coverage
+	rm -rf htmlcov/
+	rm -rf .pytest_cache/
+	rm -rf .ruff_cache/
+	find . -type d -name __pycache__ -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
 
-docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/nbgeohash.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ nbgeohash
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
+# Build package distributions
+build: clean
+	uv run python -m build
 
-install: ## install the package to the active Python's site-packages
-	uv pip install ".[dev,numba]"
+# Build documentation
+docs:
+	cd docs && uv run $(MAKE) html SPHINXBUILD="python -m sphinx" 
+	@echo "Opening documentation in Google Chrome..."
+	@if [ "$(shell uname)" = "Darwin" ]; then \
+		open -a "Google Chrome" docs/build/html/index.html; \
+	else \
+		if command -v google-chrome > /dev/null; then \
+			google-chrome docs/build/html/index.html; \
+		elif command -v google-chrome-stable > /dev/null; then \
+			google-chrome-stable docs/build/html/index.html; \
+		elif command -v chromium > /dev/null; then \
+			chromium docs/build/html/index.html; \
+		else \
+			echo "Could not find Google Chrome. Please open docs/build/html/index.html manually."; \
+		fi; \
+	fi
 
-dev-install: ## install the package in development mode (alias for install-dev)
-	uv pip install -e ".[dev,numba]"
+# Run tests on all supported Python versions
+test-all:
+	uv run tox 
 
-build: clean ## builds source and wheel package
-	uv pip install build
-	python -m build
-	ls -l dist
-
-release: build ## package and upload a release
-	uv pip install twine
-	twine upload dist/*
-
+# Run benchmarks
 benchmark:
-	uv run pytest tests/test_benchmark.py -v --benchmark-sort=name
+	uv run pytest tests/test_benchmarks.py -v --benchmark-enable $(PYTEST_ARGS) 
 
-# Optionally, add a more detailed benchmark command
-benchmark-detailed:
-	uv run pytest tests/test_benchmark.py -v --benchmark-sort=name --benchmark-columns=min,max,mean,stddev,median,ops,rounds 
+# Generate visualization examples
+viz-examples:
+	@echo "Generating visualization examples for documentation..."
+	@mkdir -p docs/source/_static/images
+	@echo "Installing visualization dependencies..."
+	uv pip install -e ".[viz]"
+	uv run python scripts/generate_viz_examples.py 

@@ -336,4 +336,335 @@ Clustering points by their geohash prefixes:
     for point in largest_cluster[1][:5]:  # Show first 5 points
         print(f"  Point {point['id']}: ({point['lat']:.4f}, {point['lng']:.4f})")
     if len(largest_cluster[1]) > 5:
-        print(f"  ... and {len(largest_cluster[1]) - 5} more points") 
+        print(f"  ... and {len(largest_cluster[1]) - 5} more points")
+
+# Get the standard deviation of the geohashes
+std_dev = pgh.std(geohashes)
+print(f"Standard deviation: {std_dev:.2f} meters")
+
+Bounding Box Operations
+---------------------
+
+Working with geohash bounding boxes:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    
+    # Get bounding box for a geohash
+    geohash = "9q8yy"  # San Francisco area
+    bbox = pgh.get_bounding_box(geohash)
+    
+    print(f"Bounding box for {geohash}:")
+    print(f"  Southwest corner: ({bbox.min_lat}, {bbox.min_lon})")
+    print(f"  Northeast corner: ({bbox.max_lat}, {bbox.max_lon})")
+    
+    # Check if a point is within the bounding box
+    test_points = [
+        ("Golden Gate Bridge", 37.8199, -122.4783),
+        ("Fisherman's Wharf", 37.8080, -122.4177),
+        ("San Jose", 37.3382, -121.8863)
+    ]
+    
+    for name, lat, lon in test_points:
+        is_in_box = pgh.is_point_in_box(lat, lon, bbox)
+        is_in_geohash = pgh.is_point_in_geohash(lat, lon, geohash)
+        print(f"{name} ({lat}, {lon}):")
+        print(f"  In bounding box: {is_in_box}")
+        print(f"  In geohash: {is_in_geohash}")
+    
+    # Find all geohashes within a custom bounding box
+    custom_bbox = pgh.BoundingBox(
+        min_lat=37.75, min_lon=-122.45,
+        max_lat=37.78, max_lon=-122.40
+    )
+    
+    # Get geohashes at different precision levels
+    for precision in [5, 6, 7]:
+        geohashes = pgh.geohashes_in_box(custom_bbox, precision=precision)
+        print(f"Precision {precision}: found {len(geohashes)} geohashes")
+        if precision == 5:
+            print(f"  Geohashes: {', '.join(geohashes)}")
+    
+    # Check if two bounding boxes intersect
+    bbox1 = pgh.get_bounding_box("9q8yyk")
+    bbox2 = pgh.get_bounding_box("9q8yym")
+    bbox3 = pgh.get_bounding_box("dr5r")  # New York
+    
+    print(f"Intersection of 9q8yyk and 9q8yym: {pgh.do_boxes_intersect(bbox1, bbox2)}")
+    print(f"Intersection of 9q8yyk and dr5r: {pgh.do_boxes_intersect(bbox1, bbox3)}")
+
+Visualizing Bounding Boxes
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Visualizing geohash bounding boxes with matplotlib:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as patches
+    
+    # Define a base geohash and get its bounding box
+    base_geohash = "9q8yy"  # San Francisco area
+    base_bbox = pgh.get_bounding_box(base_geohash)
+    
+    # Find geohashes within this area at a higher precision
+    geohashes = pgh.geohashes_in_box(base_bbox, precision=6)
+    
+    # Create a figure and axis
+    fig, ax = plt.subplots(figsize=(10, 8))
+    
+    # Plot the base bounding box
+    base_width = base_bbox.max_lon - base_bbox.min_lon
+    base_height = base_bbox.max_lat - base_bbox.min_lat
+    base_rect = patches.Rectangle(
+        (base_bbox.min_lon, base_bbox.min_lat),
+        base_width, base_height,
+        linewidth=2, edgecolor='blue', facecolor='none',
+        label=f'Base Geohash: {base_geohash}'
+    )
+    ax.add_patch(base_rect)
+    
+    # Plot each geohash's bounding box
+    for gh in geohashes[:10]:  # Limit to first 10 for clarity
+        gh_bbox = pgh.get_bounding_box(gh)
+        width = gh_bbox.max_lon - gh_bbox.min_lon
+        height = gh_bbox.max_lat - gh_bbox.min_lat
+        
+        rect = patches.Rectangle(
+            (gh_bbox.min_lon, gh_bbox.min_lat),
+            width, height,
+            linewidth=1, edgecolor='red', facecolor='red', alpha=0.2
+        )
+        ax.add_patch(rect)
+        
+        # Add geohash label at center of box
+        center_x = gh_bbox.min_lon + width/2
+        center_y = gh_bbox.min_lat + height/2
+        ax.text(center_x, center_y, gh, ha='center', va='center', fontsize=8)
+    
+    # Set plot limits and labels
+    ax.set_xlim(base_bbox.min_lon - 0.05, base_bbox.max_lon + 0.05)
+    ax.set_ylim(base_bbox.min_lat - 0.05, base_bbox.max_lat + 0.05)
+    ax.set_xlabel('Longitude')
+    ax.set_ylabel('Latitude')
+    ax.set_title(f'Geohashes within {base_geohash}')
+    ax.legend()
+    
+    plt.tight_layout()
+    plt.show()
+
+Visualization Examples
+--------------------
+
+PyGeoHash provides visualization capabilities through the optional ``viz`` module.
+To use these functions, you need to install the visualization dependencies:
+
+.. code-block:: bash
+
+    pip install pygeohash[viz]
+
+You can generate all the example visualizations shown below using the provided Makefile command:
+
+.. code-block:: bash
+
+    # Install visualization dependencies
+    make install-viz
+
+    # Generate visualization examples
+    make viz-examples
+
+This will create static images and interactive maps in the ``docs/source/_static/images`` directory.
+
+Plotting a Single Geohash
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import plot_geohash
+    import matplotlib.pyplot as plt
+    
+    # Plot a single geohash
+    fig, ax = plot_geohash("9q8yyk", color="red", alpha=0.5)
+    plt.show()
+    
+    # Plot with center point and label
+    fig, ax = plot_geohash("9q8yyk", show_center=True, show_label=True)
+    plt.show()
+
+.. figure:: _static/images/single_geohash.png
+   :width: 80%
+   :align: center
+   :alt: Single geohash visualization
+   
+   A single geohash (9q8yyk) plotted on a map
+
+.. figure:: _static/images/single_geohash_labeled.png
+   :width: 80%
+   :align: center
+   :alt: Single geohash with label and center point
+   
+   A single geohash with its center point and label displayed
+
+Plotting Multiple Geohashes
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import plot_geohashes
+    import matplotlib.pyplot as plt
+    
+    # Plot multiple geohashes with default colormap
+    geohashes = ["9q8yyk", "9q8yym", "9q8yyj", "9q8yys"]
+    fig, ax = plot_geohashes(geohashes)
+    plt.show()
+    
+    # Plot with custom colors and labels
+    fig, ax = plot_geohashes(
+        geohashes, 
+        labels=["Home", "Work", "Park", "Store"],
+        show_labels=True,
+        colors=["red", "blue", "green", "orange"]
+    )
+    plt.show()
+
+.. figure:: _static/images/multiple_geohashes.png
+   :width: 80%
+   :align: center
+   :alt: Multiple geohashes visualization
+   
+   Multiple geohashes plotted on a map with different colors
+
+.. figure:: _static/images/multiple_geohashes_labeled.png
+   :width: 80%
+   :align: center
+   :alt: Multiple geohashes with labels
+   
+   Multiple geohashes with custom labels and colors
+
+Creating Interactive Maps with Folium
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import folium_map
+    
+    # Create a map centered on a geohash
+    m = folium_map(center_geohash="9q8yyk", zoom_start=15)
+    
+    # Add a single geohash
+    m.add_geohash("9q8yyk", color="red", popup="Home")
+    
+    # Add multiple geohashes with different colors
+    m.add_geohashes(
+        ["9q8yym", "9q8yyj", "9q8yys"],
+        colors=["blue", "green", "orange"],
+        popups=["Work", "Park", "Store"]
+    )
+    
+    # Save the map to an HTML file
+    m.save("folium_map.html")
+
+.. raw:: html
+   :file: _static/images/folium_map.html
+
+Creating a Geohash Grid
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import folium_map
+    
+    # Create a map
+    m = folium_map(center_geohash="9q8y", zoom_start=12)
+    
+    # Add a geohash grid at precision 5
+    m.add_geohash_grid(precision=5, fill_opacity=0.2)
+    
+    # Save the map to an HTML file
+    m.save("folium_grid.html")
+
+.. raw:: html
+   :file: _static/images/folium_grid.html
+
+Visualizing Geohash Neighbors
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import plot_geohashes
+    import matplotlib.pyplot as plt
+    
+    # Get a geohash and its neighbors
+    center = "9q8yyk"
+    neighbors = {
+        "North": pgh.get_adjacent(center, "top"),
+        "East": pgh.get_adjacent(center, "right"),
+        "South": pgh.get_adjacent(center, "bottom"),
+        "West": pgh.get_adjacent(center, "left")
+    }
+    
+    # Plot the center and its neighbors
+    all_geohashes = [center] + list(neighbors.values())
+    labels = ["Center"] + list(neighbors.keys())
+    
+    fig, ax = plot_geohashes(
+        all_geohashes,
+        labels=labels,
+        show_labels=True,
+        colors=["red"] + ["blue"] * len(neighbors)
+    )
+    plt.show()
+
+.. figure:: _static/images/geohash_neighbors.png
+   :width: 80%
+   :align: center
+   :alt: Geohash and its neighbors
+   
+   A geohash (center) and its neighboring geohashes
+
+Visualizing Geohash Precision
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import plot_geohashes
+    import matplotlib.pyplot as plt
+    
+    # Start with a precision 4 geohash
+    base_geohash = "9q8y"
+    
+    # Generate geohashes at different precisions
+    geohashes = [
+        base_geohash,
+        base_geohash + "y",
+        base_geohash + "yk",
+    ]
+    
+    labels = [f"Precision {len(gh)}" for gh in geohashes]
+    
+    fig, ax = plot_geohashes(
+        geohashes, 
+        labels=labels, 
+        show_labels=True, 
+        colors=["red", "green", "blue"], 
+        alpha=0.5
+    )
+    plt.show()
+
+.. figure:: _static/images/geohash_precision.png
+   :width: 80%
+   :align: center
+   :alt: Geohashes at different precision levels
+   
+   Geohashes at different precision levels (4, 5, and 6)
+
+Practical Applications
+------------------- 

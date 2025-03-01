@@ -1,0 +1,63 @@
+---
+description: Overview of the pygeohash project
+globs: 
+---
+# pygeohash Project Overview
+
+## Project Description
+pygeohash is a Python module for interacting with geohashes, providing efficient geospatial indexing and encoding/decoding functionality.
+
+## Key Features
+- Geohash encoding and decoding
+- Neighbor calculation
+- Optional Numba acceleration for performance-critical operations
+
+## Project Structure
+- `pygeohash/`: Main package directory
+  - Core geohash implementation
+  - Utility functions
+  - Optional Numba-accelerated implementations
+- `tests/`: Test directory
+  - Unit tests
+  - Benchmark tests
+- `docs/`: Documentation directory
+- `.github/`: GitHub workflows and configuration
+
+## Dependencies
+- Core package has no dependencies
+- Optional Numba acceleration requires:
+  - numpy (>=1.20.0)
+  - numba (>=0.55.0)
+- Development dependencies are specified in pyproject.toml
+
+## Installation
+```bash
+# Basic installation
+pip install pygeohash
+
+# With Numba acceleration
+pip install pygeohash[numba]
+```
+
+## Development Setup
+```bash
+# Clone the repository
+git clone https://github.com/wdm0006/pygeohash.git
+cd pygeohash
+
+# Install development dependencies
+make install-dev
+```
+
+## Key Commands
+- `make test`: Run tests
+- `make coverage`: Run tests with coverage
+- `make lint`: Check code style
+- `make format`: Format code
+- `make docs`: Build documentation
+- `make benchmark`: Run performance benchmarks
+
+## Version Information
+- The project follows semantic versioning
+- Current version: 2.1.0
+- Python compatibility: >=3.8

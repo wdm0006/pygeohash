@@ -22,6 +22,7 @@ Key Features
 - **Lightweight**: Minimal overhead for your projects
 - **Python 3 Support**: Fully compatible with modern Python
 - **Robust Implementation**: Reliable geohash operations
+- **Visualization**: Optional visualization capabilities with Matplotlib and Folium
 
 Quick Start
 ----------
@@ -45,6 +46,28 @@ Basic usage:
     # Decode geohash to coordinates
     lat, lng = pgh.decode(geohash='ezs42')
     print(lat, lng)  # '42.6', '-5.6'
+
+Visualization:
+
+.. code-block:: bash
+
+    # Install with visualization support
+    pip install pygeohash[viz]
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import plot_geohash
+    import matplotlib.pyplot as plt
+    
+    # Plot a geohash
+    fig, ax = plot_geohash("9q8yyk", color="red", show_label=True)
+    plt.show()
+
+.. figure:: _static/images/single_geohash_labeled.png
+   :width: 50%
+   :align: center
+   :alt: Geohash visualization example
 
 Contents
 --------
