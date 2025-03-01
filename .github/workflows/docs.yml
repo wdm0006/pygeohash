@@ -26,7 +26,7 @@ jobs:
       run: |
         uv venv
         source .venv/bin/activate
-        uv pip install -e ".[dev,numba]"
+        uv pip install -e ".[dev,numba,viz]"
         
     - name: Build documentation
       run: |

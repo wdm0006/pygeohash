@@ -59,6 +59,18 @@ __all__ = [
     "get_adjacent",
 ]
 
+# Try to import visualization functions if dependencies are available
+try:
+    from .viz import folium_map, plot_geohash, plot_geohashes
+
+    __all__ += [
+        "plot_geohash",
+        "plot_geohashes",
+        "folium_map",
+    ]
+except ImportError:
+    pass
+
 try:
     # Soft dependency
     import numba

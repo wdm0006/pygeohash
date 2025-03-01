@@ -360,10 +360,102 @@ Using geohashes for simple geofencing:
         in_geofence = is_in_geofence(location["lat"], location["lng"], geofence)
         print(f"{location['name']} is {'inside' if in_geofence else 'outside'} the geofence")
 
+Visualization
+-----------
+
+PyGeoHash provides visualization capabilities through the optional ``viz`` module. To use these functions, you need to install the visualization dependencies:
+
+.. code-block:: bash
+
+    pip install pygeohash[viz]
+
+Plotting a Single Geohash
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import plot_geohash
+    import matplotlib.pyplot as plt
+    
+    # Encode a location to a geohash
+    geohash = pgh.encode(37.7749, -122.4194, precision=6)  # San Francisco
+    
+    # Plot the geohash
+    fig, ax = plot_geohash(geohash, color="red", alpha=0.5)
+    plt.title(f"Geohash: {geohash}")
+    plt.show()
+
+.. figure:: _static/images/single_geohash.png
+   :width: 60%
+   :align: center
+   :alt: Single geohash visualization
+
+Plotting Multiple Geohashes
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import plot_geohashes
+    import matplotlib.pyplot as plt
+    
+    # Define some locations
+    locations = {
+        "San Francisco": (37.7749, -122.4194),
+        "Oakland": (37.8044, -122.2711),
+        "Berkeley": (37.8715, -122.2730),
+        "San Jose": (37.3382, -121.8863)
+    }
+    
+    # Encode each location to a geohash
+    geohashes = [pgh.encode(lat, lng, precision=6) for name, (lat, lng) in locations.items()]
+    
+    # Plot the geohashes with labels
+    fig, ax = plot_geohashes(
+        geohashes,
+        labels=list(locations.keys()),
+        show_labels=True,
+        colors=["red", "blue", "green", "orange"]
+    )
+    plt.title("Bay Area Locations")
+    plt.show()
+
+.. figure:: _static/images/multiple_geohashes_labeled.png
+   :width: 60%
+   :align: center
+   :alt: Multiple geohashes with labels
+
+Creating Interactive Maps
+^^^^^^^^^^^^^^^^^^^^^^^
+
+PyGeoHash integrates with Folium to create interactive maps:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    from pygeohash.viz import folium_map
+    
+    # Create a map centered on a location
+    m = folium_map(center=(37.7749, -122.4194), zoom_start=12)
+    
+    # Add geohashes to the map
+    geohash = pgh.encode(37.7749, -122.4194, precision=6)
+    m.add_geohash(geohash, color="red", popup="San Francisco")
+    
+    # Add a grid of geohashes at precision 5
+    m.add_geohash_grid(precision=5, fill_opacity=0.2)
+    
+    # Save the map to an HTML file
+    m.save("map.html")
+
+For more detailed examples of visualization, see the :doc:`examples` section.
+
 Performance Considerations
 ------------------------
 
 - Geohash operations are generally very fast
 - For large datasets, consider using the Numba-accelerated functions (requires Numba and NumPy)
 - When working with millions of geohashes, consider using a database with geospatial capabilities
-- For high-precision applications, be aware of the limitations of geohashes near poles and the 180° meridian 
+- For high-precision applications, be aware of the limitations of geohashes near poles and the 180° meridian
+- Visualization functions may be slower for large numbers of geohashes; consider limiting the number of geohashes displayed or using a lower precision 

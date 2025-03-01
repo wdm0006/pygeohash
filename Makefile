@@ -1,4 +1,4 @@
-.PHONY: help setup install install-dev test test-cov lint format clean build docs lint-fix test-all benchmark
+.PHONY: help setup install install-dev test test-cov lint format clean build docs lint-fix test-all benchmark viz-examples install-viz
 
 # Default target
 help:
@@ -6,6 +6,7 @@ help:
 	@echo "  make setup        - Install uv and other required tools"
 	@echo "  make install      - Install the package"
 	@echo "  make install-dev  - Install the package with development dependencies"
+	@echo "  make install-viz  - Install the package with visualization dependencies"
 	@echo "  make test         - Run tests"
 	@echo "  make test-cov     - Run tests with coverage"
 	@echo "  make test-all     - Run tests on all supported Python versions using tox"
@@ -16,6 +17,7 @@ help:
 	@echo "  make clean        - Clean build artifacts"
 	@echo "  make build        - Build package distributions"
 	@echo "  make docs         - Build documentation"
+	@echo "  make viz-examples - Generate visualization examples for documentation"
 
 # Setup development environment
 setup:
@@ -28,7 +30,13 @@ install:
 
 # Install the package with development dependencies
 install-dev:
+	@echo "Installing development dependencies..."
 	uv pip install -e ".[dev]"
+
+# Install visualization dependencies
+install-viz:
+	@echo "Installing visualization dependencies..."
+	uv pip install -e ".[viz]"
 
 # Run tests
 test:
@@ -91,3 +99,11 @@ test-all:
 # Run benchmarks
 benchmark:
 	uv run pytest tests/test_benchmarks.py -v --benchmark-enable $(PYTEST_ARGS) 
+
+# Generate visualization examples
+viz-examples:
+	@echo "Generating visualization examples for documentation..."
+	@mkdir -p docs/source/_static/images
+	@echo "Installing visualization dependencies..."
+	uv pip install -e ".[viz]"
+	uv run python scripts/generate_viz_examples.py 

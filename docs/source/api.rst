@@ -63,6 +63,20 @@ Statistical Functions
 .. autofunction:: pygeohash.variance
 .. autofunction:: pygeohash.std
 
+Visualization Functions
+---------------------
+
+These functions require additional dependencies that can be installed with:
+``pip install pygeohash[viz]``
+
+The visualization module provides tools for creating static plots with Matplotlib and interactive maps with Folium:
+
+.. autofunction:: pygeohash.plot_geohash
+.. autofunction:: pygeohash.plot_geohashes
+.. autofunction:: pygeohash.folium_map
+
+For detailed examples of how to use these functions, see the :doc:`examples` section.
+
 Numba-accelerated Functions
 -------------------------
 

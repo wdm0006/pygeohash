@@ -143,45 +143,37 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
         and the precision requested. Higher precision values will result in more
         geohashes for the same bounding box.
     """
-    # Calculate step size based on precision (approximate)
-    lat_step = 180.0 / (2 ** (5 * precision / 2))
-    lon_step = 360.0 / (2 ** (5 * precision / 2))
-
+    # Find a geohash at the center of the bounding box
+    center_lat = (bbox.min_lat + bbox.max_lat) / 2
+    center_lon = (bbox.min_lon + bbox.max_lon) / 2
+    center_geohash = encode(center_lat, center_lon, precision)
+    
+    # Get the size of a geohash at this precision
+    center_bbox = get_bounding_box(center_geohash)
+    lat_step = center_bbox.max_lat - center_bbox.min_lat
+    lon_step = center_bbox.max_lon - center_bbox.min_lon
+    
     # Create a set to store unique geohashes
     result = set()
-
-    # Sample points along the edges
-    # Top and bottom edges (constant latitude)
-    for lon in _float_range(bbox.min_lon, bbox.max_lon, lon_step):
-        result.add(encode(bbox.min_lat, lon, precision))
-        result.add(encode(bbox.max_lat, lon, precision))
-
-    # Left and right edges (constant longitude)
-    for lat in _float_range(bbox.min_lat, bbox.max_lat, lat_step):
-        result.add(encode(lat, bbox.min_lon, precision))
-        result.add(encode(lat, bbox.max_lon, precision))
-
-    # Sample interior points in a grid pattern to catch geohashes completely within the box
-    # Use a smaller step size for the interior to ensure we catch all geohashes
-    interior_lat_step = lat_step / 2
-    interior_lon_step = lon_step / 2
-
-    # Calculate the number of steps to take in each direction
-    lat_range = bbox.max_lat - bbox.min_lat
-    lon_range = bbox.max_lon - bbox.min_lon
-
-    # Only sample interior points if the box is large enough
-    if lat_range > interior_lat_step * 3 and lon_range > interior_lon_step * 3:
-        # Start slightly inside the box to avoid edge points
-        start_lat = bbox.min_lat + interior_lat_step
-        end_lat = bbox.max_lat - interior_lat_step
-        start_lon = bbox.min_lon + interior_lon_step
-        end_lon = bbox.max_lon - interior_lon_step
-
-        for lat in _float_range(start_lat, end_lat, interior_lat_step):
-            for lon in _float_range(start_lon, end_lon, interior_lon_step):
-                result.add(encode(lat, lon, precision))
-
+    
+    # Calculate the starting points slightly outside the bounding box
+    # to ensure we cover the entire area
+    start_lat = bbox.min_lat - lat_step
+    end_lat = bbox.max_lat + lat_step
+    start_lon = bbox.min_lon - lon_step
+    end_lon = bbox.max_lon + lon_step
+    
+    # Sample points in a grid pattern with spacing based on geohash size
+    # This ensures we get all geohashes that intersect with the bounding box
+    for lat in _float_range(start_lat, end_lat, lat_step / 2):
+        for lon in _float_range(start_lon, end_lon, lon_step / 2):
+            if bbox.min_lat <= lat <= bbox.max_lat or bbox.min_lon <= lon <= bbox.max_lon:
+                gh = encode(lat, lon, precision)
+                gh_bbox = get_bounding_box(gh)
+                # Only add geohashes that actually intersect with our bounding box
+                if do_boxes_intersect(bbox, gh_bbox):
+                    result.add(gh)
+    
     return list(result)
 
 

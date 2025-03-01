@@ -2,7 +2,7 @@
 description: how to use the makefile to run tests
 globs: 
 ---
- # Elote Testing Standards
+ # Pygeohash Testing Standards
 
 ## Running Tests
 
