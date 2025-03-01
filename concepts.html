@@ -193,6 +193,31 @@ Second division (2nd character) of cell &quot;e&quot;:
 </ol>
 <p>To address the edge effect issue, when searching for nearby locations, it’s often necessary to check adjacent geohash cells as well.</p>
 </section>
+<section id="geohash-bounding-boxes">
+<h2>Geohash Bounding Boxes<a class="headerlink" href="#geohash-bounding-boxes" title="Link to this heading">¶</a></h2>
+<p>Every geohash represents a rectangular area on the Earth’s surface, which can be described by a bounding box. A bounding box is defined by four coordinates:</p>
+<ul class="simple">
+<li><p>Minimum latitude (southern edge)</p></li>
+<li><p>Minimum longitude (western edge)</p></li>
+<li><p>Maximum latitude (northern edge)</p></li>
+<li><p>Maximum longitude (eastern edge)</p></li>
+</ul>
+<p>Bounding boxes are useful for:</p>
+<ol class="arabic simple">
+<li><p><strong>Spatial Queries</strong>: Finding all points within a geographic region</p></li>
+<li><p><strong>Geofencing</strong>: Determining if a point is inside or outside a defined area</p></li>
+<li><p><strong>Spatial Indexing</strong>: Efficiently organizing and querying spatial data</p></li>
+<li><p><strong>Visualization</strong>: Rendering geographic data on maps</p></li>
+</ol>
+<p>When working with geohashes, bounding boxes provide a way to:</p>
+<ul class="simple">
+<li><p>Determine the exact area covered by a geohash</p></li>
+<li><p>Find all geohashes that intersect with a given area</p></li>
+<li><p>Check if two geographic regions overlap</p></li>
+<li><p>Identify if a point falls within a specific region</p></li>
+</ul>
+<p>The precision of a bounding box derived from a geohash depends on the geohash length. Longer geohashes result in smaller, more precise bounding boxes.</p>
+</section>
 <section id="geohash-vs-other-geocoding-systems">
 <h2>Geohash vs. Other Geocoding Systems<a class="headerlink" href="#geohash-vs-other-geocoding-systems" title="Link to this heading">¶</a></h2>
 <p>Compared to other geocoding systems:</p>
@@ -241,6 +266,7 @@ Second division (2nd character) of cell &quot;e&quot;:
 <li class="toctree-l2"><a class="reference internal" href="#precision-and-cell-size">Precision and Cell Size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#properties-of-geohashes">Properties of Geohashes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#edge-cases-and-limitations">Edge Cases and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geohash-bounding-boxes">Geohash Bounding Boxes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#geohash-vs-other-geocoding-systems">Geohash vs. Other Geocoding Systems</a></li>
 </ul>
 </li>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pygeohash.bounding_box &#8212; pygeohash 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for pygeohash.bounding_box</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Bounding box operations for geohashes.</span>
+
+<span class="sd">This module provides functions for working with geohash bounding boxes,</span>
+<span class="sd">including calculating the bounding box for a geohash and operations</span>
+<span class="sd">related to geospatial regions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">decode_exactly</span><span class="p">,</span> <span class="n">encode</span>
+
+
+<div class="viewcode-block" id="BoundingBox">
+<a class="viewcode-back" href="../../api.html#pygeohash.BoundingBox">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BoundingBox</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a geospatial bounding box.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        min_lat (float): The minimum (southern) latitude of the box in decimal degrees.</span>
+<span class="sd">        min_lon (float): The minimum (western) longitude of the box in decimal degrees.</span>
+<span class="sd">        max_lat (float): The maximum (northern) latitude of the box in decimal degrees.</span>
+<span class="sd">        max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">max_lat</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span></div>
+
+
+
+<div class="viewcode-block" id="get_bounding_box">
+<a class="viewcode-back" href="../../api.html#pygeohash.get_bounding_box">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_bounding_box</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoundingBox</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the bounding box for a geohash.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The geohash string to calculate the bounding box for.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        BoundingBox: A named tuple containing the minimum and maximum latitude and longitude</span>
+<span class="sd">            values that define the bounding box of the geohash.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; get_bounding_box(&quot;u4pruyd&quot;)</span>
+<span class="sd">        BoundingBox(min_lat=57.649, min_lon=10.407, max_lat=57.649, max_lon=10.407)</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The precision of the coordinates in the bounding box depends on the length</span>
+<span class="sd">        of the geohash. Longer geohashes result in smaller bounding boxes with more</span>
+<span class="sd">        precise coordinates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the center point and error margins</span>
+    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the bounding box coordinates</span>
+    <span class="n">min_lat</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">-</span> <span class="n">lat_err</span>
+    <span class="n">min_lon</span> <span class="o">=</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">lon_err</span>
+    <span class="n">max_lat</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">lat_err</span>
+    <span class="n">max_lon</span> <span class="o">=</span> <span class="n">lon</span> <span class="o">+</span> <span class="n">lon_err</span>
+
+    <span class="k">return</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="n">min_lat</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="is_point_in_box">
+<a class="viewcode-back" href="../../api.html#pygeohash.is_point_in_box">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_point_in_box</span><span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a point is within a bounding box.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lat (float): The latitude of the point to check.</span>
+<span class="sd">        lon (float): The longitude of the point to check.</span>
+<span class="sd">        bbox (BoundingBox): The bounding box to check against.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the point is within the bounding box, False otherwise.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; bbox = get_bounding_box(&quot;u4pruyd&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_point_in_box(57.649, 10.407, bbox)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; is_point_in_box(40.0, 10.0, bbox)</span>
+<span class="sd">        False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">&lt;=</span> <span class="n">lat</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="ow">and</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">&lt;=</span> <span class="n">lon</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span></div>
+
+
+
+<div class="viewcode-block" id="is_point_in_geohash">
+<a class="viewcode-back" href="../../api.html#pygeohash.is_point_in_geohash">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_point_in_geohash</span><span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a point is within a geohash&#39;s bounding box.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lat (float): The latitude of the point to check.</span>
+<span class="sd">        lon (float): The longitude of the point to check.</span>
+<span class="sd">        geohash (str): The geohash to check against.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the point is within the geohash&#39;s bounding box, False otherwise.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; is_point_in_geohash(57.649, 10.407, &quot;u4pruyd&quot;)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; is_point_in_geohash(40.0, 10.0, &quot;u4pruyd&quot;)</span>
+<span class="sd">        False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">is_point_in_box</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="do_boxes_intersect">
+<a class="viewcode-back" href="../../api.html#pygeohash.do_boxes_intersect">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">bbox2</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if two bounding boxes intersect.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        bbox1 (BoundingBox): The first bounding box.</span>
+<span class="sd">        bbox2 (BoundingBox): The second bounding box.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the bounding boxes intersect, False otherwise.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; box1 = BoundingBox(10.0, 20.0, 30.0, 40.0)</span>
+<span class="sd">        &gt;&gt;&gt; box2 = BoundingBox(20.0, 30.0, 40.0, 50.0)</span>
+<span class="sd">        &gt;&gt;&gt; do_boxes_intersect(box1, box2)</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span>
+        <span class="n">bbox1</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">&lt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">min_lat</span>
+        <span class="ow">or</span> <span class="n">bbox1</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">&gt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">max_lat</span>
+        <span class="ow">or</span> <span class="n">bbox1</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">&lt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">min_lon</span>
+        <span class="ow">or</span> <span class="n">bbox1</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">&gt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">max_lon</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="geohashes_in_box">
+<a class="viewcode-back" href="../../api.html#pygeohash.geohashes_in_box">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">geohashes_in_box</span><span class="p">(</span><span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find geohashes that intersect with a given bounding box.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        bbox (BoundingBox): The bounding box to find geohashes for.</span>
+<span class="sd">        precision (int, optional): The precision of the geohashes to return. Defaults to 6.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: A list of geohashes that intersect with the bounding box.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; box = BoundingBox(57.64, 10.40, 57.65, 10.41)</span>
+<span class="sd">        &gt;&gt;&gt; geohashes_in_box(box, precision=5)</span>
+<span class="sd">        [&#39;u4pru&#39;, &#39;u4prv&#39;]</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The number of geohashes returned depends on the size of the bounding box</span>
+<span class="sd">        and the precision requested. Higher precision values will result in more</span>
+<span class="sd">        geohashes for the same bounding box.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find a geohash at the center of the bounding box</span>
+    <span class="n">center_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">center_lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">center_geohash</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    
+    <span class="c1"># Get the size of a geohash at this precision</span>
+    <span class="n">center_bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">)</span>
+    <span class="n">lat_step</span> <span class="o">=</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">-</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">min_lat</span>
+    <span class="n">lon_step</span> <span class="o">=</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">-</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">min_lon</span>
+    
+    <span class="c1"># Create a set to store unique geohashes</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    
+    <span class="c1"># Calculate the starting points slightly outside the bounding box</span>
+    <span class="c1"># to ensure we cover the entire area</span>
+    <span class="n">start_lat</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">-</span> <span class="n">lat_step</span>
+    <span class="n">end_lat</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="n">lat_step</span>
+    <span class="n">start_lon</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">-</span> <span class="n">lon_step</span>
+    <span class="n">end_lon</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">+</span> <span class="n">lon_step</span>
+    
+    <span class="c1"># Sample points in a grid pattern with spacing based on geohash size</span>
+    <span class="c1"># This ensures we get all geohashes that intersect with the bounding box</span>
+    <span class="k">for</span> <span class="n">lat</span> <span class="ow">in</span> <span class="n">_float_range</span><span class="p">(</span><span class="n">start_lat</span><span class="p">,</span> <span class="n">end_lat</span><span class="p">,</span> <span class="n">lat_step</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">lon</span> <span class="ow">in</span> <span class="n">_float_range</span><span class="p">(</span><span class="n">start_lon</span><span class="p">,</span> <span class="n">end_lon</span><span class="p">,</span> <span class="n">lon_step</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">&lt;=</span> <span class="n">lat</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="ow">or</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">&lt;=</span> <span class="n">lon</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">:</span>
+                <span class="n">gh</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+                <span class="n">gh_bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
+                <span class="c1"># Only add geohashes that actually intersect with our bounding box</span>
+                <span class="k">if</span> <span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">gh_bbox</span><span class="p">):</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_float_range</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function to create a range of float values.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        start (float): The start value.</span>
+<span class="sd">        stop (float): The stop value (inclusive).</span>
+<span class="sd">        step (float): The step size.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[float]: A list of float values from start to stop with the given step size.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="k">while</span> <span class="n">current</span> <span class="o">&lt;=</span> <span class="n">stop</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">current</span> <span class="o">+=</span> <span class="n">step</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">pygeohash</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Geohash Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2016, Will McGinnis.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.1</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -31,14 +31,10 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.neighbor</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">.. module:: neighbor</span>
-<span class="sd">   :platform: Unix, Windows</span>
-<span class="sd">   :synopsis: A module for calculating adjacent geohash</span>
+<span></span><span class="sd">&quot;&quot;&quot;Geohash neighbor calculation functionality.</span>
 
-<span class="sd">.. moduleauthor:: Nicolas Mine</span>
-
-
+<span class="sd">This module provides functionality for calculating adjacent geohashes</span>
+<span class="sd">in different directions (right, left, top, bottom).</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">__base32</span>
@@ -87,9 +83,22 @@
 <div class="viewcode-block" id="get_adjacent">
 <a class="viewcode-back" href="../../api.html#pygeohash.get_adjacent">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    return the adjacent hash of a given geohash.</span>
-<span class="sd">    Direction can be right, left, top, bottom</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the adjacent geohash in the specified direction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The input geohash string.</span>
+<span class="sd">        direction (str): The direction to find the adjacent geohash.</span>
+<span class="sd">            Must be one of: &quot;right&quot;, &quot;left&quot;, &quot;top&quot;, &quot;bottom&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The adjacent geohash in the specified direction.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the geohash length is 0 (possible when close to poles).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; get_adjacent(&quot;u4pruyd&quot;, &quot;top&quot;)</span>
+<span class="sd">        &#39;u4pruyf&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The geohash length cannot be 0. Possible when close to poles&quot;</span><span class="p">)</span>

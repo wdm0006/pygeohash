@@ -357,6 +357,1424 @@
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ... and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">largest_cluster</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2"> more points&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p># Get the standard deviation of the geohashes
+std_dev = pgh.std(geohashes)
+print(f”Standard deviation: {std_dev:.2f} meters”)</p>
+</section>
+<section id="bounding-box-operations">
+<h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h2>
+<p>Working with geohash bounding boxes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Get bounding box for a geohash</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8yy&quot;</span>  <span class="c1"># San Francisco area</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bounding box for </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Southwest corner: (</span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Northeast corner: (</span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if a point is within the bounding box</span>
+<span class="n">test_points</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Golden Gate Bridge&quot;</span><span class="p">,</span> <span class="mf">37.8199</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4783</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Fisherman&#39;s Wharf&quot;</span><span class="p">,</span> <span class="mf">37.8080</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4177</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;San Jose&quot;</span><span class="p">,</span> <span class="mf">37.3382</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.8863</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="ow">in</span> <span class="n">test_points</span><span class="p">:</span>
+    <span class="n">is_in_box</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">is_point_in_box</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+    <span class="n">is_in_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  In bounding box: </span><span class="si">{</span><span class="n">is_in_box</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  In geohash: </span><span class="si">{</span><span class="n">is_in_geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Find all geohashes within a custom bounding box</span>
+<span class="n">custom_bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">BoundingBox</span><span class="p">(</span>
+    <span class="n">min_lat</span><span class="o">=</span><span class="mf">37.75</span><span class="p">,</span> <span class="n">min_lon</span><span class="o">=-</span><span class="mf">122.45</span><span class="p">,</span>
+    <span class="n">max_lat</span><span class="o">=</span><span class="mf">37.78</span><span class="p">,</span> <span class="n">max_lon</span><span class="o">=-</span><span class="mf">122.40</span>
+<span class="p">)</span>
+
+<span class="c1"># Get geohashes at different precision levels</span>
+<span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]:</span>
+    <span class="n">geohashes</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">custom_bbox</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">: found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2"> geohashes&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">precision</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Geohashes: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if two bounding boxes intersect</span>
+<span class="n">bbox1</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">)</span>
+<span class="n">bbox2</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;9q8yym&quot;</span><span class="p">)</span>
+<span class="n">bbox3</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;dr5r&quot;</span><span class="p">)</span>  <span class="c1"># New York</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intersection of 9q8yyk and 9q8yym: </span><span class="si">{</span><span class="n">pgh</span><span class="o">.</span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">,</span><span class="w"> </span><span class="n">bbox2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intersection of 9q8yyk and dr5r: </span><span class="si">{</span><span class="n">pgh</span><span class="o">.</span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">,</span><span class="w"> </span><span class="n">bbox3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="visualizing-bounding-boxes">
+<h3>Visualizing Bounding Boxes<a class="headerlink" href="#visualizing-bounding-boxes" title="Link to this heading">¶</a></h3>
+<p>Visualizing geohash bounding boxes with matplotlib:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">patches</span>
+
+<span class="c1"># Define a base geohash and get its bounding box</span>
+<span class="n">base_geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8yy&quot;</span>  <span class="c1"># San Francisco area</span>
+<span class="n">base_bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="n">base_geohash</span><span class="p">)</span>
+
+<span class="c1"># Find geohashes within this area at a higher precision</span>
+<span class="n">geohashes</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">base_bbox</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Create a figure and axis</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot the base bounding box</span>
+<span class="n">base_width</span> <span class="o">=</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">-</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lon</span>
+<span class="n">base_height</span> <span class="o">=</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">-</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lat</span>
+<span class="n">base_rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="p">,</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="p">),</span>
+    <span class="n">base_width</span><span class="p">,</span> <span class="n">base_height</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Base Geohash: </span><span class="si">{</span><span class="n">base_geohash</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">base_rect</span><span class="p">)</span>
+
+<span class="c1"># Plot each geohash&#39;s bounding box</span>
+<span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>  <span class="c1"># Limit to first 10 for clarity</span>
+    <span class="n">gh_bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">-</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lon</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">-</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lat</span>
+
+    <span class="n">rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="p">,</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="p">),</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+
+    <span class="c1"># Add geohash label at center of box</span>
+    <span class="n">center_x</span> <span class="o">=</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">center_y</span> <span class="o">=</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">gh</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Set plot limits and labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Geohashes within </span><span class="si">{</span><span class="n">base_geohash</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="visualization-examples">
+<h2>Visualization Examples<a class="headerlink" href="#visualization-examples" title="Link to this heading">¶</a></h2>
+<p>PyGeoHash provides visualization capabilities through the optional <code class="docutils literal notranslate"><span class="pre">viz</span></code> module.
+To use these functions, you need to install the visualization dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="o">[</span>viz<span class="o">]</span>
+</pre></div>
+</div>
+<p>You can generate all the example visualizations shown below using the provided Makefile command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install visualization dependencies</span>
+make<span class="w"> </span>install-viz
+
+<span class="c1"># Generate visualization examples</span>
+make<span class="w"> </span>viz-examples
+</pre></div>
+</div>
+<p>This will create static images and interactive maps in the <code class="docutils literal notranslate"><span class="pre">docs/source/_static/images</span></code> directory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohash</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Plot a single geohash</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Plot with center point and label</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">show_center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_label</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/single_geohash.png"><img alt="Single geohash visualization" src="_images/single_geohash.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">A single geohash (9q8yyk) plotted on a map</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/single_geohash_labeled.png"><img alt="Single geohash with label and center point" src="_images/single_geohash_labeled.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">A single geohash with its center point and label displayed</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Plot multiple geohashes with default colormap</span>
+<span class="n">geohashes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yym&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yyj&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yys&quot;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Plot with custom colors and labels</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span>
+    <span class="n">geohashes</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="s2">&quot;Work&quot;</span><span class="p">,</span> <span class="s2">&quot;Park&quot;</span><span class="p">,</span> <span class="s2">&quot;Store&quot;</span><span class="p">],</span>
+    <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/multiple_geohashes.png"><img alt="Multiple geohashes visualization" src="_images/multiple_geohashes.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Multiple geohashes plotted on a map with different colors</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/multiple_geohashes_labeled.png"><img alt="Multiple geohashes with labels" src="_images/multiple_geohashes_labeled.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Multiple geohashes with custom labels and colors</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
+
+<span class="c1"># Create a map centered on a geohash</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium_map</span><span class="p">(</span><span class="n">center_geohash</span><span class="o">=</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Add a single geohash</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="s2">&quot;Home&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add multiple geohashes with different colors</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_geohashes</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;9q8yym&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yyj&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yys&quot;</span><span class="p">],</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+    <span class="n">popups</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Work&quot;</span><span class="p">,</span> <span class="s2">&quot;Park&quot;</span><span class="p">,</span> <span class="s2">&quot;Store&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Save the map to an HTML file</span>
+<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;folium_map.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0d3d235c610c785eca005cba6f8c8f22 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_0d3d235c610c785eca005cba6f8c8f22" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0d3d235c610c785eca005cba6f8c8f22 = L.map(
+                "map_0d3d235c610c785eca005cba6f8c8f22",
+                {
+                    center: [37.77, -122.4],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a9aecccae8a7753a80549e925f5a0244 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a9aecccae8a7753a80549e925f5a0244.addTo(map_0d3d235c610c785eca005cba6f8c8f22);
+        
+    
+            var rectangle_dc1bca52338db787995df9d1836814da = L.rectangle(
+                [[37.77099609375, -122.420654296875], [37.7764892578125, -122.40966796875]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0d3d235c610c785eca005cba6f8c8f22);
+        
+    
+        var popup_927441134cb5dd9edbe293c70bbb86bb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_05b72378cd1ea0c2443a0b96b4e3e780 = $(`<div id="html_05b72378cd1ea0c2443a0b96b4e3e780" style="width: 100.0%; height: 100.0%;">Home</div>`)[0];
+                popup_927441134cb5dd9edbe293c70bbb86bb.setContent(html_05b72378cd1ea0c2443a0b96b4e3e780);
+            
+        
+
+        rectangle_dc1bca52338db787995df9d1836814da.bindPopup(popup_927441134cb5dd9edbe293c70bbb86bb)
+        ;
+
+        
+    
+    
+            rectangle_dc1bca52338db787995df9d1836814da.bindTooltip(
+                `<div>
+                     Geohash: 9q8yyk
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_afdbe48a6e5d48b831f8ba032c83e5e0 = L.rectangle(
+                [[37.7764892578125, -122.420654296875], [37.781982421875, -122.40966796875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0d3d235c610c785eca005cba6f8c8f22);
+        
+    
+        var popup_2ba39a2e6b7c5e90fc6b161fd3734b70 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8cab1f77ca605f49c04c7840ea179890 = $(`<div id="html_8cab1f77ca605f49c04c7840ea179890" style="width: 100.0%; height: 100.0%;">Work</div>`)[0];
+                popup_2ba39a2e6b7c5e90fc6b161fd3734b70.setContent(html_8cab1f77ca605f49c04c7840ea179890);
+            
+        
+
+        rectangle_afdbe48a6e5d48b831f8ba032c83e5e0.bindPopup(popup_2ba39a2e6b7c5e90fc6b161fd3734b70)
+        ;
+
+        
+    
+    
+            rectangle_afdbe48a6e5d48b831f8ba032c83e5e0.bindTooltip(
+                `<div>
+                     Geohash: 9q8yym
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_b178e99b245db2b65eeda731e205cf3f = L.rectangle(
+                [[37.7764892578125, -122.431640625], [37.781982421875, -122.420654296875]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0d3d235c610c785eca005cba6f8c8f22);
+        
+    
+        var popup_a36bfba3e88c5313f1abaf4599a6d5df = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_36527a68acf1611baca9360226863a53 = $(`<div id="html_36527a68acf1611baca9360226863a53" style="width: 100.0%; height: 100.0%;">Park</div>`)[0];
+                popup_a36bfba3e88c5313f1abaf4599a6d5df.setContent(html_36527a68acf1611baca9360226863a53);
+            
+        
+
+        rectangle_b178e99b245db2b65eeda731e205cf3f.bindPopup(popup_a36bfba3e88c5313f1abaf4599a6d5df)
+        ;
+
+        
+    
+    
+            rectangle_b178e99b245db2b65eeda731e205cf3f.bindTooltip(
+                `<div>
+                     Geohash: 9q8yyj
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_d6c9fc7ee22d19b196d2c500ed695224 = L.rectangle(
+                [[37.77099609375, -122.40966796875], [37.7764892578125, -122.398681640625]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0d3d235c610c785eca005cba6f8c8f22);
+        
+    
+        var popup_d7df6dd841a69b2c2d1cd2c4dd8e771a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fe08a16e1aab87ae9eba0941ccabbd3f = $(`<div id="html_fe08a16e1aab87ae9eba0941ccabbd3f" style="width: 100.0%; height: 100.0%;">Store</div>`)[0];
+                popup_d7df6dd841a69b2c2d1cd2c4dd8e771a.setContent(html_fe08a16e1aab87ae9eba0941ccabbd3f);
+            
+        
+
+        rectangle_d6c9fc7ee22d19b196d2c500ed695224.bindPopup(popup_d7df6dd841a69b2c2d1cd2c4dd8e771a)
+        ;
+
+        
+    
+    
+            rectangle_d6c9fc7ee22d19b196d2c500ed695224.bindTooltip(
+                `<div>
+                     Geohash: 9q8yys
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
+
+<span class="c1"># Create a map</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium_map</span><span class="p">(</span><span class="n">center_geohash</span><span class="o">=</span><span class="s2">&quot;9q8y&quot;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Add a geohash grid at precision 5</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_geohash_grid</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Save the map to an HTML file</span>
+<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;folium_grid.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5208a72976812c4b284b992c95b46285 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_5208a72976812c4b284b992c95b46285" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5208a72976812c4b284b992c95b46285 = L.map(
+                "map_5208a72976812c4b284b992c95b46285",
+                {
+                    center: [38.0, -123.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_336e5e5f96e4705835845741fda3a9ab = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_336e5e5f96e4705835845741fda3a9ab.addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+            var rectangle_e31184f15e8e26bfe3733fa70e1a4e56 = L.rectangle(
+                [[37.9248046875, -123.0029296875], [37.96875, -122.958984375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_1cd916d4fe1bf764ac09b8ef5975b7f6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_768cafb6c7273ea22e242b2d6c7bddf7 = $(`<div id="html_768cafb6c7273ea22e242b2d6c7bddf7" style="width: 100.0%; height: 100.0%;">Geohash: 9q8xc</div>`)[0];
+                popup_1cd916d4fe1bf764ac09b8ef5975b7f6.setContent(html_768cafb6c7273ea22e242b2d6c7bddf7);
+            
+        
+
+        rectangle_e31184f15e8e26bfe3733fa70e1a4e56.bindPopup(popup_1cd916d4fe1bf764ac09b8ef5975b7f6)
+        ;
+
+        
+    
+    
+            rectangle_e31184f15e8e26bfe3733fa70e1a4e56.bindTooltip(
+                `<div>
+                     Geohash: 9q8xc
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_08e7851d8dae8cabc3ab792bb93adecc = L.rectangle(
+                [[37.9248046875, -123.046875], [37.96875, -123.0029296875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "l", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_e3cc286cc8a8200d523b4851083fe64b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_155d80e8a78f2823b96ab1e3b02848ca = $(`<div id="html_155d80e8a78f2823b96ab1e3b02848ca" style="width: 100.0%; height: 100.0%;">Geohash: 9q8xb</div>`)[0];
+                popup_e3cc286cc8a8200d523b4851083fe64b.setContent(html_155d80e8a78f2823b96ab1e3b02848ca);
+            
+        
+
+        rectangle_08e7851d8dae8cabc3ab792bb93adecc.bindPopup(popup_e3cc286cc8a8200d523b4851083fe64b)
+        ;
+
+        
+    
+    
+            rectangle_08e7851d8dae8cabc3ab792bb93adecc.bindTooltip(
+                `<div>
+                     Geohash: 9q8xb
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_da2706c3e61edb29734e4ea1a7d3abbb = L.rectangle(
+                [[37.880859375, -122.9150390625], [37.9248046875, -122.87109375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "u", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_6d6a43079b3ee88a5d65a294fd4f66f8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7ee35599492d52f27a84a297af11a769 = $(`<div id="html_7ee35599492d52f27a84a297af11a769" style="width: 100.0%; height: 100.0%;">Geohash: 9q8xe</div>`)[0];
+                popup_6d6a43079b3ee88a5d65a294fd4f66f8.setContent(html_7ee35599492d52f27a84a297af11a769);
+            
+        
+
+        rectangle_da2706c3e61edb29734e4ea1a7d3abbb.bindPopup(popup_6d6a43079b3ee88a5d65a294fd4f66f8)
+        ;
+
+        
+    
+    
+            rectangle_da2706c3e61edb29734e4ea1a7d3abbb.bindTooltip(
+                `<div>
+                     Geohash: 9q8xe
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_ce060477c50862867efc7f618b165279 = L.rectangle(
+                [[37.880859375, -122.958984375], [37.9248046875, -122.9150390625]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_ae0271ea459a7e2b4cc49a454a27ed8a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d408acdbf65bb5bc2ca40b4e679a8b75 = $(`<div id="html_d408acdbf65bb5bc2ca40b4e679a8b75" style="width: 100.0%; height: 100.0%;">Geohash: 9q8xd</div>`)[0];
+                popup_ae0271ea459a7e2b4cc49a454a27ed8a.setContent(html_d408acdbf65bb5bc2ca40b4e679a8b75);
+            
+        
+
+        rectangle_ce060477c50862867efc7f618b165279.bindPopup(popup_ae0271ea459a7e2b4cc49a454a27ed8a)
+        ;
+
+        
+    
+    
+            rectangle_ce060477c50862867efc7f618b165279.bindTooltip(
+                `<div>
+                     Geohash: 9q8xd
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_7aee8d83d7e6d24c5571da4a19502100 = L.rectangle(
+                [[37.9248046875, -122.9150390625], [37.96875, -122.87109375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_318dad65f2a67118e20379b1b6e4d7bd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_65cf57a46ae01ea8569e18c61e11385d = $(`<div id="html_65cf57a46ae01ea8569e18c61e11385d" style="width: 100.0%; height: 100.0%;">Geohash: 9q8xg</div>`)[0];
+                popup_318dad65f2a67118e20379b1b6e4d7bd.setContent(html_65cf57a46ae01ea8569e18c61e11385d);
+            
+        
+
+        rectangle_7aee8d83d7e6d24c5571da4a19502100.bindPopup(popup_318dad65f2a67118e20379b1b6e4d7bd)
+        ;
+
+        
+    
+    
+            rectangle_7aee8d83d7e6d24c5571da4a19502100.bindTooltip(
+                `<div>
+                     Geohash: 9q8xg
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_f5ccbc7fa1301ac10bdf5de1dccbbe17 = L.rectangle(
+                [[37.9248046875, -122.958984375], [37.96875, -122.9150390625]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "l", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_8b69e0f1c82647c0ae3f11622238a361 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c966a1af7c111a36c1e74a349e5112f7 = $(`<div id="html_c966a1af7c111a36c1e74a349e5112f7" style="width: 100.0%; height: 100.0%;">Geohash: 9q8xf</div>`)[0];
+                popup_8b69e0f1c82647c0ae3f11622238a361.setContent(html_c966a1af7c111a36c1e74a349e5112f7);
+            
+        
+
+        rectangle_f5ccbc7fa1301ac10bdf5de1dccbbe17.bindPopup(popup_8b69e0f1c82647c0ae3f11622238a361)
+        ;
+
+        
+    
+    
+            rectangle_f5ccbc7fa1301ac10bdf5de1dccbbe17.bindTooltip(
+                `<div>
+                     Geohash: 9q8xf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_a115c98127b519f0ea228772ae6f00f6 = L.rectangle(
+                [[38.056640625, -123.0029296875], [38.1005859375, -122.958984375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "u", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_c7cf57fb4cbd7547cc9a19fd0e6ddf55 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9ab756a2fe78ef593649b06fd4a6786d = $(`<div id="html_9ab756a2fe78ef593649b06fd4a6786d" style="width: 100.0%; height: 100.0%;">Geohash: 9qb89</div>`)[0];
+                popup_c7cf57fb4cbd7547cc9a19fd0e6ddf55.setContent(html_9ab756a2fe78ef593649b06fd4a6786d);
+            
+        
+
+        rectangle_a115c98127b519f0ea228772ae6f00f6.bindPopup(popup_c7cf57fb4cbd7547cc9a19fd0e6ddf55)
+        ;
+
+        
+    
+    
+            rectangle_a115c98127b519f0ea228772ae6f00f6.bindTooltip(
+                `<div>
+                     Geohash: 9qb89
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_955cff435587c89514f93b88aedef6d8 = L.rectangle(
+                [[38.056640625, -123.046875], [38.1005859375, -123.0029296875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_450f7342f6600710d220fd598d3fc468 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_330fb0a71e573606f8d9c43cec09e6c3 = $(`<div id="html_330fb0a71e573606f8d9c43cec09e6c3" style="width: 100.0%; height: 100.0%;">Geohash: 9qb88</div>`)[0];
+                popup_450f7342f6600710d220fd598d3fc468.setContent(html_330fb0a71e573606f8d9c43cec09e6c3);
+            
+        
+
+        rectangle_955cff435587c89514f93b88aedef6d8.bindPopup(popup_450f7342f6600710d220fd598d3fc468)
+        ;
+
+        
+    
+    
+            rectangle_955cff435587c89514f93b88aedef6d8.bindTooltip(
+                `<div>
+                     Geohash: 9qb88
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_f8bea041e23ed02750d91149e4463833 = L.rectangle(
+                [[38.0126953125, -123.0029296875], [38.056640625, -122.958984375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_a47c6c22e319fc22c698443402df2d3e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_333b7b4114c8cbedbbed87f154d4c7f4 = $(`<div id="html_333b7b4114c8cbedbbed87f154d4c7f4" style="width: 100.0%; height: 100.0%;">Geohash: 9qb83</div>`)[0];
+                popup_a47c6c22e319fc22c698443402df2d3e.setContent(html_333b7b4114c8cbedbbed87f154d4c7f4);
+            
+        
+
+        rectangle_f8bea041e23ed02750d91149e4463833.bindPopup(popup_a47c6c22e319fc22c698443402df2d3e)
+        ;
+
+        
+    
+    
+            rectangle_f8bea041e23ed02750d91149e4463833.bindTooltip(
+                `<div>
+                     Geohash: 9qb83
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_46ee6a01dce581d1c1c015ff4442ed29 = L.rectangle(
+                [[38.0126953125, -123.046875], [38.056640625, -123.0029296875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "l", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_25eb184ea7525144a452c009b21fec1f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9ade60c7c75f915e0dd4aa0904f8b040 = $(`<div id="html_9ade60c7c75f915e0dd4aa0904f8b040" style="width: 100.0%; height: 100.0%;">Geohash: 9qb82</div>`)[0];
+                popup_25eb184ea7525144a452c009b21fec1f.setContent(html_9ade60c7c75f915e0dd4aa0904f8b040);
+            
+        
+
+        rectangle_46ee6a01dce581d1c1c015ff4442ed29.bindPopup(popup_25eb184ea7525144a452c009b21fec1f)
+        ;
+
+        
+    
+    
+            rectangle_46ee6a01dce581d1c1c015ff4442ed29.bindTooltip(
+                `<div>
+                     Geohash: 9qb82
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_2fdcc699d868cfc4b96840ec83d13502 = L.rectangle(
+                [[37.96875, -123.0029296875], [38.0126953125, -122.958984375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "u", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_0d4f2212ffd1d489edb6eab903051eb4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de48d8b43be36f4bd987b73ad98e938e = $(`<div id="html_de48d8b43be36f4bd987b73ad98e938e" style="width: 100.0%; height: 100.0%;">Geohash: 9qb81</div>`)[0];
+                popup_0d4f2212ffd1d489edb6eab903051eb4.setContent(html_de48d8b43be36f4bd987b73ad98e938e);
+            
+        
+
+        rectangle_2fdcc699d868cfc4b96840ec83d13502.bindPopup(popup_0d4f2212ffd1d489edb6eab903051eb4)
+        ;
+
+        
+    
+    
+            rectangle_2fdcc699d868cfc4b96840ec83d13502.bindTooltip(
+                `<div>
+                     Geohash: 9qb81
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_1a125fb38be5ffe4f15b97979ce99410 = L.rectangle(
+                [[37.96875, -123.046875], [38.0126953125, -123.0029296875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_3b0fed4073f7a64f8fc41d8e55e28a3e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3cbc89dda0c0399b744086a26fb26ebd = $(`<div id="html_3cbc89dda0c0399b744086a26fb26ebd" style="width: 100.0%; height: 100.0%;">Geohash: 9qb80</div>`)[0];
+                popup_3b0fed4073f7a64f8fc41d8e55e28a3e.setContent(html_3cbc89dda0c0399b744086a26fb26ebd);
+            
+        
+
+        rectangle_1a125fb38be5ffe4f15b97979ce99410.bindPopup(popup_3b0fed4073f7a64f8fc41d8e55e28a3e)
+        ;
+
+        
+    
+    
+            rectangle_1a125fb38be5ffe4f15b97979ce99410.bindTooltip(
+                `<div>
+                     Geohash: 9qb80
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_eaeda38cef159651670da744716ba4ba = L.rectangle(
+                [[38.0126953125, -122.9150390625], [38.056640625, -122.87109375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_b1b272699c8dba6d9b1744677dafeb00 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c51fe1fd912d860a03c00e14f77afc3b = $(`<div id="html_c51fe1fd912d860a03c00e14f77afc3b" style="width: 100.0%; height: 100.0%;">Geohash: 9qb87</div>`)[0];
+                popup_b1b272699c8dba6d9b1744677dafeb00.setContent(html_c51fe1fd912d860a03c00e14f77afc3b);
+            
+        
+
+        rectangle_eaeda38cef159651670da744716ba4ba.bindPopup(popup_b1b272699c8dba6d9b1744677dafeb00)
+        ;
+
+        
+    
+    
+            rectangle_eaeda38cef159651670da744716ba4ba.bindTooltip(
+                `<div>
+                     Geohash: 9qb87
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_2f7d417acff89665c3c0e9701e932025 = L.rectangle(
+                [[38.0126953125, -122.958984375], [38.056640625, -122.9150390625]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "l", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_59e67160f718ef244b599c5cfc47d9e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_72b763f5557f1efd40ae33f6c9f07093 = $(`<div id="html_72b763f5557f1efd40ae33f6c9f07093" style="width: 100.0%; height: 100.0%;">Geohash: 9qb86</div>`)[0];
+                popup_59e67160f718ef244b599c5cfc47d9e8.setContent(html_72b763f5557f1efd40ae33f6c9f07093);
+            
+        
+
+        rectangle_2f7d417acff89665c3c0e9701e932025.bindPopup(popup_59e67160f718ef244b599c5cfc47d9e8)
+        ;
+
+        
+    
+    
+            rectangle_2f7d417acff89665c3c0e9701e932025.bindTooltip(
+                `<div>
+                     Geohash: 9qb86
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_7221c6bb911400137c2e5b48dd77d1f5 = L.rectangle(
+                [[37.96875, -122.9150390625], [38.0126953125, -122.87109375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "u", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_6e3a548932cdab5f72895c9c9859d291 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b235d321036347c5b8bd8e7bb5a2ddbc = $(`<div id="html_b235d321036347c5b8bd8e7bb5a2ddbc" style="width: 100.0%; height: 100.0%;">Geohash: 9qb85</div>`)[0];
+                popup_6e3a548932cdab5f72895c9c9859d291.setContent(html_b235d321036347c5b8bd8e7bb5a2ddbc);
+            
+        
+
+        rectangle_7221c6bb911400137c2e5b48dd77d1f5.bindPopup(popup_6e3a548932cdab5f72895c9c9859d291)
+        ;
+
+        
+    
+    
+            rectangle_7221c6bb911400137c2e5b48dd77d1f5.bindTooltip(
+                `<div>
+                     Geohash: 9qb85
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_1d9dfab422722f301058da1aa6295280 = L.rectangle(
+                [[37.96875, -122.958984375], [38.0126953125, -122.9150390625]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_12e53a7bf50fab5226f187155766ab96 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_191ba135aae954b8bb629f0e65062643 = $(`<div id="html_191ba135aae954b8bb629f0e65062643" style="width: 100.0%; height: 100.0%;">Geohash: 9qb84</div>`)[0];
+                popup_12e53a7bf50fab5226f187155766ab96.setContent(html_191ba135aae954b8bb629f0e65062643);
+            
+        
+
+        rectangle_1d9dfab422722f301058da1aa6295280.bindPopup(popup_12e53a7bf50fab5226f187155766ab96)
+        ;
+
+        
+    
+    
+            rectangle_1d9dfab422722f301058da1aa6295280.bindTooltip(
+                `<div>
+                     Geohash: 9qb84
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_ff7592d4968f420230097309d49003f9 = L.rectangle(
+                [[38.056640625, -123.0908203125], [38.1005859375, -123.046875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_a17238770ac0bcaf3139b6d1ef7815b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_650e15b8e928d5105e1f1788a081881b = $(`<div id="html_650e15b8e928d5105e1f1788a081881b" style="width: 100.0%; height: 100.0%;">Geohash: 9qb2x</div>`)[0];
+                popup_a17238770ac0bcaf3139b6d1ef7815b7.setContent(html_650e15b8e928d5105e1f1788a081881b);
+            
+        
+
+        rectangle_ff7592d4968f420230097309d49003f9.bindPopup(popup_a17238770ac0bcaf3139b6d1ef7815b7)
+        ;
+
+        
+    
+    
+            rectangle_ff7592d4968f420230097309d49003f9.bindTooltip(
+                `<div>
+                     Geohash: 9qb2x
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_2cd636bda78b1131b09fa9fe4519bd84 = L.rectangle(
+                [[37.96875, -123.0908203125], [38.0126953125, -123.046875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "l", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_892b8a445187ec88fd572ea7c0880e3a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ddfb86842f501d0b72bff8ec31b12e3 = $(`<div id="html_0ddfb86842f501d0b72bff8ec31b12e3" style="width: 100.0%; height: 100.0%;">Geohash: 9qb2p</div>`)[0];
+                popup_892b8a445187ec88fd572ea7c0880e3a.setContent(html_0ddfb86842f501d0b72bff8ec31b12e3);
+            
+        
+
+        rectangle_2cd636bda78b1131b09fa9fe4519bd84.bindPopup(popup_892b8a445187ec88fd572ea7c0880e3a)
+        ;
+
+        
+    
+    
+            rectangle_2cd636bda78b1131b09fa9fe4519bd84.bindTooltip(
+                `<div>
+                     Geohash: 9qb2p
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_9706a8086cbebdf0c2e856177f9322a8 = L.rectangle(
+                [[38.0126953125, -123.0908203125], [38.056640625, -123.046875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "u", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_dc1434fc0e4a768d18b9f9b54a74ec1f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c5c61d7f83a5053544056e9d4d47f7e0 = $(`<div id="html_c5c61d7f83a5053544056e9d4d47f7e0" style="width: 100.0%; height: 100.0%;">Geohash: 9qb2r</div>`)[0];
+                popup_dc1434fc0e4a768d18b9f9b54a74ec1f.setContent(html_c5c61d7f83a5053544056e9d4d47f7e0);
+            
+        
+
+        rectangle_9706a8086cbebdf0c2e856177f9322a8.bindPopup(popup_dc1434fc0e4a768d18b9f9b54a74ec1f)
+        ;
+
+        
+    
+    
+            rectangle_9706a8086cbebdf0c2e856177f9322a8.bindTooltip(
+                `<div>
+                     Geohash: 9qb2r
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_83424d4240cbe40fc131a9147891ea0b = L.rectangle(
+                [[38.056640625, -122.9150390625], [38.1005859375, -122.87109375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_e8a9fb8ed4be1cd84a790174d6440ae4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c143cd844cbd1461eb0c038fc0337e6a = $(`<div id="html_c143cd844cbd1461eb0c038fc0337e6a" style="width: 100.0%; height: 100.0%;">Geohash: 9qb8e</div>`)[0];
+                popup_e8a9fb8ed4be1cd84a790174d6440ae4.setContent(html_c143cd844cbd1461eb0c038fc0337e6a);
+            
+        
+
+        rectangle_83424d4240cbe40fc131a9147891ea0b.bindPopup(popup_e8a9fb8ed4be1cd84a790174d6440ae4)
+        ;
+
+        
+    
+    
+            rectangle_83424d4240cbe40fc131a9147891ea0b.bindTooltip(
+                `<div>
+                     Geohash: 9qb8e
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_2fb9d4c9409b2743cfc9ad5fd6bae1d0 = L.rectangle(
+                [[38.056640625, -122.958984375], [38.1005859375, -122.9150390625]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_551deb5b98cf6d64913ad37a79012cd7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8825ff947fdc590d83b397218d110ea0 = $(`<div id="html_8825ff947fdc590d83b397218d110ea0" style="width: 100.0%; height: 100.0%;">Geohash: 9qb8d</div>`)[0];
+                popup_551deb5b98cf6d64913ad37a79012cd7.setContent(html_8825ff947fdc590d83b397218d110ea0);
+            
+        
+
+        rectangle_2fb9d4c9409b2743cfc9ad5fd6bae1d0.bindPopup(popup_551deb5b98cf6d64913ad37a79012cd7)
+        ;
+
+        
+    
+    
+            rectangle_2fb9d4c9409b2743cfc9ad5fd6bae1d0.bindTooltip(
+                `<div>
+                     Geohash: 9qb8d
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_4adb7264398d9eeb2703d6e17e609f5f = L.rectangle(
+                [[37.880859375, -123.0029296875], [37.9248046875, -122.958984375]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "l", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_a075603db26035f21c1bec1407cd0372 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7668d958ceed404ca5ae6c570e7cd330 = $(`<div id="html_7668d958ceed404ca5ae6c570e7cd330" style="width: 100.0%; height: 100.0%;">Geohash: 9q8x9</div>`)[0];
+                popup_a075603db26035f21c1bec1407cd0372.setContent(html_7668d958ceed404ca5ae6c570e7cd330);
+            
+        
+
+        rectangle_4adb7264398d9eeb2703d6e17e609f5f.bindPopup(popup_a075603db26035f21c1bec1407cd0372)
+        ;
+
+        
+    
+    
+            rectangle_4adb7264398d9eeb2703d6e17e609f5f.bindTooltip(
+                `<div>
+                     Geohash: 9q8x9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_3cc2feaf9af591afb0a2061aa29a8223 = L.rectangle(
+                [[37.880859375, -123.046875], [37.9248046875, -123.0029296875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "u", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_d85c944b110625120c0b871c48ffe705 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8b05400294491120865f071c747012a1 = $(`<div id="html_8b05400294491120865f071c747012a1" style="width: 100.0%; height: 100.0%;">Geohash: 9q8x8</div>`)[0];
+                popup_d85c944b110625120c0b871c48ffe705.setContent(html_8b05400294491120865f071c747012a1);
+            
+        
+
+        rectangle_3cc2feaf9af591afb0a2061aa29a8223.bindPopup(popup_d85c944b110625120c0b871c48ffe705)
+        ;
+
+        
+    
+    
+            rectangle_3cc2feaf9af591afb0a2061aa29a8223.bindTooltip(
+                `<div>
+                     Geohash: 9q8x8
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_d0dea808a896ac7c3a556188fdf0628e = L.rectangle(
+                [[37.9248046875, -123.0908203125], [37.96875, -123.046875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_226406a9c76a742f7b26d973d013320f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8b1e8423c17e7ed6c822594a62442075 = $(`<div id="html_8b1e8423c17e7ed6c822594a62442075" style="width: 100.0%; height: 100.0%;">Geohash: 9q8rz</div>`)[0];
+                popup_226406a9c76a742f7b26d973d013320f.setContent(html_8b1e8423c17e7ed6c822594a62442075);
+            
+        
+
+        rectangle_d0dea808a896ac7c3a556188fdf0628e.bindPopup(popup_226406a9c76a742f7b26d973d013320f)
+        ;
+
+        
+    
+    
+            rectangle_d0dea808a896ac7c3a556188fdf0628e.bindTooltip(
+                `<div>
+                     Geohash: 9q8rz
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var rectangle_0547cef949dfebbaec2adb382c0c8b70 = L.rectangle(
+                [[37.880859375, -123.0908203125], [37.9248046875, -123.046875]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(map_5208a72976812c4b284b992c95b46285);
+        
+    
+        var popup_a8a83d8c8eabbe1ca0a32caefc2d1793 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_686faf6caa44987e648b84ba102e2b77 = $(`<div id="html_686faf6caa44987e648b84ba102e2b77" style="width: 100.0%; height: 100.0%;">Geohash: 9q8rx</div>`)[0];
+                popup_a8a83d8c8eabbe1ca0a32caefc2d1793.setContent(html_686faf6caa44987e648b84ba102e2b77);
+            
+        
+
+        rectangle_0547cef949dfebbaec2adb382c0c8b70.bindPopup(popup_a8a83d8c8eabbe1ca0a32caefc2d1793)
+        ;
+
+        
+    
+    
+            rectangle_0547cef949dfebbaec2adb382c0c8b70.bindTooltip(
+                `<div>
+                     Geohash: 9q8rx
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Get a geohash and its neighbors</span>
+<span class="n">center</span> <span class="o">=</span> <span class="s2">&quot;9q8yyk&quot;</span>
+<span class="n">neighbors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;North&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;East&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;South&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;West&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Plot the center and its neighbors</span>
+<span class="n">all_geohashes</span> <span class="o">=</span> <span class="p">[</span><span class="n">center</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">neighbors</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Center&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">neighbors</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span>
+    <span class="n">all_geohashes</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+    <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/geohash_neighbors.png"><img alt="Geohash and its neighbors" src="_images/geohash_neighbors.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">A geohash (center) and its neighboring geohashes</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Start with a precision 4 geohash</span>
+<span class="n">base_geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8y&quot;</span>
+
+<span class="c1"># Generate geohashes at different precisions</span>
+<span class="n">geohashes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">base_geohash</span><span class="p">,</span>
+    <span class="n">base_geohash</span> <span class="o">+</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span>
+    <span class="n">base_geohash</span> <span class="o">+</span> <span class="s2">&quot;yk&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Precision </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span>
+    <span class="n">geohashes</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+    <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">],</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/geohash_precision.png"><img alt="Geohashes at different precision levels" src="_images/geohash_precision.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Geohashes at different precision levels (4, 5, and 6)</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="practical-applications">
+<h2>Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -398,6 +1816,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#statistical-analysis">Statistical Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#geospatial-search">Geospatial Search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#clustering-by-geohash-prefix">Clustering by Geohash Prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization-examples">Visualization Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#practical-applications">Practical Applications</a></li>
 </ul>
 </li>
 </ul>

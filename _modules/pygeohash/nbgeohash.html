@@ -31,14 +31,15 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.nbgeohash</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">.. module:: nbgeohash</span>
-<span class="sd">   :platform: Unix, Windows</span>
-<span class="sd">   :synopsis: A module for encoding to and decoding from the geohash system using numba</span>
+<span></span><span class="sd">&quot;&quot;&quot;Numba-accelerated geohash encoding and decoding.</span>
 
-<span class="sd">.. moduleauthor:: Ilyas Moutawwakil &lt;ilyas.moutawwakil@gmail.com&gt;</span>
+<span class="sd">This module provides Numba-accelerated implementations of geohash encoding</span>
+<span class="sd">and decoding functions for improved performance. It includes both single-point</span>
+<span class="sd">and vectorized operations for batch processing.</span>
 
-
+<span class="sd">Note:</span>
+<span class="sd">    This module requires Numba and NumPy to be installed. These are optional</span>
+<span class="sd">    dependencies that can be installed with `pip install pygeohash[numba]`.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">log10</span>
@@ -54,10 +55,19 @@
 
 <span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">base32_to_int</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">char</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">uint8</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the equivalent value of a base 32 character.</span>
-<span class="sd">    Surprisingly, on Numba this approach is faster than all the others.</span>
-<span class="sd">    More specifically, because the numba hashtable (dictionary) is slower.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a base32 character to its integer value.</span>
+
+<span class="sd">    This function is optimized for Numba and is faster than using a dictionary</span>
+<span class="sd">    lookup in the Numba environment.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        s (types.char): A single character from the base32 alphabet.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        types.uint8: The integer value of the character.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If the character is not in the base32 alphabet.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">__base32</span>
     <span class="n">res</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">48</span>
@@ -76,14 +86,21 @@
 <a class="viewcode-back" href="../../api.html#pygeohash.nb_decode_exactly">[docs]</a>
 <span class="nd">@njit</span><span class="p">(</span><span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">nb_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExactLatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decode the geohash to its exact values, including the error</span>
-<span class="sd">    margins of the result.  Returns four float values: latitude,</span>
-<span class="sd">    longitude, the plus/minus error for latitude (as a positive</span>
-<span class="sd">    number) and the plus/minus error for longitude (as a positive</span>
-<span class="sd">    number).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash to its exact values with error margins (Numba-accelerated).</span>
 
+<span class="sd">    This is a Numba-accelerated version of decode_exactly that provides</span>
+<span class="sd">    the same functionality but with better performance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The geohash string to decode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ExactLatLong: A named tuple containing latitude, longitude, and their respective error margins.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; nb_decode_exactly(&quot;u4pruydqqvj&quot;)</span>
+<span class="sd">        ExactLatLong(latitude=57.64911, longitude=10.40744, latitude_error=0.00001, longitude_error=0.00001)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lat_interval_neg</span><span class="p">,</span> <span class="n">lat_interval_pos</span><span class="p">,</span> <span class="n">lon_interval_neg</span><span class="p">,</span> <span class="n">lon_interval_pos</span> <span class="o">=</span> <span class="p">(</span>
         <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
         <span class="mi">90</span><span class="p">,</span>
@@ -118,10 +135,21 @@
 <a class="viewcode-back" href="../../api.html#pygeohash.nb_point_decode">[docs]</a>
 <span class="nd">@njit</span><span class="p">(</span><span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">nb_point_decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decode geohash, returning two float with latitude and longitude containing only relevant digits.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash to latitude and longitude coordinates (Numba-accelerated).</span>
 
+<span class="sd">    This is a Numba-accelerated version of decode that provides</span>
+<span class="sd">    the same functionality but with better performance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The geohash string to decode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        LatLong: A named tuple containing latitude and longitude coordinates.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; nb_point_decode(&quot;u4pruyd&quot;)</span>
+<span class="sd">        LatLong(latitude=57.649, longitude=10.407)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">nb_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
     <span class="c1"># Format to the number of decimals that are known</span>
     <span class="n">lat_dec</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">lat_err</span><span class="p">)))</span> <span class="o">-</span> <span class="mi">1</span>
@@ -137,12 +165,25 @@
 <a class="viewcode-back" href="../../api.html#pygeohash.nb_vector_decode">[docs]</a>
 <span class="nd">@njit</span><span class="p">(</span><span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">nb_vector_decode</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Tuple</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decode geohashes, returning two Arrays of floats with latitudes and longitudes containing only relevant digits.</span>
-<span class="sd">    This is not exactly a vectorized version of nb_point_decode, but it is way faster and gets faster</span>
-<span class="sd">    as the number of geohashes increase.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode multiple geohashes to arrays of latitudes and longitudes (Numba-accelerated).</span>
 
+<span class="sd">    This function provides efficient batch decoding of multiple geohashes.</span>
+<span class="sd">    It&#39;s significantly faster than decoding each geohash individually,</span>
+<span class="sd">    especially for large collections.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (List[str]): A list of geohash strings to decode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        types.Tuple: A tuple of two NumPy arrays (latitudes, longitudes).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; lats, lons = nb_vector_decode([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; lats</span>
+<span class="sd">        array([57.649, 57.649, 57.648])</span>
+<span class="sd">        &gt;&gt;&gt; lons</span>
+<span class="sd">        array([10.407, 10.407, 10.406])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
     <span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">lons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -162,8 +203,22 @@
 <a class="viewcode-back" href="../../api.html#pygeohash.nb_point_encode">[docs]</a>
 <span class="nd">@njit</span><span class="p">(</span><span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">nb_point_encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">int8</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">string</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encode a point given by latitude and longitude to a geohash of the specified precision.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode coordinates to a geohash string (Numba-accelerated).</span>
+
+<span class="sd">    This is a Numba-accelerated version of encode that provides</span>
+<span class="sd">    the same functionality but with better performance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude (types.float64): The latitude coordinate in decimal degrees (-90 to 90).</span>
+<span class="sd">        longitude (types.float64): The longitude coordinate in decimal degrees (-180 to 180).</span>
+<span class="sd">        precision (types.int8, optional): The desired length of the geohash string. Defaults to 12.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        types.string: The geohash string representation of the coordinates.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; nb_point_encode(57.64911, 10.40744, 8)</span>
+<span class="sd">        &#39;u4pruydq&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lat_interval_neg</span><span class="p">,</span> <span class="n">lat_interval_pos</span><span class="p">,</span> <span class="n">lon_interval_neg</span><span class="p">,</span> <span class="n">lon_interval_pos</span> <span class="o">=</span> <span class="p">(</span>
         <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
@@ -210,10 +265,23 @@
 <a class="viewcode-back" href="../../api.html#pygeohash.nb_vector_encode">[docs]</a>
 <span class="nd">@njit</span><span class="p">(</span><span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">nb_vector_encode</span><span class="p">(</span><span class="n">latitudes</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">longitudes</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">int8</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Array</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encode a vector of points given by latitudes and longitudes to a vector of geohashes of the specified precision.</span>
-<span class="sd">    This is not exactly a vectorized version of nb_point_encode, but it is way faster and gets faster</span>
-<span class="sd">    as the number of points increase.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode multiple coordinates to geohash strings (Numba-accelerated).</span>
+
+<span class="sd">    This function provides efficient batch encoding of multiple coordinate pairs.</span>
+<span class="sd">    It&#39;s significantly faster than encoding each coordinate pair individually,</span>
+<span class="sd">    especially for large collections.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitudes (types.Array): Array of latitude coordinates in decimal degrees.</span>
+<span class="sd">        longitudes (types.Array): Array of longitude coordinates in decimal degrees.</span>
+<span class="sd">        precision (types.int8, optional): The desired length of the geohash strings. Defaults to 12.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        types.Array: Array of geohash strings.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; nb_vector_encode(np.array([57.649, 57.650]), np.array([10.407, 10.408]), 6)</span>
+<span class="sd">        array([&#39;u4pruy&#39;, &#39;u4pruy&#39;], dtype=&#39;&lt;U12&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">latitudes</span><span class="p">)</span>
     <span class="n">geohashes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;&lt;U12&quot;</span><span class="p">)</span>

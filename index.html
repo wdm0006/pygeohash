@@ -47,6 +47,7 @@
 <li><p><strong>Lightweight</strong>: Minimal overhead for your projects</p></li>
 <li><p><strong>Python 3 Support</strong>: Fully compatible with modern Python</p></li>
 <li><p><strong>Robust Implementation</strong>: Reliable geohash operations</p></li>
+<li><p><strong>Visualization</strong>: Optional visualization capabilities with Matplotlib and Folium</p></li>
 </ul>
 </section>
 <section id="quick-start">
@@ -67,6 +68,24 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span>  <span class="c1"># &#39;42.6&#39;, &#39;-5.6&#39;</span>
 </pre></div>
 </div>
+<p>Visualization:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install with visualization support</span>
+pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="o">[</span>viz<span class="o">]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohash</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Plot a geohash</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">show_label</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/single_geohash_labeled.png"><img alt="Geohash visualization example" src="_images/single_geohash_labeled.png" style="width: 50%;" />
+</a>
+</figure>
 </section>
 <section id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">¶</a></h2>
@@ -86,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concepts.html#precision-and-cell-size">Precision and Cell Size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts.html#properties-of-geohashes">Properties of Geohashes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts.html#edge-cases-and-limitations">Edge Cases and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-bounding-boxes">Geohash Bounding Boxes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-vs-other-geocoding-systems">Geohash vs. Other Geocoding Systems</a></li>
 </ul>
 </li>
@@ -95,8 +115,10 @@
 <li class="toctree-l2"><a class="reference internal" href="usage.html#working-with-geohash-precision">Working with Geohash Precision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#calculating-distances">Calculating Distances</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#bounding-box-operations">Bounding Box Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#statistical-functions">Statistical Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#practical-examples">Practical Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#visualization">Visualization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#performance-considerations">Performance Considerations</a></li>
 </ul>
 </li>
@@ -105,7 +127,9 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#numba-accelerated-functions">Numba-accelerated Functions</a></li>
 </ul>
 </li>
@@ -116,6 +140,9 @@
 <li class="toctree-l2"><a class="reference internal" href="examples.html#statistical-analysis">Statistical Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#geospatial-search">Geospatial Search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#clustering-by-geohash-prefix">Clustering by Geohash Prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#visualization-examples">Visualization Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#practical-applications">Practical Applications</a></li>
 </ul>
 </li>
 </ul>

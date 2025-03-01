@@ -31,14 +31,11 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.distances</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">.. module:: distances</span>
-<span class="sd">   :platform: Unix, Windows</span>
-<span class="sd">   :synopsis: A module for calculating distance measures with geohashes</span>
+<span></span><span class="sd">&quot;&quot;&quot;Distance calculation functionality for geohashes.</span>
 
-<span class="sd">.. moduleauthor:: Will McGinnis &lt;will@pedalwrencher.com&gt;</span>
-
-
+<span class="sd">This module provides functions for calculating distances between geohashes,</span>
+<span class="sd">including both approximate distance based on matching characters and</span>
+<span class="sd">precise haversine distance calculation.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
@@ -67,14 +64,28 @@
 <div class="viewcode-block" id="geohash_approximate_distance">
 <a class="viewcode-back" href="../../api.html#pygeohash.geohash_approximate_distance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">geohash_approximate_distance</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">check_validity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the approximate great-circle distance between two geohashes in meters.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the approximate great-circle distance between two geohashes.</span>
 
-<span class="sd">    :param geohash_1:</span>
-<span class="sd">    :param geohash_2:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    This function calculates an approximate distance based on the number of</span>
+<span class="sd">    matching characters at the beginning of the geohashes. It&#39;s faster but</span>
+<span class="sd">    less accurate than haversine distance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash_1 (str): The first geohash.</span>
+<span class="sd">        geohash_2 (str): The second geohash.</span>
+<span class="sd">        check_validity (bool, optional): Whether to check if the geohashes are valid.</span>
+<span class="sd">            Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The approximate distance in meters.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If check_validity is True and either geohash is invalid.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; geohash_approximate_distance(&quot;u4pruyd&quot;, &quot;u4pruyf&quot;)</span>
+<span class="sd">        118.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="n">check_validity</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohash_1</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">__base32</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash 1: </span><span class="si">{</span><span class="n">geohash_1</span><span class="si">}</span><span class="s2"> is not a valid geohash&quot;</span><span class="p">)</span>
@@ -108,14 +119,22 @@
 <div class="viewcode-block" id="geohash_haversine_distance">
 <a class="viewcode-back" href="../../api.html#pygeohash.geohash_haversine_distance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">geohash_haversine_distance</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    converts the geohashes to lat/lon and then calculates the haversine great circle distance in meters.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the haversine great-circle distance between two geohashes.</span>
 
-<span class="sd">    :param geohash_1:</span>
-<span class="sd">    :param geohash_2:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    This function provides a more accurate distance calculation using the</span>
+<span class="sd">    haversine formula, which accounts for the Earth&#39;s curvature.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash_1 (str): The first geohash.</span>
+<span class="sd">        geohash_2 (str): The second geohash.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The distance in meters.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; geohash_haversine_distance(&quot;u4pruyd&quot;, &quot;u4pruyf&quot;)</span>
+<span class="sd">        152.3</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">lat_1</span><span class="p">,</span> <span class="n">lon_1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">)</span>
     <span class="n">lat_2</span><span class="p">,</span> <span class="n">lon_2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash_2</span><span class="p">)</span>
 

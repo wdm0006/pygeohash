@@ -140,6 +140,127 @@
 </pre></div>
 </div>
 </section>
+<section id="bounding-box-operations">
+<h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h2>
+<p>PyGeoHash provides functions for working with geospatial bounding boxes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Get the bounding box for a geohash</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="s2">&quot;u4pruyd&quot;</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bounding box for </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Min latitude: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Min longitude: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Max latitude: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Max longitude: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="checking-if-a-point-is-within-a-box">
+<h3>Checking if a Point is Within a Box<a class="headerlink" href="#checking-if-a-point-is-within-a-box" title="Link to this heading">¶</a></h3>
+<p>You can check if a point is within a bounding box:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Define a bounding box</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">BoundingBox</span><span class="p">(</span><span class="n">min_lat</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">min_lon</span><span class="o">=-</span><span class="mf">74.0</span><span class="p">,</span> <span class="n">max_lat</span><span class="o">=</span><span class="mf">41.0</span><span class="p">,</span> <span class="n">max_lon</span><span class="o">=-</span><span class="mf">73.0</span><span class="p">)</span>
+
+<span class="c1"># Check if a point is within the box</span>
+<span class="n">point_lat</span><span class="p">,</span> <span class="n">point_lon</span> <span class="o">=</span> <span class="mf">40.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.5</span>
+<span class="n">is_in_box</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">is_point_in_box</span><span class="p">(</span><span class="n">point_lat</span><span class="p">,</span> <span class="n">point_lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point (</span><span class="si">{</span><span class="n">point_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">point_lon</span><span class="si">}</span><span class="s2">) is </span><span class="si">{</span><span class="s1">&#39;inside&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_in_box</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;outside&#39;</span><span class="si">}</span><span class="s2"> the box&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if a point is within a geohash&#39;s bounding box</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="s2">&quot;dr5r&quot;</span>  <span class="c1"># New York area</span>
+<span class="n">is_in_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="n">point_lat</span><span class="p">,</span> <span class="n">point_lon</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point (</span><span class="si">{</span><span class="n">point_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">point_lon</span><span class="si">}</span><span class="s2">) is </span><span class="si">{</span><span class="s1">&#39;inside&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_in_geohash</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;outside&#39;</span><span class="si">}</span><span class="s2"> the geohash </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="checking-if-bounding-boxes-intersect">
+<h3>Checking if Bounding Boxes Intersect<a class="headerlink" href="#checking-if-bounding-boxes-intersect" title="Link to this heading">¶</a></h3>
+<p>You can check if two bounding boxes intersect:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Define two bounding boxes</span>
+<span class="n">box1</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">BoundingBox</span><span class="p">(</span><span class="n">min_lat</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">min_lon</span><span class="o">=-</span><span class="mf">74.0</span><span class="p">,</span> <span class="n">max_lat</span><span class="o">=</span><span class="mf">41.0</span><span class="p">,</span> <span class="n">max_lon</span><span class="o">=-</span><span class="mf">73.0</span><span class="p">)</span>
+<span class="n">box2</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">BoundingBox</span><span class="p">(</span><span class="n">min_lat</span><span class="o">=</span><span class="mf">40.5</span><span class="p">,</span> <span class="n">min_lon</span><span class="o">=-</span><span class="mf">73.5</span><span class="p">,</span> <span class="n">max_lat</span><span class="o">=</span><span class="mf">41.5</span><span class="p">,</span> <span class="n">max_lon</span><span class="o">=-</span><span class="mf">72.5</span><span class="p">)</span>
+
+<span class="c1"># Check if they intersect</span>
+<span class="n">do_intersect</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="n">box2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boxes </span><span class="si">{</span><span class="s1">&#39;intersect&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">do_intersect</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;do not intersect&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="finding-geohashes-in-a-bounding-box">
+<h3>Finding Geohashes in a Bounding Box<a class="headerlink" href="#finding-geohashes-in-a-bounding-box" title="Link to this heading">¶</a></h3>
+<p>You can find all geohashes that intersect with a bounding box:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Define a bounding box</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">BoundingBox</span><span class="p">(</span><span class="n">min_lat</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> <span class="n">min_lon</span><span class="o">=-</span><span class="mf">74.0</span><span class="p">,</span> <span class="n">max_lat</span><span class="o">=</span><span class="mf">40.1</span><span class="p">,</span> <span class="n">max_lon</span><span class="o">=-</span><span class="mf">73.9</span><span class="p">)</span>
+
+<span class="c1"># Find geohashes that intersect with the box</span>
+<span class="n">geohashes</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2"> geohashes at precision 5&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
+<span class="c1"># Try with a different precision</span>
+<span class="n">geohashes_p6</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohashes_p6</span><span class="p">)</span><span class="si">}</span><span class="s2"> geohashes at precision 6&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="practical-example-geospatial-querying">
+<h3>Practical Example: Geospatial Querying<a class="headerlink" href="#practical-example-geospatial-querying" title="Link to this heading">¶</a></h3>
+<p>Using bounding boxes for efficient geospatial querying:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+
+<span class="c1"># Sample database of locations with their coordinates</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Central Park&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">40.785091</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">73.968285</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Empire State Building&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">40.748817</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">73.985428</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Statue of Liberty&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">40.689247</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">74.044502</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Times Square&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">40.758896</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">73.985130</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Brooklyn Bridge&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">40.706086</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">73.996864</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># Define a search area (bounding box)</span>
+<span class="n">search_area</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">BoundingBox</span><span class="p">(</span>
+    <span class="n">min_lat</span><span class="o">=</span><span class="mf">40.7</span><span class="p">,</span> <span class="n">min_lon</span><span class="o">=-</span><span class="mf">74.0</span><span class="p">,</span>
+    <span class="n">max_lat</span><span class="o">=</span><span class="mf">40.8</span><span class="p">,</span> <span class="n">max_lon</span><span class="o">=-</span><span class="mf">73.9</span>
+<span class="p">)</span>
+
+<span class="c1"># Find locations within the search area</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">pgh</span><span class="o">.</span><span class="n">is_point_in_box</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">],</span> <span class="n">search_area</span><span class="p">):</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> locations within the search area:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Alternative approach using geohashes</span>
+<span class="c1"># First, find all geohashes in the search area at precision 5</span>
+<span class="n">geohashes_in_area</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">search_area</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Pre-compute geohashes for all locations</span>
+<span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">:</span>
+    <span class="n">location</span><span class="p">[</span><span class="s2">&quot;geohash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">],</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Find locations with matching geohashes</span>
+<span class="n">geohash_results</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">location</span> <span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">locations</span>
+    <span class="k">if</span> <span class="n">location</span><span class="p">[</span><span class="s2">&quot;geohash&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">geohashes_in_area</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohash_results</span><span class="p">)</span><span class="si">}</span><span class="s2"> locations using geohash matching:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">geohash_results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (geohash: </span><span class="si">{</span><span class="n">location</span><span class="p">[</span><span class="s1">&#39;geohash&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="statistical-functions">
 <h2>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">¶</a></h2>
 <p>PyGeoHash provides several statistical functions for working with groups of geohashes:</p>
@@ -244,6 +365,88 @@
 </div>
 </section>
 </section>
+<section id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">¶</a></h2>
+<p>PyGeoHash provides visualization capabilities through the optional <code class="docutils literal notranslate"><span class="pre">viz</span></code> module. To use these functions, you need to install the visualization dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="o">[</span>viz<span class="o">]</span>
+</pre></div>
+</div>
+<section id="plotting-a-single-geohash">
+<h3>Plotting a Single Geohash<a class="headerlink" href="#plotting-a-single-geohash" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohash</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Encode a location to a geohash</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="mf">37.7749</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>  <span class="c1"># San Francisco</span>
+
+<span class="c1"># Plot the geohash</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/single_geohash.png"><img alt="Single geohash visualization" src="_images/single_geohash.png" style="width: 60%;" />
+</a>
+</figure>
+</section>
+<section id="plotting-multiple-geohashes">
+<h3>Plotting Multiple Geohashes<a class="headerlink" href="#plotting-multiple-geohashes" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define some locations</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;San Francisco&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">37.7749</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">),</span>
+    <span class="s2">&quot;Oakland&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">37.8044</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.2711</span><span class="p">),</span>
+    <span class="s2">&quot;Berkeley&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">37.8715</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.2730</span><span class="p">),</span>
+    <span class="s2">&quot;San Jose&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">37.3382</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.8863</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Encode each location to a geohash</span>
+<span class="n">geohashes</span> <span class="o">=</span> <span class="p">[</span><span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span> <span class="ow">in</span> <span class="n">locations</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+<span class="c1"># Plot the geohashes with labels</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span>
+    <span class="n">geohashes</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">locations</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+    <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bay Area Locations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/multiple_geohashes_labeled.png"><img alt="Multiple geohashes with labels" src="_images/multiple_geohashes_labeled.png" style="width: 60%;" />
+</a>
+</figure>
+</section>
+<section id="creating-interactive-maps">
+<h3>Creating Interactive Maps<a class="headerlink" href="#creating-interactive-maps" title="Link to this heading">¶</a></h3>
+<p>PyGeoHash integrates with Folium to create interactive maps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
+
+<span class="c1"># Create a map centered on a location</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium_map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mf">37.7749</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">),</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Add geohashes to the map</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="mf">37.7749</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_geohash</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="s2">&quot;San Francisco&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid of geohashes at precision 5</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_geohash_grid</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Save the map to an HTML file</span>
+<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;map.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more detailed examples of visualization, see the <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> section.</p>
+</section>
+</section>
 <section id="performance-considerations">
 <h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -251,6 +454,7 @@
 <li><p>For large datasets, consider using the Numba-accelerated functions (requires Numba and NumPy)</p></li>
 <li><p>When working with millions of geohashes, consider using a database with geospatial capabilities</p></li>
 <li><p>For high-precision applications, be aware of the limitations of geohashes near poles and the 180° meridian</p></li>
+<li><p>Visualization functions may be slower for large numbers of geohashes; consider limiting the number of geohashes displayed or using a lower precision</p></li>
 </ul>
 </section>
 </section>
@@ -290,8 +494,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#working-with-geohash-precision">Working with Geohash Precision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#calculating-distances">Calculating Distances</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#practical-examples">Practical Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization">Visualization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a></li>
 </ul>
 </li>

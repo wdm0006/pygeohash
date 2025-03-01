@@ -31,7 +31,12 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.geohash</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;Geohash encoding and decoding functionality.</span>
+
+<span class="sd">This module provides the core functionality for encoding coordinates to geohashes</span>
+<span class="sd">and decoding geohashes back to coordinates. It includes both standard and exact</span>
+<span class="sd">decoding options, as well as strict encoding.</span>
+
 <span class="sd">Copyright (C) 2008 Leonard Norrgard &lt;leonard.norrgard@gmail.com&gt;</span>
 <span class="sd">Copyright (C) 2015 Leonard Norrgard &lt;leonard.norrgard@gmail.com&gt;</span>
 
@@ -70,6 +75,13 @@
 <div class="viewcode-block" id="LatLong">
 <a class="viewcode-back" href="../../api.html#pygeohash.LatLong">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LatLong</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a latitude/longitude coordinate pair.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        latitude (float): The latitude coordinate in decimal degrees.</span>
+<span class="sd">        longitude (float): The longitude coordinate in decimal degrees.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span></div>
 
@@ -78,6 +90,15 @@
 <div class="viewcode-block" id="ExactLatLong">
 <a class="viewcode-back" href="../../api.html#pygeohash.ExactLatLong">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExactLatLong</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a latitude/longitude coordinate pair with error margins.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        latitude (float): The latitude coordinate in decimal degrees.</span>
+<span class="sd">        longitude (float): The longitude coordinate in decimal degrees.</span>
+<span class="sd">        latitude_error (float): The error margin for latitude in decimal degrees.</span>
+<span class="sd">        longitude_error (float): The error margin for longitude in decimal degrees.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">latitude_error</span><span class="p">:</span> <span class="nb">float</span>
@@ -88,12 +109,17 @@
 <div class="viewcode-block" id="decode_exactly">
 <a class="viewcode-back" href="../../api.html#pygeohash.decode_exactly">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExactLatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decode the geohash to its exact values, including the error</span>
-<span class="sd">    margins of the result.  Returns four float values: latitude,</span>
-<span class="sd">    longitude, the plus/minus error for latitude (as a positive</span>
-<span class="sd">    number) and the plus/minus error for longitude (as a positive</span>
-<span class="sd">    number).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash to its exact values, including error margins.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The geohash string to decode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ExactLatLong: A named tuple containing latitude, longitude, and their respective error margins.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; decode_exactly(&quot;u4pruydqqvj&quot;)</span>
+<span class="sd">        ExactLatLong(latitude=57.64911, longitude=10.40744, latitude_error=0.00001, longitude_error=0.00001)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lat_interval</span><span class="p">,</span> <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
     <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span>
@@ -135,9 +161,20 @@
 <div class="viewcode-block" id="decode">
 <a class="viewcode-back" href="../../api.html#pygeohash.decode">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decode geohash, returning two float with latitude and longitude</span>
-<span class="sd">    containing only relevant digits and with trailing zeroes removed.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash to latitude and longitude coordinates.</span>
+
+<span class="sd">    Decodes a geohash string to a latitude and longitude coordinate pair,</span>
+<span class="sd">    with precision appropriate to the length of the geohash.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The geohash string to decode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        LatLong: A named tuple containing latitude and longitude coordinates.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; decode(&quot;u4pruyd&quot;)</span>
+<span class="sd">        LatLong(latitude=57.649, longitude=10.407)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
     <span class="c1"># Format to the number of decimals that are known</span>
@@ -154,9 +191,19 @@
 <div class="viewcode-block" id="encode">
 <a class="viewcode-back" href="../../api.html#pygeohash.encode">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encode a position given in float arguments latitude, longitude to</span>
-<span class="sd">    a geohash which will have the character count precision.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode coordinates to a geohash string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude (float): The latitude coordinate in decimal degrees (-90 to 90).</span>
+<span class="sd">        longitude (float): The longitude coordinate in decimal degrees (-180 to 180).</span>
+<span class="sd">        precision (int, optional): The desired length of the geohash string. Defaults to 12.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The geohash string representation of the coordinates.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; encode(57.64911, 10.40744, 8)</span>
+<span class="sd">        &#39;u4pruydq&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">)</span>
     <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
@@ -193,12 +240,23 @@
 
 <div class="viewcode-block" id="encode_strictly">
 <a class="viewcode-back" href="../../api.html#pygeohash.encode_strictly">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encode a position given in float arguments latitude, longitude to</span>
-<span class="sd">    a geohash which will have the character count precision.</span>
-<span class="sd">    When compared to mid, mid should be included.</span>
-<span class="sd">    Provide a separate method for backward compatibility.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode coordinates to a geohash string with strict midpoint handling.</span>
+
+<span class="sd">    This function is similar to encode() but handles the midpoint differently.</span>
+<span class="sd">    When a coordinate is exactly at the midpoint, it is included in the upper interval.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude (float): The latitude coordinate in decimal degrees (-90 to 90).</span>
+<span class="sd">        longitude (float): The longitude coordinate in decimal degrees (-180 to 180).</span>
+<span class="sd">        precision (int, optional): The desired length of the geohash string. Defaults to 12.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The geohash string representation of the coordinates.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; encode_strictly(57.64911, 10.40744, 8)</span>
+<span class="sd">        &#39;u4pruydq&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">)</span>
     <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>

@@ -31,14 +31,11 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.stats</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">.. module:: distances</span>
-<span class="sd">   :platform: Unix, Windows</span>
-<span class="sd">   :synopsis: A module for calculating distance measures with geohashes</span>
+<span></span><span class="sd">&quot;&quot;&quot;Statistical operations for collections of geohashes.</span>
 
-<span class="sd">.. moduleauthor:: Will McGinnis &lt;will@pedalwrencher.com&gt;</span>
-
-
+<span class="sd">This module provides functions for calculating statistical properties</span>
+<span class="sd">of collections of geohashes, including mean position, cardinal extremes</span>
+<span class="sd">(northern, southern, eastern, western), variance, and standard deviation.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
@@ -52,16 +49,39 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">__latitude</span><span class="p">(</span><span class="n">coordinate</span><span class="p">:</span> <span class="n">LatLong</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the latitude from a LatLong coordinate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        coordinate (LatLong): The coordinate to extract latitude from.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The latitude value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">latitude</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">__longitude</span><span class="p">(</span><span class="n">coordinate</span><span class="p">:</span> <span class="n">LatLong</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the longitude from a LatLong coordinate.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        coordinate (LatLong): The coordinate to extract longitude from.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The longitude value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">longitude</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">LatLong</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in an iterable of geohashes and returns the furthest position of the group for the cardinality as a geohash.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the extreme geohash in a collection based on a key function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+<span class="sd">        key (Callable[[LatLong], float]): Function to extract the value to compare.</span>
+<span class="sd">        reverse (bool): Whether to find maximum (True) or minimum (False).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The geohash at the extreme position.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coordinates</span><span class="p">:</span> <span class="n">Generator</span><span class="p">[</span><span class="n">LatLong</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">)</span>
     <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="nb">min</span>
@@ -72,11 +92,17 @@
 <div class="viewcode-block" id="northern">
 <a class="viewcode-back" href="../../api.html#pygeohash.northern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">northern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in an iterable of geohashes and returns the northernmost position of the group as a geohash.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the northernmost geohash in a collection.</span>
 
-<span class="sd">    :param geohashes:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The northernmost geohash.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; northern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        &#39;u4pruyf&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__latitude</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
@@ -85,11 +111,17 @@
 <div class="viewcode-block" id="eastern">
 <a class="viewcode-back" href="../../api.html#pygeohash.eastern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">eastern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in an iterable of geohashes and returns the easternmost position of the group as a geohash.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the easternmost geohash in a collection.</span>
 
-<span class="sd">    :param geohashes:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The easternmost geohash.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; eastern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        &#39;u4pruyf&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__longitude</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
@@ -98,11 +130,17 @@
 <div class="viewcode-block" id="western">
 <a class="viewcode-back" href="../../api.html#pygeohash.western">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">western</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in an iterable of geohashes and returns the westernmost position of the group as a geohash.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the westernmost geohash in a collection.</span>
 
-<span class="sd">    :param geohashes:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The westernmost geohash.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; western([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        &#39;u4pruyc&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__longitude</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
@@ -111,11 +149,17 @@
 <div class="viewcode-block" id="southern">
 <a class="viewcode-back" href="../../api.html#pygeohash.southern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">southern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in an iterable of geohashes and returns the southernmost position of the group as a geohash.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the southernmost geohash in a collection.</span>
 
-<span class="sd">    :param geohashes:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The southernmost geohash.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; southern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        &#39;u4pruyc&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__latitude</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
@@ -124,11 +168,17 @@
 <div class="viewcode-block" id="mean">
 <a class="viewcode-back" href="../../api.html#pygeohash.mean">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in an iterable of geohashes and returns the mean position of the group as a geohash.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the mean position of a collection of geohashes.</span>
 
-<span class="sd">    :param geohashes:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A geohash representing the mean position.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; mean([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        &#39;u4pruye&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coordinates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LatLong</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">decode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">encode</span><span class="p">(</span>
@@ -141,13 +191,21 @@
 <div class="viewcode-block" id="variance">
 <a class="viewcode-back" href="../../api.html#pygeohash.variance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">variance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculates the variance of a set of geohashes (in meters)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the spatial variance of a collection of geohashes.</span>
 
-<span class="sd">    :param geohashes:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    The variance is calculated as the mean of squared distances from each</span>
+<span class="sd">    geohash to the mean position.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The spatial variance in square meters.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; variance([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        12500.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">mean_v</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
     <span class="n">dists</span> <span class="o">=</span> <span class="p">[</span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean_v</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
     <span class="n">var</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dists</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dists</span><span class="p">))</span>
@@ -158,13 +216,20 @@
 <div class="viewcode-block" id="std">
 <a class="viewcode-back" href="../../api.html#pygeohash.std">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">std</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculates the standard deviation of a set of geohashes (in meters)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the spatial standard deviation of a collection of geohashes.</span>
 
-<span class="sd">    :param geohashes:</span>
-<span class="sd">    :return:</span>
+<span class="sd">    The standard deviation is the square root of the variance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Collection of geohash strings.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The spatial standard deviation in meters.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; std([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
+<span class="sd">        111.8</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span></div>
 
 </pre></div>
