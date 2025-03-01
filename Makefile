@@ -64,15 +64,15 @@ test-all: install-dev ## run tests on every Python version with tox
 	uv run tox
 
 coverage: install-dev ## check code coverage quickly with the default Python
-	uv run pytest --cov=nbgeohash tests/
+	uv run pytest --cov=pygeohash tests/
 	uv run coverage report -m
 	uv run coverage html
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/nbgeohash.rst
+	rm -f docs/pygeohash.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ nbgeohash
+	sphinx-apidoc -o docs/ pygeohash
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
