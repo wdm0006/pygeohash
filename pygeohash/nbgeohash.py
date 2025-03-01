@@ -23,16 +23,16 @@ __author__ = "ilyasmoutawwakil"
 @njit(cache=True, fastmath=True)
 def base32_to_int(s: types.char) -> types.uint8:
     """Convert a base32 character to its integer value.
-    
+
     This function is optimized for Numba and is faster than using a dictionary
     lookup in the Numba environment.
-    
+
     Args:
         s (types.char): A single character from the base32 alphabet.
-        
+
     Returns:
         types.uint8: The integer value of the character.
-        
+
     Raises:
         AssertionError: If the character is not in the base32 alphabet.
     """
@@ -52,16 +52,16 @@ def base32_to_int(s: types.char) -> types.uint8:
 @njit(fastmath=True)
 def nb_decode_exactly(geohash: str) -> ExactLatLong:
     """Decode a geohash to its exact values with error margins (Numba-accelerated).
-    
+
     This is a Numba-accelerated version of decode_exactly that provides
     the same functionality but with better performance.
-    
+
     Args:
         geohash (str): The geohash string to decode.
-        
+
     Returns:
         ExactLatLong: A named tuple containing latitude, longitude, and their respective error margins.
-        
+
     Example:
         >>> nb_decode_exactly("u4pruydqqvj")
         ExactLatLong(latitude=57.64911, longitude=10.40744, latitude_error=0.00001, longitude_error=0.00001)
@@ -98,16 +98,16 @@ def nb_decode_exactly(geohash: str) -> ExactLatLong:
 @njit(fastmath=True)
 def nb_point_decode(geohash: str) -> LatLong:
     """Decode a geohash to latitude and longitude coordinates (Numba-accelerated).
-    
+
     This is a Numba-accelerated version of decode that provides
     the same functionality but with better performance.
-    
+
     Args:
         geohash (str): The geohash string to decode.
-        
+
     Returns:
         LatLong: A named tuple containing latitude and longitude coordinates.
-        
+
     Example:
         >>> nb_point_decode("u4pruyd")
         LatLong(latitude=57.649, longitude=10.407)
@@ -125,17 +125,17 @@ def nb_point_decode(geohash: str) -> LatLong:
 @njit(fastmath=True)
 def nb_vector_decode(geohashes: List[str]) -> types.Tuple:
     """Decode multiple geohashes to arrays of latitudes and longitudes (Numba-accelerated).
-    
+
     This function provides efficient batch decoding of multiple geohashes.
     It's significantly faster than decoding each geohash individually,
     especially for large collections.
-    
+
     Args:
         geohashes (List[str]): A list of geohash strings to decode.
-        
+
     Returns:
         types.Tuple: A tuple of two NumPy arrays (latitudes, longitudes).
-        
+
     Example:
         >>> lats, lons = nb_vector_decode(["u4pruyd", "u4pruyf", "u4pruyc"])
         >>> lats
@@ -160,18 +160,18 @@ def nb_vector_decode(geohashes: List[str]) -> types.Tuple:
 @njit(fastmath=True)
 def nb_point_encode(latitude: types.float64, longitude: types.float64, precision: types.int8 = 12) -> types.string:
     """Encode coordinates to a geohash string (Numba-accelerated).
-    
+
     This is a Numba-accelerated version of encode that provides
     the same functionality but with better performance.
-    
+
     Args:
         latitude (types.float64): The latitude coordinate in decimal degrees (-90 to 90).
         longitude (types.float64): The longitude coordinate in decimal degrees (-180 to 180).
         precision (types.int8, optional): The desired length of the geohash string. Defaults to 12.
-        
+
     Returns:
         types.string: The geohash string representation of the coordinates.
-        
+
     Example:
         >>> nb_point_encode(57.64911, 10.40744, 8)
         'u4pruydq'
@@ -219,19 +219,19 @@ def nb_point_encode(latitude: types.float64, longitude: types.float64, precision
 @njit(fastmath=True)
 def nb_vector_encode(latitudes: types.Array, longitudes: types.Array, precision: types.int8 = 12) -> types.Array:
     """Encode multiple coordinates to geohash strings (Numba-accelerated).
-    
+
     This function provides efficient batch encoding of multiple coordinate pairs.
     It's significantly faster than encoding each coordinate pair individually,
     especially for large collections.
-    
+
     Args:
         latitudes (types.Array): Array of latitude coordinates in decimal degrees.
         longitudes (types.Array): Array of longitude coordinates in decimal degrees.
         precision (types.int8, optional): The desired length of the geohash strings. Defaults to 12.
-        
+
     Returns:
         types.Array: Array of geohash strings.
-        
+
     Example:
         >>> nb_vector_encode(np.array([57.649, 57.650]), np.array([10.407, 10.408]), 6)
         array(['u4pruy', 'u4pruy'], dtype='<U12')

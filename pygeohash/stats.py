@@ -17,10 +17,10 @@ __author__ = "Will McGinnis"
 
 def __latitude(coordinate: LatLong) -> float:
     """Extract the latitude from a LatLong coordinate.
-    
+
     Args:
         coordinate (LatLong): The coordinate to extract latitude from.
-        
+
     Returns:
         float: The latitude value.
     """
@@ -29,10 +29,10 @@ def __latitude(coordinate: LatLong) -> float:
 
 def __longitude(coordinate: LatLong) -> float:
     """Extract the longitude from a LatLong coordinate.
-    
+
     Args:
         coordinate (LatLong): The coordinate to extract longitude from.
-        
+
     Returns:
         float: The longitude value.
     """
@@ -41,12 +41,12 @@ def __longitude(coordinate: LatLong) -> float:
 
 def _max_cardinal(geohashes: Iterable[str], key: Callable[[LatLong], float], reverse: bool) -> str:
     """Find the extreme geohash in a collection based on a key function.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
         key (Callable[[LatLong], float]): Function to extract the value to compare.
         reverse (bool): Whether to find maximum (True) or minimum (False).
-        
+
     Returns:
         str: The geohash at the extreme position.
     """
@@ -58,13 +58,13 @@ def _max_cardinal(geohashes: Iterable[str], key: Callable[[LatLong], float], rev
 
 def northern(geohashes: Iterable[str]) -> str:
     """Find the northernmost geohash in a collection.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
-        
+
     Returns:
         str: The northernmost geohash.
-        
+
     Example:
         >>> northern(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyf'
@@ -74,13 +74,13 @@ def northern(geohashes: Iterable[str]) -> str:
 
 def eastern(geohashes: Iterable[str]) -> str:
     """Find the easternmost geohash in a collection.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
-        
+
     Returns:
         str: The easternmost geohash.
-        
+
     Example:
         >>> eastern(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyf'
@@ -90,13 +90,13 @@ def eastern(geohashes: Iterable[str]) -> str:
 
 def western(geohashes: Iterable[str]) -> str:
     """Find the westernmost geohash in a collection.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
-        
+
     Returns:
         str: The westernmost geohash.
-        
+
     Example:
         >>> western(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyc'
@@ -106,13 +106,13 @@ def western(geohashes: Iterable[str]) -> str:
 
 def southern(geohashes: Iterable[str]) -> str:
     """Find the southernmost geohash in a collection.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
-        
+
     Returns:
         str: The southernmost geohash.
-        
+
     Example:
         >>> southern(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyc'
@@ -122,13 +122,13 @@ def southern(geohashes: Iterable[str]) -> str:
 
 def mean(geohashes: Iterable[str]) -> str:
     """Calculate the mean position of a collection of geohashes.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
-        
+
     Returns:
         str: A geohash representing the mean position.
-        
+
     Example:
         >>> mean(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruye'
@@ -142,16 +142,16 @@ def mean(geohashes: Iterable[str]) -> str:
 
 def variance(geohashes: Iterable[str]) -> float:
     """Calculate the spatial variance of a collection of geohashes.
-    
+
     The variance is calculated as the mean of squared distances from each
     geohash to the mean position.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
-        
+
     Returns:
         float: The spatial variance in square meters.
-        
+
     Example:
         >>> variance(["u4pruyd", "u4pruyf", "u4pruyc"])
         12500.0
@@ -164,15 +164,15 @@ def variance(geohashes: Iterable[str]) -> float:
 
 def std(geohashes: Iterable[str]) -> float:
     """Calculate the spatial standard deviation of a collection of geohashes.
-    
+
     The standard deviation is the square root of the variance.
-    
+
     Args:
         geohashes (Iterable[str]): Collection of geohash strings.
-        
+
     Returns:
         float: The spatial standard deviation in meters.
-        
+
     Example:
         >>> std(["u4pruyd", "u4pruyf", "u4pruyc"])
         111.8

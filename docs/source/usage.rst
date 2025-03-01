@@ -119,6 +119,137 @@ To find geohashes adjacent to a given geohash:
     print(f"Bottom: {adjacent_bottom}")
     print(f"Left: {adjacent_left}")
 
+Bounding Box Operations
+---------------------
+
+PyGeoHash provides functions for working with geospatial bounding boxes:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    
+    # Get the bounding box for a geohash
+    geohash = "u4pruyd"
+    bbox = pgh.get_bounding_box(geohash)
+    
+    print(f"Bounding box for {geohash}:")
+    print(f"  Min latitude: {bbox.min_lat}")
+    print(f"  Min longitude: {bbox.min_lon}")
+    print(f"  Max latitude: {bbox.max_lat}")
+    print(f"  Max longitude: {bbox.max_lon}")
+
+Checking if a Point is Within a Box
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can check if a point is within a bounding box:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    
+    # Define a bounding box
+    bbox = pgh.BoundingBox(min_lat=40.0, min_lon=-74.0, max_lat=41.0, max_lon=-73.0)
+    
+    # Check if a point is within the box
+    point_lat, point_lon = 40.5, -73.5
+    is_in_box = pgh.is_point_in_box(point_lat, point_lon, bbox)
+    print(f"Point ({point_lat}, {point_lon}) is {'inside' if is_in_box else 'outside'} the box")
+    
+    # Check if a point is within a geohash's bounding box
+    geohash = "dr5r"  # New York area
+    is_in_geohash = pgh.is_point_in_geohash(point_lat, point_lon, geohash)
+    print(f"Point ({point_lat}, {point_lon}) is {'inside' if is_in_geohash else 'outside'} the geohash {geohash}")
+
+Checking if Bounding Boxes Intersect
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can check if two bounding boxes intersect:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    
+    # Define two bounding boxes
+    box1 = pgh.BoundingBox(min_lat=40.0, min_lon=-74.0, max_lat=41.0, max_lon=-73.0)
+    box2 = pgh.BoundingBox(min_lat=40.5, min_lon=-73.5, max_lat=41.5, max_lon=-72.5)
+    
+    # Check if they intersect
+    do_intersect = pgh.do_boxes_intersect(box1, box2)
+    print(f"Boxes {'intersect' if do_intersect else 'do not intersect'}")
+
+Finding Geohashes in a Bounding Box
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can find all geohashes that intersect with a bounding box:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    
+    # Define a bounding box
+    bbox = pgh.BoundingBox(min_lat=40.0, min_lon=-74.0, max_lat=40.1, max_lon=-73.9)
+    
+    # Find geohashes that intersect with the box
+    geohashes = pgh.geohashes_in_box(bbox, precision=5)
+    print(f"Found {len(geohashes)} geohashes at precision 5")
+    print(geohashes)
+    
+    # Try with a different precision
+    geohashes_p6 = pgh.geohashes_in_box(bbox, precision=6)
+    print(f"Found {len(geohashes_p6)} geohashes at precision 6")
+
+Practical Example: Geospatial Querying
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Using bounding boxes for efficient geospatial querying:
+
+.. code-block:: python
+
+    import pygeohash as pgh
+    
+    # Sample database of locations with their coordinates
+    locations = [
+        {"id": 1, "name": "Central Park", "lat": 40.785091, "lon": -73.968285},
+        {"id": 2, "name": "Empire State Building", "lat": 40.748817, "lon": -73.985428},
+        {"id": 3, "name": "Statue of Liberty", "lat": 40.689247, "lon": -74.044502},
+        {"id": 4, "name": "Times Square", "lat": 40.758896, "lon": -73.985130},
+        {"id": 5, "name": "Brooklyn Bridge", "lat": 40.706086, "lon": -73.996864},
+    ]
+    
+    # Define a search area (bounding box)
+    search_area = pgh.BoundingBox(
+        min_lat=40.7, min_lon=-74.0, 
+        max_lat=40.8, max_lon=-73.9
+    )
+    
+    # Find locations within the search area
+    results = []
+    for location in locations:
+        if pgh.is_point_in_box(location["lat"], location["lon"], search_area):
+            results.append(location)
+    
+    print(f"Found {len(results)} locations within the search area:")
+    for location in results:
+        print(f"  - {location['name']}")
+    
+    # Alternative approach using geohashes
+    # First, find all geohashes in the search area at precision 5
+    geohashes_in_area = pgh.geohashes_in_box(search_area, precision=5)
+    
+    # Pre-compute geohashes for all locations
+    for location in locations:
+        location["geohash"] = pgh.encode(location["lat"], location["lon"], precision=5)
+    
+    # Find locations with matching geohashes
+    geohash_results = [
+        location for location in locations 
+        if location["geohash"] in geohashes_in_area
+    ]
+    
+    print(f"Found {len(geohash_results)} locations using geohash matching:")
+    for location in geohash_results:
+        print(f"  - {location['name']} (geohash: {location['geohash']})")
+
 Statistical Functions
 -------------------
 

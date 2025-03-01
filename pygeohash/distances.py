@@ -30,23 +30,23 @@ _PRECISION: Dict[int, float] = {
 
 def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity: bool = False) -> float:
     """Calculate the approximate great-circle distance between two geohashes.
-    
+
     This function calculates an approximate distance based on the number of
     matching characters at the beginning of the geohashes. It's faster but
     less accurate than haversine distance.
-    
+
     Args:
         geohash_1 (str): The first geohash.
         geohash_2 (str): The second geohash.
         check_validity (bool, optional): Whether to check if the geohashes are valid.
             Defaults to False.
-            
+
     Returns:
         float: The approximate distance in meters.
-        
+
     Raises:
         ValueError: If check_validity is True and either geohash is invalid.
-        
+
     Example:
         >>> geohash_approximate_distance("u4pruyd", "u4pruyf")
         118.0
@@ -82,17 +82,17 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
 
 def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
     """Calculate the haversine great-circle distance between two geohashes.
-    
+
     This function provides a more accurate distance calculation using the
     haversine formula, which accounts for the Earth's curvature.
-    
+
     Args:
         geohash_1 (str): The first geohash.
         geohash_2 (str): The second geohash.
-        
+
     Returns:
         float: The distance in meters.
-        
+
     Example:
         >>> geohash_haversine_distance("u4pruyd", "u4pruyf")
         152.3

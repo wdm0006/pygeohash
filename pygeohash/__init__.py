@@ -12,6 +12,14 @@ Attributes:
     __all__ (list): List of public functions and classes exported by the module.
 """
 
+from .bounding_box import (
+    BoundingBox,
+    do_boxes_intersect,
+    geohashes_in_box,
+    get_bounding_box,
+    is_point_in_box,
+    is_point_in_geohash,
+)
 from .distances import geohash_approximate_distance, geohash_haversine_distance
 from .geohash import (
     ExactLatLong,
@@ -31,10 +39,16 @@ __all__ = [
     "geohash_haversine_distance",
     "LatLong",
     "ExactLatLong",
+    "BoundingBox",
     "encode",
     "encode_strictly",
     "decode",
     "decode_exactly",
+    "get_bounding_box",
+    "is_point_in_box",
+    "is_point_in_geohash",
+    "do_boxes_intersect",
+    "geohashes_in_box",
     "mean",
     "northern",
     "southern",

@@ -2,8 +2,6 @@
 
 This module provides functionality for calculating adjacent geohashes
 in different directions (right, left, top, bottom).
-
-The implementation is based on the approach from geohash-js by Dave Troy.
 """
 
 from pygeohash.geohash import __base32
@@ -51,18 +49,18 @@ BORDERS = {
 
 def get_adjacent(geohash: str, direction: str) -> str:
     """Calculate the adjacent geohash in the specified direction.
-    
+
     Args:
         geohash (str): The input geohash string.
         direction (str): The direction to find the adjacent geohash.
             Must be one of: "right", "left", "top", "bottom".
-            
+
     Returns:
         str: The adjacent geohash in the specified direction.
-        
+
     Raises:
         ValueError: If the geohash length is 0 (possible when close to poles).
-        
+
     Example:
         >>> get_adjacent("u4pruyd", "top")
         'u4pruyf'

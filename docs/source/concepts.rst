@@ -146,6 +146,32 @@ While geohashes are powerful, they have some limitations:
 
 To address the edge effect issue, when searching for nearby locations, it's often necessary to check adjacent geohash cells as well.
 
+Geohash Bounding Boxes
+---------------------
+
+Every geohash represents a rectangular area on the Earth's surface, which can be described by a bounding box. A bounding box is defined by four coordinates:
+
+- Minimum latitude (southern edge)
+- Minimum longitude (western edge)
+- Maximum latitude (northern edge)
+- Maximum longitude (eastern edge)
+
+Bounding boxes are useful for:
+
+1. **Spatial Queries**: Finding all points within a geographic region
+2. **Geofencing**: Determining if a point is inside or outside a defined area
+3. **Spatial Indexing**: Efficiently organizing and querying spatial data
+4. **Visualization**: Rendering geographic data on maps
+
+When working with geohashes, bounding boxes provide a way to:
+
+- Determine the exact area covered by a geohash
+- Find all geohashes that intersect with a given area
+- Check if two geographic regions overlap
+- Identify if a point falls within a specific region
+
+The precision of a bounding box derived from a geohash depends on the geohash length. Longer geohashes result in smaller, more precise bounding boxes.
+
 Geohash vs. Other Geocoding Systems
 ----------------------------------
 
