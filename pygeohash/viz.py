@@ -29,8 +29,7 @@ def _check_viz_dependencies() -> bool:
         return True
     except ImportError:
         warnings.warn(
-            "Matplotlib is required for visualization functions. Install with: pip install pygeohash[viz]",
-            stacklevel=2
+            "Matplotlib is required for visualization functions. Install with: pip install pygeohash[viz]", stacklevel=2
         )
         return False
 
@@ -46,10 +45,7 @@ def _check_folium_dependencies() -> bool:
 
         return True
     except ImportError:
-        warnings.warn(
-            "Folium is required for interactive maps. Install with: pip install pygeohash[viz]",
-            stacklevel=2
-        )
+        warnings.warn("Folium is required for interactive maps. Install with: pip install pygeohash[viz]", stacklevel=2)
         return False
 
 

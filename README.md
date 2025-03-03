@@ -7,11 +7,9 @@ A simple, lightweight, and dependency-free Python library for working with geoha
 
 ## What is PyGeoHash?
 
-PyGeoHash is a Python module that provides functions for encoding and decoding geohashes to and from latitude and 
-longitude coordinates, along with utilities for performing calculations and approximations with them.
+PyGeoHash is a Python module that provides functions for encoding and decoding geohashes to and from latitude and longitude coordinates, along with utilities for performing calculations and approximations with them.
 
-It is based on Leonard Norrgård's [geohash](https://github.com/vinsci/geohash) module, but adds more 
-functionality while supporting Python 3.
+It was originally based on Leonard Norrgård's [geohash](https://github.com/vinsci/geohash) module, but now adds more functionality while supporting Python 3, and is optimized for performance.
 
 ## Why PyGeoHash?
 
@@ -21,6 +19,7 @@ functionality while supporting Python 3.
 - **Python 3 Support**: Fully compatible with modern Python
 - **Robust Implementation**: Reliable geohash operations
 - **Optional Visualization**: Visualize geohashes with matplotlib and folium
+- **Extensively Tested**: Comprehensive test suite validated against geohash.org
 
 ## Installation
 
@@ -110,6 +109,26 @@ This will create static images and interactive maps in the `docs/source/_static/
 - Bounding box calculations
 - Visualize geohashes on static and interactive maps
 
+## Testing and Accuracy
+
+PyGeoHash is extensively tested to ensure accuracy in geohash encoding and decoding:
+
+- **Comprehensive Test Suite**: Includes over 200 test cases covering various precision levels and geographic regions
+- **Validated Against geohash.org**: All test cases are validated against the reference implementation at geohash.org
+- **Edge Case Coverage**: Special attention to edge cases like poles, equator, date line, and precision boundaries
+- **Roundtrip Consistency**: Ensures encode->decode->encode operations produce consistent results
+- **Regional Coverage**: Test cases span all continents and major geographic features
+
+To run the tests:
+
+```bash
+# Run the standard test suite
+make test
+
+# Run tests with coverage
+make test-cov
+```
+
 ## Use Cases
 
 - Location-based services
@@ -125,9 +144,9 @@ Contributions are welcome! Feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the GPL-3.0 license - see the LICENSE file for details.
+This project is licensed under the MIT license. See the LICENSE file for details. Prior to version 2.0.0's rewrite the project was licensed under the GPL-3.0 license.
 
 ## Acknowledgments
 
-- Based on Leonard Norrgård's [geohash](https://github.com/vinsci/geohash) module
+- Originally based on Leonard Norrgård's [geohash](https://github.com/vinsci/geohash) module (since re-written)
    
