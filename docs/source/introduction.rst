@@ -16,6 +16,7 @@ Why Use PyGeoHash?
 PyGeoHash offers several advantages:
 
 - **Simplicity**: The API is designed to be intuitive and easy to use
+- **High Performance**: Core operations are implemented in C for maximum speed
 - **No Dependencies**: Works with just the Python standard library
 - **Lightweight**: Adds minimal overhead to your projects
 - **Python 3 Support**: Fully compatible with modern Python
