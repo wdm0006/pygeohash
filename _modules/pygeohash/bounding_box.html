@@ -197,22 +197,22 @@
     <span class="n">center_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">center_lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">center_geohash</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
-    
+
     <span class="c1"># Get the size of a geohash at this precision</span>
     <span class="n">center_bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">)</span>
     <span class="n">lat_step</span> <span class="o">=</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">-</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">min_lat</span>
     <span class="n">lon_step</span> <span class="o">=</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">-</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">min_lon</span>
-    
+
     <span class="c1"># Create a set to store unique geohashes</span>
     <span class="n">result</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    
+
     <span class="c1"># Calculate the starting points slightly outside the bounding box</span>
     <span class="c1"># to ensure we cover the entire area</span>
     <span class="n">start_lat</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">-</span> <span class="n">lat_step</span>
     <span class="n">end_lat</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="n">lat_step</span>
     <span class="n">start_lon</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">-</span> <span class="n">lon_step</span>
     <span class="n">end_lon</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">+</span> <span class="n">lon_step</span>
-    
+
     <span class="c1"># Sample points in a grid pattern with spacing based on geohash size</span>
     <span class="c1"># This ensures we get all geohashes that intersect with the bounding box</span>
     <span class="k">for</span> <span class="n">lat</span> <span class="ow">in</span> <span class="n">_float_range</span><span class="p">(</span><span class="n">start_lat</span><span class="p">,</span> <span class="n">end_lat</span><span class="p">,</span> <span class="n">lat_step</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
@@ -223,7 +223,7 @@
                 <span class="c1"># Only add geohashes that actually intersect with our bounding box</span>
                 <span class="k">if</span> <span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">gh_bbox</span><span class="p">):</span>
                     <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
-    
+
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 
@@ -305,7 +305,7 @@
       &#169;2016, Will McGinnis.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.1</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

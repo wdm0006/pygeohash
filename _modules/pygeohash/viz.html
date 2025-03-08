@@ -62,8 +62,7 @@
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Matplotlib is required for visualization functions. Install with: pip install pygeohash[viz]&quot;</span><span class="p">,</span>
-            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
+            <span class="s2">&quot;Matplotlib is required for visualization functions. Install with: pip install pygeohash[viz]&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
@@ -79,10 +78,7 @@
 
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Folium is required for interactive maps. Install with: pip install pygeohash[viz]&quot;</span><span class="p">,</span>
-            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
-        <span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Folium is required for interactive maps. Install with: pip install pygeohash[viz]&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
 
@@ -597,7 +593,7 @@
       &#169;2016, Will McGinnis.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.1</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

@@ -37,258 +37,104 @@
 <span class="sd">and decoding geohashes back to coordinates. It includes both standard and exact</span>
 <span class="sd">decoding options, as well as strict encoding.</span>
 
-<span class="sd">Copyright (C) 2008 Leonard Norrgard &lt;leonard.norrgard@gmail.com&gt;</span>
-<span class="sd">Copyright (C) 2015 Leonard Norrgard &lt;leonard.norrgard@gmail.com&gt;</span>
-
-<span class="sd">This file is part of Geohash.</span>
-
-<span class="sd">Geohash is free software: you can redistribute it and/or modify it</span>
-<span class="sd">under the terms of the GNU Affero General Public License as published</span>
-<span class="sd">by the Free Software Foundation, either version 3 of the License, or</span>
-<span class="sd">(at your option) any later version.</span>
-
-<span class="sd">Geohash is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="sd">ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span>
-<span class="sd">FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public</span>
-<span class="sd">License for more details.</span>
-
-<span class="sd">You should have received a copy of the GNU Affero General Public</span>
-<span class="sd">License along with Geohash.  If not, see</span>
-<span class="sd">&lt;http://www.gnu.org/licenses/&gt;.</span>
-
-<span class="sd">Modified 2015 by Will McGinnis for pygeohash.</span>
-<span class="sd">Modified 2023 by Paarth Shah for pygeohash.</span>
+<span class="sd">This implementation uses a high-performance C extension for all operations.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">log10</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">NamedTuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
 
-<span class="c1">#  Note: the alphabet in geohash differs from the common base32 alphabet described in IETF&#39;s RFC 4648</span>
-<span class="c1"># (http://tools.ietf.org/html/rfc4648)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.cgeohash.geohash_module</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">decode</span> <span class="k">as</span> <span class="n">c_decode</span><span class="p">,</span>
+    <span class="n">decode_exactly</span> <span class="k">as</span> <span class="n">c_decode_exactly</span><span class="p">,</span>
+    <span class="n">encode</span> <span class="k">as</span> <span class="n">c_encode</span><span class="p">,</span>
+    <span class="n">encode_strictly</span> <span class="k">as</span> <span class="n">c_encode_strictly</span><span class="p">,</span>
+    <span class="n">get_base32</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExactLatLong</span><span class="p">,</span> <span class="n">LatLong</span>
 
-<span class="n">__base32</span> <span class="o">=</span> <span class="s2">&quot;0123456789bcdefghjkmnpqrstuvwxyz&quot;</span>
+<span class="n">__base32</span> <span class="o">=</span> <span class="n">get_base32</span><span class="p">()</span>
 <span class="n">__decodemap</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">base32_char</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">base32_char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">__base32</span><span class="p">)}</span>
 
 
-<div class="viewcode-block" id="LatLong">
-<a class="viewcode-back" href="../../api.html#pygeohash.LatLong">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">LatLong</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a latitude/longitude coordinate pair.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        latitude (float): The latitude coordinate in decimal degrees.</span>
-<span class="sd">        longitude (float): The longitude coordinate in decimal degrees.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span></div>
-
-
-
-<div class="viewcode-block" id="ExactLatLong">
-<a class="viewcode-back" href="../../api.html#pygeohash.ExactLatLong">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ExactLatLong</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a latitude/longitude coordinate pair with error margins.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        latitude (float): The latitude coordinate in decimal degrees.</span>
-<span class="sd">        longitude (float): The longitude coordinate in decimal degrees.</span>
-<span class="sd">        latitude_error (float): The error margin for latitude in decimal degrees.</span>
-<span class="sd">        longitude_error (float): The error margin for longitude in decimal degrees.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">latitude_error</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">longitude_error</span><span class="p">:</span> <span class="nb">float</span></div>
-
-
-
-<div class="viewcode-block" id="decode_exactly">
-<a class="viewcode-back" href="../../api.html#pygeohash.decode_exactly">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExactLatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash to its exact values, including error margins.</span>
+<div class="viewcode-block" id="encode">
+<a class="viewcode-back" href="../../api.html#pygeohash.encode">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a latitude and longitude into a geohash.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohash (str): The geohash string to decode.</span>
+<span class="sd">        latitude (float): The latitude to encode.</span>
+<span class="sd">        longitude (float): The longitude to encode.</span>
+<span class="sd">        precision (int, optional): The number of characters in the geohash. Defaults to 12.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        ExactLatLong: A named tuple containing latitude, longitude, and their respective error margins.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; decode_exactly(&quot;u4pruydqqvj&quot;)</span>
-<span class="sd">        ExactLatLong(latitude=57.64911, longitude=10.40744, latitude_error=0.00001, longitude_error=0.00001)</span>
+<span class="sd">        str: The geohash string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lat_interval</span><span class="p">,</span> <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
-    <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span>
-    <span class="n">is_even</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">geohash</span><span class="p">:</span>
-        <span class="n">cd</span> <span class="o">=</span> <span class="n">__decodemap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="n">is_even</span><span class="p">:</span>  <span class="c1"># adds longitude info</span>
-                <span class="n">lon_err</span> <span class="o">/=</span> <span class="mi">2</span>
-                <span class="k">if</span> <span class="n">cd</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">:</span>
-                    <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="p">(</span><span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-                        <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                    <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                        <span class="p">(</span><span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-                    <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># adds latitude info</span>
-                <span class="n">lat_err</span> <span class="o">/=</span> <span class="mi">2</span>
-                <span class="k">if</span> <span class="n">cd</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">:</span>
-                    <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="p">(</span><span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-                        <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                    <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                        <span class="p">(</span><span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-                    <span class="p">)</span>
-            <span class="n">is_even</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">is_even</span>
-    <span class="n">lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">ExactLatLong</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">c_encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="encode_strictly">
+<a class="viewcode-back" href="../../api.html#pygeohash.encode_strictly">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a latitude and longitude into a geohash with strict midpoint handling.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitude (float): The latitude to encode.</span>
+<span class="sd">        longitude (float): The longitude to encode.</span>
+<span class="sd">        precision (int, optional): The number of characters in the geohash. Defaults to 12.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The geohash string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">c_encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="decode">
 <a class="viewcode-back" href="../../api.html#pygeohash.decode">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash to latitude and longitude coordinates.</span>
-
-<span class="sd">    Decodes a geohash string to a latitude and longitude coordinate pair,</span>
-<span class="sd">    with precision appropriate to the length of the geohash.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash into a latitude and longitude.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohash (str): The geohash string to decode.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        LatLong: A named tuple containing latitude and longitude coordinates.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; decode(&quot;u4pruyd&quot;)</span>
-<span class="sd">        LatLong(latitude=57.649, longitude=10.407)</span>
+<span class="sd">        LatLong: A named tuple containing the latitude and longitude.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
-    <span class="c1"># Format to the number of decimals that are known</span>
-    <span class="n">lats</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%.*f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">lat_err</span><span class="p">))))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
-    <span class="n">lons</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%.*f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">lon_err</span><span class="p">))))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">lats</span><span class="p">:</span>
-        <span class="n">lats</span> <span class="o">=</span> <span class="n">lats</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">lons</span><span class="p">:</span>
-        <span class="n">lons</span> <span class="o">=</span> <span class="n">lons</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">LatLong</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lats</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">lons</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">c_decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span></div>
 
 
 
-<div class="viewcode-block" id="encode">
-<a class="viewcode-back" href="../../api.html#pygeohash.encode">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode coordinates to a geohash string.</span>
+<div class="viewcode-block" id="decode_exactly">
+<a class="viewcode-back" href="../../api.html#pygeohash.decode_exactly">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExactLatLong</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash into a latitude and longitude with error margins.</span>
+
+<span class="sd">    This function provides more detailed information than the standard decode</span>
+<span class="sd">    function by including the error margins for both latitude and longitude.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        latitude (float): The latitude coordinate in decimal degrees (-90 to 90).</span>
-<span class="sd">        longitude (float): The longitude coordinate in decimal degrees (-180 to 180).</span>
-<span class="sd">        precision (int, optional): The desired length of the geohash string. Defaults to 12.</span>
+<span class="sd">        geohash (str): The geohash string to decode.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        str: The geohash string representation of the coordinates.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; encode(57.64911, 10.40744, 8)</span>
-<span class="sd">        &#39;u4pruydq&#39;</span>
+<span class="sd">        ExactLatLong: A named tuple containing the latitude, longitude, and their</span>
+<span class="sd">            respective error margins.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">)</span>
-    <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
-    <span class="n">geohash</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">bits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">bit</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">even</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">precision</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">even</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="n">longitude</span> <span class="o">&gt;=</span> <span class="n">mid</span><span class="p">:</span>
-                <span class="n">ch</span> <span class="o">|=</span> <span class="n">bits</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span>
-                <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="n">latitude</span> <span class="o">&gt;=</span> <span class="n">mid</span><span class="p">:</span>
-                <span class="n">ch</span> <span class="o">|=</span> <span class="n">bits</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span>
-                <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="n">even</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">even</span>
-        <span class="k">if</span> <span class="n">bit</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
-            <span class="n">bit</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">geohash</span> <span class="o">+=</span> <span class="n">__base32</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span>
-            <span class="n">bit</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span></div>
 
 
 
-<div class="viewcode-block" id="encode_strictly">
-<a class="viewcode-back" href="../../api.html#pygeohash.encode_strictly">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode coordinates to a geohash string with strict midpoint handling.</span>
-
-<span class="sd">    This function is similar to encode() but handles the midpoint differently.</span>
-<span class="sd">    When a coordinate is exactly at the midpoint, it is included in the upper interval.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        latitude (float): The latitude coordinate in decimal degrees (-90 to 90).</span>
-<span class="sd">        longitude (float): The longitude coordinate in decimal degrees (-180 to 180).</span>
-<span class="sd">        precision (int, optional): The desired length of the geohash string. Defaults to 12.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        str: The geohash string representation of the coordinates.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; encode_strictly(57.64911, 10.40744, 8)</span>
-<span class="sd">        &#39;u4pruydq&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">)</span>
-    <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
-    <span class="n">geohash</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">bits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">bit</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">even</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">precision</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">even</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="n">longitude</span> <span class="o">&gt;=</span> <span class="n">mid</span><span class="p">:</span>
-                <span class="n">ch</span> <span class="o">|=</span> <span class="n">bits</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span>
-                <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">lon_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">lon_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="n">latitude</span> <span class="o">&gt;=</span> <span class="n">mid</span><span class="p">:</span>
-                <span class="n">ch</span> <span class="o">|=</span> <span class="n">bits</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span>
-                <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">lat_interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">lat_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">lat_interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="n">even</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">even</span>
-        <span class="k">if</span> <span class="n">bit</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
-            <span class="n">bit</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">geohash</span> <span class="o">+=</span> <span class="n">__base32</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span>
-            <span class="n">bit</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span></div>
-
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;decode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;decode_exactly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;encode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;encode_strictly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LatLong&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ExactLatLong&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;__base32&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;__decodemap&quot;</span><span class="p">,</span>
+<span class="p">]</span>
 </pre></div>
 
           </div>
@@ -349,7 +195,7 @@
       &#169;2016, Will McGinnis.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.1</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>
