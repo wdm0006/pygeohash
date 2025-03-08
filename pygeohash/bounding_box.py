@@ -147,22 +147,22 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
     center_lat = (bbox.min_lat + bbox.max_lat) / 2
     center_lon = (bbox.min_lon + bbox.max_lon) / 2
     center_geohash = encode(center_lat, center_lon, precision)
-    
+
     # Get the size of a geohash at this precision
     center_bbox = get_bounding_box(center_geohash)
     lat_step = center_bbox.max_lat - center_bbox.min_lat
     lon_step = center_bbox.max_lon - center_bbox.min_lon
-    
+
     # Create a set to store unique geohashes
     result = set()
-    
+
     # Calculate the starting points slightly outside the bounding box
     # to ensure we cover the entire area
     start_lat = bbox.min_lat - lat_step
     end_lat = bbox.max_lat + lat_step
     start_lon = bbox.min_lon - lon_step
     end_lon = bbox.max_lon + lon_step
-    
+
     # Sample points in a grid pattern with spacing based on geohash size
     # This ensures we get all geohashes that intersect with the bounding box
     for lat in _float_range(start_lat, end_lat, lat_step / 2):
@@ -173,7 +173,7 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
                 # Only add geohashes that actually intersect with our bounding box
                 if do_boxes_intersect(bbox, gh_bbox):
                     result.add(gh)
-    
+
     return list(result)
 
 

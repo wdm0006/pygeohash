@@ -10,7 +10,8 @@ import statistics
 from typing import Callable, Generator, Iterable, List
 
 from pygeohash.distances import geohash_haversine_distance
-from pygeohash.geohash import LatLong, decode, encode
+from pygeohash.geohash import decode, encode
+from pygeohash.geohash_types import LatLong
 
 __author__ = "Will McGinnis"
 

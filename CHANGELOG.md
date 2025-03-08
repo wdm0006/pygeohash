@@ -1,3 +1,11 @@
+
+v3.0.0
+======
+
+ * [meta] rewrote core logic from scratch in cpython for performance and to remove geohash.py dependency 
+ * [meta] relicensed to MIT for more permissive use 
+ * [meta] removed numba and numpy deps
+
 v2.1.0
 ======
 

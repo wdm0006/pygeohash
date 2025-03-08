@@ -6,6 +6,8 @@ This section provides detailed documentation for all functions available in the 
 Core Functions
 -------------
 
+These core functions are implemented using a high-performance C extension for maximum efficiency.
+
 .. autofunction:: pygeohash.encode
 .. autofunction:: pygeohash.encode_strictly
 .. autofunction:: pygeohash.decode
@@ -75,15 +77,4 @@ The visualization module provides tools for creating static plots with Matplotli
 .. autofunction:: pygeohash.plot_geohashes
 .. autofunction:: pygeohash.folium_map
 
-For detailed examples of how to use these functions, see the :doc:`examples` section.
-
-Numba-accelerated Functions
--------------------------
-
-These functions require Numba and NumPy to be installed and provide faster performance for large-scale operations.
-
-.. autofunction:: pygeohash.nb_point_encode
-.. autofunction:: pygeohash.nb_point_decode
-.. autofunction:: pygeohash.nb_vector_encode
-.. autofunction:: pygeohash.nb_vector_decode
-.. autofunction:: pygeohash.nb_decode_exactly 
+For detailed examples of how to use these functions, see the :doc:`examples` section. 

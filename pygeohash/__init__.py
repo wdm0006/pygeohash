@@ -4,8 +4,7 @@ This module provides functionality for encoding and decoding geohashes,
 calculating distances between geohashes, finding adjacent geohashes,
 and performing statistical operations on collections of geohashes.
 
-The module supports both pure Python implementations and optional
-Numba-accelerated implementations for performance-critical operations.
+The module uses a high-performance C implementation for core geohash operations.
 
 Attributes:
     __author__ (str): The author of the module.
@@ -21,14 +20,8 @@ from .bounding_box import (
     is_point_in_geohash,
 )
 from .distances import geohash_approximate_distance, geohash_haversine_distance
-from .geohash import (
-    ExactLatLong,
-    LatLong,
-    decode,
-    decode_exactly,
-    encode,
-    encode_strictly,
-)
+from .geohash import decode, decode_exactly, encode, encode_strictly
+from .geohash_types import ExactLatLong, LatLong
 from .neighbor import get_adjacent
 from .stats import eastern, mean, northern, southern, std, variance, western
 
@@ -70,34 +63,3 @@ try:
     ]
 except ImportError:
     pass
-
-try:
-    # Soft dependency
-    import numba
-    import numpy
-
-    from .nbgeohash import (
-        nb_decode_exactly,
-        nb_point_decode,
-        nb_point_encode,
-        nb_vector_decode,
-        nb_vector_encode,
-    )
-
-    __all__ += [
-        "nb_point_encode",
-        "nb_point_decode",
-        "nb_vector_encode",
-        "nb_vector_decode",
-        "nb_decode_exactly",
-        "nb_point_decode",
-        "nb_point_encode",
-    ]
-
-except ImportError:
-    import logging
-
-    logging.warning(
-        "Numpy and Numba are soft dependencies to use the numba geohashing functions. \n"
-        "Can only import/use native python functions."
-    )

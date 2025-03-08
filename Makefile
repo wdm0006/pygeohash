@@ -44,7 +44,7 @@ test:
 
 # Run tests with coverage
 test-cov:
-	uv run pytest --cov=elote --cov-report=term --cov-report=html $(PYTEST_ARGS)
+	uv run pytest --cov=pygeohash --cov-report=term --cov-report=html $(PYTEST_ARGS)
 
 # Run linting
 lint:

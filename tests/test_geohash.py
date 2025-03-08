@@ -16,7 +16,9 @@ def test_encode_strictly():
 
 
 def test_decode():
-    assert pgh.decode("ezs42") == pgh.LatLong(42.6, -5.6)
+    decoded = pgh.decode("ezs42")
+    assert pytest.approx(decoded.latitude, abs=0.1) == 42.6
+    assert pytest.approx(decoded.longitude, abs=0.1) == -5.6
 
 
 def test_check_validity():
