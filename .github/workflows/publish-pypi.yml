@@ -6,49 +6,103 @@ on:
       - 'v*'
 
 jobs:
-  deploy:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install cibuildwheel
+        run: pip install cibuildwheel
+      
+      - name: Build wheels
+        run: python -m cibuildwheel --output-dir wheelhouse
+        env:
+          CIBW_SKIP: "pp* *-musllinux*"  # Skip PyPy and musllinux
+          CIBW_ARCHS_MACOS: "x86_64 arm64"  # Build for Intel and Apple Silicon on macOS
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: wheels-${{ matrix.os }}
+          path: ./wheelhouse/*.whl
+
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+      
+      - name: Create virtual environment
+        run: |
+          uv venv
+      
+      - name: Install dependencies
+        run: |
+          uv pip install build
+      
+      - name: Build source distribution
+        run: |
+          # Clean the build directories first
+          rm -fr build/
+          rm -fr dist/
+          rm -fr .eggs/
+          find . -name '*.egg-info' -exec rm -fr {} +
+          find . -name '*.egg' -exec rm -f {} +
+          find . -name '*.pyc' -exec rm -f {} +
+          find . -name '*.pyo' -exec rm -f {} +
+          find . -name '*~' -exec rm -f {} +
+          find . -name '__pycache__' -exec rm -fr {} +
+          
+          # Build only the source distribution
+          uv run python -m build --sdist
+          mkdir -p wheelhouse
+          cp dist/*.tar.gz wheelhouse/
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sdist
+          path: ./wheelhouse/*.tar.gz
+
+  publish:
+    name: Publish to PyPI
+    needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
     permissions:
       # IMPORTANT: this permission is mandatory for Trusted Publishing
       id-token: write
     
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        
-    - name: Install uv
-      run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-        
-    - name: Create virtual environment
-      run: |
-        uv venv
-        
-    - name: Install dependencies
-      run: |
-        uv pip install build
-        
-    - name: Build package
-      run: |
-        # Clean the build directories first (from the Makefile's clean target)
-        rm -fr build/
-        rm -fr dist/
-        rm -fr .eggs/
-        find . -name '*.egg-info' -exec rm -fr {} +
-        find . -name '*.egg' -exec rm -f {} +
-        find . -name '*.pyc' -exec rm -f {} +
-        find . -name '*.pyo' -exec rm -f {} +
-        find . -name '*~' -exec rm -f {} +
-        find . -name '__pycache__' -exec rm -fr {} +
-        
-        # Build the package using uv run to ensure it uses the virtual environment
-        uv run python -m build
-        ls -l dist
-        
-    - name: Publish package distributions to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
+      - uses: actions/download-artifact@v3
+        with:
+          path: dist
+      
+      - name: Move distribution files to dist directory
+        run: |
+          mkdir -p dist_flat
+          find dist -type f -name "*.whl" -o -name "*.tar.gz" -exec cp {} dist_flat/ \;
+          ls -la dist_flat/
+      
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist_flat/
