@@ -30,10 +30,13 @@ jobs:
           CIBW_SKIP: "pp* *-musllinux*"  # Skip PyPy and musllinux
           CIBW_ARCHS_MACOS: "x86_64 arm64"  # Build for Intel and Apple Silicon on macOS
       
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: wheels-${{ matrix.os }}
           path: ./wheelhouse/*.whl
+          retention-days: 5
+          compression-level: 6
+          if-no-files-found: error
 
   build_sdist:
     name: Build source distribution
@@ -78,10 +81,13 @@ jobs:
           mkdir -p wheelhouse
           cp dist/*.tar.gz wheelhouse/
       
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: sdist
           path: ./wheelhouse/*.tar.gz
+          retention-days: 5
+          compression-level: 6
+          if-no-files-found: error
 
   publish:
     name: Publish to PyPI
@@ -92,9 +98,10 @@ jobs:
       id-token: write
     
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           path: dist
+          merge-multiple: true
       
       - name: Move distribution files to dist directory
         run: |
