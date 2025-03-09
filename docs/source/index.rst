@@ -80,6 +80,7 @@ Contents
    usage
    api
    examples
+   blog_posts
 
 Indices and tables
 ==================

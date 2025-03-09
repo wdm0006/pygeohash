@@ -138,6 +138,13 @@ make test-cov
 - Location encoding with privacy considerations
 - Geospatial data visualization
 
+## Blog Posts
+
+For more insights about PyGeoHash, check out these blog posts:
+
+- [PyGeoHash New Release - 2.1.0](https://mcginniscommawill.com/posts/2025-03-04-pygeohash-new-release/)
+- [Using Cursor for Library Maintenance](https://mcginniscommawill.com/posts/2025-03-09-cursor-for-library-maintenance/#challenges-and-limitations)
+
 ## Contributing
 
 Contributions are welcome! Feel free to submit a Pull Request.

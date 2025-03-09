@@ -37,3 +37,8 @@ Project History
 --------------
 
 PyGeoHash was created to modernize and extend the functionality of the original geohash module while ensuring compatibility with Python 3. The project aims to maintain a clean, dependency-free implementation that can be easily integrated into any Python project. 
+
+Additional Resources
+------------------
+
+For more insights about PyGeoHash development and use cases, check out the :doc:`blog_posts` section, which contains links to articles about the project's evolution and applications. 
