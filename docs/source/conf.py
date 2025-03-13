@@ -33,6 +33,9 @@ sys.path.insert(0, os.path.abspath("../.."))
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
+    "sphinx_rtd_theme",
+    "sphinx_rtd_dark_mode",
+    "sphinxcontrib.googleanalytics",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -118,12 +121,25 @@ autoclass_content = "both"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-# html_theme_options = {}
+html_theme_options = {
+    "navigation_depth": 4,
+    "collapse_navigation": False,
+    "sticky_navigation": True,
+    "includehidden": True,
+    "titles_only": False,
+}
+
+# Google Analytics configuration
+googleanalytics_id = "G-Z43R9PWW0B"
+googleanalytics_enabled = True
+
+# Default to dark theme
+default_dark_mode = True
 
 # Add any paths that contain custom themes here, relative to this directory.
 # html_theme_path = []
@@ -148,6 +164,12 @@ html_theme = "alabaster"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    'custom.css',
+]
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
