@@ -1,1 +1,49 @@
-/* This file intentionally left blank. */
+/* Custom styles for Read the Docs theme with dark mode support */
+
+/* Light mode adjustments */
+:root {
+    --link-color: #2980B9;
+    --link-hover-color: #3091d1;
+    --code-bg: #f8f8f8;
+    --code-color: #333;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+    --link-color: #4db8ff;
+    --link-hover-color: #66c2ff;
+    --code-bg: #2d2d2d;
+    --code-color: #f8f8f8;
+}
+
+/* Code block styling */
+.highlight {
+    background: var(--code-bg);
+}
+
+.highlight pre {
+    color: var(--code-color);
+}
+
+/* Improve table readability in dark mode */
+[data-theme="dark"] table.docutils {
+    border-color: #555;
+}
+
+[data-theme="dark"] table.docutils td,
+[data-theme="dark"] table.docutils th {
+    border-color: #555;
+}
+
+/* Improve note/warning boxes in dark mode */
+[data-theme="dark"] .admonition {
+    background-color: #2d2d2d;
+}
+
+[data-theme="dark"] .admonition.note {
+    background-color: #264c73;
+}
+
+[data-theme="dark"] .admonition.warning {
+    background-color: #73392d;
+} 

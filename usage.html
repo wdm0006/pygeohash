@@ -1,52 +1,184 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z43R9PWW0B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z43R9PWW0B');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage Guide &mdash; pygeohash 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e68397dc" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
 
-    <title>Usage Guide &#8212; pygeohash 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=8d563738"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=af2ce170"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API Reference" href="api.html" />
-    <link rel="prev" title="Geohash Concepts" href="concepts.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
+    <link rel="prev" title="Geohash Concepts" href="concepts.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="index.html" class="icon icon-home">
+            pygeohash
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-pygeohash">What is PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#why-use-pygeohash">Why Use PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#project-history">Project History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#what-is-a-geohash">What is a Geohash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#how-geohashing-works">How Geohashing Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#visual-representation">Visual Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#precision-and-cell-size">Precision and Cell Size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#properties-of-geohashes">Properties of Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#edge-cases-and-limitations">Edge Cases and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-bounding-boxes">Geohash Bounding Boxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-vs-other-geocoding-systems">Geohash vs. Other Geocoding Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-operations">Basic Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#encoding-coordinates-to-geohash">Encoding Coordinates to Geohash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decoding-geohash-to-coordinates">Decoding Geohash to Coordinates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-geohash-precision">Working with Geohash Precision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculating-distances">Calculating Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#checking-if-a-point-is-within-a-box">Checking if a Point is Within a Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checking-if-bounding-boxes-intersect">Checking if Bounding Boxes Intersect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-geohashes-in-a-bounding-box">Finding Geohashes in a Bounding Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#practical-example-geospatial-querying">Practical Example: Geospatial Querying</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#practical-examples">Practical Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#location-based-search">Location-Based Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geofencing">Geofencing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization">Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plotting-a-single-geohash">Plotting a Single Geohash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plotting-multiple-geohashes">Plotting Multiple Geohashes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-interactive-maps">Creating Interactive Maps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Performance Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#core-functions">Core Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#basic-geohashing">Basic Geohashing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#adjacent-geohashes">Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#statistical-analysis">Statistical Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#geospatial-search">Geospatial Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#clustering-by-geohash-prefix">Clustering by Geohash Prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples.html#visualizing-bounding-boxes">Visualizing Bounding Boxes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#visualization-examples">Visualization Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#practical-applications">Practical Applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blog_posts.html#pygeohash-new-release-2-1-0">PyGeoHash New Release - 2.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blog_posts.html#using-cursor-for-library-maintenance">Using Cursor for Library Maintenance</a></li>
+</ul>
+</li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pygeohash</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="usage-guide">
-<h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Link to this heading">¶</a></h1>
+<h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Permalink to this heading"></a></h1>
 <p>This guide covers common use cases and patterns for working with the PyGeoHash library.</p>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash can be installed from PyPI using pip:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pygeohash
 </pre></div>
 </div>
 </section>
 <section id="basic-operations">
-<h2>Basic Operations<a class="headerlink" href="#basic-operations" title="Link to this heading">¶</a></h2>
+<h2>Basic Operations<a class="headerlink" href="#basic-operations" title="Permalink to this heading"></a></h2>
 <section id="encoding-coordinates-to-geohash">
-<h3>Encoding Coordinates to Geohash<a class="headerlink" href="#encoding-coordinates-to-geohash" title="Link to this heading">¶</a></h3>
+<h3>Encoding Coordinates to Geohash<a class="headerlink" href="#encoding-coordinates-to-geohash" title="Permalink to this heading"></a></h3>
 <p>To convert latitude and longitude coordinates to a geohash string:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -65,7 +197,7 @@
 </div>
 </section>
 <section id="decoding-geohash-to-coordinates">
-<h3>Decoding Geohash to Coordinates<a class="headerlink" href="#decoding-geohash-to-coordinates" title="Link to this heading">¶</a></h3>
+<h3>Decoding Geohash to Coordinates<a class="headerlink" href="#decoding-geohash-to-coordinates" title="Permalink to this heading"></a></h3>
 <p>To convert a geohash string back to latitude and longitude coordinates:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -82,7 +214,7 @@
 </section>
 </section>
 <section id="working-with-geohash-precision">
-<h2>Working with Geohash Precision<a class="headerlink" href="#working-with-geohash-precision" title="Link to this heading">¶</a></h2>
+<h2>Working with Geohash Precision<a class="headerlink" href="#working-with-geohash-precision" title="Permalink to this heading"></a></h2>
 <p>The precision of a geohash determines how accurately it represents a location. Each additional character in a geohash increases precision:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -97,7 +229,7 @@
 </div>
 </section>
 <section id="calculating-distances">
-<h2>Calculating Distances<a class="headerlink" href="#calculating-distances" title="Link to this heading">¶</a></h2>
+<h2>Calculating Distances<a class="headerlink" href="#calculating-distances" title="Permalink to this heading"></a></h2>
 <p>To calculate the distance between two geohashes:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -118,7 +250,7 @@
 </div>
 </section>
 <section id="finding-adjacent-geohashes">
-<h2>Finding Adjacent Geohashes<a class="headerlink" href="#finding-adjacent-geohashes" title="Link to this heading">¶</a></h2>
+<h2>Finding Adjacent Geohashes<a class="headerlink" href="#finding-adjacent-geohashes" title="Permalink to this heading"></a></h2>
 <p>To find geohashes adjacent to a given geohash:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -141,7 +273,7 @@
 </div>
 </section>
 <section id="bounding-box-operations">
-<h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h2>
+<h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash provides functions for working with geospatial bounding boxes:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -157,7 +289,7 @@
 </pre></div>
 </div>
 <section id="checking-if-a-point-is-within-a-box">
-<h3>Checking if a Point is Within a Box<a class="headerlink" href="#checking-if-a-point-is-within-a-box" title="Link to this heading">¶</a></h3>
+<h3>Checking if a Point is Within a Box<a class="headerlink" href="#checking-if-a-point-is-within-a-box" title="Permalink to this heading"></a></h3>
 <p>You can check if a point is within a bounding box:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -177,7 +309,7 @@
 </div>
 </section>
 <section id="checking-if-bounding-boxes-intersect">
-<h3>Checking if Bounding Boxes Intersect<a class="headerlink" href="#checking-if-bounding-boxes-intersect" title="Link to this heading">¶</a></h3>
+<h3>Checking if Bounding Boxes Intersect<a class="headerlink" href="#checking-if-bounding-boxes-intersect" title="Permalink to this heading"></a></h3>
 <p>You can check if two bounding boxes intersect:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -192,7 +324,7 @@
 </div>
 </section>
 <section id="finding-geohashes-in-a-bounding-box">
-<h3>Finding Geohashes in a Bounding Box<a class="headerlink" href="#finding-geohashes-in-a-bounding-box" title="Link to this heading">¶</a></h3>
+<h3>Finding Geohashes in a Bounding Box<a class="headerlink" href="#finding-geohashes-in-a-bounding-box" title="Permalink to this heading"></a></h3>
 <p>You can find all geohashes that intersect with a bounding box:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -211,7 +343,7 @@
 </div>
 </section>
 <section id="practical-example-geospatial-querying">
-<h3>Practical Example: Geospatial Querying<a class="headerlink" href="#practical-example-geospatial-querying" title="Link to this heading">¶</a></h3>
+<h3>Practical Example: Geospatial Querying<a class="headerlink" href="#practical-example-geospatial-querying" title="Permalink to this heading"></a></h3>
 <p>Using bounding boxes for efficient geospatial querying:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -262,7 +394,7 @@
 </section>
 </section>
 <section id="statistical-functions">
-<h2>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">¶</a></h2>
+<h2>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash provides several statistical functions for working with groups of geohashes:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -294,9 +426,9 @@
 </div>
 </section>
 <section id="practical-examples">
-<h2>Practical Examples<a class="headerlink" href="#practical-examples" title="Link to this heading">¶</a></h2>
+<h2>Practical Examples<a class="headerlink" href="#practical-examples" title="Permalink to this heading"></a></h2>
 <section id="location-based-search">
-<h3>Location-Based Search<a class="headerlink" href="#location-based-search" title="Link to this heading">¶</a></h3>
+<h3>Location-Based Search<a class="headerlink" href="#location-based-search" title="Permalink to this heading"></a></h3>
 <p>Using geohashes for a simple location-based search:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -338,7 +470,7 @@
 </div>
 </section>
 <section id="geofencing">
-<h3>Geofencing<a class="headerlink" href="#geofencing" title="Link to this heading">¶</a></h3>
+<h3>Geofencing<a class="headerlink" href="#geofencing" title="Permalink to this heading"></a></h3>
 <p>Using geohashes for simple geofencing:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
@@ -366,13 +498,13 @@
 </section>
 </section>
 <section id="visualization">
-<h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">¶</a></h2>
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash provides visualization capabilities through the optional <code class="docutils literal notranslate"><span class="pre">viz</span></code> module. To use these functions, you need to install the visualization dependencies:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="o">[</span>viz<span class="o">]</span>
 </pre></div>
 </div>
 <section id="plotting-a-single-geohash">
-<h3>Plotting a Single Geohash<a class="headerlink" href="#plotting-a-single-geohash" title="Link to this heading">¶</a></h3>
+<h3>Plotting a Single Geohash<a class="headerlink" href="#plotting-a-single-geohash" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohash</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -387,12 +519,11 @@
 </pre></div>
 </div>
 <figure class="align-center">
-<a class="reference internal image-reference" href="_images/single_geohash.png"><img alt="Single geohash visualization" src="_images/single_geohash.png" style="width: 60%;" />
-</a>
+<a class="reference internal image-reference" href="_images/single_geohash.png"><img alt="Single geohash visualization" src="_images/single_geohash.png" style="width: 60%;" /></a>
 </figure>
 </section>
 <section id="plotting-multiple-geohashes">
-<h3>Plotting Multiple Geohashes<a class="headerlink" href="#plotting-multiple-geohashes" title="Link to this heading">¶</a></h3>
+<h3>Plotting Multiple Geohashes<a class="headerlink" href="#plotting-multiple-geohashes" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -420,12 +551,11 @@
 </pre></div>
 </div>
 <figure class="align-center">
-<a class="reference internal image-reference" href="_images/multiple_geohashes_labeled.png"><img alt="Multiple geohashes with labels" src="_images/multiple_geohashes_labeled.png" style="width: 60%;" />
-</a>
+<a class="reference internal image-reference" href="_images/multiple_geohashes_labeled.png"><img alt="Multiple geohashes with labels" src="_images/multiple_geohashes_labeled.png" style="width: 60%;" /></a>
 </figure>
 </section>
 <section id="creating-interactive-maps">
-<h3>Creating Interactive Maps<a class="headerlink" href="#creating-interactive-maps" title="Link to this heading">¶</a></h3>
+<h3>Creating Interactive Maps<a class="headerlink" href="#creating-interactive-maps" title="Permalink to this heading"></a></h3>
 <p>PyGeoHash integrates with Folium to create interactive maps:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
@@ -448,7 +578,7 @@
 </section>
 </section>
 <section id="performance-considerations">
-<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h2>
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Geohash operations are very fast due to the high-performance C extension implementation</p></li>
 <li><p>When working with millions of geohashes, consider using a database with geospatial capabilities</p></li>
@@ -458,7 +588,7 @@
 <p>For more detailed examples of visualization, see the <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> section.</p>
 </section>
 <section id="id1">
-<h2>Performance Considerations<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2>Performance Considerations<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Geohash operations are very fast due to the high-performance C extension implementation</p></li>
 <li><p>When working with millions of geohashes, consider using a database with geospatial capabilities</p></li>
@@ -469,87 +599,34 @@
 </section>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="concepts.html" class="btn btn-neutral float-left" title="Geohash Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Will McGinnis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">pygeohash</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#basic-operations">Basic Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#working-with-geohash-precision">Working with Geohash Precision</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#calculating-distances">Calculating Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#practical-examples">Practical Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#visualization">Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Performance Considerations</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="concepts.html" title="previous chapter">Geohash Concepts</a></li>
-      <li>Next: <a href="api.html" title="next chapter">API Reference</a></li>
-  </ul></li>
-</ul>
-</div>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2016, Will McGinnis.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
-      
-      |
-      <a href="_sources/usage.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

@@ -1,49 +1,181 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="./">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z43R9PWW0B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z43R9PWW0B');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; pygeohash 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e68397dc" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
 
-    <title>Introduction &#8212; pygeohash 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=8d563738"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=af2ce170"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Geohash Concepts" href="concepts.html" />
-    <link rel="prev" title="Welcome to PyGeoHash’s Documentation!" href="index.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
+    <link rel="prev" title="Welcome to PyGeoHash’s Documentation!" href="index.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="index.html" class="icon icon-home">
+            pygeohash
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-pygeohash">What is PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-use-pygeohash">Why Use PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-history">Project History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#what-is-a-geohash">What is a Geohash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#how-geohashing-works">How Geohashing Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#visual-representation">Visual Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#precision-and-cell-size">Precision and Cell Size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#properties-of-geohashes">Properties of Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#edge-cases-and-limitations">Edge Cases and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-bounding-boxes">Geohash Bounding Boxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-vs-other-geocoding-systems">Geohash vs. Other Geocoding Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#basic-operations">Basic Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#encoding-coordinates-to-geohash">Encoding Coordinates to Geohash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#decoding-geohash-to-coordinates">Decoding Geohash to Coordinates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#working-with-geohash-precision">Working with Geohash Precision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#calculating-distances">Calculating Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#checking-if-a-point-is-within-a-box">Checking if a Point is Within a Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#checking-if-bounding-boxes-intersect">Checking if Bounding Boxes Intersect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#finding-geohashes-in-a-bounding-box">Finding Geohashes in a Bounding Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#practical-example-geospatial-querying">Practical Example: Geospatial Querying</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#practical-examples">Practical Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#location-based-search">Location-Based Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#geofencing">Geofencing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#visualization">Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#plotting-a-single-geohash">Plotting a Single Geohash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#plotting-multiple-geohashes">Plotting Multiple Geohashes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#creating-interactive-maps">Creating Interactive Maps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#id1">Performance Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#core-functions">Core Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#basic-geohashing">Basic Geohashing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#adjacent-geohashes">Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#statistical-analysis">Statistical Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#geospatial-search">Geospatial Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#clustering-by-geohash-prefix">Clustering by Geohash Prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples.html#visualizing-bounding-boxes">Visualizing Bounding Boxes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#visualization-examples">Visualization Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#practical-applications">Practical Applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blog_posts.html#pygeohash-new-release-2-1-0">PyGeoHash New Release - 2.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blog_posts.html#using-cursor-for-library-maintenance">Using Cursor for Library Maintenance</a></li>
+</ul>
+</li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pygeohash</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h1>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
 <section id="what-is-pygeohash">
-<h2>What is PyGeoHash?<a class="headerlink" href="#what-is-pygeohash" title="Link to this heading">¶</a></h2>
+<h2>What is PyGeoHash?<a class="headerlink" href="#what-is-pygeohash" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash is a Python module that provides functions for encoding and decoding geohashes to and from latitude and
 longitude coordinates, along with utilities for performing calculations and approximations with them.</p>
 <p>It is based on Leonard Norrgård’s <a class="reference external" href="https://github.com/vinsci/geohash">geohash</a> module, but adds more
 functionality while supporting Python 3.</p>
 </section>
 <section id="why-use-pygeohash">
-<h2>Why Use PyGeoHash?<a class="headerlink" href="#why-use-pygeohash" title="Link to this heading">¶</a></h2>
+<h2>Why Use PyGeoHash?<a class="headerlink" href="#why-use-pygeohash" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash offers several advantages:</p>
 <ul class="simple">
 <li><p><strong>Simplicity</strong>: The API is designed to be intuitive and easy to use</p></li>
@@ -55,7 +187,7 @@ functionality while supporting Python 3.</p>
 </ul>
 </section>
 <section id="use-cases">
-<h2>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">¶</a></h2>
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash is ideal for a variety of applications:</p>
 <ul class="simple">
 <li><p><strong>Location-based Services</strong>: Efficiently store and retrieve location data</p></li>
@@ -66,86 +198,44 @@ functionality while supporting Python 3.</p>
 </ul>
 </section>
 <section id="project-history">
-<h2>Project History<a class="headerlink" href="#project-history" title="Link to this heading">¶</a></h2>
+<h2>Project History<a class="headerlink" href="#project-history" title="Permalink to this heading"></a></h2>
 <p>PyGeoHash was created to modernize and extend the functionality of the original geohash module while ensuring compatibility with Python 3. The project aims to maintain a clean, dependency-free implementation that can be easily integrated into any Python project.</p>
 </section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this heading"></a></h2>
+<p>For more insights about PyGeoHash development and use cases, check out the <a class="reference internal" href="blog_posts.html"><span class="doc">Blog Posts</span></a> section, which contains links to articles about the project’s evolution and applications.</p>
+</section>
 </section>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to PyGeoHash’s Documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="concepts.html" class="btn btn-neutral float-right" title="Geohash Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Will McGinnis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">pygeohash</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-is-pygeohash">What is PyGeoHash?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#why-use-pygeohash">Why Use PyGeoHash?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#use-cases">Use Cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#project-history">Project History</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to PyGeoHash’s Documentation!</a></li>
-      <li>Next: <a href="concepts.html" title="next chapter">Geohash Concepts</a></li>
-  </ul></li>
-</ul>
-</div>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2016, Will McGinnis.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
-      
-      |
-      <a href="_sources/introduction.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
