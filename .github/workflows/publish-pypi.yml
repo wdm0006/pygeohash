@@ -106,7 +106,7 @@ jobs:
       - name: Move distribution files to dist directory
         run: |
           mkdir -p dist_flat
-          find dist -type f -name "*.whl" -o -name "*.tar.gz" -exec cp {} dist_flat/ \;
+          find dist -type f \( -name "*.whl" -o -name "*.tar.gz" \) -exec cp {} dist_flat/ \;
           ls -la dist_flat/
       
       - name: Publish package distributions to PyPI

@@ -5,6 +5,7 @@
 
 A simple, lightweight, and dependency-free Python library for working with geohashes.
 
+Full docs at [pygeohash.mcginniscommawill.com](https://pygeohash.mcginniscommawill.com)
 ## What is PyGeoHash?
 
 PyGeoHash is a Python module that provides functions for encoding and decoding geohashes to and from latitude and longitude coordinates, along with utilities for performing calculations and approximations with them.
