@@ -9,7 +9,7 @@ This implementation uses a high-performance C extension for all operations.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, cast
 
 from pygeohash.cgeohash.geohash_module import (
     decode as c_decode,
@@ -35,7 +35,7 @@ def encode(latitude: float, longitude: float, precision: int = 12) -> str:
     Returns:
         str: The geohash string.
     """
-    return c_encode(latitude, longitude, precision)
+    return cast(str, c_encode(latitude, longitude, precision))
 
 
 def encode_strictly(latitude: float, longitude: float, precision: int = 12) -> str:
@@ -49,7 +49,7 @@ def encode_strictly(latitude: float, longitude: float, precision: int = 12) -> s
     Returns:
         str: The geohash string.
     """
-    return c_encode_strictly(latitude, longitude, precision)
+    return cast(str, c_encode_strictly(latitude, longitude, precision))
 
 
 def decode(geohash: str) -> LatLong:
@@ -61,7 +61,7 @@ def decode(geohash: str) -> LatLong:
     Returns:
         LatLong: A named tuple containing the latitude and longitude.
     """
-    return c_decode(geohash)
+    return cast(LatLong, c_decode(geohash))
 
 
 def decode_exactly(geohash: str) -> ExactLatLong:
@@ -77,7 +77,7 @@ def decode_exactly(geohash: str) -> ExactLatLong:
         ExactLatLong: A named tuple containing the latitude, longitude, and their
             respective error margins.
     """
-    return c_decode_exactly(geohash)
+    return cast(ExactLatLong, c_decode_exactly(geohash))
 
 
 __all__ = [

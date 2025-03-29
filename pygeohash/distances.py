@@ -5,15 +5,18 @@ including both approximate distance based on matching characters and
 precise haversine distance calculation.
 """
 
+from __future__ import annotations
+
 import math
-from typing import Dict
+from typing import Dict, Final
 
 from pygeohash.geohash import __base32, decode_exactly
+from pygeohash.geohash_types import ExactLatLong
 
-__author__ = "Will McGinnis"
+__author__: Final[str] = "Will McGinnis"
 
 # the distance between geohashes based on matching characters, in meters.
-_PRECISION: Dict[int, float] = {
+_PRECISION: Final[Dict[int, float]] = {
     0: 20000000,
     1: 5003530,
     2: 625441,
@@ -26,6 +29,9 @@ _PRECISION: Dict[int, float] = {
     9: 3.71,
     10: 0.6,
 }
+
+# Earth's radius in meters
+_EARTH_RADIUS: Final[float] = 6_371_000
 
 
 def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity: bool = False) -> float:
@@ -97,19 +103,21 @@ def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
         >>> geohash_haversine_distance("u4pruyd", "u4pruyf")
         152.3
     """
-    lat_1, lon_1, _, _ = decode_exactly(geohash_1)
-    lat_2, lon_2, _, _ = decode_exactly(geohash_2)
+    location_1: ExactLatLong = decode_exactly(geohash_1)
+    location_2: ExactLatLong = decode_exactly(geohash_2)
 
-    R = 6_371_000
-    phi_1 = math.radians(lat_1)
-    phi_2 = math.radians(lat_2)
+    lat_1, lon_1 = location_1.latitude, location_1.longitude
+    lat_2, lon_2 = location_2.latitude, location_2.longitude
 
-    delta_phi = math.radians(lat_2 - lat_1)
-    delta_lambda = math.radians(lon_2 - lon_1)
+    phi_1: float = math.radians(lat_1)
+    phi_2: float = math.radians(lat_2)
 
-    a = math.sin(delta_phi / 2.0) * math.sin(delta_phi / 2.0) + math.cos(phi_1) * math.cos(phi_2) * math.sin(
+    delta_phi: float = math.radians(lat_2 - lat_1)
+    delta_lambda: float = math.radians(lon_2 - lon_1)
+
+    a: float = math.sin(delta_phi / 2.0) * math.sin(delta_phi / 2.0) + math.cos(phi_1) * math.cos(phi_2) * math.sin(
         delta_lambda / 2
     ) * math.sin(delta_lambda / 2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    c: float = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
-    return R * c
+    return _EARTH_RADIUS * c

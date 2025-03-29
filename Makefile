@@ -1,4 +1,4 @@
-.PHONY: help setup install install-dev test test-cov lint format clean build docs lint-fix test-all benchmark viz-examples install-viz
+.PHONY: help setup install install-dev test test-cov lint format clean build docs lint-fix test-all benchmark viz-examples install-viz type-check
 
 # Default target
 help:
@@ -18,6 +18,7 @@ help:
 	@echo "  make build        - Build package distributions"
 	@echo "  make docs         - Build documentation"
 	@echo "  make viz-examples - Generate visualization examples for documentation"
+	@echo "  make type-check   - Run type checking with mypy"
 
 # Setup development environment
 setup:
@@ -47,8 +48,8 @@ test-cov:
 	uv run pytest --cov=pygeohash --cov-report=term --cov-report=html $(PYTEST_ARGS)
 
 # Run linting
-lint:
-	uv run ruff check . 
+lint: type-check
+	uv run ruff check .
 
 # Run linting and fix auto-fixable issues
 lint-fix:
@@ -107,3 +108,7 @@ viz-examples:
 	@echo "Installing visualization dependencies..."
 	uv pip install -e ".[viz]"
 	uv run python scripts/generate_viz_examples.py 
+
+# Run type checking
+type-check:
+	uv run mypy pygeohash 
