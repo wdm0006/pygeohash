@@ -24,24 +24,49 @@ from .geohash import decode, decode_exactly, encode, encode_strictly
 from .geohash_types import ExactLatLong, LatLong
 from .neighbor import get_adjacent
 from .stats import eastern, mean, northern, southern, std, variance, western
+from .types import (
+    Direction,
+    GeohashPrecision,
+    GeohashCollection,
+    GeohashList,
+    EARTH_RADIUS,
+    PRECISION_TO_ERROR,
+)
 
 __author__ = "willmcginnis"
 
 __all__ = [
-    "geohash_approximate_distance",
-    "geohash_haversine_distance",
-    "LatLong",
-    "ExactLatLong",
-    "BoundingBox",
+    # Core functions
     "encode",
     "encode_strictly",
     "decode",
     "decode_exactly",
+    
+    # Distance calculations
+    "geohash_approximate_distance",
+    "geohash_haversine_distance",
+    
+    # Types
+    "LatLong",
+    "ExactLatLong",
+    "BoundingBox",
+    "Direction",
+    "GeohashPrecision",
+    "GeohashCollection",
+    "GeohashList",
+    
+    # Constants
+    "EARTH_RADIUS",
+    "PRECISION_TO_ERROR",
+    
+    # Bounding box operations
     "get_bounding_box",
     "is_point_in_box",
     "is_point_in_geohash",
     "do_boxes_intersect",
     "geohashes_in_box",
+    
+    # Statistical operations
     "mean",
     "northern",
     "southern",
@@ -49,6 +74,8 @@ __all__ = [
     "western",
     "variance",
     "std",
+    
+    # Neighbor operations
     "get_adjacent",
 ]
 

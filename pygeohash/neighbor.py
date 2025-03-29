@@ -9,9 +9,10 @@ from __future__ import annotations
 from typing import Dict, Final, Literal, cast
 
 from pygeohash.geohash import __base32
+from pygeohash.types import Direction
 
 # Configuration  -- from https://github.com/davetroy/geohash-js/blob/master/geohash.js
-NEIGHBORS: Final[Dict[Literal["right", "left", "top", "bottom"], Dict[Literal["even", "odd"], str]]] = {
+NEIGHBORS: Final[Dict[Direction, Dict[Literal["even", "odd"], str]]] = {
     "right": {
         "even": "bc01fg45238967deuvhjyznpkmstqrwx",
         "odd": "p0r21436x8zb9dcf5h7kjnmqesgutwvy",  # = top-even
@@ -31,7 +32,7 @@ NEIGHBORS: Final[Dict[Literal["right", "left", "top", "bottom"], Dict[Literal["e
 }
 
 # Used change of parent tile
-BORDERS: Final[Dict[Literal["right", "left", "top", "bottom"], Dict[Literal["even", "odd"], str]]] = {
+BORDERS: Final[Dict[Direction, Dict[Literal["even", "odd"], str]]] = {
     "right": {
         "even": "bcfguvyz",
         "odd": "prxz",  # top-even
@@ -51,12 +52,12 @@ BORDERS: Final[Dict[Literal["right", "left", "top", "bottom"], Dict[Literal["eve
 }
 
 
-def get_adjacent(geohash: str, direction: Literal["right", "left", "top", "bottom"]) -> str:
+def get_adjacent(geohash: str, direction: Direction) -> str:
     """Calculate the adjacent geohash in the specified direction.
 
     Args:
         geohash (str): The input geohash string.
-        direction (str): The direction to find the adjacent geohash.
+        direction (Direction): The direction to find the adjacent geohash.
             Must be one of: "right", "left", "top", "bottom".
 
     Returns:

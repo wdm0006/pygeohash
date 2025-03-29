@@ -19,18 +19,19 @@ from pygeohash.cgeohash.geohash_module import (  # type: ignore[import-not-found
     get_base32,
 )
 from pygeohash.geohash_types import ExactLatLong, LatLong
+from pygeohash.types import GeohashPrecision
 
 __base32 = get_base32()
 __decodemap: Dict[str, int] = {base32_char: i for i, base32_char in enumerate(__base32)}
 
 
-def encode(latitude: float, longitude: float, precision: int = 12) -> str:
+def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) -> str:
     """Encode a latitude and longitude into a geohash.
 
     Args:
         latitude (float): The latitude to encode.
         longitude (float): The longitude to encode.
-        precision (int, optional): The number of characters in the geohash. Defaults to 12.
+        precision (GeohashPrecision, optional): The number of characters in the geohash. Defaults to 12.
 
     Returns:
         str: The geohash string.
@@ -38,13 +39,13 @@ def encode(latitude: float, longitude: float, precision: int = 12) -> str:
     return cast(str, c_encode(latitude, longitude, precision))
 
 
-def encode_strictly(latitude: float, longitude: float, precision: int = 12) -> str:
+def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecision = 12) -> str:
     """Encode a latitude and longitude into a geohash with strict midpoint handling.
 
     Args:
         latitude (float): The latitude to encode.
         longitude (float): The longitude to encode.
-        precision (int, optional): The number of characters in the geohash. Defaults to 12.
+        precision (GeohashPrecision, optional): The number of characters in the geohash. Defaults to 12.
 
     Returns:
         str: The geohash string.
