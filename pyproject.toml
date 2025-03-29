@@ -55,6 +55,8 @@ dev = [
     "mypy>=1.8.0",
     "types-requests>=2.31.0",
     "types-setuptools>=69.0.0",
+    "pandas",
+    "pandas-stubs"
 ]
 
 [tool.pytest.ini_options]
@@ -136,4 +138,14 @@ ignore_errors = true
 
 [[tool.mypy.overrides]]
 module = ["matplotlib.*", "folium.*", "numpy.*", "numba.*"]
-ignore_missing_imports = true 
+ignore_missing_imports = true
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.1.1"
+pytest-cov = "^3.0.0"
+black = "^22.3.0"
+isort = "^5.10.1"
+mypy = "^0.942"
+ruff = "^0.1.14"
+pandas = "^2.2.0"
+numpy = "^1.26.0" 

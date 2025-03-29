@@ -18,8 +18,7 @@ from pygeohash.cgeohash.geohash_module import (  # type: ignore[import-not-found
     encode_strictly as c_encode_strictly,
     get_base32,
 )
-from pygeohash.geohash_types import ExactLatLong, LatLong
-from pygeohash.types import GeohashPrecision
+from pygeohash.geohash_types import ExactLatLong, LatLong, GeohashPrecision
 
 __base32 = get_base32()
 __decodemap: Dict[str, int] = {base32_char: i for i, base32_char in enumerate(__base32)}

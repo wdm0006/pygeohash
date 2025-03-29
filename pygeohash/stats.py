@@ -18,7 +18,7 @@ from pygeohash.types import GeohashCollection, GeohashPrecision
 
 __author__: Final[str] = "Will McGinnis"
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def __latitude(coordinate: LatLong) -> float:
@@ -151,7 +151,7 @@ def mean(geohashes: GeohashCollection, precision: GeohashPrecision = 12) -> str:
 def variance(geohashes: GeohashCollection) -> float:
     """Calculate the variance of a collection of geohashes.
 
-    This function calculates the average squared distance from the mean position
+    This function calculates the mean of squared distances from the mean position
     to each geohash in the collection.
 
     Args:
@@ -165,8 +165,8 @@ def variance(geohashes: GeohashCollection) -> float:
         2500.0
     """
     mean_geohash = mean(geohashes)
-    distances = [geohash_haversine_distance(gh, mean_geohash) for gh in geohashes]
-    return statistics.variance(distances)
+    squared_distances = [(geohash_haversine_distance(gh, mean_geohash)) ** 2 for gh in geohashes]
+    return statistics.mean(squared_distances)
 
 
 def std(geohashes: GeohashCollection) -> float:

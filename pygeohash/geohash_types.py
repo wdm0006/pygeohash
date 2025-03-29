@@ -6,7 +6,7 @@ C-extension implementations of the geohash functionality.
 
 from __future__ import annotations
 
-from typing import NamedTuple
+from typing import NamedTuple, Union, Literal
 
 
 class LatLong(NamedTuple):
@@ -35,3 +35,13 @@ class ExactLatLong(NamedTuple):
     longitude: float
     latitude_error: float
     longitude_error: float
+
+
+# Precision types
+GeohashPrecision = Union[int, Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
+
+__all__ = [
+    "LatLong",
+    "ExactLatLong",
+    "GeohashPrecision",
+]
