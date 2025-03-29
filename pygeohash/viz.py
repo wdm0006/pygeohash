@@ -10,11 +10,68 @@ Functions:
     folium_map: Create an interactive map with geohashes using Folium
 """
 
+# mypy: disable-error-code="list-item,assignment"
+
 import warnings
-from typing import List, Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union, Any, cast, TypeVar
+from typing_extensions import TypeAlias, Protocol
 
 from .geohash import decode
 from .bounding_box import get_bounding_box, geohashes_in_box, BoundingBox
+
+# Type aliases for better readability
+FoliumMap: TypeAlias = Any  # Would be folium.Map if folium was always available
+FoliumRectangle: TypeAlias = Any  # Would be folium.Rectangle if folium was always available
+FoliumElement: TypeAlias = Any  # Would be folium.Element if folium was always available
+MatplotlibAxis: TypeAlias = Any  # Would be matplotlib.axes.Axes if matplotlib was always available
+MatplotlibFigure: TypeAlias = Any  # Would be matplotlib.figure.Figure if matplotlib was always available
+BoundingBoxCoords = Tuple[float, float, float, float]  # min_lat, min_lon, max_lat, max_lon
+
+T = TypeVar("T")
+
+
+class FoliumMapProtocol(Protocol):
+    """Protocol for Folium map objects."""
+
+    location: Tuple[float, float]
+    _zoom_start: int
+
+    def add_child(self, child: FoliumElement, name: Optional[str] = None, index: Optional[int] = None) -> Any: ...
+
+    def add_geohash(
+        self,
+        geohash: str,
+        color: str = "blue",
+        fill: bool = True,
+        fill_color: Optional[str] = None,
+        fill_opacity: float = 0.5,
+        weight: int = 2,
+        popup: Optional[str] = None,
+        tooltip: Optional[str] = None,
+    ) -> Any: ...
+
+    def add_geohashes(
+        self,
+        geohashes: List[str],
+        colors: Union[str, List[str]] = "blue",
+        fill: bool = True,
+        fill_colors: Optional[List[str]] = None,
+        fill_opacity: float = 0.5,
+        weight: int = 2,
+        popups: Optional[List[str]] = None,
+        tooltips: Optional[List[str]] = None,
+    ) -> Any: ...
+
+    def add_geohash_grid(
+        self,
+        precision: int = 6,
+        bbox: Optional[BoundingBoxCoords] = None,
+        color: str = "blue",
+        fill: bool = True,
+        fill_color: Optional[str] = None,
+        fill_opacity: float = 0.2,
+        weight: int = 1,
+    ) -> Any: ...
 
 
 def _check_viz_dependencies() -> bool:
@@ -51,14 +108,14 @@ def _check_folium_dependencies() -> bool:
 
 def plot_geohash(
     geohash: str,
-    ax=None,
-    color: str = "red",
+    ax: Optional[MatplotlibAxis] = None,
+    color: str = "blue",
     alpha: float = 0.5,
     label: Optional[str] = None,
     show_center: bool = False,
     show_label: bool = False,
-    **kwargs,
-) -> Tuple:
+    **kwargs: Any,
+) -> Tuple[Optional[MatplotlibFigure], Optional[MatplotlibAxis]]:
     """Plot a single geohash on a map.
 
     Args:
@@ -146,14 +203,14 @@ def plot_geohash(
 
 def plot_geohashes(
     geohashes: List[str],
-    ax=None,
+    ax: Optional[MatplotlibAxis] = None,
     colors: Union[str, List[str]] = "viridis",
     alpha: float = 0.5,
     labels: Optional[List[str]] = None,
     show_centers: bool = False,
     show_labels: bool = False,
-    **kwargs,
-) -> Tuple:
+    **kwargs: Any,
+) -> Tuple[Optional[MatplotlibFigure], Optional[MatplotlibAxis]]:
     """Plot multiple geohashes on a map.
 
     Args:
@@ -193,14 +250,16 @@ def plot_geohashes(
         # If a colormap name is provided
         try:
             cmap = cm.get_cmap(colors, n_geohashes)
-            colors = [cmap(i) for i in range(n_geohashes)]
+            colors_list = [cmap(i) for i in range(n_geohashes)]
         except ValueError:
             # If a single color name is provided
-            colors = [colors] * n_geohashes
+            colors_list = [colors] * n_geohashes
     elif len(colors) < n_geohashes:
         # If not enough colors are provided
-        colors = colors * (n_geohashes // len(colors) + 1)
-        colors = colors[:n_geohashes]
+        colors_list = colors * (n_geohashes // len(colors) + 1)
+        colors_list = colors_list[:n_geohashes]
+    else:
+        colors_list = colors
 
     # Set up labels
     if labels is None:
@@ -233,8 +292,8 @@ def plot_geohashes(
             width,
             height,
             linewidth=1,
-            edgecolor=colors[i],
-            facecolor=colors[i],
+            edgecolor=colors_list[i],
+            facecolor=colors_list[i],
             alpha=alpha,
             label=labels[i] if i == 0 or labels[i] != labels[i - 1] else None,
             **kwargs,
@@ -280,6 +339,144 @@ def plot_geohashes(
     return fig, ax
 
 
+def add_geohash(
+    self: FoliumMapProtocol,
+    geohash: str,
+    color: str = "blue",
+    fill: bool = True,
+    fill_color: Optional[str] = None,
+    fill_opacity: float = 0.5,
+    weight: int = 2,
+    popup: Optional[str] = None,
+    tooltip: Optional[str] = None,
+) -> FoliumMapProtocol:
+    """Add a geohash to the map."""
+    import folium
+
+    # Get bounding box for the geohash
+    bbox = get_bounding_box(geohash)
+
+    # Create rectangle
+    rect = folium.Rectangle(
+        bounds=[[bbox.min_lat, bbox.min_lon], [bbox.max_lat, bbox.max_lon]],
+        color=color,
+        fill=fill,
+        fill_color=fill_color or color,
+        fill_opacity=fill_opacity,
+        weight=weight,
+        popup=popup or f"Geohash: {geohash}",
+        tooltip=tooltip or f"Geohash: {geohash}",
+    )
+    self.add_child(rect)
+
+    return self
+
+
+def add_geohashes(
+    self: FoliumMapProtocol,
+    geohashes: List[str],
+    colors: Union[str, List[str]] = "blue",
+    fill: bool = True,
+    fill_colors: Optional[List[str]] = None,
+    fill_opacity: float = 0.5,
+    weight: int = 2,
+    popups: Optional[List[str]] = None,
+    tooltips: Optional[List[str]] = None,
+) -> FoliumMapProtocol:
+    """Add multiple geohashes to the map."""
+    n_geohashes = len(geohashes)
+
+    # Set up colors
+    if isinstance(colors, str):
+        colors_list = [colors] * n_geohashes
+    elif len(colors) < n_geohashes:
+        colors_list = list(colors) * (n_geohashes // len(colors) + 1)
+        colors_list = colors_list[:n_geohashes]
+    else:
+        colors_list = list(colors)
+
+    # Set up fill colors
+    if fill_colors is None:
+        fill_colors_list = colors_list
+    elif len(fill_colors) < n_geohashes:
+        fill_colors_list = list(fill_colors) * (n_geohashes // len(fill_colors) + 1)
+        fill_colors_list = fill_colors_list[:n_geohashes]
+    else:
+        fill_colors_list = list(fill_colors)
+
+    # Set up popups
+    if popups is None:
+        popups_list = [f"Geohash: {gh}" for gh in geohashes]
+    elif len(popups) < n_geohashes:
+        popups_list = list(popups) + [f"Geohash: {gh}" for gh in geohashes[len(popups) :]]
+    else:
+        popups_list = list(popups)
+
+    # Set up tooltips
+    if tooltips is None:
+        tooltips_list = [f"Geohash: {gh}" for gh in geohashes]
+    elif len(tooltips) < n_geohashes:
+        tooltips_list = list(tooltips) + [f"Geohash: {gh}" for gh in geohashes[len(tooltips) :]]
+    else:
+        tooltips_list = list(tooltips)
+
+    # Add each geohash
+    for i, geohash in enumerate(geohashes):
+        self.add_geohash(
+            geohash,
+            color=colors_list[i],
+            fill=fill,
+            fill_color=fill_colors_list[i],
+            fill_opacity=fill_opacity,
+            weight=weight,
+            popup=popups_list[i],
+            tooltip=tooltips_list[i],
+        )
+
+    return self
+
+
+def add_geohash_grid(
+    self: FoliumMapProtocol,
+    precision: int = 6,
+    bbox: Optional[BoundingBoxCoords] = None,
+    color: str = "blue",
+    fill: bool = True,
+    fill_color: Optional[str] = None,
+    fill_opacity: float = 0.2,
+    weight: int = 1,
+) -> FoliumMapProtocol:
+    """Add a grid of geohashes at the specified precision."""
+    # If no bounding box is provided, use the current map bounds
+    if bbox is None:
+        lat, lon = self.location
+        # Rough estimate of degrees visible at different zoom levels
+        degrees_visible = 360 / (2 ** (self._zoom_start - 1))
+        bbox = (
+            lat - degrees_visible / 2,  # min_lat
+            lon - degrees_visible / 2,  # min_lon
+            lat + degrees_visible / 2,  # max_lat
+            lon + degrees_visible / 2,  # max_lon
+        )
+
+    # Get all geohashes in the bounding box
+    min_lat, min_lon, max_lat, max_lon = bbox
+    bounding_box = BoundingBox(min_lat=min_lat, min_lon=min_lon, max_lat=max_lat, max_lon=max_lon)
+    geohashes = list(geohashes_in_box(bounding_box, precision=precision))
+
+    # Add geohashes to the map
+    self.add_geohashes(
+        geohashes,
+        colors=color,
+        fill=fill,
+        fill_colors=[fill_color] if fill_color else None,
+        fill_opacity=fill_opacity,
+        weight=weight,
+    )
+
+    return self
+
+
 def folium_map(
     center_geohash: Optional[str] = None,
     center: Optional[Tuple[float, float]] = None,
@@ -287,207 +484,35 @@ def folium_map(
     tiles: str = "OpenStreetMap",
     width: str = "100%",
     height: str = "100%",
-):
-    """Create an interactive map with geohashes using Folium.
-
-    Args:
-        center_geohash: Geohash string to center the map on
-        center: (lat, lon) tuple to center the map on (alternative to center_geohash)
-        zoom_start: Initial zoom level
-        tiles: Map tile provider
-        width: Width of the map
-        height: Height of the map
-
-    Returns:
-        folium.Map: A Folium map object with methods to add geohashes
-
-    Examples:
-        >>> import pygeohash as pgh
-        >>> from pygeohash.viz import folium_map
-        >>> m = folium_map(center_geohash="9q8yyk")
-        >>> m.add_geohash("9q8yyk", color="red", fill=True)
-        >>> m.save("geohash_map.html")
-    """
+) -> Optional[FoliumMapProtocol]:
+    """Create a folium map centered on a geohash or coordinates."""
     if not _check_folium_dependencies():
         return None
 
     import folium
 
-    # Determine center coordinates
     if center_geohash is not None:
-        lat, lon = decode(center_geohash)
-        center = (lat, lon)
-    elif center is None:
-        # Default to San Francisco if no center is provided
-        center = (37.7749, -122.4194)
+        center = decode(center_geohash)
 
-    # Create map
-    m = folium.Map(location=center, zoom_start=zoom_start, tiles=tiles, width=width, height=height)
+    if center is None:
+        center = (0, 0)
 
-    # Add method to add a single geohash
-    def add_geohash(
-        geohash: str,
-        color: str = "blue",
-        fill: bool = True,
-        fill_color: Optional[str] = None,
-        fill_opacity: float = 0.5,
-        weight: int = 2,
-        popup: Optional[str] = None,
-        tooltip: Optional[str] = None,
-    ):
-        """Add a geohash to the map.
+    m = folium.Map(
+        location=center,
+        zoom_start=zoom_start,
+        tiles=tiles,
+        width=width,
+        height=height,
+    )
 
-        Args:
-            geohash: Geohash string to add
-            color: Color of the geohash border
-            fill: Whether to fill the geohash
-            fill_color: Color of the geohash fill (defaults to border color)
-            fill_opacity: Opacity of the geohash fill
-            weight: Width of the geohash border
-            popup: Popup text (shown on click)
-            tooltip: Tooltip text (shown on hover)
-        """
-        # Get bounding box for the geohash
-        bbox = get_bounding_box(geohash)
+    # Create a new class that inherits from the map's class and implements our protocol
+    class GeohashMap(type(m), FoliumMapProtocol):  # type: ignore[misc]
+        _zoom_start: int = zoom_start
+        add_geohash = add_geohash
+        add_geohashes = add_geohashes
+        add_geohash_grid = add_geohash_grid
 
-        # Create rectangle
-        folium.Rectangle(
-            bounds=[[bbox.min_lat, bbox.min_lon], [bbox.max_lat, bbox.max_lon]],
-            color=color,
-            fill=fill,
-            fill_color=fill_color or color,
-            fill_opacity=fill_opacity,
-            weight=weight,
-            popup=popup or f"Geohash: {geohash}",
-            tooltip=tooltip or f"Geohash: {geohash}",
-        ).add_to(m)
+    # Convert the map instance to our new class
+    m.__class__ = GeohashMap
 
-        return m
-
-    # Add method to add multiple geohashes
-    def add_geohashes(
-        geohashes: List[str],
-        colors: Union[str, List[str]] = "blue",
-        fill: bool = True,
-        fill_colors: Optional[List[str]] = None,
-        fill_opacity: float = 0.5,
-        weight: int = 2,
-        popups: Optional[List[str]] = None,
-        tooltips: Optional[List[str]] = None,
-    ):
-        """Add multiple geohashes to the map.
-
-        Args:
-            geohashes: List of geohash strings to add
-            colors: Color or list of colors for the geohash borders
-            fill: Whether to fill the geohashes
-            fill_colors: List of colors for the geohash fills (defaults to border colors)
-            fill_opacity: Opacity of the geohash fills
-            weight: Width of the geohash borders
-            popups: List of popup texts (shown on click)
-            tooltips: List of tooltip texts (shown on hover)
-        """
-        n_geohashes = len(geohashes)
-
-        # Set up colors
-        if isinstance(colors, str):
-            colors = [colors] * n_geohashes
-        elif len(colors) < n_geohashes:
-            colors = colors * (n_geohashes // len(colors) + 1)
-            colors = colors[:n_geohashes]
-
-        # Set up fill colors
-        if fill_colors is None:
-            fill_colors = colors
-        elif len(fill_colors) < n_geohashes:
-            fill_colors = fill_colors * (n_geohashes // len(fill_colors) + 1)
-            fill_colors = fill_colors[:n_geohashes]
-
-        # Set up popups
-        if popups is None:
-            popups = [f"Geohash: {gh}" for gh in geohashes]
-        elif len(popups) < n_geohashes:
-            popups = list(popups) + [f"Geohash: {gh}" for gh in geohashes[len(popups) :]]
-
-        # Set up tooltips
-        if tooltips is None:
-            tooltips = [f"Geohash: {gh}" for gh in geohashes]
-        elif len(tooltips) < n_geohashes:
-            tooltips = list(tooltips) + [f"Geohash: {gh}" for gh in geohashes[len(tooltips) :]]
-
-        # Add each geohash
-        for i, geohash in enumerate(geohashes):
-            add_geohash(
-                geohash,
-                color=colors[i],
-                fill=fill,
-                fill_color=fill_colors[i],
-                fill_opacity=fill_opacity,
-                weight=weight,
-                popup=popups[i],
-                tooltip=tooltips[i],
-            )
-
-        return m
-
-    # Add method to add a geohash grid
-    def add_geohash_grid(
-        precision: int = 6,
-        bbox=None,
-        color: str = "blue",
-        fill: bool = True,
-        fill_color: Optional[str] = None,
-        fill_opacity: float = 0.2,
-        weight: int = 1,
-    ):
-        """Add a grid of geohashes at the specified precision.
-
-        Args:
-            precision: Precision of the geohashes
-            bbox: Bounding box to limit the grid (min_lat, min_lon, max_lat, max_lon)
-            color: Color of the geohash borders
-            fill: Whether to fill the geohashes
-            fill_color: Color of the geohash fills (defaults to border color)
-            fill_opacity: Opacity of the geohash fills
-            weight: Width of the geohash borders
-        """
-
-        # If no bounding box is provided, use the current map bounds
-        if bbox is None:
-            # This is an approximation based on the center and zoom level
-            # For a more accurate approach, we would need to get the actual map bounds
-            # which is not directly available in folium without JavaScript
-            lat, lon = m.location
-            # Rough estimate of degrees visible at different zoom levels
-            # This is a very rough approximation
-            degrees_visible = 360 / (2 ** (zoom_start - 1))
-            bbox = (
-                lat - degrees_visible / 2,
-                lon - degrees_visible / 2,
-                lat + degrees_visible / 2,
-                lon + degrees_visible / 2,
-            )
-
-        # Get all geohashes in the bounding box
-        bounding_box = BoundingBox(min_lat=bbox[0], min_lon=bbox[1], max_lat=bbox[2], max_lon=bbox[3])
-
-        geohashes = geohashes_in_box(bounding_box, precision=precision)
-
-        # Add geohashes to the map
-        add_geohashes(
-            geohashes,
-            colors=color,
-            fill=fill,
-            fill_colors=fill_color or color,
-            fill_opacity=fill_opacity,
-            weight=weight,
-        )
-
-        return m
-
-    # Attach methods to the map object
-    m.add_geohash = add_geohash
-    m.add_geohashes = add_geohashes
-    m.add_geohash_grid = add_geohash_grid
-
-    return m
+    return cast(FoliumMapProtocol, m)

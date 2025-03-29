@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from typing import Dict, cast
 
-from pygeohash.cgeohash.geohash_module import (
+from pygeohash.cgeohash.geohash_module import (  # type: ignore[import-not-found]
     decode as c_decode,
     decode_exactly as c_decode_exactly,
     encode as c_encode,
