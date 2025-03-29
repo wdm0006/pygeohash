@@ -91,7 +91,7 @@ def demonstrate_folium_map() -> None:
         center=(center_lat, center_lon),
         zoom_start=10,
     )
-    
+
     # Add geohashes to map
     m.add_geohashes(
         geohashes,

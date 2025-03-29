@@ -7,7 +7,8 @@ Each test captures stdout and verifies expected output is present.
 import io
 import sys
 import matplotlib
-matplotlib.use('Agg')  # Set non-interactive backend before other imports
+
+matplotlib.use("Agg")  # Set non-interactive backend before other imports
 
 from contextlib import redirect_stdout
 from pathlib import Path

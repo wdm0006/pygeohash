@@ -17,11 +17,12 @@ import numpy.typing as npt
 if TYPE_CHECKING:
     import pandas as pd
     from pandas import DataFrame, Series
+
     # Type variables for pandas types
-    GeohashSeriesType = TypeVar('GeohashSeriesType', bound='pd.Series[str]')
-    LatitudeSeriesType = TypeVar('LatitudeSeriesType', bound='pd.Series[float]')
-    LongitudeSeriesType = TypeVar('LongitudeSeriesType', bound='pd.Series[float]')
-    GeohashDataFrameType = TypeVar('GeohashDataFrameType', bound='pd.DataFrame')
+    GeohashSeriesType = TypeVar("GeohashSeriesType", bound="pd.Series[str]")
+    LatitudeSeriesType = TypeVar("LatitudeSeriesType", bound="pd.Series[float]")
+    LongitudeSeriesType = TypeVar("LongitudeSeriesType", bound="pd.Series[float]")
+    GeohashDataFrameType = TypeVar("GeohashDataFrameType", bound="pd.DataFrame")
     # Type aliases for pandas
     GeohashSeries = Series[str]
     LatitudeSeries = Series[float]
@@ -30,6 +31,7 @@ if TYPE_CHECKING:
 else:
     import pandas as pd
     from pandas import DataFrame, Series
+
     # Runtime type aliases
     GeohashSeries = Series
     LatitudeSeries = Series
@@ -57,27 +59,29 @@ GeohashArray = npt.NDArray[np.str_]
 LatitudeArray = npt.NDArray[np.float64]
 LongitudeArray = npt.NDArray[np.float64]
 
+
 def is_valid_geohash(value: Union[str, object]) -> bool:
     """Validate if a string is a valid geohash.
-    
+
     Args:
         value: String to validate
-        
+
     Returns:
         bool: True if valid geohash, False otherwise
     """
     if not isinstance(value, str):
         return False
-    
-    valid_chars = set('0123456789bcdefghjkmnpqrstuvwxyz')
+
+    valid_chars = set("0123456789bcdefghjkmnpqrstuvwxyz")
     return all(c in valid_chars for c in value.lower())
+
 
 def is_valid_latitude(value: Union[float, int, object]) -> bool:
     """Validate if a number is a valid latitude.
-    
+
     Args:
         value: Number to validate
-        
+
     Returns:
         bool: True if valid latitude, False otherwise
     """
@@ -85,12 +89,13 @@ def is_valid_latitude(value: Union[float, int, object]) -> bool:
         return False
     return -90 <= float(value) <= 90
 
+
 def is_valid_longitude(value: Union[float, int, object]) -> bool:
     """Validate if a number is a valid longitude.
-    
+
     Args:
         value: Number to validate
-        
+
     Returns:
         bool: True if valid longitude, False otherwise
     """
@@ -98,15 +103,16 @@ def is_valid_longitude(value: Union[float, int, object]) -> bool:
         return False
     return -180 <= float(value) <= 180
 
+
 def assert_valid_geohash(value: str) -> Geohash:
     """Assert that a value is a valid geohash and return it typed.
-    
+
     Args:
         value: Value to validate
-        
+
     Returns:
         Geohash: The validated geohash
-        
+
     Raises:
         ValueError: If value is not a valid geohash
     """
@@ -114,15 +120,16 @@ def assert_valid_geohash(value: str) -> Geohash:
         raise ValueError(f"Invalid geohash: {value}")
     return value
 
+
 def assert_valid_latitude(value: Union[float, int]) -> Latitude:
     """Assert that a value is a valid latitude and return it typed.
-    
+
     Args:
         value: Value to validate
-        
+
     Returns:
         Latitude: The validated latitude
-        
+
     Raises:
         ValueError: If value is not a valid latitude
     """
@@ -130,21 +137,23 @@ def assert_valid_latitude(value: Union[float, int]) -> Latitude:
         raise ValueError(f"Invalid latitude: {value}")
     return float(value)
 
+
 def assert_valid_longitude(value: Union[float, int]) -> Longitude:
     """Assert that a value is a valid longitude and return it typed.
-    
+
     Args:
         value: Value to validate
-        
+
     Returns:
         Longitude: The validated longitude
-        
+
     Raises:
         ValueError: If value is not a valid longitude
     """
     if not is_valid_longitude(value):
         raise ValueError(f"Invalid longitude: {value}")
     return float(value)
+
 
 # Type checking helpers
 def is_geohash_series(obj: object) -> bool:
@@ -153,11 +162,13 @@ def is_geohash_series(obj: object) -> bool:
         from pandas import Series
     return isinstance(obj, Series) and all(is_valid_geohash(str(x)) for x in obj)
 
+
 def is_latitude_series(obj: object) -> bool:
     """Check if object is a pandas Series of latitudes."""
     if not TYPE_CHECKING:
         from pandas import Series
     return isinstance(obj, Series) and all(is_valid_latitude(x) for x in obj)
+
 
 def is_longitude_series(obj: object) -> bool:
     """Check if object is a pandas Series of longitudes."""
@@ -165,11 +176,13 @@ def is_longitude_series(obj: object) -> bool:
         from pandas import Series
     return isinstance(obj, Series) and all(is_valid_longitude(x) for x in obj)
 
+
 def is_geohash_dataframe(obj: object) -> bool:
     """Check if object is a DataFrame with geohash columns."""
     if not TYPE_CHECKING:
         from pandas import DataFrame
     return isinstance(obj, DataFrame) and any(is_geohash_series(obj[col]) for col in obj.columns)
+
 
 # Direction literals
 Direction = Literal["right", "left", "top", "bottom"]
