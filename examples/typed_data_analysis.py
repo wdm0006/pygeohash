@@ -128,13 +128,13 @@ def main() -> None:
     print("\nDemonstrating error handling...")
     try:
         # This will raise ValueError (invalid latitude)
-        invalid_lat = assert_valid_latitude(91.0)
+        assert_valid_latitude(91.0)
     except ValueError as e:
         print(f"Caught error: {e}")
 
     try:
         # This will raise ValueError (invalid geohash)
-        invalid_geohash = assert_valid_geohash("invalid!")
+        assert_valid_geohash("invalid!")
     except ValueError as e:
         print(f"Caught error: {e}")
 
