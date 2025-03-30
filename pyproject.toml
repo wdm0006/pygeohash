@@ -130,11 +130,7 @@ warn_unused_ignores = true
 warn_no_return = true
 warn_unreachable = true
 strict_equality = true
-strict_concatenate = true
-
-[[tool.mypy.overrides]]
-module = ["cgeohash.*"]
-ignore_errors = true
+extra_checks = true
 
 [[tool.mypy.overrides]]
 module = ["matplotlib.*", "folium.*", "numpy.*", "numba.*"]

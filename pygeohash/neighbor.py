@@ -6,7 +6,7 @@ in different directions (right, left, top, bottom).
 
 from __future__ import annotations
 
-from typing import Dict, Final, Literal, cast
+from typing import Dict, Final, Literal
 
 from pygeohash.geohash import __base32
 from pygeohash.types import Direction
@@ -84,4 +84,4 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
     neighbor_str = NEIGHBORS[direction][split_direction]
     idx = neighbor_str.index(last_char)
     base32_char = __base32[idx]
-    return base + cast(str, base32_char)
+    return base + base32_char
