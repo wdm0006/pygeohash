@@ -5,7 +5,9 @@ including calculating the bounding box for a geohash and operations
 related to geospatial regions.
 """
 
-from typing import List, NamedTuple
+from __future__ import annotations
+
+from typing import List, NamedTuple, Set, Iterator
 
 from pygeohash.geohash import decode_exactly, encode
 
@@ -49,10 +51,10 @@ def get_bounding_box(geohash: str) -> BoundingBox:
     lat, lon, lat_err, lon_err = decode_exactly(geohash)
 
     # Calculate the bounding box coordinates
-    min_lat = lat - lat_err
-    min_lon = lon - lon_err
-    max_lat = lat + lat_err
-    max_lon = lon + lon_err
+    min_lat: float = lat - lat_err
+    min_lon: float = lon - lon_err
+    max_lat: float = lat + lat_err
+    max_lon: float = lon + lon_err
 
     return BoundingBox(min_lat, min_lon, max_lat, max_lon)
 
@@ -95,7 +97,7 @@ def is_point_in_geohash(lat: float, lon: float, geohash: str) -> bool:
         >>> is_point_in_geohash(40.0, 10.0, "u4pruyd")
         False
     """
-    bbox = get_bounding_box(geohash)
+    bbox: BoundingBox = get_bounding_box(geohash)
     return is_point_in_box(lat, lon, bbox)
 
 
@@ -144,32 +146,32 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
         geohashes for the same bounding box.
     """
     # Find a geohash at the center of the bounding box
-    center_lat = (bbox.min_lat + bbox.max_lat) / 2
-    center_lon = (bbox.min_lon + bbox.max_lon) / 2
-    center_geohash = encode(center_lat, center_lon, precision)
+    center_lat: float = (bbox.min_lat + bbox.max_lat) / 2
+    center_lon: float = (bbox.min_lon + bbox.max_lon) / 2
+    center_geohash: str = encode(center_lat, center_lon, precision)
 
     # Get the size of a geohash at this precision
-    center_bbox = get_bounding_box(center_geohash)
-    lat_step = center_bbox.max_lat - center_bbox.min_lat
-    lon_step = center_bbox.max_lon - center_bbox.min_lon
+    center_bbox: BoundingBox = get_bounding_box(center_geohash)
+    lat_step: float = center_bbox.max_lat - center_bbox.min_lat
+    lon_step: float = center_bbox.max_lon - center_bbox.min_lon
 
     # Create a set to store unique geohashes
-    result = set()
+    result: Set[str] = set()
 
     # Calculate the starting points slightly outside the bounding box
     # to ensure we cover the entire area
-    start_lat = bbox.min_lat - lat_step
-    end_lat = bbox.max_lat + lat_step
-    start_lon = bbox.min_lon - lon_step
-    end_lon = bbox.max_lon + lon_step
+    start_lat: float = bbox.min_lat - lat_step
+    end_lat: float = bbox.max_lat + lat_step
+    start_lon: float = bbox.min_lon - lon_step
+    end_lon: float = bbox.max_lon + lon_step
 
     # Sample points in a grid pattern with spacing based on geohash size
     # This ensures we get all geohashes that intersect with the bounding box
     for lat in _float_range(start_lat, end_lat, lat_step / 2):
         for lon in _float_range(start_lon, end_lon, lon_step / 2):
             if bbox.min_lat <= lat <= bbox.max_lat or bbox.min_lon <= lon <= bbox.max_lon:
-                gh = encode(lat, lon, precision)
-                gh_bbox = get_bounding_box(gh)
+                gh: str = encode(lat, lon, precision)
+                gh_bbox: BoundingBox = get_bounding_box(gh)
                 # Only add geohashes that actually intersect with our bounding box
                 if do_boxes_intersect(bbox, gh_bbox):
                     result.add(gh)
@@ -177,7 +179,7 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
     return list(result)
 
 
-def _float_range(start: float, stop: float, step: float) -> List[float]:
+def _float_range(start: float, stop: float, step: float) -> Iterator[float]:
     """Helper function to create a range of float values.
 
     Args:
@@ -186,11 +188,9 @@ def _float_range(start: float, stop: float, step: float) -> List[float]:
         step (float): The step size.
 
     Returns:
-        List[float]: A list of float values from start to stop with the given step size.
+        Iterator[float]: An iterator of float values from start to stop with the given step size.
     """
-    result = []
-    current = start
+    current: float = start
     while current <= stop:
-        result.append(current)
+        yield current
         current += step
-    return result

@@ -74,12 +74,14 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   
+   :caption: Contents:
+
    introduction
    concepts
    usage
-   api
+   types
    examples
+   api
    blog_posts
 
 Indices and tables

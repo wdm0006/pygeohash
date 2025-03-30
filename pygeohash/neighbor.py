@@ -4,10 +4,15 @@ This module provides functionality for calculating adjacent geohashes
 in different directions (right, left, top, bottom).
 """
 
+from __future__ import annotations
+
+from typing import Dict, Final, Literal
+
 from pygeohash.geohash import __base32
+from pygeohash.types import Direction
 
 # Configuration  -- from https://github.com/davetroy/geohash-js/blob/master/geohash.js
-NEIGHBORS = {
+NEIGHBORS: Final[Dict[Direction, Dict[Literal["even", "odd"], str]]] = {
     "right": {
         "even": "bc01fg45238967deuvhjyznpkmstqrwx",
         "odd": "p0r21436x8zb9dcf5h7kjnmqesgutwvy",  # = top-even
@@ -27,7 +32,7 @@ NEIGHBORS = {
 }
 
 # Used change of parent tile
-BORDERS = {
+BORDERS: Final[Dict[Direction, Dict[Literal["even", "odd"], str]]] = {
     "right": {
         "even": "bcfguvyz",
         "odd": "prxz",  # top-even
@@ -47,12 +52,12 @@ BORDERS = {
 }
 
 
-def get_adjacent(geohash: str, direction: str) -> str:
+def get_adjacent(geohash: str, direction: Direction) -> str:
     """Calculate the adjacent geohash in the specified direction.
 
     Args:
         geohash (str): The input geohash string.
-        direction (str): The direction to find the adjacent geohash.
+        direction (Direction): The direction to find the adjacent geohash.
             Must be one of: "right", "left", "top", "bottom".
 
     Returns:
@@ -71,9 +76,12 @@ def get_adjacent(geohash: str, direction: str) -> str:
     last_char = source_hash[-1]
     base = source_hash[:-1]
 
-    split_direction = ["even", "odd"][len(source_hash) % 2]
+    split_direction: Literal["even", "odd"] = "even" if len(source_hash) % 2 == 0 else "odd"
 
     if last_char in BORDERS[direction][split_direction]:
         base = get_adjacent(base, direction)
 
-    return base + __base32[NEIGHBORS[direction][split_direction].index(last_char)]
+    neighbor_str = NEIGHBORS[direction][split_direction]
+    idx = neighbor_str.index(last_char)
+    base32_char = __base32[idx]
+    return base + base32_char
