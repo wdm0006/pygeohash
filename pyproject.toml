@@ -56,7 +56,8 @@ dev = [
     "types-requests>=2.31.0",
     "types-setuptools>=69.0.0",
     "pandas",
-    "pandas-stubs"
+    "pandas-stubs",
+    "numpy"
 ]
 
 [tool.pytest.ini_options]
