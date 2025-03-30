@@ -111,7 +111,7 @@ isolated_build = True
 [testenv]
 # Install the package itself with the 'dev' extras
 deps =
-    {.[dev]}
+    .[dev]
 commands =
     pytest {posargs:tests}
 """
