@@ -123,3 +123,4 @@ dmypy.json
 
 # Coverage
 htmlcov/
+*.lock
