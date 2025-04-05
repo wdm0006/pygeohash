@@ -15,6 +15,9 @@ from pygeohash.distances import geohash_haversine_distance
 from pygeohash.geohash import decode, encode
 from pygeohash.geohash_types import LatLong
 from pygeohash.types import GeohashCollection, GeohashPrecision
+from pygeohash.logging import get_logger
+
+logger = get_logger(__name__)
 
 __author__: Final[str] = "Will McGinnis"
 
@@ -56,12 +59,21 @@ def _max_cardinal(geohashes: GeohashCollection, key_func: Callable[[LatLong], fl
     Returns:
         str: The geohash at the extreme position.
     """
+    logger.debug("Finding %s for %d geohashes", "maximum" if reverse else "minimum", len(geohashes))
+
+    if not geohashes:
+        logger.warning("Empty geohash collection provided")
+        return ""
+
     coordinates = (decode(x) for x in geohashes)
     if reverse:
         coordinate = max(coordinates, key=lambda x: key_func(x))
     else:
         coordinate = min(coordinates, key=lambda x: key_func(x))
-    return encode(coordinate.latitude, coordinate.longitude)
+
+    result = encode(coordinate.latitude, coordinate.longitude)
+    logger.debug("Found %s geohash: %s", "maximum" if reverse else "minimum", result)
+    return result
 
 
 def northern(geohashes: GeohashCollection) -> str:
@@ -77,7 +89,10 @@ def northern(geohashes: GeohashCollection) -> str:
         >>> northern(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyf'
     """
-    return _max_cardinal(geohashes, __latitude, True)
+    logger.debug("Finding northernmost geohash in collection of %d geohashes", len(geohashes))
+    result = _max_cardinal(geohashes, __latitude, True)
+    logger.debug("Found northernmost geohash: %s", result)
+    return result
 
 
 def southern(geohashes: GeohashCollection) -> str:
@@ -93,7 +108,10 @@ def southern(geohashes: GeohashCollection) -> str:
         >>> southern(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyc'
     """
-    return _max_cardinal(geohashes, __latitude, False)
+    logger.debug("Finding southernmost geohash in collection of %d geohashes", len(geohashes))
+    result = _max_cardinal(geohashes, __latitude, False)
+    logger.debug("Found southernmost geohash: %s", result)
+    return result
 
 
 def eastern(geohashes: GeohashCollection) -> str:
@@ -109,7 +127,10 @@ def eastern(geohashes: GeohashCollection) -> str:
         >>> eastern(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyf'
     """
-    return _max_cardinal(geohashes, __longitude, True)
+    logger.debug("Finding easternmost geohash in collection of %d geohashes", len(geohashes))
+    result = _max_cardinal(geohashes, __longitude, True)
+    logger.debug("Found easternmost geohash: %s", result)
+    return result
 
 
 def western(geohashes: GeohashCollection) -> str:
@@ -125,7 +146,10 @@ def western(geohashes: GeohashCollection) -> str:
         >>> western(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyc'
     """
-    return _max_cardinal(geohashes, __longitude, False)
+    logger.debug("Finding westernmost geohash in collection of %d geohashes", len(geohashes))
+    result = _max_cardinal(geohashes, __longitude, False)
+    logger.debug("Found westernmost geohash: %s", result)
+    return result
 
 
 def mean(geohashes: GeohashCollection, precision: GeohashPrecision = 12) -> str:
@@ -142,10 +166,20 @@ def mean(geohashes: GeohashCollection, precision: GeohashPrecision = 12) -> str:
         >>> mean(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruye'
     """
+    logger.debug("Calculating mean position for %d geohashes with precision %d", len(geohashes), precision)
+
+    if not geohashes:
+        logger.warning("Empty geohash collection provided")
+        return ""
+
     coordinates = [decode(x) for x in geohashes]
+    logger.debug("Decoded %d coordinates for mean calculation", len(coordinates))
     mean_lat = statistics.mean(c.latitude for c in coordinates)
     mean_lon = statistics.mean(c.longitude for c in coordinates)
-    return encode(mean_lat, mean_lon, precision)
+
+    result = encode(mean_lat, mean_lon, precision)
+    logger.debug("Mean position calculated: %s (lat=%f, lon=%f)", result, mean_lat, mean_lon)
+    return result
 
 
 def variance(geohashes: GeohashCollection) -> float:
@@ -164,9 +198,18 @@ def variance(geohashes: GeohashCollection) -> float:
         >>> variance(["u4pruyd", "u4pruyf", "u4pruyc"])
         2500.0
     """
+    logger.debug("Calculating variance for %d geohashes", len(geohashes))
+
+    if not geohashes:
+        logger.warning("Empty geohash collection provided")
+        return 0.0
+
     mean_geohash = mean(geohashes)
     squared_distances = [(geohash_haversine_distance(gh, mean_geohash)) ** 2 for gh in geohashes]
-    return statistics.mean(squared_distances)
+    result = statistics.mean(squared_distances)
+
+    logger.debug("Calculated variance: %f square meters", result)
+    return result
 
 
 def std(geohashes: GeohashCollection) -> float:
@@ -185,4 +228,7 @@ def std(geohashes: GeohashCollection) -> float:
         >>> std(["u4pruyd", "u4pruyf", "u4pruyc"])
         50.0
     """
-    return math.sqrt(variance(geohashes))
+    logger.debug("Calculating standard deviation for %d geohashes", len(geohashes))
+    result = math.sqrt(variance(geohashes))
+    logger.debug("Calculated standard deviation: %f meters", result)
+    return result

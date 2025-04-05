@@ -45,6 +45,14 @@ from .types import (
     LongitudeSeries,
     GeohashDataFrame,
 )
+from .logging import (
+    logger,
+    get_logger,
+    set_log_level,
+    add_stream_handler,
+    add_file_handler,
+    remove_all_handlers,
+)
 
 __author__ = "willmcginnis"
 
@@ -98,6 +106,13 @@ __all__ = [
     "assert_valid_geohash",
     "assert_valid_latitude",
     "assert_valid_longitude",
+    # Logging functions
+    "logger",
+    "get_logger",
+    "set_log_level",
+    "add_stream_handler",
+    "add_file_handler",
+    "remove_all_handlers",
 ]
 
 # Try to import visualization functions if dependencies are available

@@ -12,6 +12,9 @@ from typing import Dict, Final
 
 from pygeohash.geohash import __base32, decode_exactly
 from pygeohash.geohash_types import ExactLatLong
+from pygeohash.logging import get_logger
+
+logger = get_logger(__name__)
 
 __author__: Final[str] = "Will McGinnis"
 
@@ -57,11 +60,17 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
         >>> geohash_approximate_distance("u4pruyd", "u4pruyf")
         118.0
     """
+    logger.debug(
+        "Calculating approximate distance between %s and %s (check_validity=%s)", geohash_1, geohash_2, check_validity
+    )
+
     if check_validity:
         if len([x for x in geohash_1 if x in __base32]) != len(geohash_1):
+            logger.error("Invalid geohash 1: %s", geohash_1)
             raise ValueError(f"Geohash 1: {geohash_1} is not a valid geohash")
 
         if len([x for x in geohash_2 if x in __base32]) != len(geohash_2):
+            logger.error("Invalid geohash 2: %s", geohash_2)
             raise ValueError(f"Geohash 2: {geohash_2} is not a valid geohash")
 
     # normalize the geohashes to the length of the shortest
@@ -83,7 +92,9 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
     # we only have precision metrics up to 10 characters
     matching = min(matching, 10)
 
-    return _PRECISION[matching]
+    result = _PRECISION[matching]
+    logger.debug("Found %d matching characters, approximate distance: %f meters", matching, result)
+    return result
 
 
 def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
@@ -103,11 +114,25 @@ def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
         >>> geohash_haversine_distance("u4pruyd", "u4pruyf")
         152.3
     """
+    logger.debug("Calculating haversine distance between %s and %s", geohash_1, geohash_2)
+
     location_1: ExactLatLong = decode_exactly(geohash_1)
     location_2: ExactLatLong = decode_exactly(geohash_2)
 
     lat_1, lon_1 = location_1.latitude, location_1.longitude
     lat_2, lon_2 = location_2.latitude, location_2.longitude
+
+    logger.debug(
+        "Coordinates: (%f±%f, %f±%f) and (%f±%f, %f±%f)",
+        lat_1,
+        location_1.latitude_error,
+        lon_1,
+        location_1.longitude_error,
+        lat_2,
+        location_2.latitude_error,
+        lon_2,
+        location_2.longitude_error,
+    )
 
     phi_1: float = math.radians(lat_1)
     phi_2: float = math.radians(lat_2)
@@ -120,4 +145,6 @@ def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
     ) * math.sin(delta_lambda / 2)
     c: float = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
-    return _EARTH_RADIUS * c
+    result = _EARTH_RADIUS * c
+    logger.debug("Calculated haversine distance: %f meters", result)
+    return result
