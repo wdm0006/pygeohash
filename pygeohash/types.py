@@ -13,6 +13,7 @@ from typing import Dict, Final, List, Literal, TypeVar, Union, Tuple, Collection
 from typing import TYPE_CHECKING
 import numpy as np
 import numpy.typing as npt
+import sys
 
 from pygeohash.logging import get_logger
 
@@ -27,9 +28,14 @@ if TYPE_CHECKING:
     LongitudeSeriesType = TypeVar("LongitudeSeriesType", bound="pd.Series[float]")
     GeohashDataFrameType = TypeVar("GeohashDataFrameType", bound="pd.DataFrame")
     # Type aliases for pandas
-    GeohashSeries = Series[str]
-    LatitudeSeries = Series[float]
-    LongitudeSeries = Series[float]
+    if sys.version_info >= (3, 9):
+        GeohashSeries = Series[str]
+        LatitudeSeries = Series[float]
+        LongitudeSeries = Series[float]
+    else:
+        GeohashSeries = Series
+        LatitudeSeries = Series
+        LongitudeSeries = Series
     GeohashDataFrame = DataFrame
 else:
     import pandas as pd

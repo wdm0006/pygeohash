@@ -4,7 +4,7 @@ Type System
 The ``pygeohash`` library provides a comprehensive type system to help users write type-safe code and get better IDE support. This includes both basic types for working with geohashes and specialized types for NumPy and Pandas integration.
 
 Core Types
----------
+----------
 
 These are the fundamental types used throughout the library:
 
@@ -41,12 +41,12 @@ These are the fundamental types used throughout the library:
         print(f"Min Lon: {bbox.min_lon}, Max Lon: {bbox.max_lon}")
 
 Validation Types
---------------
+----------------
 
 The library provides special types and validation functions for geohashes and coordinates. These help catch errors early and make code more maintainable.
 
 Validation Functions
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 The library provides three pairs of validation functions:
 
@@ -61,7 +61,7 @@ The library provides three pairs of validation functions:
    - ``assert_valid_longitude(value: float) -> Longitude``
 
 Basic Usage
-~~~~~~~~~~
+~~~~~~~~~~~
 
 Here's how to use the validation functions:
 
@@ -89,7 +89,7 @@ Here's how to use the validation functions:
         print(f"Validation failed: {e}")
 
 Validation Rules
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 The validation functions enforce the following rules:
 
@@ -107,7 +107,7 @@ The validation functions enforce the following rules:
    - Must be a valid float number
 
 Best Practices
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 Here are some recommended patterns for using the validation types:
 
@@ -196,7 +196,7 @@ Here are some recommended patterns for using the validation types:
         return s.apply(assert_valid_geohash)
 
 Common Validation Errors
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here are the common validation errors you might encounter:
 
@@ -220,7 +220,7 @@ Here are the common validation errors you might encounter:
     assert_valid_longitude(-181)  # Below -180 degrees
 
 Collection Types
---------------
+----------------
 
 The library provides type aliases for collections of geohashes:
 
@@ -244,7 +244,7 @@ The library provides type aliases for collections of geohashes:
         geohashes: GeohashList = ["9q9hwg", "9q9hwy", "9q9hwv"]
 
 NumPy Integration
----------------
+-----------------
 
 For users working with NumPy arrays, the library provides specialized array types:
 
@@ -276,7 +276,7 @@ For users working with NumPy arrays, the library provides specialized array type
         longitudes: LongitudeArray = np.array([-122.4194, -122.4195, -122.4196])
 
 Pandas Integration
-----------------
+------------------
 
 For users working with Pandas, the library provides specialized Series and DataFrame types:
 
@@ -312,7 +312,7 @@ For users working with Pandas, the library provides specialized Series and DataF
         print(df.longitude)  # LongitudeSeries
 
 Utility Types
------------
+-------------
 
 The library also includes utility types for specific purposes:
 
@@ -337,7 +337,7 @@ The library also includes utility types for specific purposes:
             return encode(lat, lon, prec)  # prec must be between 1 and 12
 
 Type Safety and Fallbacks
------------------------
+-------------------------
 
 The library's type system is designed to be both helpful and unobtrusive:
 
@@ -350,7 +350,7 @@ The library's type system is designed to be both helpful and unobtrusive:
    - No runtime overhead or dependencies are added
 
 Example: Type-Safe Function
--------------------------
+---------------------------
 
 Here's an example of how to write a type-safe function that works with different input types:
 

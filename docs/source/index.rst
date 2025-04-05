@@ -15,7 +15,7 @@ Welcome to PyGeoHash's Documentation!
     :target: https://pypi.org/project/pygeohash/
 
 Key Features
------------
+------------
 
 - **Zero Dependencies**: Works with just the Python standard library
 - **Simple API**: Clean, intuitive functions that are easy to understand
@@ -25,7 +25,7 @@ Key Features
 - **Visualization**: Optional visualization capabilities with Matplotlib and Folium
 
 Quick Start
-----------
+-----------
 
 Installation:
 
