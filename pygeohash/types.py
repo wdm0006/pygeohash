@@ -9,10 +9,13 @@ parameter types.
 from __future__ import annotations
 
 import re
-from typing import Dict, Final, List, Literal, TypeVar, Union, Iterable, Tuple
+from typing import Dict, Final, List, Literal, TypeVar, Union, Tuple, Collection
 from typing import TYPE_CHECKING
 import numpy as np
 import numpy.typing as npt
+
+from pygeohash.logging import get_logger
+
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -39,8 +42,10 @@ else:
     GeohashDataFrame = DataFrame
 
 # Re-export core types
-from .geohash_types import LatLong, ExactLatLong, GeohashPrecision
-from .bounding_box import BoundingBox
+from pygeohash.geohash_types import LatLong, ExactLatLong, GeohashPrecision
+from pygeohash.bounding_box import BoundingBox
+
+logger = get_logger(__name__)
 
 # Type variables
 T = TypeVar("T")
@@ -206,7 +211,7 @@ PRECISION_TO_ERROR: Final[Dict[int, float]] = {
 }
 
 # Collection types
-GeohashCollection = Iterable[str]
+GeohashCollection = Collection[str]
 GeohashList = List[str]
 
 __all__ = [

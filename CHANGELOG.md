@@ -1,4 +1,9 @@
+v3.1.0
+======
 
+ * Added comprehensive logging
+ * Added type hints and a types module
+ 
 v3.0.0
 ======
 
