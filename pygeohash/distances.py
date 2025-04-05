@@ -48,7 +48,7 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
         geohash_1 (str): The first geohash.
         geohash_2 (str): The second geohash.
         check_validity (bool, optional): Whether to check if the geohashes are valid.
-            Defaults to False.
+        Defaults to False.
 
     Returns:
         float: The approximate distance in meters.

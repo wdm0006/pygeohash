@@ -4,7 +4,7 @@ Usage Guide
 This guide covers common use cases and patterns for working with the PyGeoHash library.
 
 Installation
------------
+------------
 
 PyGeoHash can be installed from PyPI using pip:
 
@@ -13,10 +13,10 @@ PyGeoHash can be installed from PyPI using pip:
     pip install pygeohash
 
 Basic Operations
---------------
+----------------
 
 Encoding Coordinates to Geohash
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To convert latitude and longitude coordinates to a geohash string:
 
@@ -37,7 +37,7 @@ To convert latitude and longitude coordinates to a geohash string:
     print(strict_geohash)  # 'ezs42'
 
 Decoding Geohash to Coordinates
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To convert a geohash string back to latitude and longitude coordinates:
 
@@ -55,7 +55,7 @@ To convert a geohash string back to latitude and longitude coordinates:
     print(exact_location.latitude_error, exact_location.longitude_error)  # Error margins
 
 Working with Geohash Precision
------------------------------
+------------------------------
 
 The precision of a geohash determines how accurately it represents a location. Each additional character in a geohash increases precision:
 
@@ -72,7 +72,7 @@ The precision of a geohash determines how accurately it represents a location. E
         print(f"Precision {precision}: {geohash} -> ({decoded.latitude}, {decoded.longitude})")
 
 Calculating Distances
--------------------
+---------------------
 
 To calculate the distance between two geohashes:
 
@@ -95,7 +95,7 @@ To calculate the distance between two geohashes:
     print(f"Haversine distance: {haversine_distance} meters")
 
 Finding Adjacent Geohashes
-------------------------
+--------------------------
 
 To find geohashes adjacent to a given geohash:
 
@@ -120,7 +120,7 @@ To find geohashes adjacent to a given geohash:
     print(f"Left: {adjacent_left}")
 
 Bounding Box Operations
----------------------
+-----------------------
 
 PyGeoHash provides functions for working with geospatial bounding boxes:
 
@@ -139,7 +139,7 @@ PyGeoHash provides functions for working with geospatial bounding boxes:
     print(f"  Max longitude: {bbox.max_lon}")
 
 Checking if a Point is Within a Box
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can check if a point is within a bounding box:
 
@@ -161,7 +161,7 @@ You can check if a point is within a bounding box:
     print(f"Point ({point_lat}, {point_lon}) is {'inside' if is_in_geohash else 'outside'} the geohash {geohash}")
 
 Checking if Bounding Boxes Intersect
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can check if two bounding boxes intersect:
 
@@ -178,7 +178,7 @@ You can check if two bounding boxes intersect:
     print(f"Boxes {'intersect' if do_intersect else 'do not intersect'}")
 
 Finding Geohashes in a Bounding Box
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can find all geohashes that intersect with a bounding box:
 
@@ -199,7 +199,7 @@ You can find all geohashes that intersect with a bounding box:
     print(f"Found {len(geohashes_p6)} geohashes at precision 6")
 
 Practical Example: Geospatial Querying
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Using bounding boxes for efficient geospatial querying:
 
@@ -251,7 +251,7 @@ Using bounding boxes for efficient geospatial querying:
         print(f"  - {location['name']} (geohash: {location['geohash']})")
 
 Statistical Functions
--------------------
+---------------------
 
 PyGeoHash provides several statistical functions for working with groups of geohashes:
 
@@ -285,10 +285,10 @@ PyGeoHash provides several statistical functions for working with groups of geoh
     print(f"Standard deviation: {std_dev} meters")
 
 Practical Examples
-----------------
+------------------
 
 Location-Based Search
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 Using geohashes for a simple location-based search:
 
@@ -332,7 +332,7 @@ Using geohashes for a simple location-based search:
     print(f"Sorted POIs by distance: {sorted_pois}")
 
 Geofencing
-^^^^^^^^^
+^^^^^^^^^^
 
 Using geohashes for simple geofencing:
 
@@ -361,7 +361,7 @@ Using geohashes for simple geofencing:
         print(f"{location['name']} is {'inside' if in_geofence else 'outside'} the geofence")
 
 Visualization
------------
+-------------
 
 PyGeoHash provides visualization capabilities through the optional ``viz`` module. To use these functions, you need to install the visualization dependencies:
 
@@ -370,7 +370,7 @@ PyGeoHash provides visualization capabilities through the optional ``viz`` modul
     pip install pygeohash[viz]
 
 Plotting a Single Geohash
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -392,7 +392,7 @@ Plotting a Single Geohash
    :alt: Single geohash visualization
 
 Plotting Multiple Geohashes
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -427,7 +427,7 @@ Plotting Multiple Geohashes
    :alt: Multiple geohashes with labels
 
 Creating Interactive Maps
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 PyGeoHash integrates with Folium to create interactive maps:
 
@@ -452,7 +452,7 @@ PyGeoHash integrates with Folium to create interactive maps:
 For more detailed examples of visualization, see the :doc:`examples` section.
 
 Performance Considerations
-------------------------
+--------------------------
 
 - Geohash operations are very fast due to the high-performance C extension implementation
 - When working with millions of geohashes, consider using a database with geospatial capabilities
@@ -462,7 +462,7 @@ Performance Considerations
 For more detailed examples of visualization, see the :doc:`examples` section.
 
 Performance Considerations
-------------------------
+--------------------------
 
 - Geohash operations are very fast due to the high-performance C extension implementation
 - When working with millions of geohashes, consider using a database with geospatial capabilities

@@ -4,7 +4,7 @@ Examples
 This section provides practical code examples for common use cases of the PyGeoHash library.
 
 Basic Geohashing
---------------
+----------------
 
 Converting between coordinates and geohashes:
 
@@ -38,7 +38,7 @@ Converting between coordinates and geohashes:
     print(f"Error margins: ±{exact.latitude_error}° latitude, ±{exact.longitude_error}° longitude")
 
 Adjacent Geohashes
-----------------
+------------------
 
 Working with adjacent geohashes:
 
@@ -92,7 +92,7 @@ Working with adjacent geohashes:
         print(" ".join(row))
 
 Distance Calculations
-------------------
+---------------------
 
 Calculating distances between geohashes:
 
@@ -126,7 +126,7 @@ Calculating distances between geohashes:
             print(f"  Haversine: {haversine_distance/1000:.1f} km")
 
 Statistical Analysis
------------------
+--------------------
 
 Using statistical functions with geohashes:
 
@@ -184,7 +184,7 @@ Using statistical functions with geohashes:
     print(f"\nDistance between cluster means: {distance/1000:.1f} km")
 
 Geospatial Search
----------------
+-----------------
 
 Implementing a simple geospatial search using geohashes:
 
@@ -278,7 +278,7 @@ Implementing a simple geospatial search using geohashes:
         print(f"{result['data']['name']}: {result['distance_km']:.2f} km")
 
 Clustering by Geohash Prefix
--------------------------
+----------------------------
 
 Clustering points by their geohash prefixes:
 
@@ -343,7 +343,7 @@ std_dev = pgh.std(geohashes)
 print(f"Standard deviation: {std_dev:.2f} meters")
 
 Bounding Box Operations
----------------------
+-----------------------
 
 Working with geohash bounding boxes:
 
@@ -395,7 +395,7 @@ Working with geohash bounding boxes:
     print(f"Intersection of 9q8yyk and dr5r: {pgh.do_boxes_intersect(bbox1, bbox3)}")
 
 Visualizing Bounding Boxes
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Visualizing geohash bounding boxes with matplotlib:
 
@@ -456,7 +456,7 @@ Visualizing geohash bounding boxes with matplotlib:
     plt.show()
 
 Visualization Examples
---------------------
+----------------------
 
 PyGeoHash provides visualization capabilities through the optional ``viz`` module.
 To use these functions, you need to install the visualization dependencies:
@@ -478,7 +478,7 @@ You can generate all the example visualizations shown below using the provided M
 This will create static images and interactive maps in the ``docs/source/_static/images`` directory.
 
 Plotting a Single Geohash
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 .. code-block:: python
 
@@ -509,7 +509,7 @@ Plotting a Single Geohash
    A single geohash with its center point and label displayed
 
 Plotting Multiple Geohashes
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 .. code-block:: python
 
@@ -546,7 +546,7 @@ Plotting Multiple Geohashes
    Multiple geohashes with custom labels and colors
 
 Creating Interactive Maps with Folium
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 .. code-block:: python
 
@@ -573,7 +573,7 @@ Creating Interactive Maps with Folium
    :file: _static/images/folium_map.html
 
 Creating a Geohash Grid
-~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 .. code-block:: python
 
@@ -593,7 +593,7 @@ Creating a Geohash Grid
    :file: _static/images/folium_grid.html
 
 Visualizing Geohash Neighbors
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 .. code-block:: python
 
@@ -630,7 +630,7 @@ Visualizing Geohash Neighbors
    A geohash (center) and its neighboring geohashes
 
 Visualizing Geohash Precision
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 .. code-block:: python
 
@@ -665,6 +665,3 @@ Visualizing Geohash Precision
    :alt: Geohashes at different precision levels
    
    Geohashes at different precision levels (4, 5, and 6)
-
-Practical Applications
-------------------- 

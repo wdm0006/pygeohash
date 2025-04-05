@@ -1,6 +1,6 @@
-name: "Docs Publication"
+name: "Docs Validation"
 on:
-  push:
+  pull_request:
     branches: [ master ]
 
 jobs:
@@ -28,9 +28,5 @@ jobs:
         uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "./docs/"
-      
-      - name: Deploy Docs
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: "./docs/build/html/"
+          pre-build-command: "pip install -e '.[dev,viz]'"
+          build-command: "make html SPHINXOPTS='-W --keep-going'"

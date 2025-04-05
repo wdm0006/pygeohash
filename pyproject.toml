@@ -92,7 +92,7 @@ target-version = "py38"
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E", "F", "B"]
+select = ["E", "F", "B", "S"]
 ignore = []
 
 [tool.ruff.lint.isort]
@@ -100,6 +100,7 @@ known-first-party = ["pygeohash"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # Ignore unused imports in __init__.py files
+"tests/**/*.py" = ["B011", "S101"]  # Ignore assert warnings in test files
 
 [tool.ruff.format]
 quote-style = "double"

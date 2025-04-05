@@ -1,10 +1,10 @@
 API Reference
-============
+=============
 
 This section provides detailed documentation for all functions available in the PyGeoHash library.
 
 Core Functions
--------------
+--------------
 
 These core functions are implemented using a high-performance C extension for maximum efficiency.
 
@@ -14,7 +14,7 @@ These core functions are implemented using a high-performance C extension for ma
 .. autofunction:: pygeohash.decode_exactly
 
 Data Types
----------
+----------
 
 .. autoclass:: pygeohash.LatLong
    :members:
@@ -35,18 +35,18 @@ Data Types
    :noindex:
 
 Distance Calculations
---------------------
+---------------------
 
 .. autofunction:: pygeohash.geohash_approximate_distance
 .. autofunction:: pygeohash.geohash_haversine_distance
 
 Geohash Navigation
------------------
+------------------
 
 .. autofunction:: pygeohash.get_adjacent
 
 Bounding Box Operations
----------------------
+-----------------------
 
 .. autofunction:: pygeohash.get_bounding_box
 .. autofunction:: pygeohash.is_point_in_box
@@ -55,7 +55,7 @@ Bounding Box Operations
 .. autofunction:: pygeohash.geohashes_in_box
 
 Statistical Functions
--------------------
+---------------------
 
 .. autofunction:: pygeohash.mean
 .. autofunction:: pygeohash.northern
@@ -66,7 +66,7 @@ Statistical Functions
 .. autofunction:: pygeohash.std
 
 Visualization Functions
----------------------
+-----------------------
 
 These functions require additional dependencies that can be installed with:
 ``pip install pygeohash[viz]``

@@ -1,8 +1,8 @@
 Geohash Concepts
-===============
+================
 
 What is a Geohash?
------------------
+------------------
 
 A geohash is a public domain geocoding system that encodes geographic coordinates (latitude and longitude) into a short string of letters and digits. It was invented by Gustavo Niemeyer in 2008.
 
@@ -13,7 +13,7 @@ Geohashes offer a way to represent a location with a single string, where:
 - Geohashes can be used for indexing and searching geographic data
 
 How Geohashing Works
--------------------
+--------------------
 
 Geohashing uses a base-32 encoding system with the following characters:
 ``0123456789bcdefghjkmnpqrstuvwxyz`` (note the omission of a, i, l, and o to avoid confusion with numbers).
@@ -32,7 +32,7 @@ The encoding process works by recursively dividing the world into smaller and sm
     World → "e" → "ez" → "ezs" → "ezs4" → "ezs42" → ...
 
 Visual Representation
---------------------
+---------------------
 
 Consider the following visualization of how geohashing divides the world:
 
@@ -63,7 +63,7 @@ Consider the following visualization of how geohashing divides the world:
     +---+---+---+---+---+---+---+---+
 
 Precision and Cell Size
-----------------------
+-----------------------
 
 The precision of a geohash depends on its length:
 
@@ -125,7 +125,7 @@ The precision of a geohash depends on its length:
      - 3.7 cm × 1.9 cm
 
 Properties of Geohashes
-----------------------
+-----------------------
 
 Geohashes have several important properties:
 
@@ -135,7 +135,7 @@ Geohashes have several important properties:
 4. **Human-Readable**: Can be easily shared and communicated
 
 Edge Cases and Limitations
--------------------------
+--------------------------
 
 While geohashes are powerful, they have some limitations:
 
@@ -147,7 +147,7 @@ While geohashes are powerful, they have some limitations:
 To address the edge effect issue, when searching for nearby locations, it's often necessary to check adjacent geohash cells as well.
 
 Geohash Bounding Boxes
----------------------
+----------------------
 
 Every geohash represents a rectangular area on the Earth's surface, which can be described by a bounding box. A bounding box is defined by four coordinates:
 
@@ -173,7 +173,7 @@ When working with geohashes, bounding boxes provide a way to:
 The precision of a bounding box derived from a geohash depends on the geohash length. Longer geohashes result in smaller, more precise bounding boxes.
 
 Geohash vs. Other Geocoding Systems
-----------------------------------
+-----------------------------------
 
 Compared to other geocoding systems:
 

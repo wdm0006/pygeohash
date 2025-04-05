@@ -61,7 +61,7 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
     Args:
         geohash (str): The input geohash string.
         direction (Direction): The direction to find the adjacent geohash.
-            Must be one of: "right", "left", "top", "bottom".
+        Must be one of: "right", "left", "top", "bottom".
 
     Returns:
         str: The adjacent geohash in the specified direction.

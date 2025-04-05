@@ -38,6 +38,9 @@ extensions = [
     "sphinxcontrib.googleanalytics",
 ]
 
+# Mock imports for C extensions and other dependencies
+autodoc_mock_imports = ["pygeohash.cgeohash.geohash_module"]
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
@@ -71,7 +74,7 @@ release = "1.0.0"
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -313,4 +316,4 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 # texinfo_no_detailmenu = False
-html_extra_path = ['CNAME']
+html_extra_path = ["CNAME"]

@@ -2,7 +2,7 @@
 
 This module provides functions for visualizing geohashes on maps.
 It requires additional dependencies that can be installed with:
-    pip install pygeohash[viz]
+`pip install pygeohash[viz]`
 
 Functions:
     plot_geohash: Plot a single geohash on a map
@@ -126,7 +126,7 @@ def plot_geohash(
         label: Label for the geohash (defaults to the geohash string)
         show_center: Whether to show the center point of the geohash
         show_label: Whether to show the label on the map
-        **kwargs: Additional keyword arguments passed to matplotlib
+        \**kwargs: Additional keyword arguments passed to matplotlib
 
     Returns:
         Tuple: (fig, ax) - The matplotlib figure and axis objects
@@ -221,7 +221,7 @@ def plot_geohashes(
         labels: Labels for the geohashes (defaults to the geohash strings)
         show_centers: Whether to show the center points of the geohashes
         show_labels: Whether to show the labels on the map
-        **kwargs: Additional keyword arguments passed to matplotlib
+        \**kwargs: Additional keyword arguments passed to matplotlib
 
     Returns:
         Tuple: (fig, ax) - The matplotlib figure and axis objects
