@@ -37,7 +37,8 @@ PRECISION_LEVELS = [1, 3, 5, 7, 9, 12]  # Common precision levels
 def generate_random_coordinates(count: int) -> List[Tuple[float, float]]:
     """Generate random latitude/longitude pairs."""
     return [
-        (round(random.uniform(MIN_LAT, MAX_LAT), 6), round(random.uniform(MIN_LON, MAX_LON), 6)) for _ in range(count)
+        (round(random.uniform(MIN_LAT, MAX_LAT), 6), round(random.uniform(MIN_LON, MAX_LON), 6))
+        for _ in range(count)  # noqa: S311
     ]
 
 
