@@ -20,7 +20,7 @@ TOLERANCE = 1e-5
 def generate_random_coordinates(count: int) -> List[Tuple[float, float]]:
     """Generate random latitude/longitude pairs."""
     return [
-        (round(random.uniform(MIN_LAT, MAX_LAT), 6), round(random.uniform(MIN_LON, MAX_LON), 6))
+        (round(random.uniform(MIN_LAT, MAX_LAT), 6), round(random.uniform(MIN_LON, MAX_LON), 6))  # noqa: S311
         for _ in range(count)  # noqa: S311
     ]
 

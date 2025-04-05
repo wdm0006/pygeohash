@@ -38,6 +38,9 @@ extensions = [
     "sphinxcontrib.googleanalytics",
 ]
 
+# Mock imports for C extensions and other dependencies
+autodoc_mock_imports = ["pygeohash.cgeohash.geohash_module"]
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 

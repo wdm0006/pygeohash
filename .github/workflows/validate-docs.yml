@@ -28,5 +28,5 @@ jobs:
         uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "./docs/"
-          pre-build-command: ""
-          build-command: "make html SPHINXOPTS='-W --keep-going'"  # Turn warnings into errors but keep going 
+          pre-build-command: "pip install -e '.[dev,viz]'"
+          build-command: "make html SPHINXOPTS='-W --keep-going'"
