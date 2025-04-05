@@ -140,7 +140,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#visualization-examples">Visualization Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#practical-applications">Practical Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting-a-single-geohash">Plotting a Single Geohash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting-multiple-geohashes">Plotting Multiple Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-interactive-maps-with-folium">Creating Interactive Maps with Folium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-geohash-grid">Creating a Geohash Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualizing-geohash-neighbors">Visualizing Geohash Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualizing-geohash-precision">Visualizing Geohash Precision</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
@@ -638,6 +643,9 @@ make<span class="w"> </span>viz-examples
 </pre></div>
 </div>
 <p>This will create static images and interactive maps in the <code class="docutils literal notranslate"><span class="pre">docs/source/_static/images</span></code> directory.</p>
+</section>
+<section id="plotting-a-single-geohash">
+<h2>Plotting a Single Geohash<a class="headerlink" href="#plotting-a-single-geohash" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohash</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -663,6 +671,9 @@ make<span class="w"> </span>viz-examples
 <p><span class="caption-text">A single geohash with its center point and label displayed</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
+</section>
+<section id="plotting-multiple-geohashes">
+<h2>Plotting Multiple Geohashes<a class="headerlink" href="#plotting-multiple-geohashes" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -694,6 +705,9 @@ make<span class="w"> </span>viz-examples
 <p><span class="caption-text">Multiple geohashes with custom labels and colors</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
+</section>
+<section id="creating-interactive-maps-with-folium">
+<h2>Creating Interactive Maps with Folium<a class="headerlink" href="#creating-interactive-maps-with-folium" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
 
@@ -932,6 +946,9 @@ make<span class="w"> </span>viz-examples
         
 </script>
 </html>
+</section>
+<section id="creating-a-geohash-grid">
+<h2>Creating a Geohash Grid<a class="headerlink" href="#creating-a-geohash-grid" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
 
@@ -1856,6 +1873,9 @@ make<span class="w"> </span>viz-examples
         
 </script>
 </html>
+</section>
+<section id="visualizing-geohash-neighbors">
+<h2>Visualizing Geohash Neighbors<a class="headerlink" href="#visualizing-geohash-neighbors" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1888,6 +1908,9 @@ make<span class="w"> </span>viz-examples
 <p><span class="caption-text">A geohash (center) and its neighboring geohashes</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
+</section>
+<section id="visualizing-geohash-precision">
+<h2>Visualizing Geohash Precision<a class="headerlink" href="#visualizing-geohash-precision" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1920,9 +1943,6 @@ make<span class="w"> </span>viz-examples
 <p><span class="caption-text">Geohashes at different precision levels (4, 5, and 6)</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-</section>
-<section id="practical-applications">
-<h2>Practical Applications<a class="headerlink" href="#practical-applications" title="Permalink to this heading"></a></h2>
 </section>
 </section>
 
