@@ -478,7 +478,7 @@ You can generate all the example visualizations shown below using the provided M
 This will create static images and interactive maps in the ``docs/source/_static/images`` directory.
 
 Plotting a Single Geohash
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 .. code-block:: python
 
@@ -509,7 +509,7 @@ Plotting a Single Geohash
    A single geohash with its center point and label displayed
 
 Plotting Multiple Geohashes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 .. code-block:: python
 
@@ -546,7 +546,7 @@ Plotting Multiple Geohashes
    Multiple geohashes with custom labels and colors
 
 Creating Interactive Maps with Folium
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 .. code-block:: python
 
@@ -573,7 +573,7 @@ Creating Interactive Maps with Folium
    :file: _static/images/folium_map.html
 
 Creating a Geohash Grid
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 .. code-block:: python
 
@@ -593,7 +593,7 @@ Creating a Geohash Grid
    :file: _static/images/folium_grid.html
 
 Visualizing Geohash Neighbors
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 .. code-block:: python
 
@@ -630,7 +630,7 @@ Visualizing Geohash Neighbors
    A geohash (center) and its neighboring geohashes
 
 Visualizing Geohash Precision
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 .. code-block:: python
 
