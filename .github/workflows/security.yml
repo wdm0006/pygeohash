@@ -1,4 +1,4 @@
-name: Security Check
+name: "Security"
 
 on:
   push:
@@ -9,12 +9,43 @@ on:
     - cron: '0 0 * * 0'  # Run weekly on Sundays at midnight UTC
 
 jobs:
-  security:
+  codeql:
+    name: CodeQL Analysis
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
 
-      - name: Set up Python
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+          queries: security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:python"
+
+  dependency-security:
+    name: Dependency Security
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.8'
@@ -22,9 +53,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install bandit
+          pip install pip-audit
+          pip install ".[dev,viz]"
 
-      - name: Run Bandit security scan
+      - name: Run pip-audit
         run: |
-          bandit -r pygeohash -c bandit.yaml -f txt -ll -i
-        continue-on-error: false  # Fail the workflow if security issues are found 
+          pip-audit
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v3 

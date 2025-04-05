@@ -92,7 +92,7 @@ target-version = "py38"
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E", "F", "B"]
+select = ["E", "F", "B", "S"]
 ignore = []
 
 [tool.ruff.lint.isort]
@@ -137,7 +137,7 @@ warn_unreachable = true
 strict_equality = true
 extra_checks = true
 
-[[tool.mypy.overrides]]
+[tool.mypy.overrides]
 module = ["matplotlib.*", "folium.*", "numpy.*", "numba.*"]
 ignore_missing_imports = true
 
