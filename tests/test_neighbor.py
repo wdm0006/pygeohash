@@ -46,3 +46,9 @@ def test_south_pole_odd():
     assert pgh.get_adjacent("5bpbpbh", "top") == "5bpbpbk"
     with pytest.raises(ValueError):
         pgh.get_adjacent("5bpbpbh", "bottom")
+
+
+def test_zero_length_geohash():
+    """Test that a zero-length geohash raises a ValueError with the correct message."""
+    with pytest.raises(ValueError, match="^The geohash length cannot be 0. Possible when close to poles$"):
+        pgh.get_adjacent("", "top")

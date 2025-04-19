@@ -22,8 +22,7 @@ help:
 
 # Setup development environment
 setup:
-	pip install uv
-	uv venv --python=3.8
+	uv venv --python=3.10
 
 # Install the package
 install:
