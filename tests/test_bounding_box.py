@@ -2,7 +2,7 @@
 
 import pytest
 
-from pygeohash import (
+from pygeohash.bounding_box import (
     BoundingBox,
     do_boxes_intersect,
     geohashes_in_box,

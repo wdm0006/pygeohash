@@ -57,7 +57,8 @@ dev = [
     "types-setuptools>=69.0.0",
     "pandas",
     "pandas-stubs",
-    "numpy"
+    "numpy",
+    "mutmut>=2.4.4",
 ]
 
 [tool.pytest.ini_options]
@@ -142,12 +143,22 @@ extra_checks = true
 module = ["matplotlib.*", "folium.*", "numpy.*", "numba.*"]
 ignore_missing_imports = true
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.1.1"
-pytest-cov = "^3.0.0"
-black = "^22.3.0"
-isort = "^5.10.1"
-mypy = "^0.942"
-ruff = "^0.1.14"
-pandas = "^2.2.0"
-numpy = "^1.26.0" 
+[tool.mutmut]
+paths_to_mutate = [
+    "pygeohash/distances.py",
+    "pygeohash/neighbor.py",
+    "pygeohash/bounding_box.py",
+    "pygeohash/stats.py",
+    "pygeohash/types.py",
+    "pygeohash/geohash_types.py",
+    "pygeohash/viz.py",
+    "pygeohash/__init__.py",
+]
+tests_dir = [ "tests/" ]
+runner = "pytest"
+backup = false
+also_copy = [
+    "pygeohash/cgeohash", 
+    "examples",
+    "pygeohash/logging.py"
+]
