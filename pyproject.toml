@@ -142,3 +142,23 @@ extra_checks = true
 [[tool.mypy.overrides]]
 module = ["matplotlib.*", "folium.*", "numpy.*", "numba.*"]
 ignore_missing_imports = true
+
+[tool.mutmut]
+paths_to_mutate = [
+    "pygeohash/distances.py",
+    "pygeohash/neighbor.py",
+    "pygeohash/bounding_box.py",
+    "pygeohash/stats.py",
+    "pygeohash/types.py",
+    "pygeohash/geohash_types.py",
+    "pygeohash/viz.py",
+    "pygeohash/__init__.py",
+]
+tests_dir = [ "tests/" ]
+runner = "pytest"
+backup = false
+also_copy = [
+    "pygeohash/cgeohash", 
+    "examples",
+    "pygeohash/logging.py"
+]

@@ -16,8 +16,8 @@ import warnings
 from typing import List, Optional, Tuple, Union, Any, cast, TypeVar
 from typing_extensions import TypeAlias, Protocol
 
-from .geohash import decode
-from .bounding_box import get_bounding_box, geohashes_in_box, BoundingBox
+from pygeohash.geohash import decode
+from pygeohash.bounding_box import get_bounding_box, geohashes_in_box, BoundingBox
 
 # Type aliases for better readability
 FoliumMap: TypeAlias = Any  # Would be folium.Map if folium was always available
