@@ -10,15 +10,89 @@ def test_encode():
     assert pgh.encode(0.0, -5.6, precision=5) == "ebh00"
 
 
+def test_encode_invalid_precision_type():
+    """Test encode with invalid precision type."""
+    with pytest.raises(ValueError, match="Precision must be an integer"):
+        pgh.encode(42.6, -5.6, precision=5.5)
+    with pytest.raises(ValueError, match="Precision must be an integer"):
+        pgh.encode(42.6, -5.6, precision="5")
+
+
+def test_encode_invalid_precision_range():
+    """Test encode with precision outside the valid range (1-12)."""
+    with pytest.raises(ValueError, match="Precision must be between 1 and 12"):
+        pgh.encode(42.6, -5.6, precision=0)
+    with pytest.raises(ValueError, match="Precision must be between 1 and 12"):
+        pgh.encode(42.6, -5.6, precision=13)
+
+
+def test_encode_valid_precision():
+    """Test encode with valid precision values."""
+    assert pgh.encode(42.6, -5.6, precision=1) == "e"
+    assert pgh.encode(42.6, -5.6, precision=12) == "ezs42e44yx96"
+
+
 def test_encode_strictly():
     assert pgh.encode(0.0, -5.6, precision=5) == "ebh00"
     assert pgh.encode_strictly(0.0, -5.6, precision=5) == "ebh00"
+
+
+def test_encode_strictly_invalid_precision_type():
+    """Test encode_strictly with invalid precision type."""
+    with pytest.raises(ValueError, match="Precision must be an integer"):
+        pgh.encode_strictly(42.6, -5.6, precision=5.5)
+
+
+def test_encode_strictly_invalid_precision_range():
+    """Test encode_strictly with precision outside the valid range (1-12)."""
+    with pytest.raises(ValueError, match="Precision must be between 1 and 12"):
+        pgh.encode_strictly(42.6, -5.6, precision=13)
 
 
 def test_decode():
     decoded = pgh.decode("ezs42")
     assert pytest.approx(decoded.latitude, abs=0.1) == 42.6
     assert pytest.approx(decoded.longitude, abs=0.1) == -5.6
+
+
+def test_decode_invalid_type():
+    """Test decode with invalid input type."""
+    with pytest.raises(ValueError, match="Geohash must be a string"):
+        pgh.decode(123)
+    with pytest.raises(ValueError, match="Geohash must be a string"):
+        pgh.decode(None)
+
+
+def test_decode_empty():
+    """Test decode with empty string."""
+    with pytest.raises(ValueError, match="Geohash cannot be empty"):
+        pgh.decode("")
+
+
+def test_decode_invalid_chars():
+    """Test decode with invalid characters."""
+    with pytest.raises(ValueError, match="Invalid character in geohash"):
+        pgh.decode("ezs42a")  # 'a' is invalid
+    with pytest.raises(ValueError, match="Invalid character in geohash"):
+        pgh.decode("ezs!2")  # '!' is invalid
+
+
+def test_decode_exactly_invalid_type():
+    """Test decode_exactly with invalid input type."""
+    with pytest.raises(ValueError, match="Geohash must be a string"):
+        pgh.decode_exactly(123)
+
+
+def test_decode_exactly_empty():
+    """Test decode_exactly with empty string."""
+    with pytest.raises(ValueError, match="Geohash cannot be empty"):
+        pgh.decode_exactly("")
+
+
+def test_decode_exactly_invalid_chars():
+    """Test decode_exactly with invalid characters."""
+    with pytest.raises(ValueError, match="Invalid character in geohash"):
+        pgh.decode_exactly("ezs42a")  # 'a' is invalid
 
 
 def test_check_validity():

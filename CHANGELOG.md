@@ -1,3 +1,8 @@
+v3.1.1
+======
+
+ * Added input validation to raise on invliad precisions and geohashes before sending to c lib
+ 
 v3.1.0
 ======
 
