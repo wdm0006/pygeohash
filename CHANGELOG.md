@@ -1,3 +1,8 @@
+v3.1.2
+======
+
+ * bugfix inadvertantly requiring numpy and pandas for type checks; they are now required for mypy but not at runtime.
+
 v3.1.1
 ======
 

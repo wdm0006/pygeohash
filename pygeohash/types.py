@@ -8,48 +8,58 @@ parameter types.
 
 from __future__ import annotations
 
+from pygeohash.geohash_types import LatLong, ExactLatLong, GeohashPrecision
+from pygeohash.bounding_box import BoundingBox
+
 import re
 from typing import Dict, Final, List, Literal, TypeVar, Union, Tuple, Collection
 from typing import TYPE_CHECKING
-import numpy as np
-import numpy.typing as npt
 import sys
 
 from pygeohash.logging import get_logger
 
+_HAS_NUMPY: bool = False
+_HAS_PANDAS: bool = False
 
 if TYPE_CHECKING:
+    import numpy as np
+    import numpy.typing as npt
     import pandas as pd
     from pandas import DataFrame, Series
 
-    # Type variables for pandas types
-    GeohashSeriesType = TypeVar("GeohashSeriesType", bound="pd.Series[str]")
-    LatitudeSeriesType = TypeVar("LatitudeSeriesType", bound="pd.Series[float]")
-    LongitudeSeriesType = TypeVar("LongitudeSeriesType", bound="pd.Series[float]")
-    GeohashDataFrameType = TypeVar("GeohashDataFrameType", bound="pd.DataFrame")
-    # Type aliases for pandas
-    if sys.version_info >= (3, 9):
-        GeohashSeries = Series[str]
-        LatitudeSeries = Series[float]
-        LongitudeSeries = Series[float]
-    else:
-        GeohashSeries = Series
-        LatitudeSeries = Series
-        LongitudeSeries = Series
-    GeohashDataFrame = DataFrame
+    _HAS_NUMPY = True
+    _HAS_PANDAS = True
 else:
-    import pandas as pd
-    from pandas import DataFrame, Series
+    # Optional dependencies for runtime
+    try:
+        import numpy as np
+        import numpy.typing as npt
 
-    # Runtime type aliases
-    GeohashSeries = Series
-    LatitudeSeries = Series
-    LongitudeSeries = Series
-    GeohashDataFrame = DataFrame
+        _HAS_NUMPY = True
+    except ImportError:
 
-# Re-export core types
-from pygeohash.geohash_types import LatLong, ExactLatLong, GeohashPrecision
-from pygeohash.bounding_box import BoundingBox
+        class np:
+            pass
+
+        class npt:
+            pass
+
+    try:
+        import pandas as pd
+        from pandas import DataFrame, Series
+
+        _HAS_PANDAS = True
+    except ImportError:
+
+        class DataFrame:
+            pass
+
+        class Series:
+            pass
+
+        class pd:
+            pass
+
 
 logger = get_logger(__name__)
 
@@ -66,9 +76,25 @@ Coordinate = Tuple[float, float]
 _GEOHASH_PATTERN: Final[re.Pattern] = re.compile(r"^[0123456789bcdefghjkmnpqrstuvwxyz]+$")
 
 # Type definitions for numpy arrays
-GeohashArray = npt.NDArray[np.str_]
-LatitudeArray = npt.NDArray[np.float64]
-LongitudeArray = npt.NDArray[np.float64]
+if TYPE_CHECKING:
+    GeohashArray = "npt.NDArray[np.str_]"
+    LatitudeArray = "npt.NDArray[np.float64]"
+    LongitudeArray = "npt.NDArray[np.float64]"
+else:
+    if _HAS_NUMPY:
+        GeohashArray = npt.NDArray[np.str_]
+        LatitudeArray = npt.NDArray[np.float64]
+        LongitudeArray = npt.NDArray[np.float64]
+    else:
+
+        class GeohashArray:
+            pass
+
+        class LatitudeArray:
+            pass
+
+        class LongitudeArray:
+            pass
 
 
 def is_valid_geohash(value: Union[str, object]) -> bool:
@@ -169,29 +195,37 @@ def assert_valid_longitude(value: Union[float, int]) -> Longitude:
 # Type checking helpers
 def is_geohash_series(obj: object) -> bool:
     """Check if object is a pandas Series of geohashes."""
-    if not TYPE_CHECKING:
-        from pandas import Series
+    if not _HAS_PANDAS:
+        return False
+    from pandas import Series
+
     return isinstance(obj, Series) and all(is_valid_geohash(str(x)) for x in obj)
 
 
 def is_latitude_series(obj: object) -> bool:
     """Check if object is a pandas Series of latitudes."""
-    if not TYPE_CHECKING:
-        from pandas import Series
+    if not _HAS_PANDAS:
+        return False
+    from pandas import Series
+
     return isinstance(obj, Series) and all(is_valid_latitude(x) for x in obj)
 
 
 def is_longitude_series(obj: object) -> bool:
     """Check if object is a pandas Series of longitudes."""
-    if not TYPE_CHECKING:
-        from pandas import Series
+    if not _HAS_PANDAS:
+        return False
+    from pandas import Series
+
     return isinstance(obj, Series) and all(is_valid_longitude(x) for x in obj)
 
 
 def is_geohash_dataframe(obj: object) -> bool:
     """Check if object is a DataFrame with geohash columns."""
-    if not TYPE_CHECKING:
-        from pandas import DataFrame
+    if not _HAS_PANDAS:
+        return False
+    from pandas import DataFrame
+
     return isinstance(obj, DataFrame) and any(is_geohash_series(obj[col]) for col in obj.columns)
 
 
@@ -219,6 +253,27 @@ PRECISION_TO_ERROR: Final[Dict[int, float]] = {
 # Collection types
 GeohashCollection = Collection[str]
 GeohashList = List[str]
+
+# Pandas type variables and aliases
+if TYPE_CHECKING:
+    GeohashSeriesType = TypeVar("GeohashSeriesType", bound="pd.Series[str]")
+    LatitudeSeriesType = TypeVar("LatitudeSeriesType", bound="pd.Series[float]")
+    LongitudeSeriesType = TypeVar("LongitudeSeriesType", bound="pd.Series[float]")
+    GeohashDataFrameType = TypeVar("GeohashDataFrameType", bound="pd.DataFrame")
+    if sys.version_info >= (3, 9):
+        GeohashSeries = Series[str]
+        LatitudeSeries = Series[float]
+        LongitudeSeries = Series[float]
+    else:
+        GeohashSeries = Series
+        LatitudeSeries = Series
+        LongitudeSeries = Series
+    GeohashDataFrame = DataFrame
+else:
+    GeohashSeries = Series
+    LatitudeSeries = Series
+    LongitudeSeries = Series
+    GeohashDataFrame = DataFrame
 
 __all__ = [
     # Core types
