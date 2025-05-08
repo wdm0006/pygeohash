@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z43R9PWW0B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z43R9PWW0B');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pygeohash.neighbor &mdash; pygeohash 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e68397dc" />
+      <link rel="stylesheet" type="text/css" href="../../_static/dark_mode_css/general.css?v=c0a7eb24" />
+      <link rel="stylesheet" type="text/css" href="../../_static/dark_mode_css/dark.css?v=70edf1c7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=af2ce170"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+      <script src="../../_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pygeohash
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#what-is-pygeohash">What is PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#why-use-pygeohash">Why Use PyGeoHash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#project-history">Project History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction.html#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Geohash Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#what-is-a-geohash">What is a Geohash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#how-geohashing-works">How Geohashing Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#visual-representation">Visual Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#precision-and-cell-size">Precision and Cell Size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#properties-of-geohashes">Properties of Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#edge-cases-and-limitations">Edge Cases and Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#geohash-bounding-boxes">Geohash Bounding Boxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts.html#geohash-vs-other-geocoding-systems">Geohash vs. Other Geocoding Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#basic-operations">Basic Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#encoding-coordinates-to-geohash">Encoding Coordinates to Geohash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#decoding-geohash-to-coordinates">Decoding Geohash to Coordinates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#working-with-geohash-precision">Working with Geohash Precision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#calculating-distances">Calculating Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#checking-if-a-point-is-within-a-box">Checking if a Point is Within a Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#checking-if-bounding-boxes-intersect">Checking if Bounding Boxes Intersect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#finding-geohashes-in-a-bounding-box">Finding Geohashes in a Bounding Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#practical-example-geospatial-querying">Practical Example: Geospatial Querying</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#practical-examples">Practical Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#location-based-search">Location-Based Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#geofencing">Geofencing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#visualization">Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#plotting-a-single-geohash">Plotting a Single Geohash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#plotting-multiple-geohashes">Plotting Multiple Geohashes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage.html#creating-interactive-maps">Creating Interactive Maps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage.html#id1">Performance Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../types.html">Type System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#core-types">Core Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#validation-types">Validation Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../types.html#validation-functions">Validation Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../types.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../types.html#validation-rules">Validation Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../types.html#best-practices">Best Practices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../types.html#common-validation-errors">Common Validation Errors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#collection-types">Collection Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#numpy-integration">NumPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#pandas-integration">Pandas Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#utility-types">Utility Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#type-safety-and-fallbacks">Type Safety and Fallbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../types.html#example-type-safe-function">Example: Type-Safe Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#basic-geohashing">Basic Geohashing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#adjacent-geohashes">Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#statistical-analysis">Statistical Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#geospatial-search">Geospatial Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#clustering-by-geohash-prefix">Clustering by Geohash Prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples.html#visualizing-bounding-boxes">Visualizing Bounding Boxes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#visualization-examples">Visualization Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#plotting-a-single-geohash">Plotting a Single Geohash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#plotting-multiple-geohashes">Plotting Multiple Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#creating-interactive-maps-with-folium">Creating Interactive Maps with Folium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#creating-a-geohash-grid">Creating a Geohash Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#visualizing-geohash-neighbors">Visualizing Geohash Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#visualizing-geohash-precision">Visualizing Geohash Precision</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#core-functions">Core Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.encode"><code class="docutils literal notranslate"><span class="pre">encode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.encode_strictly"><code class="docutils literal notranslate"><span class="pre">encode_strictly()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.decode"><code class="docutils literal notranslate"><span class="pre">decode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.decode_exactly"><code class="docutils literal notranslate"><span class="pre">decode_exactly()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#data-types">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#distance-calculations">Distance Calculations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.geohash_approximate_distance"><code class="docutils literal notranslate"><span class="pre">geohash_approximate_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.geohash_haversine_distance"><code class="docutils literal notranslate"><span class="pre">geohash_haversine_distance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#geohash-navigation">Geohash Navigation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.get_adjacent"><code class="docutils literal notranslate"><span class="pre">get_adjacent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.get_bounding_box"><code class="docutils literal notranslate"><span class="pre">get_bounding_box()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.is_point_in_box"><code class="docutils literal notranslate"><span class="pre">is_point_in_box()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.is_point_in_geohash"><code class="docutils literal notranslate"><span class="pre">is_point_in_geohash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.do_boxes_intersect"><code class="docutils literal notranslate"><span class="pre">do_boxes_intersect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.geohashes_in_box"><code class="docutils literal notranslate"><span class="pre">geohashes_in_box()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#statistical-functions">Statistical Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.mean"><code class="docutils literal notranslate"><span class="pre">mean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.northern"><code class="docutils literal notranslate"><span class="pre">northern()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.southern"><code class="docutils literal notranslate"><span class="pre">southern()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.eastern"><code class="docutils literal notranslate"><span class="pre">eastern()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.western"><code class="docutils literal notranslate"><span class="pre">western()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.variance"><code class="docutils literal notranslate"><span class="pre">variance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pygeohash.std"><code class="docutils literal notranslate"><span class="pre">std()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#visualization-functions">Visualization Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../blog_posts.html">Blog Posts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../blog_posts.html#pygeohash-new-release-2-1-0">PyGeoHash New Release - 2.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../blog_posts.html#using-cursor-for-library-maintenance">Using Cursor for Library Maintenance</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pygeohash</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pygeohash.neighbor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pygeohash.neighbor</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Geohash neighbor calculation functionality.</span>
+
+<span class="sd">This module provides functionality for calculating adjacent geohashes</span>
+<span class="sd">in different directions (right, left, top, bottom).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Literal</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">__base32</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Configuration  -- from https://github.com/davetroy/geohash-js/blob/master/geohash.js</span>
+<span class="n">NEIGHBORS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Direction</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;even&quot;</span><span class="p">,</span> <span class="s2">&quot;odd&quot;</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;bc01fg45238967deuvhjyznpkmstqrwx&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;p0r21436x8zb9dcf5h7kjnmqesgutwvy&quot;</span><span class="p">,</span>  <span class="c1"># = top-even</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;238967debc01fg45kmstqrwxuvhjyznp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;14365h7k9dcfesgujnmqp0r2twvyx8zb&quot;</span><span class="p">,</span>  <span class="c1"># = bottom-even</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;top&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;p0r21436x8zb9dcf5h7kjnmqesgutwvy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;bc01fg45238967deuvhjyznpkmstqrwx&quot;</span><span class="p">,</span>  <span class="c1"># = right-even</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;bottom&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;14365h7k9dcfesgujnmqp0r2twvyx8zb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;238967debc01fg45kmstqrwxuvhjyznp&quot;</span><span class="p">,</span>  <span class="c1"># = left-even</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Used change of parent tile</span>
+<span class="n">BORDERS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Direction</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;even&quot;</span><span class="p">,</span> <span class="s2">&quot;odd&quot;</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;bcfguvyz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;prxz&quot;</span><span class="p">,</span>  <span class="c1"># top-even</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;0145hjnp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;028b&quot;</span><span class="p">,</span>  <span class="c1"># bottom-even</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;top&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;prxz&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;bcfguvyz&quot;</span><span class="p">,</span>  <span class="c1"># right-even</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;bottom&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;even&quot;</span><span class="p">:</span> <span class="s2">&quot;028b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;odd&quot;</span><span class="p">:</span> <span class="s2">&quot;0145hjnp&quot;</span><span class="p">,</span>  <span class="c1"># left-even</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="get_adjacent"><a class="viewcode-back" href="../../api.html#pygeohash.get_adjacent">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">Direction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the adjacent geohash in the specified direction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The input geohash string.</span>
+<span class="sd">        direction (Direction): The direction to find the adjacent geohash.</span>
+<span class="sd">        Must be one of: &quot;right&quot;, &quot;left&quot;, &quot;top&quot;, &quot;bottom&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The adjacent geohash in the specified direction.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the geohash length is 0 (possible when close to poles).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; get_adjacent(&quot;u4pruyd&quot;, &quot;top&quot;)</span>
+<span class="sd">        &#39;u4pruyf&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding adjacent geohash for </span><span class="si">%s</span><span class="s2"> in direction </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">geohash</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find adjacent geohash: input geohash length is 0&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The geohash length cannot be 0. Possible when close to poles&quot;</span><span class="p">)</span>
+
+    <span class="n">source_hash</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">last_char</span> <span class="o">=</span> <span class="n">source_hash</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">source_hash</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Processing: base=</span><span class="si">%s</span><span class="s2">, last_char=</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
+
+    <span class="n">split_direction</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;even&quot;</span><span class="p">,</span> <span class="s2">&quot;odd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;even&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_hash</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;odd&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Using </span><span class="si">%s</span><span class="s2"> lookup tables based on hash length&quot;</span><span class="p">,</span> <span class="n">split_direction</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">last_char</span> <span class="ow">in</span> <span class="n">BORDERS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="n">split_direction</span><span class="p">]:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Last character </span><span class="si">%s</span><span class="s2"> is on border, recursively finding parent neighbor&quot;</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">get_adjacent</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Last character </span><span class="si">%s</span><span class="s2"> is not on border, using direct neighbor lookup&quot;</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
+
+    <span class="n">neighbor_str</span> <span class="o">=</span> <span class="n">NEIGHBORS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="n">split_direction</span><span class="p">]</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">neighbor_str</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">last_char</span><span class="p">)</span>
+    <span class="n">base32_char</span> <span class="o">=</span> <span class="n">__base32</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="n">base32_char</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found adjacent geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Will McGinnis.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
