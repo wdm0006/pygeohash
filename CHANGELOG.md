@@ -1,3 +1,8 @@
+v3.1.3
+======
+
+ * Updating pypi email to registered domain
+ 
 v3.1.2
 ======
 
