@@ -145,3 +145,38 @@ def test_stats():
 
     std = pgh.std(coordinates)
     assert pytest.approx(std, abs=1e-4) == 5559746.322389894
+
+
+def test_geohash_approximate_distance_mutant_kill():
+    # This test targets a surviving mutant in geohash_approximate_distance
+    # For geohashes with 4 matching leading characters, the distance should be 19545
+    assert pgh.geohash_approximate_distance("abcd1", "abcd2") == 19545
+
+
+def test_geohash_approximate_distance_all_cases():
+    # Test all possible numbers of matching leading characters (0-10)
+    base = "abcdefghijklmno"
+    for match in range(0, 11):
+        g1 = base[:match] + "1" + base[match+1:11]
+        g2 = base[:match] + "2" + base[match+1:11]
+        expected = pgh.PRECISION_TO_ERROR[match]
+        assert pgh.geohash_approximate_distance(g1, g2) == expected, f"Failed for {match} matches"
+
+    # Test normalization: geohashes of different lengths
+    assert pgh.geohash_approximate_distance("abcd1234", "abcd") == pgh.PRECISION_TO_ERROR[4]
+    assert pgh.geohash_approximate_distance("abcd", "abcd1234") == pgh.PRECISION_TO_ERROR[4]
+    assert pgh.geohash_approximate_distance("abcde", "abc") == pgh.PRECISION_TO_ERROR[3]
+
+    # Test all characters matching (should use max precision 10)
+    g = base[:10]
+    assert pgh.geohash_approximate_distance(g, g) == pgh.PRECISION_TO_ERROR[10]
+
+    # Test no characters matching
+    assert pgh.geohash_approximate_distance("a123456789", "b987654321") == pgh.PRECISION_TO_ERROR[0]
+
+    # Test empty strings (should return max error for 0 matches)
+    assert pgh.geohash_approximate_distance("", "") == pgh.PRECISION_TO_ERROR[0]
+
+    # Test single character geohashes
+    assert pgh.geohash_approximate_distance("a", "a") == pgh.PRECISION_TO_ERROR[1]
+    assert pgh.geohash_approximate_distance("a", "b") == pgh.PRECISION_TO_ERROR[0]
