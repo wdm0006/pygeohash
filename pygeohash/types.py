@@ -108,7 +108,7 @@ def is_valid_geohash(value: Union[str, object]) -> bool:
     """
     if not isinstance(value, str):
         return False
-    
+
     # Check length (1-12 characters)
     if len(value) < 1 or len(value) > 12:
         return False
