@@ -42,7 +42,8 @@ valid_geohash_cases = [
     ("gbsuo", False),  # Contains 'o'
     ("gbsuv ", False),  # Contains space
     ("gbsuv-", False),  # Contains hyphen
-    ("", True),  # Empty string is technically valid by this check
+    ("", False),  # Empty string is invalid (length must be 1-12)
+    ("a" * 13, False),  # Too long (>12 characters)
     # Invalid types
     (123, False),
     (0.0, False),

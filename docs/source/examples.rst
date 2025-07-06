@@ -338,10 +338,6 @@ Clustering points by their geohash prefixes:
     if len(largest_cluster[1]) > 5:
         print(f"  ... and {len(largest_cluster[1]) - 5} more points")
 
-# Get the standard deviation of the geohashes
-std_dev = pgh.std(geohashes)
-print(f"Standard deviation: {std_dev:.2f} meters")
-
 Bounding Box Operations
 -----------------------
 
