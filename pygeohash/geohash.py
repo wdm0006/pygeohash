@@ -44,12 +44,21 @@ def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) 
         str: The geohash string.
 
     Raises:
-        ValueError: If the precision is not an integer or is outside the valid range (1-12).
+        ValueError: If the latitude or longitude values are invalid, or if the precision
+            is not an integer or is outside the valid range (1-12).
     """
     if not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
     if not (MIN_PRECISION <= precision <= MAX_PRECISION):
         raise ValueError(f"Precision must be between {MIN_PRECISION} and {MAX_PRECISION}, but got {precision}.")
+
+    # Validate latitude range
+    if not (-90.0 <= latitude <= 90.0):
+        raise ValueError(f"Latitude must be between -90.0 and 90.0 degrees, but got {latitude}.")
+
+    # Validate longitude range
+    if not (-180.0 <= longitude <= 180.0):
+        raise ValueError(f"Longitude must be between -180.0 and 180.0 degrees, but got {longitude}.")
 
     logger.debug("Encoding coordinates: lat=%f, lon=%f with precision %d", latitude, longitude, precision)
     result = c_encode(latitude, longitude, precision)
@@ -80,6 +89,14 @@ def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecisi
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
     if not (MIN_PRECISION <= precision <= MAX_PRECISION):
         raise ValueError(f"Precision must be between {MIN_PRECISION} and {MAX_PRECISION}, but got {precision}.")
+
+    # Validate latitude range
+    if not (-90.0 <= latitude <= 90.0):
+        raise ValueError(f"Latitude must be between -90.0 and 90.0 degrees, but got {latitude}.")
+
+    # Validate longitude range
+    if not (-180.0 <= longitude <= 180.0):
+        raise ValueError(f"Longitude must be between -180.0 and 180.0 degrees, but got {longitude}.")
 
     logger.debug("Strictly encoding coordinates: lat=%f, lon=%f with precision %d", latitude, longitude, precision)
     try:
