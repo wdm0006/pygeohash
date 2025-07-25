@@ -32,6 +32,26 @@ def test_encode_valid_precision():
     assert pgh.encode(42.6, -5.6, precision=12) == "ezs42e44yx96"
 
 
+def test_encode_invalid_latitude():
+    """Test encode with invalid latitude values."""
+    with pytest.raises(ValueError, match="Latitude must be between -90.0 and 90.0 degrees"):
+        pgh.encode(91.0, 0.0)
+    with pytest.raises(ValueError, match="Latitude must be between -90.0 and 90.0 degrees"):
+        pgh.encode(-91.0, 0.0)
+    with pytest.raises(ValueError, match="Latitude must be between -90.0 and 90.0 degrees"):
+        pgh.encode(999.0, 0.0)
+
+
+def test_encode_invalid_longitude():
+    """Test encode with invalid longitude values."""
+    with pytest.raises(ValueError, match="Longitude must be between -180.0 and 180.0 degrees"):
+        pgh.encode(0.0, 181.0)
+    with pytest.raises(ValueError, match="Longitude must be between -180.0 and 180.0 degrees"):
+        pgh.encode(0.0, -181.0)
+    with pytest.raises(ValueError, match="Longitude must be between -180.0 and 180.0 degrees"):
+        pgh.encode(0.0, 999.0)
+
+
 def test_encode_strictly():
     assert pgh.encode(0.0, -5.6, precision=5) == "ebh00"
     assert pgh.encode_strictly(0.0, -5.6, precision=5) == "ebh00"
@@ -47,6 +67,22 @@ def test_encode_strictly_invalid_precision_range():
     """Test encode_strictly with precision outside the valid range (1-12)."""
     with pytest.raises(ValueError, match="Precision must be between 1 and 12"):
         pgh.encode_strictly(42.6, -5.6, precision=13)
+
+
+def test_encode_strictly_invalid_latitude():
+    """Test encode_strictly with invalid latitude values."""
+    with pytest.raises(ValueError, match="Latitude must be between -90.0 and 90.0 degrees"):
+        pgh.encode_strictly(91.0, 0.0)
+    with pytest.raises(ValueError, match="Latitude must be between -90.0 and 90.0 degrees"):
+        pgh.encode_strictly(-91.0, 0.0)
+
+
+def test_encode_strictly_invalid_longitude():
+    """Test encode_strictly with invalid longitude values."""
+    with pytest.raises(ValueError, match="Longitude must be between -180.0 and 180.0 degrees"):
+        pgh.encode_strictly(0.0, 181.0)
+    with pytest.raises(ValueError, match="Longitude must be between -180.0 and 180.0 degrees"):
+        pgh.encode_strictly(0.0, -181.0)
 
 
 def test_decode():

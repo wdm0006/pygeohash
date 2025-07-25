@@ -1,3 +1,11 @@
+v3.2.0
+======
+
+ * Added input validation for latitude and longitude in encode functions to prevent invalid coordinates from being processed
+ * Latitude values must now be between -90.0 and 90.0 degrees
+ * Longitude values must now be between -180.0 and 180.0 degrees
+ * Both encode() and encode_strictly() functions now raise ValueError with descriptive messages for invalid coordinates
+
 v3.1.3
 ======
 
