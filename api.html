@@ -15,7 +15,7 @@
     </script>
     
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; pygeohash 1.0.0 documentation</title>
+  <title>API Reference &mdash; pygeohash 3.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e68397dc" />
@@ -25,7 +25,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=af2ce170"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=6d170d0f"></script>
       <script src="_static/doctools.js?v=888ff710"></script>
       <script src="_static/sphinx_highlight.js?v=4825356b"></script>
       <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -237,7 +237,10 @@ precision (GeohashPrecision, optional): The number of characters in the geohash.
 </dd>
 <dt>Returns:</dt><dd><p>str: The geohash string.</p>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: If the precision is not an integer or is outside the valid range (1-12).</p>
+<dt>Raises:</dt><dd><dl class="simple">
+<dt>ValueError: If the latitude or longitude values are invalid, or if the precision</dt><dd><p>is not an integer or is outside the valid range (1-12).</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>

@@ -14,7 +14,7 @@
     </script>
     
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pygeohash.geohash &mdash; pygeohash 1.0.0 documentation</title>
+  <title>pygeohash.geohash &mdash; pygeohash 3.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e68397dc" />
@@ -24,7 +24,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=af2ce170"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=6d170d0f"></script>
       <script src="../../_static/doctools.js?v=888ff710"></script>
       <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
       <script src="../../_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
@@ -261,12 +261,21 @@
 <span class="sd">        str: The geohash string.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If the precision is not an integer or is outside the valid range (1-12).</span>
+<span class="sd">        ValueError: If the latitude or longitude values are invalid, or if the precision</span>
+<span class="sd">            is not an integer or is outside the valid range (1-12).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Validate latitude range</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be between -90.0 and 90.0 degrees, but got </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Validate longitude range</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span> <span class="o">&lt;=</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="mf">180.0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be between -180.0 and 180.0 degrees, but got </span><span class="si">{</span><span class="n">longitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Encoding coordinates: lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">c_encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
@@ -297,6 +306,14 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Validate latitude range</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be between -90.0 and 90.0 degrees, but got </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Validate longitude range</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span> <span class="o">&lt;=</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="mf">180.0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be between -180.0 and 180.0 degrees, but got </span><span class="si">{</span><span class="n">longitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Strictly encoding coordinates: lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
