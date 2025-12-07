@@ -1,3 +1,8 @@
+v3.2.2
+======
+
+ * Fresh release for more wheels
+ 
 v3.2.1
 ======
  
