@@ -33,8 +33,6 @@ sys.path.insert(0, os.path.abspath("../.."))
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
-    "sphinx_rtd_theme",
-    "sphinx_rtd_dark_mode",
     "sphinxcontrib.googleanalytics",
 ]
 
@@ -102,7 +100,7 @@ exclude_patterns = []
 # show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "sphinx"
+pygments_style = "wabi_sphinx_theme.pygments_style.WabiStyle"
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
@@ -124,25 +122,31 @@ autoclass_content = "both"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "sphinx_rtd_theme"
+html_theme = "wabi_sphinx_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "navigation_depth": 4,
-    "collapse_navigation": False,
-    "sticky_navigation": True,
-    "includehidden": True,
-    "titles_only": False,
+    "site_title": "McGinnis, Will",
+    "site_url": "https://mcginniscommawill.com",
+    "nav_links": [
+        {"label": "Guides", "url": "https://mcginniscommawill.com/guides/"},
+        {"label": "Topics", "url": "https://mcginniscommawill.com/topics/"},
+        {"label": "Blog", "url": "https://mcginniscommawill.com/posts/"},
+        {"label": "About", "url": "https://mcginniscommawill.com/about/"},
+        {"label": "Free Coffee", "url": "https://mcginniscommawill.com/coffee/"},
+        {"label": "OSS", "url": "https://mcginniscommawill.com/oss/"},
+    ],
+    "nav_show_docs_link": True,
+    "nav_docs_label": "Docs",
+    "show_breadcrumbs": True,
+    "show_home_breadcrumb": True,
 }
 
 # Google Analytics configuration
 googleanalytics_id = "G-Z43R9PWW0B"
 googleanalytics_enabled = True
-
-# Default to dark theme
-default_dark_mode = True
 
 # Add any paths that contain custom themes here, relative to this directory.
 # html_theme_path = []

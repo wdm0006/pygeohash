@@ -566,7 +566,8 @@ Creating Interactive Maps with Folium
     m.save("folium_map.html")
 
 .. raw:: html
-   :file: _static/images/folium_map.html
+
+   <iframe src="_static/images/folium_map.html" width="100%" height="400" style="border: none; border-radius: 6px;"></iframe>
 
 Creating a Geohash Grid
 -----------------------
@@ -586,7 +587,8 @@ Creating a Geohash Grid
     m.save("folium_grid.html")
 
 .. raw:: html
-   :file: _static/images/folium_grid.html
+
+   <iframe src="_static/images/folium_grid.html" width="100%" height="400" style="border: none; border-radius: 6px;"></iframe>
 
 Visualizing Geohash Neighbors
 -----------------------------
