@@ -82,8 +82,8 @@ def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecisi
         str: The geohash string.
 
     Raises:
-        ValueError: If the latitude or longitude values are invalid, or if the precision is not an integer
-            or is outside the valid range (1-12).
+        ValueError: If the latitude or longitude values are invalid, or if the precision
+            is not an integer or is outside the valid range (1-12).
     """
     if not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")

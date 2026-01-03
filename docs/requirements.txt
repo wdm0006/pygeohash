@@ -1,7 +1,6 @@
 sphinx>=6.1.3
 docutils>=0.19
-sphinx_rtd_theme>=1.0.0
-sphinx_rtd_dark_mode
+wabi-sphinx-theme @ git+https://github.com/wdm0006/mcw-sphinx-theme.git
 sphinxcontrib-googleanalytics
 matplotlib>=3.5.0
 folium 
