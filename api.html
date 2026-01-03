@@ -1,9 +1,10 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z43R9PWW0B"></script>
@@ -14,307 +15,294 @@
         gtag('config', 'G-Z43R9PWW0B');
     </script>
     
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; pygeohash 3.2.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e68397dc" />
-      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/general.css?v=c0a7eb24" />
-      <link rel="stylesheet" type="text/css" href="_static/dark_mode_css/dark.css?v=70edf1c7" />
-
-  
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=6d170d0f"></script>
-      <script src="_static/doctools.js?v=888ff710"></script>
-      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
-      <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
-      <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
-    <script src="_static/js/theme.js"></script>
+    <title>API Reference &#8212; pygeohash 3.2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
+    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=501c8ac3" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
+    <script src="_static/documentation_options.js?v=4f6ddb47"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Blog Posts" href="blog_posts.html" />
-    <link rel="prev" title="Examples" href="examples.html" /> 
-</head>
+    <link rel="prev" title="Examples" href="examples.html" />
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 
+
+
+<meta name="description" content="API Reference - pygeohash documentation">
+
+
+
+
+
+<meta property="og:title" content="API Reference">
+<meta property="og:description" content="API Reference - pygeohash documentation">
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://wdm0006.github.io/pygeohash/api.html">
+
+
+<meta property="og:site_name" content="pygeohash">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="API Reference">
+<meta name="twitter:description" content="API Reference - pygeohash documentation">
+
+<meta name="twitter:site" content="@willmcginniser">
+
+
+
+
+
+<link rel="canonical" href="https://wdm0006.github.io/pygeohash/api.html">
+
+
+ 
+
+  </head><body>
+<header class="header">
+  <div class="header__inner">
+    
+    <a href="https://mcginniscommawill.com" class="header__logo">
+      McGinnis, Will
+    </a>
+
+    
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+
+    
+    <nav class="nav" role="navigation">
+      
+      
+        
           
           
-          <a href="index.html" class="icon icon-home">
-            pygeohash
+          
+          <a href="https://mcginniscommawill.com/guides/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Guides
           </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-pygeohash">What is PyGeoHash?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#why-use-pygeohash">Why Use PyGeoHash?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#use-cases">Use Cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#project-history">Project History</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#additional-resources">Additional Resources</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#what-is-a-geohash">What is a Geohash?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#how-geohashing-works">How Geohashing Works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#visual-representation">Visual Representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#precision-and-cell-size">Precision and Cell Size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#properties-of-geohashes">Properties of Geohashes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#edge-cases-and-limitations">Edge Cases and Limitations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-bounding-boxes">Geohash Bounding Boxes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html#geohash-vs-other-geocoding-systems">Geohash vs. Other Geocoding Systems</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#basic-operations">Basic Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#encoding-coordinates-to-geohash">Encoding Coordinates to Geohash</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#decoding-geohash-to-coordinates">Decoding Geohash to Coordinates</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#working-with-geohash-precision">Working with Geohash Precision</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#calculating-distances">Calculating Distances</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#bounding-box-operations">Bounding Box Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#checking-if-a-point-is-within-a-box">Checking if a Point is Within a Box</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#checking-if-bounding-boxes-intersect">Checking if Bounding Boxes Intersect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#finding-geohashes-in-a-bounding-box">Finding Geohashes in a Bounding Box</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#practical-example-geospatial-querying">Practical Example: Geospatial Querying</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#statistical-functions">Statistical Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#practical-examples">Practical Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#location-based-search">Location-Based Search</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#geofencing">Geofencing</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#visualization">Visualization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#plotting-a-single-geohash">Plotting a Single Geohash</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#plotting-multiple-geohashes">Plotting Multiple Geohashes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#creating-interactive-maps">Creating Interactive Maps</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#performance-considerations">Performance Considerations</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="types.html#core-types">Core Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html#validation-types">Validation Types</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="types.html#validation-functions">Validation Functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="types.html#basic-usage">Basic Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="types.html#validation-rules">Validation Rules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="types.html#best-practices">Best Practices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="types.html#common-validation-errors">Common Validation Errors</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="types.html#collection-types">Collection Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html#numpy-integration">NumPy Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html#pandas-integration">Pandas Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html#utility-types">Utility Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html#type-safety-and-fallbacks">Type Safety and Fallbacks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="types.html#example-type-safe-function">Example: Type-Safe Function</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#basic-geohashing">Basic Geohashing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#adjacent-geohashes">Adjacent Geohashes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#distance-calculations">Distance Calculations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#statistical-analysis">Statistical Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#geospatial-search">Geospatial Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#clustering-by-geohash-prefix">Clustering by Geohash Prefix</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#bounding-box-operations">Bounding Box Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="examples.html#visualizing-bounding-boxes">Visualizing Bounding Boxes</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#visualization-examples">Visualization Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#plotting-a-single-geohash">Plotting a Single Geohash</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#plotting-multiple-geohashes">Plotting Multiple Geohashes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#creating-interactive-maps-with-folium">Creating Interactive Maps with Folium</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#creating-a-geohash-grid">Creating a Geohash Grid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#visualizing-geohash-neighbors">Visualizing Geohash Neighbors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#visualizing-geohash-precision">Visualizing Geohash Precision</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core Functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.encode"><code class="docutils literal notranslate"><span class="pre">encode()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.encode_strictly"><code class="docutils literal notranslate"><span class="pre">encode_strictly()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.decode"><code class="docutils literal notranslate"><span class="pre">decode()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.decode_exactly"><code class="docutils literal notranslate"><span class="pre">decode_exactly()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#data-types">Data Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#distance-calculations">Distance Calculations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.geohash_approximate_distance"><code class="docutils literal notranslate"><span class="pre">geohash_approximate_distance()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.geohash_haversine_distance"><code class="docutils literal notranslate"><span class="pre">geohash_haversine_distance()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#geohash-navigation">Geohash Navigation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.get_adjacent"><code class="docutils literal notranslate"><span class="pre">get_adjacent()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.get_bounding_box"><code class="docutils literal notranslate"><span class="pre">get_bounding_box()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.is_point_in_box"><code class="docutils literal notranslate"><span class="pre">is_point_in_box()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.is_point_in_geohash"><code class="docutils literal notranslate"><span class="pre">is_point_in_geohash()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.do_boxes_intersect"><code class="docutils literal notranslate"><span class="pre">do_boxes_intersect()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.geohashes_in_box"><code class="docutils literal notranslate"><span class="pre">geohashes_in_box()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.mean"><code class="docutils literal notranslate"><span class="pre">mean()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.northern"><code class="docutils literal notranslate"><span class="pre">northern()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.southern"><code class="docutils literal notranslate"><span class="pre">southern()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.eastern"><code class="docutils literal notranslate"><span class="pre">eastern()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.western"><code class="docutils literal notranslate"><span class="pre">western()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.variance"><code class="docutils literal notranslate"><span class="pre">variance()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pygeohash.std"><code class="docutils literal notranslate"><span class="pre">std()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#visualization-functions">Visualization Functions</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="blog_posts.html#pygeohash-new-release-2-1-0">PyGeoHash New Release - 2.1.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="blog_posts.html#using-cursor-for-library-maintenance">Using Cursor for Library Maintenance</a></li>
-</ul>
-</li>
-</ul>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/topics/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Topics
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/posts/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Blog
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/about/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            About
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/coffee/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Free Coffee
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/oss/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            OSS
+          </a>
+        
+      
 
-        </div>
-      </div>
+      
+      
+      <a href="index.html" class="nav__link nav__link--active">
+        Docs
+      </a>
+      
     </nav>
+  </div>
+</header>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">pygeohash</a>
-      </nav>
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">API Reference</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="breadcrumbs__inner">
+    
+    <a href="https://mcginniscommawill.com">Home</a>
+    <span class="breadcrumbs__separator">/</span>
+    
+    <a href="index.html">Docs</a>
+    
+    
+    <span class="breadcrumbs__separator">/</span>
+    <span>API Reference</span>
+    
+  </div>
+</nav>
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h1>
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
 <p>This section provides detailed documentation for all functions available in the PyGeoHash library.</p>
 <section id="core-functions">
-<h2>Core Functions<a class="headerlink" href="#core-functions" title="Permalink to this heading"></a></h2>
+<h2>Core Functions<a class="headerlink" href="#core-functions" title="Link to this heading">¶</a></h2>
 <p>These core functions are implemented using a high-performance C extension for maximum efficiency.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.encode">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.encode" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.encode" title="Link to this definition">¶</a></dt>
 <dd><p>Encode a latitude and longitude into a geohash.</p>
-<dl>
-<dt>Args:</dt><dd><p>latitude (float): The latitude to encode.
-longitude (float): The longitude to encode.
-precision (GeohashPrecision, optional): The number of characters in the geohash.</p>
-<blockquote>
-<div><p>Defaults to 12. Must be between 1 and 12, inclusive.</p>
-</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> (<em>float</em>) – The latitude to encode.</p></li>
+<li><p><strong>longitude</strong> (<em>float</em>) – The longitude to encode.</p></li>
+<li><p><strong>precision</strong> (<em>GeohashPrecision</em><em>, </em><em>optional</em>) – The number of characters in the geohash.
+Defaults to 12. Must be between 1 and 12, inclusive.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>str: The geohash string.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The geohash string.</p>
 </dd>
-<dt>Raises:</dt><dd><dl class="simple">
-<dt>ValueError: If the latitude or longitude values are invalid, or if the precision</dt><dd><p>is not an integer or is outside the valid range (1-12).</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
-</dl>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the latitude or longitude values are invalid, or if the precision
+    is not an integer or is outside the valid range (1-12).</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.encode_strictly">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">encode_strictly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#encode_strictly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.encode_strictly" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">encode_strictly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#encode_strictly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.encode_strictly" title="Link to this definition">¶</a></dt>
 <dd><p>Encode a latitude and longitude into a geohash with strict validation.</p>
 <p>This function performs additional validation on the input coordinates
 before encoding them into a geohash.</p>
-<dl>
-<dt>Args:</dt><dd><p>latitude (float): The latitude to encode.
-longitude (float): The longitude to encode.
-precision (GeohashPrecision, optional): The number of characters in the geohash.</p>
-<blockquote>
-<div><p>Defaults to 12. Must be between 1 and 12, inclusive.</p>
-</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> (<em>float</em>) – The latitude to encode.</p></li>
+<li><p><strong>longitude</strong> (<em>float</em>) – The longitude to encode.</p></li>
+<li><p><strong>precision</strong> (<em>GeohashPrecision</em><em>, </em><em>optional</em>) – The number of characters in the geohash.
+Defaults to 12. Must be between 1 and 12, inclusive.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>str: The geohash string.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The geohash string.</p>
 </dd>
-<dt>Raises:</dt><dd><dl class="simple">
-<dt>ValueError: If the latitude or longitude values are invalid, or if the precision is not an integer</dt><dd><p>or is outside the valid range (1-12).</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
-</dl>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the latitude or longitude values are invalid, or if the precision
+    is not an integer or is outside the valid range (1-12).</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.decode">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">LatLong</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.decode" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">LatLong</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.decode" title="Link to this definition">¶</a></dt>
 <dd><p>Decode a geohash into a latitude and longitude.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>geohash (str): The geohash string to decode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash string to decode.</p>
 </dd>
-<dt>Returns:</dt><dd><p>LatLong: A named tuple containing the latitude and longitude.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A named tuple containing the latitude and longitude.</p>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: If the geohash is not a string, is empty, or contains invalid characters.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LatLong</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the geohash is not a string, is empty, or contains invalid characters.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.decode_exactly">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">decode_exactly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ExactLatLong</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#decode_exactly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.decode_exactly" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">decode_exactly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ExactLatLong</span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#decode_exactly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.decode_exactly" title="Link to this definition">¶</a></dt>
 <dd><p>Decode a geohash into a latitude and longitude with error margins.</p>
 <p>This function provides more detailed information than the standard decode
 function by including the error margins for both latitude and longitude.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>geohash (str): The geohash string to decode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash string to decode.</p>
 </dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt>ExactLatLong: A named tuple containing the latitude, longitude, and their</dt><dd><p>respective error margins.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A named tuple containing the latitude, longitude, and their</dt><dd><p>respective error margins.</p>
 </dd>
 </dl>
+</p>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: If the geohash is not a string, is empty, or contains invalid characters.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ExactLatLong</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the geohash is not a string, is empty, or contains invalid characters.</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
 <section id="data-types">
-<h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this heading"></a></h2>
+<h2>Data Types<a class="headerlink" href="#data-types" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">LatLong</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/geohash_types.html#LatLong"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">LatLong</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/geohash_types.html#LatLong"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
 <p>Named tuple representing a latitude/longitude coordinate pair.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><p>latitude (float): The latitude coordinate in decimal degrees.
-longitude (float): The longitude coordinate in decimal degrees.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">latitude</span></span></dt>
+<dd><p>The latitude coordinate in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">longitude</span></span></dt>
+<dd><p>The longitude coordinate in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>Create new instance of LatLong(latitude, longitude)</p>
 <dl class="py attribute">
 <dt class="sig sig-object py">
@@ -332,16 +320,53 @@ longitude (float): The longitude coordinate in decimal degrees.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">ExactLatLong</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/geohash_types.html#ExactLatLong"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">ExactLatLong</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/geohash_types.html#ExactLatLong"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
 <p>Named tuple representing a latitude/longitude coordinate pair with error margins.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><p>latitude (float): The latitude coordinate in decimal degrees.
-longitude (float): The longitude coordinate in decimal degrees.
-latitude_error (float): The error margin for latitude in decimal degrees.
-longitude_error (float): The error margin for longitude in decimal degrees.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">latitude</span></span></dt>
+<dd><p>The latitude coordinate in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">longitude</span></span></dt>
+<dd><p>The longitude coordinate in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">latitude_error</span></span></dt>
+<dd><p>The error margin for latitude in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">longitude_error</span></span></dt>
+<dd><p>The error margin for longitude in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>Create new instance of ExactLatLong(latitude, longitude, latitude_error, longitude_error)</p>
 <dl class="py attribute">
 <dt class="sig sig-object py">
@@ -371,16 +396,53 @@ longitude_error (float): The error margin for longitude in decimal degrees.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">BoundingBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#BoundingBox"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">BoundingBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#BoundingBox"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
 <p>Named tuple representing a geospatial bounding box.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><p>min_lat (float): The minimum (southern) latitude of the box in decimal degrees.
-min_lon (float): The minimum (western) longitude of the box in decimal degrees.
-max_lat (float): The maximum (northern) latitude of the box in decimal degrees.
-max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">min_lat</span></span></dt>
+<dd><p>The minimum (southern) latitude of the box in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">min_lon</span></span></dt>
+<dd><p>The minimum (western) longitude of the box in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">max_lat</span></span></dt>
+<dd><p>The maximum (northern) latitude of the box in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">max_lon</span></span></dt>
+<dd><p>The maximum (eastern) longitude of the box in decimal degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p>Create new instance of BoundingBox(min_lat, min_lon, max_lat, max_lon)</p>
 <dl class="py attribute">
 <dt class="sig sig-object py">
@@ -410,355 +472,580 @@ max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.<
 
 </section>
 <section id="distance-calculations">
-<h2>Distance Calculations<a class="headerlink" href="#distance-calculations" title="Permalink to this heading"></a></h2>
+<h2>Distance Calculations<a class="headerlink" href="#distance-calculations" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.geohash_approximate_distance">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_approximate_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geohash_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_validity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/distances.html#geohash_approximate_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_approximate_distance" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_approximate_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geohash_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_validity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/distances.html#geohash_approximate_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_approximate_distance" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the approximate great-circle distance between two geohashes.</p>
 <p>This function calculates an approximate distance based on the number of
 matching characters at the beginning of the geohashes. It’s faster but
 less accurate than haversine distance.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohash_1 (str): The first geohash.
-geohash_2 (str): The second geohash.
-check_validity (bool, optional): Whether to check if the geohashes are valid.
-Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohash_1</strong> (<em>str</em>) – The first geohash.</p></li>
+<li><p><strong>geohash_2</strong> (<em>str</em>) – The second geohash.</p></li>
+<li><p><strong>check_validity</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to check if the geohashes are valid.</p></li>
+<li><p><strong>False.</strong> (<em>Defaults to</em>)</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>float: The approximate distance in meters.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The approximate distance in meters.</p>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: If check_validity is True and either geohash is invalid.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_approximate_distance</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">)</span>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If check_validity is True and either geohash is invalid.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_approximate_distance</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">)</span>
 <span class="go">118.0</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.geohash_haversine_distance">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_haversine_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geohash_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/distances.html#geohash_haversine_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_haversine_distance" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_haversine_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geohash_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/distances.html#geohash_haversine_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_haversine_distance" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the haversine great-circle distance between two geohashes.</p>
 <p>This function provides a more accurate distance calculation using the
 haversine formula, which accounts for the Earth’s curvature.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohash_1 (str): The first geohash.
-geohash_2 (str): The second geohash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohash_1</strong> (<em>str</em>) – The first geohash.</p></li>
+<li><p><strong>geohash_2</strong> (<em>str</em>) – The second geohash.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>float: The distance in meters.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The distance in meters.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">)</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">)</span>
 <span class="go">152.3</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
 <section id="geohash-navigation">
-<h2>Geohash Navigation<a class="headerlink" href="#geohash-navigation" title="Permalink to this heading"></a></h2>
+<h2>Geohash Navigation<a class="headerlink" href="#geohash-navigation" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.get_adjacent">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">get_adjacent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'right'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'left'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'top'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'bottom'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/neighbor.html#get_adjacent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.get_adjacent" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">get_adjacent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'right'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'left'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'top'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'bottom'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/neighbor.html#get_adjacent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.get_adjacent" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the adjacent geohash in the specified direction.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohash (str): The input geohash string.
-direction (Direction): The direction to find the adjacent geohash.
-Must be one of: “right”, “left”, “top”, “bottom”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohash</strong> (<em>str</em>) – The input geohash string.</p></li>
+<li><p><strong>direction</strong> (<em>Direction</em>) – The direction to find the adjacent geohash.</p></li>
+<li><p><strong>of</strong> (<em>Must be one</em>) – “right”, “left”, “top”, “bottom”.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>str: The adjacent geohash in the specified direction.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The adjacent geohash in the specified direction.</p>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: If the geohash length is 0 (possible when close to poles).</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_adjacent</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">)</span>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the geohash length is 0 (possible when close to poles).</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_adjacent</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">)</span>
 <span class="go">&#39;u4pruyf&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
 <section id="bounding-box-operations">
-<h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Permalink to this heading"></a></h2>
+<h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.get_bounding_box">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">get_bounding_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BoundingBox</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#get_bounding_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.get_bounding_box" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">get_bounding_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BoundingBox</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#get_bounding_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.get_bounding_box" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the bounding box for a geohash.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohash (str): The geohash string to calculate the bounding box for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash string to calculate the bounding box for.</p>
 </dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt>BoundingBox: A named tuple containing the minimum and maximum latitude and longitude</dt><dd><p>values that define the bounding box of the geohash.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A named tuple containing the minimum and maximum latitude and longitude</dt><dd><p>values that define the bounding box of the geohash.</p>
 </dd>
 </dl>
+</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BoundingBox</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
 <span class="go">BoundingBox(min_lat=57.649, min_lon=10.407, max_lat=57.649, max_lon=10.407)</span>
 </pre></div>
 </div>
-</dd>
-<dt>Note:</dt><dd><p>The precision of the coordinates in the bounding box depends on the length
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The precision of the coordinates in the bounding box depends on the length
 of the geohash. Longer geohashes result in smaller bounding boxes with more
 precise coordinates.</p>
-</dd>
-</dl>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.is_point_in_box">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">is_point_in_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#is_point_in_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.is_point_in_box" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">is_point_in_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#is_point_in_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.is_point_in_box" title="Link to this definition">¶</a></dt>
 <dd><p>Check if a point is within a bounding box.</p>
-<dl>
-<dt>Args:</dt><dd><p>lat (float): The latitude of the point to check.
-lon (float): The longitude of the point to check.
-bbox (BoundingBox): The bounding box to check against.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat</strong> (<em>float</em>) – The latitude of the point to check.</p></li>
+<li><p><strong>lon</strong> (<em>float</em>) – The longitude of the point to check.</p></li>
+<li><p><strong>bbox</strong> (<em>BoundingBox</em>) – The bounding box to check against.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>bool: True if the point is within the bounding box, False otherwise.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the point is within the bounding box, False otherwise.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_box</span><span class="p">(</span><span class="mf">57.649</span><span class="p">,</span> <span class="mf">10.407</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_box</span><span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
 <span class="go">False</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.is_point_in_geohash">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">is_point_in_geohash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#is_point_in_geohash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.is_point_in_geohash" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">is_point_in_geohash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#is_point_in_geohash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.is_point_in_geohash" title="Link to this definition">¶</a></dt>
 <dd><p>Check if a point is within a geohash’s bounding box.</p>
-<dl>
-<dt>Args:</dt><dd><p>lat (float): The latitude of the point to check.
-lon (float): The longitude of the point to check.
-geohash (str): The geohash to check against.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat</strong> (<em>float</em>) – The latitude of the point to check.</p></li>
+<li><p><strong>lon</strong> (<em>float</em>) – The longitude of the point to check.</p></li>
+<li><p><strong>geohash</strong> (<em>str</em>) – The geohash to check against.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>bool: True if the point is within the geohash’s bounding box, False otherwise.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the point is within the geohash’s bounding box, False otherwise.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="mf">57.649</span><span class="p">,</span> <span class="mf">10.407</span><span class="p">,</span> <span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="mf">57.649</span><span class="p">,</span> <span class="mf">10.407</span><span class="p">,</span> <span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
 <span class="go">False</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.do_boxes_intersect">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">do_boxes_intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#do_boxes_intersect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.do_boxes_intersect" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">do_boxes_intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#do_boxes_intersect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.do_boxes_intersect" title="Link to this definition">¶</a></dt>
 <dd><p>Check if two bounding boxes intersect.</p>
-<dl>
-<dt>Args:</dt><dd><p>bbox1 (BoundingBox): The first bounding box.
-bbox2 (BoundingBox): The second bounding box.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox1</strong> (<em>BoundingBox</em>) – The first bounding box.</p></li>
+<li><p><strong>bbox2</strong> (<em>BoundingBox</em>) – The second bounding box.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>bool: True if the bounding boxes intersect, False otherwise.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the bounding boxes intersect, False otherwise.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box1</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">)</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box1</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">box2</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="n">box2</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.geohashes_in_box">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohashes_in_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#geohashes_in_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohashes_in_box" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohashes_in_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundingBox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#geohashes_in_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohashes_in_box" title="Link to this definition">¶</a></dt>
 <dd><p>Find geohashes that intersect with a given bounding box.</p>
-<dl>
-<dt>Args:</dt><dd><p>bbox (BoundingBox): The bounding box to find geohashes for.
-precision (int, optional): The precision of the geohashes to return. Defaults to 6.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bbox</strong> (<em>BoundingBox</em>) – The bounding box to find geohashes for.</p></li>
+<li><p><strong>precision</strong> (<em>int</em><em>, </em><em>optional</em>) – The precision of the geohashes to return. Defaults to 6.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>List[str]: A list of geohashes that intersect with the bounding box.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of geohashes that intersect with the bounding box.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="mf">57.64</span><span class="p">,</span> <span class="mf">10.40</span><span class="p">,</span> <span class="mf">57.65</span><span class="p">,</span> <span class="mf">10.41</span><span class="p">)</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="mf">57.64</span><span class="p">,</span> <span class="mf">10.40</span><span class="p">,</span> <span class="mf">57.65</span><span class="p">,</span> <span class="mf">10.41</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="go">[&#39;u4pru&#39;, &#39;u4prv&#39;]</span>
 </pre></div>
 </div>
-</dd>
-<dt>Note:</dt><dd><p>The number of geohashes returned depends on the size of the bounding box
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The number of geohashes returned depends on the size of the bounding box
 and the precision requested. Higher precision values will result in more
 geohashes for the same bounding box.</p>
-</dd>
-</dl>
+</div>
 </dd></dl>
 
 </section>
 <section id="statistical-functions">
-<h2>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Permalink to this heading"></a></h2>
+<h2>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.mean">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.mean" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.mean" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the mean position of a collection of geohashes.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohashes (GeohashCollection): Collection of geohash strings.
-precision (GeohashPrecision, optional): The precision of the resulting geohash. Defaults to 12.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohashes</strong> (<em>GeohashCollection</em>) – Collection of geohash strings.</p></li>
+<li><p><strong>precision</strong> (<em>GeohashPrecision</em><em>, </em><em>optional</em>) – The precision of the resulting geohash. Defaults to 12.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>str: A geohash representing the mean position.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A geohash representing the mean position.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
 <span class="go">&#39;u4pruye&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.northern">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">northern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#northern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.northern" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">northern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#northern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.northern" title="Link to this definition">¶</a></dt>
 <dd><p>Find the northernmost geohash in a collection.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohashes (GeohashCollection): Collection of geohash strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohashes</strong> (<em>GeohashCollection</em>) – Collection of geohash strings.</p>
 </dd>
-<dt>Returns:</dt><dd><p>str: The northernmost geohash.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The northernmost geohash.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">northern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">northern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
 <span class="go">&#39;u4pruyf&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.southern">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">southern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#southern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.southern" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">southern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#southern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.southern" title="Link to this definition">¶</a></dt>
 <dd><p>Find the southernmost geohash in a collection.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohashes (GeohashCollection): Collection of geohash strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohashes</strong> (<em>GeohashCollection</em>) – Collection of geohash strings.</p>
 </dd>
-<dt>Returns:</dt><dd><p>str: The southernmost geohash.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The southernmost geohash.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">southern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">southern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
 <span class="go">&#39;u4pruyc&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.eastern">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">eastern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#eastern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.eastern" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">eastern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#eastern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.eastern" title="Link to this definition">¶</a></dt>
 <dd><p>Find the easternmost geohash in a collection.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohashes (GeohashCollection): Collection of geohash strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohashes</strong> (<em>GeohashCollection</em>) – Collection of geohash strings.</p>
 </dd>
-<dt>Returns:</dt><dd><p>str: The easternmost geohash.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The easternmost geohash.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eastern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eastern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
 <span class="go">&#39;u4pruyf&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.western">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">western</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#western"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.western" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">western</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#western"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.western" title="Link to this definition">¶</a></dt>
 <dd><p>Find the westernmost geohash in a collection.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohashes (GeohashCollection): Collection of geohash strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohashes</strong> (<em>GeohashCollection</em>) – Collection of geohash strings.</p>
 </dd>
-<dt>Returns:</dt><dd><p>str: The westernmost geohash.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The westernmost geohash.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">western</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">western</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
 <span class="go">&#39;u4pruyc&#39;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.variance">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#variance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.variance" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#variance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.variance" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the variance of a collection of geohashes.</p>
 <p>This function calculates the mean of squared distances from the mean position
 to each geohash in the collection.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohashes (GeohashCollection): Collection of geohash strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohashes</strong> (<em>GeohashCollection</em>) – Collection of geohash strings.</p>
 </dd>
-<dt>Returns:</dt><dd><p>float: The variance in meters squared.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The variance in meters squared.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">variance</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">variance</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
 <span class="go">2500.0</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.std">
-<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.std" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.std" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the standard deviation of a collection of geohashes.</p>
 <p>This function calculates the square root of the variance, which represents
 the average distance from the mean position to each geohash in the collection.</p>
-<dl>
-<dt>Args:</dt><dd><p>geohashes (GeohashCollection): Collection of geohash strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohashes</strong> (<em>GeohashCollection</em>) – Collection of geohash strings.</p>
 </dd>
-<dt>Returns:</dt><dd><p>float: The standard deviation in meters.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The standard deviation in meters.</p>
 </dd>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">std</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">std</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
 <span class="go">50.0</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
 <section id="visualization-functions">
-<h2>Visualization Functions<a class="headerlink" href="#visualization-functions" title="Permalink to this heading"></a></h2>
+<h2>Visualization Functions<a class="headerlink" href="#visualization-functions" title="Link to this heading">¶</a></h2>
 <p>These functions require additional dependencies that can be installed with:
 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pygeohash[viz]</span></code></p>
 <p>The visualization module provides tools for creating static plots with Matplotlib and interactive maps with Folium:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.plot_geohash">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">plot_geohash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/viz.html#plot_geohash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.plot_geohash" title="Link to this definition">¶</a></dt>
+<dd><p>Plot a single geohash on a map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohash</strong> – The geohash string to plot</p></li>
+<li><p><strong>ax</strong> – Matplotlib axis to plot on (optional)</p></li>
+<li><p><strong>color</strong> – Color of the geohash polygon</p></li>
+<li><p><strong>alpha</strong> – Transparency of the geohash polygon</p></li>
+<li><p><strong>label</strong> – Label for the geohash (defaults to the geohash string)</p></li>
+<li><p><strong>show_center</strong> – Whether to show the center point of the geohash</p></li>
+<li><p><strong>show_label</strong> – Whether to show the label on the map</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to matplotlib</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(fig, ax) - The matplotlib figure and axis objects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohash</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.plot_geohashes">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">plot_geohashes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'viridis'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_centers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/viz.html#plot_geohashes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.plot_geohashes" title="Link to this definition">¶</a></dt>
+<dd><p>Plot multiple geohashes on a map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohashes</strong> – List of geohash strings to plot</p></li>
+<li><p><strong>ax</strong> – Matplotlib axis to plot on (optional)</p></li>
+<li><p><strong>colors</strong> – Color or colormap name for the geohashes</p></li>
+<li><p><strong>alpha</strong> – Transparency of the geohash polygons</p></li>
+<li><p><strong>labels</strong> – Labels for the geohashes (defaults to the geohash strings)</p></li>
+<li><p><strong>show_centers</strong> – Whether to show the center points of the geohashes</p></li>
+<li><p><strong>show_labels</strong> – Whether to show the labels on the map</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to matplotlib</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(fig, ax) - The matplotlib figure and axis objects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">([</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yym&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yyj&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.folium_map">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">folium_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">13</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'OpenStreetMap'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'100%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'100%'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">FoliumMapProtocol</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pygeohash/viz.html#folium_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.folium_map" title="Link to this definition">¶</a></dt>
+<dd><p>Create a folium map centered on a geohash or coordinates.</p>
+</dd></dl>
+
 <p>For detailed examples of how to use these functions, see the <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> section.</p>
 </section>
 </section>
 
 
-           </div>
+            <div class="clearer"></div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="blog_posts.html" class="btn btn-neutral float-right" title="Blog Posts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2016, Will McGinnis.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
         </div>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-types">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualization-functions">Visualization Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
+</ul>
 
-</body>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer class="footer">
+  <div class="footer__inner">
+    
+    
+    <div class="footer__links">
+      
+        <a href="https://github.com/wdm0006" class="footer__link" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+      
+        <a href="https://www.linkedin.com/in/wmcginnis/" class="footer__link" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+      
+        <a href="https://x.com/willmcginniser" class="footer__link" target="_blank" rel="noopener noreferrer">
+          Twitter
+        </a>
+      
+    </div>
+    
+
+    
+    <p class="footer__copy">
+      
+        &copy; 2016, Will McGinnis
+      
+    </p>
+  </div>
+</footer>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', function() {
+        nav.classList.toggle('is-open');
+        const isOpen = nav.classList.contains('is-open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  });
+</script>
+
+  </body>
 </html>
