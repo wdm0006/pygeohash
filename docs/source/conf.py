@@ -130,6 +130,7 @@ html_theme = "wabi_sphinx_theme"
 html_theme_options = {
     "site_title": "McGinnis, Will",
     "site_url": "https://mcginniscommawill.com",
+    "docs_base_url": "https://wdm0006.github.io/pygeohash",
     "nav_links": [
         {"label": "Guides", "url": "https://mcginniscommawill.com/guides/"},
         {"label": "Topics", "url": "https://mcginniscommawill.com/topics/"},
@@ -142,6 +143,7 @@ html_theme_options = {
     "nav_docs_label": "Docs",
     "show_breadcrumbs": True,
     "show_home_breadcrumb": True,
+    "twitter_site": "@willmcginniser",
 }
 
 # Google Analytics configuration
