@@ -37,13 +37,15 @@ def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) 
     Args:
         latitude (float): The latitude to encode.
         longitude (float): The longitude to encode.
-        precision (GeohashPrecision, optional): The number of characters in the geohash. Defaults to 12. Must be between 1 and 12, inclusive.
+        precision (GeohashPrecision, optional): The number of characters in the geohash.
+            Defaults to 12. Must be between 1 and 12, inclusive.
 
     Returns:
         str: The geohash string.
 
     Raises:
-        ValueError: If the latitude or longitude values are invalid, or if the precision is not an integer or is outside the valid range (1-12).
+        ValueError: If the latitude or longitude values are invalid, or if the precision
+            is not an integer or is outside the valid range (1-12).
     """
     if not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
@@ -73,13 +75,15 @@ def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecisi
     Args:
         latitude (float): The latitude to encode.
         longitude (float): The longitude to encode.
-        precision (GeohashPrecision, optional): The number of characters in the geohash. Defaults to 12. Must be between 1 and 12, inclusive.
+        precision (GeohashPrecision, optional): The number of characters in the geohash.
+            Defaults to 12. Must be between 1 and 12, inclusive.
 
     Returns:
         str: The geohash string.
 
     Raises:
-        ValueError: If the latitude or longitude values are invalid, or if the precision is not an integer or is outside the valid range (1-12).
+        ValueError: If the latitude or longitude values are invalid, or if the precision
+            is not an integer or is outside the valid range (1-12).
     """
     if not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
