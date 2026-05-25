@@ -113,6 +113,32 @@ def test_decode_invalid_chars():
         pgh.decode("ezs!2")  # '!' is invalid
 
 
+def test_decode_non_ascii():
+    """Non-ASCII input must be rejected cleanly, not read out of bounds.
+
+    The C decoder indexes a 128-entry table by character; bytes >= 128 (such as
+    multibyte UTF-8) must be treated as invalid rather than indexing past it.
+    """
+    for bad in ["café", "ñ", "ezs42°", "日本語", "ezs42\x80"]:
+        with pytest.raises(ValueError, match="Invalid character in geohash"):
+            pgh.decode(bad)
+        with pytest.raises(ValueError, match="Invalid character in geohash"):
+            pgh.decode_exactly(bad)
+
+
+def test_decode_return_types():
+    """decode/decode_exactly return the documented named tuples with named fields."""
+    from pygeohash.geohash_types import ExactLatLong, LatLong
+
+    latlong = pgh.decode("ezs42")
+    assert isinstance(latlong, LatLong)
+    assert latlong == (latlong.latitude, latlong.longitude)
+
+    exact = pgh.decode_exactly("ezs42")
+    assert isinstance(exact, ExactLatLong)
+    assert exact.latitude_error > 0 and exact.longitude_error > 0
+
+
 def test_decode_exactly_invalid_type():
     """Test decode_exactly with invalid input type."""
     with pytest.raises(ValueError, match="Geohash must be a string"):
