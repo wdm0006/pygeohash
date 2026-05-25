@@ -54,30 +54,76 @@ static PyObject* geohash_get_base32(PyObject *self, PyObject *args) {
     return PyUnicode_FromString(BASE32);
 }
 
-// Decode a geohash string to exact latitude/longitude with error margins
-static PyObject* geohash_decode_exactly(PyObject *self, PyObject *args) {
-    const char *geohash;
-    
-    if (!PyArg_ParseTuple(args, "s", &geohash)) {
+// Cached LatLong / ExactLatLong named-tuple classes from pygeohash.geohash_types.
+// Importing the module and looking up the class on every decode call was a large
+// share of decode's cost, so we resolve them once and hold the references for the
+// lifetime of the process.
+static PyObject *LatLong_type = NULL;
+static PyObject *ExactLatLong_type = NULL;
+
+static int ensure_types(void) {
+    if (LatLong_type != NULL) {
+        return 0;
+    }
+    PyObject *module = PyImport_ImportModule("pygeohash.geohash_types");
+    if (!module) {
+        return -1;
+    }
+    LatLong_type = PyObject_GetAttrString(module, "LatLong");
+    ExactLatLong_type = PyObject_GetAttrString(module, "ExactLatLong");
+    Py_DECREF(module);
+    if (!LatLong_type || !ExactLatLong_type) {
+        Py_CLEAR(LatLong_type);
+        Py_CLEAR(ExactLatLong_type);
+        return -1;
+    }
+    return 0;
+}
+
+// Build a named-tuple instance (LatLong / ExactLatLong) from a values tuple.
+//
+// A typing.NamedTuple is a plain tuple subclass whose generated __new__ does
+// `tuple.__new__(cls, (field0, field1, ...))`. Calling the type the normal way
+// (PyObject_CallFunction) pays for that extra Python-level __new__ on every
+// decode. We skip it by invoking tuple's tp_new directly, which is exactly the
+// operation the generated __new__ performs. `values` is consumed (stolen).
+static PyObject* make_named_tuple(PyObject *type, PyObject *values) {
+    if (!values) {
         return NULL;
     }
-    
+    PyObject *call_args = PyTuple_Pack(1, values);  // tuple.__new__(type, values)
+    Py_DECREF(values);
+    if (!call_args) {
+        return NULL;
+    }
+    PyObject *result = PyTuple_Type.tp_new((PyTypeObject *)type, call_args, NULL);
+    Py_DECREF(call_args);
+    return result;
+}
+
+// Core decode: walk the geohash bits into a center point and error margins.
+// Returns 0 on success, -1 on an invalid character (with a Python exception set).
+static int decode_to_doubles(const char *geohash, double *out_lat, double *out_lon,
+                             double *out_lat_err, double *out_lon_err) {
     double lat_interval[2] = {-90.0, 90.0};
     double lon_interval[2] = {-180.0, 180.0};
     double lat_err = 90.0;
     double lon_err = 180.0;
     int is_even = 1;
-    int len = strlen(geohash);
-    
+    size_t len = strlen(geohash);
+
     init_base32_decode_map();
-    
-    for (int i = 0; i < len; i++) {
-        int cd = base32_decode_map[(int)geohash[i]];
+
+    for (size_t i = 0; i < len; i++) {
+        unsigned char c = (unsigned char)geohash[i];
+        // Guard the table lookup: bytes >= 128 (e.g. multibyte UTF-8) must not
+        // index past base32_decode_map, they are simply invalid.
+        int cd = (c < 128) ? base32_decode_map[c] : -1;
         if (cd == -1) {
             PyErr_SetString(PyExc_ValueError, "Invalid character in geohash");
-            return NULL;
+            return -1;
         }
-        
+
         // Process each bit of the base32 character
         for (int mask = 16; mask > 0; mask >>= 1) {
             if (is_even) {  // longitude
@@ -98,84 +144,50 @@ static PyObject* geohash_decode_exactly(PyObject *self, PyObject *args) {
             is_even = !is_even;
         }
     }
-    
-    double lat = (lat_interval[0] + lat_interval[1]) / 2.0;
-    double lon = (lon_interval[0] + lon_interval[1]) / 2.0;
-    
-    // Get the ExactLatLong named tuple class from the geohash_types module
-    PyObject *module = PyImport_ImportModule("pygeohash.geohash_types");
-    if (!module) {
+
+    *out_lat = (lat_interval[0] + lat_interval[1]) / 2.0;
+    *out_lon = (lon_interval[0] + lon_interval[1]) / 2.0;
+    *out_lat_err = lat_err;
+    *out_lon_err = lon_err;
+    return 0;
+}
+
+// Decode a geohash string to exact latitude/longitude with error margins
+static PyObject* geohash_decode_exactly(PyObject *self, PyObject *args) {
+    const char *geohash;
+
+    if (!PyArg_ParseTuple(args, "s", &geohash)) {
         return NULL;
     }
-    
-    PyObject *exactlatlongClass = PyObject_GetAttrString(module, "ExactLatLong");
-    Py_DECREF(module);
-    if (!exactlatlongClass) {
+
+    double lat, lon, lat_err, lon_err;
+    if (decode_to_doubles(geohash, &lat, &lon, &lat_err, &lon_err) != 0) {
         return NULL;
     }
-    
-    // Create a new ExactLatLong instance
-    PyObject *args_tuple = Py_BuildValue("dddd", lat, lon, lat_err, lon_err);
-    PyObject *exactlatlongInstance = PyObject_CallObject(exactlatlongClass, args_tuple);
-    
-    Py_DECREF(exactlatlongClass);
-    Py_DECREF(args_tuple);
-    
-    return exactlatlongInstance;
+    if (ensure_types() != 0) {
+        return NULL;
+    }
+    return make_named_tuple(ExactLatLong_type, Py_BuildValue("dddd", lat, lon, lat_err, lon_err));
 }
 
 // Python wrapper for decode function
 static PyObject* geohash_decode(PyObject *self, PyObject *args) {
     const char *geohash;
-    
+
     if (!PyArg_ParseTuple(args, "s", &geohash)) {
         return NULL;
     }
-    
-    // Call decode_exactly to get the coordinates and error margins
-    PyObject *exact_result = geohash_decode_exactly(self, args);
-    if (!exact_result) {
+
+    // Decode straight into a LatLong: no intermediate ExactLatLong, no second
+    // module import, no attribute round-trip.
+    double lat, lon, lat_err, lon_err;
+    if (decode_to_doubles(geohash, &lat, &lon, &lat_err, &lon_err) != 0) {
         return NULL;
     }
-    
-    // Extract values from the ExactLatLong tuple
-    PyObject *lat_obj = PyObject_GetAttrString(exact_result, "latitude");
-    PyObject *lon_obj = PyObject_GetAttrString(exact_result, "longitude");
-    
-    if (!lat_obj || !lon_obj) {
-        Py_XDECREF(lat_obj);
-        Py_XDECREF(lon_obj);
-        Py_DECREF(exact_result);
+    if (ensure_types() != 0) {
         return NULL;
     }
-    
-    double lat = PyFloat_AsDouble(lat_obj);
-    double lon = PyFloat_AsDouble(lon_obj);
-    
-    Py_DECREF(lat_obj);
-    Py_DECREF(lon_obj);
-    Py_DECREF(exact_result);
-    
-    // Get the LatLong named tuple class from the geohash_types module
-    PyObject *module = PyImport_ImportModule("pygeohash.geohash_types");
-    if (!module) {
-        return NULL;
-    }
-    
-    PyObject *latlongClass = PyObject_GetAttrString(module, "LatLong");
-    Py_DECREF(module);
-    if (!latlongClass) {
-        return NULL;
-    }
-    
-    // Create a new LatLong instance
-    PyObject *args_tuple = Py_BuildValue("dd", lat, lon);
-    PyObject *latlongInstance = PyObject_CallObject(latlongClass, args_tuple);
-    
-    Py_DECREF(latlongClass);
-    Py_DECREF(args_tuple);
-    
-    return latlongInstance;
+    return make_named_tuple(LatLong_type, Py_BuildValue("dd", lat, lon));
 }
 
 // Encode coordinates to a geohash string
