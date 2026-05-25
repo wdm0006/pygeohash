@@ -60,10 +60,7 @@ def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) 
     if not (-180.0 <= longitude <= 180.0):
         raise ValueError(f"Longitude must be between -180.0 and 180.0 degrees, but got {longitude}.")
 
-    logger.debug("Encoding coordinates: lat=%f, lon=%f with precision %d", latitude, longitude, precision)
-    result = c_encode(latitude, longitude, precision)
-    logger.debug("Encoded to geohash: %s", result)
-    return result
+    return c_encode(latitude, longitude, precision)
 
 
 def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecision = 12) -> str:
@@ -98,11 +95,8 @@ def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecisi
     if not (-180.0 <= longitude <= 180.0):
         raise ValueError(f"Longitude must be between -180.0 and 180.0 degrees, but got {longitude}.")
 
-    logger.debug("Strictly encoding coordinates: lat=%f, lon=%f with precision %d", latitude, longitude, precision)
     try:
-        result = c_encode_strictly(latitude, longitude, precision)
-        logger.debug("Strictly encoded to geohash: %s", result)
-        return result
+        return c_encode_strictly(latitude, longitude, precision)
     except ValueError as e:
         logger.error(
             "Failed to strictly encode coordinates: lat=%f, lon=%f with precision %d: %s",
@@ -130,13 +124,11 @@ def decode(geohash: str) -> LatLong:
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:
         raise ValueError("Geohash cannot be empty.")
-    if not all(c in __base32 for c in geohash):
-        raise ValueError(f"Invalid character in geohash: '{geohash}'. Only characters '{__base32}' are allowed.")
 
-    logger.debug("Decoding geohash: %s", geohash)
-    lat, lon = c_decode(geohash)
-    logger.debug("Decoded to coordinates: lat=%f, lon=%f", lat, lon)
-    return LatLong(latitude=lat, longitude=lon)
+    # The C extension raises ValueError("Invalid character in geohash") for any
+    # non-base32 character, so we let it do the per-character validation instead
+    # of paying for a Python-level scan on every call.
+    return LatLong(*c_decode(geohash))
 
 
 def decode_exactly(geohash: str) -> ExactLatLong:
@@ -159,13 +151,9 @@ def decode_exactly(geohash: str) -> ExactLatLong:
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:
         raise ValueError("Geohash cannot be empty.")
-    if not all(c in __base32 for c in geohash):
-        raise ValueError(f"Invalid character in geohash: '{geohash}'. Only characters '{__base32}' are allowed.")
 
-    logger.debug("Exactly decoding geohash: %s", geohash)
-    lat, lon, lat_err, lon_err = c_decode_exactly(geohash)
-    logger.debug("Exactly decoded to coordinates: lat=%f±%f, lon=%f±%f", lat, lat_err, lon, lon_err)
-    return ExactLatLong(latitude=lat, longitude=lon, latitude_error=lat_err, longitude_error=lon_err)
+    # See decode(): the C extension validates characters and raises on its own.
+    return ExactLatLong(*c_decode_exactly(geohash))
 
 
 __all__ = [
