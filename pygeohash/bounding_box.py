@@ -50,20 +50,9 @@ def get_bounding_box(geohash: str) -> BoundingBox:
         of the geohash. Longer geohashes result in smaller bounding boxes with more
         precise coordinates.
     """
-    logger.debug("Calculating bounding box for geohash: %s", geohash)
     # Get the center point and error margins
     lat, lon, lat_err, lon_err = decode_exactly(geohash)
-    logger.debug("Center point: (lat=%f, lon=%f) with errors: (lat_err=%f, lon_err=%f)", lat, lon, lat_err, lon_err)
-
-    # Calculate the bounding box coordinates
-    min_lat: float = lat - lat_err
-    min_lon: float = lon - lon_err
-    max_lat: float = lat + lat_err
-    max_lon: float = lon + lon_err
-
-    result = BoundingBox(min_lat, min_lon, max_lat, max_lon)
-    logger.debug("Calculated bounding box: %s", result)
-    return result
+    return BoundingBox(lat - lat_err, lon - lon_err, lat + lat_err, lon + lon_err)
 
 
 def is_point_in_box(lat: float, lon: float, bbox: BoundingBox) -> bool:
