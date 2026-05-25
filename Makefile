@@ -98,7 +98,7 @@ test-all:
 
 # Run benchmarks
 benchmark:
-	uv run pytest tests/test_benchmarks.py -v --benchmark-enable $(PYTEST_ARGS) 
+	uv run pytest tests/test_benchmark.py tests/test_benchmark_comparison.py -v --benchmark-enable --benchmark-group-by=group $(PYTEST_ARGS)
 
 # Generate visualization examples
 viz-examples:

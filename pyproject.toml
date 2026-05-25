@@ -37,6 +37,15 @@ viz = [
     "matplotlib>=3.5.0",
     "folium>=0.14.0",
 ]
+benchmark = [
+    "pytest-benchmark",
+    "python-geohash",
+    "geohashr",
+    "pygeohash-fast",
+    "libgeohash",
+    "geolib",
+    "geohash-tools",
+]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
