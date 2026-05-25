@@ -227,20 +227,9 @@
 <span class="sd">        of the geohash. Longer geohashes result in smaller bounding boxes with more</span>
 <span class="sd">        precise coordinates.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating bounding box for geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
     <span class="c1"># Get the center point and error margins</span>
     <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Center point: (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">) with errors: (lat_err=</span><span class="si">%f</span><span class="s2">, lon_err=</span><span class="si">%f</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span><span class="p">)</span>
-
-    <span class="c1"># Calculate the bounding box coordinates</span>
-    <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">-</span> <span class="n">lat_err</span>
-    <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">lon_err</span>
-    <span class="n">max_lat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">lat_err</span>
-    <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">lon</span> <span class="o">+</span> <span class="n">lon_err</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="n">min_lat</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculated bounding box: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="k">return</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="n">lat</span> <span class="o">-</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">lon_err</span><span class="p">,</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">+</span> <span class="n">lon_err</span><span class="p">)</span></div>
 
 
 
