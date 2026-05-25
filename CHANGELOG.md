@@ -1,3 +1,11 @@
+v3.3.0
+======
+
+ * [perf] reworked the C decode path: cache the LatLong/ExactLatLong types instead of importing them per call, decode straight into a LatLong without building and discarding an intermediate ExactLatLong, and construct the result tuple directly (decode ~3x faster, bounding box ~1.5x faster)
+ * [perf] trimmed the Python wrappers: dropped redundant per-character validation (the C extension already validates) and per-call debug logging from the encode/decode/bounding-box hot paths
+ * [bugfix] fixed a latent out-of-bounds read in the C decoder for input bytes >= 128 (e.g. multibyte UTF-8); these are now cleanly rejected as invalid characters
+ * [tests] added a cross-library benchmark suite comparing pygeohash against other geohash libraries, behind an optional 'benchmark' extra
+
 v3.2.2
 ======
 
