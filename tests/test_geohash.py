@@ -57,6 +57,27 @@ def test_encode_strictly():
     assert pgh.encode_strictly(0.0, -5.6, precision=5) == "ebh00"
 
 
+def test_encode_strictly_matches_encode():
+    """encode_strictly currently behaves identically to encode.
+
+    Pin that equivalence across a representative set of coordinates and
+    precisions so any future divergence is intentional and caught here.
+    """
+    coordinates = [
+        (42.6, -5.6),
+        (0.0, -5.6),
+        (0.0, 0.0),
+        (-90.0, -180.0),
+        (90.0, 180.0),
+        (37.7749, -122.4194),
+        (-33.8688, 151.2093),
+        (51.5074, -0.1278),
+    ]
+    for lat, lon in coordinates:
+        for precision in range(1, 13):
+            assert pgh.encode_strictly(lat, lon, precision) == pgh.encode(lat, lon, precision)
+
+
 def test_encode_strictly_invalid_precision_type():
     """Test encode_strictly with invalid precision type."""
     with pytest.raises(ValueError, match="Precision must be an integer"):
