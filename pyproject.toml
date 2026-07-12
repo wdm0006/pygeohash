@@ -123,6 +123,7 @@ legacy_tox_ini = """
 [tox]
 envlist = py38, py39, py310, py311, py312
 isolated_build = True
+skip_missing_interpreters = True
 
 [testenv]
 # Install the package itself with the 'dev' extras
