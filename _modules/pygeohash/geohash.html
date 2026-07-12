@@ -241,10 +241,14 @@
 <div class="viewcode-block" id="encode_strictly">
 <a class="viewcode-back" href="../../api.html#pygeohash.encode_strictly">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a latitude and longitude into a geohash with strict validation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a latitude and longitude into a geohash.</span>
 
-<span class="sd">    This function performs additional validation on the input coordinates</span>
-<span class="sd">    before encoding them into a geohash.</span>
+<span class="sd">    This function currently behaves identically to :func:`encode`: it applies the</span>
+<span class="sd">    same precision/latitude/longitude validation and returns the same geohash for</span>
+<span class="sd">    every input. It is retained as a separate name for API/back-compatibility (and</span>
+<span class="sd">    additionally logs an error if the underlying C encoder raises). Despite its</span>
+<span class="sd">    name, it does not perform any extra validation or use different midpoint</span>
+<span class="sd">    handling than :func:`encode`.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        latitude (float): The latitude to encode.</span>
