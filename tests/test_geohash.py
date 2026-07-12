@@ -57,6 +57,27 @@ def test_encode_strictly():
     assert pgh.encode_strictly(0.0, -5.6, precision=5) == "ebh00"
 
 
+def test_encode_strictly_matches_encode():
+    """encode_strictly currently behaves identically to encode.
+
+    Pin that equivalence across a representative set of coordinates and
+    precisions so any future divergence is intentional and caught here.
+    """
+    coordinates = [
+        (42.6, -5.6),
+        (0.0, -5.6),
+        (0.0, 0.0),
+        (-90.0, -180.0),
+        (90.0, 180.0),
+        (37.7749, -122.4194),
+        (-33.8688, 151.2093),
+        (51.5074, -0.1278),
+    ]
+    for lat, lon in coordinates:
+        for precision in range(1, 13):
+            assert pgh.encode_strictly(lat, lon, precision) == pgh.encode(lat, lon, precision)
+
+
 def test_encode_strictly_invalid_precision_type():
     """Test encode_strictly with invalid precision type."""
     with pytest.raises(ValueError, match="Precision must be an integer"):
@@ -67,6 +88,25 @@ def test_encode_strictly_invalid_precision_range():
     """Test encode_strictly with precision outside the valid range (1-12)."""
     with pytest.raises(ValueError, match="Precision must be between 1 and 12"):
         pgh.encode_strictly(42.6, -5.6, precision=13)
+
+
+def test_c_encode_validates_precision_directly():
+    """The C extension functions must bounds-check precision themselves.
+
+    The public Python wrappers validate precision, but the C module is
+    directly importable and writes into a fixed 13-byte stack buffer. An
+    out-of-range precision (e.g. 13 or 50) would overflow that buffer, so the
+    C layer must reject it with a ValueError before encoding.
+    """
+    from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
+
+    for c_func in (c_encode, c_encode_strictly):
+        for bad_precision in (0, 13, 50, -1):
+            with pytest.raises(ValueError, match="precision must be between 1 and 12"):
+                c_func(0.0, 0.0, bad_precision)
+        # Valid precisions still encode correctly through the C layer.
+        assert c_func(42.6, -5.6, 5) == "ezs42"
+        assert c_func(42.6, -5.6, 12) == "ezs42e44yx96"
 
 
 def test_encode_strictly_invalid_latitude():

@@ -194,14 +194,21 @@ static PyObject* geohash_decode(PyObject *self, PyObject *args) {
 static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs) {
     double latitude, longitude;
     int precision = 12;
-    
+
     static char *kwlist[] = {"latitude", "longitude", "precision", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "dd|i", kwlist, 
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "dd|i", kwlist,
                                     &latitude, &longitude, &precision)) {
         return NULL;
     }
-    
+
+    // Bounds-check precision before writing into the fixed-size geohash[13]
+    // buffer below: any value > 12 would overrun it (stack buffer overflow).
+    if (precision < 1 || precision > 12) {
+        PyErr_SetString(PyExc_ValueError, "precision must be between 1 and 12");
+        return NULL;
+    }
+
     // Ensure latitude is between -90 and 90
     if (latitude < -90.0) latitude = -90.0;
     if (latitude > 90.0) latitude = 90.0;
@@ -253,18 +260,30 @@ static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs
     return PyUnicode_FromString(geohash);
 }
 
-// Encode coordinates to a geohash string with strict midpoint handling
+// Encode coordinates to a geohash string.
+//
+// NOTE: This is intentionally identical to geohash_encode above. Despite the
+// "strictly" name, it performs the same interval-bisection encoding with the
+// same midpoint handling and produces the same output for every input. It is
+// kept as a separate entry point only for API/back-compatibility.
 static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObject *kwargs) {
     double latitude, longitude;
     int precision = 12;
-    
+
     static char *kwlist[] = {"latitude", "longitude", "precision", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "dd|i", kwlist, 
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "dd|i", kwlist,
                                     &latitude, &longitude, &precision)) {
         return NULL;
     }
-    
+
+    // Bounds-check precision before writing into the fixed-size geohash[13]
+    // buffer below: any value > 12 would overrun it (stack buffer overflow).
+    if (precision < 1 || precision > 12) {
+        PyErr_SetString(PyExc_ValueError, "precision must be between 1 and 12");
+        return NULL;
+    }
+
     // Ensure latitude is between -90 and 90
     if (latitude < -90.0) latitude = -90.0;
     if (latitude > 90.0) latitude = 90.0;
