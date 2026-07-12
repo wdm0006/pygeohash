@@ -235,7 +235,6 @@ def plot_geohashes(
         return None, None
 
     import matplotlib.pyplot as plt
-    import matplotlib.cm as cm
     from matplotlib.patches import Rectangle
 
     # Create figure and axis if not provided
@@ -249,7 +248,7 @@ def plot_geohashes(
     if isinstance(colors, str):
         # If a colormap name is provided
         try:
-            cmap = cm.get_cmap(colors, n_geohashes)
+            cmap = plt.get_cmap(colors, n_geohashes)
             colors_list = [cmap(i) for i in range(n_geohashes)]
         except ValueError:
             # If a single color name is provided
