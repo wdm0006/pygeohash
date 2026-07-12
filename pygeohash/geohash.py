@@ -64,10 +64,14 @@ def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) 
 
 
 def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecision = 12) -> str:
-    """Encode a latitude and longitude into a geohash with strict validation.
+    """Encode a latitude and longitude into a geohash.
 
-    This function performs additional validation on the input coordinates
-    before encoding them into a geohash.
+    This function currently behaves identically to :func:`encode`: it applies the
+    same precision/latitude/longitude validation and returns the same geohash for
+    every input. It is retained as a separate name for API/back-compatibility (and
+    additionally logs an error if the underlying C encoder raises). Despite its
+    name, it does not perform any extra validation or use different midpoint
+    handling than :func:`encode`.
 
     Args:
         latitude (float): The latitude to encode.

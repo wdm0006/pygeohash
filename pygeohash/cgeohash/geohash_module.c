@@ -260,7 +260,12 @@ static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs
     return PyUnicode_FromString(geohash);
 }
 
-// Encode coordinates to a geohash string with strict midpoint handling
+// Encode coordinates to a geohash string.
+//
+// NOTE: This is intentionally identical to geohash_encode above. Despite the
+// "strictly" name, it performs the same interval-bisection encoding with the
+// same midpoint handling and produces the same output for every input. It is
+// kept as a separate entry point only for API/back-compatibility.
 static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObject *kwargs) {
     double latitude, longitude;
     int precision = 12;
