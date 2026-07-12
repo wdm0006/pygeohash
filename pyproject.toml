@@ -66,7 +66,7 @@ dev = [
     "types-setuptools>=69.0.0",
     "pandas",
     "pandas-stubs",
-    "numpy",
+    "numpy<2.5",
     "mutmut>=2.4.4",
 ]
 
@@ -134,7 +134,7 @@ commands =
 """
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true

@@ -90,6 +90,25 @@ def test_encode_strictly_invalid_precision_range():
         pgh.encode_strictly(42.6, -5.6, precision=13)
 
 
+def test_c_encode_validates_precision_directly():
+    """The C extension functions must bounds-check precision themselves.
+
+    The public Python wrappers validate precision, but the C module is
+    directly importable and writes into a fixed 13-byte stack buffer. An
+    out-of-range precision (e.g. 13 or 50) would overflow that buffer, so the
+    C layer must reject it with a ValueError before encoding.
+    """
+    from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
+
+    for c_func in (c_encode, c_encode_strictly):
+        for bad_precision in (0, 13, 50, -1):
+            with pytest.raises(ValueError, match="precision must be between 1 and 12"):
+                c_func(0.0, 0.0, bad_precision)
+        # Valid precisions still encode correctly through the C layer.
+        assert c_func(42.6, -5.6, 5) == "ezs42"
+        assert c_func(42.6, -5.6, 12) == "ezs42e44yx96"
+
+
 def test_encode_strictly_invalid_latitude():
     """Test encode_strictly with invalid latitude values."""
     with pytest.raises(ValueError, match="Latitude must be between -90.0 and 90.0 degrees"):
