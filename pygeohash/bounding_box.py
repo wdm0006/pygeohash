@@ -167,10 +167,10 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
 
     # Calculate the starting points slightly outside the bounding box
     # to ensure we cover the entire area
-    start_lat: float = bbox.min_lat - lat_step
-    end_lat: float = bbox.max_lat + lat_step
-    start_lon: float = bbox.min_lon - lon_step
-    end_lon: float = bbox.max_lon + lon_step
+    start_lat: float = max(bbox.min_lat - lat_step, -90.0)
+    end_lat: float = min(bbox.max_lat + lat_step, 90.0)
+    start_lon: float = max(bbox.min_lon - lon_step, -180.0)
+    end_lon: float = min(bbox.max_lon + lon_step, 180.0)
     logger.debug("Search area: lat=[%f, %f], lon=[%f, %f]", start_lat, end_lat, start_lon, end_lon)
 
     # Sample points in a grid pattern with spacing based on geohash size

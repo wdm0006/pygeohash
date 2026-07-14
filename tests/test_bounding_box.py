@@ -165,3 +165,19 @@ class TestBoundingBox:
         mid_geohash = encode(mid_lat, mid_lon, 3)
 
         assert mid_geohash in result_interior
+
+    @pytest.mark.parametrize(
+        "bbox",
+        [
+            BoundingBox(-90.0, 0.0, -89.9, 0.1),
+            BoundingBox(89.9, 0.0, 90.0, 0.1),
+            BoundingBox(0.0, -180.0, 0.1, -179.9),
+            BoundingBox(0.0, 179.9, 0.1, 180.0),
+        ],
+    )
+    def test_geohashes_in_box_at_world_boundaries(self, bbox):
+        """Test boxes touching geographic limits return intersecting geohashes."""
+        result = geohashes_in_box(bbox, precision=4)
+
+        assert result
+        assert all(do_boxes_intersect(bbox, get_bounding_box(geohash)) for geohash in result)
