@@ -109,6 +109,32 @@ def test_c_encode_validates_precision_directly():
         assert c_func(42.6, -5.6, 12) == "ezs42e44yx96"
 
 
+def test_c_encode_rejects_non_finite_coordinates():
+    from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
+
+    for c_func in (c_encode, c_encode_strictly):
+        for latitude, longitude in (
+            (float("inf"), 0.0),
+            (float("-inf"), 0.0),
+            (float("nan"), 0.0),
+            (0.0, float("inf")),
+            (0.0, float("-inf")),
+            (0.0, float("nan")),
+        ):
+            with pytest.raises(ValueError, match="latitude and longitude must be finite"):
+                c_func(latitude, longitude)
+
+
+def test_c_encode_preserves_finite_coordinate_normalization():
+    from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
+
+    for c_func in (c_encode, c_encode_strictly):
+        assert c_func(91.0, 0.0, 5) == c_func(90.0, 0.0, 5)
+        assert c_func(-91.0, 0.0, 5) == c_func(-90.0, 0.0, 5)
+        assert c_func(0.0, 181.0, 5) == c_func(0.0, -179.0, 5)
+        assert c_func(0.0, -181.0, 5) == c_func(0.0, 179.0, 5)
+
+
 def test_encode_strictly_invalid_latitude():
     """Test encode_strictly with invalid latitude values."""
     with pytest.raises(ValueError, match="Latitude must be between -90.0 and 90.0 degrees"):
