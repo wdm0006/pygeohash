@@ -202,6 +202,11 @@ static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs
         return NULL;
     }
 
+    if (!isfinite(latitude) || !isfinite(longitude)) {
+        PyErr_SetString(PyExc_ValueError, "latitude and longitude must be finite");
+        return NULL;
+    }
+
     // Bounds-check precision before writing into the fixed-size geohash[13]
     // buffer below: any value > 12 would overrun it (stack buffer overflow).
     if (precision < 1 || precision > 12) {
@@ -274,6 +279,11 @@ static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObjec
 
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, "dd|i", kwlist,
                                     &latitude, &longitude, &precision)) {
+        return NULL;
+    }
+
+    if (!isfinite(latitude) || !isfinite(longitude)) {
+        PyErr_SetString(PyExc_ValueError, "latitude and longitude must be finite");
         return NULL;
     }
 
@@ -362,4 +372,4 @@ static struct PyModuleDef geohashmodule = {
 // Module initialization function
 PyMODINIT_FUNC PyInit_geohash_module(void) {
     return PyModule_Create(&geohashmodule);
-} 
+}
