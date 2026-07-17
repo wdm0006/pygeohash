@@ -36,6 +36,10 @@
 
 
 
+
+
+
+
 <meta property="og:title" content="pygeohash.distances">
 <meta property="og:description" content="pygeohash.distances - pygeohash documentation">
 <meta property="og:type" content="website">
@@ -246,6 +250,9 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohash_2</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">__base32</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash_2</span><span class="p">):</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid geohash 2: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash 2: </span><span class="si">{</span><span class="n">geohash_2</span><span class="si">}</span><span class="s2"> is not a valid geohash&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">geohash_1</span> <span class="o">==</span> <span class="n">geohash_2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
 
     <span class="c1"># normalize the geohashes to the length of the shortest</span>
     <span class="n">len_1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">)</span>
