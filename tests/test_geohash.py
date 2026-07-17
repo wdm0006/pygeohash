@@ -228,6 +228,16 @@ def test_check_validity():
         pgh.geohash_approximate_distance("shibu", "shiba", check_validity=True)
 
 
+def test_approximate_distance_checks_identical_invalid_geohashes():
+    with pytest.raises(ValueError):
+        pgh.geohash_approximate_distance("invalid", "invalid", check_validity=True)
+
+
+@pytest.mark.parametrize("geohash", ["s", "u4pruydqqvjk"])
+def test_approximate_distance_is_zero_for_identical_geohashes(geohash):
+    assert pgh.geohash_approximate_distance(geohash, geohash) == 0.0
+
+
 def test_distance():
     # test the fast geohash distance approximations
     assert pgh.geohash_approximate_distance("bcd3u", "bc83n") == 625441
