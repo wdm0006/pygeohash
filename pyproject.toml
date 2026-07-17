@@ -17,6 +17,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
+    "Typing :: Typed",
 ]
 keywords = ["geohash", "gis"]
 dependencies = []
@@ -30,7 +31,7 @@ dependencies = []
 packages = ["pygeohash", "pygeohash.cgeohash"]
 
 [tool.setuptools.package-data]
-pygeohash = ["cgeohash/*.c", "cgeohash/*.h"]
+pygeohash = ["py.typed", "cgeohash/*.c", "cgeohash/*.h"]
 
 [project.optional-dependencies]
 viz = [
