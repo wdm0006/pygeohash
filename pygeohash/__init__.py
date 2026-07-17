@@ -11,51 +11,56 @@ Attributes:
     __all__ (list): List of public functions and classes exported by the module.
 """
 
-from pygeohash.bounding_box import (
-    BoundingBox,
-    do_boxes_intersect,
-    geohashes_in_box,
-    get_bounding_box,
-    is_point_in_box,
-    is_point_in_geohash,
-)
-from pygeohash.distances import geohash_approximate_distance, geohash_haversine_distance
+from importlib import import_module
+from typing import TYPE_CHECKING, Dict, List
+
 from pygeohash.geohash import decode, decode_exactly, encode, encode_strictly
-from pygeohash.geohash_types import ExactLatLong, LatLong
-from pygeohash.neighbor import get_adjacent
-from pygeohash.stats import eastern, mean, northern, southern, std, variance, western
-from pygeohash.types import (
-    Direction,
-    GeohashPrecision,
-    GeohashCollection,
-    GeohashList,
-    EARTH_RADIUS,
-    PRECISION_TO_ERROR,
-    assert_valid_geohash,
-    assert_valid_latitude,
-    assert_valid_longitude,
-    is_valid_geohash,
-    is_valid_latitude,
-    is_valid_longitude,
-    Geohash,
-    Latitude,
-    Longitude,
-    LatitudeArray,
-    LongitudeArray,
-    GeohashArray,
-    GeohashSeries,
-    LatitudeSeries,
-    LongitudeSeries,
-    GeohashDataFrame,
-)
+from pygeohash.geohash_types import ExactLatLong, GeohashPrecision, LatLong
 from pygeohash.logging import (
-    logger,
-    get_logger,
-    set_log_level,
-    add_stream_handler,
     add_file_handler,
+    add_stream_handler,
+    get_logger,
+    logger,
     remove_all_handlers,
+    set_log_level,
 )
+
+if TYPE_CHECKING:
+    from pygeohash.bounding_box import (
+        BoundingBox,
+        do_boxes_intersect,
+        geohashes_in_box,
+        get_bounding_box,
+        is_point_in_box,
+        is_point_in_geohash,
+    )
+    from pygeohash.distances import geohash_approximate_distance, geohash_haversine_distance
+    from pygeohash.neighbor import get_adjacent
+    from pygeohash.stats import eastern, mean, northern, southern, std, variance, western
+    from pygeohash.types import (
+        EARTH_RADIUS,
+        PRECISION_TO_ERROR,
+        Direction,
+        Geohash,
+        GeohashArray,
+        GeohashCollection,
+        GeohashDataFrame,
+        GeohashList,
+        GeohashSeries,
+        Latitude,
+        LatitudeArray,
+        LatitudeSeries,
+        Longitude,
+        LongitudeArray,
+        LongitudeSeries,
+        assert_valid_geohash,
+        assert_valid_latitude,
+        assert_valid_longitude,
+        is_valid_geohash,
+        is_valid_latitude,
+        is_valid_longitude,
+    )
+    from pygeohash.viz import folium_map, plot_geohash, plot_geohashes
 
 __author__ = "willmcginnis"
 
@@ -119,16 +124,69 @@ __all__ = [
     "add_stream_handler",
     "add_file_handler",
     "remove_all_handlers",
+    # Visualization functions
+    "plot_geohash",
+    "plot_geohashes",
+    "folium_map",
 ]
 
-# Try to import visualization functions if dependencies are available
-try:
-    from pygeohash.viz import folium_map, plot_geohash, plot_geohashes
+_LAZY_IMPORTS: Dict[str, str] = {
+    name: module
+    for module, names in (
+        (
+            "pygeohash.bounding_box",
+            (
+                "BoundingBox",
+                "do_boxes_intersect",
+                "geohashes_in_box",
+                "get_bounding_box",
+                "is_point_in_box",
+                "is_point_in_geohash",
+            ),
+        ),
+        ("pygeohash.distances", ("geohash_approximate_distance", "geohash_haversine_distance")),
+        ("pygeohash.neighbor", ("get_adjacent",)),
+        ("pygeohash.stats", ("eastern", "mean", "northern", "southern", "std", "variance", "western")),
+        (
+            "pygeohash.types",
+            (
+                "EARTH_RADIUS",
+                "PRECISION_TO_ERROR",
+                "Direction",
+                "Geohash",
+                "GeohashArray",
+                "GeohashCollection",
+                "GeohashDataFrame",
+                "GeohashList",
+                "GeohashSeries",
+                "Latitude",
+                "LatitudeArray",
+                "LatitudeSeries",
+                "Longitude",
+                "LongitudeArray",
+                "LongitudeSeries",
+                "assert_valid_geohash",
+                "assert_valid_latitude",
+                "assert_valid_longitude",
+                "is_valid_geohash",
+                "is_valid_latitude",
+                "is_valid_longitude",
+            ),
+        ),
+        ("pygeohash.viz", ("folium_map", "plot_geohash", "plot_geohashes")),
+    )
+    for name in names
+}
 
-    __all__ += [
-        "plot_geohash",
-        "plot_geohashes",
-        "folium_map",
-    ]
-except ImportError:
-    pass
+
+def __getattr__(name: str) -> object:
+    module = _LAZY_IMPORTS.get(name)
+    if module is None:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    value: object = getattr(import_module(module), name)
+    globals()[name] = value
+    return value
+
+
+def __dir__() -> List[str]:
+    return sorted(set(globals()) | set(__all__))
