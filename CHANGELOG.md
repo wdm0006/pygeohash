@@ -1,3 +1,14 @@
+v3.3.1
+======
+
+ * [bugfix] `encode`/`encode_strictly` in the C extension now reject a precision outside 1-12 with a ValueError. Calling `pygeohash.cgeohash.geohash_module.encode` directly with a larger precision previously overran a fixed-size buffer.
+ * [bugfix] the C encoders now reject NaN and infinite coordinates with a ValueError. Passing an infinite longitude previously hung the call.
+ * [bugfix] `geohash_approximate_distance` now returns 0.0 for two identical geohashes instead of the precision-table value for their shared prefix.
+ * [bugfix] `geohashes_in_box` now clamps its sampling range to latitude +/-90 and longitude +/-180, so boxes touching the world limits enumerate correctly.
+ * [bugfix] `plot_geohashes` works again with matplotlib >= 3.9, which removed `matplotlib.cm.get_cmap`.
+ * [packaging] the `py.typed` marker is now shipped in the wheel and sdist, so type checkers finally see pygeohash's inline type hints. The "Typing :: Typed" classifier is now accurate.
+ * [docs] `encode_strictly` no longer claims to perform extra validation. It is identical to `encode` and is kept only as a back-compatible alias.
+
 v3.3.0
 ======
 

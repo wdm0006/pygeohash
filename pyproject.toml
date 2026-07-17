@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygeohash"
-version = "3.3.0"
+version = "3.3.1"
 description = "Python module for interacting with geohashes"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -25,7 +25,7 @@ dependencies = []
 [project.urls]
 "Homepage" = "https://pygeohash.mcginniscommawill.com"
 "Bug Tracker" = "https://github.com/wdm0006/pygeohash/issues"
-"Download" = "https://github.com/wdm0006/pygeohash/tarball/3.3.0"
+"Download" = "https://github.com/wdm0006/pygeohash/tarball/3.3.1"
 
 [tool.setuptools]
 packages = ["pygeohash", "pygeohash.cgeohash"]
