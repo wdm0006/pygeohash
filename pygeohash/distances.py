@@ -73,6 +73,9 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
             logger.error("Invalid geohash 2: %s", geohash_2)
             raise ValueError(f"Geohash 2: {geohash_2} is not a valid geohash")
 
+    if geohash_1 == geohash_2:
+        return 0.0
+
     # normalize the geohashes to the length of the shortest
     len_1 = len(geohash_1)
     len_2 = len(geohash_2)
