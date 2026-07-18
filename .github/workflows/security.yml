@@ -1,12 +1,19 @@
 name: "Security"
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
+  schedule:
+    - cron: '0 6 * * 1'
 
 jobs:
   codeql:
     name: CodeQL Analysis
+    # CodeQL autobuild is expensive; run it on merges to master and weekly
+    # rather than on every PR. PRs are still gated by dependency review below.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -33,6 +40,9 @@ jobs:
 
   dependency-security:
     name: Dependency Security
+    # dependency-review-action only runs on pull_request events, so this job is
+    # PR-only; it keeps the fast per-PR supply-chain gate that CodeQL no longer provides.
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: read
