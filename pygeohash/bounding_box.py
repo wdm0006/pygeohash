@@ -42,8 +42,8 @@ def get_bounding_box(geohash: str) -> BoundingBox:
             values that define the bounding box of the geohash.
 
     Example:
-        >>> get_bounding_box("u4pruyd")
-        BoundingBox(min_lat=57.649, min_lon=10.407, max_lat=57.649, max_lon=10.407)
+        >>> tuple(round(value, 6) for value in get_bounding_box("u4pruyd"))
+        (57.64801, 10.406799, 57.649384, 10.408173)
 
     Note:
         The precision of the coordinates in the bounding box depends on the length
@@ -141,7 +141,7 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
     Example:
         >>> box = BoundingBox(57.64, 10.40, 57.65, 10.41)
         >>> geohashes_in_box(box, precision=5)
-        ['u4pru', 'u4prv']
+        ['u4pru']
 
     Note:
         The number of geohashes returned depends on the size of the bounding box
