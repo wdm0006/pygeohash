@@ -1,6 +1,7 @@
-v3.3.1
+v3.4.0
 ======
 
+ * [bugfix] `northern`, `southern`, `eastern`, and `western` now return the selected input geohash unchanged instead of re-encoding its center at precision 12.
  * [bugfix] `encode`/`encode_strictly` in the C extension now reject a precision outside 1-12 with a ValueError. Calling `pygeohash.cgeohash.geohash_module.encode` directly with a larger precision previously overran a fixed-size buffer.
  * [bugfix] the C encoders now reject NaN and infinite coordinates with a ValueError. Passing an infinite longitude previously hung the call.
  * [bugfix] `geohash_approximate_distance` now returns 0.0 for two identical geohashes instead of the precision-table value for their shared prefix.
