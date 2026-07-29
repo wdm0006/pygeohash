@@ -236,7 +236,7 @@
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; geohash_approximate_distance(&quot;u4pruyd&quot;, &quot;u4pruyf&quot;)</span>
-<span class="sd">        118.0</span>
+<span class="sd">        610</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
         <span class="s2">&quot;Calculating approximate distance between </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2"> (check_validity=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">,</span> <span class="n">check_validity</span>
@@ -295,8 +295,8 @@
 <span class="sd">        float: The distance in meters.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; geohash_haversine_distance(&quot;u4pruyd&quot;, &quot;u4pruyf&quot;)</span>
-<span class="sd">        152.3</span>
+<span class="sd">        &gt;&gt;&gt; round(geohash_haversine_distance(&quot;u4pruyd&quot;, &quot;u4pruyf&quot;), 1)</span>
+<span class="sd">        152.7</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating haversine distance between </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">)</span>
 

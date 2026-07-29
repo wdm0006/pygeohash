@@ -223,8 +223,8 @@
 <span class="sd">            values that define the bounding box of the geohash.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; get_bounding_box(&quot;u4pruyd&quot;)</span>
-<span class="sd">        BoundingBox(min_lat=57.649, min_lon=10.407, max_lat=57.649, max_lon=10.407)</span>
+<span class="sd">        &gt;&gt;&gt; tuple(round(value, 6) for value in get_bounding_box(&quot;u4pruyd&quot;))</span>
+<span class="sd">        (57.64801, 10.406799, 57.649384, 10.408173)</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        The precision of the coordinates in the bounding box depends on the length</span>
@@ -334,7 +334,7 @@
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; box = BoundingBox(57.64, 10.40, 57.65, 10.41)</span>
 <span class="sd">        &gt;&gt;&gt; geohashes_in_box(box, precision=5)</span>
-<span class="sd">        [&#39;u4pru&#39;, &#39;u4prv&#39;]</span>
+<span class="sd">        [&#39;u4pru&#39;]</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        The number of geohashes returned depends on the size of the bounding box</span>
