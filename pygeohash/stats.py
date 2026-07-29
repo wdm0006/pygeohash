@@ -65,13 +65,11 @@ def _max_cardinal(geohashes: GeohashCollection, key_func: Callable[[LatLong], fl
         logger.warning("Empty geohash collection provided")
         return ""
 
-    coordinates = (decode(x) for x in geohashes)
     if reverse:
-        coordinate = max(coordinates, key=lambda x: key_func(x))
+        result = max(geohashes, key=lambda geohash: key_func(decode(geohash)))
     else:
-        coordinate = min(coordinates, key=lambda x: key_func(x))
+        result = min(geohashes, key=lambda geohash: key_func(decode(geohash)))
 
-    result = encode(coordinate.latitude, coordinate.longitude)
     logger.debug("Found %s geohash: %s", "maximum" if reverse else "minimum", result)
     return result
 
@@ -106,7 +104,7 @@ def southern(geohashes: GeohashCollection) -> str:
 
     Example:
         >>> southern(["u4pruyd", "u4pruyf", "u4pruyc"])
-        'u4pruyc'
+        'u4pruyd'
     """
     logger.debug("Finding southernmost geohash in collection of %d geohashes", len(geohashes))
     result = _max_cardinal(geohashes, __latitude, False)
@@ -125,7 +123,7 @@ def eastern(geohashes: GeohashCollection) -> str:
 
     Example:
         >>> eastern(["u4pruyd", "u4pruyf", "u4pruyc"])
-        'u4pruyf'
+        'u4pruyd'
     """
     logger.debug("Finding easternmost geohash in collection of %d geohashes", len(geohashes))
     result = _max_cardinal(geohashes, __longitude, True)

@@ -283,3 +283,25 @@ def test_stats():
 
     std = pgh.std(coordinates)
     assert pytest.approx(std, abs=1e-4) == 5559746.322389894
+
+
+def test_cardinal_extremes_return_input_geohashes():
+    geohashes = ["u4pruyd", "u4pruyf", "u4pruyc"]
+
+    assert pgh.northern(geohashes) == "u4pruyf"
+    assert pgh.southern(geohashes) == "u4pruyd"
+    assert pgh.eastern(geohashes) == "u4pruyd"
+    assert pgh.western(geohashes) == "u4pruyc"
+
+
+def test_cardinal_extremes_return_members_of_mixed_precision_collection():
+    geohashes = ["u", "g", "s000"]
+
+    for cardinal_extreme in (pgh.northern, pgh.southern, pgh.eastern, pgh.western):
+        assert cardinal_extreme(geohashes) in geohashes
+
+
+def test_cardinal_extreme_tie_returns_first_geohash():
+    geohashes = ["u4pruyd", "u4pruyf", "u4pruyc"]
+
+    assert pgh.eastern(geohashes) == geohashes[0]
