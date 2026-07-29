@@ -58,7 +58,7 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
 
     Example:
         >>> geohash_approximate_distance("u4pruyd", "u4pruyf")
-        118.0
+        610
     """
     logger.debug(
         "Calculating approximate distance between %s and %s (check_validity=%s)", geohash_1, geohash_2, check_validity
@@ -114,8 +114,8 @@ def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
         float: The distance in meters.
 
     Example:
-        >>> geohash_haversine_distance("u4pruyd", "u4pruyf")
-        152.3
+        >>> round(geohash_haversine_distance("u4pruyd", "u4pruyf"), 1)
+        152.7
     """
     logger.debug("Calculating haversine distance between %s and %s", geohash_1, geohash_2)
 

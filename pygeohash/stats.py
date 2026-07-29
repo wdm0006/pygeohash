@@ -162,7 +162,7 @@ def mean(geohashes: GeohashCollection, precision: GeohashPrecision = 12) -> str:
 
     Example:
         >>> mean(["u4pruyd", "u4pruyf", "u4pruyc"])
-        'u4pruye'
+        'u4pruyf1m6dt'
     """
     logger.debug("Calculating mean position for %d geohashes with precision %d", len(geohashes), precision)
 
@@ -193,8 +193,8 @@ def variance(geohashes: GeohashCollection) -> float:
         float: The variance in meters squared.
 
     Example:
-        >>> variance(["u4pruyd", "u4pruyf", "u4pruyc"])
-        2500.0
+        >>> round(variance(["u4pruyd", "u4pruyf", "u4pruyc"]), 1)
+        6665.5
     """
     logger.debug("Calculating variance for %d geohashes", len(geohashes))
 
@@ -223,8 +223,8 @@ def std(geohashes: GeohashCollection) -> float:
         float: The standard deviation in meters.
 
     Example:
-        >>> std(["u4pruyd", "u4pruyf", "u4pruyc"])
-        50.0
+        >>> round(std(["u4pruyd", "u4pruyf", "u4pruyc"]), 1)
+        81.6
     """
     logger.debug("Calculating standard deviation for %d geohashes", len(geohashes))
     result = math.sqrt(variance(geohashes))
