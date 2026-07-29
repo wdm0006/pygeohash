@@ -46,15 +46,15 @@ short_geohash = pgh.encode(latitude=42.6, longitude=-5.6, precision=5)
 print(short_geohash)  # 'ezs42'
 
 # Decode geohash to coordinates
-lat, lng = pgh.decode(geohash='ezs42')
+lat, lng = pgh.decode(geohash="ezs42")
 print(lat, lng)  # '42.6', '-5.6'
 
 # Calculate approximate distance between geohashes (in meters)
-distance = pgh.geohash_approximate_distance(geohash_1='bcd3u', geohash_2='bc83n')
+distance = pgh.geohash_approximate_distance(geohash_1="bcd3u", geohash_2="bc83n")
 print(distance)  # 625441
 
 # Get adjacent geohash
-adjacent = pgh.get_adjacent(geohash='kd3ybyu', direction='right')
+adjacent = pgh.get_adjacent(geohash="kd3ybyu", direction="right")
 print(adjacent)  # 'kd3ybyv'
 ```
 
