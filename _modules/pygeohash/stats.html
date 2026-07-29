@@ -14,11 +14,11 @@
         gtag('config', 'G-Z43R9PWW0B');
     </script>
     
-    <title>pygeohash.stats &#8212; pygeohash 3.3.1 documentation</title>
+    <title>pygeohash.stats &#8212; pygeohash 3.4.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=30d13653" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/wabi.css?v=501c8ac3" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a8d29c75" />
-    <script src="../../_static/documentation_options.js?v=9ac01507"></script>
+    <script src="../../_static/documentation_options.js?v=b0e360d0"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -241,13 +241,11 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Empty geohash collection provided&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
-    <span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
-        <span class="n">coordinate</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">key_func</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">geohash</span><span class="p">:</span> <span class="n">key_func</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">)))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">coordinate</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">key_func</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">geohash</span><span class="p">:</span> <span class="n">key_func</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">)))</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">coordinate</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%s</span><span class="s2"> geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;maximum&quot;</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="s2">&quot;minimum&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span>
 
@@ -287,7 +285,7 @@
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; southern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
-<span class="sd">        &#39;u4pruyc&#39;</span>
+<span class="sd">        &#39;u4pruyd&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding southernmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__latitude</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -309,7 +307,7 @@
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; eastern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
-<span class="sd">        &#39;u4pruyf&#39;</span>
+<span class="sd">        &#39;u4pruyd&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding easternmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__longitude</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
