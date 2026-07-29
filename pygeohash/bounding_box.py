@@ -140,7 +140,7 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
 
     Example:
         >>> box = BoundingBox(57.64, 10.40, 57.65, 10.41)
-        >>> geohashes_in_box(box, precision=5)
+        >>> sorted(geohashes_in_box(box, precision=5))
         ['u4pru']
 
     Note:
@@ -177,12 +177,11 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
     # This ensures we get all geohashes that intersect with the bounding box
     for lat in _float_range(start_lat, end_lat, lat_step / 2):
         for lon in _float_range(start_lon, end_lon, lon_step / 2):
-            if bbox.min_lat <= lat <= bbox.max_lat or bbox.min_lon <= lon <= bbox.max_lon:
-                gh: str = encode(lat, lon, precision)
-                gh_bbox: BoundingBox = get_bounding_box(gh)
-                # Only add geohashes that actually intersect with our bounding box
-                if do_boxes_intersect(bbox, gh_bbox):
-                    result.add(gh)
+            gh: str = encode(lat, lon, precision)
+            gh_bbox: BoundingBox = get_bounding_box(gh)
+            # Only add geohashes that actually intersect with our bounding box
+            if do_boxes_intersect(bbox, gh_bbox):
+                result.add(gh)
 
     logger.debug("Found %d intersecting geohashes", len(result))
     return list(result)

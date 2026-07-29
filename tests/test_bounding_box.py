@@ -12,6 +12,31 @@ from pygeohash.bounding_box import (
 )
 from pygeohash.geohash import encode
 
+# Fixed boxes whose corner cells were dropped before the corner pre-filter was removed.
+# Each one omits at least one intersecting cell at both precision 5 and precision 6
+# under the old implementation.
+CORNER_BOXES = [
+    BoundingBox(-9.825261385772734, 87.4279160521848, -9.748421102977142, 87.67290863932223),
+    BoundingBox(-59.406, -75.466, -59.325, -75.276),
+    BoundingBox(37.875, -114.057, 38.101, -113.685),
+    BoundingBox(34.365, 67.075, 34.641, 67.47),
+]
+
+
+def _brute_force_geohashes(bbox: BoundingBox, precision: int, samples: int = 100) -> set:
+    """Encode a dense grid of points inside ``bbox``; every result must be enumerated."""
+    lat_span = bbox.max_lat - bbox.min_lat
+    lon_span = bbox.max_lon - bbox.min_lon
+    return {
+        encode(
+            bbox.min_lat + lat_span * i / (samples - 1),
+            bbox.min_lon + lon_span * j / (samples - 1),
+            precision,
+        )
+        for i in range(samples)
+        for j in range(samples)
+    }
+
 
 class TestBoundingBox:
     """Test class for bounding box operations."""
@@ -180,4 +205,34 @@ class TestBoundingBox:
         result = geohashes_in_box(bbox, precision=4)
 
         assert result
+        assert all(do_boxes_intersect(bbox, get_bounding_box(geohash)) for geohash in result)
+
+    @pytest.mark.parametrize(
+        "bbox",
+        CORNER_BOXES,
+    )
+    @pytest.mark.parametrize("precision", [5, 6])
+    def test_geohashes_in_box_includes_corner_cells(self, bbox, precision):
+        """The cells containing the box's own four corners must be returned."""
+        result = geohashes_in_box(bbox, precision=precision)
+
+        corners = {
+            encode(bbox.min_lat, bbox.min_lon, precision),
+            encode(bbox.min_lat, bbox.max_lon, precision),
+            encode(bbox.max_lat, bbox.min_lon, precision),
+            encode(bbox.max_lat, bbox.max_lon, precision),
+        }
+        assert corners <= set(result)
+
+    @pytest.mark.parametrize(
+        "bbox",
+        CORNER_BOXES,
+    )
+    @pytest.mark.parametrize("precision", [5, 6])
+    def test_geohashes_in_box_covers_brute_force_sampling(self, bbox, precision):
+        """Every cell found by densely sampling the box interior must be returned."""
+        result = set(geohashes_in_box(bbox, precision=precision))
+
+        assert _brute_force_geohashes(bbox, precision) <= result
+        # The candidate set is widened, but each returned cell must still intersect.
         assert all(do_boxes_intersect(bbox, get_bounding_box(geohash)) for geohash in result)
