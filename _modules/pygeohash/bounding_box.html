@@ -333,7 +333,7 @@
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; box = BoundingBox(57.64, 10.40, 57.65, 10.41)</span>
-<span class="sd">        &gt;&gt;&gt; geohashes_in_box(box, precision=5)</span>
+<span class="sd">        &gt;&gt;&gt; sorted(geohashes_in_box(box, precision=5))</span>
 <span class="sd">        [&#39;u4pru&#39;]</span>
 
 <span class="sd">    Note:</span>
@@ -370,12 +370,11 @@
     <span class="c1"># This ensures we get all geohashes that intersect with the bounding box</span>
     <span class="k">for</span> <span class="n">lat</span> <span class="ow">in</span> <span class="n">_float_range</span><span class="p">(</span><span class="n">start_lat</span><span class="p">,</span> <span class="n">end_lat</span><span class="p">,</span> <span class="n">lat_step</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">lon</span> <span class="ow">in</span> <span class="n">_float_range</span><span class="p">(</span><span class="n">start_lon</span><span class="p">,</span> <span class="n">end_lon</span><span class="p">,</span> <span class="n">lon_step</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">&lt;=</span> <span class="n">lat</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="ow">or</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">&lt;=</span> <span class="n">lon</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">:</span>
-                <span class="n">gh</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
-                <span class="n">gh_bbox</span><span class="p">:</span> <span class="n">BoundingBox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
-                <span class="c1"># Only add geohashes that actually intersect with our bounding box</span>
-                <span class="k">if</span> <span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">gh_bbox</span><span class="p">):</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
+            <span class="n">gh</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+            <span class="n">gh_bbox</span><span class="p">:</span> <span class="n">BoundingBox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
+            <span class="c1"># Only add geohashes that actually intersect with our bounding box</span>
+            <span class="k">if</span> <span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">gh_bbox</span><span class="p">):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%d</span><span class="s2"> intersecting geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
