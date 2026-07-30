@@ -185,7 +185,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">TypeVar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.distances</span><span class="w"> </span><span class="kn">import</span> <span class="n">geohash_haversine_distance</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">decode</span><span class="p">,</span> <span class="n">encode</span>
@@ -198,6 +198,38 @@
 <span class="n">__author__</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Will McGinnis&quot;</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+
+<span class="c1">#: Resultant vector lengths at or below this value are treated as fully cancelled.</span>
+<span class="n">_CIRCULAR_MEAN_TOLERANCE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_circular_mean_longitude</span><span class="p">(</span><span class="n">longitudes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the circular mean of a sequence of longitudes in degrees.</span>
+
+<span class="sd">    Longitude is circular, so an arithmetic mean places the centroid of a</span>
+<span class="sd">    collection spanning the antimeridian near the prime meridian instead. This</span>
+<span class="sd">    averages the unit vectors of the longitudes and converts the resultant back</span>
+<span class="sd">    to degrees.</span>
+
+<span class="sd">    When the resultant vector cancels out (for example two antipodal</span>
+<span class="sd">    longitudes), no unique circular mean exists and the arithmetic mean of the</span>
+<span class="sd">    longitudes is returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        longitudes (Sequence[float]): Longitudes in degrees.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The mean longitude in degrees, within [-180, 180].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">radians</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span> <span class="k">for</span> <span class="n">longitude</span> <span class="ow">in</span> <span class="n">longitudes</span><span class="p">]</span>
+    <span class="n">mean_sin</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span> <span class="k">for</span> <span class="n">radian</span> <span class="ow">in</span> <span class="n">radians</span><span class="p">)</span>
+    <span class="n">mean_cos</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span> <span class="k">for</span> <span class="n">radian</span> <span class="ow">in</span> <span class="n">radians</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">mean_sin</span><span class="p">,</span> <span class="n">mean_cos</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">_CIRCULAR_MEAN_TOLERANCE</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Longitude vectors cancelled out; falling back to the arithmetic mean&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">longitudes</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">mean_sin</span><span class="p">,</span> <span class="n">mean_cos</span><span class="p">))</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">__latitude</span><span class="p">(</span><span class="n">coordinate</span><span class="p">:</span> <span class="n">LatLong</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -343,12 +375,19 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the mean position of a collection of geohashes.</span>
 
+<span class="sd">    Latitude is averaged arithmetically. Longitude is averaged circularly, so a</span>
+<span class="sd">    collection spanning the antimeridian is centered near ±180 rather than near</span>
+<span class="sd">    the prime meridian. If the longitude vectors cancel out exactly (for example</span>
+<span class="sd">    two antipodal longitudes) no unique circular mean exists, and the arithmetic</span>
+<span class="sd">    mean of the longitudes is used instead.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
 <span class="sd">        precision (GeohashPrecision, optional): The precision of the resulting geohash. Defaults to 12.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        str: A geohash representing the mean position.</span>
+<span class="sd">        str: A geohash representing the mean position, or an empty string for an</span>
+<span class="sd">            empty collection.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; mean([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
@@ -363,7 +402,7 @@
     <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[</span><span class="n">decode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Decoded </span><span class="si">%d</span><span class="s2"> coordinates for mean calculation&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">))</span>
     <span class="n">mean_lat</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">latitude</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">)</span>
-    <span class="n">mean_lon</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">longitude</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">)</span>
+    <span class="n">mean_lon</span> <span class="o">=</span> <span class="n">_circular_mean_longitude</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">longitude</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">])</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">mean_lat</span><span class="p">,</span> <span class="n">mean_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Mean position calculated: </span><span class="si">%s</span><span class="s2"> (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">mean_lat</span><span class="p">,</span> <span class="n">mean_lon</span><span class="p">)</span>
