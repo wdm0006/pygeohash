@@ -10,9 +10,10 @@ from __future__ import annotations
 import math
 from typing import Dict, Final
 
-from pygeohash.geohash import __base32, decode_exactly
+from pygeohash.geohash import decode_exactly
 from pygeohash.geohash_types import ExactLatLong
 from pygeohash.logging import get_logger
+from pygeohash.types import is_valid_geohash
 
 logger = get_logger(__name__)
 
@@ -65,13 +66,16 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
     )
 
     if check_validity:
-        if len([x for x in geohash_1 if x in __base32]) != len(geohash_1):
+        if not is_valid_geohash(geohash_1):
             logger.error("Invalid geohash 1: %s", geohash_1)
             raise ValueError(f"Geohash 1: {geohash_1} is not a valid geohash")
 
-        if len([x for x in geohash_2 if x in __base32]) != len(geohash_2):
+        if not is_valid_geohash(geohash_2):
             logger.error("Invalid geohash 2: %s", geohash_2)
             raise ValueError(f"Geohash 2: {geohash_2} is not a valid geohash")
+
+        geohash_1 = geohash_1.lower()
+        geohash_2 = geohash_2.lower()
 
     if geohash_1 == geohash_2:
         return 0.0
