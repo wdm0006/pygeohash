@@ -233,6 +233,33 @@ def test_approximate_distance_checks_identical_invalid_geohashes():
         pgh.geohash_approximate_distance("invalid", "invalid", check_validity=True)
 
 
+@pytest.mark.parametrize("geohash", ["", "u4pruydqqvjkc"])
+def test_approximate_distance_rejects_invalid_length(geohash):
+    with pytest.raises(ValueError):
+        pgh.geohash_approximate_distance(geohash, "u4pruyd", check_validity=True)
+
+
+@pytest.mark.parametrize(
+    "geohash_1, geohash_2",
+    [
+        ("U4PRUYD", "U4PRUYF"),
+        ("u4PRuyD", "U4pRUyf"),
+    ],
+)
+def test_approximate_distance_normalizes_validated_geohashes(geohash_1, geohash_2):
+    expected = pgh.geohash_approximate_distance(geohash_1.lower(), geohash_2.lower(), check_validity=True)
+    assert pgh.geohash_approximate_distance(geohash_1, geohash_2, check_validity=True) == expected
+
+
+def test_approximate_distance_skips_validation_by_default(monkeypatch):
+    def fail_validation(_geohash):
+        raise AssertionError("validation should not run")
+
+    monkeypatch.setattr("pygeohash.distances.is_valid_geohash", fail_validation)
+    assert pgh.geohash_approximate_distance("", "") == 0.0
+    assert pgh.geohash_approximate_distance("u4pruydqqvjkc", "u4pruydqqvjkd") == 0.6
+
+
 @pytest.mark.parametrize("geohash", ["s", "u4pruydqqvjk"])
 def test_approximate_distance_is_zero_for_identical_geohashes(geohash):
     assert pgh.geohash_approximate_distance(geohash, geohash) == 0.0
