@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import math
 import statistics
-from typing import Callable, Final, TypeVar
+from typing import Callable, Final, Sequence, TypeVar
 
 from pygeohash.distances import geohash_haversine_distance
 from pygeohash.geohash import decode, encode
@@ -22,6 +22,38 @@ logger = get_logger(__name__)
 __author__: Final[str] = "Will McGinnis"
 
 T = TypeVar("T")
+
+#: Resultant vector lengths at or below this value are treated as fully cancelled.
+_CIRCULAR_MEAN_TOLERANCE: Final[float] = 1e-12
+
+
+def _circular_mean_longitude(longitudes: Sequence[float]) -> float:
+    """Calculate the circular mean of a sequence of longitudes in degrees.
+
+    Longitude is circular, so an arithmetic mean places the centroid of a
+    collection spanning the antimeridian near the prime meridian instead. This
+    averages the unit vectors of the longitudes and converts the resultant back
+    to degrees.
+
+    When the resultant vector cancels out (for example two antipodal
+    longitudes), no unique circular mean exists and the arithmetic mean of the
+    longitudes is returned.
+
+    Args:
+        longitudes (Sequence[float]): Longitudes in degrees.
+
+    Returns:
+        float: The mean longitude in degrees, within [-180, 180].
+    """
+    radians = [math.radians(longitude) for longitude in longitudes]
+    mean_sin = statistics.mean(math.sin(radian) for radian in radians)
+    mean_cos = statistics.mean(math.cos(radian) for radian in radians)
+
+    if math.hypot(mean_sin, mean_cos) <= _CIRCULAR_MEAN_TOLERANCE:
+        logger.debug("Longitude vectors cancelled out; falling back to the arithmetic mean")
+        return statistics.mean(longitudes)
+
+    return math.degrees(math.atan2(mean_sin, mean_cos))
 
 
 def __latitude(coordinate: LatLong) -> float:
@@ -153,12 +185,19 @@ def western(geohashes: GeohashCollection) -> str:
 def mean(geohashes: GeohashCollection, precision: GeohashPrecision = 12) -> str:
     """Calculate the mean position of a collection of geohashes.
 
+    Latitude is averaged arithmetically. Longitude is averaged circularly, so a
+    collection spanning the antimeridian is centered near ±180 rather than near
+    the prime meridian. If the longitude vectors cancel out exactly (for example
+    two antipodal longitudes) no unique circular mean exists, and the arithmetic
+    mean of the longitudes is used instead.
+
     Args:
         geohashes (GeohashCollection): Collection of geohash strings.
         precision (GeohashPrecision, optional): The precision of the resulting geohash. Defaults to 12.
 
     Returns:
-        str: A geohash representing the mean position.
+        str: A geohash representing the mean position, or an empty string for an
+            empty collection.
 
     Example:
         >>> mean(["u4pruyd", "u4pruyf", "u4pruyc"])
@@ -173,7 +212,7 @@ def mean(geohashes: GeohashCollection, precision: GeohashPrecision = 12) -> str:
     coordinates = [decode(x) for x in geohashes]
     logger.debug("Decoded %d coordinates for mean calculation", len(coordinates))
     mean_lat = statistics.mean(c.latitude for c in coordinates)
-    mean_lon = statistics.mean(c.longitude for c in coordinates)
+    mean_lon = _circular_mean_longitude([c.longitude for c in coordinates])
 
     result = encode(mean_lat, mean_lon, precision)
     logger.debug("Mean position calculated: %s (lat=%f, lon=%f)", result, mean_lat, mean_lon)
