@@ -13,17 +13,20 @@ Functions:
 # mypy: disable-error-code="list-item,assignment"
 
 import warnings
-from typing import List, Optional, Tuple, Union, Any, cast, TypeVar, Protocol
+from typing import TYPE_CHECKING, List, Optional, Tuple, Union, Any, cast, TypeVar, Protocol
 
 from pygeohash.geohash import decode
 from pygeohash.bounding_box import get_bounding_box, geohashes_in_box, BoundingBox
 
+if TYPE_CHECKING:
+    from typing_extensions import TypeAlias
+
 # Type aliases for better readability
-FoliumMap = Any  # Would be folium.Map if folium was always available
-FoliumRectangle = Any  # Would be folium.Rectangle if folium was always available
-FoliumElement = Any  # Would be folium.Element if folium was always available
-MatplotlibAxis = Any  # Would be matplotlib.axes.Axes if matplotlib was always available
-MatplotlibFigure = Any  # Would be matplotlib.figure.Figure if matplotlib was always available
+FoliumMap: "TypeAlias" = Any  # Would be folium.Map if folium was always available
+FoliumRectangle: "TypeAlias" = Any  # Would be folium.Rectangle if folium was always available
+FoliumElement: "TypeAlias" = Any  # Would be folium.Element if folium was always available
+MatplotlibAxis: "TypeAlias" = Any  # Would be matplotlib.axes.Axes if matplotlib was always available
+MatplotlibFigure: "TypeAlias" = Any  # Would be matplotlib.figure.Figure if matplotlib was always available
 BoundingBoxCoords = Tuple[float, float, float, float]  # min_lat, min_lon, max_lat, max_lon
 
 T = TypeVar("T")

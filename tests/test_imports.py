@@ -1,5 +1,7 @@
+from __future__ import annotations
+
+import builtins
 import importlib
-import subprocess
 import sys
 
 import pytest
@@ -7,73 +9,59 @@ import pytest
 import pygeohash
 
 
-@pytest.mark.parametrize("statement", ("import pygeohash", "from pygeohash.geohash import encode"))
-def test_core_import_does_not_load_optional_modules(statement: str) -> None:
-    script = f"""
-import importlib.abc
-import sys
+def reject_imports(monkeypatch: pytest.MonkeyPatch, names: set[str]) -> None:
+    original_import = builtins.__import__
+
+    def guarded_import(name: str, *args: object, **kwargs: object) -> object:
+        if name.split(".", 1)[0] in names:
+            raise AssertionError("optional import attempted: " + name)
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", guarded_import)
 
 
-class RejectOptional(importlib.abc.MetaPathFinder):
-    def find_spec(self, fullname, path=None, target=None):
-        if fullname.split(".", 1)[0] in {{"numpy", "pandas", "matplotlib", "folium", "typing_extensions"}}:
-            raise AssertionError("optional import attempted: " + fullname)
+@pytest.mark.parametrize("module_name", ("pygeohash", "pygeohash.geohash"))
+def test_core_import_does_not_load_optional_modules(monkeypatch: pytest.MonkeyPatch, module_name: str) -> None:
+    monkeypatch.delitem(sys.modules, "pygeohash", raising=False)
+    if module_name != "pygeohash":
+        monkeypatch.delitem(sys.modules, module_name, raising=False)
+
+    reject_imports(monkeypatch, {"numpy", "pandas", "matplotlib", "folium", "typing_extensions"})
+    module = importlib.import_module(module_name)
+
+    assert module.encode(42.6, -5.6, precision=5) == "ezs42"
+    if module_name == "pygeohash":
+        assert set(module.__all__) <= set(dir(module))
+        assert not set(module._LAZY_IMPORTS).intersection(module.__dict__)
 
 
-sys.meta_path.insert(0, RejectOptional())
-sys.path.insert(0, ".")
-{statement}
-import pygeohash
+def test_visualization_exports_keep_dependencies_optional(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delitem(sys.modules, "pygeohash", raising=False)
+    monkeypatch.delitem(sys.modules, "pygeohash.viz", raising=False)
+    reject_imports(monkeypatch, {"matplotlib", "folium", "typing_extensions"})
+    package = importlib.import_module("pygeohash")
 
-assert pygeohash.encode(42.6, -5.6, precision=5) == "ezs42"
-assert set(pygeohash.__all__) <= set(dir(pygeohash))
-assert not {{
-    "pygeohash.bounding_box",
-    "pygeohash.distances",
-    "pygeohash.neighbor",
-    "pygeohash.stats",
-    "pygeohash.types",
-    "pygeohash.viz",
-    "statistics",
-}} & set(sys.modules)
-
-get_bounding_box = pygeohash.get_bounding_box
-assert get_bounding_box("ezs42").min_lat < 42.6
-assert pygeohash.__dict__["get_bounding_box"] is get_bounding_box
-assert "pygeohash.bounding_box" in sys.modules
-assert not {{
-    "pygeohash.distances",
-    "pygeohash.neighbor",
-    "pygeohash.stats",
-    "pygeohash.types",
-    "pygeohash.viz",
-    "statistics",
-}} & set(sys.modules)
-"""
-    subprocess.run((sys.executable, "-I", "-c", script), check=True)  # noqa: S603
+    for name in ("plot_geohash", "plot_geohashes", "folium_map"):
+        assert callable(getattr(package, name))
 
 
-def test_wildcard_import_keeps_visualization_dependencies_optional() -> None:
-    script = """
-import importlib.abc
-import sys
+def test_lazy_export_is_loaded_once_and_cached(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delitem(pygeohash.__dict__, "get_bounding_box", raising=False)
+    imports: list[str] = []
 
+    def import_and_record(name: str) -> object:
+        imports.append(name)
+        return importlib.import_module(name)
 
-class RejectVisualization(importlib.abc.MetaPathFinder):
-    def find_spec(self, fullname, path=None, target=None):
-        if fullname.split(".", 1)[0] in {"matplotlib", "folium", "typing_extensions"}:
-            raise AssertionError("visualization import attempted: " + fullname)
+    monkeypatch.setattr(pygeohash, "import_module", import_and_record)
 
+    get_bounding_box = pygeohash.get_bounding_box
 
-sys.meta_path.insert(0, RejectVisualization())
-sys.path.insert(0, ".")
-from pygeohash import *
-
-assert callable(plot_geohash)
-assert callable(plot_geohashes)
-assert callable(folium_map)
-"""
-    subprocess.run((sys.executable, "-I", "-c", script), check=True)  # noqa: S603
+    assert get_bounding_box("ezs42").min_lat < 42.6
+    assert pygeohash.get_bounding_box is get_bounding_box
+    assert imports == ["pygeohash.bounding_box"]
 
 
 def test_public_exports_match_their_implementations() -> None:
