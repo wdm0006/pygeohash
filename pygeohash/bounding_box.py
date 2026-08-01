@@ -7,28 +7,72 @@ related to geospatial regions.
 
 from __future__ import annotations
 
-from typing import List, NamedTuple, Set, Iterator
+from typing import Any, Iterable, List, NamedTuple, Set, Iterator, Type, TypeVar
 
 from pygeohash.geohash import decode_exactly, encode
 from pygeohash.logging import get_logger
 
 logger = get_logger(__name__)
 
+_FIELD_ORDER = "BoundingBox fields are (min_lat, min_lon, max_lat, max_lon)"
 
-class BoundingBox(NamedTuple):
-    """Named tuple representing a geospatial bounding box.
 
-    Attributes:
-        min_lat (float): The minimum (southern) latitude of the box in decimal degrees.
-        min_lon (float): The minimum (western) longitude of the box in decimal degrees.
-        max_lat (float): The maximum (northern) latitude of the box in decimal degrees.
-        max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.
-    """
+class _BoundingBoxFields(NamedTuple):
+    """Field layout for :class:`BoundingBox`; ``typing.NamedTuple`` forbids overriding ``__new__``."""
 
     min_lat: float
     min_lon: float
     max_lat: float
     max_lon: float
+
+
+_BoundingBoxT = TypeVar("_BoundingBoxT", bound=_BoundingBoxFields)
+
+
+class BoundingBox(_BoundingBoxFields):
+    """Named tuple representing a geospatial bounding box.
+
+    The fields interleave latitude and longitude, so the order is
+    ``(min_lat, min_lon, max_lat, max_lon)`` rather than the grouped
+    ``(min_lat, max_lat, min_lon, max_lon)``. Construction rejects an inverted box
+    (``min_lat > max_lat`` or ``min_lon > max_lon``) with a ``ValueError``, which is
+    what a grouped argument list produces. A degenerate box whose minimum equals its
+    maximum on either axis is valid. Boxes spanning the antimeridian, which would need
+    ``min_lon > max_lon``, are not supported.
+
+    Attributes:
+        min_lat (float): The minimum (southern) latitude of the box in decimal degrees.
+            Must not exceed ``max_lat``.
+        min_lon (float): The minimum (western) longitude of the box in decimal degrees.
+            Must not exceed ``max_lon``.
+        max_lat (float): The maximum (northern) latitude of the box in decimal degrees.
+        max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.
+
+    Raises:
+        ValueError: If ``min_lat > max_lat`` or ``min_lon > max_lon``.
+    """
+
+    __slots__ = ()
+
+    def __new__(cls, min_lat: float, min_lon: float, max_lat: float, max_lon: float) -> "BoundingBox":
+        if min_lat > max_lat:
+            raise ValueError(f"min_lat ({min_lat}) must not exceed max_lat ({max_lat}); {_FIELD_ORDER}")
+        if min_lon > max_lon:
+            raise ValueError(
+                f"min_lon ({min_lon}) must not exceed max_lon ({max_lon}); "
+                "boxes spanning the antimeridian are not supported"
+            )
+        return super().__new__(cls, min_lat, min_lon, max_lat, max_lon)
+
+    # mypy rejects the narrowed self-type against the synthesized namedtuple signature.
+    @classmethod
+    def _make(cls: Type[_BoundingBoxT], iterable: Iterable[Any]) -> _BoundingBoxT:  # type: ignore[override]
+        """Build a box from an iterable of field values, validating the ordering.
+
+        Overridden so that ``_make`` and ``_replace`` route through ``__new__`` instead of
+        ``tuple.__new__``, which would bypass validation.
+        """
+        return cls(*iterable)
 
 
 def get_bounding_box(geohash: str) -> BoundingBox:
