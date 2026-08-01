@@ -183,30 +183,74 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Iterator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">decode_exactly</span><span class="p">,</span> <span class="n">encode</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
+<span class="n">_FIELD_ORDER</span> <span class="o">=</span> <span class="s2">&quot;BoundingBox fields are (min_lat, min_lon, max_lat, max_lon)&quot;</span>
 
-<div class="viewcode-block" id="BoundingBox">
-<a class="viewcode-back" href="../../api.html#pygeohash.BoundingBox">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">BoundingBox</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a geospatial bounding box.</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        min_lat (float): The minimum (southern) latitude of the box in decimal degrees.</span>
-<span class="sd">        min_lon (float): The minimum (western) longitude of the box in decimal degrees.</span>
-<span class="sd">        max_lat (float): The maximum (northern) latitude of the box in decimal degrees.</span>
-<span class="sd">        max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_BoundingBoxFields</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Field layout for :class:`BoundingBox`; ``typing.NamedTuple`` forbids overriding ``__new__``.&quot;&quot;&quot;</span>
 
     <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">max_lat</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span></div>
+    <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span>
+
+
+<span class="n">_BoundingBoxT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_BoundingBoxT&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">_BoundingBoxFields</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BoundingBox">
+<a class="viewcode-back" href="../../api.html#pygeohash.BoundingBox">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BoundingBox</span><span class="p">(</span><span class="n">_BoundingBoxFields</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a geospatial bounding box.</span>
+
+<span class="sd">    The fields interleave latitude and longitude, so the order is</span>
+<span class="sd">    ``(min_lat, min_lon, max_lat, max_lon)`` rather than the grouped</span>
+<span class="sd">    ``(min_lat, max_lat, min_lon, max_lon)``. Construction rejects an inverted box</span>
+<span class="sd">    (``min_lat &gt; max_lat`` or ``min_lon &gt; max_lon``) with a ``ValueError``, which is</span>
+<span class="sd">    what a grouped argument list produces. A degenerate box whose minimum equals its</span>
+<span class="sd">    maximum on either axis is valid. Boxes spanning the antimeridian, which would need</span>
+<span class="sd">    ``min_lon &gt; max_lon``, are not supported.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        min_lat (float): The minimum (southern) latitude of the box in decimal degrees.</span>
+<span class="sd">            Must not exceed ``max_lat``.</span>
+<span class="sd">        min_lon (float): The minimum (western) longitude of the box in decimal degrees.</span>
+<span class="sd">            Must not exceed ``max_lon``.</span>
+<span class="sd">        max_lat (float): The maximum (northern) latitude of the box in decimal degrees.</span>
+<span class="sd">        max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If ``min_lat &gt; max_lat`` or ``min_lon &gt; max_lon``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;BoundingBox&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">min_lat</span> <span class="o">&gt;</span> <span class="n">max_lat</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min_lat (</span><span class="si">{</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">) must not exceed max_lat (</span><span class="si">{</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">); </span><span class="si">{</span><span class="n">_FIELD_ORDER</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">min_lon</span> <span class="o">&gt;</span> <span class="n">max_lon</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;min_lon (</span><span class="si">{</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">) must not exceed max_lon (</span><span class="si">{</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">); &quot;</span>
+                <span class="s2">&quot;boxes spanning the antimeridian are not supported&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">)</span>
+
+    <span class="c1"># mypy rejects the narrowed self-type against the synthesized namedtuple signature.</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_BoundingBoxT</span><span class="p">],</span> <span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">_BoundingBoxT</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a box from an iterable of field values, validating the ordering.</span>
+
+<span class="sd">        Overridden so that ``_make`` and ``_replace`` route through ``__new__`` instead of</span>
+<span class="sd">        ``tuple.__new__``, which would bypass validation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">iterable</span><span class="p">)</span></div>
 
 
 

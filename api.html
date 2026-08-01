@@ -405,12 +405,20 @@ function by including the error margins for both latitude and longitude.</p>
 <dl class="py class">
 <dt class="sig sig-object py">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">BoundingBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#BoundingBox"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BoundingBoxFields</span></code></p>
 <p>Named tuple representing a geospatial bounding box.</p>
+<p>The fields interleave latitude and longitude, so the order is
+<code class="docutils literal notranslate"><span class="pre">(min_lat,</span> <span class="pre">min_lon,</span> <span class="pre">max_lat,</span> <span class="pre">max_lon)</span></code> rather than the grouped
+<code class="docutils literal notranslate"><span class="pre">(min_lat,</span> <span class="pre">max_lat,</span> <span class="pre">min_lon,</span> <span class="pre">max_lon)</span></code>. Construction rejects an inverted box
+(<code class="docutils literal notranslate"><span class="pre">min_lat</span> <span class="pre">&gt;</span> <span class="pre">max_lat</span></code> or <code class="docutils literal notranslate"><span class="pre">min_lon</span> <span class="pre">&gt;</span> <span class="pre">max_lon</span></code>) with a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>, which is
+what a grouped argument list produces. A degenerate box whose minimum equals its
+maximum on either axis is valid. Boxes spanning the antimeridian, which would need
+<code class="docutils literal notranslate"><span class="pre">min_lon</span> <span class="pre">&gt;</span> <span class="pre">max_lon</span></code>, are not supported.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">min_lat</span></span></dt>
-<dd><p>The minimum (southern) latitude of the box in decimal degrees.</p>
+<dd><p>The minimum (southern) latitude of the box in decimal degrees.
+Must not exceed <code class="docutils literal notranslate"><span class="pre">max_lat</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -421,7 +429,8 @@ function by including the error margins for both latitude and longitude.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">min_lon</span></span></dt>
-<dd><p>The minimum (western) longitude of the box in decimal degrees.</p>
+<dd><p>The minimum (western) longitude of the box in decimal degrees.
+Must not exceed <code class="docutils literal notranslate"><span class="pre">max_lon</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -451,31 +460,11 @@ function by including the error margins for both latitude and longitude.</p>
 </dl>
 </dd></dl>
 
-<p>Create new instance of BoundingBox(min_lat, min_lon, max_lat, max_lon)</p>
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">max_lat</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span></dt>
-<dd><p>Alias for field number 2</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">max_lon</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span></dt>
-<dd><p>Alias for field number 3</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">min_lat</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span></dt>
-<dd><p>Alias for field number 0</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">min_lon</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span></dt>
-<dd><p>Alias for field number 1</p>
-</dd></dl>
-
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">min_lat</span> <span class="pre">&gt;</span> <span class="pre">max_lat</span></code> or <code class="docutils literal notranslate"><span class="pre">min_lon</span> <span class="pre">&gt;</span> <span class="pre">max_lon</span></code>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
