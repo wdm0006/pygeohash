@@ -242,10 +242,13 @@
 <span class="sd">        Must be one of: &quot;right&quot;, &quot;left&quot;, &quot;top&quot;, &quot;bottom&quot;.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        str: The adjacent geohash in the specified direction.</span>
+<span class="sd">        str: The adjacent geohash in the specified direction. Longitude is cyclic, so the</span>
+<span class="sd">        &quot;left&quot;/&quot;right&quot; neighbors of a cell touching the antimeridian wrap around to the</span>
+<span class="sd">        other side of the grid.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If the geohash length is 0 (possible when close to poles).</span>
+<span class="sd">        ValueError: If the geohash is empty, or if the requested neighbor would lie beyond</span>
+<span class="sd">        the north or south pole (&quot;top&quot; of the top row, &quot;bottom&quot; of the bottom row).</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; get_adjacent(&quot;u4pruyd&quot;, &quot;top&quot;)</span>
@@ -266,8 +269,16 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Using </span><span class="si">%s</span><span class="s2"> lookup tables based on hash length&quot;</span><span class="p">,</span> <span class="n">split_direction</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">last_char</span> <span class="ow">in</span> <span class="n">BORDERS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="n">split_direction</span><span class="p">]:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Last character </span><span class="si">%s</span><span class="s2"> is on border, recursively finding parent neighbor&quot;</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
-        <span class="n">base</span> <span class="o">=</span> <span class="n">get_adjacent</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Last character </span><span class="si">%s</span><span class="s2"> is on border, recursively finding parent neighbor&quot;</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="n">get_adjacent</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">):</span>
+            <span class="n">pole</span> <span class="o">=</span> <span class="s2">&quot;north&quot;</span> <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;top&quot;</span> <span class="k">else</span> <span class="s2">&quot;south&quot;</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find adjacent geohash: the </span><span class="si">%s</span><span class="s2"> neighbor lies beyond the </span><span class="si">%s</span><span class="s2"> pole&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">pole</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No adjacent geohash to the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">: it would lie beyond the </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2"> pole&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Longitude is cyclic, so the top-level tables already encode the antimeridian wrap.</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Last character </span><span class="si">%s</span><span class="s2"> is on the antimeridian, wrapping longitude&quot;</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Last character </span><span class="si">%s</span><span class="s2"> is not on border, using direct neighbor lookup&quot;</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
 

@@ -546,13 +546,18 @@ haversine formula, which accounts for the Earth’s curvature.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The adjacent geohash in the specified direction.</p>
+<dd class="field-even"><p>The adjacent geohash in the specified direction. Longitude is cyclic, so the
+“left”/”right” neighbors of a cell touching the antimeridian wrap around to the
+other side of the grid.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the geohash length is 0 (possible when close to poles).</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the geohash is empty, or if the requested neighbor would lie beyond</p></li>
+<li><p><strong>the north</strong><strong> or </strong><strong>south pole</strong><strong> (</strong><strong>&quot;top&quot;</strong><strong> of </strong><strong>the top row</strong><strong>, </strong><strong>&quot;bottom&quot;</strong><strong> of </strong><strong>the bottom row</strong><strong>)</strong><strong>.</strong> – </p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
