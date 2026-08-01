@@ -236,3 +236,84 @@ class TestBoundingBox:
         assert _brute_force_geohashes(bbox, precision) <= result
         # The candidate set is widened, but each returned cell must still intersect.
         assert all(do_boxes_intersect(bbox, get_bounding_box(geohash)) for geohash in result)
+
+    @pytest.mark.parametrize(
+        ("fields", "expected_message"),
+        [
+            # Inverted latitude.
+            ((51.0, 10.0, 50.0, 11.0), "min_lat (51.0) must not exceed max_lat (50.0)"),
+            # Inverted longitude.
+            ((50.0, 11.0, 51.0, 10.0), "min_lon (11.0) must not exceed max_lon (10.0)"),
+            # The grouped-argument mistake: (min_lat, max_lat, min_lon, max_lon).
+            ((50.0, 51.0, 10.0, 11.0), "min_lat (50.0) must not exceed max_lat (10.0)"),
+            # A box written to span the antimeridian, which is not supported.
+            ((50.0, 179.0, 51.0, -179.0), "min_lon (179.0) must not exceed max_lon (-179.0)"),
+        ],
+    )
+    def test_inverted_box_is_rejected(self, fields, expected_message):
+        """An inverted box raises instead of silently yielding empty/False results."""
+        with pytest.raises(ValueError) as excinfo:
+            BoundingBox(*fields)
+
+        assert expected_message in str(excinfo.value)
+
+    def test_inverted_latitude_message_names_the_field_order(self):
+        """The latitude error spells out the interleaved field order."""
+        with pytest.raises(ValueError, match=r"fields are \(min_lat, min_lon, max_lat, max_lon\)"):
+            BoundingBox(51.0, 10.0, 50.0, 11.0)
+
+    def test_inverted_longitude_message_names_the_antimeridian(self):
+        """The longitude error explains that antimeridian-spanning boxes are unsupported."""
+        with pytest.raises(ValueError, match="antimeridian"):
+            BoundingBox(50.0, 179.0, 51.0, -179.0)
+
+    @pytest.mark.parametrize(
+        "fields",
+        [
+            (50.0, 10.0, 50.0, 11.0),  # Degenerate latitude.
+            (50.0, 10.0, 51.0, 10.0),  # Degenerate longitude.
+            (50.0, 10.0, 50.0, 10.0),  # Degenerate on both axes.
+        ],
+    )
+    def test_degenerate_box_is_accepted(self, fields):
+        """A box whose minimum equals its maximum on either axis stays legal."""
+        bbox = BoundingBox(*fields)
+
+        assert tuple(bbox) == fields
+
+    @pytest.mark.parametrize("geohash", ["s", "ezs42", "u4pruyd", "u4pruydqqvj8"])
+    def test_geohashes_in_box_on_degenerate_box_returns_containing_cell(self, geohash):
+        """A zero-area box still enumerates the cell that contains it."""
+        center = get_bounding_box(geohash)
+        point_lat = (center.min_lat + center.max_lat) / 2
+        point_lon = (center.min_lon + center.max_lon) / 2
+        precision = len(geohash)
+        degenerate = BoundingBox(point_lat, point_lon, point_lat, point_lon)
+
+        result = sorted(geohashes_in_box(degenerate, precision=precision))
+
+        assert encode(point_lat, point_lon, precision) in result
+
+    def test_replace_validates_ordering(self):
+        """``_replace`` routes through ``__new__`` rather than bypassing validation."""
+        bbox = BoundingBox(10.0, 20.0, 30.0, 40.0)
+
+        assert bbox._replace(max_lat=35.0) == BoundingBox(10.0, 20.0, 35.0, 40.0)
+        with pytest.raises(ValueError, match="min_lat"):
+            bbox._replace(max_lat=5.0)
+
+    @pytest.mark.parametrize("precision", range(1, 13))
+    def test_get_bounding_box_output_is_always_constructible(self, precision):
+        """No box the library produces itself may be rejected by the new validation."""
+        for lat, lon in [
+            (0.0, 0.0),
+            (57.64911, 10.40744),
+            (-33.8688, 151.2093),
+            (89.9999, 179.9999),
+            (-89.9999, -179.9999),
+            (90.0, 180.0),
+            (-90.0, -180.0),
+        ]:
+            bbox = get_bounding_box(encode(lat, lon, precision))
+            # Reconstructing exercises __new__ on values get_bounding_box just produced.
+            assert BoundingBox(*bbox) == bbox
