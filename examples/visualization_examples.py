@@ -8,6 +8,7 @@ This example shows how to create different types of visualizations:
 """
 
 from pathlib import Path
+from typing import Optional
 
 import matplotlib.pyplot as plt
 
@@ -21,13 +22,16 @@ from pygeohash import (
     assert_valid_geohash,
 )
 
-# Ensure images directory exists
+# Default output directory for the generated images
 IMAGES_DIR = Path(__file__).parent / "images"
-IMAGES_DIR.mkdir(exist_ok=True)
 
 
-def demonstrate_single_geohash() -> None:
-    """Show how to plot a single geohash."""
+def demonstrate_single_geohash(output_dir: Path) -> None:
+    """Show how to plot a single geohash.
+
+    Args:
+        output_dir: Directory the generated PNG is written to.
+    """
     print("\nPlotting single geohash...")
 
     # Plot San Francisco geohash
@@ -36,12 +40,16 @@ def demonstrate_single_geohash() -> None:
 
     # Add title and save
     plt.title("San Francisco Geohash")
-    plt.savefig(IMAGES_DIR / "single_geohash.png")
+    plt.savefig(output_dir / "single_geohash.png")
     plt.close()
 
 
-def demonstrate_multiple_geohashes() -> None:
-    """Show how to plot multiple geohashes with different styles."""
+def demonstrate_multiple_geohashes(output_dir: Path) -> None:
+    """Show how to plot multiple geohashes with different styles.
+
+    Args:
+        output_dir: Directory the generated PNG is written to.
+    """
     print("\nPlotting multiple geohashes...")
 
     # Sample geohashes around SF Bay
@@ -62,12 +70,16 @@ def demonstrate_multiple_geohashes() -> None:
 
     # Add title and save
     plt.title("SF Bay Area Geohashes")
-    plt.savefig(IMAGES_DIR / "multiple_geohashes.png")
+    plt.savefig(output_dir / "multiple_geohashes.png")
     plt.close()
 
 
-def demonstrate_folium_map() -> None:
-    """Show how to create an interactive Folium map."""
+def demonstrate_folium_map(output_dir: Path) -> None:
+    """Show how to create an interactive Folium map.
+
+    Args:
+        output_dir: Directory the generated HTML map is written to.
+    """
     print("\nCreating Folium map...")
 
     # Sample geohashes (Silicon Valley tech companies)
@@ -98,19 +110,27 @@ def demonstrate_folium_map() -> None:
         colors=["red", "blue", "green", "purple"],
         tooltips=["Apple", "Google", "Meta", "Tesla"],
     )
-    m.save(IMAGES_DIR / "tech_companies.html")
+    m.save(output_dir / "tech_companies.html")
 
 
-def main() -> None:
-    """Run all demonstrations."""
+def main(output_dir: Optional[Path] = None) -> None:
+    """Run all demonstrations.
+
+    Args:
+        output_dir: Directory the generated files are written to. Defaults to the
+            ``images`` directory next to this script.
+    """
+    output_dir = IMAGES_DIR if output_dir is None else Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     print("Visualization Examples")
     print("====================")
 
-    demonstrate_single_geohash()
-    demonstrate_multiple_geohashes()
-    demonstrate_folium_map()
+    demonstrate_single_geohash(output_dir)
+    demonstrate_multiple_geohashes(output_dir)
+    demonstrate_folium_map(output_dir)
 
-    print(f"\nVisualization files saved in: {IMAGES_DIR}")
+    print(f"\nVisualization files saved in: {output_dir}")
 
 
 if __name__ == "__main__":

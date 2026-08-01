@@ -4,6 +4,7 @@ This module tests that all example scripts can run without errors.
 Each test captures stdout and verifies expected output is present.
 """
 
+import hashlib
 import io
 import sys
 import matplotlib
@@ -20,6 +21,23 @@ from examples import typed_data_analysis
 # Add examples directory to path
 EXAMPLES_DIR = Path(__file__).parent.parent / "examples"
 sys.path.append(str(EXAMPLES_DIR))
+
+# Files under examples/images/ that are tracked in git and must survive a test run
+TRACKED_IMAGE_NAMES = ("single_geohash.png", "multiple_geohashes.png", "tech_companies.html")
+
+
+def _snapshot_tracked_images() -> dict:
+    """Snapshot the tracked example images, keyed by file name.
+
+    Records a content hash and the modification time. The mtime matters: regenerating
+    these PNGs is byte-deterministic for a given matplotlib version, so a stray write
+    can reproduce the committed bytes exactly and a content-only check would miss it.
+    """
+    images_dir = EXAMPLES_DIR / "images"
+    return {
+        name: (hashlib.sha256((images_dir / name).read_bytes()).hexdigest(), (images_dir / name).stat().st_mtime_ns)
+        for name in TRACKED_IMAGE_NAMES
+    }
 
 
 def capture_output(func) -> str:
@@ -72,9 +90,11 @@ def test_statistical_analysis():
     assert "Standard deviation:" in output  # Should show dispersion stats
 
 
-def test_visualization_examples():
+def test_visualization_examples(tmp_path):
     """Test visualization_examples.py example runs without errors."""
-    output = capture_output(visualization_examples.main)
+    tracked_before = _snapshot_tracked_images()
+
+    output = capture_output(lambda: visualization_examples.main(tmp_path))
 
     # Verify key sections are present
     assert "Visualization Examples" in output
@@ -82,11 +102,12 @@ def test_visualization_examples():
     assert "Plotting multiple geohashes" in output
     assert "Creating Folium map" in output
 
-    # Verify files were created
-    images_dir = EXAMPLES_DIR / "images"
-    assert (images_dir / "single_geohash.png").exists()
-    assert (images_dir / "multiple_geohashes.png").exists()
-    assert (images_dir / "tech_companies.html").exists()
+    # Verify files were created, under the injected output directory
+    for name in TRACKED_IMAGE_NAMES:
+        assert (tmp_path / name).exists()
+
+    # The example must not touch the tracked copies under examples/images/
+    assert _snapshot_tracked_images() == tracked_before
 
 
 def test_typed_data_analysis():
