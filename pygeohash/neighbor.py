@@ -64,10 +64,13 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
         Must be one of: "right", "left", "top", "bottom".
 
     Returns:
-        str: The adjacent geohash in the specified direction.
+        str: The adjacent geohash in the specified direction. Longitude is cyclic, so the
+        "left"/"right" neighbors of a cell touching the antimeridian wrap around to the
+        other side of the grid.
 
     Raises:
-        ValueError: If the geohash length is 0 (possible when close to poles).
+        ValueError: If the geohash is empty, or if the requested neighbor would lie beyond
+        the north or south pole ("top" of the top row, "bottom" of the bottom row).
 
     Example:
         >>> get_adjacent("u4pruyd", "top")
@@ -88,8 +91,16 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
     logger.debug("Using %s lookup tables based on hash length", split_direction)
 
     if last_char in BORDERS[direction][split_direction]:
-        logger.debug("Last character %s is on border, recursively finding parent neighbor", last_char)
-        base = get_adjacent(base, direction)
+        if base:
+            logger.debug("Last character %s is on border, recursively finding parent neighbor", last_char)
+            base = get_adjacent(base, direction)
+        elif direction in ("top", "bottom"):
+            pole = "north" if direction == "top" else "south"
+            logger.error("Cannot find adjacent geohash: the %s neighbor lies beyond the %s pole", direction, pole)
+            raise ValueError(f"No adjacent geohash to the {direction}: it would lie beyond the {pole} pole")
+        else:
+            # Longitude is cyclic, so the top-level tables already encode the antimeridian wrap.
+            logger.debug("Last character %s is on the antimeridian, wrapping longitude", last_char)
     else:
         logger.debug("Last character %s is not on border, using direct neighbor lookup", last_char)
 
