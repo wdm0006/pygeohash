@@ -223,6 +223,51 @@ def test_decode_exactly_invalid_chars():
         pgh.decode_exactly("ezs42a")  # 'a' is invalid
 
 
+CASE_VARIANTS = ["U4PRUYD", "U4pruYd", "u4PRUYd"]
+
+
+@pytest.mark.parametrize("variant", CASE_VARIANTS)
+def test_decode_is_case_insensitive(variant):
+    """Uppercase and mixed-case input decodes exactly like the lowercase form."""
+    assert pgh.decode(variant) == pgh.decode("u4pruyd")
+    assert pgh.decode_exactly(variant) == pgh.decode_exactly("u4pruyd")
+
+
+def test_validate_then_decode():
+    """The validate-then-use contract holds: what assert_valid_geohash accepts, decode decodes."""
+    validated = pgh.assert_valid_geohash("U4PRUYD")
+    assert pgh.decode(validated) == pgh.decode("u4pruyd")
+
+
+@pytest.mark.parametrize("variant", CASE_VARIANTS)
+def test_downstream_consumers_accept_uppercase(variant):
+    """Consumers routed through decode/decode_exactly accept uppercase too."""
+    assert pgh.get_bounding_box(variant) == pgh.get_bounding_box("u4pruyd")
+
+    center = pgh.decode("u4pruyd")
+    assert pgh.is_point_in_geohash(center.latitude, center.longitude, variant) is True
+
+    assert pgh.geohash_haversine_distance(variant, "u4pruyf") == pgh.geohash_haversine_distance("u4pruyd", "u4pruyf")
+
+    uppercase_collection = [variant, "EZS42"]
+    lowercase_collection = ["u4pruyd", "ezs42"]
+    assert pgh.mean(uppercase_collection) == pgh.mean(lowercase_collection)
+    assert pgh.variance(uppercase_collection) == pgh.variance(lowercase_collection)
+    assert pgh.std(uppercase_collection) == pgh.std(lowercase_collection)
+    # northern/eastern return the selected input verbatim, so the uppercase form comes back as-is.
+    assert pgh.northern(uppercase_collection) == variant
+    assert pgh.eastern(uppercase_collection) == variant
+
+
+@pytest.mark.parametrize("bad", ["a1i", "A1I", "ezs42a", "EZS42A", "ezs!2", "EZS!2"])
+def test_decode_rejects_out_of_alphabet_in_either_case(bad):
+    """Case normalization does not widen the alphabet: 'a', 'i', 'l', 'o' and punctuation still raise."""
+    with pytest.raises(ValueError, match="Invalid character in geohash"):
+        pgh.decode(bad)
+    with pytest.raises(ValueError, match="Invalid character in geohash"):
+        pgh.decode_exactly(bad)
+
+
 def test_check_validity():
     with pytest.raises(ValueError):
         pgh.geohash_approximate_distance("shibu", "shiba", check_validity=True)

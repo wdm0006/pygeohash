@@ -116,7 +116,9 @@ def decode(geohash: str) -> LatLong:
     """Decode a geohash into a latitude and longitude.
 
     Args:
-        geohash (str): The geohash string to decode.
+        geohash (str): The geohash string to decode. Input is case-insensitive, matching
+            :func:`~pygeohash.types.is_valid_geohash` and :func:`~pygeohash.neighbor.get_adjacent`,
+            so ``"U4PRUYD"`` and ``"U4pruYd"`` decode identically to ``"u4pruyd"``.
 
     Returns:
         LatLong: A named tuple containing the latitude and longitude.
@@ -132,7 +134,7 @@ def decode(geohash: str) -> LatLong:
     # The C extension raises ValueError("Invalid character in geohash") for any
     # non-base32 character, so we let it do the per-character validation instead
     # of paying for a Python-level scan on every call.
-    return LatLong(*c_decode(geohash))
+    return LatLong(*c_decode(geohash.lower()))
 
 
 def decode_exactly(geohash: str) -> ExactLatLong:
@@ -142,7 +144,9 @@ def decode_exactly(geohash: str) -> ExactLatLong:
     function by including the error margins for both latitude and longitude.
 
     Args:
-        geohash (str): The geohash string to decode.
+        geohash (str): The geohash string to decode. Input is case-insensitive, matching
+            :func:`~pygeohash.types.is_valid_geohash` and :func:`~pygeohash.neighbor.get_adjacent`,
+            so ``"U4PRUYD"`` and ``"U4pruYd"`` decode identically to ``"u4pruyd"``.
 
     Returns:
         ExactLatLong: A named tuple containing the latitude, longitude, and their
@@ -157,7 +161,7 @@ def decode_exactly(geohash: str) -> ExactLatLong:
         raise ValueError("Geohash cannot be empty.")
 
     # See decode(): the C extension validates characters and raises on its own.
-    return ExactLatLong(*c_decode_exactly(geohash))
+    return ExactLatLong(*c_decode_exactly(geohash.lower()))
 
 
 __all__ = [
