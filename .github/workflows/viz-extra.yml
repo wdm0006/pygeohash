@@ -1,0 +1,47 @@
+name: Test Visualization Extra
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  viz-only:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Install visualization extra only
+      run: |
+        uv venv
+        uv pip install -e ".[viz]"
+
+    - name: Exercise visualization API
+      run: |
+        .venv/bin/python - <<'PY'
+        import pygeohash as pgh
+        import pygeohash.viz as viz
+
+        figure, axis = viz.plot_geohash("u4pruyd")
+        assert figure is not None
+        assert axis is not None
+        assert viz.folium_map("u4pruyd") is not None
+        assert pgh.plot_geohash is viz.plot_geohash
+        assert pgh.plot_geohashes is viz.plot_geohashes
+        assert pgh.folium_map is viz.folium_map
+        PY
