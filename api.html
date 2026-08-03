@@ -241,7 +241,9 @@ Defaults to 12. Must be between 1 and 12, inclusive.</p></li>
 <dd><p>Decode a geohash into a latitude and longitude.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash string to decode.</p>
+<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash string to decode. Input is case-insensitive, matching
+<code class="xref py py-func docutils literal notranslate"><span class="pre">is_valid_geohash()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">get_adjacent()</span></code>,
+so <code class="docutils literal notranslate"><span class="pre">&quot;U4PRUYD&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;U4pruYd&quot;</span></code> decode identically to <code class="docutils literal notranslate"><span class="pre">&quot;u4pruyd&quot;</span></code>.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A named tuple containing the latitude and longitude.</p>
@@ -263,7 +265,9 @@ Defaults to 12. Must be between 1 and 12, inclusive.</p></li>
 function by including the error margins for both latitude and longitude.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash string to decode.</p>
+<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash string to decode. Input is case-insensitive, matching
+<code class="xref py py-func docutils literal notranslate"><span class="pre">is_valid_geohash()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">get_adjacent()</span></code>,
+so <code class="docutils literal notranslate"><span class="pre">&quot;U4PRUYD&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;U4pruYd&quot;</span></code> decode identically to <code class="docutils literal notranslate"><span class="pre">&quot;u4pruyd&quot;</span></code>.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">

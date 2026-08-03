@@ -300,7 +300,9 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash into a latitude and longitude.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohash (str): The geohash string to decode.</span>
+<span class="sd">        geohash (str): The geohash string to decode. Input is case-insensitive, matching</span>
+<span class="sd">            :func:`~pygeohash.types.is_valid_geohash` and :func:`~pygeohash.neighbor.get_adjacent`,</span>
+<span class="sd">            so ``&quot;U4PRUYD&quot;`` and ``&quot;U4pruYd&quot;`` decode identically to ``&quot;u4pruyd&quot;``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        LatLong: A named tuple containing the latitude and longitude.</span>
@@ -316,7 +318,7 @@
     <span class="c1"># The C extension raises ValueError(&quot;Invalid character in geohash&quot;) for any</span>
     <span class="c1"># non-base32 character, so we let it do the per-character validation instead</span>
     <span class="c1"># of paying for a Python-level scan on every call.</span>
-    <span class="k">return</span> <span class="n">LatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">LatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span></div>
 
 
 
@@ -329,7 +331,9 @@
 <span class="sd">    function by including the error margins for both latitude and longitude.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohash (str): The geohash string to decode.</span>
+<span class="sd">        geohash (str): The geohash string to decode. Input is case-insensitive, matching</span>
+<span class="sd">            :func:`~pygeohash.types.is_valid_geohash` and :func:`~pygeohash.neighbor.get_adjacent`,</span>
+<span class="sd">            so ``&quot;U4PRUYD&quot;`` and ``&quot;U4pruYd&quot;`` decode identically to ``&quot;u4pruyd&quot;``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        ExactLatLong: A named tuple containing the latitude, longitude, and their</span>
@@ -344,7 +348,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Geohash cannot be empty.&quot;</span><span class="p">)</span>
 
     <span class="c1"># See decode(): the C extension validates characters and raises on its own.</span>
-    <span class="k">return</span> <span class="n">ExactLatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">ExactLatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span></div>
 
 
 
