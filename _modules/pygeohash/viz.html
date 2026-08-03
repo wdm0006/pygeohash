@@ -189,18 +189,17 @@
 <span class="c1"># mypy: disable-error-code=&quot;list-item,assignment&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cast</span><span class="p">,</span> <span class="n">TypeVar</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeAlias</span><span class="p">,</span> <span class="n">Protocol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cast</span><span class="p">,</span> <span class="n">TypeVar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">decode</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.bounding_box</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_bounding_box</span><span class="p">,</span> <span class="n">geohashes_in_box</span><span class="p">,</span> <span class="n">BoundingBox</span>
 
 <span class="c1"># Type aliases for better readability</span>
-<span class="n">FoliumMap</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be folium.Map if folium was always available</span>
-<span class="n">FoliumRectangle</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be folium.Rectangle if folium was always available</span>
-<span class="n">FoliumElement</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be folium.Element if folium was always available</span>
-<span class="n">MatplotlibAxis</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be matplotlib.axes.Axes if matplotlib was always available</span>
-<span class="n">MatplotlibFigure</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be matplotlib.figure.Figure if matplotlib was always available</span>
+<span class="n">FoliumMap</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be folium.Map if folium was always available</span>
+<span class="n">FoliumRectangle</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be folium.Rectangle if folium was always available</span>
+<span class="n">FoliumElement</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be folium.Element if folium was always available</span>
+<span class="n">MatplotlibAxis</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be matplotlib.axes.Axes if matplotlib was always available</span>
+<span class="n">MatplotlibFigure</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be matplotlib.figure.Figure if matplotlib was always available</span>
 <span class="n">BoundingBoxCoords</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>  <span class="c1"># min_lat, min_lon, max_lat, max_lon</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
