@@ -234,6 +234,15 @@ The library provides type aliases for collections of geohashes:
         def calculate_center(geohashes: GeohashCollection) -> str:
             return mean(geohashes)
 
+    A single geohash string technically satisfies this type but iterates as one
+    geohash per character, so the statistics functions reject it with a
+    ``TypeError``. Wrap a single geohash in a collection:
+
+    .. code-block:: python
+
+        mean(["9q9hwg"])  # correct
+        mean("9q9hwg")  # raises TypeError
+
 ``GeohashList``
     A concrete list of geohash strings:
 
