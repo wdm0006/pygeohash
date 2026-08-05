@@ -203,6 +203,27 @@
 <span class="n">_CIRCULAR_MEAN_TOLERANCE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reject a single geohash string passed where a collection is expected.</span>
+
+<span class="sd">    A ``str`` satisfies ``Collection[str]``, so passing one geohash instead of a</span>
+<span class="sd">    collection of geohashes would otherwise be treated as a collection of</span>
+<span class="sd">    single-character geohashes and return a plausible but meaningless result.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (GeohashCollection): The value supplied by the caller.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a string rather than a collection of</span>
+<span class="sd">            geohash strings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;geohashes must be a collection of geohash strings, not a single geohash string. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Wrap a single geohash in a collection, for example [</span><span class="si">{</span><span class="n">geohashes</span><span class="si">!r}</span><span class="s2">].&quot;</span>
+        <span class="p">)</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_circular_mean_longitude</span><span class="p">(</span><span class="n">longitudes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the circular mean of a sequence of longitudes in degrees.</span>
 
@@ -260,13 +281,19 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the extreme geohash in a collection based on a key function.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 <span class="sd">        key_func (Callable[[LatLong], float]): Function to extract the value to compare.</span>
 <span class="sd">        reverse (bool): Whether to find maximum (True) or minimum (False).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The geohash at the extreme position.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding </span><span class="si">%s</span><span class="s2"> for </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="s2">&quot;maximum&quot;</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="s2">&quot;minimum&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
@@ -288,10 +315,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the northernmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The northernmost geohash.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; northern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
@@ -310,10 +341,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the southernmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The southernmost geohash.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; southern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
@@ -332,10 +367,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the easternmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The easternmost geohash.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; eastern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
@@ -354,10 +393,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the westernmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The westernmost geohash.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; western([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
@@ -382,17 +425,23 @@
 <span class="sd">    mean of the longitudes is used instead.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 <span class="sd">        precision (GeohashPrecision, optional): The precision of the resulting geohash. Defaults to 12.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: A geohash representing the mean position, or an empty string for an</span>
 <span class="sd">            empty collection.</span>
 
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
+
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; mean([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
 <span class="sd">        &#39;u4pruyf1m6dt&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating mean position for </span><span class="si">%d</span><span class="s2"> geohashes with precision </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">),</span> <span class="n">precision</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
@@ -419,15 +468,21 @@
 <span class="sd">    to each geohash in the collection.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The variance in meters squared.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; round(variance([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;]), 1)</span>
 <span class="sd">        6665.5</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating variance for </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
@@ -452,15 +507,21 @@
 <span class="sd">    the average distance from the mean position to each geohash in the collection.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings.</span>
+<span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
+<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The standard deviation in meters.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; round(std([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;]), 1)</span>
 <span class="sd">        81.6</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating standard deviation for </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculated standard deviation: </span><span class="si">%f</span><span class="s2"> meters&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>

@@ -388,6 +388,13 @@
     <span class="k">return</span> <span class="n">mean</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>A single geohash string technically satisfies this type but iterates as one
+geohash per character, so the statistics functions reject it with a
+<code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. Wrap a single geohash in a collection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">([</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">])</span>  <span class="c1"># correct</span>
+<span class="n">mean</span><span class="p">(</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">)</span>  <span class="c1"># raises TypeError</span>
+</pre></div>
+</div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">GeohashList</span></code></dt><dd><p>A concrete list of geohash strings:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeohashList</span>
