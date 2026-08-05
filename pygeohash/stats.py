@@ -27,6 +27,27 @@ T = TypeVar("T")
 _CIRCULAR_MEAN_TOLERANCE: Final[float] = 1e-12
 
 
+def _reject_bare_geohash_string(geohashes: GeohashCollection) -> None:
+    """Reject a single geohash string passed where a collection is expected.
+
+    A ``str`` satisfies ``Collection[str]``, so passing one geohash instead of a
+    collection of geohashes would otherwise be treated as a collection of
+    single-character geohashes and return a plausible but meaningless result.
+
+    Args:
+        geohashes (GeohashCollection): The value supplied by the caller.
+
+    Raises:
+        TypeError: If ``geohashes`` is a string rather than a collection of
+            geohash strings.
+    """
+    if isinstance(geohashes, str):
+        raise TypeError(
+            "geohashes must be a collection of geohash strings, not a single geohash string. "
+            f"Wrap a single geohash in a collection, for example [{geohashes!r}]."
+        )
+
+
 def _circular_mean_longitude(longitudes: Sequence[float]) -> float:
     """Calculate the circular mean of a sequence of longitudes in degrees.
 
@@ -84,13 +105,19 @@ def _max_cardinal(geohashes: GeohashCollection, key_func: Callable[[LatLong], fl
     """Find the extreme geohash in a collection based on a key function.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
         key_func (Callable[[LatLong], float]): Function to extract the value to compare.
         reverse (bool): Whether to find maximum (True) or minimum (False).
 
     Returns:
         str: The geohash at the extreme position.
+
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
     """
+    _reject_bare_geohash_string(geohashes)
+
     logger.debug("Finding %s for %d geohashes", "maximum" if reverse else "minimum", len(geohashes))
 
     if not geohashes:
@@ -110,10 +137,14 @@ def northern(geohashes: GeohashCollection) -> str:
     """Find the northernmost geohash in a collection.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
 
     Returns:
         str: The northernmost geohash.
+
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
 
     Example:
         >>> northern(["u4pruyd", "u4pruyf", "u4pruyc"])
@@ -129,10 +160,14 @@ def southern(geohashes: GeohashCollection) -> str:
     """Find the southernmost geohash in a collection.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
 
     Returns:
         str: The southernmost geohash.
+
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
 
     Example:
         >>> southern(["u4pruyd", "u4pruyf", "u4pruyc"])
@@ -148,10 +183,14 @@ def eastern(geohashes: GeohashCollection) -> str:
     """Find the easternmost geohash in a collection.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
 
     Returns:
         str: The easternmost geohash.
+
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
 
     Example:
         >>> eastern(["u4pruyd", "u4pruyf", "u4pruyc"])
@@ -167,10 +206,14 @@ def western(geohashes: GeohashCollection) -> str:
     """Find the westernmost geohash in a collection.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
 
     Returns:
         str: The westernmost geohash.
+
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
 
     Example:
         >>> western(["u4pruyd", "u4pruyf", "u4pruyc"])
@@ -192,17 +235,23 @@ def mean(geohashes: GeohashCollection, precision: GeohashPrecision = 12) -> str:
     mean of the longitudes is used instead.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
         precision (GeohashPrecision, optional): The precision of the resulting geohash. Defaults to 12.
 
     Returns:
         str: A geohash representing the mean position, or an empty string for an
             empty collection.
 
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
+
     Example:
         >>> mean(["u4pruyd", "u4pruyf", "u4pruyc"])
         'u4pruyf1m6dt'
     """
+    _reject_bare_geohash_string(geohashes)
+
     logger.debug("Calculating mean position for %d geohashes with precision %d", len(geohashes), precision)
 
     if not geohashes:
@@ -226,15 +275,21 @@ def variance(geohashes: GeohashCollection) -> float:
     to each geohash in the collection.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
 
     Returns:
         float: The variance in meters squared.
+
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
 
     Example:
         >>> round(variance(["u4pruyd", "u4pruyf", "u4pruyc"]), 1)
         6665.5
     """
+    _reject_bare_geohash_string(geohashes)
+
     logger.debug("Calculating variance for %d geohashes", len(geohashes))
 
     if not geohashes:
@@ -256,15 +311,21 @@ def std(geohashes: GeohashCollection) -> float:
     the average distance from the mean position to each geohash in the collection.
 
     Args:
-        geohashes (GeohashCollection): Collection of geohash strings.
+        geohashes (GeohashCollection): Collection of geohash strings. A single geohash
+            must be wrapped in a collection, for example ``["u4pruyd"]``.
 
     Returns:
         float: The standard deviation in meters.
+
+    Raises:
+        TypeError: If ``geohashes`` is a single geohash string.
 
     Example:
         >>> round(std(["u4pruyd", "u4pruyf", "u4pruyc"]), 1)
         81.6
     """
+    _reject_bare_geohash_string(geohashes)
+
     logger.debug("Calculating standard deviation for %d geohashes", len(geohashes))
     result = math.sqrt(variance(geohashes))
     logger.debug("Calculated standard deviation: %f meters", result)

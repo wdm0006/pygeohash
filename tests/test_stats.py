@@ -8,6 +8,19 @@ import pygeohash as pgh
 WEST_OF_LINE = pgh.encode(0.0, 179.0)
 EAST_OF_LINE = pgh.encode(0.0, -179.0)
 
+# Every public function that takes a collection of geohashes.
+COLLECTION_FUNCTIONS = [
+    pgh.northern,
+    pgh.southern,
+    pgh.eastern,
+    pgh.western,
+    pgh.mean,
+    pgh.variance,
+    pgh.std,
+]
+
+CLUSTER = ["u4pruyd", "u4pruyf", "u4pruyc"]
+
 
 def test_mean_across_antimeridian():
     """A collection straddling the antimeridian is centered near +/-180, not near Greenwich."""
@@ -106,3 +119,47 @@ def test_empty_collection():
     assert pgh.variance([]) == 0.0
     assert pgh.std([]) == 0.0
     assert not math.isnan(pgh.std([]))
+
+
+@pytest.mark.parametrize("function", COLLECTION_FUNCTIONS, ids=lambda function: function.__name__)
+def test_bare_geohash_string_is_rejected(function):
+    """A single geohash string is not a collection of geohashes, even though it iterates like one."""
+    with pytest.raises(TypeError, match="collection of geohash strings"):
+        function("u4pruyd")
+
+
+@pytest.mark.parametrize("wrap", [list, tuple, set], ids=["list", "tuple", "set"])
+def test_non_string_collections_are_unchanged(wrap):
+    """Collections of geohashes keep their results whatever container they arrive in."""
+    # Cardinal ties resolve in input order, and a set has none, so these cells are
+    # chosen to share neither a latitude nor a longitude.
+    north_east = pgh.encode(57.7, 10.5, 8)
+    middle = pgh.encode(57.6, 10.4, 8)
+    south_west = pgh.encode(57.5, 10.3, 8)
+    corners = wrap([middle, north_east, south_west])
+
+    assert pgh.northern(corners) == north_east
+    assert pgh.southern(corners) == south_west
+    assert pgh.eastern(corners) == north_east
+    assert pgh.western(corners) == south_west
+
+    assert pgh.mean(wrap(CLUSTER)) == "u4pruyf1m6dt"
+    assert pgh.variance(wrap(CLUSTER)) == pytest.approx(6665.5, abs=0.1)
+    assert pgh.std(wrap(CLUSTER)) == pytest.approx(81.6, abs=0.1)
+
+
+def test_single_element_collection_is_accepted():
+    """One geohash wrapped in a collection is the supported way to summarize a single cell."""
+    assert pgh.northern(["u4pruyd"]) == "u4pruyd"
+    assert pgh.southern(["u4pruyd"]) == "u4pruyd"
+    assert pgh.eastern(["u4pruyd"]) == "u4pruyd"
+    assert pgh.western(["u4pruyd"]) == "u4pruyd"
+    assert pgh.mean(["u4pruyd"], 7) == "u4pruyd"
+    assert pgh.variance(["u4pruyd"]) == pytest.approx(0.0, abs=1e-3)
+    assert pgh.std(["u4pruyd"]) == pytest.approx(0.0, abs=1e-1)
+
+
+@pytest.mark.parametrize("function", COLLECTION_FUNCTIONS, ids=lambda function: function.__name__)
+def test_empty_collection_is_still_accepted(function):
+    """The guard rejects strings only; an empty collection keeps its documented result."""
+    assert function([]) in ("", 0.0)
