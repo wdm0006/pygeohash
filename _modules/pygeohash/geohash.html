@@ -223,12 +223,20 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If the latitude or longitude values are invalid, or if the precision</span>
-<span class="sd">            is not an integer or is outside the valid range (1-12).</span>
+<span class="sd">            is not an integer or is outside the valid range (1-12). Booleans are</span>
+<span class="sd">            rejected for all three arguments, even though ``bool`` is a subclass of</span>
+<span class="sd">            ``int``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="c1"># bool is a subclass of int, so it has to be rejected explicitly.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Validate latitude range</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span><span class="p">):</span>
@@ -265,12 +273,20 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If the latitude or longitude values are invalid, or if the precision</span>
-<span class="sd">            is not an integer or is outside the valid range (1-12).</span>
+<span class="sd">            is not an integer or is outside the valid range (1-12). Booleans are</span>
+<span class="sd">            rejected for all three arguments, even though ``bool`` is a subclass of</span>
+<span class="sd">            ``int``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="c1"># bool is a subclass of int, so it has to be rejected explicitly.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Validate latitude range</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span><span class="p">):</span>
