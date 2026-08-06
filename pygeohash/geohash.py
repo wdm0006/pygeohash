@@ -45,12 +45,20 @@ def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) 
 
     Raises:
         ValueError: If the latitude or longitude values are invalid, or if the precision
-            is not an integer or is outside the valid range (1-12).
+            is not an integer or is outside the valid range (1-12). Booleans are
+            rejected for all three arguments, even though ``bool`` is a subclass of
+            ``int``.
     """
-    if not isinstance(precision, int):
+    # bool is a subclass of int, so it has to be rejected explicitly.
+    if isinstance(precision, bool) or not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
     if not (MIN_PRECISION <= precision <= MAX_PRECISION):
         raise ValueError(f"Precision must be between {MIN_PRECISION} and {MAX_PRECISION}, but got {precision}.")
+
+    if isinstance(latitude, bool):
+        raise ValueError(f"Latitude must be a number, but got {type(latitude).__name__}.")
+    if isinstance(longitude, bool):
+        raise ValueError(f"Longitude must be a number, but got {type(longitude).__name__}.")
 
     # Validate latitude range
     if not (-90.0 <= latitude <= 90.0):
@@ -84,12 +92,20 @@ def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecisi
 
     Raises:
         ValueError: If the latitude or longitude values are invalid, or if the precision
-            is not an integer or is outside the valid range (1-12).
+            is not an integer or is outside the valid range (1-12). Booleans are
+            rejected for all three arguments, even though ``bool`` is a subclass of
+            ``int``.
     """
-    if not isinstance(precision, int):
+    # bool is a subclass of int, so it has to be rejected explicitly.
+    if isinstance(precision, bool) or not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
     if not (MIN_PRECISION <= precision <= MAX_PRECISION):
         raise ValueError(f"Precision must be between {MIN_PRECISION} and {MAX_PRECISION}, but got {precision}.")
+
+    if isinstance(latitude, bool):
+        raise ValueError(f"Latitude must be a number, but got {type(latitude).__name__}.")
+    if isinstance(longitude, bool):
+        raise ValueError(f"Longitude must be a number, but got {type(longitude).__name__}.")
 
     # Validate latitude range
     if not (-90.0 <= latitude <= 90.0):

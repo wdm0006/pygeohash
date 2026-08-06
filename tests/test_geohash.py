@@ -52,6 +52,37 @@ def test_encode_invalid_longitude():
         pgh.encode(0.0, 999.0)
 
 
+@pytest.mark.parametrize("encoder", [pgh.encode, pgh.encode_strictly])
+@pytest.mark.parametrize("value", [True, False])
+def test_encode_rejects_boolean_latitude(encoder, value):
+    """A bool must not be encoded as latitude 1.0/0.0 just because bool subclasses int."""
+    with pytest.raises(ValueError, match="Latitude must be a number"):
+        encoder(value, 0.0)
+
+
+@pytest.mark.parametrize("encoder", [pgh.encode, pgh.encode_strictly])
+@pytest.mark.parametrize("value", [True, False])
+def test_encode_rejects_boolean_longitude(encoder, value):
+    """A bool must not be encoded as longitude 1.0/0.0 just because bool subclasses int."""
+    with pytest.raises(ValueError, match="Longitude must be a number"):
+        encoder(0.0, value)
+
+
+@pytest.mark.parametrize("encoder", [pgh.encode, pgh.encode_strictly])
+@pytest.mark.parametrize("value", [True, False])
+def test_encode_rejects_boolean_precision(encoder, value):
+    """A bool precision must raise instead of silently meaning precision 1 (or 0)."""
+    with pytest.raises(ValueError, match="Precision must be an integer"):
+        encoder(42.6, -5.6, precision=value)
+
+
+@pytest.mark.parametrize("encoder", [pgh.encode, pgh.encode_strictly])
+def test_encode_accepts_integer_coordinates_and_precision(encoder):
+    """Rejecting bools must not disturb ordinary int coordinates or precisions."""
+    assert encoder(42, -5, 5) == encoder(42.0, -5.0, 5) == "ezkqy"
+    assert encoder(0, 0, 1) == "s"
+
+
 def test_encode_strictly():
     assert pgh.encode(0.0, -5.6, precision=5) == "ebh00"
     assert pgh.encode_strictly(0.0, -5.6, precision=5) == "ebh00"
