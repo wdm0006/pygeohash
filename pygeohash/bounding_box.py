@@ -7,6 +7,7 @@ related to geospatial regions.
 
 from __future__ import annotations
 
+import math
 from typing import Any, Iterable, List, NamedTuple, Set, Iterator, Type, TypeVar
 
 from pygeohash.geohash import decode_exactly, encode
@@ -34,7 +35,8 @@ class BoundingBox(_BoundingBoxFields):
 
     The fields interleave latitude and longitude, so the order is
     ``(min_lat, min_lon, max_lat, max_lon)`` rather than the grouped
-    ``(min_lat, max_lat, min_lon, max_lon)``. Construction rejects an inverted box
+    ``(min_lat, max_lat, min_lon, max_lon)``. Coordinates must be finite and within
+    the geographic bounds for their axis. Construction also rejects an inverted box
     (``min_lat > max_lat`` or ``min_lon > max_lon``) with a ``ValueError``, which is
     what a grouped argument list produces. A degenerate box whose minimum equals its
     maximum on either axis is valid. Boxes spanning the antimeridian, which would need
@@ -42,19 +44,37 @@ class BoundingBox(_BoundingBoxFields):
 
     Attributes:
         min_lat (float): The minimum (southern) latitude of the box in decimal degrees.
-            Must not exceed ``max_lat``.
+            Must be between -90 and 90 and not exceed ``max_lat``.
         min_lon (float): The minimum (western) longitude of the box in decimal degrees.
-            Must not exceed ``max_lon``.
-        max_lat (float): The maximum (northern) latitude of the box in decimal degrees.
-        max_lon (float): The maximum (eastern) longitude of the box in decimal degrees.
+            Must be between -180 and 180 and not exceed ``max_lon``.
+        max_lat (float): The maximum (northern) latitude of the box in decimal degrees,
+            between -90 and 90.
+        max_lon (float): The maximum (eastern) longitude of the box in decimal degrees,
+            between -180 and 180.
 
     Raises:
-        ValueError: If ``min_lat > max_lat`` or ``min_lon > max_lon``.
+        ValueError: If a coordinate is non-finite, outside its geographic bounds, or
+            the box has ``min_lat > max_lat`` or ``min_lon > max_lon``.
     """
 
     __slots__ = ()
 
     def __new__(cls, min_lat: float, min_lon: float, max_lat: float, max_lon: float) -> "BoundingBox":
+        for field, value, lower, upper in (
+            ("min_lat", min_lat, -90.0, 90.0),
+            ("min_lon", min_lon, -180.0, 180.0),
+            ("max_lat", max_lat, -90.0, 90.0),
+            ("max_lon", max_lon, -180.0, 180.0),
+        ):
+            try:
+                is_finite = math.isfinite(value)
+            except TypeError:
+                is_finite = False
+            if not is_finite:
+                raise ValueError(f"{field} ({value}) must be a finite number")
+            if not lower <= value <= upper:
+                raise ValueError(f"{field} ({value}) must be between {lower:g} and {upper:g}")
+
         if min_lat > max_lat:
             raise ValueError(f"min_lat ({min_lat}) must not exceed max_lat ({max_lat}); {_FIELD_ORDER}")
         if min_lon > max_lon:

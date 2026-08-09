@@ -281,6 +281,42 @@ class TestBoundingBox:
 
         assert tuple(bbox) == fields
 
+    @pytest.mark.parametrize("field_index", range(4))
+    @pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf")])
+    def test_non_finite_coordinate_is_rejected(self, field_index, value):
+        """Every bounding-box field requires a finite coordinate."""
+        fields = [10.0, 20.0, 30.0, 40.0]
+        fields[field_index] = value
+
+        with pytest.raises(ValueError, match="finite"):
+            BoundingBox(*fields)
+
+    @pytest.mark.parametrize(
+        ("fields", "field"),
+        [
+            ((-90.1, 20.0, 30.0, 40.0), "min_lat"),
+            ((10.0, -180.1, 30.0, 40.0), "min_lon"),
+            ((10.0, 20.0, 90.1, 40.0), "max_lat"),
+            ((10.0, 20.0, 30.0, 180.1), "max_lon"),
+        ],
+    )
+    def test_out_of_range_coordinate_is_rejected(self, fields, field):
+        """Each field is constrained to the geographic bounds for its axis."""
+        with pytest.raises(ValueError, match=field):
+            BoundingBox(*fields)
+
+    @pytest.mark.parametrize(
+        "fields",
+        [
+            (-90.0, -180.0, 90.0, 180.0),
+            (-90.0, -180.0, -90.0, -180.0),
+            (90.0, 180.0, 90.0, 180.0),
+        ],
+    )
+    def test_world_boundaries_are_accepted(self, fields):
+        """Exact world limits, including degenerate corner boxes, remain valid."""
+        assert tuple(BoundingBox(*fields)) == fields
+
     @pytest.mark.parametrize("geohash", ["s", "ezs42", "u4pruyd", "u4pruydqqvj8"])
     def test_geohashes_in_box_on_degenerate_box_returns_containing_cell(self, geohash):
         """A zero-area box still enumerates the cell that contains it."""
@@ -301,6 +337,20 @@ class TestBoundingBox:
         assert bbox._replace(max_lat=35.0) == BoundingBox(10.0, 20.0, 35.0, 40.0)
         with pytest.raises(ValueError, match="min_lat"):
             bbox._replace(max_lat=5.0)
+
+    @pytest.mark.parametrize(
+        "operation",
+        [
+            lambda bbox: bbox._replace(max_lon=float("inf")),
+            lambda bbox: bbox._replace(max_lon=181.0),
+            lambda bbox: BoundingBox._make((10.0, 20.0, float("nan"), 40.0)),
+            lambda bbox: BoundingBox._make((10.0, -181.0, 30.0, 40.0)),
+        ],
+    )
+    def test_make_and_replace_validate_coordinates(self, operation):
+        """Named-tuple construction helpers cannot bypass coordinate validation."""
+        with pytest.raises(ValueError):
+            operation(BoundingBox(10.0, 20.0, 30.0, 40.0))
 
     @pytest.mark.parametrize("precision", range(1, 13))
     def test_get_bounding_box_output_is_always_constructible(self, precision):
