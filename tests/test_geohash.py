@@ -1,5 +1,6 @@
 import pytest
 import pygeohash as pgh
+from pygeohash.cgeohash import geohash_module
 
 __author__ = "willmcginnis"
 
@@ -252,6 +253,61 @@ def test_decode_exactly_invalid_chars():
     """Test decode_exactly with invalid characters."""
     with pytest.raises(ValueError, match="Invalid character in geohash"):
         pgh.decode_exactly("ezs42a")  # 'a' is invalid
+
+
+DECODE_APIS = [
+    pytest.param(pgh.decode, id="public-decode"),
+    pytest.param(pgh.decode_exactly, id="public-decode-exactly"),
+    pytest.param(geohash_module.decode, id="native-decode"),
+    pytest.param(geohash_module.decode_exactly, id="native-decode-exactly"),
+]
+EXACT_DECODERS = (pgh.decode_exactly, geohash_module.decode_exactly)
+BOUNDARY_DECODE_RESULTS = {
+    "u": ((67.5, 22.5), (67.5, 22.5, 22.5, 22.5)),
+    "u4pruydqqvj8": (
+        (57.64911004342139, 10.407439861446619),
+        (57.64911004342139, 10.407439861446619, 8.381903171539307e-08, 1.6763806343078613e-07),
+    ),
+}
+
+
+@pytest.mark.parametrize("decoder", DECODE_APIS)
+@pytest.mark.parametrize(
+    "geohash", [pytest.param("u" * 13, id="length-13"), pytest.param("u" * 1000, id="length-1000")]
+)
+def test_decode_rejects_over_precision_geohashes(decoder, geohash):
+    """Both public and native decode boundaries reject non-canonical lengths."""
+    with pytest.raises(ValueError, match="at most 12|between 1 and 12"):
+        decoder(geohash)
+
+
+@pytest.mark.parametrize(
+    "decoder,native_name",
+    [(pgh.decode, "c_decode"), (pgh.decode_exactly, "c_decode_exactly")],
+)
+def test_public_decode_rejects_over_precision_before_native_delegation(monkeypatch, decoder, native_name):
+    """The public boundary validates length without relying on the native layer."""
+    monkeypatch.setattr(f"pygeohash.geohash.{native_name}", lambda _geohash: pytest.fail("native decoder called"))
+
+    with pytest.raises(ValueError, match="at most 12"):
+        decoder("u" * 13)
+
+
+@pytest.mark.parametrize("decoder", DECODE_APIS)
+@pytest.mark.parametrize("geohash", ["u", "u4pruydqqvj8"])
+def test_decode_accepts_boundary_lengths(decoder, geohash):
+    """Canonical minimum and maximum precision geohashes remain decodable."""
+    expected = BOUNDARY_DECODE_RESULTS[geohash][decoder in EXACT_DECODERS]
+    assert decoder(geohash) == expected
+
+
+@pytest.mark.parametrize("decoder", [geohash_module.decode, geohash_module.decode_exactly])
+def test_native_decode_rejects_empty_and_invalid_geohashes(decoder):
+    """The native boundary enforces minimum length and retains character validation."""
+    with pytest.raises(ValueError, match="between 1 and 12"):
+        decoder("")
+    with pytest.raises(ValueError, match="Invalid character in geohash"):
+        decoder("ezs42a")
 
 
 CASE_VARIANTS = ["U4PRUYD", "U4pruYd", "u4PRUYd"]

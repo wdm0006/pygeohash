@@ -112,6 +112,11 @@ static int decode_to_doubles(const char *geohash, double *out_lat, double *out_l
     int is_even = 1;
     size_t len = strlen(geohash);
 
+    if (len < 1 || len > 12) {
+        PyErr_SetString(PyExc_ValueError, "Geohash must be between 1 and 12 characters long");
+        return -1;
+    }
+
     init_base32_decode_map();
 
     for (size_t i = 0; i < len; i++) {
