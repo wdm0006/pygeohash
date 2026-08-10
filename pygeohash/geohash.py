@@ -140,12 +140,15 @@ def decode(geohash: str) -> LatLong:
         LatLong: A named tuple containing the latitude and longitude.
 
     Raises:
-        ValueError: If the geohash is not a string, is empty, or contains invalid characters.
+        ValueError: If the geohash is not a string, is not between 1 and 12 characters,
+            or contains invalid characters.
     """
     if not isinstance(geohash, str):
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:
         raise ValueError("Geohash cannot be empty.")
+    if len(geohash) > MAX_PRECISION:
+        raise ValueError(f"Geohash must be at most {MAX_PRECISION} characters long.")
 
     # The C extension raises ValueError("Invalid character in geohash") for any
     # non-base32 character, so we let it do the per-character validation instead
@@ -169,12 +172,15 @@ def decode_exactly(geohash: str) -> ExactLatLong:
             respective error margins.
 
     Raises:
-        ValueError: If the geohash is not a string, is empty, or contains invalid characters.
+        ValueError: If the geohash is not a string, is not between 1 and 12 characters,
+            or contains invalid characters.
     """
     if not isinstance(geohash, str):
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:
         raise ValueError("Geohash cannot be empty.")
+    if len(geohash) > MAX_PRECISION:
+        raise ValueError(f"Geohash must be at most {MAX_PRECISION} characters long.")
 
     # See decode(): the C extension validates characters and raises on its own.
     return ExactLatLong(*c_decode_exactly(geohash.lower()))
