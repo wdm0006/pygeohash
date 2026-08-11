@@ -65,7 +65,20 @@ jobs:
 
       - name: Run pip-audit
         run: |
-          pip-audit --path .
+          python - <<'PY'
+          from importlib.metadata import distributions
+
+          installed = sorted(
+              distribution.metadata["Name"]
+              for distribution in distributions()
+              if distribution.metadata["Name"].lower() != "pygeohash"
+          )
+          print(f"Found {len(installed)} installed third-party distributions:")
+          print("\n".join(installed))
+          if not installed:
+              raise SystemExit("No third-party distributions found to audit")
+          PY
+          pip-audit --verbose
 
       - name: Dependency Review
         uses: actions/dependency-review-action@v4 
