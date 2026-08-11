@@ -59,7 +59,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          # The audit below covers every distribution installed in this
+          # environment, including the setuptools/wheel that ship preinstalled
+          # with the runner's Python and routinely lag behind published security
+          # fixes, so upgrade the build tooling along with pip.
+          python -m pip install --upgrade pip setuptools wheel
           pip install pip-audit
           pip install -e ".[dev,viz]"
 
