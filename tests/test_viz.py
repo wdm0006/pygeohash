@@ -200,5 +200,78 @@ class TestViz(unittest.TestCase):
             self.assertIsNone(m)
 
 
+# (center, attribute of the world edge the clipped grid should reach, its value)
+GRID_EDGE_CASES = [
+    ((89.9, 0.0), "max_lat", 90.0),
+    ((-89.9, 0.0), "min_lat", -90.0),
+    ((0.0, 179.9), "max_lon", 180.0),
+    ((0.0, -179.9), "min_lon", -180.0),
+]
+
+INVALID_GRID_BOXES = [
+    (-100.0, -10.0, -95.0, 10.0),
+    (-10.0, -200.0, 10.0, -190.0),
+    (50.0, 179.0, 51.0, -179.0),
+]
+
+
+def _grid_rectangle_bounds(folium_module, geohash_map):
+    """Collect ``(min_lat, min_lon, max_lat, max_lon)`` for every rectangle on the map."""
+    return [
+        (child.locations[0][0], child.locations[0][1], child.locations[1][0], child.locations[1][1])
+        for child in geohash_map._children.values()
+        if isinstance(child, folium_module.Rectangle)
+    ]
+
+
+@pytest.mark.parametrize("center, edge, edge_value", GRID_EDGE_CASES)
+def test_add_geohash_grid_clips_generated_viewport(center, edge, edge_value):
+    """A viewport derived near a world edge is clipped instead of raising."""
+    folium = pytest.importorskip("folium")
+    from pygeohash.viz import folium_map
+
+    geohash_map = folium_map(center=center, zoom_start=3)
+    geohash_map.add_geohash_grid(precision=2)
+
+    bounds = _grid_rectangle_bounds(folium, geohash_map)
+    assert len(bounds) > 0
+    assert all(-90.0 <= min_lat <= max_lat <= 90.0 for min_lat, _, max_lat, _ in bounds)
+    assert all(-180.0 <= min_lon <= max_lon <= 180.0 for _, min_lon, _, max_lon in bounds)
+
+    reached = {
+        "min_lat": min(bound[0] for bound in bounds),
+        "min_lon": min(bound[1] for bound in bounds),
+        "max_lat": max(bound[2] for bound in bounds),
+        "max_lon": max(bound[3] for bound in bounds),
+    }
+    assert reached[edge] == edge_value
+
+
+def test_add_geohash_grid_ordinary_viewport():
+    """An ordinary central viewport still adds geohash rectangles."""
+    folium = pytest.importorskip("folium")
+    from pygeohash.viz import folium_map
+
+    geohash_map = folium_map(center=(37.7749, -122.4194), zoom_start=3)
+    geohash_map.add_geohash_grid(precision=2)
+
+    bounds = _grid_rectangle_bounds(folium, geohash_map)
+    assert len(bounds) > 0
+    assert any(min_lat <= 37.7749 <= max_lat for min_lat, _, max_lat, _ in bounds)
+    assert any(min_lon <= -122.4194 <= max_lon for _, min_lon, _, max_lon in bounds)
+
+
+@pytest.mark.parametrize("bbox", INVALID_GRID_BOXES)
+def test_add_geohash_grid_rejects_explicit_invalid_bbox(bbox):
+    """An explicit caller-supplied box is still validated by BoundingBox."""
+    pytest.importorskip("folium")
+    from pygeohash.viz import folium_map
+
+    geohash_map = folium_map(center=(0.0, 0.0), zoom_start=3)
+
+    with pytest.raises(ValueError):
+        geohash_map.add_geohash_grid(precision=2, bbox=bbox)
+
+
 if __name__ == "__main__":
     unittest.main()
