@@ -626,17 +626,24 @@
     <span class="n">fill_opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="n">weight</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FoliumMapProtocol</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a grid of geohashes at the specified precision.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a grid of geohashes at the specified precision.</span>
+
+<span class="sd">    When no ``bbox`` is given the viewport is derived from the map center and zoom</span>
+<span class="sd">    and clipped to the world bounds, so maps centered near a pole or the</span>
+<span class="sd">    antimeridian render the visible part of the grid. An explicitly supplied</span>
+<span class="sd">    ``bbox`` is passed through unchanged and validated by :class:`BoundingBox`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># If no bounding box is provided, use the current map bounds</span>
     <span class="k">if</span> <span class="n">bbox</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">location</span>
         <span class="c1"># Rough estimate of degrees visible at different zoom levels</span>
         <span class="n">degrees_visible</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zoom_start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">half_extent</span> <span class="o">=</span> <span class="n">degrees_visible</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="n">bbox</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">lat</span> <span class="o">-</span> <span class="n">degrees_visible</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># min_lat</span>
-            <span class="n">lon</span> <span class="o">-</span> <span class="n">degrees_visible</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># min_lon</span>
-            <span class="n">lat</span> <span class="o">+</span> <span class="n">degrees_visible</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># max_lat</span>
-            <span class="n">lon</span> <span class="o">+</span> <span class="n">degrees_visible</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># max_lon</span>
+            <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">lat</span> <span class="o">-</span> <span class="n">half_extent</span><span class="p">),</span>  <span class="c1"># min_lat</span>
+            <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">half_extent</span><span class="p">),</span>  <span class="c1"># min_lon</span>
+            <span class="nb">min</span><span class="p">(</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">half_extent</span><span class="p">),</span>  <span class="c1"># max_lat</span>
+            <span class="nb">min</span><span class="p">(</span><span class="mf">180.0</span><span class="p">,</span> <span class="n">lon</span> <span class="o">+</span> <span class="n">half_extent</span><span class="p">),</span>  <span class="c1"># max_lon</span>
         <span class="p">)</span>
 
     <span class="c1"># Get all geohashes in the bounding box</span>
