@@ -1,9 +1,12 @@
 """Tests for type validation functions in pygeohash.types."""
 
+import pandas as pd
 import pytest
 from pygeohash.types import (
     assert_valid_latitude,
     assert_valid_longitude,
+    is_geohash_dataframe,
+    is_geohash_series,
     is_valid_geohash,
     is_valid_latitude,
     is_valid_longitude,
@@ -117,6 +120,40 @@ def test_assert_valid_coordinates_accept_integers():
     """Ordinary integer coordinates keep working and come back as floats."""
     assert assert_valid_latitude(45) == 45.0
     assert assert_valid_longitude(-120) == -120.0
+
+
+def test_is_geohash_series_accepts_valid_strings():
+    """A Series containing only geohash strings is valid."""
+    assert is_geohash_series(pd.Series(["gbsuv", "u00000", "EZS42"])) is True
+
+
+@pytest.mark.parametrize(
+    "values",
+    [
+        [123],
+        [1, 2, 3],
+        [True],
+        [False],
+        ["gbsuv", 123],
+        ["u00000", True],
+    ],
+)
+def test_is_geohash_series_rejects_non_string_values(values):
+    """Non-string values are not geohashes, even when their text would be valid."""
+    assert is_geohash_series(pd.Series(values)) is False
+
+
+@pytest.mark.parametrize("values", [[123], [1, 2, 3], [True], [False]])
+def test_is_geohash_dataframe_rejects_non_string_columns(values):
+    """Numeric-only and boolean-only DataFrames have no geohash column."""
+    assert is_geohash_dataframe(pd.DataFrame({"id": values})) is False
+
+
+def test_is_geohash_dataframe_accepts_valid_geohash_column():
+    """A valid geohash string column is detected alongside non-geohash data."""
+    dataframe = pd.DataFrame({"id": [123, 456], "geohash": ["gbsuv", "u00000"]})
+
+    assert is_geohash_dataframe(dataframe) is True
 
 
 # TODO: Add similar tests for is_valid_longitude and is_valid_geohash
