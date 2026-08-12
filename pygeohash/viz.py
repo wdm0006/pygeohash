@@ -444,17 +444,24 @@ def add_geohash_grid(
     fill_opacity: float = 0.2,
     weight: int = 1,
 ) -> FoliumMapProtocol:
-    """Add a grid of geohashes at the specified precision."""
+    """Add a grid of geohashes at the specified precision.
+
+    When no ``bbox`` is given the viewport is derived from the map center and zoom
+    and clipped to the world bounds, so maps centered near a pole or the
+    antimeridian render the visible part of the grid. An explicitly supplied
+    ``bbox`` is passed through unchanged and validated by :class:`BoundingBox`.
+    """
     # If no bounding box is provided, use the current map bounds
     if bbox is None:
         lat, lon = self.location
         # Rough estimate of degrees visible at different zoom levels
         degrees_visible = 360 / (2 ** (self._zoom_start - 1))
+        half_extent = degrees_visible / 2
         bbox = (
-            lat - degrees_visible / 2,  # min_lat
-            lon - degrees_visible / 2,  # min_lon
-            lat + degrees_visible / 2,  # max_lat
-            lon + degrees_visible / 2,  # max_lon
+            max(-90.0, lat - half_extent),  # min_lat
+            max(-180.0, lon - half_extent),  # min_lon
+            min(90.0, lat + half_extent),  # max_lat
+            min(180.0, lon + half_extent),  # max_lon
         )
 
     # Get all geohashes in the bounding box
