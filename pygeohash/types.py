@@ -205,7 +205,7 @@ def is_geohash_series(obj: object) -> bool:
         return False
     from pandas import Series
 
-    return isinstance(obj, Series) and all(is_valid_geohash(str(x)) for x in obj)
+    return isinstance(obj, Series) and all(is_valid_geohash(x) for x in obj)
 
 
 def is_latitude_series(obj: object) -> bool:
