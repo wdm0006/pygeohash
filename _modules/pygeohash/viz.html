@@ -406,11 +406,20 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        Tuple: (fig, ax) - The matplotlib figure and axis objects</span>
 
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If ``geohashes`` is empty, or if ``colors`` is an empty list.</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; import pygeohash as pgh</span>
 <span class="sd">        &gt;&gt;&gt; from pygeohash.viz import plot_geohashes</span>
 <span class="sd">        &gt;&gt;&gt; fig, ax = plot_geohashes([&quot;9q8yyk&quot;, &quot;9q8yym&quot;, &quot;9q8yyj&quot;])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;plot_geohashes requires at least one geohash&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">colors</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;colors must be a color name, a colormap name, or a non-empty list of colors&quot;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_check_viz_dependencies</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
@@ -563,8 +572,19 @@
     <span class="n">popups</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">tooltips</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FoliumMapProtocol</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add multiple geohashes to the map.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add multiple geohashes to the map.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If ``geohashes`` is non-empty and ``colors`` or ``fill_colors``</span>
+<span class="sd">            is an empty list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n_geohashes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n_geohashes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">colors</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;colors must be a color name or a non-empty list of colors&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fill_colors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fill_colors</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;fill_colors must be None or a non-empty list of colors&quot;</span><span class="p">)</span>
 
     <span class="c1"># Set up colors</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
