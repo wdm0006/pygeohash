@@ -1,6 +1,7 @@
 import io
 import logging
 from pathlib import Path
+from typing import Iterator
 
 import pytest
 
@@ -8,7 +9,7 @@ import pygeohash as pgh
 
 
 @pytest.fixture(autouse=True)
-def reset_pygeohash_logging() -> None:
+def reset_pygeohash_logging() -> Iterator[None]:
     pgh.remove_all_handlers()
     pgh.set_log_level(logging.NOTSET)
     yield
@@ -35,6 +36,21 @@ def test_stream_handler_default_emits_warning_records() -> None:
     pgh.mean([])
 
     assert "Empty geohash collection provided" in stream.getvalue()
+
+
+def test_stream_handler_default_delivers_info_records() -> None:
+    stream = io.StringIO()
+    root_logger = logging.getLogger()
+    original_root_level = root_logger.level
+    root_logger.setLevel(logging.WARNING)
+
+    try:
+        pgh.add_stream_handler(stream=stream)
+        pgh.logger.info("info level record")
+    finally:
+        root_logger.setLevel(original_root_level)
+
+    assert "info level record" in stream.getvalue()
 
 
 def test_file_handler_emits_records(tmp_path: Path) -> None:
