@@ -22,14 +22,17 @@ def get_logger(name: Optional[str] = None) -> logging.Logger:
     """Get a logger instance for the specified name.
 
     Args:
-        name: The name of the logger to get. If None, returns the main pygeohash logger.
-            If specified, returns a child logger of the main pygeohash logger.
+        name: The name of the logger to get. If None or ``"pygeohash"``, returns the main
+            pygeohash logger. Fully qualified pygeohash names are returned as-is; other
+            names are treated as children of the main pygeohash logger.
 
     Returns:
         logging.Logger: The requested logger instance.
     """
     if name is None:
         return logger
+    if name == logger.name or name.startswith(f"{logger.name}."):
+        return logging.getLogger(name)
     return logger.getChild(name)
 
 
@@ -51,7 +54,8 @@ def add_stream_handler(
     """Add a stream handler to the pygeohash logger.
 
     Args:
-        level: The logging level for the handler. Defaults to INFO.
+        level: The logging level for the handler. Defaults to INFO. If the pygeohash
+            logger would filter records at this level, its level is lowered to match.
         format_string: The format string for log messages.
         **handler_kwargs: Additional keyword arguments to pass to StreamHandler.
     """
@@ -60,6 +64,8 @@ def add_stream_handler(
     formatter = logging.Formatter(format_string)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+    if logger.getEffectiveLevel() > handler.level:
+        logger.setLevel(handler.level)
 
 
 def add_file_handler(
@@ -72,7 +78,8 @@ def add_file_handler(
 
     Args:
         filename: The name of the file to log to.
-        level: The logging level for the handler. Defaults to INFO.
+        level: The logging level for the handler. Defaults to INFO. If the pygeohash
+            logger would filter records at this level, its level is lowered to match.
         format_string: The format string for log messages.
         **handler_kwargs: Additional keyword arguments to pass to FileHandler.
     """
@@ -81,6 +88,8 @@ def add_file_handler(
     formatter = logging.Formatter(format_string)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+    if logger.getEffectiveLevel() > handler.level:
+        logger.setLevel(handler.level)
 
 
 def remove_all_handlers() -> None:
