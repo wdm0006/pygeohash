@@ -225,11 +225,20 @@ def plot_geohashes(
     Returns:
         Tuple: (fig, ax) - The matplotlib figure and axis objects
 
+    Raises:
+        ValueError: If ``geohashes`` is empty, or if ``colors`` is an empty list.
+
     Examples:
         >>> import pygeohash as pgh
         >>> from pygeohash.viz import plot_geohashes
         >>> fig, ax = plot_geohashes(["9q8yyk", "9q8yym", "9q8yyj"])
     """
+    if not geohashes:
+        raise ValueError("plot_geohashes requires at least one geohash")
+
+    if not isinstance(colors, str) and not colors:
+        raise ValueError("colors must be a color name, a colormap name, or a non-empty list of colors")
+
     if not _check_viz_dependencies():
         return None, None
 
@@ -381,8 +390,19 @@ def add_geohashes(
     popups: Optional[List[str]] = None,
     tooltips: Optional[List[str]] = None,
 ) -> FoliumMapProtocol:
-    """Add multiple geohashes to the map."""
+    """Add multiple geohashes to the map.
+
+    Raises:
+        ValueError: If ``geohashes`` is non-empty and ``colors`` or ``fill_colors``
+            is an empty list.
+    """
     n_geohashes = len(geohashes)
+
+    if n_geohashes:
+        if not isinstance(colors, str) and not colors:
+            raise ValueError("colors must be a color name or a non-empty list of colors")
+        if fill_colors is not None and not fill_colors:
+            raise ValueError("fill_colors must be None or a non-empty list of colors")
 
     # Set up colors
     if isinstance(colors, str):
