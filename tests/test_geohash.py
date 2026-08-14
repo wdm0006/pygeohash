@@ -157,6 +157,50 @@ def test_c_encode_rejects_non_finite_coordinates():
                 c_func(latitude, longitude)
 
 
+def test_c_encode_rejects_boolean_coordinates():
+    """bool is a subclass of int, so the C encoders must reject it explicitly.
+
+    Without an explicit guard the "d" format unit coerces True/False to
+    1.0/0.0 before any validation runs, so a direct extension call would encode
+    a boolean as a coordinate while the package-root wrappers raise.
+    """
+    from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
+
+    for c_func in (c_encode, c_encode_strictly):
+        for latitude, longitude in (
+            (True, 0.0),
+            (False, 0.0),
+            (0.0, True),
+            (0.0, False),
+            (True, True),
+        ):
+            with pytest.raises(ValueError, match="latitude and longitude must be numbers, not booleans"):
+                c_func(latitude, longitude, 5)
+
+
+def test_c_encode_rejects_boolean_precision():
+    from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
+
+    for c_func in (c_encode, c_encode_strictly):
+        for bad_precision in (True, False):
+            with pytest.raises(ValueError, match="precision must be an integer, not a boolean"):
+                c_func(0.0, 0.0, bad_precision)
+            with pytest.raises(ValueError, match="precision must be an integer, not a boolean"):
+                c_func(0.0, 0.0, precision=bad_precision)
+
+
+def test_c_encode_accepts_ordinary_numeric_arguments():
+    """The boolean guards must not disturb plain int/float arguments."""
+    from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
+
+    for c_func in (c_encode, c_encode_strictly):
+        assert c_func(42.6, -5.6, 5) == "ezs42"
+        assert c_func(42.6, -5.6) == "ezs42e44yx96"
+        assert c_func(42, -5, 5) == "ezkqy"
+        assert c_func(0.0, 0.0, 1) == "s"
+        assert c_func(latitude=42.6, longitude=-5.6, precision=12) == "ezs42e44yx96"
+
+
 def test_c_encode_preserves_finite_coordinate_normalization():
     from pygeohash.cgeohash.geohash_module import encode as c_encode, encode_strictly as c_encode_strictly
 
