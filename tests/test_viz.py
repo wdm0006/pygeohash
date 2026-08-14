@@ -273,5 +273,67 @@ def test_add_geohash_grid_rejects_explicit_invalid_bbox(bbox):
         geohash_map.add_geohash_grid(precision=2, bbox=bbox)
 
 
+def test_plot_geohashes_rejects_empty_collection():
+    """An empty geohash collection is rejected before matplotlib sees infinite axis limits."""
+    pytest.importorskip("matplotlib")
+    from pygeohash.viz import plot_geohashes
+
+    with pytest.raises(ValueError, match="at least one geohash"):
+        plot_geohashes([])
+
+
+def test_plot_geohashes_rejects_empty_colors():
+    """An empty color list is rejected instead of dividing by zero while cycling."""
+    pytest.importorskip("matplotlib")
+    from pygeohash.viz import plot_geohashes
+
+    with pytest.raises(ValueError, match="non-empty list of colors"):
+        plot_geohashes(["9q8yyk"], colors=[])
+
+
+def test_plot_geohashes_cycles_short_color_list():
+    """A short non-empty color list still cycles across a longer geohash list."""
+    matplotlib = pytest.importorskip("matplotlib")
+    matplotlib.use("Agg")
+    from matplotlib.patches import Rectangle
+
+    from pygeohash.viz import plot_geohashes
+
+    fig, ax = plot_geohashes(["9q8yyk", "9q8yym", "9q8yyj"], colors=["red", "blue"])
+    try:
+        patches = [child for child in ax.get_children() if isinstance(child, Rectangle) and child.get_label()]
+        assert [patch.get_edgecolor() for patch in patches] == [
+            matplotlib.colors.to_rgba("red", 0.5),
+            matplotlib.colors.to_rgba("blue", 0.5),
+            matplotlib.colors.to_rgba("red", 0.5),
+        ]
+    finally:
+        matplotlib.pyplot.close(fig)
+
+
+@pytest.mark.parametrize("kwargs", [{"colors": []}, {"fill_colors": []}])
+def test_add_geohashes_rejects_empty_style_lists(kwargs):
+    """Empty color/fill-color lists are rejected instead of dividing by zero while cycling."""
+    pytest.importorskip("folium")
+    from pygeohash.viz import folium_map
+
+    geohash_map = folium_map(center=(0.0, 0.0), zoom_start=3)
+
+    with pytest.raises(ValueError, match="non-empty list of colors"):
+        geohash_map.add_geohashes(["9q8yyk"], **kwargs)
+
+
+def test_add_geohashes_cycles_short_color_list():
+    """A short non-empty color list still cycles across a longer geohash list."""
+    folium = pytest.importorskip("folium")
+    from pygeohash.viz import folium_map
+
+    geohash_map = folium_map(center=(0.0, 0.0), zoom_start=3)
+    geohash_map.add_geohashes(["9q8yyk", "9q8yym", "9q8yyj"], colors=["red", "blue"])
+
+    rectangles = [child for child in geohash_map._children.values() if isinstance(child, folium.Rectangle)]
+    assert [rectangle.options["color"] for rectangle in rectangles] == ["red", "blue", "red"]
+
+
 if __name__ == "__main__":
     unittest.main()
