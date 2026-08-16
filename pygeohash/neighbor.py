@@ -6,10 +6,10 @@ in different directions (right, left, top, bottom).
 
 from __future__ import annotations
 
-from typing import Dict, Final, Literal
+from typing import Dict, Final, Literal, Tuple
 
 from pygeohash.geohash import __base32
-from pygeohash.types import Direction
+from pygeohash.types import Direction, is_valid_geohash
 from pygeohash.logging import get_logger
 
 logger = get_logger(__name__)
@@ -54,6 +54,8 @@ BORDERS: Final[Dict[Direction, Dict[Literal["even", "odd"], str]]] = {
     },
 }
 
+DIRECTIONS: Final[Tuple[Direction, ...]] = ("right", "left", "top", "bottom")
+
 
 def get_adjacent(geohash: str, direction: Direction) -> str:
     """Calculate the adjacent geohash in the specified direction.
@@ -69,8 +71,11 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
         other side of the grid.
 
     Raises:
-        ValueError: If the geohash is empty, or if the requested neighbor would lie beyond
-        the north or south pole ("top" of the top row, "bottom" of the bottom row).
+        ValueError: If the geohash is empty; if it is not a canonical geohash (1-12
+        characters drawn from the geohash base32 alphabet, case-insensitive); if the
+        direction is not one of "right", "left", "top" or "bottom"; or if the requested
+        neighbor would lie beyond the north or south pole ("top" of the top row,
+        "bottom" of the bottom row).
 
     Example:
         >>> get_adjacent("u4pruyd", "top")
@@ -81,6 +86,17 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
     if len(geohash) == 0:
         logger.error("Cannot find adjacent geohash: input geohash length is 0")
         raise ValueError("The geohash length cannot be 0. Possible when close to poles")
+
+    if not is_valid_geohash(geohash):
+        logger.error("Cannot find adjacent geohash: %r is not a valid geohash", geohash)
+        raise ValueError(
+            f"Invalid geohash: {geohash!r}. A geohash must be 1 to 12 characters "
+            "from the base32 alphabet '0123456789bcdefghjkmnpqrstuvwxyz'"
+        )
+
+    if direction not in DIRECTIONS:
+        logger.error("Cannot find adjacent geohash: %r is not a valid direction", direction)
+        raise ValueError(f"Invalid direction: {direction!r}. Must be one of 'right', 'left', 'top', 'bottom'")
 
     source_hash = geohash.lower()
     last_char = source_hash[-1]
