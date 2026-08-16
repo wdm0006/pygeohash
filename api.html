@@ -569,8 +569,11 @@ other side of the grid.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>ValueError</strong> – If the geohash is empty, or if the requested neighbor would lie beyond</p></li>
-<li><p><strong>the north</strong><strong> or </strong><strong>south pole</strong><strong> (</strong><strong>&quot;top&quot;</strong><strong> of </strong><strong>the top row</strong><strong>, </strong><strong>&quot;bottom&quot;</strong><strong> of </strong><strong>the bottom row</strong><strong>)</strong><strong>.</strong> – </p></li>
+<li><p><strong>ValueError</strong> – If the geohash is empty; if it is not a canonical geohash (1-12</p></li>
+<li><p><strong>characters drawn from the geohash base32 alphabet</strong><strong>, </strong><strong>case-insensitive</strong><strong>)</strong><strong>; if the</strong> – </p></li>
+<li><p><strong>direction is not one</strong><strong> of </strong><strong>&quot;right&quot;</strong><strong>, </strong><strong>&quot;left&quot;</strong><strong>, </strong><strong>&quot;top&quot;</strong><strong> or </strong><strong>&quot;bottom&quot;;</strong><strong> or </strong><strong>if the requested</strong> – </p></li>
+<li><p><strong>neighbor would lie beyond the north</strong><strong> or </strong><strong>south pole</strong><strong> (</strong><strong>&quot;top&quot;</strong><strong> of </strong><strong>the top row</strong><strong>,</strong> – </p></li>
+<li><p><strong>&quot;bottom&quot;</strong><strong> of </strong><strong>the bottom row</strong><strong>)</strong><strong>.</strong> – </p></li>
 </ul>
 </dd>
 </dl>

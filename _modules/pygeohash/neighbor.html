@@ -182,10 +182,10 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Literal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">__base32</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">is_valid_geohash</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -230,6 +230,8 @@
     <span class="p">},</span>
 <span class="p">}</span>
 
+<span class="n">DIRECTIONS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Direction</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">)</span>
+
 
 <div class="viewcode-block" id="get_adjacent">
 <a class="viewcode-back" href="../../api.html#pygeohash.get_adjacent">[docs]</a>
@@ -247,8 +249,11 @@
 <span class="sd">        other side of the grid.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If the geohash is empty, or if the requested neighbor would lie beyond</span>
-<span class="sd">        the north or south pole (&quot;top&quot; of the top row, &quot;bottom&quot; of the bottom row).</span>
+<span class="sd">        ValueError: If the geohash is empty; if it is not a canonical geohash (1-12</span>
+<span class="sd">        characters drawn from the geohash base32 alphabet, case-insensitive); if the</span>
+<span class="sd">        direction is not one of &quot;right&quot;, &quot;left&quot;, &quot;top&quot; or &quot;bottom&quot;; or if the requested</span>
+<span class="sd">        neighbor would lie beyond the north or south pole (&quot;top&quot; of the top row,</span>
+<span class="sd">        &quot;bottom&quot; of the bottom row).</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; get_adjacent(&quot;u4pruyd&quot;, &quot;top&quot;)</span>
@@ -259,6 +264,17 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find adjacent geohash: input geohash length is 0&quot;</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The geohash length cannot be 0. Possible when close to poles&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_geohash</span><span class="p">(</span><span class="n">geohash</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find adjacent geohash: </span><span class="si">%r</span><span class="s2"> is not a valid geohash&quot;</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Invalid geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">!r}</span><span class="s2">. A geohash must be 1 to 12 characters &quot;</span>
+            <span class="s2">&quot;from the base32 alphabet &#39;0123456789bcdefghjkmnpqrstuvwxyz&#39;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DIRECTIONS</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot find adjacent geohash: </span><span class="si">%r</span><span class="s2"> is not a valid direction&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid direction: </span><span class="si">{</span><span class="n">direction</span><span class="si">!r}</span><span class="s2">. Must be one of &#39;right&#39;, &#39;left&#39;, &#39;top&#39;, &#39;bottom&#39;&quot;</span><span class="p">)</span>
 
     <span class="n">source_hash</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">last_char</span> <span class="o">=</span> <span class="n">source_hash</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
