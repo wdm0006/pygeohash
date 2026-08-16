@@ -54,6 +54,43 @@ def test_zero_length_geohash():
         pgh.get_adjacent("", "top")
 
 
+INVALID_GEOHASHES = [
+    "a4pruyd",  # 'a' is not in the geohash alphabet
+    "u4pr!yd",  # punctuation mid-string
+    "u4pru!",  # invalid last character
+    "u4pruydqqvjuu4pr",  # 16 characters, over the 12-character maximum
+    "u4pruyd ",  # trailing whitespace
+    "u4pr yd",  # embedded space
+]
+
+
+@pytest.mark.parametrize("geohash", INVALID_GEOHASHES)
+@pytest.mark.parametrize("direction", ["right", "left", "top", "bottom"])
+def test_invalid_geohash_raises(geohash, direction):
+    with pytest.raises(ValueError, match="Invalid geohash"):
+        pgh.get_adjacent(geohash, direction)
+
+
+def test_invalid_last_character_message_is_geohash_specific():
+    """An invalid final character must not leak str.index's 'substring not found'."""
+    with pytest.raises(ValueError, match=r"^Invalid geohash: 'u4pru!'\."):
+        pgh.get_adjacent("u4pru!", "top")
+
+
+@pytest.mark.parametrize("direction", ["up", "down", "north", "TOP", "", "Right"])
+def test_invalid_direction_raises_value_error(direction):
+    with pytest.raises(ValueError, match="Must be one of 'right', 'left', 'top', 'bottom'"):
+        pgh.get_adjacent("u4pruyd", direction)
+
+
+def test_uppercase_geohash_is_still_accepted():
+    assert pgh.get_adjacent("U4PRUYD", "top") == "u4pruyf"
+
+
+def test_maximum_precision_geohash_is_accepted():
+    assert pgh.get_adjacent("u4pruydqqvju", "top") == "u4pruydqqvjv"
+
+
 ANTIMERIDIAN_PAIRS = [
     # (western-edge geohash, eastern-edge geohash) -- each is the other's east/west neighbor
     ("8", "x"),
