@@ -419,8 +419,9 @@ so <code class="docutils literal notranslate"><span class="pre">&quot;U4PRUYD&qu
 <p>Named tuple representing a geospatial bounding box.</p>
 <p>The fields interleave latitude and longitude, so the order is
 <code class="docutils literal notranslate"><span class="pre">(min_lat,</span> <span class="pre">min_lon,</span> <span class="pre">max_lat,</span> <span class="pre">max_lon)</span></code> rather than the grouped
-<code class="docutils literal notranslate"><span class="pre">(min_lat,</span> <span class="pre">max_lat,</span> <span class="pre">min_lon,</span> <span class="pre">max_lon)</span></code>. Coordinates must be finite and within
-the geographic bounds for their axis. Construction also rejects an inverted box
+<code class="docutils literal notranslate"><span class="pre">(min_lat,</span> <span class="pre">max_lat,</span> <span class="pre">min_lon,</span> <span class="pre">max_lon)</span></code>. Coordinates must be finite numbers within
+the geographic bounds for their axis; booleans are rejected even though <code class="docutils literal notranslate"><span class="pre">bool</span></code> is a
+subclass of <code class="docutils literal notranslate"><span class="pre">int</span></code>. Construction also rejects an inverted box
 (<code class="docutils literal notranslate"><span class="pre">min_lat</span> <span class="pre">&gt;</span> <span class="pre">max_lat</span></code> or <code class="docutils literal notranslate"><span class="pre">min_lon</span> <span class="pre">&gt;</span> <span class="pre">max_lon</span></code>) with a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>, which is
 what a grouped argument list produces. A degenerate box whose minimum equals its
 maximum on either axis is valid. Boxes spanning the antimeridian, which would need
@@ -475,8 +476,8 @@ between -180 and 180.</p>
 
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – If a coordinate is non-finite, outside its geographic bounds, or
-    the box has <code class="docutils literal notranslate"><span class="pre">min_lat</span> <span class="pre">&gt;</span> <span class="pre">max_lat</span></code> or <code class="docutils literal notranslate"><span class="pre">min_lon</span> <span class="pre">&gt;</span> <span class="pre">max_lon</span></code>.</p>
+<dd class="field-odd"><p><strong>ValueError</strong> – If a coordinate is a boolean, non-finite, outside its geographic
+    bounds, or the box has <code class="docutils literal notranslate"><span class="pre">min_lat</span> <span class="pre">&gt;</span> <span class="pre">max_lat</span></code> or <code class="docutils literal notranslate"><span class="pre">min_lon</span> <span class="pre">&gt;</span> <span class="pre">max_lon</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>

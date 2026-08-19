@@ -213,8 +213,9 @@
 
 <span class="sd">    The fields interleave latitude and longitude, so the order is</span>
 <span class="sd">    ``(min_lat, min_lon, max_lat, max_lon)`` rather than the grouped</span>
-<span class="sd">    ``(min_lat, max_lat, min_lon, max_lon)``. Coordinates must be finite and within</span>
-<span class="sd">    the geographic bounds for their axis. Construction also rejects an inverted box</span>
+<span class="sd">    ``(min_lat, max_lat, min_lon, max_lon)``. Coordinates must be finite numbers within</span>
+<span class="sd">    the geographic bounds for their axis; booleans are rejected even though ``bool`` is a</span>
+<span class="sd">    subclass of ``int``. Construction also rejects an inverted box</span>
 <span class="sd">    (``min_lat &gt; max_lat`` or ``min_lon &gt; max_lon``) with a ``ValueError``, which is</span>
 <span class="sd">    what a grouped argument list produces. A degenerate box whose minimum equals its</span>
 <span class="sd">    maximum on either axis is valid. Boxes spanning the antimeridian, which would need</span>
@@ -231,8 +232,8 @@
 <span class="sd">            between -180 and 180.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If a coordinate is non-finite, outside its geographic bounds, or</span>
-<span class="sd">            the box has ``min_lat &gt; max_lat`` or ``min_lon &gt; max_lon``.</span>
+<span class="sd">        ValueError: If a coordinate is a boolean, non-finite, outside its geographic</span>
+<span class="sd">            bounds, or the box has ``min_lat &gt; max_lat`` or ``min_lon &gt; max_lon``.</span>
 <span class="sd">    """</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
@@ -244,6 +245,9 @@
             <span class="p">(</span><span class="s2">"max_lat"</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span>
             <span class="p">(</span><span class="s2">"max_lon"</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">),</span>
         <span class="p">):</span>
+            <span class="c1"># bool is a subclass of int, so it has to be rejected explicitly.</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be a number, not a bool"</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">is_finite</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
