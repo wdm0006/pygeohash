@@ -160,9 +160,41 @@ This project is licensed under the MIT license. See the LICENSE file for details
    
 # Benchmarks
 
-We did a rewrite of the core logic into cpython in v3.0.0 to improve performance and remove the dependency on geohash.py. Here is the performance part:
+## How PyGeoHash compares to other geohash libraries
 
-## Version 3.0.0
+Median time per call in nanoseconds — lower is better. Measured on an Apple M4
+(macOS, CPython 3.12.11) with the suite in `tests/test_benchmark_comparison.py`,
+run three times.
+
+| Library | Implementation | encode | decode | bbox |
+|---|---|---|---|---|
+| geohashr | Rust extension | 125 | 80 | 104 |
+| pygeohash-fast | Rust extension | 166 | 167 | — |
+| python-geohash | C++ extension | 208 | 250 | 250 |
+| **pygeohash** | **C extension** | **250** | **333** | **709** |
+| libgeohash | pure Python | 2,709 | 2,625 | 2,750 |
+| geohash-tools | pure Python | 3,792 | 3,375 | — |
+| geolib | pure Python | 10,584 | 58,208 | 43,292 |
+
+PyGeoHash is 3.9x to 10.8x faster than the quickest pure-Python library, depending
+on the operation, and lands within 1.2x of `python-geohash` on `encode` (1.3x on
+`decode`, 2.8x on bounding boxes) — the C++ extension it is commonly swapped in
+for when a build toolchain is not available. The two Rust extensions are faster
+than PyGeoHash on everything measured here, and the two fastest `encode` entries
+are within measurement noise of each other.
+
+These are medians from one machine and one set of runs. The full tables, the
+exact library versions, the caveats and the command to regenerate everything are
+on the [benchmarks page](https://pygeohash.mcginniscommawill.com/benchmarks.html)
+in the documentation.
+
+## Version history
+
+The tables below compare PyGeoHash 3.0.0 to PyGeoHash 2.1.0 — a record of the
+v3.0.0 CPython rewrite, not a comparison against other libraries. They were
+produced with a much older pytest-benchmark and are kept for history only.
+
+### Version 3.0.0
 
 | Name (time in ns)                     | Min                  | Max                  | Mean                | StdDev              | Median              | IQR              | Outliers  | OPS (Kops/s)       | Rounds | Iterations |
 |---------------------------------------|----------------------|----------------------|---------------------|---------------------|---------------------|------------------|-----------|--------------------|--------|------------|
@@ -172,7 +204,7 @@ We did a rewrite of the core logic into cpython in v3.0.0 to improve performance
 | test_haversine_distance_benchmark     | 3,989.0001 (6.50)    | 1,066,400.9897 (1.22)| 5,441.2395 (4.86)   | 10,068.4850 (2.25)  | 4,475.0050 (6.27)   | 330.0083 (3.63)  | 429;3534  | 183.7817 (0.21)    | 28312  | 1          |
 
 
-## Version 2.1.0
+### Version 2.1.0
 | Name (time in ns)                     | Min                  | Max                  | Mean                | StdDev              | Median              | IQR              | Outliers  | OPS (Kops/s)       | Rounds | Iterations |
 |---------------------------------------|----------------------|----------------------|---------------------|---------------------|---------------------|------------------|-----------|--------------------|--------|------------|
 | test_approximate_distance_benchmark   | 903.0045 (1.0)        | 2,239,810.0118 (145.76)| 1,242.2962 (1.0)     | 8,910.5317 (2.45)    | 1,034.0009 (1.0)     | 83.0041 (1.0)    | 411;12404  | 804,960.9836 (1.0) | 126872 | 1          |
