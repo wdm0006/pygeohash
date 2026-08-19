@@ -305,6 +305,49 @@ class TestBoundingBox:
         with pytest.raises(ValueError, match=field):
             BoundingBox(*fields)
 
+    @pytest.mark.parametrize("field_index", range(4))
+    @pytest.mark.parametrize("value", [True, False])
+    def test_boolean_coordinate_is_rejected(self, field_index, value):
+        """No field accepts a boolean, even though ``bool`` is a subclass of ``int``."""
+        fields = [10.0, 20.0, 30.0, 40.0]
+        fields[field_index] = value
+
+        with pytest.raises(ValueError, match="not a bool"):
+            BoundingBox(*fields)
+
+    @pytest.mark.parametrize("field_index", range(4))
+    @pytest.mark.parametrize("value", [True, False])
+    def test_make_rejects_boolean_coordinate(self, field_index, value):
+        """``_make`` routes through ``__new__`` and cannot smuggle a boolean in."""
+        fields = [10.0, 20.0, 30.0, 40.0]
+        fields[field_index] = value
+
+        with pytest.raises(ValueError, match="not a bool"):
+            BoundingBox._make(fields)
+
+    @pytest.mark.parametrize("field", ["min_lat", "min_lon", "max_lat", "max_lon"])
+    @pytest.mark.parametrize("value", [True, False])
+    def test_replace_rejects_boolean_coordinate(self, field, value):
+        """``_replace`` cannot swap a validated coordinate for a boolean."""
+        bbox = BoundingBox(10.0, 20.0, 30.0, 40.0)
+
+        with pytest.raises(ValueError, match="not a bool"):
+            bbox._replace(**{field: value})
+
+    @pytest.mark.parametrize(
+        "fields",
+        [
+            (10, 20, 30, 40),
+            (0, 0, 1, 1),
+            (-90, -180, 90, 180),
+        ],
+    )
+    def test_integer_coordinates_are_accepted(self, fields):
+        """Ordinary integers stay valid and keep their values; only ``bool`` is rejected."""
+        bbox = BoundingBox(*fields)
+
+        assert tuple(bbox) == fields
+
     @pytest.mark.parametrize(
         "fields",
         [

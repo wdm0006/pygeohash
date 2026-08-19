@@ -35,8 +35,9 @@ class BoundingBox(_BoundingBoxFields):
 
     The fields interleave latitude and longitude, so the order is
     ``(min_lat, min_lon, max_lat, max_lon)`` rather than the grouped
-    ``(min_lat, max_lat, min_lon, max_lon)``. Coordinates must be finite and within
-    the geographic bounds for their axis. Construction also rejects an inverted box
+    ``(min_lat, max_lat, min_lon, max_lon)``. Coordinates must be finite numbers within
+    the geographic bounds for their axis; booleans are rejected even though ``bool`` is a
+    subclass of ``int``. Construction also rejects an inverted box
     (``min_lat > max_lat`` or ``min_lon > max_lon``) with a ``ValueError``, which is
     what a grouped argument list produces. A degenerate box whose minimum equals its
     maximum on either axis is valid. Boxes spanning the antimeridian, which would need
@@ -53,8 +54,8 @@ class BoundingBox(_BoundingBoxFields):
             between -180 and 180.
 
     Raises:
-        ValueError: If a coordinate is non-finite, outside its geographic bounds, or
-            the box has ``min_lat > max_lat`` or ``min_lon > max_lon``.
+        ValueError: If a coordinate is a boolean, non-finite, outside its geographic
+            bounds, or the box has ``min_lat > max_lat`` or ``min_lon > max_lon``.
     """
 
     __slots__ = ()
@@ -66,6 +67,9 @@ class BoundingBox(_BoundingBoxFields):
             ("max_lat", max_lat, -90.0, 90.0),
             ("max_lon", max_lon, -180.0, 180.0),
         ):
+            # bool is a subclass of int, so it has to be rejected explicitly.
+            if isinstance(value, bool):
+                raise ValueError(f"{field} ({value}) must be a number, not a bool")
             try:
                 is_finite = math.isfinite(value)
             except TypeError:
