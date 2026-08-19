@@ -174,12 +174,12 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.bounding_box</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Bounding box operations for geohashes.</span>
+<span></span><span class="sd">"""Bounding box operations for geohashes.</span>
 
 <span class="sd">This module provides functions for working with geohash bounding boxes,</span>
 <span class="sd">including calculating the bounding box for a geohash and operations</span>
 <span class="sd">related to geospatial regions.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -191,11 +191,11 @@
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="n">_FIELD_ORDER</span> <span class="o">=</span> <span class="s2">&quot;BoundingBox fields are (min_lat, min_lon, max_lat, max_lon)&quot;</span>
+<span class="n">_FIELD_ORDER</span> <span class="o">=</span> <span class="s2">"BoundingBox fields are (min_lat, min_lon, max_lat, max_lon)"</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_BoundingBoxFields</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Field layout for :class:`BoundingBox`; ``typing.NamedTuple`` forbids overriding ``__new__``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Field layout for :class:`BoundingBox`; ``typing.NamedTuple`` forbids overriding ``__new__``."""</span>
 
     <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span>
@@ -203,13 +203,13 @@
     <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span>
 
 
-<span class="n">_BoundingBoxT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_BoundingBoxT&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">_BoundingBoxFields</span><span class="p">)</span>
+<span class="n">_BoundingBoxT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_BoundingBoxT"</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">_BoundingBoxFields</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="BoundingBox">
 <a class="viewcode-back" href="../../api.html#pygeohash.BoundingBox">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BoundingBox</span><span class="p">(</span><span class="n">_BoundingBoxFields</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a geospatial bounding box.</span>
+<span class="w">    </span><span class="sd">"""Named tuple representing a geospatial bounding box.</span>
 
 <span class="sd">    The fields interleave latitude and longitude, so the order is</span>
 <span class="sd">    ``(min_lat, min_lon, max_lat, max_lon)`` rather than the grouped</span>
@@ -233,43 +233,43 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If a coordinate is non-finite, outside its geographic bounds, or</span>
 <span class="sd">            the box has ``min_lat &gt; max_lat`` or ``min_lon &gt; max_lon``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;BoundingBox&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"BoundingBox"</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="ow">in</span> <span class="p">(</span>
-            <span class="p">(</span><span class="s2">&quot;min_lat&quot;</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;min_lon&quot;</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;max_lat&quot;</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;max_lon&quot;</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"min_lat"</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"min_lon"</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"max_lat"</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"max_lon"</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">),</span>
         <span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">is_finite</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
                 <span class="n">is_finite</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">is_finite</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be a finite number&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be a finite number"</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be between </span><span class="si">{</span><span class="n">lower</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">upper</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be between </span><span class="si">{</span><span class="n">lower</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">upper</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">min_lat</span> <span class="o">&gt;</span> <span class="n">max_lat</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min_lat (</span><span class="si">{</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">) must not exceed max_lat (</span><span class="si">{</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">); </span><span class="si">{</span><span class="n">_FIELD_ORDER</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"min_lat (</span><span class="si">{</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">) must not exceed max_lat (</span><span class="si">{</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">); </span><span class="si">{</span><span class="n">_FIELD_ORDER</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">min_lon</span> <span class="o">&gt;</span> <span class="n">max_lon</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;min_lon (</span><span class="si">{</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">) must not exceed max_lon (</span><span class="si">{</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">); &quot;</span>
-                <span class="s2">&quot;boxes spanning the antimeridian are not supported&quot;</span>
+                <span class="sa">f</span><span class="s2">"min_lon (</span><span class="si">{</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">) must not exceed max_lon (</span><span class="si">{</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">); "</span>
+                <span class="s2">"boxes spanning the antimeridian are not supported"</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">)</span>
 
     <span class="c1"># mypy rejects the narrowed self-type against the synthesized namedtuple signature.</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_make</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_BoundingBoxT</span><span class="p">],</span> <span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">_BoundingBoxT</span><span class="p">:</span>  <span class="c1"># type: ignore[override]</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build a box from an iterable of field values, validating the ordering.</span>
+<span class="w">        </span><span class="sd">"""Build a box from an iterable of field values, validating the ordering.</span>
 
 <span class="sd">        Overridden so that ``_make`` and ``_replace`` route through ``__new__`` instead of</span>
 <span class="sd">        ``tuple.__new__``, which would bypass validation.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">iterable</span><span class="p">)</span></div>
 
 
@@ -277,7 +277,7 @@
 <div class="viewcode-block" id="get_bounding_box">
 <a class="viewcode-back" href="../../api.html#pygeohash.get_bounding_box">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_bounding_box</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoundingBox</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the bounding box for a geohash.</span>
+<span class="w">    </span><span class="sd">"""Calculate the bounding box for a geohash.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohash (str): The geohash string to calculate the bounding box for.</span>
@@ -287,14 +287,14 @@
 <span class="sd">            values that define the bounding box of the geohash.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; tuple(round(value, 6) for value in get_bounding_box(&quot;u4pruyd&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; tuple(round(value, 6) for value in get_bounding_box("u4pruyd"))</span>
 <span class="sd">        (57.64801, 10.406799, 57.649384, 10.408173)</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        The precision of the coordinates in the bounding box depends on the length</span>
 <span class="sd">        of the geohash. Longer geohashes result in smaller bounding boxes with more</span>
 <span class="sd">        precise coordinates.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Get the center point and error margins</span>
     <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="n">lat</span> <span class="o">-</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">lon_err</span><span class="p">,</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">+</span> <span class="n">lon_err</span><span class="p">)</span></div>
@@ -304,7 +304,7 @@
 <div class="viewcode-block" id="is_point_in_box">
 <a class="viewcode-back" href="../../api.html#pygeohash.is_point_in_box">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_point_in_box</span><span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a point is within a bounding box.</span>
+<span class="w">    </span><span class="sd">"""Check if a point is within a bounding box.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        lat (float): The latitude of the point to check.</span>
@@ -315,15 +315,15 @@
 <span class="sd">        bool: True if the point is within the bounding box, False otherwise.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; bbox = get_bounding_box(&quot;u4pruyd&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; bbox = get_bounding_box("u4pruyd")</span>
 <span class="sd">        &gt;&gt;&gt; is_point_in_box(57.649, 10.407, bbox)</span>
 <span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; is_point_in_box(40.0, 10.0, bbox)</span>
 <span class="sd">        False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Checking if point (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">) is in box: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Checking if point (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">) is in box: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">&lt;=</span> <span class="n">lat</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="ow">and</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">&lt;=</span> <span class="n">lon</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Point is </span><span class="si">%s</span><span class="s2"> the box&quot;</span><span class="p">,</span> <span class="s2">&quot;inside&quot;</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">&quot;outside&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Point is </span><span class="si">%s</span><span class="s2"> the box"</span><span class="p">,</span> <span class="s2">"inside"</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">"outside"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -331,7 +331,7 @@
 <div class="viewcode-block" id="is_point_in_geohash">
 <a class="viewcode-back" href="../../api.html#pygeohash.is_point_in_geohash">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_point_in_geohash</span><span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a point is within a geohash&#39;s bounding box.</span>
+<span class="w">    </span><span class="sd">"""Check if a point is within a geohash's bounding box.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        lat (float): The latitude of the point to check.</span>
@@ -339,15 +339,15 @@
 <span class="sd">        geohash (str): The geohash to check against.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        bool: True if the point is within the geohash&#39;s bounding box, False otherwise.</span>
+<span class="sd">        bool: True if the point is within the geohash's bounding box, False otherwise.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; is_point_in_geohash(57.649, 10.407, &quot;u4pruyd&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_point_in_geohash(57.649, 10.407, "u4pruyd")</span>
 <span class="sd">        True</span>
-<span class="sd">        &gt;&gt;&gt; is_point_in_geohash(40.0, 10.0, &quot;u4pruyd&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; is_point_in_geohash(40.0, 10.0, "u4pruyd")</span>
 <span class="sd">        False</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Checking if point (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">) is in geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Checking if point (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">) is in geohash: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
     <span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">is_point_in_box</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span></div>
 
@@ -356,7 +356,7 @@
 <div class="viewcode-block" id="do_boxes_intersect">
 <a class="viewcode-back" href="../../api.html#pygeohash.do_boxes_intersect">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">bbox2</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if two bounding boxes intersect.</span>
+<span class="w">    </span><span class="sd">"""Check if two bounding boxes intersect.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        bbox1 (BoundingBox): The first bounding box.</span>
@@ -370,15 +370,15 @@
 <span class="sd">        &gt;&gt;&gt; box2 = BoundingBox(20.0, 30.0, 40.0, 50.0)</span>
 <span class="sd">        &gt;&gt;&gt; do_boxes_intersect(box1, box2)</span>
 <span class="sd">        True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Checking intersection between boxes: </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">bbox1</span><span class="p">,</span> <span class="n">bbox2</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Checking intersection between boxes: </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">bbox1</span><span class="p">,</span> <span class="n">bbox2</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span>
         <span class="n">bbox1</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">&lt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">min_lat</span>
         <span class="ow">or</span> <span class="n">bbox1</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">&gt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">max_lat</span>
         <span class="ow">or</span> <span class="n">bbox1</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">&lt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">min_lon</span>
         <span class="ow">or</span> <span class="n">bbox1</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">&gt;</span> <span class="n">bbox2</span><span class="o">.</span><span class="n">max_lon</span>
     <span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Boxes </span><span class="si">%s</span><span class="s2"> intersect&quot;</span><span class="p">,</span> <span class="s2">&quot;do&quot;</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">&quot;do not&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Boxes </span><span class="si">%s</span><span class="s2"> intersect"</span><span class="p">,</span> <span class="s2">"do"</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">"do not"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -386,7 +386,7 @@
 <div class="viewcode-block" id="geohashes_in_box">
 <a class="viewcode-back" href="../../api.html#pygeohash.geohashes_in_box">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">geohashes_in_box</span><span class="p">(</span><span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find geohashes that intersect with a given bounding box.</span>
+<span class="w">    </span><span class="sd">"""Find geohashes that intersect with a given bounding box.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        bbox (BoundingBox): The bounding box to find geohashes for.</span>
@@ -398,26 +398,26 @@
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; box = BoundingBox(57.64, 10.40, 57.65, 10.41)</span>
 <span class="sd">        &gt;&gt;&gt; sorted(geohashes_in_box(box, precision=5))</span>
-<span class="sd">        [&#39;u4pru&#39;]</span>
+<span class="sd">        ['u4pru']</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        The number of geohashes returned depends on the size of the bounding box</span>
 <span class="sd">        and the precision requested. Higher precision values will result in more</span>
 <span class="sd">        geohashes for the same bounding box.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding geohashes in box </span><span class="si">%s</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding geohashes in box </span><span class="si">%s</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
 
     <span class="c1"># Find a geohash at the center of the bounding box</span>
     <span class="n">center_lat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">center_lon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">center_geohash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Center geohash: </span><span class="si">%s</span><span class="s2"> at (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">center_geohash</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Center geohash: </span><span class="si">%s</span><span class="s2"> at (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">)"</span><span class="p">,</span> <span class="n">center_geohash</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">)</span>
 
     <span class="c1"># Get the size of a geohash at this precision</span>
     <span class="n">center_bbox</span><span class="p">:</span> <span class="n">BoundingBox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">)</span>
     <span class="n">lat_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">-</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">min_lat</span>
     <span class="n">lon_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">-</span> <span class="n">center_bbox</span><span class="o">.</span><span class="n">min_lon</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Geohash size at precision </span><span class="si">%d</span><span class="s2">: lat_step=</span><span class="si">%f</span><span class="s2">, lon_step=</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">lat_step</span><span class="p">,</span> <span class="n">lon_step</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Geohash size at precision </span><span class="si">%d</span><span class="s2">: lat_step=</span><span class="si">%f</span><span class="s2">, lon_step=</span><span class="si">%f</span><span class="s2">"</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">lat_step</span><span class="p">,</span> <span class="n">lon_step</span><span class="p">)</span>
 
     <span class="c1"># Create a set to store unique geohashes</span>
     <span class="n">result</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -428,7 +428,7 @@
     <span class="n">end_lat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="n">lat_step</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">)</span>
     <span class="n">start_lon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">-</span> <span class="n">lon_step</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span><span class="p">)</span>
     <span class="n">end_lon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">+</span> <span class="n">lon_step</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Search area: lat=[</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">], lon=[</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">start_lat</span><span class="p">,</span> <span class="n">end_lat</span><span class="p">,</span> <span class="n">start_lon</span><span class="p">,</span> <span class="n">end_lon</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Search area: lat=[</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">], lon=[</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">]"</span><span class="p">,</span> <span class="n">start_lat</span><span class="p">,</span> <span class="n">end_lat</span><span class="p">,</span> <span class="n">start_lon</span><span class="p">,</span> <span class="n">end_lon</span><span class="p">)</span>
 
     <span class="c1"># Sample points in a grid pattern with spacing based on geohash size</span>
     <span class="c1"># This ensures we get all geohashes that intersect with the bounding box</span>
@@ -440,13 +440,13 @@
             <span class="k">if</span> <span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">gh_bbox</span><span class="p">):</span>
                 <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%d</span><span class="s2"> intersecting geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found </span><span class="si">%d</span><span class="s2"> intersecting geohashes"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_float_range</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function to create a range of float values.</span>
+<span class="w">    </span><span class="sd">"""Helper function to create a range of float values.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        start (float): The start value.</span>
@@ -455,7 +455,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Iterator[float]: An iterator of float values from start to stop with the given step size.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">current</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">start</span>
     <span class="k">while</span> <span class="n">current</span> <span class="o">&lt;=</span> <span class="n">stop</span><span class="p">:</span>
         <span class="k">yield</span> <span class="n">current</span>
@@ -477,6 +477,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../blog_posts.html">Blog Posts</a></li>
 </ul>
 

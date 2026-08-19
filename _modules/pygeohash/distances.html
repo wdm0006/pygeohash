@@ -174,12 +174,12 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.distances</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Distance calculation functionality for geohashes.</span>
+<span></span><span class="sd">"""Distance calculation functionality for geohashes.</span>
 
 <span class="sd">This module provides functions for calculating distances between geohashes,</span>
 <span class="sd">including both approximate distance based on matching characters and</span>
 <span class="sd">precise haversine distance calculation.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -193,7 +193,7 @@
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="n">__author__</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Will McGinnis&quot;</span>
+<span class="n">__author__</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Will McGinnis"</span>
 
 <span class="c1"># the distance between geohashes based on matching characters, in meters.</span>
 <span class="n">_PRECISION</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
@@ -210,17 +210,17 @@
     <span class="mi">10</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="c1"># Earth&#39;s radius in meters</span>
+<span class="c1"># Earth's radius in meters</span>
 <span class="n">_EARTH_RADIUS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6_371_000</span>
 
 
 <div class="viewcode-block" id="geohash_approximate_distance">
 <a class="viewcode-back" href="../../api.html#pygeohash.geohash_approximate_distance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">geohash_approximate_distance</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">check_validity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the approximate great-circle distance between two geohashes.</span>
+<span class="w">    </span><span class="sd">"""Calculate the approximate great-circle distance between two geohashes.</span>
 
 <span class="sd">    This function calculates an approximate distance based on the number of</span>
-<span class="sd">    matching characters at the beginning of the geohashes. It&#39;s faster but</span>
+<span class="sd">    matching characters at the beginning of the geohashes. It's faster but</span>
 <span class="sd">    less accurate than haversine distance.</span>
 
 <span class="sd">    Args:</span>
@@ -236,21 +236,21 @@
 <span class="sd">        ValueError: If check_validity is True and either geohash is invalid.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; geohash_approximate_distance(&quot;u4pruyd&quot;, &quot;u4pruyf&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; geohash_approximate_distance("u4pruyd", "u4pruyf")</span>
 <span class="sd">        610</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-        <span class="s2">&quot;Calculating approximate distance between </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2"> (check_validity=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">,</span> <span class="n">check_validity</span>
+        <span class="s2">"Calculating approximate distance between </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2"> (check_validity=</span><span class="si">%s</span><span class="s2">)"</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">,</span> <span class="n">check_validity</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">check_validity</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_geohash</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid geohash 1: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash 1: </span><span class="si">{</span><span class="n">geohash_1</span><span class="si">}</span><span class="s2"> is not a valid geohash&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Invalid geohash 1: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash 1: </span><span class="si">{</span><span class="n">geohash_1</span><span class="si">}</span><span class="s2"> is not a valid geohash"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_geohash</span><span class="p">(</span><span class="n">geohash_2</span><span class="p">):</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid geohash 2: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash 2: </span><span class="si">{</span><span class="n">geohash_2</span><span class="si">}</span><span class="s2"> is not a valid geohash&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Invalid geohash 2: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash 2: </span><span class="si">{</span><span class="n">geohash_2</span><span class="si">}</span><span class="s2"> is not a valid geohash"</span><span class="p">)</span>
 
         <span class="n">geohash_1</span> <span class="o">=</span> <span class="n">geohash_1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">geohash_2</span> <span class="o">=</span> <span class="n">geohash_2</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -278,7 +278,7 @@
     <span class="n">matching</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">matching</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">_PRECISION</span><span class="p">[</span><span class="n">matching</span><span class="p">]</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%d</span><span class="s2"> matching characters, approximate distance: </span><span class="si">%f</span><span class="s2"> meters&quot;</span><span class="p">,</span> <span class="n">matching</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found </span><span class="si">%d</span><span class="s2"> matching characters, approximate distance: </span><span class="si">%f</span><span class="s2"> meters"</span><span class="p">,</span> <span class="n">matching</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -286,10 +286,10 @@
 <div class="viewcode-block" id="geohash_haversine_distance">
 <a class="viewcode-back" href="../../api.html#pygeohash.geohash_haversine_distance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">geohash_haversine_distance</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the haversine great-circle distance between two geohashes.</span>
+<span class="w">    </span><span class="sd">"""Calculate the haversine great-circle distance between two geohashes.</span>
 
 <span class="sd">    This function provides a more accurate distance calculation using the</span>
-<span class="sd">    haversine formula, which accounts for the Earth&#39;s curvature.</span>
+<span class="sd">    haversine formula, which accounts for the Earth's curvature.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohash_1 (str): The first geohash.</span>
@@ -299,10 +299,10 @@
 <span class="sd">        float: The distance in meters.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; round(geohash_haversine_distance(&quot;u4pruyd&quot;, &quot;u4pruyf&quot;), 1)</span>
+<span class="sd">        &gt;&gt;&gt; round(geohash_haversine_distance("u4pruyd", "u4pruyf"), 1)</span>
 <span class="sd">        152.7</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating haversine distance between </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Calculating haversine distance between </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">geohash_1</span><span class="p">,</span> <span class="n">geohash_2</span><span class="p">)</span>
 
     <span class="n">location_1</span><span class="p">:</span> <span class="n">ExactLatLong</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash_1</span><span class="p">)</span>
     <span class="n">location_2</span><span class="p">:</span> <span class="n">ExactLatLong</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash_2</span><span class="p">)</span>
@@ -311,7 +311,7 @@
     <span class="n">lat_2</span><span class="p">,</span> <span class="n">lon_2</span> <span class="o">=</span> <span class="n">location_2</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">location_2</span><span class="o">.</span><span class="n">longitude</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-        <span class="s2">&quot;Coordinates: (</span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">) and (</span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="s2">"Coordinates: (</span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">) and (</span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">, </span><span class="si">%f</span><span class="s2">±</span><span class="si">%f</span><span class="s2">)"</span><span class="p">,</span>
         <span class="n">lat_1</span><span class="p">,</span>
         <span class="n">location_1</span><span class="o">.</span><span class="n">latitude_error</span><span class="p">,</span>
         <span class="n">lon_1</span><span class="p">,</span>
@@ -334,7 +334,7 @@
     <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">))</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">_EARTH_RADIUS</span> <span class="o">*</span> <span class="n">c</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculated haversine distance: </span><span class="si">%f</span><span class="s2"> meters&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Calculated haversine distance: </span><span class="si">%f</span><span class="s2"> meters"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 </pre></div>
@@ -354,6 +354,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../blog_posts.html">Blog Posts</a></li>
 </ul>
 

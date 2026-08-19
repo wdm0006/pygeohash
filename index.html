@@ -199,11 +199,11 @@
 
 <span class="c1"># Encode coordinates to geohash</span>
 <span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">42.6</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">5.6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>  <span class="c1"># &#39;ezs42e44yx96&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>  <span class="c1"># 'ezs42e44yx96'</span>
 
 <span class="c1"># Decode geohash to coordinates</span>
-<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">&#39;ezs42&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span>  <span class="c1"># &#39;42.6&#39;, &#39;-5.6&#39;</span>
+<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">=</span><span class="s1">'ezs42'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span>  <span class="c1"># '42.6', '-5.6'</span>
 </pre></div>
 </div>
 <p>Visualization:</p>
@@ -216,7 +216,7 @@ pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># Plot a geohash</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">show_label</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">"9q8yyk"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">show_label</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -300,6 +300,16 @@ pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="
 <li class="toctree-l2"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#what-is-measured">What is measured</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#encode">Encode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#decode">Decode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#bounding-box">Bounding box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#environment">Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#reproducing-this-page">Reproducing this page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#caveats">Caveats</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="blog_posts.html#pygeohash-new-release-2-1-0">PyGeoHash New Release - 2.1.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blog_posts.html#using-cursor-for-library-maintenance">Using Cursor for Library Maintenance</a></li>
@@ -334,6 +344,7 @@ pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="
 <li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
 </ul>
 

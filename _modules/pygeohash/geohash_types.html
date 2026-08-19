@@ -174,11 +174,11 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.geohash_types</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Type definitions for the geohash module.</span>
+<span></span><span class="sd">"""Type definitions for the geohash module.</span>
 
 <span class="sd">This module provides type definitions used by both the pure Python and</span>
 <span class="sd">C-extension implementations of the geohash functionality.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -188,12 +188,12 @@
 <div class="viewcode-block" id="LatLong">
 <a class="viewcode-back" href="../../api.html#pygeohash.LatLong">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LatLong</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a latitude/longitude coordinate pair.</span>
+<span class="w">    </span><span class="sd">"""Named tuple representing a latitude/longitude coordinate pair.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        latitude (float): The latitude coordinate in decimal degrees.</span>
 <span class="sd">        longitude (float): The longitude coordinate in decimal degrees.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span></div>
@@ -203,14 +203,14 @@
 <div class="viewcode-block" id="ExactLatLong">
 <a class="viewcode-back" href="../../api.html#pygeohash.ExactLatLong">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExactLatLong</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Named tuple representing a latitude/longitude coordinate pair with error margins.</span>
+<span class="w">    </span><span class="sd">"""Named tuple representing a latitude/longitude coordinate pair with error margins.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        latitude (float): The latitude coordinate in decimal degrees.</span>
 <span class="sd">        longitude (float): The longitude coordinate in decimal degrees.</span>
 <span class="sd">        latitude_error (float): The error margin for latitude in decimal degrees.</span>
 <span class="sd">        longitude_error (float): The error margin for longitude in decimal degrees.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span>
@@ -223,9 +223,9 @@
 <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;LatLong&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ExactLatLong&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GeohashPrecision&quot;</span><span class="p">,</span>
+    <span class="s2">"LatLong"</span><span class="p">,</span>
+    <span class="s2">"ExactLatLong"</span><span class="p">,</span>
+    <span class="s2">"GeohashPrecision"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 
@@ -244,6 +244,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../blog_posts.html">Blog Posts</a></li>
 </ul>
 

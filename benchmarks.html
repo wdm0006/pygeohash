@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z43R9PWW0B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z43R9PWW0B');
+    </script>
+    
+    <title>Benchmarks &#8212; pygeohash 3.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
+    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=501c8ac3" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
+    <script src="_static/documentation_options.js?v=b0e360d0"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Blog Posts" href="blog_posts.html" />
+    <link rel="prev" title="API Reference" href="api.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+
+
+
+<meta name="description" content="Benchmarks - pygeohash documentation">
+
+
+
+
+
+
+
+
+
+<meta property="og:title" content="Benchmarks">
+<meta property="og:description" content="Benchmarks - pygeohash documentation">
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://wdm0006.github.io/pygeohash/benchmarks.html">
+
+
+<meta property="og:site_name" content="pygeohash">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Benchmarks">
+<meta name="twitter:description" content="Benchmarks - pygeohash documentation">
+
+<meta name="twitter:site" content="@willmcginniser">
+
+
+
+
+
+<link rel="canonical" href="https://wdm0006.github.io/pygeohash/benchmarks.html">
+
+
+ 
+
+  </head><body>
+<header class="header">
+  <div class="header__inner">
+    
+    <a href="https://mcginniscommawill.com" class="header__logo">
+      McGinnis, Will
+    </a>
+
+    
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+
+    
+    <nav class="nav" role="navigation">
+      
+      
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/guides/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Guides
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/topics/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Topics
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/posts/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Blog
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/about/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            About
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/coffee/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Free Coffee
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/oss/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            OSS
+          </a>
+        
+      
+
+      
+      
+      <a href="index.html" class="nav__link nav__link--active">
+        Docs
+      </a>
+      
+    </nav>
+  </div>
+</header>
+
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="breadcrumbs__inner">
+    
+    <a href="https://mcginniscommawill.com">Home</a>
+    <span class="breadcrumbs__separator">/</span>
+    
+    <a href="index.html">Docs</a>
+    
+    
+    <span class="breadcrumbs__separator">/</span>
+    <span>Benchmarks</span>
+    
+  </div>
+</nav>
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="benchmarks">
+<h1>Benchmarks<a class="headerlink" href="#benchmarks" title="Link to this heading">¶</a></h1>
+<p>How does PyGeoHash compare to the other geohash libraries on PyPI? This page
+publishes the numbers rather than leaving the question open. It is generated by
+<code class="docutils literal notranslate"><span class="pre">scripts/run_comparison_benchmark.py</span></code> from the suite in
+<code class="docutils literal notranslate"><span class="pre">tests/test_benchmark_comparison.py</span></code>, which measures every library on identical
+work.</p>
+<section id="what-is-measured">
+<h2>What is measured<a class="headerlink" href="#what-is-measured" title="Link to this heading">¶</a></h2>
+<p>Every library receives the same inputs: latitude <code class="docutils literal notranslate"><span class="pre">42.6</span></code>, longitude <code class="docutils literal notranslate"><span class="pre">-5.6</span></code> and
+precision <code class="docutils literal notranslate"><span class="pre">9</span></code> for encoding, and the geohash <code class="docutils literal notranslate"><span class="pre">ezs42e44y</span></code> for decoding and
+bounding-box lookups. The encode cases assert that each library returns the same
+standard geohash, so the comparison is genuinely like for like.</p>
+<p>Two libraries offer no bounding-box helper (<code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> and
+<code class="docutils literal notranslate"><span class="pre">geohash-tools</span></code>), so they appear only in the encode and decode tables. Two
+others are excluded from the suite entirely: <code class="docutils literal notranslate"><span class="pre">geohash-hilbert</span></code> computes a
+Hilbert-curve variant rather than a standard geohash, and <code class="docutils literal notranslate"><span class="pre">mzgeohash</span></code> takes no
+precision parameter, so equal work cannot be guaranteed.</p>
+<p>The whole suite was run 3 times. Each library’s headline figure is the
+median of its per-run medians, and the range column gives the lowest and highest
+median it produced, so the run-to-run movement behind every number is visible.
+Ops/sec is derived from the headline median, and the final column is each
+library’s median divided by pygeohash’s.</p>
+</section>
+<section id="encode">
+<h2>Encode<a class="headerlink" href="#encode" title="Link to this heading">¶</a></h2>
+<p>Encode <code class="docutils literal notranslate"><span class="pre">(42.6,</span> <span class="pre">-5.6)</span></code> to a precision-9 geohash.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 14.0%" />
+<col style="width: 20.0%" />
+<col style="width: 14.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Median (ns)</p></th>
+<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Ops/sec</p></th>
+<th class="head"><p>vs pygeohash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>geohashr</p></td>
+<td><p>Rust extension</p></td>
+<td><p>125</p></td>
+<td><p>84 - 166</p></td>
+<td><p>8,005,531</p></td>
+<td><p>0.50x</p></td>
+</tr>
+<tr class="row-odd"><td><p>pygeohash-fast</p></td>
+<td><p>Rust extension</p></td>
+<td><p>166</p></td>
+<td><p>125 - 166</p></td>
+<td><p>6,023,797</p></td>
+<td><p>0.66x</p></td>
+</tr>
+<tr class="row-even"><td><p>python-geohash</p></td>
+<td><p>C++ extension</p></td>
+<td><p>208</p></td>
+<td><p>208 - 209</p></td>
+<td><p>4,806,902</p></td>
+<td><p>0.83x</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>250</p></td>
+<td><p>250 - 584</p></td>
+<td><p>3,999,038</p></td>
+<td><p>1.00x</p></td>
+</tr>
+<tr class="row-even"><td><p>libgeohash</p></td>
+<td><p>pure Python</p></td>
+<td><p>2,709</p></td>
+<td><p>2,709 - 2,709</p></td>
+<td><p>369,142</p></td>
+<td><p>10.83x</p></td>
+</tr>
+<tr class="row-odd"><td><p>geohash-tools</p></td>
+<td><p>pure Python</p></td>
+<td><p>3,792</p></td>
+<td><p>3,792 - 3,833</p></td>
+<td><p>263,713</p></td>
+<td><p>15.16x</p></td>
+</tr>
+<tr class="row-even"><td><p>geolib</p></td>
+<td><p>pure Python</p></td>
+<td><p>10,584</p></td>
+<td><p>10,584 - 10,625</p></td>
+<td><p>94,482</p></td>
+<td><p>42.33x</p></td>
+</tr>
+</tbody>
+</table>
+<p>On this machine pygeohash takes 1.20x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 10.8x
+faster than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> are faster still.</p>
+<p>The repeated runs did not separate <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> and <code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code>. Their ranges of
+medians overlap, so their relative order in the table is within measurement noise and
+swaps between runs: read them as tied.</p>
+</section>
+<section id="decode">
+<h2>Decode<a class="headerlink" href="#decode" title="Link to this heading">¶</a></h2>
+<p>Decode <code class="docutils literal notranslate"><span class="pre">ezs42e44y</span></code> back to coordinates.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 14.0%" />
+<col style="width: 20.0%" />
+<col style="width: 14.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Median (ns)</p></th>
+<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Ops/sec</p></th>
+<th class="head"><p>vs pygeohash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>geohashr</p></td>
+<td><p>Rust extension</p></td>
+<td><p>80</p></td>
+<td><p>80 - 81</p></td>
+<td><p>12,435,484</p></td>
+<td><p>0.24x</p></td>
+</tr>
+<tr class="row-odd"><td><p>pygeohash-fast</p></td>
+<td><p>Rust extension</p></td>
+<td><p>167</p></td>
+<td><p>166 - 167</p></td>
+<td><p>5,990,191</p></td>
+<td><p>0.50x</p></td>
+</tr>
+<tr class="row-even"><td><p>python-geohash</p></td>
+<td><p>C++ extension</p></td>
+<td><p>250</p></td>
+<td><p>250 - 250</p></td>
+<td><p>4,000,901</p></td>
+<td><p>0.75x</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>333</p></td>
+<td><p>333 - 334</p></td>
+<td><p>3,002,424</p></td>
+<td><p>1.00x</p></td>
+</tr>
+<tr class="row-even"><td><p>libgeohash</p></td>
+<td><p>pure Python</p></td>
+<td><p>2,625</p></td>
+<td><p>2,625 - 2,667</p></td>
+<td><p>380,962</p></td>
+<td><p>7.88x</p></td>
+</tr>
+<tr class="row-odd"><td><p>geohash-tools</p></td>
+<td><p>pure Python</p></td>
+<td><p>3,375</p></td>
+<td><p>3,334 - 3,375</p></td>
+<td><p>296,297</p></td>
+<td><p>10.13x</p></td>
+</tr>
+<tr class="row-even"><td><p>geolib</p></td>
+<td><p>pure Python</p></td>
+<td><p>58,208</p></td>
+<td><p>56,916 - 59,313</p></td>
+<td><p>17,180</p></td>
+<td><p>174.77x</p></td>
+</tr>
+</tbody>
+</table>
+<p>On this machine pygeohash takes 1.33x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 7.9x
+faster than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> are faster still.</p>
+</section>
+<section id="bounding-box">
+<h2>Bounding box<a class="headerlink" href="#bounding-box" title="Link to this heading">¶</a></h2>
+<p>Look up the bounding box of the <code class="docutils literal notranslate"><span class="pre">ezs42e44y</span></code> cell.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 14.0%" />
+<col style="width: 20.0%" />
+<col style="width: 14.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Median (ns)</p></th>
+<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Ops/sec</p></th>
+<th class="head"><p>vs pygeohash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>geohashr</p></td>
+<td><p>Rust extension</p></td>
+<td><p>104</p></td>
+<td><p>104 - 104</p></td>
+<td><p>9,619,080</p></td>
+<td><p>0.15x</p></td>
+</tr>
+<tr class="row-odd"><td><p>python-geohash</p></td>
+<td><p>C++ extension</p></td>
+<td><p>250</p></td>
+<td><p>250 - 291</p></td>
+<td><p>3,999,038</p></td>
+<td><p>0.35x</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>709</p></td>
+<td><p>709 - 750</p></td>
+<td><p>1,410,498</p></td>
+<td><p>1.00x</p></td>
+</tr>
+<tr class="row-odd"><td><p>libgeohash</p></td>
+<td><p>pure Python</p></td>
+<td><p>2,750</p></td>
+<td><p>2,750 - 2,750</p></td>
+<td><p>363,626</p></td>
+<td><p>3.88x</p></td>
+</tr>
+<tr class="row-even"><td><p>geolib</p></td>
+<td><p>pure Python</p></td>
+<td><p>43,292</p></td>
+<td><p>42,959 - 44,000</p></td>
+<td><p>23,099</p></td>
+<td><p>61.06x</p></td>
+</tr>
+</tbody>
+</table>
+<p>On this machine pygeohash takes 2.84x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 3.9x
+faster than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> is faster
+still.</p>
+</section>
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">¶</a></h2>
+<p>These figures come from repeated runs on one machine. They are not an average
+across hardware, and they should be read as an ordering rather than as
+absolute throughput you can expect elsewhere.</p>
+<ul class="simple">
+<li><p><strong>Date of run</strong>: 2026-08-14 (3 repeats of the suite)</p></li>
+<li><p><strong>Machine</strong>: Apple M4 (arm64, 10 cores)</p></li>
+<li><p><strong>Operating system</strong>: Darwin 25.2.0</p></li>
+<li><p><strong>Python</strong>: CPython 3.12.11</p></li>
+<li><p><strong>pytest-benchmark</strong>: 5.2.3</p></li>
+</ul>
+<p>Installed versions of every library measured:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">geohash-tools</span></code> 0.2.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geohashr</span></code> 1.6.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geolib</span></code> 1.0.7</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libgeohash</span></code> 0.1.1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> 3.4.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> 0.3.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> 0.9.2</p></li>
+</ul>
+</section>
+<section id="reproducing-this-page">
+<h2>Reproducing this page<a class="headerlink" href="#reproducing-this-page" title="Link to this heading">¶</a></h2>
+<p>From a checkout, with the <code class="docutils literal notranslate"><span class="pre">dev</span></code> and <code class="docutils literal notranslate"><span class="pre">benchmark</span></code> extras installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[dev,benchmark]"</span>
+python<span class="w"> </span>scripts/run_comparison_benchmark.py
+</pre></div>
+</div>
+<p>The script runs the suite several times, reads the pytest-benchmark JSON
+reports, and rewrites this page with the numbers and the environment it
+observed. Rerun it on your own machine before quoting any of these figures as
+your own.</p>
+</section>
+<section id="caveats">
+<h2>Caveats<a class="headerlink" href="#caveats" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Every figure is a median from one machine; a benchmark is a draw from a
+noisy process, not a constant.</p></li>
+<li><p>The fastest entries take well under a microsecond, which is only tens of
+ticks of the platform timer, so their medians are coarsely quantized. Where
+two adjacent entries were not separated by the measurement, the note under
+the table says so and they should be read as tied.</p></li>
+<li><p>Only the three operations above are measured. A library that is slower here
+may be faster on work this suite does not cover.</p></li>
+<li><p>Install cost is not measured. <code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> ships pre-built wheels and needs
+no compiler at install time, which is what motivated the comparison in the
+first place, but that is a packaging property rather than a speed result.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-measured">What is measured</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#encode">Encode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#decode">Decode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bounding-box">Bounding box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment">Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reproducing-this-page">Reproducing this page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caveats">Caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer class="footer">
+  <div class="footer__inner">
+    
+    
+    <div class="footer__links">
+      
+        <a href="https://github.com/wdm0006" class="footer__link" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+      
+        <a href="https://www.linkedin.com/in/wmcginnis/" class="footer__link" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+      
+        <a href="https://x.com/willmcginniser" class="footer__link" target="_blank" rel="noopener noreferrer">
+          Twitter
+        </a>
+      
+    </div>
+    
+
+    
+    <p class="footer__copy">
+      
+        &copy; 2016, Will McGinnis
+      
+    </p>
+  </div>
+</footer>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', function() {
+        nav.classList.toggle('is-open');
+        const isOpen = nav.classList.contains('is-open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  });
+</script>
+
+  </body>
+</html>

@@ -182,25 +182,25 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">LatLong</span>
 
 <span class="n">location</span><span class="p">:</span> <span class="n">LatLong</span> <span class="o">=</span> <span class="n">LatLong</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">37.7749</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">122.4194</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude: </span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">, Longitude: </span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Latitude: </span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">, Longitude: </span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">ExactLatLong</span></code></dt><dd><p>A named tuple that includes error margins for latitude and longitude:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExactLatLong</span><span class="p">,</span> <span class="n">decode_exactly</span>
 
-<span class="n">exact_location</span><span class="p">:</span> <span class="n">ExactLatLong</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lat: </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">latitude_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lon: </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">longitude_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">exact_location</span><span class="p">:</span> <span class="n">ExactLatLong</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="s2">"9q9hwg"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Lat: </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">latitude_error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Lon: </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">exact_location</span><span class="o">.</span><span class="n">longitude_error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">BoundingBox</span></code></dt><dd><p>A named tuple representing a geographical bounding box:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">get_bounding_box</span>
 
-<span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Min Lat: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">, Max Lat: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Min Lon: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">, Max Lon: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">"9q9hwg"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Min Lat: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">, Max Lat: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Min Lon: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">, Max Lon: </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -233,19 +233,19 @@
 <span class="p">)</span>
 
 <span class="c1"># Using check functions (returns bool)</span>
-<span class="k">if</span> <span class="n">is_valid_geohash</span><span class="p">(</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Valid geohash!&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">is_valid_geohash</span><span class="p">(</span><span class="s2">"9q9hwg"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Valid geohash!"</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">is_valid_latitude</span><span class="p">(</span><span class="mf">37.7749</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_valid_longitude</span><span class="p">(</span><span class="o">-</span><span class="mf">122.4194</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Valid coordinates!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Valid coordinates!"</span><span class="p">)</span>
 
 <span class="c1"># Using assertion functions (returns validated type)</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">geohash</span><span class="p">:</span> <span class="n">Geohash</span> <span class="o">=</span> <span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">)</span>
+    <span class="n">geohash</span><span class="p">:</span> <span class="n">Geohash</span> <span class="o">=</span> <span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">"9q9hwg"</span><span class="p">)</span>
     <span class="n">lat</span><span class="p">:</span> <span class="n">Latitude</span> <span class="o">=</span> <span class="n">assert_valid_latitude</span><span class="p">(</span><span class="mf">37.7749</span><span class="p">)</span>
     <span class="n">lon</span><span class="p">:</span> <span class="n">Longitude</span> <span class="o">=</span> <span class="n">assert_valid_longitude</span><span class="p">(</span><span class="o">-</span><span class="mf">122.4194</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Validation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -305,14 +305,14 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">safe_process_location</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="c1"># Check without raising for coordinates</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_latitude</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">is_valid_longitude</span><span class="p">(</span><span class="n">lon</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Invalid coordinates (</span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Warning: Invalid coordinates (</span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># Assert for geohash (will raise if invalid)</span>
         <span class="n">validated_geohash</span> <span class="o">=</span> <span class="n">assert_valid_geohash</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="c1"># Process validated data</span>
@@ -340,9 +340,9 @@
     <span class="n">valid_lons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">lons</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="n">lons</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">valid_lats</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid latitudes found&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid latitudes found"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">valid_lons</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid longitudes found&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid longitudes found"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">lats</span><span class="p">,</span> <span class="n">lons</span>
 
@@ -360,9 +360,9 @@
 <li><p>Invalid geohash format:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># These will raise ValueError</span>
-<span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>  <span class="c1"># Empty string</span>
-<span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">)</span>  <span class="c1"># Invalid characters</span>
-<span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">&quot;9q9hwg&quot;</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Too long (&gt;12 chars)</span>
+<span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>  <span class="c1"># Empty string</span>
+<span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">"!"</span><span class="p">)</span>  <span class="c1"># Invalid characters</span>
+<span class="n">assert_valid_geohash</span><span class="p">(</span><span class="s2">"9q9hwg"</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Too long (&gt;12 chars)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -391,15 +391,15 @@
 <p>A single geohash string technically satisfies this type but iterates as one
 geohash per character, so the statistics functions reject it with a
 <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. Wrap a single geohash in a collection:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">([</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">])</span>  <span class="c1"># correct</span>
-<span class="n">mean</span><span class="p">(</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">)</span>  <span class="c1"># raises TypeError</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">([</span><span class="s2">"9q9hwg"</span><span class="p">])</span>  <span class="c1"># correct</span>
+<span class="n">mean</span><span class="p">(</span><span class="s2">"9q9hwg"</span><span class="p">)</span>  <span class="c1"># raises TypeError</span>
 </pre></div>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">GeohashList</span></code></dt><dd><p>A concrete list of geohash strings:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeohashList</span>
 
-<span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">,</span> <span class="s2">&quot;9q9hwy&quot;</span><span class="p">,</span> <span class="s2">&quot;9q9hwv&quot;</span><span class="p">]</span>
+<span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"9q9hwg"</span><span class="p">,</span> <span class="s2">"9q9hwy"</span><span class="p">,</span> <span class="s2">"9q9hwv"</span><span class="p">]</span>
 </pre></div>
 </div>
 </dd>
@@ -442,7 +442,7 @@ geohash per character, so the statistics functions reject it with a
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeohashSeries</span><span class="p">,</span> <span class="n">LatitudeSeries</span><span class="p">,</span> <span class="n">LongitudeSeries</span>
 
-<span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashSeries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">,</span> <span class="s2">&quot;9q9hwy&quot;</span><span class="p">,</span> <span class="s2">&quot;9q9hwv&quot;</span><span class="p">])</span>
+<span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashSeries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"9q9hwg"</span><span class="p">,</span> <span class="s2">"9q9hwy"</span><span class="p">,</span> <span class="s2">"9q9hwv"</span><span class="p">])</span>
 <span class="n">latitudes</span><span class="p">:</span> <span class="n">LatitudeSeries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">37.7749</span><span class="p">,</span> <span class="mf">37.7750</span><span class="p">,</span> <span class="mf">37.7751</span><span class="p">])</span>
 <span class="n">longitudes</span><span class="p">:</span> <span class="n">LongitudeSeries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="o">-</span><span class="mf">122.4194</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4195</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4196</span><span class="p">])</span>
 </pre></div>
@@ -453,9 +453,9 @@ geohash per character, so the statistics functions reject it with a
 
 <span class="c1"># Create a DataFrame with typed columns</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">GeohashDataFrame</span><span class="p">({</span>
-    <span class="s1">&#39;geohash&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;9q9hwg&quot;</span><span class="p">,</span> <span class="s2">&quot;9q9hwy&quot;</span><span class="p">,</span> <span class="s2">&quot;9q9hwv&quot;</span><span class="p">],</span>
-    <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">37.7749</span><span class="p">,</span> <span class="mf">37.7750</span><span class="p">,</span> <span class="mf">37.7751</span><span class="p">],</span>
-    <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">122.4194</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4195</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4196</span><span class="p">]</span>
+    <span class="s1">'geohash'</span><span class="p">:</span> <span class="p">[</span><span class="s2">"9q9hwg"</span><span class="p">,</span> <span class="s2">"9q9hwy"</span><span class="p">,</span> <span class="s2">"9q9hwv"</span><span class="p">],</span>
+    <span class="s1">'latitude'</span><span class="p">:</span> <span class="p">[</span><span class="mf">37.7749</span><span class="p">,</span> <span class="mf">37.7750</span><span class="p">,</span> <span class="mf">37.7751</span><span class="p">],</span>
+    <span class="s1">'longitude'</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">122.4194</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4195</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4196</span><span class="p">]</span>
 <span class="p">})</span>
 
 <span class="c1"># Type checking will ensure these columns exist and have correct types</span>
@@ -475,7 +475,7 @@ geohash per character, so the statistics functions reject it with a
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">get_adjacent</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_neighbor</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dir</span><span class="p">:</span> <span class="n">Direction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>  <span class="c1"># dir must be &quot;right&quot;, &quot;left&quot;, &quot;top&quot;, or &quot;bottom&quot;</span>
+    <span class="k">return</span> <span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>  <span class="c1"># dir must be "right", "left", "top", or "bottom"</span>
 </pre></div>
 </div>
 </dd>
@@ -516,10 +516,10 @@ geohash per character, so the statistics functions reject it with a
     <span class="n">lons</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">LongitudeArray</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
     <span class="n">precision</span><span class="p">:</span> <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeohashCollection</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process coordinates and return geohashes.</span>
+<span class="w">    </span><span class="sd">"""Process coordinates and return geohashes.</span>
 
 <span class="sd">    Works with both NumPy arrays and Python lists.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span> <span class="k">for</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lats</span><span class="p">,</span> <span class="n">lons</span><span class="p">)]</span>
 </pre></div>
 </div>
@@ -553,6 +553,7 @@ geohash per character, so the statistics functions reject it with a
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
 </ul>
 

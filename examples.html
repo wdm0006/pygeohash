@@ -181,28 +181,28 @@
 
 <span class="c1"># Define some locations</span>
 <span class="n">locations</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;San Francisco&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">37.7749</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">),</span>
-    <span class="s2">&quot;New York&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span><span class="p">),</span>
-    <span class="s2">&quot;Tokyo&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">35.6762</span><span class="p">,</span> <span class="mf">139.6503</span><span class="p">),</span>
-    <span class="s2">&quot;Sydney&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">33.8688</span><span class="p">,</span> <span class="mf">151.2093</span><span class="p">),</span>
-    <span class="s2">&quot;Rio de Janeiro&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">22.9068</span><span class="p">,</span> <span class="o">-</span><span class="mf">43.1729</span><span class="p">)</span>
+    <span class="s2">"San Francisco"</span><span class="p">:</span> <span class="p">(</span><span class="mf">37.7749</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">),</span>
+    <span class="s2">"New York"</span><span class="p">:</span> <span class="p">(</span><span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span><span class="p">),</span>
+    <span class="s2">"Tokyo"</span><span class="p">:</span> <span class="p">(</span><span class="mf">35.6762</span><span class="p">,</span> <span class="mf">139.6503</span><span class="p">),</span>
+    <span class="s2">"Sydney"</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">33.8688</span><span class="p">,</span> <span class="mf">151.2093</span><span class="p">),</span>
+    <span class="s2">"Rio de Janeiro"</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">22.9068</span><span class="p">,</span> <span class="o">-</span><span class="mf">43.1729</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1"># Encode each location with different precision levels</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span> <span class="ow">in</span> <span class="n">locations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]:</span>
         <span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Decode a geohash back to coordinates</span>
-<span class="n">geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8yyk8yuv&quot;</span>  <span class="c1"># San Francisco with precision 10</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="s2">"9q8yyk8yuv"</span>  <span class="c1"># San Francisco with precision 10</span>
 <span class="n">location</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Decoded </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Decoded </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
 <span class="c1"># Get exact decoding with error margins</span>
 <span class="n">exact</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error margins: ±</span><span class="si">{</span><span class="n">exact</span><span class="o">.</span><span class="n">latitude_error</span><span class="si">}</span><span class="s2">° latitude, ±</span><span class="si">{</span><span class="n">exact</span><span class="o">.</span><span class="n">longitude_error</span><span class="si">}</span><span class="s2">° longitude&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error margins: ±</span><span class="si">{</span><span class="n">exact</span><span class="o">.</span><span class="n">latitude_error</span><span class="si">}</span><span class="s2">° latitude, ±</span><span class="si">{</span><span class="n">exact</span><span class="o">.</span><span class="n">longitude_error</span><span class="si">}</span><span class="s2">° longitude"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -212,18 +212,18 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
 <span class="c1"># Get adjacent geohashes in all four directions</span>
-<span class="n">geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8yyk&quot;</span>  <span class="c1"># San Francisco</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="s2">"9q8yyk"</span>  <span class="c1"># San Francisco</span>
 
-<span class="n">adjacent_top</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">)</span>
-<span class="n">adjacent_right</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
-<span class="n">adjacent_bottom</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
-<span class="n">adjacent_left</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">adjacent_top</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">'top'</span><span class="p">)</span>
+<span class="n">adjacent_right</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">)</span>
+<span class="n">adjacent_bottom</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">'bottom'</span><span class="p">)</span>
+<span class="n">adjacent_left</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s1">'left'</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Top: </span><span class="si">{</span><span class="n">adjacent_top</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Right: </span><span class="si">{</span><span class="n">adjacent_right</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bottom: </span><span class="si">{</span><span class="n">adjacent_bottom</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Left: </span><span class="si">{</span><span class="n">adjacent_left</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Original: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Top: </span><span class="si">{</span><span class="n">adjacent_top</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Right: </span><span class="si">{</span><span class="n">adjacent_right</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bottom: </span><span class="si">{</span><span class="n">adjacent_bottom</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Left: </span><span class="si">{</span><span class="n">adjacent_left</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Create a simple 3x3 grid of geohashes</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">create_simple_grid</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">):</span>
@@ -235,26 +235,26 @@
 
     <span class="c1"># Fill in the grid</span>
     <span class="c1"># Top row</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'top'</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'left'</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'right'</span><span class="p">)</span>
 
     <span class="c1"># Middle row</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'left'</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">)</span>
 
     <span class="c1"># Bottom row</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'bottom'</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'left'</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'right'</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">grid</span>
 
 <span class="c1"># Create and print the grid</span>
 <span class="n">grid</span> <span class="o">=</span> <span class="n">create_simple_grid</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Geohash Grid:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Geohash Grid:"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">grid</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -265,28 +265,28 @@
 
 <span class="c1"># Define some locations with their geohashes</span>
 <span class="n">locations</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;San Francisco&quot;</span><span class="p">:</span> <span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Los Angeles&quot;</span><span class="p">:</span> <span class="s2">&quot;9q5cd&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;New York&quot;</span><span class="p">:</span> <span class="s2">&quot;dr5reg&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;London&quot;</span><span class="p">:</span> <span class="s2">&quot;gcpvj&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Tokyo&quot;</span><span class="p">:</span> <span class="s2">&quot;xn76ur&quot;</span>
+    <span class="s2">"San Francisco"</span><span class="p">:</span> <span class="s2">"9q8yyk"</span><span class="p">,</span>
+    <span class="s2">"Los Angeles"</span><span class="p">:</span> <span class="s2">"9q5cd"</span><span class="p">,</span>
+    <span class="s2">"New York"</span><span class="p">:</span> <span class="s2">"dr5reg"</span><span class="p">,</span>
+    <span class="s2">"London"</span><span class="p">:</span> <span class="s2">"gcpvj"</span><span class="p">,</span>
+    <span class="s2">"Tokyo"</span><span class="p">:</span> <span class="s2">"xn76ur"</span>
 <span class="p">}</span>
 
 <span class="c1"># Calculate distances between San Francisco and other cities</span>
-<span class="n">sf</span> <span class="o">=</span> <span class="n">locations</span><span class="p">[</span><span class="s2">&quot;San Francisco&quot;</span><span class="p">]</span>
+<span class="n">sf</span> <span class="o">=</span> <span class="n">locations</span><span class="p">[</span><span class="s2">"San Francisco"</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distances from San Francisco:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Distances from San Francisco:"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">geohash</span> <span class="ow">in</span> <span class="n">locations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">city</span> <span class="o">!=</span> <span class="s2">&quot;San Francisco&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">city</span> <span class="o">!=</span> <span class="s2">"San Francisco"</span><span class="p">:</span>
         <span class="c1"># Approximate distance (based on matching characters)</span>
         <span class="n">approx_distance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohash_approximate_distance</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
 
         <span class="c1"># More accurate distance (using Haversine formula)</span>
         <span class="n">haversine_distance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Approximate: </span><span class="si">{</span><span class="n">approx_distance</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Haversine: </span><span class="si">{</span><span class="n">haversine_distance</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Approximate: </span><span class="si">{</span><span class="n">approx_distance</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Haversine: </span><span class="si">{</span><span class="n">haversine_distance</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -311,13 +311,13 @@
 <span class="n">ny_cluster</span> <span class="o">=</span> <span class="n">generate_cluster</span><span class="p">(</span><span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">spread</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
 
 <span class="c1"># Analyze San Francisco cluster</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;San Francisco Cluster Analysis:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of points: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"San Francisco Cluster Analysis:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of points: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Find the mean position</span>
 <span class="n">mean_position</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span>
 <span class="n">mean_coords</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">mean_position</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean position: </span><span class="si">{</span><span class="n">mean_position</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">mean_coords</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">mean_coords</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mean position: </span><span class="si">{</span><span class="n">mean_position</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">mean_coords</span><span class="o">.</span><span class="n">latitude</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">mean_coords</span><span class="o">.</span><span class="n">longitude</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
 <span class="c1"># Find cardinal extremes</span>
 <span class="n">north</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">northern</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span>
@@ -325,24 +325,24 @@
 <span class="n">east</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">eastern</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span>
 <span class="n">west</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">western</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Northernmost: </span><span class="si">{</span><span class="n">north</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Southernmost: </span><span class="si">{</span><span class="n">south</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Easternmost: </span><span class="si">{</span><span class="n">east</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Westernmost: </span><span class="si">{</span><span class="n">west</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Northernmost: </span><span class="si">{</span><span class="n">north</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Southernmost: </span><span class="si">{</span><span class="n">south</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Easternmost: </span><span class="si">{</span><span class="n">east</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Westernmost: </span><span class="si">{</span><span class="n">west</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Calculate statistical measures</span>
 <span class="n">variance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">variance</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span>
 <span class="n">std_dev</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variance: </span><span class="si">{</span><span class="n">variance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m²&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard deviation: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variance: </span><span class="si">{</span><span class="n">variance</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m²"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Standard deviation: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m"</span><span class="p">)</span>
 
 <span class="c1"># Compare the two clusters</span>
 <span class="n">sf_mean</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sf_cluster</span><span class="p">)</span>
 <span class="n">ny_mean</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ny_cluster</span><span class="p">)</span>
 
 <span class="n">distance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="n">sf_mean</span><span class="p">,</span> <span class="n">ny_mean</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Distance between cluster means: </span><span class="si">{</span><span class="n">distance</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Distance between cluster means: </span><span class="si">{</span><span class="n">distance</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -353,46 +353,46 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">SimpleGeohashIndex</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple geospatial index using geohashes.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""A simple geospatial index using geohashes."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">precision</span> <span class="o">=</span> <span class="n">precision</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">add_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a point to the index.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Add a point to the index."""</span>
         <span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">precision</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">geohash</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
-            <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span>
-            <span class="s1">&#39;lng&#39;</span><span class="p">:</span> <span class="n">lng</span><span class="p">,</span>
-            <span class="s1">&#39;geohash&#39;</span><span class="p">:</span> <span class="n">geohash</span><span class="p">,</span>
-            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span> <span class="ow">or</span> <span class="p">{}</span>
+            <span class="s1">'id'</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="s1">'lat'</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span>
+            <span class="s1">'lng'</span><span class="p">:</span> <span class="n">lng</span><span class="p">,</span>
+            <span class="s1">'geohash'</span><span class="p">:</span> <span class="n">geohash</span><span class="p">,</span>
+            <span class="s1">'data'</span><span class="p">:</span> <span class="n">data</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="p">})</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">search_nearby</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">radius_km</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Search for points near the given coordinates.</span>
 <span class="sd">        This is a simplified approach that checks adjacent cells.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Get the geohash of the search point</span>
         <span class="n">center_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">precision</span><span class="p">)</span>
 
         <span class="c1"># Get adjacent geohashes</span>
         <span class="n">adjacent</span> <span class="o">=</span> <span class="p">[</span><span class="n">center_geohash</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'top'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">,</span> <span class="s1">'bottom'</span><span class="p">,</span> <span class="s1">'left'</span><span class="p">]:</span>
             <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="n">direction</span><span class="p">))</span>
 
         <span class="c1"># Add diagonal adjacents</span>
-        <span class="n">top</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">)</span>
-        <span class="n">right</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
-        <span class="n">bottom</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
-        <span class="n">left</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'top'</span><span class="p">)</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">)</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'bottom'</span><span class="p">)</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">,</span> <span class="s1">'left'</span><span class="p">)</span>
 
-        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">))</span>     <span class="c1"># top-right</span>
-        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">))</span>  <span class="c1"># bottom-right</span>
-        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">))</span>   <span class="c1"># bottom-left</span>
-        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="s1">&#39;top&#39;</span><span class="p">))</span>      <span class="c1"># top-left</span>
+        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">))</span>     <span class="c1"># top-right</span>
+        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="s1">'bottom'</span><span class="p">))</span>  <span class="c1"># bottom-right</span>
+        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="s1">'left'</span><span class="p">))</span>   <span class="c1"># bottom-left</span>
+        <span class="n">adjacent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="s1">'top'</span><span class="p">))</span>      <span class="c1"># top-left</span>
 
         <span class="c1"># Collect all points in the search geohashes</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
@@ -401,17 +401,17 @@
                 <span class="c1"># Calculate actual distance</span>
                 <span class="n">distance</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohash_haversine_distance</span><span class="p">(</span>
                     <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">precision</span><span class="p">),</span>
-                    <span class="n">point</span><span class="p">[</span><span class="s1">&#39;geohash&#39;</span><span class="p">]</span>
+                    <span class="n">point</span><span class="p">[</span><span class="s1">'geohash'</span><span class="p">]</span>
                 <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># Convert to km</span>
 
                 <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;=</span> <span class="n">radius_km</span><span class="p">:</span>
                     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
                         <span class="o">**</span><span class="n">point</span><span class="p">,</span>
-                        <span class="s1">&#39;distance_km&#39;</span><span class="p">:</span> <span class="n">distance</span>
+                        <span class="s1">'distance_km'</span><span class="p">:</span> <span class="n">distance</span>
                     <span class="p">})</span>
 
         <span class="c1"># Sort by distance</span>
-        <span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;distance_km&#39;</span><span class="p">])</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">'distance_km'</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">results</span>
 
 <span class="c1"># Example usage</span>
@@ -419,22 +419,22 @@
 
 <span class="c1"># Add some points</span>
 <span class="n">cities</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;San Francisco&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">37.7749</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Oakland&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">37.8044</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.2711</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Berkeley&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">37.8715</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.2730</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;San Jose&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">37.3382</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">121.8863</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Los Angeles&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">34.0522</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">118.2437</span><span class="p">}</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span> <span class="s2">"lat"</span><span class="p">:</span> <span class="mf">37.7749</span><span class="p">,</span> <span class="s2">"lng"</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Oakland"</span><span class="p">,</span> <span class="s2">"lat"</span><span class="p">:</span> <span class="mf">37.8044</span><span class="p">,</span> <span class="s2">"lng"</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.2711</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Berkeley"</span><span class="p">,</span> <span class="s2">"lat"</span><span class="p">:</span> <span class="mf">37.8715</span><span class="p">,</span> <span class="s2">"lng"</span><span class="p">:</span> <span class="o">-</span><span class="mf">122.2730</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"San Jose"</span><span class="p">,</span> <span class="s2">"lat"</span><span class="p">:</span> <span class="mf">37.3382</span><span class="p">,</span> <span class="s2">"lng"</span><span class="p">:</span> <span class="o">-</span><span class="mf">121.8863</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Los Angeles"</span><span class="p">,</span> <span class="s2">"lat"</span><span class="p">:</span> <span class="mf">34.0522</span><span class="p">,</span> <span class="s2">"lng"</span><span class="p">:</span> <span class="o">-</span><span class="mf">118.2437</span><span class="p">}</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
-    <span class="n">index</span><span class="o">.</span><span class="n">add_point</span><span class="p">(</span><span class="n">city</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">city</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span> <span class="n">city</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">],</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">city</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]})</span>
+    <span class="n">index</span><span class="o">.</span><span class="n">add_point</span><span class="p">(</span><span class="n">city</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span> <span class="n">city</span><span class="p">[</span><span class="s2">"lat"</span><span class="p">],</span> <span class="n">city</span><span class="p">[</span><span class="s2">"lng"</span><span class="p">],</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="n">city</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]})</span>
 
 <span class="c1"># Search for cities within 50km of San Francisco</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">search_nearby</span><span class="p">(</span><span class="mf">37.7749</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4194</span><span class="p">,</span> <span class="n">radius_km</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cities within 50km of San Francisco:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cities within 50km of San Francisco:"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;distance_km&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> km&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'distance_km'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> km"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -445,7 +445,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">cluster_by_geohash_prefix</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">prefix_length</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Cluster points by their geohash prefixes.</span>
 
 <span class="sd">    Args:</span>
@@ -454,17 +454,17 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Dictionary mapping geohash prefixes to lists of points</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">clusters</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
         <span class="n">geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
         <span class="n">prefix</span> <span class="o">=</span> <span class="n">geohash</span><span class="p">[:</span><span class="n">prefix_length</span><span class="p">]</span>
         <span class="n">clusters</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
-            <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span>
-            <span class="s1">&#39;lng&#39;</span><span class="p">:</span> <span class="n">lng</span><span class="p">,</span>
-            <span class="s1">&#39;geohash&#39;</span><span class="p">:</span> <span class="n">geohash</span>
+            <span class="s1">'id'</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+            <span class="s1">'lat'</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span>
+            <span class="s1">'lng'</span><span class="p">:</span> <span class="n">lng</span><span class="p">,</span>
+            <span class="s1">'geohash'</span><span class="p">:</span> <span class="n">geohash</span>
         <span class="p">})</span>
 
     <span class="k">return</span> <span class="n">clusters</span>
@@ -483,17 +483,17 @@
 <span class="n">clusters</span> <span class="o">=</span> <span class="n">cluster_by_geohash_prefix</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">prefix_length</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Print the clusters</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span><span class="si">}</span><span class="s2"> clusters:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span><span class="si">}</span><span class="s2"> clusters:"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">points</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">clusters</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="si">}</span><span class="s2"> points&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cluster </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="si">}</span><span class="s2"> points"</span><span class="p">)</span>
 
 <span class="c1"># Print details of the largest cluster</span>
 <span class="n">largest_cluster</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">clusters</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Details of largest cluster (</span><span class="si">{</span><span class="n">largest_cluster</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Details of largest cluster (</span><span class="si">{</span><span class="n">largest_cluster</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">):"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">largest_cluster</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="mi">5</span><span class="p">]:</span>  <span class="c1"># Show first 5 points</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Point </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;lng&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Point </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">'lng'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">largest_cluster</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ... and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">largest_cluster</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2"> more points&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  ... and </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">largest_cluster</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2"> more points"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -503,26 +503,26 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 
 <span class="c1"># Get bounding box for a geohash</span>
-<span class="n">geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8yy&quot;</span>  <span class="c1"># San Francisco area</span>
+<span class="n">geohash</span> <span class="o">=</span> <span class="s2">"9q8yy"</span>  <span class="c1"># San Francisco area</span>
 <span class="n">bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bounding box for </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Southwest corner: (</span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Northeast corner: (</span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bounding box for </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Southwest corner: (</span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Northeast corner: (</span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
 <span class="c1"># Check if a point is within the bounding box</span>
 <span class="n">test_points</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">&quot;Golden Gate Bridge&quot;</span><span class="p">,</span> <span class="mf">37.8199</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4783</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;Fisherman&#39;s Wharf&quot;</span><span class="p">,</span> <span class="mf">37.8080</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4177</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;San Jose&quot;</span><span class="p">,</span> <span class="mf">37.3382</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.8863</span><span class="p">)</span>
+    <span class="p">(</span><span class="s2">"Golden Gate Bridge"</span><span class="p">,</span> <span class="mf">37.8199</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4783</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Fisherman's Wharf"</span><span class="p">,</span> <span class="mf">37.8080</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.4177</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"San Jose"</span><span class="p">,</span> <span class="mf">37.3382</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.8863</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="ow">in</span> <span class="n">test_points</span><span class="p">:</span>
     <span class="n">is_in_box</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">is_point_in_box</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
     <span class="n">is_in_geohash</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">geohash</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  In bounding box: </span><span class="si">{</span><span class="n">is_in_box</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  In geohash: </span><span class="si">{</span><span class="n">is_in_geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">):"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  In bounding box: </span><span class="si">{</span><span class="n">is_in_box</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  In geohash: </span><span class="si">{</span><span class="n">is_in_geohash</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Find all geohashes within a custom bounding box</span>
 <span class="n">custom_bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">BoundingBox</span><span class="p">(</span>
@@ -533,17 +533,17 @@
 <span class="c1"># Get geohashes at different precision levels</span>
 <span class="k">for</span> <span class="n">precision</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]:</span>
     <span class="n">geohashes</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">custom_bbox</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">: found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2"> geohashes&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">: found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2"> geohashes"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">precision</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Geohashes: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Geohashes: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Check if two bounding boxes intersect</span>
-<span class="n">bbox1</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">)</span>
-<span class="n">bbox2</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;9q8yym&quot;</span><span class="p">)</span>
-<span class="n">bbox3</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;dr5r&quot;</span><span class="p">)</span>  <span class="c1"># New York</span>
+<span class="n">bbox1</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">"9q8yyk"</span><span class="p">)</span>
+<span class="n">bbox2</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">"9q8yym"</span><span class="p">)</span>
+<span class="n">bbox3</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">"dr5r"</span><span class="p">)</span>  <span class="c1"># New York</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intersection of 9q8yyk and 9q8yym: </span><span class="si">{</span><span class="n">pgh</span><span class="o">.</span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">,</span><span class="w"> </span><span class="n">bbox2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intersection of 9q8yyk and dr5r: </span><span class="si">{</span><span class="n">pgh</span><span class="o">.</span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">,</span><span class="w"> </span><span class="n">bbox3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Intersection of 9q8yyk and 9q8yym: </span><span class="si">{</span><span class="n">pgh</span><span class="o">.</span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">,</span><span class="w"> </span><span class="n">bbox2</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Intersection of 9q8yyk and dr5r: </span><span class="si">{</span><span class="n">pgh</span><span class="o">.</span><span class="n">do_boxes_intersect</span><span class="p">(</span><span class="n">bbox1</span><span class="p">,</span><span class="w"> </span><span class="n">bbox3</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="visualizing-bounding-boxes">
@@ -554,7 +554,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">patches</span>
 
 <span class="c1"># Define a base geohash and get its bounding box</span>
-<span class="n">base_geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8yy&quot;</span>  <span class="c1"># San Francisco area</span>
+<span class="n">base_geohash</span> <span class="o">=</span> <span class="s2">"9q8yy"</span>  <span class="c1"># San Francisco area</span>
 <span class="n">base_bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="n">base_geohash</span><span class="p">)</span>
 
 <span class="c1"># Find geohashes within this area at a higher precision</span>
@@ -569,12 +569,12 @@
 <span class="n">base_rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
     <span class="p">(</span><span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="p">,</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="p">),</span>
     <span class="n">base_width</span><span class="p">,</span> <span class="n">base_height</span><span class="p">,</span>
-    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Base Geohash: </span><span class="si">{</span><span class="n">base_geohash</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">'none'</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'Base Geohash: </span><span class="si">{</span><span class="n">base_geohash</span><span class="si">}</span><span class="s1">'</span>
 <span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">base_rect</span><span class="p">)</span>
 
-<span class="c1"># Plot each geohash&#39;s bounding box</span>
+<span class="c1"># Plot each geohash's bounding box</span>
 <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>  <span class="c1"># Limit to first 10 for clarity</span>
     <span class="n">gh_bbox</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span>
     <span class="n">width</span> <span class="o">=</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">-</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lon</span>
@@ -583,21 +583,21 @@
     <span class="n">rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
         <span class="p">(</span><span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lon</span><span class="p">,</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lat</span><span class="p">),</span>
         <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
-        <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span>
     <span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
 
     <span class="c1"># Add geohash label at center of box</span>
     <span class="n">center_x</span> <span class="o">=</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span>
     <span class="n">center_y</span> <span class="o">=</span> <span class="n">gh_bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">gh</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">gh</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 
 <span class="c1"># Set plot limits and labels</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">base_bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">base_bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Geohashes within </span><span class="si">{</span><span class="n">base_geohash</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Longitude'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Latitude'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Geohashes within </span><span class="si">{</span><span class="n">base_geohash</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -630,11 +630,11 @@ make<span class="w"> </span>viz-examples
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># Plot a single geohash</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">"9q8yyk"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Plot with center point and label</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">show_center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_label</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">"9q8yyk"</span><span class="p">,</span> <span class="n">show_center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_label</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -660,16 +660,16 @@ make<span class="w"> </span>viz-examples
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># Plot multiple geohashes with default colormap</span>
-<span class="n">geohashes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yym&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yyj&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yys&quot;</span><span class="p">]</span>
+<span class="n">geohashes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"9q8yyk"</span><span class="p">,</span> <span class="s2">"9q8yym"</span><span class="p">,</span> <span class="s2">"9q8yyj"</span><span class="p">,</span> <span class="s2">"9q8yys"</span><span class="p">]</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Plot with custom colors and labels</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span>
     <span class="n">geohashes</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Home&quot;</span><span class="p">,</span> <span class="s2">&quot;Work&quot;</span><span class="p">,</span> <span class="s2">&quot;Park&quot;</span><span class="p">,</span> <span class="s2">&quot;Store&quot;</span><span class="p">],</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Home"</span><span class="p">,</span> <span class="s2">"Work"</span><span class="p">,</span> <span class="s2">"Park"</span><span class="p">,</span> <span class="s2">"Store"</span><span class="p">],</span>
     <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">]</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -695,20 +695,20 @@ make<span class="w"> </span>viz-examples
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
 
 <span class="c1"># Create a map centered on a geohash</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">folium_map</span><span class="p">(</span><span class="n">center_geohash</span><span class="o">=</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium_map</span><span class="p">(</span><span class="n">center_geohash</span><span class="o">=</span><span class="s2">"9q8yyk"</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 
 <span class="c1"># Add a single geohash</span>
-<span class="n">m</span><span class="o">.</span><span class="n">add_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="s2">&quot;Home&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_geohash</span><span class="p">(</span><span class="s2">"9q8yyk"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">popup</span><span class="o">=</span><span class="s2">"Home"</span><span class="p">)</span>
 
 <span class="c1"># Add multiple geohashes with different colors</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add_geohashes</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">&quot;9q8yym&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yyj&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yys&quot;</span><span class="p">],</span>
-    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
-    <span class="n">popups</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Work&quot;</span><span class="p">,</span> <span class="s2">&quot;Park&quot;</span><span class="p">,</span> <span class="s2">&quot;Store&quot;</span><span class="p">]</span>
+    <span class="p">[</span><span class="s2">"9q8yym"</span><span class="p">,</span> <span class="s2">"9q8yyj"</span><span class="p">,</span> <span class="s2">"9q8yys"</span><span class="p">],</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">"blue"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">],</span>
+    <span class="n">popups</span><span class="o">=</span><span class="p">[</span><span class="s2">"Work"</span><span class="p">,</span> <span class="s2">"Park"</span><span class="p">,</span> <span class="s2">"Store"</span><span class="p">]</span>
 <span class="p">)</span>
 
 <span class="c1"># Save the map to an HTML file</span>
-<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;folium_map.html&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"folium_map.html"</span><span class="p">)</span>
 </pre></div>
 </div>
 <iframe src="_static/images/folium_map.html" width="100%" height="400" style="border: none; border-radius: 6px;"></iframe></section>
@@ -718,13 +718,13 @@ make<span class="w"> </span>viz-examples
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">folium_map</span>
 
 <span class="c1"># Create a map</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">folium_map</span><span class="p">(</span><span class="n">center_geohash</span><span class="o">=</span><span class="s2">&quot;9q8y&quot;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium_map</span><span class="p">(</span><span class="n">center_geohash</span><span class="o">=</span><span class="s2">"9q8y"</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="c1"># Add a geohash grid at precision 5</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add_geohash_grid</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
 <span class="c1"># Save the map to an HTML file</span>
-<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;folium_grid.html&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"folium_grid.html"</span><span class="p">)</span>
 </pre></div>
 </div>
 <iframe src="_static/images/folium_grid.html" width="100%" height="400" style="border: none; border-radius: 6px;"></iframe></section>
@@ -735,23 +735,23 @@ make<span class="w"> </span>viz-examples
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># Get a geohash and its neighbors</span>
-<span class="n">center</span> <span class="o">=</span> <span class="s2">&quot;9q8yyk&quot;</span>
+<span class="n">center</span> <span class="o">=</span> <span class="s2">"9q8yyk"</span>
 <span class="n">neighbors</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;North&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;East&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;South&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;West&quot;</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+    <span class="s2">"North"</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">"top"</span><span class="p">),</span>
+    <span class="s2">"East"</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">),</span>
+    <span class="s2">"South"</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">),</span>
+    <span class="s2">"West"</span><span class="p">:</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="s2">"left"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1"># Plot the center and its neighbors</span>
 <span class="n">all_geohashes</span> <span class="o">=</span> <span class="p">[</span><span class="n">center</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">neighbors</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Center&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">neighbors</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Center"</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">neighbors</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span>
     <span class="n">all_geohashes</span><span class="p">,</span>
     <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
     <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">"red"</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"blue"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -771,22 +771,22 @@ make<span class="w"> </span>viz-examples
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># Start with a precision 4 geohash</span>
-<span class="n">base_geohash</span> <span class="o">=</span> <span class="s2">&quot;9q8y&quot;</span>
+<span class="n">base_geohash</span> <span class="o">=</span> <span class="s2">"9q8y"</span>
 
 <span class="c1"># Generate geohashes at different precisions</span>
 <span class="n">geohashes</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">base_geohash</span><span class="p">,</span>
-    <span class="n">base_geohash</span> <span class="o">+</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span>
-    <span class="n">base_geohash</span> <span class="o">+</span> <span class="s2">&quot;yk&quot;</span><span class="p">,</span>
+    <span class="n">base_geohash</span> <span class="o">+</span> <span class="s2">"y"</span><span class="p">,</span>
+    <span class="n">base_geohash</span> <span class="o">+</span> <span class="s2">"yk"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Precision </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"Precision </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gh</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">(</span>
     <span class="n">geohashes</span><span class="p">,</span>
     <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
     <span class="n">show_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">],</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">],</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -834,6 +834,7 @@ make<span class="w"> </span>viz-examples
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
 </ul>
 

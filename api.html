@@ -24,7 +24,7 @@
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Blog Posts" href="blog_posts.html" />
+    <link rel="next" title="Benchmarks" href="benchmarks.html" />
     <link rel="prev" title="Examples" href="examples.html" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -511,7 +511,7 @@ less accurate than haversine distance.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_approximate_distance</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_approximate_distance</span><span class="p">(</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">)</span>
 <span class="go">610</span>
 </pre></div>
 </div>
@@ -538,7 +538,7 @@ haversine formula, which accounts for the Earth’s curvature.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">152.7</span>
 </pre></div>
 </div>
@@ -578,8 +578,8 @@ other side of the grid.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_adjacent</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">)</span>
-<span class="go">&#39;u4pruyf&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_adjacent</span><span class="p">(</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"top"</span><span class="p">)</span>
+<span class="go">'u4pruyf'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -607,7 +607,7 @@ other side of the grid.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">"u4pruyd"</span><span class="p">))</span>
 <span class="go">(57.64801, 10.406799, 57.649384, 10.408173)</span>
 </pre></div>
 </div>
@@ -639,7 +639,7 @@ precise coordinates.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bbox</span> <span class="o">=</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="s2">"u4pruyd"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_box</span><span class="p">(</span><span class="mf">57.649</span><span class="p">,</span> <span class="mf">10.407</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_box</span><span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
@@ -668,9 +668,9 @@ precise coordinates.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="mf">57.649</span><span class="p">,</span> <span class="mf">10.407</span><span class="p">,</span> <span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="mf">57.649</span><span class="p">,</span> <span class="mf">10.407</span><span class="p">,</span> <span class="s2">"u4pruyd"</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;u4pruyd&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_point_in_geohash</span><span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">"u4pruyd"</span><span class="p">)</span>
 <span class="go">False</span>
 </pre></div>
 </div>
@@ -724,7 +724,7 @@ precise coordinates.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="mf">57.64</span><span class="p">,</span> <span class="mf">10.40</span><span class="p">,</span> <span class="mf">57.65</span><span class="p">,</span> <span class="mf">10.41</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
-<span class="go">[&#39;u4pru&#39;]</span>
+<span class="go">['u4pru']</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -770,8 +770,8 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
-<span class="go">&#39;u4pruyf1m6dt&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span><span class="p">([</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">,</span> <span class="s2">"u4pruyc"</span><span class="p">])</span>
+<span class="go">'u4pruyf1m6dt'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -796,8 +796,8 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">northern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
-<span class="go">&#39;u4pruyf&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">northern</span><span class="p">([</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">,</span> <span class="s2">"u4pruyc"</span><span class="p">])</span>
+<span class="go">'u4pruyf'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -822,8 +822,8 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">southern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
-<span class="go">&#39;u4pruyd&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">southern</span><span class="p">([</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">,</span> <span class="s2">"u4pruyc"</span><span class="p">])</span>
+<span class="go">'u4pruyd'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -848,8 +848,8 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eastern</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
-<span class="go">&#39;u4pruyd&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eastern</span><span class="p">([</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">,</span> <span class="s2">"u4pruyc"</span><span class="p">])</span>
+<span class="go">'u4pruyd'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -874,8 +874,8 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">western</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">])</span>
-<span class="go">&#39;u4pruyc&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">western</span><span class="p">([</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">,</span> <span class="s2">"u4pruyc"</span><span class="p">])</span>
+<span class="go">'u4pruyc'</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -902,7 +902,7 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">variance</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">variance</span><span class="p">([</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">,</span> <span class="s2">"u4pruyc"</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">6665.5</span>
 </pre></div>
 </div>
@@ -930,7 +930,7 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">std</span><span class="p">([</span><span class="s2">&quot;u4pruyd&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyf&quot;</span><span class="p">,</span> <span class="s2">&quot;u4pruyc&quot;</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">std</span><span class="p">([</span><span class="s2">"u4pruyd"</span><span class="p">,</span> <span class="s2">"u4pruyf"</span><span class="p">,</span> <span class="s2">"u4pruyc"</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">81.6</span>
 </pre></div>
 </div>
@@ -969,7 +969,7 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohash</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohash</span><span class="p">(</span><span class="s2">"9q8yyk"</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1004,7 +1004,7 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pygeohash</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgh</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.viz</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_geohashes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">([</span><span class="s2">&quot;9q8yyk&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yym&quot;</span><span class="p">,</span> <span class="s2">&quot;9q8yyj&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_geohashes</span><span class="p">([</span><span class="s2">"9q8yyk"</span><span class="p">,</span> <span class="s2">"9q8yym"</span><span class="p">,</span> <span class="s2">"9q8yyj"</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1044,6 +1044,7 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 <li class="toctree-l2"><a class="reference internal" href="#visualization-functions">Visualization Functions</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
 </ul>
 

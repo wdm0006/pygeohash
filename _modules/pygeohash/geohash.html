@@ -174,14 +174,14 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.geohash</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Geohash encoding and decoding functionality.</span>
+<span></span><span class="sd">"""Geohash encoding and decoding functionality.</span>
 
 <span class="sd">This module provides the core functionality for encoding coordinates to geohashes</span>
 <span class="sd">and decoding geohashes back to coordinates. It includes both standard and exact</span>
 <span class="sd">decoding options, as well as strict encoding.</span>
 
 <span class="sd">This implementation uses a high-performance C extension for all operations.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -210,7 +210,7 @@
 <div class="viewcode-block" id="encode">
 <a class="viewcode-back" href="../../api.html#pygeohash.encode">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a latitude and longitude into a geohash.</span>
+<span class="w">    </span><span class="sd">"""Encode a latitude and longitude into a geohash.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        latitude (float): The latitude to encode.</span>
@@ -226,25 +226,25 @@
 <span class="sd">            is not an integer or is outside the valid range (1-12). Booleans are</span>
 <span class="sd">            rejected for all three arguments, even though ``bool`` is a subclass of</span>
 <span class="sd">            ``int``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># bool is a subclass of int, so it has to be rejected explicitly.</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Latitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Longitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="c1"># Validate latitude range</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be between -90.0 and 90.0 degrees, but got </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Latitude must be between -90.0 and 90.0 degrees, but got </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="c1"># Validate longitude range</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span> <span class="o">&lt;=</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="mf">180.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be between -180.0 and 180.0 degrees, but got </span><span class="si">{</span><span class="n">longitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Longitude must be between -180.0 and 180.0 degrees, but got </span><span class="si">{</span><span class="n">longitude</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">c_encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span></div>
 
@@ -253,7 +253,7 @@
 <div class="viewcode-block" id="encode_strictly">
 <a class="viewcode-back" href="../../api.html#pygeohash.encode_strictly">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode a latitude and longitude into a geohash.</span>
+<span class="w">    </span><span class="sd">"""Encode a latitude and longitude into a geohash.</span>
 
 <span class="sd">    This function currently behaves identically to :func:`encode`: it applies the</span>
 <span class="sd">    same precision/latitude/longitude validation and returns the same geohash for</span>
@@ -276,31 +276,31 @@
 <span class="sd">            is not an integer or is outside the valid range (1-12). Booleans are</span>
 <span class="sd">            rejected for all three arguments, even though ``bool`` is a subclass of</span>
 <span class="sd">            ``int``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># bool is a subclass of int, so it has to be rejected explicitly.</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Latitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Longitude must be a number, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="c1"># Validate latitude range</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Latitude must be between -90.0 and 90.0 degrees, but got </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Latitude must be between -90.0 and 90.0 degrees, but got </span><span class="si">{</span><span class="n">latitude</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="c1"># Validate longitude range</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span> <span class="o">&lt;=</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="mf">180.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Longitude must be between -180.0 and 180.0 degrees, but got </span><span class="si">{</span><span class="n">longitude</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Longitude must be between -180.0 and 180.0 degrees, but got </span><span class="si">{</span><span class="n">longitude</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c_encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
-            <span class="s2">&quot;Failed to strictly encode coordinates: lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">"Failed to strictly encode coordinates: lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
             <span class="n">latitude</span><span class="p">,</span>
             <span class="n">longitude</span><span class="p">,</span>
             <span class="n">precision</span><span class="p">,</span>
@@ -313,12 +313,12 @@
 <div class="viewcode-block" id="decode">
 <a class="viewcode-back" href="../../api.html#pygeohash.decode">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash into a latitude and longitude.</span>
+<span class="w">    </span><span class="sd">"""Decode a geohash into a latitude and longitude.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohash (str): The geohash string to decode. Input is case-insensitive, matching</span>
 <span class="sd">            :func:`~pygeohash.types.is_valid_geohash` and :func:`~pygeohash.neighbor.get_adjacent`,</span>
-<span class="sd">            so ``&quot;U4PRUYD&quot;`` and ``&quot;U4pruYd&quot;`` decode identically to ``&quot;u4pruyd&quot;``.</span>
+<span class="sd">            so ``"U4PRUYD"`` and ``"U4pruYd"`` decode identically to ``"u4pruyd"``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        LatLong: A named tuple containing the latitude and longitude.</span>
@@ -326,15 +326,15 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If the geohash is not a string, is not between 1 and 12 characters,</span>
 <span class="sd">            or contains invalid characters.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash must be a string, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash must be a string, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohash</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Geohash cannot be empty.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Geohash cannot be empty."</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">MAX_PRECISION</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash must be at most </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2"> characters long.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash must be at most </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2"> characters long."</span><span class="p">)</span>
 
-    <span class="c1"># The C extension raises ValueError(&quot;Invalid character in geohash&quot;) for any</span>
+    <span class="c1"># The C extension raises ValueError("Invalid character in geohash") for any</span>
     <span class="c1"># non-base32 character, so we let it do the per-character validation instead</span>
     <span class="c1"># of paying for a Python-level scan on every call.</span>
     <span class="k">return</span> <span class="n">LatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span></div>
@@ -344,7 +344,7 @@
 <div class="viewcode-block" id="decode_exactly">
 <a class="viewcode-back" href="../../api.html#pygeohash.decode_exactly">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExactLatLong</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a geohash into a latitude and longitude with error margins.</span>
+<span class="w">    </span><span class="sd">"""Decode a geohash into a latitude and longitude with error margins.</span>
 
 <span class="sd">    This function provides more detailed information than the standard decode</span>
 <span class="sd">    function by including the error margins for both latitude and longitude.</span>
@@ -352,7 +352,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        geohash (str): The geohash string to decode. Input is case-insensitive, matching</span>
 <span class="sd">            :func:`~pygeohash.types.is_valid_geohash` and :func:`~pygeohash.neighbor.get_adjacent`,</span>
-<span class="sd">            so ``&quot;U4PRUYD&quot;`` and ``&quot;U4pruYd&quot;`` decode identically to ``&quot;u4pruyd&quot;``.</span>
+<span class="sd">            so ``"U4PRUYD"`` and ``"U4pruYd"`` decode identically to ``"u4pruyd"``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        ExactLatLong: A named tuple containing the latitude, longitude, and their</span>
@@ -361,13 +361,13 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If the geohash is not a string, is not between 1 and 12 characters,</span>
 <span class="sd">            or contains invalid characters.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash must be a string, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash must be a string, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohash</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Geohash cannot be empty.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Geohash cannot be empty."</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">MAX_PRECISION</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash must be at most </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2"> characters long.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash must be at most </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2"> characters long."</span><span class="p">)</span>
 
     <span class="c1"># See decode(): the C extension validates characters and raises on its own.</span>
     <span class="k">return</span> <span class="n">ExactLatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span></div>
@@ -375,14 +375,14 @@
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;decode&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;decode_exactly&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;encode&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;encode_strictly&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;LatLong&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ExactLatLong&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;__base32&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;__decodemap&quot;</span><span class="p">,</span>
+    <span class="s2">"decode"</span><span class="p">,</span>
+    <span class="s2">"decode_exactly"</span><span class="p">,</span>
+    <span class="s2">"encode"</span><span class="p">,</span>
+    <span class="s2">"encode_strictly"</span><span class="p">,</span>
+    <span class="s2">"LatLong"</span><span class="p">,</span>
+    <span class="s2">"ExactLatLong"</span><span class="p">,</span>
+    <span class="s2">"__base32"</span><span class="p">,</span>
+    <span class="s2">"__decodemap"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 
@@ -401,6 +401,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../blog_posts.html">Blog Posts</a></li>
 </ul>
 

@@ -174,7 +174,7 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.viz</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Visualization module for PyGeoHash.</span>
+<span></span><span class="sd">"""Visualization module for PyGeoHash.</span>
 
 <span class="sd">This module provides functions for visualizing geohashes on maps.</span>
 <span class="sd">It requires additional dependencies that can be installed with:</span>
@@ -184,9 +184,9 @@
 <span class="sd">    plot_geohash: Plot a single geohash on a map</span>
 <span class="sd">    plot_geohashes: Plot multiple geohashes on a map</span>
 <span class="sd">    folium_map: Create an interactive map with geohashes using Folium</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
-<span class="c1"># mypy: disable-error-code=&quot;list-item,assignment&quot;</span>
+<span class="c1"># mypy: disable-error-code="list-item,assignment"</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">cast</span><span class="p">,</span> <span class="n">TypeVar</span>
@@ -202,11 +202,11 @@
 <span class="n">MatplotlibFigure</span> <span class="o">=</span> <span class="n">Any</span>  <span class="c1"># Would be matplotlib.figure.Figure if matplotlib was always available</span>
 <span class="n">BoundingBoxCoords</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>  <span class="c1"># min_lat, min_lon, max_lat, max_lon</span>
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"T"</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">FoliumMapProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol for Folium map objects.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Protocol for Folium map objects."""</span>
 
     <span class="n">location</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
     <span class="n">_zoom_start</span><span class="p">:</span> <span class="nb">int</span>
@@ -216,7 +216,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">add_geohash</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">,</span>
         <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">fill_color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">fill_opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -228,7 +228,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">add_geohashes</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">geohashes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-        <span class="n">colors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+        <span class="n">colors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">,</span>
         <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">fill_colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">fill_opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -241,7 +241,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
         <span class="n">bbox</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoundingBoxCoords</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">,</span>
         <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">fill_color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">fill_opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
@@ -250,34 +250,34 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_check_viz_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if visualization dependencies are installed.</span>
+<span class="w">    </span><span class="sd">"""Check if visualization dependencies are installed.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: True if dependencies are installed, False otherwise</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>  <span class="c1"># noqa: F401</span>
 
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Matplotlib is required for visualization functions. Install with: pip install pygeohash[viz]&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
+            <span class="s2">"Matplotlib is required for visualization functions. Install with: pip install pygeohash[viz]"</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_check_folium_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if folium dependencies are installed.</span>
+<span class="w">    </span><span class="sd">"""Check if folium dependencies are installed.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: True if dependencies are installed, False otherwise</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>  <span class="c1"># noqa: F401</span>
 
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Folium is required for interactive maps. Install with: pip install pygeohash[viz]&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Folium is required for interactive maps. Install with: pip install pygeohash[viz]"</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
 
@@ -286,14 +286,14 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_geohash</span><span class="p">(</span>
     <span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">ax</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MatplotlibAxis</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">,</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
     <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">show_center</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">show_label</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">MatplotlibFigure</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MatplotlibAxis</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a single geohash on a map.</span>
+<span class="w">    </span><span class="sd">"""Plot a single geohash on a map.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohash: The geohash string to plot</span>
@@ -311,8 +311,8 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; import pygeohash as pgh</span>
 <span class="sd">        &gt;&gt;&gt; from pygeohash.viz import plot_geohash</span>
-<span class="sd">        &gt;&gt;&gt; fig, ax = plot_geohash(&quot;9q8yyk&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = plot_geohash("9q8yyk")</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_check_viz_dependencies</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
@@ -351,13 +351,13 @@
     <span class="k">if</span> <span class="n">show_center</span><span class="p">:</span>
         <span class="n">center_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="n">center_lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 
     <span class="c1"># Add label if requested</span>
     <span class="k">if</span> <span class="n">show_label</span><span class="p">:</span>
         <span class="n">center_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="n">center_lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">label</span> <span class="ow">or</span> <span class="n">geohash</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">label</span> <span class="ow">or</span> <span class="n">geohash</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 
     <span class="c1"># Set axis limits with a small buffer</span>
     <span class="n">buffer</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
@@ -365,15 +365,15 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="n">buffer</span><span class="p">)</span>
 
     <span class="c1"># Add grid for better orientation</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 
     <span class="c1"># Set labels and title</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Longitude"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Latitude"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># Make sure aspect ratio is equal</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">"equal"</span><span class="p">,</span> <span class="s2">"box"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
 
@@ -384,14 +384,14 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_geohashes</span><span class="p">(</span>
     <span class="n">geohashes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">ax</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MatplotlibAxis</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">colors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">colors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">"viridis"</span><span class="p">,</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
     <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">show_centers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">show_labels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">MatplotlibFigure</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MatplotlibAxis</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot multiple geohashes on a map.</span>
+<span class="w">    </span><span class="sd">"""Plot multiple geohashes on a map.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes: List of geohash strings to plot</span>
@@ -412,13 +412,13 @@
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; import pygeohash as pgh</span>
 <span class="sd">        &gt;&gt;&gt; from pygeohash.viz import plot_geohashes</span>
-<span class="sd">        &gt;&gt;&gt; fig, ax = plot_geohashes([&quot;9q8yyk&quot;, &quot;9q8yym&quot;, &quot;9q8yyj&quot;])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = plot_geohashes(["9q8yyk", "9q8yym", "9q8yyj"])</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;plot_geohashes requires at least one geohash&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"plot_geohashes requires at least one geohash"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">colors</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;colors must be a color name, a colormap name, or a non-empty list of colors&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"colors must be a color name, a colormap name, or a non-empty list of colors"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_check_viz_dependencies</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
@@ -456,8 +456,8 @@
         <span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">+</span> <span class="n">geohashes</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="p">:]</span>
 
     <span class="c1"># Track the overall bounding box</span>
-    <span class="n">min_lon</span><span class="p">,</span> <span class="n">min_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
-    <span class="n">max_lon</span><span class="p">,</span> <span class="n">max_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;-inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;-inf&quot;</span><span class="p">)</span>
+    <span class="n">min_lon</span><span class="p">,</span> <span class="n">min_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+    <span class="n">max_lon</span><span class="p">,</span> <span class="n">max_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"-inf"</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"-inf"</span><span class="p">)</span>
 
     <span class="c1"># Plot each geohash</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">geohash</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">geohashes</span><span class="p">):</span>
@@ -494,13 +494,13 @@
         <span class="k">if</span> <span class="n">show_centers</span><span class="p">:</span>
             <span class="n">center_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
             <span class="n">center_lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 
         <span class="c1"># Add label if requested</span>
         <span class="k">if</span> <span class="n">show_labels</span><span class="p">:</span>
             <span class="n">center_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
             <span class="n">center_lon</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 
     <span class="c1"># Set axis limits with a small buffer</span>
     <span class="n">width</span> <span class="o">=</span> <span class="n">max_lon</span> <span class="o">-</span> <span class="n">min_lon</span>
@@ -510,19 +510,19 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">min_lat</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">max_lat</span> <span class="o">+</span> <span class="n">buffer</span><span class="p">)</span>
 
     <span class="c1"># Add grid for better orientation</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 
     <span class="c1"># Set labels and title</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geohashes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Longitude"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Latitude"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohashes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># Add legend if there are multiple geohashes with different labels</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
     <span class="c1"># Make sure aspect ratio is equal</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">"equal"</span><span class="p">,</span> <span class="s2">"box"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
 
@@ -531,7 +531,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">add_geohash</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">:</span> <span class="n">FoliumMapProtocol</span><span class="p">,</span>
     <span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">,</span>
     <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fill_color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">fill_opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -539,7 +539,7 @@
     <span class="n">popup</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">tooltip</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FoliumMapProtocol</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a geohash to the map.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Add a geohash to the map."""</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
 
     <span class="c1"># Get bounding box for the geohash</span>
@@ -553,8 +553,8 @@
         <span class="n">fill_color</span><span class="o">=</span><span class="n">fill_color</span> <span class="ow">or</span> <span class="n">color</span><span class="p">,</span>
         <span class="n">fill_opacity</span><span class="o">=</span><span class="n">fill_opacity</span><span class="p">,</span>
         <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span>
-        <span class="n">popup</span><span class="o">=</span><span class="n">popup</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">tooltip</span><span class="o">=</span><span class="n">tooltip</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">popup</span><span class="o">=</span><span class="n">popup</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="o">=</span><span class="n">tooltip</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Geohash: </span><span class="si">{</span><span class="n">geohash</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
 
@@ -564,7 +564,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">add_geohashes</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">:</span> <span class="n">FoliumMapProtocol</span><span class="p">,</span>
     <span class="n">geohashes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-    <span class="n">colors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">colors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">,</span>
     <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fill_colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">fill_opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -572,19 +572,19 @@
     <span class="n">popups</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">tooltips</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FoliumMapProtocol</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add multiple geohashes to the map.</span>
+<span class="w">    </span><span class="sd">"""Add multiple geohashes to the map.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If ``geohashes`` is non-empty and ``colors`` or ``fill_colors``</span>
 <span class="sd">            is an empty list.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n_geohashes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_geohashes</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">colors</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;colors must be a color name or a non-empty list of colors&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"colors must be a color name or a non-empty list of colors"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">fill_colors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fill_colors</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;fill_colors must be None or a non-empty list of colors&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"fill_colors must be None or a non-empty list of colors"</span><span class="p">)</span>
 
     <span class="c1"># Set up colors</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -606,17 +606,17 @@
 
     <span class="c1"># Set up popups</span>
     <span class="k">if</span> <span class="n">popups</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">popups_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
+        <span class="n">popups_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">popups</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n_geohashes</span><span class="p">:</span>
-        <span class="n">popups_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">popups</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">popups</span><span class="p">)</span> <span class="p">:]]</span>
+        <span class="n">popups_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">popups</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">popups</span><span class="p">)</span> <span class="p">:]]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">popups_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">popups</span><span class="p">)</span>
 
     <span class="c1"># Set up tooltips</span>
     <span class="k">if</span> <span class="n">tooltips</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">tooltips_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
+        <span class="n">tooltips_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">tooltips</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n_geohashes</span><span class="p">:</span>
-        <span class="n">tooltips_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tooltips</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">tooltips</span><span class="p">)</span> <span class="p">:]]</span>
+        <span class="n">tooltips_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tooltips</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"Geohash: </span><span class="si">{</span><span class="n">gh</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">tooltips</span><span class="p">)</span> <span class="p">:]]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">tooltips_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tooltips</span><span class="p">)</span>
 
@@ -640,19 +640,19 @@
     <span class="bp">self</span><span class="p">:</span> <span class="n">FoliumMapProtocol</span><span class="p">,</span>
     <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
     <span class="n">bbox</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoundingBoxCoords</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"blue"</span><span class="p">,</span>
     <span class="n">fill</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fill_color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">fill_opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="n">weight</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FoliumMapProtocol</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a grid of geohashes at the specified precision.</span>
+<span class="w">    </span><span class="sd">"""Add a grid of geohashes at the specified precision.</span>
 
 <span class="sd">    When no ``bbox`` is given the viewport is derived from the map center and zoom</span>
 <span class="sd">    and clipped to the world bounds, so maps centered near a pole or the</span>
 <span class="sd">    antimeridian render the visible part of the grid. An explicitly supplied</span>
 <span class="sd">    ``bbox`` is passed through unchanged and validated by :class:`BoundingBox`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># If no bounding box is provided, use the current map bounds</span>
     <span class="k">if</span> <span class="n">bbox</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">location</span>
@@ -690,11 +690,11 @@
     <span class="n">center_geohash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">center</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">zoom_start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>
-    <span class="n">tiles</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;OpenStreetMap&quot;</span><span class="p">,</span>
-    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span>
-    <span class="n">height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span>
+    <span class="n">tiles</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"OpenStreetMap"</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"100%"</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"100%"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FoliumMapProtocol</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a folium map centered on a geohash or coordinates.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Create a folium map centered on a geohash or coordinates."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_check_folium_dependencies</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span>
 
@@ -714,7 +714,7 @@
         <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="c1"># Create a new class that inherits from the map&#39;s class and implements our protocol</span>
+    <span class="c1"># Create a new class that inherits from the map's class and implements our protocol</span>
     <span class="k">class</span><span class="w"> </span><span class="nc">GeohashMap</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">FoliumMapProtocol</span><span class="p">):</span>  <span class="c1"># type: ignore[misc]</span>
         <span class="n">_zoom_start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">zoom_start</span>
         <span class="n">add_geohash</span> <span class="o">=</span> <span class="n">add_geohash</span>
@@ -743,6 +743,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../blog_posts.html">Blog Posts</a></li>
 </ul>
 

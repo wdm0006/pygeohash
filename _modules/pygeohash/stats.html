@@ -174,12 +174,12 @@
           <div class="body" role="main">
             
   <h1>Source code for pygeohash.stats</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Statistical operations for collections of geohashes.</span>
+<span></span><span class="sd">"""Statistical operations for collections of geohashes.</span>
 
 <span class="sd">This module provides functions for calculating statistical properties</span>
 <span class="sd">of collections of geohashes, including mean position, cardinal extremes</span>
 <span class="sd">(northern, southern, eastern, western), variance, and standard deviation.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
@@ -195,16 +195,16 @@
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="n">__author__</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Will McGinnis&quot;</span>
+<span class="n">__author__</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Will McGinnis"</span>
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"T"</span><span class="p">)</span>
 
 <span class="c1">#: Resultant vector lengths at or below this value are treated as fully cancelled.</span>
 <span class="n">_CIRCULAR_MEAN_TOLERANCE</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reject a single geohash string passed where a collection is expected.</span>
+<span class="w">    </span><span class="sd">"""Reject a single geohash string passed where a collection is expected.</span>
 
 <span class="sd">    A ``str`` satisfies ``Collection[str]``, so passing one geohash instead of a</span>
 <span class="sd">    collection of geohashes would otherwise be treated as a collection of</span>
@@ -216,16 +216,16 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        TypeError: If ``geohashes`` is a string rather than a collection of</span>
 <span class="sd">            geohash strings.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="s2">&quot;geohashes must be a collection of geohash strings, not a single geohash string. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Wrap a single geohash in a collection, for example [</span><span class="si">{</span><span class="n">geohashes</span><span class="si">!r}</span><span class="s2">].&quot;</span>
+            <span class="s2">"geohashes must be a collection of geohash strings, not a single geohash string. "</span>
+            <span class="sa">f</span><span class="s2">"Wrap a single geohash in a collection, for example [</span><span class="si">{</span><span class="n">geohashes</span><span class="si">!r}</span><span class="s2">]."</span>
         <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_circular_mean_longitude</span><span class="p">(</span><span class="n">longitudes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the circular mean of a sequence of longitudes in degrees.</span>
+<span class="w">    </span><span class="sd">"""Calculate the circular mean of a sequence of longitudes in degrees.</span>
 
 <span class="sd">    Longitude is circular, so an arithmetic mean places the centroid of a</span>
 <span class="sd">    collection spanning the antimeridian near the prime meridian instead. This</span>
@@ -241,48 +241,48 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The mean longitude in degrees, within [-180, 180].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">radians</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span> <span class="k">for</span> <span class="n">longitude</span> <span class="ow">in</span> <span class="n">longitudes</span><span class="p">]</span>
     <span class="n">mean_sin</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span> <span class="k">for</span> <span class="n">radian</span> <span class="ow">in</span> <span class="n">radians</span><span class="p">)</span>
     <span class="n">mean_cos</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span> <span class="k">for</span> <span class="n">radian</span> <span class="ow">in</span> <span class="n">radians</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">mean_sin</span><span class="p">,</span> <span class="n">mean_cos</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">_CIRCULAR_MEAN_TOLERANCE</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Longitude vectors cancelled out; falling back to the arithmetic mean&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Longitude vectors cancelled out; falling back to the arithmetic mean"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">longitudes</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">mean_sin</span><span class="p">,</span> <span class="n">mean_cos</span><span class="p">))</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">__latitude</span><span class="p">(</span><span class="n">coordinate</span><span class="p">:</span> <span class="n">LatLong</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the latitude from a LatLong coordinate.</span>
+<span class="w">    </span><span class="sd">"""Extract the latitude from a LatLong coordinate.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        coordinate (LatLong): The coordinate to extract latitude from.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The latitude value.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">latitude</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">__longitude</span><span class="p">(</span><span class="n">coordinate</span><span class="p">:</span> <span class="n">LatLong</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the longitude from a LatLong coordinate.</span>
+<span class="w">    </span><span class="sd">"""Extract the longitude from a LatLong coordinate.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        coordinate (LatLong): The coordinate to extract longitude from.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The longitude value.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">longitude</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">,</span> <span class="n">key_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">LatLong</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the extreme geohash in a collection based on a key function.</span>
+<span class="w">    </span><span class="sd">"""Find the extreme geohash in a collection based on a key function.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 <span class="sd">        key_func (Callable[[LatLong], float]): Function to extract the value to compare.</span>
 <span class="sd">        reverse (bool): Whether to find maximum (True) or minimum (False).</span>
 
@@ -291,32 +291,32 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding </span><span class="si">%s</span><span class="s2"> for </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="s2">&quot;maximum&quot;</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="s2">&quot;minimum&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding </span><span class="si">%s</span><span class="s2"> for </span><span class="si">%d</span><span class="s2"> geohashes"</span><span class="p">,</span> <span class="s2">"maximum"</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="s2">"minimum"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Empty geohash collection provided&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Empty geohash collection provided"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">""</span>
 
     <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">geohash</span><span class="p">:</span> <span class="n">key_func</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">)))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">geohash</span><span class="p">:</span> <span class="n">key_func</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">geohash</span><span class="p">)))</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%s</span><span class="s2"> geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;maximum&quot;</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="s2">&quot;minimum&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found </span><span class="si">%s</span><span class="s2"> geohash: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"maximum"</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="s2">"minimum"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span>
 
 
 <div class="viewcode-block" id="northern">
 <a class="viewcode-back" href="../../api.html#pygeohash.northern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">northern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the northernmost geohash in a collection.</span>
+<span class="w">    </span><span class="sd">"""Find the northernmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The northernmost geohash.</span>
@@ -325,12 +325,12 @@
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; northern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
-<span class="sd">        &#39;u4pruyf&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding northernmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
+<span class="sd">        &gt;&gt;&gt; northern(["u4pruyd", "u4pruyf", "u4pruyc"])</span>
+<span class="sd">        'u4pruyf'</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding northernmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__latitude</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found northernmost geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found northernmost geohash: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -338,11 +338,11 @@
 <div class="viewcode-block" id="southern">
 <a class="viewcode-back" href="../../api.html#pygeohash.southern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">southern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the southernmost geohash in a collection.</span>
+<span class="w">    </span><span class="sd">"""Find the southernmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The southernmost geohash.</span>
@@ -351,12 +351,12 @@
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; southern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
-<span class="sd">        &#39;u4pruyd&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding southernmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
+<span class="sd">        &gt;&gt;&gt; southern(["u4pruyd", "u4pruyf", "u4pruyc"])</span>
+<span class="sd">        'u4pruyd'</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding southernmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__latitude</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found southernmost geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found southernmost geohash: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -364,11 +364,11 @@
 <div class="viewcode-block" id="eastern">
 <a class="viewcode-back" href="../../api.html#pygeohash.eastern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">eastern</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the easternmost geohash in a collection.</span>
+<span class="w">    </span><span class="sd">"""Find the easternmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The easternmost geohash.</span>
@@ -377,12 +377,12 @@
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; eastern([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
-<span class="sd">        &#39;u4pruyd&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding easternmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
+<span class="sd">        &gt;&gt;&gt; eastern(["u4pruyd", "u4pruyf", "u4pruyc"])</span>
+<span class="sd">        'u4pruyd'</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding easternmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__longitude</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found easternmost geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found easternmost geohash: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -390,11 +390,11 @@
 <div class="viewcode-block" id="western">
 <a class="viewcode-back" href="../../api.html#pygeohash.western">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">western</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the westernmost geohash in a collection.</span>
+<span class="w">    </span><span class="sd">"""Find the westernmost geohash in a collection.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The westernmost geohash.</span>
@@ -403,12 +403,12 @@
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; western([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
-<span class="sd">        &#39;u4pruyc&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Finding westernmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
+<span class="sd">        &gt;&gt;&gt; western(["u4pruyd", "u4pruyf", "u4pruyc"])</span>
+<span class="sd">        'u4pruyc'</span>
+<span class="sd">    """</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding westernmost geohash in collection of </span><span class="si">%d</span><span class="s2"> geohashes"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_max_cardinal</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">__longitude</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Found westernmost geohash: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found westernmost geohash: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -416,7 +416,7 @@
 <div class="viewcode-block" id="mean">
 <a class="viewcode-back" href="../../api.html#pygeohash.mean">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the mean position of a collection of geohashes.</span>
+<span class="w">    </span><span class="sd">"""Calculate the mean position of a collection of geohashes.</span>
 
 <span class="sd">    Latitude is averaged arithmetically. Longitude is averaged circularly, so a</span>
 <span class="sd">    collection spanning the antimeridian is centered near ±180 rather than near</span>
@@ -426,7 +426,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 <span class="sd">        precision (GeohashPrecision, optional): The precision of the resulting geohash. Defaults to 12.</span>
 
 <span class="sd">    Returns:</span>
@@ -437,24 +437,24 @@
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; mean([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;])</span>
-<span class="sd">        &#39;u4pruyf1m6dt&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; mean(["u4pruyd", "u4pruyf", "u4pruyc"])</span>
+<span class="sd">        'u4pruyf1m6dt'</span>
+<span class="sd">    """</span>
     <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating mean position for </span><span class="si">%d</span><span class="s2"> geohashes with precision </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">),</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Calculating mean position for </span><span class="si">%d</span><span class="s2"> geohashes with precision </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">),</span> <span class="n">precision</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Empty geohash collection provided&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Empty geohash collection provided"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">""</span>
 
     <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[</span><span class="n">decode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Decoded </span><span class="si">%d</span><span class="s2"> coordinates for mean calculation&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Decoded </span><span class="si">%d</span><span class="s2"> coordinates for mean calculation"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">))</span>
     <span class="n">mean_lat</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">latitude</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">)</span>
     <span class="n">mean_lon</span> <span class="o">=</span> <span class="n">_circular_mean_longitude</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">longitude</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">])</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">mean_lat</span><span class="p">,</span> <span class="n">mean_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Mean position calculated: </span><span class="si">%s</span><span class="s2"> (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">mean_lat</span><span class="p">,</span> <span class="n">mean_lon</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Mean position calculated: </span><span class="si">%s</span><span class="s2"> (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">)"</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">mean_lat</span><span class="p">,</span> <span class="n">mean_lon</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -462,14 +462,14 @@
 <div class="viewcode-block" id="variance">
 <a class="viewcode-back" href="../../api.html#pygeohash.variance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">variance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the variance of a collection of geohashes.</span>
+<span class="w">    </span><span class="sd">"""Calculate the variance of a collection of geohashes.</span>
 
 <span class="sd">    This function calculates the mean of squared distances from the mean position</span>
 <span class="sd">    to each geohash in the collection.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The variance in meters squared.</span>
@@ -478,22 +478,22 @@
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; round(variance([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;]), 1)</span>
+<span class="sd">        &gt;&gt;&gt; round(variance(["u4pruyd", "u4pruyf", "u4pruyc"]), 1)</span>
 <span class="sd">        6665.5</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating variance for </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Calculating variance for </span><span class="si">%d</span><span class="s2"> geohashes"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">geohashes</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Empty geohash collection provided&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Empty geohash collection provided"</span><span class="p">)</span>
         <span class="k">return</span> <span class="mf">0.0</span>
 
     <span class="n">mean_geohash</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
     <span class="n">squared_distances</span> <span class="o">=</span> <span class="p">[(</span><span class="n">geohash_haversine_distance</span><span class="p">(</span><span class="n">gh</span><span class="p">,</span> <span class="n">mean_geohash</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">gh</span> <span class="ow">in</span> <span class="n">geohashes</span><span class="p">]</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">squared_distances</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculated variance: </span><span class="si">%f</span><span class="s2"> square meters&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Calculated variance: </span><span class="si">%f</span><span class="s2"> square meters"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -501,14 +501,14 @@
 <div class="viewcode-block" id="std">
 <a class="viewcode-back" href="../../api.html#pygeohash.std">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">std</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">GeohashCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the standard deviation of a collection of geohashes.</span>
+<span class="w">    </span><span class="sd">"""Calculate the standard deviation of a collection of geohashes.</span>
 
 <span class="sd">    This function calculates the square root of the variance, which represents</span>
 <span class="sd">    the average distance from the mean position to each geohash in the collection.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        geohashes (GeohashCollection): Collection of geohash strings. A single geohash</span>
-<span class="sd">            must be wrapped in a collection, for example ``[&quot;u4pruyd&quot;]``.</span>
+<span class="sd">            must be wrapped in a collection, for example ``["u4pruyd"]``.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The standard deviation in meters.</span>
@@ -517,14 +517,14 @@
 <span class="sd">        TypeError: If ``geohashes`` is a single geohash string.</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; round(std([&quot;u4pruyd&quot;, &quot;u4pruyf&quot;, &quot;u4pruyc&quot;]), 1)</span>
+<span class="sd">        &gt;&gt;&gt; round(std(["u4pruyd", "u4pruyf", "u4pruyc"]), 1)</span>
 <span class="sd">        81.6</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">_reject_bare_geohash_string</span><span class="p">(</span><span class="n">geohashes</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculating standard deviation for </span><span class="si">%d</span><span class="s2"> geohashes&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Calculating standard deviation for </span><span class="si">%d</span><span class="s2"> geohashes"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">))</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Calculated standard deviation: </span><span class="si">%f</span><span class="s2"> meters&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Calculated standard deviation: </span><span class="si">%f</span><span class="s2"> meters"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 </pre></div>
@@ -544,6 +544,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../blog_posts.html">Blog Posts</a></li>
 </ul>
 
