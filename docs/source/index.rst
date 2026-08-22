@@ -82,6 +82,7 @@ Contents
    types
    examples
    api
+   benchmarks
    blog_posts
 
 Indices and tables
