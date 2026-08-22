@@ -12,6 +12,12 @@ PyGeoHash can be installed from PyPI using pip:
 
     pip install pygeohash
 
+or from conda-forge:
+
+.. code-block:: bash
+
+    conda install -c conda-forge pygeohash
+
 Basic Operations
 ----------------
 
