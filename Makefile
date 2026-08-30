@@ -110,4 +110,4 @@ viz-examples:
 
 # Run type checking
 type-check:
-	uv run mypy pygeohash 
+	uv run mypy pygeohash tests/typing
