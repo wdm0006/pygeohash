@@ -7,6 +7,8 @@ from pygeohash.types import (
     assert_valid_longitude,
     is_geohash_dataframe,
     is_geohash_series,
+    is_latitude_series,
+    is_longitude_series,
     is_valid_geohash,
     is_valid_latitude,
     is_valid_longitude,
@@ -154,6 +156,63 @@ def test_is_geohash_dataframe_accepts_valid_geohash_column():
     dataframe = pd.DataFrame({"id": [123, 456], "geohash": ["gbsuv", "u00000"]})
 
     assert is_geohash_dataframe(dataframe) is True
+
+
+@pytest.mark.parametrize(
+    "predicate, dtype",
+    [
+        (is_geohash_series, object),
+        (is_geohash_series, "float64"),
+        (is_latitude_series, object),
+        (is_latitude_series, "float64"),
+        (is_longitude_series, object),
+        (is_longitude_series, "float64"),
+    ],
+)
+def test_series_predicates_reject_empty_series(predicate, dtype):
+    """An empty Series contains no element establishing what it holds."""
+    assert predicate(pd.Series([], dtype=dtype)) is False
+
+
+@pytest.mark.parametrize(
+    "values, expected",
+    [
+        ([0.0, 45.0, -45.0], True),
+        ([90.0, -90.0], True),  # Boundaries stay valid
+        ([45, -45], True),  # Plain integers stay valid
+        ([90.000001], False),
+        ([0.0, 100.0], False),
+        (["not a number"], False),
+        ([True, False], False),  # bool is a subclass of int but is not a coordinate
+    ],
+)
+def test_is_latitude_series(values, expected):
+    """Populated latitude Series are classified by their element values."""
+    assert is_latitude_series(pd.Series(values)) is expected
+
+
+@pytest.mark.parametrize(
+    "values, expected",
+    [
+        ([0.0, 90.0, -90.0], True),
+        ([180.0, -180.0], True),  # Boundaries stay valid
+        ([90, -90], True),  # Plain integers stay valid
+        ([180.000001], False),
+        ([0.0, 200.0], False),
+        (["not a number"], False),
+        ([True, False], False),  # bool is a subclass of int but is not a coordinate
+    ],
+)
+def test_is_longitude_series(values, expected):
+    """Populated longitude Series are classified by their element values."""
+    assert is_longitude_series(pd.Series(values)) is expected
+
+
+def test_is_geohash_dataframe_rejects_empty_columns():
+    """An empty column establishes nothing, so it is not a geohash column."""
+    dataframe = pd.DataFrame({"anything": pd.Series([], dtype=object)})
+
+    assert is_geohash_dataframe(dataframe) is False
 
 
 # TODO: Add similar tests for is_valid_longitude and is_valid_geohash
