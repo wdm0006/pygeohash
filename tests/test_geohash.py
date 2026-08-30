@@ -281,6 +281,24 @@ def test_decode_return_types():
     assert exact.latitude_error > 0 and exact.longitude_error > 0
 
 
+def test_native_decode_return_types_and_values():
+    """Native decoders return the public named tuples with their named values."""
+    from pygeohash.geohash_types import ExactLatLong, LatLong
+
+    latlong = geohash_module.decode("u4pruyd")
+    assert isinstance(latlong, LatLong)
+    assert latlong == LatLong(latitude=57.64869689941406, longitude=10.407485961914062)
+
+    exact = geohash_module.decode_exactly("u4pruyd")
+    assert isinstance(exact, ExactLatLong)
+    assert exact == ExactLatLong(
+        latitude=57.64869689941406,
+        longitude=10.407485961914062,
+        latitude_error=0.0006866455078125,
+        longitude_error=0.0006866455078125,
+    )
+
+
 def test_decode_exactly_invalid_type():
     """Test decode_exactly with invalid input type."""
     with pytest.raises(ValueError, match="Geohash must be a string"):
