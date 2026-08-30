@@ -35,4 +35,4 @@ jobs:
 
       - name: Run MyPy type checking
         run: |
-          mypy pygeohash 
+          mypy pygeohash tests/typing
