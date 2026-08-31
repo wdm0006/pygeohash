@@ -153,7 +153,7 @@ def decode(geohash: str) -> LatLong:
     # The C extension raises ValueError("Invalid character in geohash") for any
     # non-base32 character, so we let it do the per-character validation instead
     # of paying for a Python-level scan on every call.
-    return LatLong(*c_decode(geohash.lower()))
+    return c_decode(geohash.lower())
 
 
 def decode_exactly(geohash: str) -> ExactLatLong:
@@ -183,7 +183,7 @@ def decode_exactly(geohash: str) -> ExactLatLong:
         raise ValueError(f"Geohash must be at most {MAX_PRECISION} characters long.")
 
     # See decode(): the C extension validates characters and raises on its own.
-    return ExactLatLong(*c_decode_exactly(geohash.lower()))
+    return c_decode_exactly(geohash.lower())
 
 
 __all__ = [

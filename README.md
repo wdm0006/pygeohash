@@ -164,24 +164,24 @@ This project is licensed under the MIT license. See the LICENSE file for details
 
 Median time per call in nanoseconds — lower is better. Measured on an Apple M4
 (macOS, CPython 3.12.11) with the suite in `tests/test_benchmark_comparison.py`,
-run three times.
+run seven times.
 
 | Library | Implementation | encode | decode | bbox |
 |---|---|---|---|---|
-| geohashr | Rust extension | 125 | 80 | 104 |
-| pygeohash-fast | Rust extension | 166 | 167 | — |
+| geohashr | Rust extension | 86 | 81 | 104 |
+| pygeohash-fast | Rust extension | 125 | 167 | — |
+| **pygeohash** | **C extension** | **204** | **250** | **667** |
 | python-geohash | C++ extension | 208 | 250 | 250 |
-| **pygeohash** | **C extension** | **250** | **333** | **709** |
-| libgeohash | pure Python | 2,709 | 2,625 | 2,750 |
-| geohash-tools | pure Python | 3,792 | 3,375 | — |
-| geolib | pure Python | 10,584 | 58,208 | 43,292 |
+| libgeohash | pure Python | 2,750 | 2,625 | 2,750 |
+| geohash-tools | pure Python | 3,833 | 3,375 | — |
+| geolib | pure Python | 10,584 | 57,708 | 43,875 |
 
-PyGeoHash is 3.9x to 10.8x faster than the quickest pure-Python library, depending
-on the operation, and lands within 1.2x of `python-geohash` on `encode` (1.3x on
-`decode`, 2.8x on bounding boxes) — the C++ extension it is commonly swapped in
-for when a build toolchain is not available. The two Rust extensions are faster
-than PyGeoHash on everything measured here, and the two fastest `encode` entries
-are within measurement noise of each other.
+PyGeoHash is 4.1x to 13.5x faster than the quickest pure-Python library, depending
+on the operation. Against `python-geohash` — the C++ extension it is commonly
+swapped in for when a build toolchain is not available — the repeated runs do not
+separate the two on `encode` or on `decode`; PyGeoHash takes 2.7x its time on
+bounding boxes. The two Rust extensions are faster than PyGeoHash on everything
+measured here, and they are within measurement noise of each other on `encode`.
 
 These are medians from one machine and one set of runs. The full tables, the
 exact library versions, the caveats and the command to regenerate everything are
