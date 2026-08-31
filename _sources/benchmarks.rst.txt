@@ -21,7 +21,7 @@ others are excluded from the suite entirely: ``geohash-hilbert`` computes a
 Hilbert-curve variant rather than a standard geohash, and ``mzgeohash`` takes no
 precision parameter, so equal work cannot be guaranteed.
 
-The whole suite was run 3 times. Each library's headline figure is the
+The whole suite was run 7 times. Each library's headline figure is the
 median of its per-run medians, and the range column gives the lowest and highest
 median it produced, so the run-to-run movement behind every number is visible.
 Ops/sec is derived from the headline median, and the final column is each
@@ -39,59 +39,59 @@ Encode ``(42.6, -5.6)`` to a precision-9 geohash.
    * - Library
      - Implementation
      - Median (ns)
-     - Range over 3 runs (ns)
+     - Range over 7 runs (ns)
      - Ops/sec
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 125
-     - 84 - 166
-     - 8,005,531
-     - 0.50x
+     - 86
+     - 84 - 125
+     - 11,688,548
+     - 0.42x
    * - pygeohash-fast
      - Rust extension
-     - 166
-     - 125 - 166
-     - 6,023,797
-     - 0.66x
+     - 125
+     - 125 - 125
+     - 7,999,939
+     - 0.61x
+   * - **pygeohash**
+     - C extension
+     - 204
+     - 202 - 206
+     - 4,898,352
+     - 1.00x
    * - python-geohash
      - C++ extension
      - 208
-     - 208 - 209
-     - 4,806,902
-     - 0.83x
-   * - **pygeohash**
-     - C extension
-     - 250
-     - 250 - 584
-     - 3,999,038
-     - 1.00x
+     - 165 - 208
+     - 4,807,575
+     - 1.02x
    * - libgeohash
      - pure Python
-     - 2,709
-     - 2,709 - 2,709
-     - 369,142
-     - 10.83x
+     - 2,750
+     - 2,709 - 2,750
+     - 363,637
+     - 13.47x
    * - geohash-tools
      - pure Python
-     - 3,792
-     - 3,792 - 3,833
-     - 263,713
-     - 15.16x
+     - 3,833
+     - 3,792 - 3,834
+     - 260,892
+     - 18.78x
    * - geolib
      - pure Python
      - 10,584
-     - 10,584 - 10,625
+     - 10,542 - 10,834
      - 94,482
-     - 42.33x
+     - 51.84x
 
-On this machine pygeohash takes 1.20x the median time of ``python-geohash`` and is 10.8x
-faster than ``libgeohash``, the quickest pure-Python entry. ``geohashr``,
-``pygeohash-fast`` are faster still.
+On this machine pygeohash is 1.02x faster than ``python-geohash`` and is 13.5x faster
+than ``libgeohash``, the quickest pure-Python entry. ``geohashr``, ``pygeohash-fast``
+are faster still.
 
-The repeated runs did not separate ``geohashr`` and ``pygeohash-fast``. Their ranges of
-medians overlap, so their relative order in the table is within measurement noise and
-swaps between runs: read them as tied.
+The repeated runs did not separate ``geohashr`` and ``pygeohash-fast``; ``pygeohash``
+and ``python-geohash``. Their ranges of medians overlap, so their relative order in the
+table is within measurement noise and swaps between runs: read them as tied.
 
 Decode
 ------
@@ -105,55 +105,59 @@ Decode ``ezs42e44y`` back to coordinates.
    * - Library
      - Implementation
      - Median (ns)
-     - Range over 3 runs (ns)
+     - Range over 7 runs (ns)
      - Ops/sec
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 80
-     - 80 - 81
-     - 12,435,484
-     - 0.24x
+     - 81
+     - 81 - 81
+     - 12,339,577
+     - 0.32x
    * - pygeohash-fast
      - Rust extension
      - 167
-     - 166 - 167
-     - 5,990,191
-     - 0.50x
+     - 167 - 167
+     - 5,988,104
+     - 0.67x
+   * - **pygeohash**
+     - C extension
+     - 250
+     - 250 - 542
+     - 3,999,970
+     - 1.00x
    * - python-geohash
      - C++ extension
      - 250
      - 250 - 250
-     - 4,000,901
-     - 0.75x
-   * - **pygeohash**
-     - C extension
-     - 333
-     - 333 - 334
-     - 3,002,424
+     - 3,999,970
      - 1.00x
    * - libgeohash
      - pure Python
      - 2,625
-     - 2,625 - 2,667
-     - 380,962
-     - 7.88x
+     - 2,625 - 2,666
+     - 380,954
+     - 10.50x
    * - geohash-tools
      - pure Python
      - 3,375
-     - 3,334 - 3,375
+     - 3,375 - 3,417
      - 296,297
-     - 10.13x
+     - 13.50x
    * - geolib
      - pure Python
-     - 58,208
-     - 56,916 - 59,313
-     - 17,180
-     - 174.77x
+     - 57,708
+     - 57,458 - 62,541
+     - 17,329
+     - 230.83x
 
-On this machine pygeohash takes 1.33x the median time of ``python-geohash`` and is 7.9x
-faster than ``libgeohash``, the quickest pure-Python entry. ``geohashr``,
-``pygeohash-fast`` are faster still.
+On this machine pygeohash is 1.00x faster than ``python-geohash`` and is 10.5x faster
+than ``libgeohash``, the quickest pure-Python entry. ``geohashr``, ``pygeohash-fast``
+are faster still.
+
+The repeated runs did not separate ``pygeohash`` and ``python-geohash``. Their ranges of
+medians overlap, so their relative order in the table is within measurement noise and
+swaps between runs: read them as tied.
 
 Bounding box
 ------------
@@ -167,41 +171,41 @@ Look up the bounding box of the ``ezs42e44y`` cell.
    * - Library
      - Implementation
      - Median (ns)
-     - Range over 3 runs (ns)
+     - Range over 7 runs (ns)
      - Ops/sec
      - vs pygeohash
    * - geohashr
      - Rust extension
      - 104
-     - 104 - 104
-     - 9,619,080
-     - 0.15x
+     - 104 - 105
+     - 9,580,832
+     - 0.16x
    * - python-geohash
      - C++ extension
      - 250
      - 250 - 291
-     - 3,999,038
-     - 0.35x
+     - 3,999,970
+     - 0.37x
    * - **pygeohash**
      - C extension
-     - 709
-     - 709 - 750
-     - 1,410,498
+     - 667
+     - 666 - 667
+     - 1,499,312
      - 1.00x
    * - libgeohash
      - pure Python
      - 2,750
-     - 2,750 - 2,750
-     - 363,626
-     - 3.88x
+     - 2,750 - 2,792
+     - 363,634
+     - 4.12x
    * - geolib
      - pure Python
-     - 43,292
-     - 42,959 - 44,000
-     - 23,099
-     - 61.06x
+     - 43,875
+     - 43,041 - 44,208
+     - 22,792
+     - 65.78x
 
-On this machine pygeohash takes 2.84x the median time of ``python-geohash`` and is 3.9x
+On this machine pygeohash takes 2.67x the median time of ``python-geohash`` and is 4.1x
 faster than ``libgeohash``, the quickest pure-Python entry. ``geohashr`` is faster
 still.
 
@@ -212,11 +216,11 @@ These figures come from repeated runs on one machine. They are not an average
 across hardware, and they should be read as an ordering rather than as
 absolute throughput you can expect elsewhere.
 
-* **Date of run**: 2026-08-14 (3 repeats of the suite)
+* **Date of run**: 2026-08-31 (7 repeats of the suite)
 * **Machine**: Apple M4 (arm64, 10 cores)
 * **Operating system**: Darwin 25.2.0
 * **Python**: CPython 3.12.11
-* **pytest-benchmark**: 5.2.3
+* **pytest-benchmark**: 5.3.0
 
 Installed versions of every library measured:
 
@@ -224,7 +228,7 @@ Installed versions of every library measured:
 * ``geohashr`` 1.6.0
 * ``geolib`` 1.0.7
 * ``libgeohash`` 0.1.1
-* ``pygeohash`` 3.4.0
+* ``pygeohash`` 3.3.2
 * ``pygeohash-fast`` 0.3.0
 * ``python-geohash`` 0.9.2
 

@@ -189,7 +189,7 @@ standard geohash, so the comparison is genuinely like for like.</p>
 others are excluded from the suite entirely: <code class="docutils literal notranslate"><span class="pre">geohash-hilbert</span></code> computes a
 Hilbert-curve variant rather than a standard geohash, and <code class="docutils literal notranslate"><span class="pre">mzgeohash</span></code> takes no
 precision parameter, so equal work cannot be guaranteed.</p>
-<p>The whole suite was run 3 times. Each library’s headline figure is the
+<p>The whole suite was run 7 times. Each library’s headline figure is the
 median of its per-run medians, and the range column gives the lowest and highest
 median it produced, so the run-to-run movement behind every number is visible.
 Ops/sec is derived from the headline median, and the final column is each
@@ -211,7 +211,7 @@ library’s median divided by pygeohash’s.</p>
 <tr class="row-odd"><th class="head"><p>Library</p></th>
 <th class="head"><p>Implementation</p></th>
 <th class="head"><p>Median (ns)</p></th>
-<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Range over 7 runs (ns)</p></th>
 <th class="head"><p>Ops/sec</p></th>
 <th class="head"><p>vs pygeohash</p></th>
 </tr>
@@ -219,61 +219,61 @@ library’s median divided by pygeohash’s.</p>
 <tbody>
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
-<td><p>125</p></td>
-<td><p>84 - 166</p></td>
-<td><p>8,005,531</p></td>
-<td><p>0.50x</p></td>
+<td><p>86</p></td>
+<td><p>84 - 125</p></td>
+<td><p>11,688,548</p></td>
+<td><p>0.42x</p></td>
 </tr>
 <tr class="row-odd"><td><p>pygeohash-fast</p></td>
 <td><p>Rust extension</p></td>
-<td><p>166</p></td>
-<td><p>125 - 166</p></td>
-<td><p>6,023,797</p></td>
-<td><p>0.66x</p></td>
+<td><p>125</p></td>
+<td><p>125 - 125</p></td>
+<td><p>7,999,939</p></td>
+<td><p>0.61x</p></td>
 </tr>
-<tr class="row-even"><td><p>python-geohash</p></td>
+<tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>204</p></td>
+<td><p>202 - 206</p></td>
+<td><p>4,898,352</p></td>
+<td><p>1.00x</p></td>
+</tr>
+<tr class="row-odd"><td><p>python-geohash</p></td>
 <td><p>C++ extension</p></td>
 <td><p>208</p></td>
-<td><p>208 - 209</p></td>
-<td><p>4,806,902</p></td>
-<td><p>0.83x</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>pygeohash</strong></p></td>
-<td><p>C extension</p></td>
-<td><p>250</p></td>
-<td><p>250 - 584</p></td>
-<td><p>3,999,038</p></td>
-<td><p>1.00x</p></td>
+<td><p>165 - 208</p></td>
+<td><p>4,807,575</p></td>
+<td><p>1.02x</p></td>
 </tr>
 <tr class="row-even"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
-<td><p>2,709</p></td>
-<td><p>2,709 - 2,709</p></td>
-<td><p>369,142</p></td>
-<td><p>10.83x</p></td>
+<td><p>2,750</p></td>
+<td><p>2,709 - 2,750</p></td>
+<td><p>363,637</p></td>
+<td><p>13.47x</p></td>
 </tr>
 <tr class="row-odd"><td><p>geohash-tools</p></td>
 <td><p>pure Python</p></td>
-<td><p>3,792</p></td>
-<td><p>3,792 - 3,833</p></td>
-<td><p>263,713</p></td>
-<td><p>15.16x</p></td>
+<td><p>3,833</p></td>
+<td><p>3,792 - 3,834</p></td>
+<td><p>260,892</p></td>
+<td><p>18.78x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
 <td><p>10,584</p></td>
-<td><p>10,584 - 10,625</p></td>
+<td><p>10,542 - 10,834</p></td>
 <td><p>94,482</p></td>
-<td><p>42.33x</p></td>
+<td><p>51.84x</p></td>
 </tr>
 </tbody>
 </table>
-<p>On this machine pygeohash takes 1.20x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 10.8x
-faster than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>,
-<code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> are faster still.</p>
-<p>The repeated runs did not separate <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> and <code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code>. Their ranges of
-medians overlap, so their relative order in the table is within measurement noise and
-swaps between runs: read them as tied.</p>
+<p>On this machine pygeohash is 1.02x faster than <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 13.5x faster
+than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>, <code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code>
+are faster still.</p>
+<p>The repeated runs did not separate <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> and <code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code>; <code class="docutils literal notranslate"><span class="pre">pygeohash</span></code>
+and <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code>. Their ranges of medians overlap, so their relative order in the
+table is within measurement noise and swaps between runs: read them as tied.</p>
 </section>
 <section id="decode">
 <h2>Decode<a class="headerlink" href="#decode" title="Link to this heading">¶</a></h2>
@@ -291,7 +291,7 @@ swaps between runs: read them as tied.</p>
 <tr class="row-odd"><th class="head"><p>Library</p></th>
 <th class="head"><p>Implementation</p></th>
 <th class="head"><p>Median (ns)</p></th>
-<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Range over 7 runs (ns)</p></th>
 <th class="head"><p>Ops/sec</p></th>
 <th class="head"><p>vs pygeohash</p></th>
 </tr>
@@ -299,58 +299,61 @@ swaps between runs: read them as tied.</p>
 <tbody>
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
-<td><p>80</p></td>
-<td><p>80 - 81</p></td>
-<td><p>12,435,484</p></td>
-<td><p>0.24x</p></td>
+<td><p>81</p></td>
+<td><p>81 - 81</p></td>
+<td><p>12,339,577</p></td>
+<td><p>0.32x</p></td>
 </tr>
 <tr class="row-odd"><td><p>pygeohash-fast</p></td>
 <td><p>Rust extension</p></td>
 <td><p>167</p></td>
-<td><p>166 - 167</p></td>
-<td><p>5,990,191</p></td>
-<td><p>0.50x</p></td>
+<td><p>167 - 167</p></td>
+<td><p>5,988,104</p></td>
+<td><p>0.67x</p></td>
 </tr>
-<tr class="row-even"><td><p>python-geohash</p></td>
+<tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>250</p></td>
+<td><p>250 - 542</p></td>
+<td><p>3,999,970</p></td>
+<td><p>1.00x</p></td>
+</tr>
+<tr class="row-odd"><td><p>python-geohash</p></td>
 <td><p>C++ extension</p></td>
 <td><p>250</p></td>
 <td><p>250 - 250</p></td>
-<td><p>4,000,901</p></td>
-<td><p>0.75x</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>pygeohash</strong></p></td>
-<td><p>C extension</p></td>
-<td><p>333</p></td>
-<td><p>333 - 334</p></td>
-<td><p>3,002,424</p></td>
+<td><p>3,999,970</p></td>
 <td><p>1.00x</p></td>
 </tr>
 <tr class="row-even"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
 <td><p>2,625</p></td>
-<td><p>2,625 - 2,667</p></td>
-<td><p>380,962</p></td>
-<td><p>7.88x</p></td>
+<td><p>2,625 - 2,666</p></td>
+<td><p>380,954</p></td>
+<td><p>10.50x</p></td>
 </tr>
 <tr class="row-odd"><td><p>geohash-tools</p></td>
 <td><p>pure Python</p></td>
 <td><p>3,375</p></td>
-<td><p>3,334 - 3,375</p></td>
+<td><p>3,375 - 3,417</p></td>
 <td><p>296,297</p></td>
-<td><p>10.13x</p></td>
+<td><p>13.50x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
-<td><p>58,208</p></td>
-<td><p>56,916 - 59,313</p></td>
-<td><p>17,180</p></td>
-<td><p>174.77x</p></td>
+<td><p>57,708</p></td>
+<td><p>57,458 - 62,541</p></td>
+<td><p>17,329</p></td>
+<td><p>230.83x</p></td>
 </tr>
 </tbody>
 </table>
-<p>On this machine pygeohash takes 1.33x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 7.9x
-faster than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>,
-<code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> are faster still.</p>
+<p>On this machine pygeohash is 1.00x faster than <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 10.5x faster
+than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>, <code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code>
+are faster still.</p>
+<p>The repeated runs did not separate <code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> and <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code>. Their ranges of
+medians overlap, so their relative order in the table is within measurement noise and
+swaps between runs: read them as tied.</p>
 </section>
 <section id="bounding-box">
 <h2>Bounding box<a class="headerlink" href="#bounding-box" title="Link to this heading">¶</a></h2>
@@ -368,7 +371,7 @@ faster than <code class="docutils literal notranslate"><span class="pre">libgeoh
 <tr class="row-odd"><th class="head"><p>Library</p></th>
 <th class="head"><p>Implementation</p></th>
 <th class="head"><p>Median (ns)</p></th>
-<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Range over 7 runs (ns)</p></th>
 <th class="head"><p>Ops/sec</p></th>
 <th class="head"><p>vs pygeohash</p></th>
 </tr>
@@ -377,41 +380,41 @@ faster than <code class="docutils literal notranslate"><span class="pre">libgeoh
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
 <td><p>104</p></td>
-<td><p>104 - 104</p></td>
-<td><p>9,619,080</p></td>
-<td><p>0.15x</p></td>
+<td><p>104 - 105</p></td>
+<td><p>9,580,832</p></td>
+<td><p>0.16x</p></td>
 </tr>
 <tr class="row-odd"><td><p>python-geohash</p></td>
 <td><p>C++ extension</p></td>
 <td><p>250</p></td>
 <td><p>250 - 291</p></td>
-<td><p>3,999,038</p></td>
-<td><p>0.35x</p></td>
+<td><p>3,999,970</p></td>
+<td><p>0.37x</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>709</p></td>
-<td><p>709 - 750</p></td>
-<td><p>1,410,498</p></td>
+<td><p>667</p></td>
+<td><p>666 - 667</p></td>
+<td><p>1,499,312</p></td>
 <td><p>1.00x</p></td>
 </tr>
 <tr class="row-odd"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
 <td><p>2,750</p></td>
-<td><p>2,750 - 2,750</p></td>
-<td><p>363,626</p></td>
-<td><p>3.88x</p></td>
+<td><p>2,750 - 2,792</p></td>
+<td><p>363,634</p></td>
+<td><p>4.12x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
-<td><p>43,292</p></td>
-<td><p>42,959 - 44,000</p></td>
-<td><p>23,099</p></td>
-<td><p>61.06x</p></td>
+<td><p>43,875</p></td>
+<td><p>43,041 - 44,208</p></td>
+<td><p>22,792</p></td>
+<td><p>65.78x</p></td>
 </tr>
 </tbody>
 </table>
-<p>On this machine pygeohash takes 2.84x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 3.9x
+<p>On this machine pygeohash takes 2.67x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 4.1x
 faster than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> is faster
 still.</p>
 </section>
@@ -421,11 +424,11 @@ still.</p>
 across hardware, and they should be read as an ordering rather than as
 absolute throughput you can expect elsewhere.</p>
 <ul class="simple">
-<li><p><strong>Date of run</strong>: 2026-08-14 (3 repeats of the suite)</p></li>
+<li><p><strong>Date of run</strong>: 2026-08-31 (7 repeats of the suite)</p></li>
 <li><p><strong>Machine</strong>: Apple M4 (arm64, 10 cores)</p></li>
 <li><p><strong>Operating system</strong>: Darwin 25.2.0</p></li>
 <li><p><strong>Python</strong>: CPython 3.12.11</p></li>
-<li><p><strong>pytest-benchmark</strong>: 5.2.3</p></li>
+<li><p><strong>pytest-benchmark</strong>: 5.3.0</p></li>
 </ul>
 <p>Installed versions of every library measured:</p>
 <ul class="simple">
@@ -433,7 +436,7 @@ absolute throughput you can expect elsewhere.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">geohashr</span></code> 1.6.0</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">geolib</span></code> 1.0.7</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">libgeohash</span></code> 0.1.1</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> 3.4.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> 3.3.2</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> 0.3.0</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> 0.9.2</p></li>
 </ul>

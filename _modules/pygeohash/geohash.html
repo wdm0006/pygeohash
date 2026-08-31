@@ -337,7 +337,7 @@
     <span class="c1"># The C extension raises ValueError("Invalid character in geohash") for any</span>
     <span class="c1"># non-base32 character, so we let it do the per-character validation instead</span>
     <span class="c1"># of paying for a Python-level scan on every call.</span>
-    <span class="k">return</span> <span class="n">LatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span></div>
+    <span class="k">return</span> <span class="n">c_decode</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
 
 
 
@@ -370,7 +370,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash must be at most </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2"> characters long."</span><span class="p">)</span>
 
     <span class="c1"># See decode(): the C extension validates characters and raises on its own.</span>
-    <span class="k">return</span> <span class="n">ExactLatLong</span><span class="p">(</span><span class="o">*</span><span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span></div>
+    <span class="k">return</span> <span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
 
 
 
