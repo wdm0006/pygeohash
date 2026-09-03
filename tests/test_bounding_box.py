@@ -1,5 +1,7 @@
 """Tests for the bounding box module."""
 
+from itertools import product
+
 import pytest
 
 from pygeohash.bounding_box import (
@@ -21,6 +23,8 @@ CORNER_BOXES = [
     BoundingBox(37.875, -114.057, 38.101, -113.685),
     BoundingBox(34.365, 67.075, 34.641, 67.47),
 ]
+
+BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz"
 
 
 def _brute_force_geohashes(bbox: BoundingBox, precision: int, samples: int = 100) -> set:
@@ -68,6 +72,15 @@ class TestBoundingBox:
         assert isinstance(bbox, BoundingBox)
         assert bbox.min_lat < bbox.max_lat
         assert bbox.min_lon < bbox.max_lon
+
+    def test_get_bounding_box_sweep_is_ordered_and_world_bounded(self):
+        """Every precision 1-3 cell produces an ordered box within world bounds."""
+        for precision in range(1, 4):
+            for characters in product(BASE32, repeat=precision):
+                bbox = get_bounding_box("".join(characters))
+
+                assert -90.0 <= bbox.min_lat <= bbox.max_lat <= 90.0
+                assert -180.0 <= bbox.min_lon <= bbox.max_lon <= 180.0
 
     def test_bounding_box_properties(self):
         """Test the properties of the BoundingBox named tuple."""

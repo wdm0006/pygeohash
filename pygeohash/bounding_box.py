@@ -98,6 +98,11 @@ class BoundingBox(_BoundingBoxFields):
         """
         return cls(*iterable)
 
+    @classmethod
+    def _unvalidated(cls, min_lat: float, min_lon: float, max_lat: float, max_lon: float) -> "BoundingBox":
+        """Build a box from values the library itself derived, skipping validation."""
+        return tuple.__new__(cls, (min_lat, min_lon, max_lat, max_lon))
+
 
 def get_bounding_box(geohash: str) -> BoundingBox:
     """Calculate the bounding box for a geohash.
@@ -120,7 +125,7 @@ def get_bounding_box(geohash: str) -> BoundingBox:
     """
     # Get the center point and error margins
     lat, lon, lat_err, lon_err = decode_exactly(geohash)
-    return BoundingBox(lat - lat_err, lon - lon_err, lat + lat_err, lon + lon_err)
+    return BoundingBox._unvalidated(lat - lat_err, lon - lon_err, lat + lat_err, lon + lon_err)
 
 
 def is_point_in_box(lat: float, lon: float, bbox: BoundingBox) -> bool:
