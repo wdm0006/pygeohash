@@ -274,7 +274,12 @@
 <span class="sd">        Overridden so that ``_make`` and ``_replace`` route through ``__new__`` instead of</span>
 <span class="sd">        ``tuple.__new__``, which would bypass validation.</span>
 <span class="sd">        """</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">iterable</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">iterable</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_unvalidated</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"BoundingBox"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Build a box from values the library itself derived, skipping validation."""</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="p">(</span><span class="n">min_lat</span><span class="p">,</span> <span class="n">min_lon</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">))</span></div>
 
 
 
@@ -301,7 +306,7 @@
 <span class="sd">    """</span>
     <span class="c1"># Get the center point and error margins</span>
     <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="n">lat</span> <span class="o">-</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">lon_err</span><span class="p">,</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">+</span> <span class="n">lon_err</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">BoundingBox</span><span class="o">.</span><span class="n">_unvalidated</span><span class="p">(</span><span class="n">lat</span> <span class="o">-</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">lon_err</span><span class="p">,</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon</span> <span class="o">+</span> <span class="n">lon_err</span><span class="p">)</span></div>
 
 
 
