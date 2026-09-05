@@ -8,7 +8,7 @@ related to geospatial regions.
 from __future__ import annotations
 
 import math
-from typing import Any, Iterable, List, NamedTuple, Set, Iterator, Type, TypeVar
+from typing import Any, Iterable, List, NamedTuple, Type, TypeVar
 
 from pygeohash.geohash import decode_exactly, encode
 from pygeohash.logging import get_logger
@@ -209,7 +209,7 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
         precision (int, optional): The precision of the geohashes to return. Defaults to 6.
 
     Returns:
-        List[str]: A list of geohashes that intersect with the bounding box.
+        List[str]: A sorted list of geohashes that intersect with the bounding box.
 
     Example:
         >>> box = BoundingBox(57.64, 10.40, 57.65, 10.41)
@@ -219,59 +219,84 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
     Note:
         The number of geohashes returned depends on the size of the bounding box
         and the precision requested. Higher precision values will result in more
-        geohashes for the same bounding box.
+        geohashes for the same bounding box. Cells are enumerated directly on
+        the geohash grid instead of sampling points, so the result is returned
+        in a deterministically sorted order that is identical across processes.
     """
     logger.debug("Finding geohashes in box %s with precision %d", bbox, precision)
 
-    # Find a geohash at the center of the bounding box
+    # Encode the center first: this validates the precision argument exactly as
+    # the previous sampling implementation did, and anchors the enumeration.
     center_lat: float = (bbox.min_lat + bbox.max_lat) / 2
     center_lon: float = (bbox.min_lon + bbox.max_lon) / 2
     center_geohash: str = encode(center_lat, center_lon, precision)
     logger.debug("Center geohash: %s at (lat=%f, lon=%f)", center_geohash, center_lat, center_lon)
 
-    # Get the size of a geohash at this precision
-    center_bbox: BoundingBox = get_bounding_box(center_geohash)
-    lat_step: float = center_bbox.max_lat - center_bbox.min_lat
-    lon_step: float = center_bbox.max_lon - center_bbox.min_lon
+    # Cell size at this precision. The C decoder refines intervals by exact
+    # halving, so the decoded error margins are exact half-cell sizes.
+    _cell_lat, _cell_lon, lat_err, lon_err = decode_exactly(center_geohash)
+    lat_step: float = 2.0 * lat_err
+    lon_step: float = 2.0 * lon_err
     logger.debug("Geohash size at precision %d: lat_step=%f, lon_step=%f", precision, lat_step, lon_step)
 
-    # Create a set to store unique geohashes
-    result: Set[str] = set()
+    # The geohash grid is uniform at a given precision: 2 ** (5p // 2) latitude
+    # rows and 2 ** ((5p + 1) // 2) longitude columns (bits alternate
+    # longitude/latitude per character, so odd and even precisions differ).
+    lat_rows: int = 1 << ((5 * precision) // 2)
+    lon_cols: int = 1 << ((5 * precision + 1) // 2)
 
-    # Calculate the starting points slightly outside the bounding box
-    # to ensure we cover the entire area
-    start_lat: float = max(bbox.min_lat - lat_step, -90.0)
-    end_lat: float = min(bbox.max_lat + lat_step, 90.0)
-    start_lon: float = max(bbox.min_lon - lon_step, -180.0)
-    end_lon: float = min(bbox.max_lon + lon_step, 180.0)
-    logger.debug("Search area: lat=[%f, %f], lon=[%f, %f]", start_lat, end_lat, start_lon, end_lon)
+    # Covering index rectangle. The +/- 1 slack absorbs the rounding of the
+    # index division for coordinates that sit within a rounding error of a
+    # cell boundary; extra candidate rows and columns are filtered per cell.
+    first_row: int = max(0, math.floor((bbox.min_lat + 90.0) / lat_step) - 1)
+    last_row: int = min(lat_rows - 1, math.floor((bbox.max_lat + 90.0) / lat_step) + 1)
+    first_col: int = max(0, math.floor((bbox.min_lon + 180.0) / lon_step) - 1)
+    last_col: int = min(lon_cols - 1, math.floor((bbox.max_lon + 180.0) / lon_step) + 1)
 
-    # Sample points in a grid pattern with spacing based on geohash size
-    # This ensures we get all geohashes that intersect with the bounding box
-    for lat in _float_range(start_lat, end_lat, lat_step / 2):
-        for lon in _float_range(start_lon, end_lon, lon_step / 2):
-            gh: str = encode(lat, lon, precision)
-            gh_bbox: BoundingBox = get_bounding_box(gh)
-            # Only add geohashes that actually intersect with our bounding box
-            if do_boxes_intersect(bbox, gh_bbox):
-                result.add(gh)
+    # A cell is classified interior (fully inside the box) or exterior (clear
+    # of it) only when the decision clears this margin on both axes; anything
+    # closer is tested exactly with do_boxes_intersect. Decoded cell bounds are
+    # exact multiples of the cell size (the C decoder halves intervals exactly)
+    # and -90 + row * lat_step reproduces the same values exactly, so 1e-12
+    # degrees is orders of magnitude above the arithmetic slack while staying
+    # far below half a cell at precision 12 (~8e-8 degrees).
+    margin: float = 1e-12
+
+    min_lat: float = bbox.min_lat
+    max_lat: float = bbox.max_lat
+    min_lon: float = bbox.min_lon
+    max_lon: float = bbox.max_lon
+
+    # Column data is row-independent: precompute each candidate column's
+    # center longitude and interior flag once, so the row loop below only
+    # does latitude arithmetic per cell.
+    col_centers: List[float] = []
+    col_interior: List[bool] = []
+    for col in range(first_col, last_col + 1):
+        cell_min_lon: float = -180.0 + col * lon_step
+        cell_max_lon: float = cell_min_lon + lon_step
+        if cell_max_lon < min_lon - margin or cell_min_lon > max_lon + margin:
+            continue  # column entirely outside the box
+        col_centers.append(cell_min_lon + lon_err)
+        col_interior.append(cell_min_lon >= min_lon + margin and cell_max_lon <= max_lon - margin)
+
+    result: List[str] = []
+    append = result.append
+
+    for row in range(first_row, last_row + 1):
+        cell_min_lat: float = -90.0 + row * lat_step
+        cell_max_lat: float = cell_min_lat + lat_step
+        if cell_max_lat < min_lat - margin or cell_min_lat > max_lat + margin:
+            continue  # row entirely outside the box
+        row_center_lat: float = cell_min_lat + lat_err
+        lat_interior: bool = cell_min_lat >= min_lat + margin and cell_max_lat <= max_lat - margin
+
+        for center_lon, lon_interior in zip(col_centers, col_interior):
+            cell_geohash: str = encode(row_center_lat, center_lon, precision)
+            if lat_interior and lon_interior:
+                append(cell_geohash)  # interior cell: fully inside the box
+            elif do_boxes_intersect(bbox, get_bounding_box(cell_geohash)):
+                append(cell_geohash)
 
     logger.debug("Found %d intersecting geohashes", len(result))
-    return list(result)
-
-
-def _float_range(start: float, stop: float, step: float) -> Iterator[float]:
-    """Helper function to create a range of float values.
-
-    Args:
-        start (float): The start value.
-        stop (float): The stop value (inclusive).
-        step (float): The step size.
-
-    Returns:
-        Iterator[float]: An iterator of float values from start to stop with the given step size.
-    """
-    current: float = start
-    while current <= stop:
-        yield current
-        current += step
+    return sorted(result)
