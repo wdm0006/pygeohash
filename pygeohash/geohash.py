@@ -49,6 +49,23 @@ def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) 
             rejected for all three arguments, even though ``bool`` is a subclass of
             ``int``.
     """
+    # Fast path: the common case (exact-type floats in range, an in-range int
+    # precision) goes straight to the C codec. The ``type(x) is ...`` identity
+    # checks are cheaper than isinstance and naturally reject bool (type(True) is
+    # bool, not int); NaN/inf fail the range comparisons. Anything else (ints,
+    # bools, numeric subclasses, non-finite, out-of-range values) falls through
+    # to the full validation below, which raises exactly the same errors as
+    # before, in the same order.
+    if (
+        type(latitude) is float
+        and type(longitude) is float
+        and -90.0 <= latitude <= 90.0
+        and -180.0 <= longitude <= 180.0
+        and type(precision) is int
+        and MIN_PRECISION <= precision <= MAX_PRECISION
+    ):
+        return c_encode(latitude, longitude, precision)
+
     # bool is a subclass of int, so it has to be rejected explicitly.
     if isinstance(precision, bool) or not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
@@ -96,6 +113,31 @@ def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecisi
             rejected for all three arguments, even though ``bool`` is a subclass of
             ``int``.
     """
+    # Same fast path as encode(): exact-type floats in range with an in-range int
+    # precision go straight to the C codec; anything else falls through to the
+    # full validation below, which raises exactly the same errors as before. The
+    # error log on a C-level failure is part of this function's contract, so the
+    # fast path keeps it.
+    if (
+        type(latitude) is float
+        and type(longitude) is float
+        and -90.0 <= latitude <= 90.0
+        and -180.0 <= longitude <= 180.0
+        and type(precision) is int
+        and MIN_PRECISION <= precision <= MAX_PRECISION
+    ):
+        try:
+            return c_encode_strictly(latitude, longitude, precision)
+        except ValueError as e:
+            logger.error(
+                "Failed to strictly encode coordinates: lat=%f, lon=%f with precision %d: %s",
+                latitude,
+                longitude,
+                precision,
+                str(e),
+            )
+            raise
+
     # bool is a subclass of int, so it has to be rejected explicitly.
     if isinstance(precision, bool) or not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
@@ -143,6 +185,25 @@ def decode(geohash: str) -> LatLong:
         ValueError: If the geohash is not a string, is not between 1 and 12 characters,
             or contains invalid characters.
     """
+    # Fast path: non-empty strings within the length bound are handed to the C
+    # codec verbatim, skipping the defensive .lower(). If the raw call raises, the
+    # bound check has already proved the wrapper's own checks would pass, so
+    # case-normalize and retry directly -- uppercase and mixed-case input lands
+    # there, and the retry's result or error is identical to the original path's.
+    # len() raises TypeError for non-str inputs, which routes them (and empty or
+    # over-precision strings, which fail the bound check) to the original checks
+    # below, keeping over-precision rejection native-free and every error message
+    # exactly as before.
+    try:
+        within_bounds = 0 < len(geohash) <= MAX_PRECISION
+    except TypeError:  # non-str geohash: not within bounds
+        within_bounds = False
+    if within_bounds:
+        try:
+            return c_decode(geohash)
+        except ValueError:
+            return c_decode(geohash.lower())
+
     if not isinstance(geohash, str):
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:
@@ -175,6 +236,25 @@ def decode_exactly(geohash: str) -> ExactLatLong:
         ValueError: If the geohash is not a string, is not between 1 and 12 characters,
             or contains invalid characters.
     """
+    # Fast path: non-empty strings within the length bound are handed to the C
+    # codec verbatim, skipping the defensive .lower(). If the raw call raises, the
+    # bound check has already proved the wrapper's own checks would pass, so
+    # case-normalize and retry directly -- uppercase and mixed-case input lands
+    # there, and the retry's result or error is identical to the original path's.
+    # len() raises TypeError for non-str inputs, which routes them (and empty or
+    # over-precision strings, which fail the bound check) to the original checks
+    # below, keeping over-precision rejection native-free and every error message
+    # exactly as before.
+    try:
+        within_bounds = 0 < len(geohash) <= MAX_PRECISION
+    except TypeError:  # non-str geohash: not within bounds
+        within_bounds = False
+    if within_bounds:
+        try:
+            return c_decode_exactly(geohash)
+        except ValueError:
+            return c_decode_exactly(geohash.lower())
+
     if not isinstance(geohash, str):
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:
