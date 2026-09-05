@@ -21,11 +21,11 @@ def test_stream_handler_emits_debug_records() -> None:
     stream = io.StringIO()
 
     pgh.add_stream_handler(level=logging.DEBUG, stream=stream)
-    pgh.get_adjacent("u4pruyd", "top")
+    pgh.geohash_approximate_distance("u4pruyd", "u4pruyf")
 
     output = stream.getvalue()
-    assert "Finding adjacent geohash for u4pruyd in direction top" in output
-    assert "pygeohash.neighbor" in output
+    assert "Calculating approximate distance between u4pruyd and u4pruyf" in output
+    assert "pygeohash.distances" in output
     assert "pygeohash.pygeohash" not in output
 
 
@@ -57,9 +57,9 @@ def test_file_handler_emits_records(tmp_path: Path) -> None:
     log_file = tmp_path / "pygeohash.log"
 
     pgh.add_file_handler(str(log_file), level=logging.DEBUG)
-    pgh.get_adjacent("u4pruyd", "top")
+    pgh.geohash_approximate_distance("u4pruyd", "u4pruyf")
 
-    assert "Finding adjacent geohash for u4pruyd in direction top" in log_file.read_text()
+    assert "Calculating approximate distance between u4pruyd and u4pruyf" in log_file.read_text()
 
 
 def test_stream_handler_does_not_configure_root_logger() -> None:
@@ -95,12 +95,13 @@ def test_module_logger_handler_receives_neighbor_records() -> None:
     module_logger.addHandler(handler)
 
     try:
-        pgh.get_adjacent("u4pruyd", "top")
+        with pytest.raises(ValueError):
+            pgh.get_adjacent("", "top")
     finally:
         module_logger.removeHandler(handler)
         module_logger.setLevel(original_level)
 
-    assert "Finding adjacent geohash for u4pruyd in direction top" in stream.getvalue()
+    assert "Cannot find adjacent geohash: input geohash length is 0" in stream.getvalue()
 
 
 def test_get_logger_preserves_bare_child_name() -> None:
