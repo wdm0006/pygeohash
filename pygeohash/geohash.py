@@ -185,25 +185,6 @@ def decode(geohash: str) -> LatLong:
         ValueError: If the geohash is not a string, is not between 1 and 12 characters,
             or contains invalid characters.
     """
-    # Fast path: non-empty strings within the length bound are handed to the C
-    # codec verbatim, skipping the defensive .lower(). If the raw call raises, the
-    # bound check has already proved the wrapper's own checks would pass, so
-    # case-normalize and retry directly -- uppercase and mixed-case input lands
-    # there, and the retry's result or error is identical to the original path's.
-    # len() raises TypeError for non-str inputs, which routes them (and empty or
-    # over-precision strings, which fail the bound check) to the original checks
-    # below, keeping over-precision rejection native-free and every error message
-    # exactly as before.
-    try:
-        within_bounds = 0 < len(geohash) <= MAX_PRECISION
-    except TypeError:  # non-str geohash: not within bounds
-        within_bounds = False
-    if within_bounds:
-        try:
-            return c_decode(geohash)
-        except ValueError:
-            return c_decode(geohash.lower())
-
     if not isinstance(geohash, str):
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:
@@ -236,25 +217,6 @@ def decode_exactly(geohash: str) -> ExactLatLong:
         ValueError: If the geohash is not a string, is not between 1 and 12 characters,
             or contains invalid characters.
     """
-    # Fast path: non-empty strings within the length bound are handed to the C
-    # codec verbatim, skipping the defensive .lower(). If the raw call raises, the
-    # bound check has already proved the wrapper's own checks would pass, so
-    # case-normalize and retry directly -- uppercase and mixed-case input lands
-    # there, and the retry's result or error is identical to the original path's.
-    # len() raises TypeError for non-str inputs, which routes them (and empty or
-    # over-precision strings, which fail the bound check) to the original checks
-    # below, keeping over-precision rejection native-free and every error message
-    # exactly as before.
-    try:
-        within_bounds = 0 < len(geohash) <= MAX_PRECISION
-    except TypeError:  # non-str geohash: not within bounds
-        within_bounds = False
-    if within_bounds:
-        try:
-            return c_decode_exactly(geohash)
-        except ValueError:
-            return c_decode_exactly(geohash.lower())
-
     if not isinstance(geohash, str):
         raise ValueError(f"Geohash must be a string, but got {type(geohash).__name__}.")
     if not geohash:

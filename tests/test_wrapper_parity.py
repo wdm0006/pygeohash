@@ -1,11 +1,11 @@
 """Wrapper parity coverage for the codec fast paths.
 
-The public wrappers take a fast path for canonical inputs -- exact-type in-range
-float coordinates with an in-range int precision, and non-empty in-bounds strings
-handed to the C codec verbatim -- and fall through to the original validation for
-everything else. These tests pin that both paths produce identical results and
-identical errors for every input class, including the Unicode cases that make a
-naive "skip .lower()" optimization unsound.
+The encode wrappers take a fast path for canonical inputs -- exact-type in-range
+float coordinates with an in-range int precision -- and fall through to the
+original validation for everything else; the decode wrappers are unchanged and
+keep their case-insensitive handling. These tests pin identical results and
+identical errors for every input class on both wrappers, including the Unicode
+cases that make any change to .lower() handling unsound.
 """
 
 import pytest
