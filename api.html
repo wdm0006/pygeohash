@@ -716,7 +716,7 @@ precise coordinates.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of geohashes that intersect with the bounding box.</p>
+<dd class="field-even"><p>A sorted list of geohashes that intersect with the bounding box.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List[str]</p>
@@ -732,7 +732,9 @@ precise coordinates.</p>
 <p class="admonition-title">Note</p>
 <p>The number of geohashes returned depends on the size of the bounding box
 and the precision requested. Higher precision values will result in more
-geohashes for the same bounding box.</p>
+geohashes for the same bounding box. Cells are enumerated directly on
+the geohash grid instead of sampling points, so the result is returned
+in a deterministically sorted order that is identical across processes.</p>
 </div>
 </dd></dl>
 
