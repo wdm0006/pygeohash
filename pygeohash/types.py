@@ -75,6 +75,9 @@ Coordinate = Tuple[float, float]
 # Validation constants
 _GEOHASH_PATTERN: Final[re.Pattern] = re.compile(r"^[0123456789bcdefghjkmnpqrstuvwxyz]+$")
 
+# Precomputed once at import so is_valid_geohash does not rebuild a 32-character set per call.
+_GEOHASH_CHAR_SET: Final[frozenset] = frozenset("0123456789bcdefghjkmnpqrstuvwxyz")
+
 # Type definitions for numpy arrays
 if TYPE_CHECKING:
     GeohashArray = "npt.NDArray[np.str_]"
@@ -113,8 +116,9 @@ def is_valid_geohash(value: Union[str, object]) -> bool:
     if len(value) < 1 or len(value) > 12:
         return False
 
-    valid_chars = set("0123456789bcdefghjkmnpqrstuvwxyz")
-    return all(c in valid_chars for c in value.lower())
+    # issuperset runs the all-characters-valid check in C, equivalent to
+    # all(c in valid_chars for c in value.lower()), with no per-call set construction.
+    return _GEOHASH_CHAR_SET.issuperset(value.lower())
 
 
 def is_valid_latitude(value: Union[float, int, object]) -> bool:
