@@ -227,6 +227,23 @@
 <span class="sd">            rejected for all three arguments, even though ``bool`` is a subclass of</span>
 <span class="sd">            ``int``.</span>
 <span class="sd">    """</span>
+    <span class="c1"># Fast path: the common case (exact-type floats in range, an in-range int</span>
+    <span class="c1"># precision) goes straight to the C codec. The ``type(x) is ...`` identity</span>
+    <span class="c1"># checks are cheaper than isinstance and naturally reject bool (type(True) is</span>
+    <span class="c1"># bool, not int); NaN/inf fail the range comparisons. Anything else (ints,</span>
+    <span class="c1"># bools, numeric subclasses, non-finite, out-of-range values) falls through</span>
+    <span class="c1"># to the full validation below, which raises exactly the same errors as</span>
+    <span class="c1"># before, in the same order.</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span>
+        <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span>
+        <span class="ow">and</span> <span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span>
+        <span class="ow">and</span> <span class="o">-</span><span class="mf">180.0</span> <span class="o">&lt;=</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="mf">180.0</span>
+        <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span>
+        <span class="ow">and</span> <span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="n">c_encode</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+
     <span class="c1"># bool is a subclass of int, so it has to be rejected explicitly.</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
@@ -277,6 +294,31 @@
 <span class="sd">            rejected for all three arguments, even though ``bool`` is a subclass of</span>
 <span class="sd">            ``int``.</span>
 <span class="sd">    """</span>
+    <span class="c1"># Same fast path as encode(): exact-type floats in range with an in-range int</span>
+    <span class="c1"># precision go straight to the C codec; anything else falls through to the</span>
+    <span class="c1"># full validation below, which raises exactly the same errors as before. The</span>
+    <span class="c1"># error log on a C-level failure is part of this function's contract, so the</span>
+    <span class="c1"># fast path keeps it.</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="nb">type</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span>
+        <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span>
+        <span class="ow">and</span> <span class="o">-</span><span class="mf">90.0</span> <span class="o">&lt;=</span> <span class="n">latitude</span> <span class="o">&lt;=</span> <span class="mf">90.0</span>
+        <span class="ow">and</span> <span class="o">-</span><span class="mf">180.0</span> <span class="o">&lt;=</span> <span class="n">longitude</span> <span class="o">&lt;=</span> <span class="mf">180.0</span>
+        <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span>
+        <span class="ow">and</span> <span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span>
+    <span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">c_encode_strictly</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s2">"Failed to strictly encode coordinates: lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span>
+                <span class="n">latitude</span><span class="p">,</span>
+                <span class="n">longitude</span><span class="p">,</span>
+                <span class="n">precision</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="k">raise</span>
+
     <span class="c1"># bool is a subclass of int, so it has to be rejected explicitly.</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
