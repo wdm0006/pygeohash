@@ -31,22 +31,18 @@
 // Base32 alphabet used for geohash encoding
 static const char BASE32[] = "0123456789bcdefghjkmnpqrstuvwxyz";
 
-// Mapping from base32 character to its index value
-static int base32_decode_map[128] = {0};
+// Mapping from byte value to its 5-bit base32 index, -1 for every
+// non-alphabet byte. 256 entries so any char value (including bytes >= 128
+// from multibyte UTF-8) can index it without a separate range guard.
+static int base32_decode_map[256] = {0};
 
-// Initialize the base32 decode map
-static void init_base32_decode_map() {
-    static int initialized = 0;
-    if (!initialized) {
-        // Initialize all to -1 (invalid)
-        for (int i = 0; i < 128; i++) {
-            base32_decode_map[i] = -1;
-        }
-        // Set valid values
-        for (int i = 0; i < 32; i++) {
-            base32_decode_map[(int)BASE32[i]] = i;
-        }
-        initialized = 1;
+// Initialize the base32 decode map. Called once from the module init function.
+static void init_base32_decode_map(void) {
+    for (int i = 0; i < 256; i++) {
+        base32_decode_map[i] = -1;
+    }
+    for (int i = 0; i < 32; i++) {
+        base32_decode_map[(unsigned char)BASE32[i]] = i;
     }
 }
 
@@ -104,13 +100,23 @@ static PyObject* make_named_tuple(PyObject *type, PyObject *values) {
 
 // Core decode: walk the geohash bits into a center point and error margins.
 // Returns 0 on success, -1 on an invalid character (with a Python exception set).
+//
+// The geohash bit stream strictly alternates longitude/latitude starting with
+// longitude, and each character contributes 5 bits, so character parity
+// alternates: even-index characters start on a longitude bit (L A L A L for
+// masks 16, 8, 4, 2, 1), odd-index characters on a latitude bit (A L A L A).
+// Characters are processed in pairs, which makes the parity of every unrolled
+// step a compile-time constant, with one trailing character for odd lengths.
+// The floating point operations per bit (error halving, midpoint
+// (lo + hi) * 0.5, and which bound is replaced) run in the original order, so
+// results are bit-identical to the previous loop (verified by
+// tests/test_c_codec_bit_identity.py).
 static int decode_to_doubles(const char *geohash, double *out_lat, double *out_lon,
                              double *out_lat_err, double *out_lon_err) {
-    double lat_interval[2] = {-90.0, 90.0};
-    double lon_interval[2] = {-180.0, 180.0};
+    double lat_lo = -90.0, lat_hi = 90.0;
+    double lon_lo = -180.0, lon_hi = 180.0;
     double lat_err = 90.0;
     double lon_err = 180.0;
-    int is_even = 1;
     size_t len = strlen(geohash);
 
     if (len < 1 || len > 12) {
@@ -118,41 +124,54 @@ static int decode_to_doubles(const char *geohash, double *out_lat, double *out_l
         return -1;
     }
 
-    init_base32_decode_map();
-
-    for (size_t i = 0; i < len; i++) {
-        unsigned char c = (unsigned char)geohash[i];
-        // Guard the table lookup: bytes >= 128 (e.g. multibyte UTF-8) must not
-        // index past base32_decode_map, they are simply invalid.
-        int cd = (c < 128) ? base32_decode_map[c] : -1;
-        if (cd == -1) {
+    size_t i = 0;
+    for (; i + 1 < len; i += 2) {
+        // The table guards every byte: non-alphabet bytes (including >= 128)
+        // map to -1. Whether an invalid character is detected here or after
+        // bisecting the first of the pair is unobservable: the caller discards
+        // all interval state when -1 is returned.
+        int cd0 = base32_decode_map[(unsigned char)geohash[i]];
+        int cd1 = base32_decode_map[(unsigned char)geohash[i + 1]];
+        if (cd0 < 0 || cd1 < 0) {
             PyErr_SetString(PyExc_ValueError, "Invalid character in geohash");
             return -1;
         }
 
-        // Process each bit of the base32 character
-        for (int mask = 16; mask > 0; mask >>= 1) {
-            if (is_even) {  // longitude
-                lon_err /= 2.0;
-                if (cd & mask) {
-                    lon_interval[0] = (lon_interval[0] + lon_interval[1]) / 2.0;
-                } else {
-                    lon_interval[1] = (lon_interval[0] + lon_interval[1]) / 2.0;
-                }
-            } else {  // latitude
-                lat_err /= 2.0;
-                if (cd & mask) {
-                    lat_interval[0] = (lat_interval[0] + lat_interval[1]) / 2.0;
-                } else {
-                    lat_interval[1] = (lat_interval[0] + lat_interval[1]) / 2.0;
-                }
-            }
-            is_even = !is_even;
+        double mid;
+
+        // character i (even index): lon, lat, lon, lat, lon
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd0 & 16) { lon_lo = mid; } else { lon_hi = mid; }
+        lat_err *= 0.5; mid = (lat_lo + lat_hi) * 0.5; if (cd0 &  8) { lat_lo = mid; } else { lat_hi = mid; }
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd0 &  4) { lon_lo = mid; } else { lon_hi = mid; }
+        lat_err *= 0.5; mid = (lat_lo + lat_hi) * 0.5; if (cd0 &  2) { lat_lo = mid; } else { lat_hi = mid; }
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd0 &  1) { lon_lo = mid; } else { lon_hi = mid; }
+
+        // character i + 1 (odd index): lat, lon, lat, lon, lat
+        lat_err *= 0.5; mid = (lat_lo + lat_hi) * 0.5; if (cd1 & 16) { lat_lo = mid; } else { lat_hi = mid; }
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd1 &  8) { lon_lo = mid; } else { lon_hi = mid; }
+        lat_err *= 0.5; mid = (lat_lo + lat_hi) * 0.5; if (cd1 &  4) { lat_lo = mid; } else { lat_hi = mid; }
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd1 &  2) { lon_lo = mid; } else { lon_hi = mid; }
+        lat_err *= 0.5; mid = (lat_lo + lat_hi) * 0.5; if (cd1 &  1) { lat_lo = mid; } else { lat_hi = mid; }
+    }
+    if (i < len) {
+        // odd length: final character, even index -> starts on a longitude bit
+        int cd = base32_decode_map[(unsigned char)geohash[i]];
+        if (cd < 0) {
+            PyErr_SetString(PyExc_ValueError, "Invalid character in geohash");
+            return -1;
         }
+
+        double mid;
+
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd & 16) { lon_lo = mid; } else { lon_hi = mid; }
+        lat_err *= 0.5; mid = (lat_lo + lat_hi) * 0.5; if (cd &  8) { lat_lo = mid; } else { lat_hi = mid; }
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd &  4) { lon_lo = mid; } else { lon_hi = mid; }
+        lat_err *= 0.5; mid = (lat_lo + lat_hi) * 0.5; if (cd &  2) { lat_lo = mid; } else { lat_hi = mid; }
+        lon_err *= 0.5; mid = (lon_lo + lon_hi) * 0.5; if (cd &  1) { lon_lo = mid; } else { lon_hi = mid; }
     }
 
-    *out_lat = (lat_interval[0] + lat_interval[1]) / 2.0;
-    *out_lon = (lon_interval[0] + lon_interval[1]) / 2.0;
+    *out_lat = (lat_lo + lat_hi) * 0.5;
+    *out_lon = (lon_lo + lon_hi) * 0.5;
     *out_lat_err = lat_err;
     *out_lon_err = lon_err;
     return 0;
@@ -420,5 +439,6 @@ static struct PyModuleDef geohashmodule = {
 
 // Module initialization function
 PyMODINIT_FUNC PyInit_geohash_module(void) {
+    init_base32_decode_map();
     return PyModule_Create(&geohashmodule);
 }
