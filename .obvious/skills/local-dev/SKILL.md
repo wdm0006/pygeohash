@@ -26,16 +26,17 @@ Recorded 2026-09-05 on sandbox `cmp_WXrvD8BB` (live session `icudbl9xcq7lsqozvkg
 
 ```python
 import matplotlib
+
 matplotlib.use("Agg")  # headless
 import pygeohash as pgh
 from pygeohash.viz import plot_geohash, folium_map
 
-pgh.encode(latitude=42.6, longitude=-5.6)           # 'ezs42e44yx96'
-lat, lng = pgh.decode(geohash="ezs42")              # (42.60498046875, -5.60302734375)
+pgh.encode(latitude=42.6, longitude=-5.6)  # 'ezs42e44yx96'
+lat, lng = pgh.decode(geohash="ezs42")  # (42.60498046875, -5.60302734375)
 pgh.geohash_approximate_distance("bcd3u", "bc83n")  # 625441
-pgh.get_adjacent("kd3ybyu", "right")                # 'kd3ybyv'
-plot_geohash("9q8yyk", color="red")                 # matplotlib figure
-folium_map("u4pruyd")                               # folium map object
+pgh.get_adjacent("kd3ybyu", "right")  # 'kd3ybyv'
+plot_geohash("9q8yyk", color="red")  # matplotlib figure
+folium_map("u4pruyd")  # folium map object
 ```
 
 ## Gotchas
