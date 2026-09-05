@@ -182,7 +182,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">FrozenSet</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">__base32</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">is_valid_geohash</span>
@@ -232,6 +232,25 @@
 
 <span class="n">DIRECTIONS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Direction</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="s2">"left"</span><span class="p">,</span> <span class="s2">"top"</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">)</span>
 
+<span class="c1"># Precomputed lookups so the hot path avoids per-call construction, str.index scans,</span>
+<span class="c1"># and recursion on border characters. Indexed [direction][parity_bit] where bit 0 =</span>
+<span class="c1"># even-length hash and bit 1 = odd-length hash (a prefix of length i + 1 has parity</span>
+<span class="c1"># bit (i + 1) &amp; 1).</span>
+<span class="n">_BORDER_SETS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Direction</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">FrozenSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">direction</span><span class="p">:</span> <span class="p">(</span>
+        <span class="nb">frozenset</span><span class="p">(</span><span class="n">BORDERS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="s2">"even"</span><span class="p">]),</span>
+        <span class="nb">frozenset</span><span class="p">(</span><span class="n">BORDERS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="s2">"odd"</span><span class="p">]),</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">DIRECTIONS</span>
+<span class="p">}</span>
+<span class="n">_NEIGHBOR_MAPS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Direction</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">direction</span><span class="p">:</span> <span class="p">(</span>
+        <span class="p">{</span><span class="n">char</span><span class="p">:</span> <span class="n">__base32</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">NEIGHBORS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="s2">"even"</span><span class="p">])},</span>
+        <span class="p">{</span><span class="n">char</span><span class="p">:</span> <span class="n">__base32</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">NEIGHBORS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="s2">"odd"</span><span class="p">])},</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">DIRECTIONS</span>
+<span class="p">}</span>
+
 
 <div class="viewcode-block" id="get_adjacent">
 <a class="viewcode-back" href="../../api.html#pygeohash.get_adjacent">[docs]</a>
@@ -259,8 +278,6 @@
 <span class="sd">        &gt;&gt;&gt; get_adjacent("u4pruyd", "top")</span>
 <span class="sd">        'u4pruyf'</span>
 <span class="sd">    """</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding adjacent geohash for </span><span class="si">%s</span><span class="s2"> in direction </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">geohash</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Cannot find adjacent geohash: input geohash length is 0"</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The geohash length cannot be 0. Possible when close to poles"</span><span class="p">)</span>
@@ -277,33 +294,32 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid direction: </span><span class="si">{</span><span class="n">direction</span><span class="si">!r}</span><span class="s2">. Must be one of 'right', 'left', 'top', 'bottom'"</span><span class="p">)</span>
 
     <span class="n">source_hash</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="n">last_char</span> <span class="o">=</span> <span class="n">source_hash</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">base</span> <span class="o">=</span> <span class="n">source_hash</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Processing: base=</span><span class="si">%s</span><span class="s2">, last_char=</span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
+    <span class="n">border_sets</span> <span class="o">=</span> <span class="n">_BORDER_SETS</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
+    <span class="n">neighbor_maps</span> <span class="o">=</span> <span class="n">_NEIGHBOR_MAPS</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
 
-    <span class="n">split_direction</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"even"</span><span class="p">,</span> <span class="s2">"odd"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"even"</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_hash</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"odd"</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Using </span><span class="si">%s</span><span class="s2"> lookup tables based on hash length"</span><span class="p">,</span> <span class="n">split_direction</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">last_char</span> <span class="ow">in</span> <span class="n">BORDERS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="n">split_direction</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">base</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Last character </span><span class="si">%s</span><span class="s2"> is on border, recursively finding parent neighbor"</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
-            <span class="n">base</span> <span class="o">=</span> <span class="n">get_adjacent</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">):</span>
-            <span class="n">pole</span> <span class="o">=</span> <span class="s2">"north"</span> <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">"top"</span> <span class="k">else</span> <span class="s2">"south"</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Cannot find adjacent geohash: the </span><span class="si">%s</span><span class="s2"> neighbor lies beyond the </span><span class="si">%s</span><span class="s2"> pole"</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">pole</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No adjacent geohash to the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">: it would lie beyond the </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2"> pole"</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Walk right-to-left through border characters instead of recursing: position i</span>
+    <span class="c1"># ends a substring of length i + 1, so its parity bit is (i + 1) &amp; 1. Reaching</span>
+    <span class="c1"># the first character on a border means the neighbor crosses into the parent tile.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_hash</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">source_hash</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">border_sets</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">):</span>
+                <span class="n">pole</span> <span class="o">=</span> <span class="s2">"north"</span> <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">"top"</span> <span class="k">else</span> <span class="s2">"south"</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Cannot find adjacent geohash: the </span><span class="si">%s</span><span class="s2"> neighbor lies beyond the </span><span class="si">%s</span><span class="s2"> pole"</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">pole</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No adjacent geohash to the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">: it would lie beyond the </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2"> pole"</span><span class="p">)</span>
             <span class="c1"># Longitude is cyclic, so the top-level tables already encode the antimeridian wrap.</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Last character </span><span class="si">%s</span><span class="s2"> is on the antimeridian, wrapping longitude"</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Last character </span><span class="si">%s</span><span class="s2"> is not on border, using direct neighbor lookup"</span><span class="p">,</span> <span class="n">last_char</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
 
-    <span class="n">neighbor_str</span> <span class="o">=</span> <span class="n">NEIGHBORS</span><span class="p">[</span><span class="n">direction</span><span class="p">][</span><span class="n">split_direction</span><span class="p">]</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">neighbor_str</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">last_char</span><span class="p">)</span>
-    <span class="n">base32_char</span> <span class="o">=</span> <span class="n">__base32</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">base</span> <span class="o">+</span> <span class="n">base32_char</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Found adjacent geohash: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="n">translated</span> <span class="o">=</span> <span class="n">neighbor_maps</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">][</span><span class="n">source_hash</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_hash</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># Common case: the last character is not on a border, no parent lookup needed.</span>
+        <span class="k">return</span> <span class="n">source_hash</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">translated</span>
+
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">source_hash</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">translated</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_hash</span><span class="p">)):</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbor_maps</span><span class="p">[(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">][</span><span class="n">source_hash</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span></div>
 
 </pre></div>
 
