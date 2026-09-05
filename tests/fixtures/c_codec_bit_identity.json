@@ -1,0 +1,10118 @@
+[
+ {
+  "kind": "encode",
+  "lat": "0x1.769b5b0e57918p+5",
+  "lon": "-0x1.899a48f5f720dp+6",
+  "precision": 8,
+  "result": "cb642u6u"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.26ee18229d692p+6",
+  "lon": "-0x1.b8b769a1e9726p+5",
+  "precision": 8,
+  "result": "fv0g6qt5"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4d6ba7892180ep+6",
+  "lon": "-0x1.28387dd03f1a7p+6",
+  "precision": 2,
+  "result": "43"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f681f9a857800p-4",
+  "lon": "-0x1.80ecb12a4b2d8p+6",
+  "precision": 4,
+  "result": "3zgx"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.b733b62fac8b4p+4",
+  "lon": "0x1.8e002b93b3718p+6",
+  "precision": 2,
+  "result": "q5"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3a081b535ed8ap+5",
+  "lon": "-0x1.540d0b3e0df0ep+6",
+  "precision": 3,
+  "result": "615"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.72c5df25dbad0p+5",
+  "lon": "0x1.6a9a14c109470p+4",
+  "precision": 1,
+  "result": "u"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8e3d56afb8570p+3",
+  "lon": "-0x1.4b5ba9f18bb66p+7",
+  "precision": 10,
+  "result": "2mf1jyknwy"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7a615e9778190p+5",
+  "lon": "0x1.dc84f1fbc2664p+6",
+  "precision": 9,
+  "result": "y8ktnf78n"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0538d22eb3f30p+4",
+  "lon": "0x1.66ce56e7d4ef8p+6",
+  "precision": 7,
+  "result": "tfzuchn"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.193a6222656e0p+5",
+  "lon": "0x1.28cd1758a6dc0p+6",
+  "precision": 10,
+  "result": "twhzbrwbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.01ecd4f122f58p+3",
+  "lon": "-0x1.20abdbced1245p+7",
+  "precision": 8,
+  "result": "8c3mge3c"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.940ca6ae28c24p+5",
+  "lon": "0x1.1d1c2f9a396e8p+6",
+  "precision": 6,
+  "result": "v8fxmf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2114f256ad498p+6",
+  "lon": "-0x1.ac3d0da37cf2ap+5",
+  "precision": 3,
+  "result": "fuc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2a0020878aa28p+6",
+  "lon": "-0x1.146ec1ba1e963p+7",
+  "precision": 12,
+  "result": "bvjxyf3fwm8w"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.59e3f9a7c6cb0p+4",
+  "lon": "0x1.40f0d98a1878cp+7",
+  "precision": 9,
+  "result": "xef4gx6yz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1856775dd0cbcp+5",
+  "lon": "0x1.3c25491813cc0p+6",
+  "precision": 8,
+  "result": "ty0pqe0x"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c6f3227bbd718p+5",
+  "lon": "0x1.2a8c1dec842a8p+4",
+  "precision": 1,
+  "result": "u"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4fff6ecc52170p+6",
+  "lon": "-0x1.2f6024f38b160p+7",
+  "precision": 1,
+  "result": "b"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.664a4291c279ap+6",
+  "lon": "0x1.518455aa02900p+4",
+  "precision": 8,
+  "result": "h2p42jbf"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.03d3556d78878p+4",
+  "lon": "-0x1.002eaa44269dap+6",
+  "precision": 11,
+  "result": "6t47weg2qj2"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b7b58f6aa832cp+4",
+  "lon": "-0x1.58d601e4ab689p+6",
+  "precision": 1,
+  "result": "d"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.523f9ae4edc88p+4",
+  "lon": "0x1.052c5db47e080p+7",
+  "precision": 11,
+  "result": "wgub78d2981"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.bacd2b2e4b3c0p+4",
+  "lon": "-0x1.98fec536d9a10p+3",
+  "precision": 11,
+  "result": "esyvmnj54f9"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3733b75e9a821p+5",
+  "lon": "-0x1.401e115f6799cp+6",
+  "precision": 10,
+  "result": "61p4dykmse"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3f6c026c5d030p+2",
+  "lon": "-0x1.ab9e696c20ce0p+5",
+  "precision": 5,
+  "result": "dbcur"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.aeec04f6e8880p+2",
+  "lon": "-0x1.df418ca279328p+6",
+  "precision": 1,
+  "result": "3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.e3024a1b5921cp+5",
+  "lon": "0x1.044dea6e68808p+7",
+  "precision": 8,
+  "result": "yfsx3xju"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.edfcde3119326p+4",
+  "lon": "-0x1.229611626aae6p+7",
+  "precision": 10,
+  "result": "2f88mg8b93"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3b4e9903d3806p+6",
+  "lon": "-0x1.971374ba24adcp+5",
+  "precision": 6,
+  "result": "fy5b6j"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.356ce9c3130c2p+6",
+  "lon": "0x1.59b35fb9b7d9cp+7",
+  "precision": 7,
+  "result": "zvfbj63"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.bc26979b086d0p+4",
+  "lon": "0x1.522c2d9a39bb4p+5",
+  "precision": 7,
+  "result": "suyjcvm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.d659cdfc582ccp+5",
+  "lon": "0x1.fef10679e95f0p+6",
+  "precision": 5,
+  "result": "nvdcd"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5e5f67256447ap+6",
+  "lon": "0x1.e7759014159c0p+3",
+  "precision": 1,
+  "result": "u"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.954c3edda8c99p+5",
+  "lon": "0x1.0631b651fd6fep+6",
+  "precision": 12,
+  "result": "jqyxg94zpggn"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.722a5030535c0p+1",
+  "lon": "-0x1.b252f6f7bd208p+4",
+  "precision": 6,
+  "result": "e2s8qq"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.a076e25fa83c0p+2",
+  "lon": "-0x1.e83191b1f11d4p+5",
+  "precision": 7,
+  "result": "d9ht52e"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4b9b47f1426a8p+5",
+  "lon": "-0x1.0867245e1098cp+6",
+  "precision": 6,
+  "result": "688upy"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.cb5c1c7c90604p+5",
+  "lon": "-0x1.ebed032d1be60p+3",
+  "precision": 11,
+  "result": "gdjndhvzwe3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c82f766c68eb4p+5",
+  "lon": "-0x1.a832102d5037cp+5",
+  "precision": 11,
+  "result": "ff4k3kub0fk"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.35eef54bc78d2p+6",
+  "lon": "-0x1.94220f6749190p+5",
+  "precision": 1,
+  "result": "f"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.22b95a899a2d0p+5",
+  "lon": "-0x1.8c2d2f94a1bfap+6",
+  "precision": 4,
+  "result": "9y3w"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.128d20176cb60p+1",
+  "lon": "0x1.34ed028e3550cp+6",
+  "precision": 8,
+  "result": "t8qujqqp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.329f76468d3b0p+6",
+  "lon": "0x1.35abede41ddf4p+6",
+  "precision": 12,
+  "result": "jdr5ctmbpc4p"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.24e2b1626d646p+6",
+  "lon": "0x1.75bb64d5989a8p+6",
+  "precision": 1,
+  "result": "y"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0ffc64ca5f786p+6",
+  "lon": "-0x1.14e1616fb9c64p+7",
+  "precision": 1,
+  "result": "b"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6ba1455a61a58p+5",
+  "lon": "-0x1.e6ee3986b7641p+6",
+  "precision": 12,
+  "result": "c216tfsgrb79"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c8efe9d229220p+3",
+  "lon": "0x1.335f8ec9740e8p+6",
+  "precision": 3,
+  "result": "mtq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.45e1e404678b6p+5",
+  "lon": "0x1.08a06f9abfc74p+7",
+  "precision": 6,
+  "result": "qby06b"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3c9605605d048p+5",
+  "lon": "0x1.47adaf71c570cp+6",
+  "precision": 8,
+  "result": "tz430hh4"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4f2b5eff72604p+6",
+  "lon": "-0x1.0e4170f71a920p+3",
+  "precision": 3,
+  "result": "gyc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.853788f2c8400p+2",
+  "lon": "0x1.92dd44e21aaf4p+6",
+  "precision": 5,
+  "result": "w1pde"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.8407e716a9a74p+5",
+  "lon": "0x1.548b92f4a9556p+7",
+  "precision": 4,
+  "result": "zb95"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5cd2457d4b280p+6",
+  "lon": "-0x1.0ec68db05ec62p+7",
+  "precision": 5,
+  "result": "bzx8p"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.13d37e311cf10p+6",
+  "lon": "-0x1.28537d43d3718p+7",
+  "precision": 2,
+  "result": "0e"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.37897a59cdcb9p+6",
+  "lon": "-0x1.891db00a4e78cp+5",
+  "precision": 2,
+  "result": "4f"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1ade4c938c3fcp+6",
+  "lon": "0x1.d959d8ca3cc88p+6",
+  "precision": 5,
+  "result": "yss4k"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ca29413056ed4p+5",
+  "lon": "-0x1.3fd3d68b286d0p+6",
+  "precision": 4,
+  "result": "f4pj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.f151a111b4840p+3",
+  "lon": "0x1.de65e4bf2ba54p+6",
+  "precision": 4,
+  "result": "wdv0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.16f06dfbb5ec0p+6",
+  "lon": "0x1.4dad6b0188a38p+5",
+  "precision": 4,
+  "result": "uums"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3b5e109711e90p+6",
+  "lon": "0x1.5ae523bbf6bf0p+7",
+  "precision": 1,
+  "result": "p"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6b72418cf74bcp+5",
+  "lon": "0x1.656f92dd10af2p+7",
+  "precision": 5,
+  "result": "zbp46"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4ce80ef481be8p+5",
+  "lon": "-0x1.c03f51efe9f5ep+6",
+  "precision": 10,
+  "result": "9x2k9zrp1g"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4c76c36da805dp+5",
+  "lon": "0x1.cf6e8fefe1188p+6",
+  "precision": 12,
+  "result": "q8d7s6t5nmht"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f18868ec1f160p+3",
+  "lon": "0x1.303dc4aa06ab8p+7",
+  "precision": 3,
+  "result": "rmh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.de84c251db3a8p+3",
+  "lon": "0x1.27f669371a5e6p+6",
+  "precision": 3,
+  "result": "tds"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.18f1167a091c2p+6",
+  "lon": "-0x1.f6999d0464760p+4",
+  "precision": 4,
+  "result": "gk3x"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1501601945f54p+6",
+  "lon": "0x1.a6043364b9b98p+6",
+  "precision": 4,
+  "result": "n7en"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.266762d867718p+4",
+  "lon": "-0x1.caab0aa55f040p+2",
+  "precision": 3,
+  "result": "eg6"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0f61da8b2458ep+6",
+  "lon": "-0x1.80eb84a287e60p+6",
+  "precision": 1,
+  "result": "1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.38a69acbf74d8p+4",
+  "lon": "-0x1.d45f1a8750a2bp+6",
+  "precision": 2,
+  "result": "97"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1aa8ceeff5564p+6",
+  "lon": "0x1.5b256837bff24p+6",
+  "precision": 1,
+  "result": "v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.264539f7e2d2ap+6",
+  "lon": "0x1.33c4b5130f800p+6",
+  "precision": 4,
+  "result": "jdyt"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4aaee0c7247f8p+5",
+  "lon": "-0x1.81d674272f6f7p+6",
+  "precision": 10,
+  "result": "3bekv507uk"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a0746ebd7d64fp+5",
+  "lon": "0x1.0ba429c02f4e8p+5",
+  "precision": 7,
+  "result": "hwxzc73"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.76e3dd7b31ca8p+4",
+  "lon": "0x1.e56d03dbd3450p+6",
+  "precision": 9,
+  "result": "qey69w94d"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.8a1115be2e218p+5",
+  "lon": "-0x1.37facbdafda54p+5",
+  "precision": 7,
+  "result": "g0u20x4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7465c3c062380p+1",
+  "lon": "-0x1.388b798ff136fp+7",
+  "precision": 11,
+  "result": "2x2z7ymgubu"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1fd3b0a84a922p+6",
+  "lon": "-0x1.744a7374b804fp+6",
+  "precision": 12,
+  "result": "cuvc656d2f2m"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c3d6814c481acp+4",
+  "lon": "-0x1.cae40f9f4d80cp+6",
+  "precision": 6,
+  "result": "9mn2tk"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.17eb30624a5aep+6",
+  "lon": "-0x1.4230d45ef8f41p+7",
+  "precision": 8,
+  "result": "bkmqn5mv"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2789ccf255fd6p+5",
+  "lon": "0x1.1be606df66990p+3",
+  "precision": 11,
+  "result": "snw61vhk2t5"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.71d3abeaf8180p+5",
+  "lon": "0x1.85077595081f0p+4",
+  "precision": 12,
+  "result": "u81qcr95swpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4277748adc49ep+6",
+  "lon": "0x1.181c2f8b3add2p+6",
+  "precision": 2,
+  "result": "vw"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0314e2d6b5480p+3",
+  "lon": "-0x1.2e29544d80734p+7",
+  "precision": 7,
+  "result": "89kw41f"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.43a8974bdaf8ap+6",
+  "lon": "0x1.6f73cd9a48d18p+4",
+  "precision": 11,
+  "result": "h987dtgnj3b"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6d5ff31f816c2p+5",
+  "lon": "0x1.617e01f103e8ep+7",
+  "precision": 3,
+  "result": "pzv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.55090d7a72eb9p+6",
+  "lon": "0x1.5e013109047d0p+7",
+  "precision": 1,
+  "result": "p"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ac460b87876acp+4",
+  "lon": "-0x1.665de5e12e778p+6",
+  "precision": 10,
+  "result": "dhb232c3dj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b8c9ac90488a8p+4",
+  "lon": "-0x1.ab1b79f7b3e6ep+6",
+  "precision": 4,
+  "result": "9suh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.10b4f14398cacp+5",
+  "lon": "-0x1.bb6cf7454f070p+6",
+  "precision": 9,
+  "result": "9w11vmsg4"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.124db24753a6ep+6",
+  "lon": "0x1.5b311c3c15da8p+7",
+  "precision": 4,
+  "result": "zu5q"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.98c4143736080p+5",
+  "lon": "0x1.183877c07158cp+5",
+  "precision": 8,
+  "result": "uc0ftjdq"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7fb78196ea018p+5",
+  "lon": "0x1.4e971749fe008p+4",
+  "precision": 11,
+  "result": "u2wbggew43c"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b8f01f0fe8a00p+5",
+  "lon": "0x1.f395b2e148e40p+6",
+  "precision": 4,
+  "result": "ycbc"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.843d8aa0e4920p+4",
+  "lon": "-0x1.52028c12c24c9p+7",
+  "precision": 4,
+  "result": "25xv"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0885f78d5e71ep+6",
+  "lon": "-0x1.05f2873053d02p+7",
+  "precision": 6,
+  "result": "c5fb5w"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.71ef141ba65d0p+2",
+  "lon": "-0x1.5e4c4d3c8bc60p+6",
+  "precision": 5,
+  "result": "6ncxp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.52964cba579cfp+6",
+  "lon": "0x1.2594deb34ecd0p+3",
+  "precision": 5,
+  "result": "h0yw2"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.a28a75e0a2f5cp+4",
+  "lon": "0x1.90f12c48753e8p+6",
+  "precision": 11,
+  "result": "whxkbfj60fm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.435d63377a370p+3",
+  "lon": "-0x1.08b55e552de86p+6",
+  "precision": 11,
+  "result": "6w0yw07m1rs"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4d858faf29184p+5",
+  "lon": "-0x1.ffc84745dcfe6p+6",
+  "precision": 10,
+  "result": "9pmj0t2z5g"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ffa0dc966e570p+3",
+  "lon": "-0x1.4d051067ebcd2p+7",
+  "precision": 12,
+  "result": "86cdfyx5n762"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3049a0a660f45p+6",
+  "lon": "-0x1.7eb5adfa74b00p+6",
+  "precision": 1,
+  "result": "1"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67571724e6430p+2",
+  "lon": "0x1.a01a0fdf86324p+6",
+  "precision": 7,
+  "result": "qr1bp1v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5b17724cea10cp+6",
+  "lon": "-0x1.81fddd413ac00p-1",
+  "precision": 8,
+  "result": "5bx6qg7p"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.adef8ebfb34b0p+2",
+  "lon": "-0x1.81f5e403a9670p+4",
+  "precision": 10,
+  "result": "7qycg14d23"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7b786876e8cf8p+4",
+  "lon": "-0x1.19e00ea15d1a1p+7",
+  "precision": 4,
+  "result": "8u5y"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.032e0746bdd30p+5",
+  "lon": "-0x1.4547ddf5253f5p+7",
+  "precision": 8,
+  "result": "8mu271bb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.91467aa38dfd0p+5",
+  "lon": "-0x1.fe0184a595e36p+5",
+  "precision": 6,
+  "result": "4x4dtk"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9f1fdbb4a66a8p+5",
+  "lon": "0x1.bbe97306e1f20p+3",
+  "precision": 10,
+  "result": "hqcbg9t7wg"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8c624ee939b00p-1",
+  "lon": "0x1.46340c657d7ccp+6",
+  "precision": 12,
+  "result": "mzcgxepd00cp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.80e32deb5ff58p+5",
+  "lon": "-0x1.b2ac81d611156p+6",
+  "precision": 5,
+  "result": "1x6wr"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.dce86139746d8p+5",
+  "lon": "-0x1.b434720a288e8p+4",
+  "precision": 9,
+  "result": "g6se5s7cd"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ddc2e5461b710p+3",
+  "lon": "-0x1.763b9f1209adfp+6",
+  "precision": 2,
+  "result": "9f"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.93d9cd628b117p+5",
+  "lon": "-0x1.f9abf4742ab78p+4",
+  "precision": 11,
+  "result": "5r18bf4kf4w"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c3d3bb827f920p+5",
+  "lon": "0x1.63f8f54944874p+6",
+  "precision": 1,
+  "result": "v"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.a46e2a0da85ecp+5",
+  "lon": "-0x1.527c0ceadba87p+6",
+  "precision": 11,
+  "result": "f17ffrhu02w"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.37bf7b63a4332p+5",
+  "lon": "-0x1.48f14adfac120p+5",
+  "precision": 1,
+  "result": "7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5356ee4fd01bap+6",
+  "lon": "-0x1.92f400ad63bb0p+5",
+  "precision": 5,
+  "result": "4bujm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3dea601c54711p+5",
+  "lon": "0x1.6e3be2a5f83dcp+6",
+  "precision": 1,
+  "result": "q"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6e7cf95f9a5c0p+2",
+  "lon": "-0x1.13e6a214ad3bep+7",
+  "precision": 10,
+  "result": "2yvzkve93m"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.314f555bd8084p+5",
+  "lon": "0x1.bae5270e77680p+1",
+  "precision": 5,
+  "result": "snf3n"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.d0078d3dfc010p+2",
+  "lon": "-0x1.12ab0f96a20e5p+7",
+  "precision": 3,
+  "result": "2yw"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.568609b7d1028p+5",
+  "lon": "-0x1.3a2c4b66de27cp+7",
+  "precision": 6,
+  "result": "8x8796"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6e01ced29e0f8p+4",
+  "lon": "-0x1.071d1382ac28ep+7",
+  "precision": 7,
+  "result": "9h46nk7"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c70e3df72c0ccp+4",
+  "lon": "-0x1.4a11af3b85500p+5",
+  "precision": 7,
+  "result": "ej49v1s"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9a3ddd0bf78fcp+5",
+  "lon": "0x1.2ed7a8051d5aap+7",
+  "precision": 10,
+  "result": "pqgsm8tx1u"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.50ddf4b4d57cap+5",
+  "lon": "-0x1.a4705941988e6p+5",
+  "precision": 7,
+  "result": "6bd8kn6"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.73b84be905086p+5",
+  "lon": "-0x1.badad83daded0p+5",
+  "precision": 10,
+  "result": "4z8xsm63gd"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8cea8035252dap+5",
+  "lon": "-0x1.9e00b4eb8f930p+3",
+  "precision": 1,
+  "result": "5"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.18c3de6276c26p+6",
+  "lon": "0x1.d651d4421d894p+6",
+  "precision": 1,
+  "result": "n"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.8d00c4772d1d0p+4",
+  "lon": "-0x1.fb2519ac61108p+5",
+  "precision": 9,
+  "result": "ds6vjmn83"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2a19894ea05f0p+4",
+  "lon": "-0x1.0ba9a0ca352c7p+7",
+  "precision": 6,
+  "result": "3h8y48"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.277b4d8cb69b6p+5",
+  "lon": "0x1.1b09c336c8e58p+4",
+  "precision": 8,
+  "result": "sqsd4ec7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8b8d5a893cbf3p+5",
+  "lon": "-0x1.d381f4a3c84a6p+5",
+  "precision": 2,
+  "result": "4x"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5291af65e14ccp+5",
+  "lon": "0x1.f2f5e1bcbc720p+4",
+  "precision": 10,
+  "result": "sxw0v8k4rz"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c9cae427bf380p+2",
+  "lon": "0x1.68863c8a8d7a4p+6",
+  "precision": 10,
+  "result": "qn8p6cz6ww"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.10c6609c0108cp+6",
+  "lon": "0x1.6380e323bddeep+7",
+  "precision": 2,
+  "result": "pg"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a2c8110656e08p+3",
+  "lon": "-0x1.d762185cbc8d8p+4",
+  "precision": 12,
+  "result": "7mej99dg4kzk"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.de2cd527d7e08p+5",
+  "lon": "0x1.78c8c460fc344p+6",
+  "precision": 1,
+  "result": "y"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e490d1a7c378ap+5",
+  "lon": "0x1.0fa80ea693f88p+7",
+  "precision": 8,
+  "result": "pj0x6v7n"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.11deff4869c7ep+5",
+  "lon": "0x1.2ab541299faecp+6",
+  "precision": 2,
+  "result": "tw"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.54ae1d9bd279cp+6",
+  "lon": "0x1.00b1cd8986ee0p+5",
+  "precision": 5,
+  "result": "uxnud"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.59b5acfa86a94p+4",
+  "lon": "0x1.bb9cf34dc864cp+6",
+  "precision": 2,
+  "result": "w7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c4293cf8a3a82p+4",
+  "lon": "-0x1.201b74b8dec5ep+7",
+  "precision": 5,
+  "result": "2fcx1"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5841a4e759418p+5",
+  "lon": "0x1.5feb96f846798p+7",
+  "precision": 5,
+  "result": "rbm5h"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1d53ce40a866cp+4",
+  "lon": "0x1.04677758a2a0cp+7",
+  "precision": 6,
+  "result": "quuddc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.14e40c32f4f58p+4",
+  "lon": "0x1.a68415fe44dfcp+6",
+  "precision": 2,
+  "result": "w7"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.50f1de334f33cp+6",
+  "lon": "-0x1.16e495f85c266p+7",
+  "precision": 11,
+  "result": "byuz4ydpqj9"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1caad08aad5a0p+6",
+  "lon": "0x1.6a5052b129d24p+5",
+  "precision": 4,
+  "result": "j525"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0a9ea951605c0p+5",
+  "lon": "0x1.5bc375608ef98p+4",
+  "precision": 9,
+  "result": "k6p6qsgj7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1b32cfac69e88p+6",
+  "lon": "0x1.7f05cd1179d08p+5",
+  "precision": 9,
+  "result": "j56j1rrd6"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1d48e555532d6p+5",
+  "lon": "0x1.fcc8a31d43900p+6",
+  "precision": 1,
+  "result": "w"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8f73d6e7efb77p+5",
+  "lon": "-0x1.5bb66de552191p+7",
+  "precision": 3,
+  "result": "0ph"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1cd4f7524dfc0p+1",
+  "lon": "-0x1.f632ae5e27da3p+6",
+  "precision": 7,
+  "result": "90qsxj1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3a143b80f1560p+1",
+  "lon": "0x1.53e13af41bdd0p+6",
+  "precision": 5,
+  "result": "tbkmv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.27bd845433910p+6",
+  "lon": "0x1.c7b218ea5dcd8p+4",
+  "precision": 4,
+  "result": "hdu7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2d8fe0ef8f789p+5",
+  "lon": "0x1.77535a7168890p+3",
+  "precision": 5,
+  "result": "k323d"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1e5a55cf21a00p-2",
+  "lon": "-0x1.490d4d0dfffa0p+3",
+  "precision": 6,
+  "result": "7zbwqj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.abdedc0004348p+3",
+  "lon": "0x1.111e15a330114p+6",
+  "precision": 12,
+  "result": "td2s1dpe2ye6"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.db00cefe1dee0p+5",
+  "lon": "-0x1.a8e4c2071c038p+6",
+  "precision": 7,
+  "result": "cds3ybf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b6823c6dccb50p+5",
+  "lon": "0x1.5663e83ffd0f8p+4",
+  "precision": 1,
+  "result": "u"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.763d9e3e16ad4p+4",
+  "lon": "0x1.5c25fdaad93e4p+7",
+  "precision": 4,
+  "result": "xu5v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.ae2fad418c806p+5",
+  "lon": "-0x1.bcc580e495354p+6",
+  "precision": 6,
+  "result": "1w2yjd"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.dfbb0e92e7170p+4",
+  "lon": "0x1.30070284035f8p+7",
+  "precision": 12,
+  "result": "r6sj7jszrsrd"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.25d82a61b6dd8p+3",
+  "lon": "-0x1.06b1ddd12dbdap+7",
+  "precision": 3,
+  "result": "3n6"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.24e8c3006a012p+6",
+  "lon": "0x1.48c7bc6d84b44p+6",
+  "precision": 3,
+  "result": "jff"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d2ab80ce71560p+1",
+  "lon": "0x1.975805f3036e0p+6",
+  "precision": 1,
+  "result": "w"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7e12bc13a99abp+5",
+  "lon": "-0x1.99c5994b489b4p+5",
+  "precision": 6,
+  "result": "4ze863"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4398bd9028bdcp+5",
+  "lon": "0x1.3c9937472c9b2p+7",
+  "precision": 6,
+  "result": "xx0w45"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.eb0b9d39947f0p+2",
+  "lon": "-0x1.eada0af686116p+6",
+  "precision": 12,
+  "result": "3q8sre5pvqtw"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0cb8968474bb6p+6",
+  "lon": "0x1.47c8485352cfcp+7",
+  "precision": 10,
+  "result": "zeuw1mvcmh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.bbdcd720f70e0p+2",
+  "lon": "0x1.dd45f400bf760p+6",
+  "precision": 7,
+  "result": "w9hz7ns"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f976012c56e50p+2",
+  "lon": "0x1.d61d27451e0f4p+6",
+  "precision": 11,
+  "result": "qwee46jxgf7"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5d80cb20735f4p+6",
+  "lon": "-0x1.2f52d20b911fcp+6",
+  "precision": 5,
+  "result": "frd14"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.87acce86e0b90p+2",
+  "lon": "-0x1.e7f4c7313ea4ep+6",
+  "precision": 4,
+  "result": "9316"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5f4cbc3e12f04p+4",
+  "lon": "0x1.8280652a7543cp+6",
+  "precision": 6,
+  "result": "qhhenf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1caa6f86f3fa8p+3",
+  "lon": "-0x1.2fbd18613efacp+6",
+  "precision": 8,
+  "result": "d3d4856j"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0d3268e52d6d0p+4",
+  "lon": "-0x1.0350aa0898ccfp+7",
+  "precision": 2,
+  "result": "94"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0eb5dc007abb2p+6",
+  "lon": "-0x1.f7b7c1bd4e0aep+6",
+  "precision": 9,
+  "result": "chn3n2kfx"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.da0ef3c4778bcp+5",
+  "lon": "-0x1.fd9cd99f9b3d4p+5",
+  "precision": 7,
+  "result": "fdd9n7m"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b5ed8fe5e5d0cp+4",
+  "lon": "0x1.41efc3132504ep+7",
+  "precision": 6,
+  "result": "xsf7wy"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.f0178aa941e28p+5",
+  "lon": "-0x1.0ee3502996602p+6",
+  "precision": 5,
+  "result": "f7pbf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b3d7aaba6bd10p+4",
+  "lon": "-0x1.95a8cb4c7a782p+6",
+  "precision": 6,
+  "result": "9szfun"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7cabe82b2939cp+4",
+  "lon": "0x1.a0fa447234b10p+3",
+  "precision": 2,
+  "result": "k7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a7556ada6cd68p+3",
+  "lon": "0x1.568436c51d03ep+7",
+  "precision": 12,
+  "result": "rv9u9pdqqn8j"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7a4fc3bee58a0p+4",
+  "lon": "-0x1.43986f61172b1p+6",
+  "precision": 9,
+  "result": "dhnqx075p"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.bad7786de79f8p+4",
+  "lon": "0x1.b1b81a9410364p+6",
+  "precision": 10,
+  "result": "q7j4e3knm0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4bbf5698b797bp+6",
+  "lon": "0x1.907e3dc05cc88p+5",
+  "precision": 11,
+  "result": "j1785jvcbcc"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.cf61aff32cab5p+5",
+  "lon": "0x1.7d40f31775324p+6",
+  "precision": 2,
+  "result": "nj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.f15cdf59df764p+5",
+  "lon": "0x1.fb28cb225714cp+6",
+  "precision": 7,
+  "result": "yg41tjv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2e7422bfc2c61p+6",
+  "lon": "0x1.1352178054708p+7",
+  "precision": 11,
+  "result": "p49cudcpyq1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d6f4c01da7068p+3",
+  "lon": "-0x1.cb3dd3eaac2b4p+5",
+  "precision": 11,
+  "result": "ddx5txnyfju"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.006bf46b8fe34p+5",
+  "lon": "0x1.2ec6c8457c00cp+7",
+  "precision": 1,
+  "result": "r"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.25be2e3153c9ap+6",
+  "lon": "-0x1.d811575300c14p+5",
+  "precision": 3,
+  "result": "4dy"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.635387f1b3a3ep+6",
+  "lon": "0x1.4bebf3af74258p+6",
+  "precision": 5,
+  "result": "jb5n8"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.bb22da29f5354p+5",
+  "lon": "0x1.10e578280fc50p+3",
+  "precision": 10,
+  "result": "u1y545ccvh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1f2f944a67254p+6",
+  "lon": "-0x1.1b3cec049b1ffp+7",
+  "precision": 6,
+  "result": "bug23q"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.93ed970e328e0p+3",
+  "lon": "0x1.cabc75189d320p+6",
+  "precision": 7,
+  "result": "wd1xc9y"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1ca1712c7439ep+5",
+  "lon": "0x1.3c7f7a5bb36e0p+7",
+  "precision": 4,
+  "result": "xw2d"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.50868c1afcf78p+3",
+  "lon": "-0x1.a996b4bbc8720p+2",
+  "precision": 9,
+  "result": "ecg7bdmwx"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6a2e1ca643356p+5",
+  "lon": "-0x1.bd4c53f4a4d7bp+6",
+  "precision": 3,
+  "result": "1xb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.181cbc00e63dap+6",
+  "lon": "-0x1.1910b94090310p+4",
+  "precision": 7,
+  "result": "gs7w2k0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.29f7af0337860p+6",
+  "lon": "0x1.8e4f830e8ff5cp+6",
+  "precision": 11,
+  "result": "yjnzcby4xks"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1776bab68cdcep+6",
+  "lon": "0x1.643aea7683446p+7",
+  "precision": 10,
+  "result": "zuqtmneqtu"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3bafe30c24ee0p+4",
+  "lon": "-0x1.cd6e1b03ac18ep+5",
+  "precision": 5,
+  "result": "dewbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4aff1a948f919p+6",
+  "lon": "-0x1.426ebee345c2dp+7",
+  "precision": 4,
+  "result": "03m3"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1b5c39f633fa8p+6",
+  "lon": "-0x1.f3491810bd11ep+6",
+  "precision": 10,
+  "result": "15rhzxgyen"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.623af65f45705p+6",
+  "lon": "0x1.fc414093df5c0p+5",
+  "precision": 12,
+  "result": "j2m0jww6xwmr"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.15ca0604ee8adp+6",
+  "lon": "-0x1.5077641f093dap+6",
+  "precision": 6,
+  "result": "45shvv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2aa64c360909fp+5",
+  "lon": "-0x1.7eb1919ba9180p+2",
+  "precision": 5,
+  "result": "7c7ex"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4c7c6dfe133a2p+6",
+  "lon": "-0x1.129a234ca0dbdp+6",
+  "precision": 5,
+  "result": "fqz0v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1e8d0f7b68e50p+3",
+  "lon": "-0x1.4956491e4e412p+6",
+  "precision": 5,
+  "result": "6nmmn"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.bf208fddbffc4p+5",
+  "lon": "-0x1.13ff3bdd82c80p+2",
+  "precision": 2,
+  "result": "gc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ef7f52ee7b9d8p+4",
+  "lon": "0x1.5d4afdc021a00p+4",
+  "precision": 1,
+  "result": "s"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9da5c0e1d85c2p+5",
+  "lon": "-0x1.78ad6b543633fp+6",
+  "precision": 12,
+  "result": "1yv1c55zngpz"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.d43be465c6200p-3",
+  "lon": "-0x1.45ea783cbe538p+7",
+  "precision": 9,
+  "result": "2runey3sh"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9f5a1e02b6830p+5",
+  "lon": "-0x1.05217a2f49dd9p+6",
+  "precision": 1,
+  "result": "4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3f1835424b79fp+6",
+  "lon": "0x1.558e161605fccp+7",
+  "precision": 12,
+  "result": "pcc6njsku7w9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5a727ae70182cp+5",
+  "lon": "-0x1.3731dd4b531e0p+4",
+  "precision": 10,
+  "result": "exdnm7t5js"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9ea3acf201af0p+2",
+  "lon": "0x1.353d8151611c0p+4",
+  "precision": 5,
+  "result": "s3jsz"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9fb4185cfb30cp+4",
+  "lon": "0x1.f4e1eecd6484cp+6",
+  "precision": 12,
+  "result": "qg3h1qnyur4z"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.478ddbeb791fap+6",
+  "lon": "-0x1.473db5ea0a6b7p+7",
+  "precision": 6,
+  "result": "037whs"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.caf8ce92fae5ep+5",
+  "lon": "-0x1.e2cfdec3a4508p+4",
+  "precision": 1,
+  "result": "5"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.31429c4ced48ap+6",
+  "lon": "0x1.522395324726cp+6",
+  "precision": 3,
+  "result": "jfk"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1eb6a2775249ep+6",
+  "lon": "-0x1.5c256490470e6p+6",
+  "precision": 9,
+  "result": "fhdpg2tuw"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ab00d28fbaacp+4",
+  "lon": "-0x1.48367f299fdbap+7",
+  "precision": 3,
+  "result": "2m5"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2ed5e7ed4dd4ep+6",
+  "lon": "-0x1.4ce07e6f5e944p+5",
+  "precision": 10,
+  "result": "gj6qtnku38"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.fc5d94c618f7ap+5",
+  "lon": "-0x1.15b4bcd0b0bb9p+7",
+  "precision": 6,
+  "result": "0utq2r"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.d29231b4743d8p+5",
+  "lon": "0x1.be32714af5890p+4",
+  "precision": 9,
+  "result": "hteu4wfvm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f780b2033bce2p+5",
+  "lon": "0x1.ba4180b27b158p+6",
+  "precision": 4,
+  "result": "nky9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.f3d55a6c6a3fcp+5",
+  "lon": "0x1.0a74f11f60888p+5",
+  "precision": 1,
+  "result": "u"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0bb0246047f58p+4",
+  "lon": "-0x1.651380702ede0p+3",
+  "precision": 7,
+  "result": "7v00f46"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7088a3e3287dep+5",
+  "lon": "0x1.a48b63085dbb4p+6",
+  "precision": 4,
+  "result": "nrfc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.f1fe9315ec7c0p+2",
+  "lon": "0x1.21e58a76c4a1ap+7",
+  "precision": 9,
+  "result": "x1rh62s0s"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3b244368c9da8p+6",
+  "lon": "-0x1.209dae6821638p+6",
+  "precision": 12,
+  "result": "fqh8nn7n638c"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e233b3f1b5460p+3",
+  "lon": "0x1.63783cd2d7fb4p+6",
+  "precision": 4,
+  "result": "mvr4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.193ac97a91e76p+6",
+  "lon": "0x1.c077d7433c140p+2",
+  "precision": 11,
+  "result": "h5sbp2ytdkb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2c90397b52d64p+6",
+  "lon": "0x1.0fb22a0f08c7ap+7",
+  "precision": 7,
+  "result": "zj2e7qc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.081804b91ddc0p+1",
+  "lon": "-0x1.1e0b626c22020p+2",
+  "precision": 2,
+  "result": "eb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.700e731255f50p+2",
+  "lon": "-0x1.92bd86d07a498p+5",
+  "precision": 8,
+  "result": "6yupq3jd"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.25add02cad34ap+6",
+  "lon": "0x1.ee3c011f29920p+4",
+  "precision": 11,
+  "result": "utjcwvthvp2"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5516b762ceb96p+6",
+  "lon": "0x1.a44f45832d6b8p+6",
+  "precision": 1,
+  "result": "y"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6091e42e4cd00p-1",
+  "lon": "0x1.58cd5e085eac0p+2",
+  "precision": 8,
+  "result": "kpgu4deh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d5d9e6a117240p+2",
+  "lon": "0x1.961732388ae80p+2",
+  "precision": 2,
+  "result": "s1"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.889392e1c40dep+5",
+  "lon": "-0x1.34f93165ff840p+1",
+  "precision": 5,
+  "result": "5zq2c"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.89a70b1a8a7f3p+5",
+  "lon": "0x1.1542ecb236f36p+7",
+  "precision": 8,
+  "result": "pp684d5y"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.161d147556d36p+6",
+  "lon": "-0x1.55c0704af712cp+5",
+  "precision": 12,
+  "result": "gh3eeckbrbze"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.868fe4c076279p+5",
+  "lon": "0x1.276d3d6a44a74p+7",
+  "precision": 1,
+  "result": "p"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.446e0392a0770p+4",
+  "lon": "0x1.13888fece5ac4p+7",
+  "precision": 11,
+  "result": "x59gqgq9m26"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.41f8738dc0676p+6",
+  "lon": "0x1.ce4b7903281a0p+2",
+  "precision": 2,
+  "result": "un"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d0fa6beb871dcp+4",
+  "lon": "-0x1.33e7f6fc7c4e8p+7",
+  "precision": 2,
+  "result": "8t"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.74e2d10e306a0p+1",
+  "lon": "0x1.66f056d4546f6p+7",
+  "precision": 9,
+  "result": "xbx8efmdk"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b355d6a98f400p+2",
+  "lon": "-0x1.088579522e7b0p+5",
+  "precision": 4,
+  "result": "e30q"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.002abed4da32ep+6",
+  "lon": "-0x1.bfb0dc898dba5p+6",
+  "precision": 8,
+  "result": "ce2km4kq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a837908f5e900p-2",
+  "lon": "0x1.13346b93bafccp+7",
+  "precision": 2,
+  "result": "rp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.afe725bae0f80p+4",
+  "lon": "0x1.cc00d940a525cp+6",
+  "precision": 5,
+  "result": "qe1y2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.64b609c18f743p+6",
+  "lon": "0x1.b0e96047ac540p+1",
+  "precision": 12,
+  "result": "h04ksvwvc4mp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.8fd6a33478f0cp+5",
+  "lon": "0x1.48d47e5d28134p+6",
+  "precision": 12,
+  "result": "vbfkqdt9mysu"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.306a7c356effap+6",
+  "lon": "0x1.410f697faca40p+7",
+  "precision": 10,
+  "result": "ztd0uyq3y7"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.53f7aeeda9b76p+6",
+  "lon": "-0x1.ccad64845e15ap+5",
+  "precision": 5,
+  "result": "fxp59"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.410e9d2aba28cp+5",
+  "lon": "0x1.7f52a893b0fc8p+6",
+  "precision": 10,
+  "result": "wphhk9vf9s"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.cf6c9c3ada700p+0",
+  "lon": "0x1.3f44e792e12cap+7",
+  "precision": 4,
+  "result": "x83d"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.afd9ac1dec728p+3",
+  "lon": "-0x1.53b665d5a5503p+7",
+  "precision": 12,
+  "result": "84rhybdryw5r"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e8d07777361acp+5",
+  "lon": "-0x1.378329334d30dp+7",
+  "precision": 12,
+  "result": "0t1hrsvb60ep"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9e0373802b0eap+5",
+  "lon": "0x1.f544430e3050cp+6",
+  "precision": 8,
+  "result": "nyc1eduu"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.32817f4ba72cep+6",
+  "lon": "0x1.c7112eb1a0238p+5",
+  "precision": 3,
+  "result": "j62"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.d256ce667458cp+5",
+  "lon": "-0x1.b4f3d5cfa019ap+6",
+  "precision": 11,
+  "result": "1tdk6hpnpr9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.03b9251bcb662p+6",
+  "lon": "-0x1.007e789a328e1p+7",
+  "precision": 9,
+  "result": "c5sc3sm37"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.78fe947d2b334p+5",
+  "lon": "-0x1.3c6e5951d53dbp+6",
+  "precision": 7,
+  "result": "f0rspfe"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.eb3d53d465786p+5",
+  "lon": "0x1.64916ec01f518p+7",
+  "precision": 2,
+  "result": "pv"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.8d307a9a0acb0p+3",
+  "lon": "-0x1.59f4656718bfap+7",
+  "precision": 3,
+  "result": "84h"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d10b41fc4ed80p+5",
+  "lon": "0x1.2aaf42de6f184p+5",
+  "precision": 11,
+  "result": "uf6d9w6ftyp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0b896a6252e9cp+6",
+  "lon": "-0x1.2bb661916ec28p+5",
+  "precision": 6,
+  "result": "5hj7e2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.85c635cd35600p+5",
+  "lon": "0x1.3c98583676318p+5",
+  "precision": 10,
+  "result": "hzk4ud3pn1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.055b672bf658ap+6",
+  "lon": "0x1.fd89293ccce14p+6",
+  "precision": 3,
+  "result": "ygd"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.298d0914d88f8p+4",
+  "lon": "0x1.da3de71ad1908p+6",
+  "precision": 1,
+  "result": "w"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3bff3bccae2aep+6",
+  "lon": "0x1.de44a9932dd38p+6",
+  "precision": 6,
+  "result": "ywj12v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1ae80a24427bcp+6",
+  "lon": "-0x1.b1bb489fa4244p+5",
+  "precision": 4,
+  "result": "4g3m"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9795bb9e9f730p+5",
+  "lon": "0x1.171c1ecf4f1dcp+7",
+  "precision": 12,
+  "result": "pngnpthv9rs7"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.73eb677898730p+5",
+  "lon": "-0x1.9043b001aa342p+6",
+  "precision": 12,
+  "result": "cb2b6znpdce4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9a88b91184278p+5",
+  "lon": "-0x1.fb3ae53b4cd80p+2",
+  "precision": 8,
+  "result": "5yfk5dhf"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8fef251a8d6a0p+1",
+  "lon": "-0x1.6457b6545052ap+7",
+  "precision": 1,
+  "result": "2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5eb7d90dfe030p+6",
+  "lon": "-0x1.025f4ea2ca139p+7",
+  "precision": 5,
+  "result": "10kjh"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2875283ea1ef8p+5",
+  "lon": "-0x1.3059830f533b2p+6",
+  "precision": 12,
+  "result": "633vhtfy4u0j"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.8b56ae158f8b0p+3",
+  "lon": "-0x1.42b5291883b28p+7",
+  "precision": 10,
+  "result": "86jq2319pq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.39d0eb2b4396ap+6",
+  "lon": "-0x1.4cb005f563080p+4",
+  "precision": 2,
+  "result": "5d"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4171a7c0d0030p+2",
+  "lon": "-0x1.6a9b501494894p+5",
+  "precision": 11,
+  "result": "6zpg2tdtrqw"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c91dfff3ce622p+5",
+  "lon": "-0x1.2a12f6dc9a384p+5",
+  "precision": 8,
+  "result": "5jvdbnh9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.45c48df23e650p+6",
+  "lon": "0x1.394089803b114p+7",
+  "precision": 12,
+  "result": "zqrrk459erqv"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.8ac7cec88c5e4p+4",
+  "lon": "0x1.8e935bf5ab590p+4",
+  "precision": 10,
+  "result": "ss3sqgex5y"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0b3426eb1194ep+6",
+  "lon": "-0x1.0bddc57ae5160p+5",
+  "precision": 10,
+  "result": "g7bhn0dpwg"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.dbe30b7a36450p+3",
+  "lon": "0x1.23e4cb99eff70p+7",
+  "precision": 2,
+  "result": "x4"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.491ee8d2bf524p+6",
+  "lon": "0x1.f0a19ed1d4a28p+6",
+  "precision": 6,
+  "result": "yy8k16"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.28eb1c1c89996p+5",
+  "lon": "-0x1.2d491ee14009cp+7",
+  "precision": 10,
+  "result": "8wsghh932h"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ee0fad2dd0c40p+5",
+  "lon": "0x1.0cb1d06ad1d1ep+7",
+  "precision": 2,
+  "result": "yf"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.61c87b7b346d0p+4",
+  "lon": "-0x1.bb3982b79e75fp+6",
+  "precision": 6,
+  "result": "3s14nw"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c85b4daa77c70p+2",
+  "lon": "0x1.29cdd404666c4p+6",
+  "precision": 6,
+  "result": "mwszqj"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.220d9ff4cec4fp+6",
+  "lon": "-0x1.b7de26796e05ep+6",
+  "precision": 7,
+  "result": "1e1g3xk"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1a7c941305201p+5",
+  "lon": "-0x1.2b4e482801775p+6",
+  "precision": 7,
+  "result": "63dz17c"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4546e79339a46p+5",
+  "lon": "0x1.196ce0d332a6ep+7",
+  "precision": 11,
+  "result": "r0u09ypud3n"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.08991c7a3cfc0p+1",
+  "lon": "-0x1.0b0fdeadbbd6dp+7",
+  "precision": 1,
+  "result": "3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d4c2164484c68p+4",
+  "lon": "0x1.6a748feb495f0p+5",
+  "precision": 3,
+  "result": "tj0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f6d2fba200d60p+5",
+  "lon": "0x1.52f19d4d997b4p+7",
+  "precision": 9,
+  "result": "pubd2mvwt"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.bc2670438f9c8p+5",
+  "lon": "0x1.78f1cefd8efacp+6",
+  "precision": 6,
+  "result": "nn5h0m"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12668d6cd12c8p+4",
+  "lon": "-0x1.09f683b892e9cp+7",
+  "precision": 4,
+  "result": "3hcq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5add01aefa382p+6",
+  "lon": "0x1.a9cd945e9d6fcp+6",
+  "precision": 7,
+  "result": "n2edwmg"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.47faaaa242e58p+5",
+  "lon": "0x1.29bff05aaf9aap+7",
+  "precision": 11,
+  "result": "r29yg8xku5s"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7fe8c6ee92150p+5",
+  "lon": "-0x1.2ffd191199922p+6",
+  "precision": 3,
+  "result": "f29"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7b91cda16387bp+5",
+  "lon": "-0x1.3b188103dbe96p+7",
+  "precision": 9,
+  "result": "0rxfnftju"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.886fd756e1a50p+5",
+  "lon": "-0x1.1b7e1b5dcc0a0p+4",
+  "precision": 7,
+  "result": "5x72uvc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.47aadc02abca2p+6",
+  "lon": "-0x1.004e97bf774a7p+7",
+  "precision": 4,
+  "result": "cnsf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.17c89d0ca8e76p+6",
+  "lon": "-0x1.637a6fdcc7800p+4",
+  "precision": 11,
+  "result": "gs2jymmb3nz"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7f4da03e9f516p+5",
+  "lon": "-0x1.22c2efb21d100p+7",
+  "precision": 7,
+  "result": "0z2x7v8"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.88ca512d76bb8p+4",
+  "lon": "-0x1.6293b29092280p+7",
+  "precision": 2,
+  "result": "25"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2b1f319fad76cp+5",
+  "lon": "-0x1.ca03e89ddb666p+5",
+  "precision": 2,
+  "result": "69"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d2ed6f627e940p+5",
+  "lon": "-0x1.690e799d542a9p+6",
+  "precision": 7,
+  "result": "cfru1cp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.dc86460ca3eb8p+5",
+  "lon": "-0x1.0d29536d0f5b5p+6",
+  "precision": 1,
+  "result": "f"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.cc00a95fa587cp+5",
+  "lon": "0x1.572a1ace05af0p+5",
+  "precision": 5,
+  "result": "ufnx0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3dbcfd645b28fp+6",
+  "lon": "0x1.fcb7900e00108p+4",
+  "precision": 10,
+  "result": "h9ys5e2k0u"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.10d2b5704b1c0p+0",
+  "lon": "-0x1.0a312889c7a00p+4",
+  "precision": 7,
+  "result": "e8hnj6j"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9f24aa00d1ff0p+3",
+  "lon": "-0x1.c2df009e8808cp+6",
+  "precision": 6,
+  "result": "96rcg1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.81cfff1649ca0p+4",
+  "lon": "-0x1.3179031cd9577p+7",
+  "precision": 10,
+  "result": "8s73hmsy11"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0e28b25fa2cbcp+4",
+  "lon": "-0x1.3e25cc962e1b0p+6",
+  "precision": 12,
+  "result": "6hzryn4ypefg"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0a4628b6b79bcp+6",
+  "lon": "-0x1.240cd1ebf1df9p+7",
+  "precision": 11,
+  "result": "bgb4tn7v9yx"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.43b1de76e34acp+4",
+  "lon": "0x1.27272c158bd48p+7",
+  "precision": 5,
+  "result": "rk2uy"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.80399c2d44b30p+5",
+  "lon": "-0x1.ef9070618a03cp+6",
+  "precision": 9,
+  "result": "c0xchz321"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6d123e66e7c60p+3",
+  "lon": "0x1.42f9453584794p+6",
+  "precision": 4,
+  "result": "mvcr"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f74d102c41110p+3",
+  "lon": "-0x1.d7c47fc4b6d44p+5",
+  "precision": 3,
+  "result": "6tn"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.574f8752d135cp+4",
+  "lon": "-0x1.7eb502218eeb0p+4",
+  "precision": 11,
+  "result": "e7yfpdned7n"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1bf740a7e79bcp+6",
+  "lon": "-0x1.092d063eee880p+5",
+  "precision": 8,
+  "result": "572kjsrh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.77f9968664698p+3",
+  "lon": "0x1.415e6d09ae5e2p+7",
+  "precision": 9,
+  "result": "xd46b6yu4"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.229b817a74de4p+6",
+  "lon": "0x1.208f44e003920p+5",
+  "precision": 10,
+  "result": "uuctkcc7fb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.481af26a6761cp+4",
+  "lon": "-0x1.88daf4ef30c88p+5",
+  "precision": 4,
+  "result": "dgth"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ae88229674f90p+3",
+  "lon": "0x1.43de1e920c294p+6",
+  "precision": 5,
+  "result": "tf3sd"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.b69c8ce2d3860p+1",
+  "lon": "0x1.d7269e60c6d88p+4",
+  "precision": 8,
+  "result": "kxkuw04w"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.39332a0728478p+3",
+  "lon": "-0x1.ca5297922fb8ep+5",
+  "precision": 1,
+  "result": "6"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3291f52dcd287p+6",
+  "lon": "-0x1.54020992aeee6p+7",
+  "precision": 1,
+  "result": "0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3cdde6f925d45p+6",
+  "lon": "0x1.30be8a2832a28p+6",
+  "precision": 3,
+  "result": "j9y"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5759e3f036754p+6",
+  "lon": "-0x1.2b8dc35546172p+7",
+  "precision": 6,
+  "result": "bxm2rd"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.18412d9e15660p+6",
+  "lon": "-0x1.8362a0abf6200p+2",
+  "precision": 8,
+  "result": "5ge9qm23"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2038a7154d180p+1",
+  "lon": "-0x1.13214b31ae86fp+6",
+  "precision": 1,
+  "result": "d"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7cf9384f0987fp+5",
+  "lon": "0x1.4ccc8d66b8a78p+6",
+  "precision": 5,
+  "result": "jze1j"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.abd96292a013cp+4",
+  "lon": "-0x1.c6b224ec4489ep+5",
+  "precision": 8,
+  "result": "6epxfsh8"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5b46f6dc316b8p+3",
+  "lon": "0x1.793b9a0a4d42cp+6",
+  "precision": 9,
+  "result": "w1gjdp95u"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9dd6c5cf375c8p+3",
+  "lon": "-0x1.5f0d7b6b9c9b5p+7",
+  "precision": 2,
+  "result": "2j"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e1339dc429dabp+5",
+  "lon": "-0x1.7e4ae9ec1b964p+5",
+  "precision": 1,
+  "result": "4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.65278c5baa04dp+6",
+  "lon": "0x1.b7ba330f5868cp+6",
+  "precision": 10,
+  "result": "n2nhj99bj6"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.95bc042b868b9p+5",
+  "lon": "0x1.3cd092f2f1d98p+5",
+  "precision": 7,
+  "result": "hyupmpm"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4400d030d31f0p+6",
+  "lon": "0x1.9e75f09a88c80p+1",
+  "precision": 11,
+  "result": "un6kc9tzf62"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.856a457b754c4p+5",
+  "lon": "-0x1.61e799f23309fp+7",
+  "precision": 5,
+  "result": "0p65j"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1bcdea11354dep+6",
+  "lon": "-0x1.f3d454d025970p+3",
+  "precision": 3,
+  "result": "gss"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.60f2055eaf880p+4",
+  "lon": "-0x1.5da8cc33b4702p+6",
+  "precision": 7,
+  "result": "d5cv6zd"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4412154a77290p+6",
+  "lon": "-0x1.fc554b2b626fap+5",
+  "precision": 1,
+  "result": "f"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5034d20defe7ap+6",
+  "lon": "-0x1.7952a4875992cp+5",
+  "precision": 2,
+  "result": "fy"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.26314e920fc80p+6",
+  "lon": "-0x1.0f3b7442f9c4ep+6",
+  "precision": 2,
+  "result": "46"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1373970971dcep+6",
+  "lon": "-0x1.1b3e49cbf0a6cp+7",
+  "precision": 12,
+  "result": "0gg21rfk8hwg"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.71bef464f5fc0p+4",
+  "lon": "0x1.72fe0cf21ab2cp+6",
+  "precision": 2,
+  "result": "wh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5585bd1e826acp+5",
+  "lon": "-0x1.f51a106a98371p+6",
+  "precision": 4,
+  "result": "9pwf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.10cb722560f44p+6",
+  "lon": "0x1.2993ef25cba6cp+5",
+  "precision": 5,
+  "result": "uu47y"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.aa563685e305cp+5",
+  "lon": "0x1.3d445f951cd5ap+7",
+  "precision": 11,
+  "result": "z92z1v92vqv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.90d1ee67560b8p+4",
+  "lon": "0x1.ad5a13c6630f8p+6",
+  "precision": 4,
+  "result": "q7s3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4fc8620544aa0p+6",
+  "lon": "0x1.3052ae36bc688p+6",
+  "precision": 6,
+  "result": "vwyje3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1aa4dfd9c58e8p+3",
+  "lon": "0x1.cee4c596a7accp+5",
+  "precision": 8,
+  "result": "t394hxvt"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b520bd3135218p+5",
+  "lon": "-0x1.b510c06905865p+6",
+  "precision": 1,
+  "result": "c"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.41d81e50fe38cp+4",
+  "lon": "-0x1.217344326655ep+7",
+  "precision": 7,
+  "result": "2u3jddn"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3329d8e028890p+2",
+  "lon": "-0x1.1cb8ca4974f0ep+7",
+  "precision": 8,
+  "result": "8bfg23xy"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ad239f2c8042p+6",
+  "lon": "-0x1.103212a652bf7p+6",
+  "precision": 5,
+  "result": "4kpse"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0fb209c6fd5f2p+5",
+  "lon": "0x1.072b488217458p+5",
+  "precision": 5,
+  "result": "swp3h"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.305b671284400p+1",
+  "lon": "-0x1.91f0e279b9f88p+4",
+  "precision": 9,
+  "result": "7rw4kr5hr"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f70aa48cb65f3p+5",
+  "lon": "-0x1.389dcf03ec5fcp+7",
+  "precision": 8,
+  "result": "0sbf715b"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d489f6f2339c8p+5",
+  "lon": "-0x1.346fc667ae2f8p+5",
+  "precision": 12,
+  "result": "g4kt4tv7thpp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.22f2701543128p+3",
+  "lon": "0x1.5a78353394654p+6",
+  "precision": 4,
+  "result": "myms"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d7716661a37d0p+4",
+  "lon": "0x1.fea6656765160p+2",
+  "precision": 3,
+  "result": "sjj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.abed07f83a8e8p+4",
+  "lon": "-0x1.29545149cf664p+5",
+  "precision": 10,
+  "result": "ehv84kb7j6"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.65ff6529d8bcdp+5",
+  "lon": "-0x1.14b169a3dede8p+5",
+  "precision": 5,
+  "result": "70p3k"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ace84c6bc3558p+5",
+  "lon": "-0x1.14dd2b7e5a158p+7",
+  "precision": 4,
+  "result": "bct9"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6f549b5e50580p-1",
+  "lon": "-0x1.ee6a415fddf88p+4",
+  "precision": 6,
+  "result": "7rf5bv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4ef826799054ep+6",
+  "lon": "0x1.ffb0809483b68p+6",
+  "precision": 1,
+  "result": "n"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5cdaa175d2a57p+6",
+  "lon": "-0x1.44d3e19bd8664p+6",
+  "precision": 10,
+  "result": "40qrb56bt8"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.82a7c1039f0dcp+4",
+  "lon": "-0x1.93c116de3207ap+6",
+  "precision": 2,
+  "result": "9u"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2f7691c5b9f8fp+6",
+  "lon": "0x1.4879090d1bf14p+6",
+  "precision": 2,
+  "result": "jf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.deb625a096be8p+5",
+  "lon": "0x1.3fd33eb7d4a20p+2",
+  "precision": 5,
+  "result": "u4es3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.cd7d7d1e2723cp+5",
+  "lon": "-0x1.0d7342e6472bep+7",
+  "precision": 11,
+  "result": "c420nm2nvhv"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.402626854be5cp+4",
+  "lon": "0x1.54edf5547aab6p+7",
+  "precision": 5,
+  "result": "xg91z"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9be0c6f1bc898p+4",
+  "lon": "0x1.818e26a10f6d8p+6",
+  "precision": 8,
+  "result": "whsd3qk0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9afe9c759cb60p+5",
+  "lon": "0x1.1923e7c35dd86p+7",
+  "precision": 4,
+  "result": "z15u"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.53c75384505f8p+5",
+  "lon": "0x1.bdae80b2253b0p+6",
+  "precision": 1,
+  "result": "q"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.957003ca8d408p+3",
+  "lon": "0x1.ccbd2cf945064p+6",
+  "precision": 10,
+  "result": "wd3bj46zxh"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b4822f0a1b358p+4",
+  "lon": "-0x1.330d2212259e9p+7",
+  "precision": 3,
+  "result": "8sf"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1f133e845ae22p+6",
+  "lon": "-0x1.13496ecebb561p+7",
+  "precision": 9,
+  "result": "0gnpeygh7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.babf4f90ab824p+5",
+  "lon": "-0x1.257db16472185p+6",
+  "precision": 4,
+  "result": "4q5v"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0171f43ae1298p+5",
+  "lon": "0x1.eea1b64fe8540p+3",
+  "precision": 5,
+  "result": "smdzp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2d0738de58c6cp+4",
+  "lon": "0x1.9423e096b3868p+5",
+  "precision": 10,
+  "result": "t57gj919p2"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5f75494a17774p+6",
+  "lon": "-0x1.f3cf2983c40a0p+3",
+  "precision": 2,
+  "result": "gx"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.bfb487b9296f0p+5",
+  "lon": "0x1.4d23940604670p+6",
+  "precision": 6,
+  "result": "jy51xh"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67b8edf7262abp+6",
+  "lon": "-0x1.2859475fc072cp+7",
+  "precision": 4,
+  "result": "08n8"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.196fe4d6430b0p+6",
+  "lon": "0x1.60c58465f9f8cp+5",
+  "precision": 12,
+  "result": "uux272w03wgf"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0e523906d16adp+6",
+  "lon": "0x1.ffb4ce298d918p+6",
+  "precision": 6,
+  "result": "ngfzx1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.07686728d715cp+5",
+  "lon": "0x1.3a33638db061ap+7",
+  "precision": 4,
+  "result": "xmze"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.309c1053d8850p+6",
+  "lon": "-0x1.4fb272f9a88bdp+7",
+  "precision": 1,
+  "result": "0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0145635e9686cp+6",
+  "lon": "-0x1.42ae7c6c3be0ep+7",
+  "precision": 1,
+  "result": "b"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.cbbd1724383bfp+5",
+  "lon": "-0x1.b2fc8ef9df85cp+5",
+  "precision": 4,
+  "result": "4vc3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1c96ceddac570p+4",
+  "lon": "0x1.1e912d0c76568p+6",
+  "precision": 9,
+  "result": "te4vnjzzw"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b75ab9d65c234p+5",
+  "lon": "0x1.127588bb89660p+5",
+  "precision": 3,
+  "result": "ucb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1de3a9d7105c0p+0",
+  "lon": "0x1.1d9c390e105d8p+6",
+  "precision": 3,
+  "result": "mxf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.50f97ddb51f8ap+6",
+  "lon": "-0x1.5b42bcf27b15fp+7",
+  "precision": 6,
+  "result": "bnux2b"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a6663ace92b80p+2",
+  "lon": "0x1.91deb4a563720p+4",
+  "precision": 12,
+  "result": "kwcf7w9838bb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c58ea1d711020p+2",
+  "lon": "-0x1.3ee7ca0836befp+6",
+  "precision": 11,
+  "result": "6nxr9vch1pp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.024a606470b68p+6",
+  "lon": "0x1.a17b849a87ac4p+5",
+  "precision": 8,
+  "result": "jht0esbj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c3667fc586604p+5",
+  "lon": "0x1.0422464570d00p+0",
+  "precision": 3,
+  "result": "u40"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3f4d71d66d9adp+6",
+  "lon": "-0x1.5420b2f9a8e8cp+7",
+  "precision": 7,
+  "result": "01z1fh5"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f340e6ea38db8p+5",
+  "lon": "0x1.654259b74c000p-2",
+  "precision": 5,
+  "result": "hhbhz"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2e1a1ee89ee9ap+5",
+  "lon": "0x1.650ddd5b477a8p+6",
+  "precision": 7,
+  "result": "mcr3pjx"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d53ddabccbcc0p+5",
+  "lon": "-0x1.1fd3a52286cd8p+7",
+  "precision": 12,
+  "result": "bf3ttjv7r6nn"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.650fbdac40054p+5",
+  "lon": "-0x1.4d6dccb51297ap+7",
+  "precision": 1,
+  "result": "2"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.874282d1d31d0p+5",
+  "lon": "0x1.f37029c155240p+3",
+  "precision": 5,
+  "result": "u2en5"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5389e0b93911cp+4",
+  "lon": "-0x1.4abac692dc1cap+7",
+  "precision": 4,
+  "result": "87f2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e548b68aaf1acp+5",
+  "lon": "0x1.b1957ebf8119cp+6",
+  "precision": 3,
+  "result": "nmj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c1a3a708a86c0p+4",
+  "lon": "0x1.a030e036b8180p+3",
+  "precision": 2,
+  "result": "sk"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2032bf3cccd30p+6",
+  "lon": "0x1.bbb0fc7a571a0p+6",
+  "precision": 10,
+  "result": "n7nyh5g8ck"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3745fa3806d7cp+5",
+  "lon": "-0x1.36e73fdab1937p+7",
+  "precision": 5,
+  "result": "8wcmq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.47bc705760203p+6",
+  "lon": "0x1.9b22ad0fa14a4p+5",
+  "precision": 7,
+  "result": "j1ktckq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.38692213caa28p+4",
+  "lon": "-0x1.11e61bb7d55f8p+4",
+  "precision": 10,
+  "result": "7sebfmqw9z"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.810a5e2254e80p+0",
+  "lon": "0x1.3dcf27a702988p+6",
+  "precision": 4,
+  "result": "tb22"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.10f1498c5e24ap+6",
+  "lon": "0x1.43e1d085f3c10p+3",
+  "precision": 7,
+  "result": "h5z5y64"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2e288b029ada4p+6",
+  "lon": "-0x1.6e98cf8c260f8p+5",
+  "precision": 8,
+  "result": "4fx6m0rt"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6e8a9cd129cd0p+5",
+  "lon": "-0x1.4f59cc12393ffp+7",
+  "precision": 10,
+  "result": "0rbg27ns8m"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ab5b2195f1d6p+6",
+  "lon": "0x1.02742954dec14p+5",
+  "precision": 10,
+  "result": "hsnuxjtpc0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ec93bc70ed88cp+4",
+  "lon": "0x1.c481b47e48aa8p+5",
+  "precision": 2,
+  "result": "tm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a3b765d9041a8p+5",
+  "lon": "-0x1.ddf3c2bac4ab5p+6",
+  "precision": 12,
+  "result": "1qej8cp7yen4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67919953701dep+6",
+  "lon": "0x1.cf30989cf9878p+5",
+  "precision": 2,
+  "result": "j2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.979acee557f24p+4",
+  "lon": "-0x1.e80331b41ad70p+4",
+  "precision": 2,
+  "result": "77"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.37098cfaba9c4p+4",
+  "lon": "-0x1.7f1fee5bb114dp+6",
+  "precision": 2,
+  "result": "9g"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2d64545442b7dp+5",
+  "lon": "0x1.4b7ea88922806p+7",
+  "precision": 7,
+  "result": "r9mcett"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.80e663dc1b01fp+5",
+  "lon": "0x1.1b361bb661cf4p+6",
+  "precision": 1,
+  "result": "j"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.42bdc680ead08p+5",
+  "lon": "0x1.d093aaaf55894p+6",
+  "precision": 9,
+  "result": "q8fd6zvdu"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.bae8bbb085bcep+5",
+  "lon": "0x1.0b38e5de5ae68p+6",
+  "precision": 8,
+  "result": "jqpt01q7"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0f4c977213c1cp+4",
+  "lon": "0x1.807c4d853e934p+6",
+  "precision": 10,
+  "result": "w5h27qc3n8"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.24da25707c4e4p+6",
+  "lon": "-0x1.1934e6af726b4p+5",
+  "precision": 9,
+  "result": "54zp2pgzn"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.38985f30eccafp+5",
+  "lon": "-0x1.350b744946e2ep+7",
+  "precision": 6,
+  "result": "2941ey"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8ecc6c97517f8p+4",
+  "lon": "0x1.77aa2a0321230p+6",
+  "precision": 8,
+  "result": "q5df1ne9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2e6eb06c510b4p+5",
+  "lon": "-0x1.64a9a799c777ep+6",
+  "precision": 7,
+  "result": "dn8x4fp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5b9682f5c80f7p+5",
+  "lon": "0x1.e200424092b00p+1",
+  "precision": 7,
+  "result": "k068vdq"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.2dbff1f30fe10p+3",
+  "lon": "-0x1.6b233670eb54fp+6",
+  "precision": 12,
+  "result": "9cxmwhsgf7ym"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5b8b562456d66p+6",
+  "lon": "-0x1.baa591e8a8621p+6",
+  "precision": 11,
+  "result": "cx3q3c4s59x"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a61c574d1b1bap+4",
+  "lon": "-0x1.0f7be5a7f322bp+7",
+  "precision": 3,
+  "result": "2gr"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.659abb8500ba0p+5",
+  "lon": "0x1.b2afb36cccae4p+6",
+  "precision": 6,
+  "result": "wrvq2c"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b2121667284a8p+4",
+  "lon": "-0x1.0086b24be15cdp+7",
+  "precision": 10,
+  "result": "9huf36c8m9"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4971d3551c9c0p+2",
+  "lon": "-0x1.f280a6bc67800p+4",
+  "precision": 10,
+  "result": "7r1fenbt5n"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.370de96a96f74p+4",
+  "lon": "0x1.947f599fb2088p+4",
+  "precision": 8,
+  "result": "se3yx715"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.63463706db72fp+6",
+  "lon": "-0x1.1d034fcec0209p+7",
+  "precision": 11,
+  "result": "0b4wtpjfqde"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.13d83f7a6f5ccp+5",
+  "lon": "-0x1.abd6fba173681p+6",
+  "precision": 6,
+  "result": "9w5unh"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0007419360dfap+6",
+  "lon": "-0x1.5805aefc2ab00p+7",
+  "precision": 3,
+  "result": "0ht"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8f1e44a0a7508p+4",
+  "lon": "-0x1.a92aa672b2ba0p+3",
+  "precision": 7,
+  "result": "7ewd1dv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4cb26cdd1aff2p+6",
+  "lon": "0x1.5f918907f0a28p+5",
+  "precision": 6,
+  "result": "hcpqb4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c21e9c94f0896p+4",
+  "lon": "-0x1.605fd41bf3974p+7",
+  "precision": 7,
+  "result": "24fxyy8"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.95d75bc9d091dp+5",
+  "lon": "-0x1.67e915d7f4c58p+7",
+  "precision": 10,
+  "result": "0nbp3hbe6v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.c1ca074285b9fp+5",
+  "lon": "0x1.be975c5cf1340p+1",
+  "precision": 1,
+  "result": "h"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4d148a397653cp+6",
+  "lon": "-0x1.70c3d0ab56bf9p+6",
+  "precision": 10,
+  "result": "cyy3wnu7hx"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ff40a4461c758p+5",
+  "lon": "-0x1.71623e658660cp+6",
+  "precision": 8,
+  "result": "cgq7d9gd"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.48a286cc93370p+3",
+  "lon": "-0x1.25c590caa7888p+4",
+  "precision": 12,
+  "result": "7w4vw4qjgghs"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b0ef3bf242310p+5",
+  "lon": "-0x1.2b29b9bb984f5p+6",
+  "precision": 11,
+  "result": "f3dgf5ej330"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0519861f3c090p+4",
+  "lon": "0x1.3ec2219bfec94p+6",
+  "precision": 2,
+  "result": "mv"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.d83b07f13032cp+5",
+  "lon": "-0x1.622ff59a30715p+7",
+  "precision": 9,
+  "result": "b46pf1u7f"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.464390cfee0b6p+6",
+  "lon": "0x1.4a8f3677a5380p+7",
+  "precision": 11,
+  "result": "p9mxcp358qy"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.57816de994428p+5",
+  "lon": "-0x1.502bb418b6709p+7",
+  "precision": 2,
+  "result": "8r"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.46a8e365173dfp+6",
+  "lon": "-0x1.fd9c0ed6b4d6fp+6",
+  "precision": 1,
+  "result": "1"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4729f301e539ap+6",
+  "lon": "0x1.fb09cfc636614p+5",
+  "precision": 11,
+  "result": "j3mndnrv04v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2db54ea51ebdfp+6",
+  "lon": "-0x1.cb72cb7b88020p+6",
+  "precision": 10,
+  "result": "16w6fhzvwc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0c2db6d9c12e4p+5",
+  "lon": "-0x1.45a5730948779p+7",
+  "precision": 4,
+  "result": "8mun"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c953ae4ee4000p-7",
+  "lon": "-0x1.0cf1fd13728d8p+5",
+  "precision": 2,
+  "result": "e2"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.016a0a3e35eaap+6",
+  "lon": "0x1.441f74c7a6368p+6",
+  "precision": 1,
+  "result": "v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2c9cf752e6ba0p+1",
+  "lon": "-0x1.a4e56064d128ep+5",
+  "precision": 11,
+  "result": "6zdddu3ng83"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.0b4c5f8ee7a74p+6",
+  "lon": "0x1.ba57de01e4a04p+6",
+  "precision": 10,
+  "result": "y7yshmn1kj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.292d52290f330p+4",
+  "lon": "0x1.e3a09a0d84a38p+6",
+  "precision": 6,
+  "result": "wemcxm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.ae97afebef77ep+4",
+  "lon": "-0x1.27e602f837e5cp+7",
+  "precision": 3,
+  "result": "2en"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3231c5a0190e4p+6",
+  "lon": "0x1.8498754a90314p+6",
+  "precision": 10,
+  "result": "yjt56xjxvn"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7caac3d4b80b0p+3",
+  "lon": "-0x1.ef829eb6b2fdcp+6",
+  "precision": 10,
+  "result": "94pgtje47d"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.af70f8a66f44dp+5",
+  "lon": "-0x1.04077a1c30638p+7",
+  "precision": 5,
+  "result": "1n7t1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.199bd13ba2aeap+6",
+  "lon": "-0x1.308b3e620cb82p+7",
+  "precision": 2,
+  "result": "bs"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.109432ee98258p+4",
+  "lon": "-0x1.28f5c7b280ce1p+7",
+  "precision": 10,
+  "result": "8en2vm24uq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a33b857b0b968p+4",
+  "lon": "0x1.3760752e97806p+7",
+  "precision": 8,
+  "result": "r7qdyy0f"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6111d1ae20accp+6",
+  "lon": "0x1.8d5aa58e9db78p+4",
+  "precision": 5,
+  "result": "h839v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.662e03d5ea264p+6",
+  "lon": "-0x1.9a2db5f77c888p+4",
+  "precision": 5,
+  "result": "52jf8"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5a165bbc1bc13p+6",
+  "lon": "0x1.89d9d1a997d08p+6",
+  "precision": 8,
+  "result": "n0w5b94m"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f0c7709431adcp+5",
+  "lon": "0x1.51df6688e97c0p+3",
+  "precision": 1,
+  "result": "h"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.23ff48a5ec828p+4",
+  "lon": "0x1.62b2a956b99dcp+7",
+  "precision": 3,
+  "result": "xgn"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4fe464fd9f6d8p+4",
+  "lon": "-0x1.a6576e025fe08p+6",
+  "precision": 1,
+  "result": "9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.189d9dd2c478ep+6",
+  "lon": "-0x1.a5ec945379ec4p+5",
+  "precision": 2,
+  "result": "fu"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.b3f08a358c4e6p+5",
+  "lon": "0x1.c9e9e6297b9dcp+5",
+  "precision": 3,
+  "result": "jq2"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ec71b967a25a8p+5",
+  "lon": "-0x1.1cfb8300f5c35p+7",
+  "precision": 5,
+  "result": "bffwj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6eafe70639b40p+2",
+  "lon": "0x1.3dc845e099b58p+6",
+  "precision": 10,
+  "result": "tc02xg488j"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2f874bd0700f0p+5",
+  "lon": "-0x1.5c1818245a617p+6",
+  "precision": 9,
+  "result": "61605tp3k"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.79a07c2c84560p+1",
+  "lon": "0x1.2260b7ba28d6cp+5",
+  "precision": 8,
+  "result": "kz3z1yyv"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.ae732f60bb030p+5",
+  "lon": "-0x1.1e9b81bcef6cap+7",
+  "precision": 10,
+  "result": "bcd4551kj4"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7e07df43c10e0p+2",
+  "lon": "0x1.1c5966011e252p+6",
+  "precision": 9,
+  "result": "t949cwsjq"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.25bf24462899ap+6",
+  "lon": "-0x1.31d06019db978p+4",
+  "precision": 5,
+  "result": "gt43v"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4fc48c3ab492bp+6",
+  "lon": "-0x1.04fff393f0234p+6",
+  "precision": 12,
+  "result": "491d7ny6vbhb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2dcf561410900p+2",
+  "lon": "-0x1.2618fade16604p+7",
+  "precision": 1,
+  "result": "2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.b3c3f133e069ap+4",
+  "lon": "-0x1.594c324d004e0p+3",
+  "precision": 8,
+  "result": "7g0m43yw"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0fae1ae598203p+6",
+  "lon": "-0x1.12cb7b2f742ddp+7",
+  "precision": 5,
+  "result": "0gym9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.38f00fbc835c0p+6",
+  "lon": "0x1.63fc969edd508p+7",
+  "precision": 3,
+  "result": "zvy"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.2f53f8b502870p+3",
+  "lon": "0x1.0663ef224ec1ep+6",
+  "precision": 4,
+  "result": "mqqd"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.21a5bc04688a6p+5",
+  "lon": "0x1.3607ac6526300p+7",
+  "precision": 6,
+  "result": "xqqjzr"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.44bc968c428abp+5",
+  "lon": "-0x1.71f233e55b8a8p+4",
+  "precision": 4,
+  "result": "72z9"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.535aa98fe456dp+6",
+  "lon": "-0x1.8c1c0ac6789a3p+6",
+  "precision": 8,
+  "result": "1bct6ed7"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.f2ccfc43e0090p+5",
+  "lon": "-0x1.4c65ffce24ffbp+6",
+  "precision": 7,
+  "result": "f5hftn2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.58e9a0144b79bp+5",
+  "lon": "-0x1.cbc14bc094a7dp+6",
+  "precision": 9,
+  "result": "32q68x24k"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c0b70d8d5f418p+4",
+  "lon": "0x1.f164dce19d178p+6",
+  "precision": 7,
+  "result": "wubrt97"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.47590d0e3ebe4p+6",
+  "lon": "-0x1.58838ddd8ec76p+6",
+  "precision": 3,
+  "result": "416"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.20fb128c96af4p+6",
+  "lon": "0x1.a9cdc62de3a88p+4",
+  "precision": 7,
+  "result": "usffvxf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.fdd8d761401b0p+3",
+  "lon": "0x1.0bb99f6730158p+5",
+  "precision": 7,
+  "result": "sdzf9s2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.ddca331f3bf80p+2",
+  "lon": "-0x1.211c534138f20p+2",
+  "precision": 1,
+  "result": "7"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0a515c7576dcbp+6",
+  "lon": "0x1.9f8909097dd9cp+6",
+  "precision": 4,
+  "result": "nk1v"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.f946f99ca6c0cp+5",
+  "lon": "-0x1.5e2eeadefb6f3p+7",
+  "precision": 12,
+  "result": "b55rr9y5tjjw"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7c3a329a3b2cbp+5",
+  "lon": "-0x1.19d0c20918220p+2",
+  "precision": 11,
+  "result": "5zsceg9wfhg"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.568e30937108cp+4",
+  "lon": "-0x1.a4e8ddd834929p+6",
+  "precision": 8,
+  "result": "9ev1v3x8"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8cb4baff520a0p+2",
+  "lon": "-0x1.04373d7210b82p+7",
+  "precision": 4,
+  "result": "3ngk"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.eb4feb93800f3p+5",
+  "lon": "-0x1.3924985aae918p+7",
+  "precision": 3,
+  "result": "0t0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5de4f6b7869c8p+4",
+  "lon": "0x1.9b8d3cea6e5a4p+6",
+  "precision": 8,
+  "result": "w7chmm08"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4e05e36c4de36p+5",
+  "lon": "-0x1.9fe505f6918f0p+5",
+  "precision": 4,
+  "result": "6be4"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6ae7c524ca060p+5",
+  "lon": "0x1.0e434d18fc6a6p+7",
+  "precision": 8,
+  "result": "z0044fpe"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.df675b4368e78p+4",
+  "lon": "0x1.4e75217f6fd9cp+7",
+  "precision": 2,
+  "result": "xt"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e3adf2a3a7bb0p+5",
+  "lon": "-0x1.c61eceaffabb8p+4",
+  "precision": 5,
+  "result": "5m7b4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.10f711df9de4cp+4",
+  "lon": "0x1.1a82506c18fdap+7",
+  "precision": 1,
+  "result": "r"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3822735a3c31cp+5",
+  "lon": "0x1.c8612110cacc4p+6",
+  "precision": 12,
+  "result": "wwcjuqc36y8q"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.dc26d24360b30p+4",
+  "lon": "-0x1.82a222488c913p+6",
+  "precision": 3,
+  "result": "3fe"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.152be9b1b2712p+5",
+  "lon": "-0x1.ef9dd4ce936f0p+5",
+  "precision": 3,
+  "result": "dw5"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.33bc1923c0198p+3",
+  "lon": "0x1.0b207ee422de6p+7",
+  "precision": 4,
+  "result": "wcwy"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.7b4b504c61084p+4",
+  "lon": "-0x1.6d90dd94ccd1dp+6",
+  "precision": 7,
+  "result": "9upnb7d"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c33fb411a2660p+5",
+  "lon": "-0x1.1851dd6c2b690p+5",
+  "precision": 10,
+  "result": "g4p0fsktmk"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.d6c4bd1fbaf0ap+4",
+  "lon": "0x1.45cbd2825d124p+7",
+  "precision": 5,
+  "result": "rdgbd"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.3bd9b3c2f8e58p+3",
+  "lon": "0x1.10b74cade9908p+7",
+  "precision": 12,
+  "result": "x1bbnuufgcgm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9501ddd27dc28p+3",
+  "lon": "0x1.75654c80c9278p+6",
+  "precision": 11,
+  "result": "qjdrupywete"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.86b70c68d158cp+4",
+  "lon": "0x1.8aec97e8e5fe4p+5",
+  "precision": 4,
+  "result": "th74"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c889941a25d34p+4",
+  "lon": "0x1.2edc3669d15d4p+7",
+  "precision": 1,
+  "result": "x"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.479017adbd17cp+4",
+  "lon": "-0x1.3eeb2bc18d201p+7",
+  "precision": 11,
+  "result": "87ws7qvmbxf"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7477755e680c0p+2",
+  "lon": "-0x1.53dc6127acc50p+5",
+  "precision": 4,
+  "result": "7ncy"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3d201045f9e78p+4",
+  "lon": "0x1.6112d0cbf29f4p+6",
+  "precision": 6,
+  "result": "muqz0x"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f6fbfd8ea7fa7p+5",
+  "lon": "0x1.02f2bccdb72e6p+7",
+  "precision": 4,
+  "result": "nuu4"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0b7db6ef4f417p+6",
+  "lon": "-0x1.01aa786ea42c8p+5",
+  "precision": 7,
+  "result": "5k15e44"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.42972eee35cb2p+6",
+  "lon": "0x1.1b9aa239ac1b0p+3",
+  "precision": 7,
+  "result": "unq6c9m"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.12913d4fe731ap+6",
+  "lon": "-0x1.7bc6456b28a89p+6",
+  "precision": 10,
+  "result": "cuhqrxb5tj"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1aca010f833e8p+3",
+  "lon": "-0x1.501a4351bc58ap+7",
+  "precision": 9,
+  "result": "2q2mxzhzc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.35a01578225ccp+4",
+  "lon": "-0x1.5546cd663bb46p+6",
+  "precision": 4,
+  "result": "d57q"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.74f92b2376180p-1",
+  "lon": "-0x1.c5ccd8f7a15dbp+6",
+  "precision": 1,
+  "result": "3"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e82e16323f1e8p+3",
+  "lon": "0x1.18c467761520ep+6",
+  "precision": 8,
+  "result": "mt3cjqb1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.81162ac428968p+5",
+  "lon": "0x1.12b2099652a40p+3",
+  "precision": 6,
+  "result": "u0w1g6"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.fcc0b2106d644p+4",
+  "lon": "-0x1.c05f0983884a0p+3",
+  "precision": 11,
+  "result": "etwhchmp4nb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4a5cdcda30469p+6",
+  "lon": "-0x1.075216fb450b3p+6",
+  "precision": 6,
+  "result": "4934ju"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.3180ab8db81a4p+6",
+  "lon": "0x1.326c605538dacp+7",
+  "precision": 8,
+  "result": "p6kvw2jr"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.1b674c6ea2a6cp+5",
+  "lon": "0x1.4c6fe777bc004p+7",
+  "precision": 5,
+  "result": "r9wnq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.58b2d5ecb7040p+0",
+  "lon": "0x1.c15a45a1ca4e0p+6",
+  "precision": 3,
+  "result": "qrz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4d39db2c82a58p+5",
+  "lon": "0x1.44edae9159b78p+4",
+  "precision": 6,
+  "result": "srqkyn"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.f25604d846b34p+5",
+  "lon": "-0x1.150d06eb74e0cp+6",
+  "precision": 6,
+  "result": "4kytxu"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.a91ef9b7afc13p+5",
+  "lon": "0x1.22c1400d06428p+7",
+  "precision": 3,
+  "result": "pnx"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.9cbea09d8fc1bp+5",
+  "lon": "0x1.5b9ec33a1f5c2p+7",
+  "precision": 12,
+  "result": "pygd7pu8s2ze"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.e20f1a7e59800p-5",
+  "lon": "-0x1.5961b6d63eda8p+4",
+  "precision": 1,
+  "result": "e"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.8e88948d289c8p+5",
+  "lon": "0x1.2805722135cb8p+6",
+  "precision": 8,
+  "result": "jxhss51h"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.5fc2216b908f6p+6",
+  "lon": "0x1.40f948f83f83ap+7",
+  "precision": 10,
+  "result": "zxdh7byvpm"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.058b1379de08cp+6",
+  "lon": "-0x1.cd586a21ad47cp+6",
+  "precision": 5,
+  "result": "c7tgz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.95b8b25fd53dcp+5",
+  "lon": "-0x1.5713218a9070ap+6",
+  "precision": 7,
+  "result": "f150823"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.a2647ba782790p+2",
+  "lon": "0x1.66170c857fd16p+7",
+  "precision": 1,
+  "result": "x"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.61a801c4ac030p+5",
+  "lon": "0x1.8cccf88b9fb38p+6",
+  "precision": 1,
+  "result": "w"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.96fadbf395564p+5",
+  "lon": "-0x1.e81148cf09f00p+0",
+  "precision": 2,
+  "result": "gc"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4e0db16dac7c7p+6",
+  "lon": "0x1.ac6d708fcec78p+5",
+  "precision": 10,
+  "result": "j1nhfsu7me"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e1ebe506dacf0p+2",
+  "lon": "0x1.23661584a84f0p+5",
+  "precision": 10,
+  "result": "ky9vhv5y2m"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.b5459368231cap+5",
+  "lon": "-0x1.65ae6d4c33a76p+7",
+  "precision": 8,
+  "result": "0n2c43sh"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6243ee4b0b9b0p+6",
+  "lon": "0x1.24a71ca962c34p+5",
+  "precision": 1,
+  "result": "h"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c15d437cc5a18p+5",
+  "lon": "-0x1.7a652897a4bedp+6",
+  "precision": 9,
+  "result": "ccuxx3e30"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.62edee6b8d074p+5",
+  "lon": "0x1.1aed39bb25acap+7",
+  "precision": 10,
+  "result": "xpus7hd7ww"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.203586ac09320p+3",
+  "lon": "0x1.14a0fe9fd16f4p+5",
+  "precision": 12,
+  "result": "sc8e4ze6u58g"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.4775de6279dfcp+5",
+  "lon": "-0x1.38e4571b9bf7fp+7",
+  "precision": 2,
+  "result": "28"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.e9c8de07098f0p+4",
+  "lon": "-0x1.41204d25b8b1fp+6",
+  "precision": 5,
+  "result": "64wcv"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.54a91c7f2e2a4p+6",
+  "lon": "0x1.328db3636edc8p+5",
+  "precision": 4,
+  "result": "hbg5"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.1a77f227226d0p+6",
+  "lon": "-0x1.2e49929cd708ep+7",
+  "precision": 3,
+  "result": "bss"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.443bd19e5a3aep+6",
+  "lon": "-0x1.7d11ea144b57fp+6",
+  "precision": 12,
+  "result": "cykm0hhrd2p6"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.be342cf5f5324p+4",
+  "lon": "-0x1.1e63f296dd0b6p+6",
+  "precision": 7,
+  "result": "67j16g0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5d1a8ac92a912p+6",
+  "lon": "0x1.3244575534970p+6",
+  "precision": 7,
+  "result": "j8qrqrf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.a2c6cbc931778p+3",
+  "lon": "-0x1.6d8aabbe33140p+4",
+  "precision": 12,
+  "result": "e6rf2n7gcq4y"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.b17749058b052p+4",
+  "lon": "-0x1.13723a889409cp+7",
+  "precision": 6,
+  "result": "2gnjfh"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.d97dca2c677e8p+4",
+  "lon": "0x1.5ce0bc22e137ep+7",
+  "precision": 11,
+  "result": "rfsp9kwx1c9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.60ebaffa0f8e6p+6",
+  "lon": "0x1.eda1d57017250p+4",
+  "precision": 5,
+  "result": "uxtvy"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7b51666c0ae93p+5",
+  "lon": "-0x1.3ce4a539ac51bp+6",
+  "precision": 3,
+  "result": "4px"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.e9df0386cecc8p+4",
+  "lon": "-0x1.5ac3e0dc77023p+7",
+  "precision": 3,
+  "result": "8jk"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.c1bfdc702771cp+5",
+  "lon": "-0x1.487f2c700826ap+7",
+  "precision": 10,
+  "result": "b3gpy6mcx1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.b3e67d0e87d28p+5",
+  "lon": "0x1.21f3f9b973d18p+6",
+  "precision": 5,
+  "result": "v9etc"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.63150db0d8892p+6",
+  "lon": "-0x1.0a3fd18315839p+6",
+  "precision": 11,
+  "result": "fxb9j24vcry"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.29e8c33aa33abp+6",
+  "lon": "-0x1.295d3d2edff56p+7",
+  "precision": 1,
+  "result": "0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.4543d8ea72cd0p+6",
+  "lon": "0x1.5d6bdda8ec68cp+7",
+  "precision": 9,
+  "result": "zyknxehmt"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.fccfddbeb26b8p+5",
+  "lon": "0x1.ed037d4cc3000p+0",
+  "precision": 1,
+  "result": "h"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.5e443866c51ddp+6",
+  "lon": "0x1.0aee6ed5ded4ep+6",
+  "precision": 4,
+  "result": "j2rm"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.7e0c3a889a840p+1",
+  "lon": "-0x1.aa4cd479bc03ap+5",
+  "precision": 10,
+  "result": "6z6p52thwf"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.04f3d6fac647cp+5",
+  "lon": "0x1.4c363854b38d0p+4",
+  "precision": 7,
+  "result": "smyc86p"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.41e6de01d9edfp+6",
+  "lon": "-0x1.101e9ee75f6d1p+7",
+  "precision": 11,
+  "result": "0cxnpvuk2xx"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.35f8d969902e4p+4",
+  "lon": "-0x1.10f512ed9a414p+7",
+  "precision": 3,
+  "result": "8gq"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12d56e74f38a5p+6",
+  "lon": "-0x1.050ddde2e14d0p+4",
+  "precision": 6,
+  "result": "5eu3hs"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.421212e867f14p+6",
+  "lon": "-0x1.48a30dc9f5f02p+6",
+  "precision": 5,
+  "result": "fnmd4"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 1,
+  "result": "s"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 2,
+  "result": "s0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 5,
+  "result": "s0000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 6,
+  "result": "s00000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 11,
+  "result": "s0000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "result": "s00000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 1,
+  "result": "s"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 2,
+  "result": "s0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 5,
+  "result": "s0000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 6,
+  "result": "s00000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 11,
+  "result": "s0000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "result": "s00000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 1,
+  "result": "z"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 2,
+  "result": "zz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 5,
+  "result": "zzzzz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 6,
+  "result": "zzzzzz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 11,
+  "result": "zzzzzzzzzzz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 12,
+  "result": "zzzzzzzzzzzz"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 1,
+  "result": "b"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 2,
+  "result": "bp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 5,
+  "result": "bpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 6,
+  "result": "bpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 11,
+  "result": "bpbpbpbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 12,
+  "result": "bpbpbpbpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 1,
+  "result": "p"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 2,
+  "result": "pb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 5,
+  "result": "pbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 6,
+  "result": "pbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 11,
+  "result": "pbpbpbpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 12,
+  "result": "pbpbpbpbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 1,
+  "result": "0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 2,
+  "result": "00"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 5,
+  "result": "00000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 6,
+  "result": "000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 11,
+  "result": "00000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.6800000000000p+6",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 12,
+  "result": "000000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 1,
+  "result": "x"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 2,
+  "result": "xb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 5,
+  "result": "xbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 6,
+  "result": "xbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 11,
+  "result": "xbpbpbpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.6800000000000p+7",
+  "precision": 12,
+  "result": "xbpbpbpbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 1,
+  "result": "8"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 2,
+  "result": "80"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 5,
+  "result": "80000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 6,
+  "result": "800000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 11,
+  "result": "80000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.6800000000000p+7",
+  "precision": 12,
+  "result": "800000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.67ffffffffffcp+7",
+  "precision": 1,
+  "result": "x"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.67ffffffffffcp+7",
+  "precision": 2,
+  "result": "xb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.67ffffffffffcp+7",
+  "precision": 5,
+  "result": "xbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.67ffffffffffcp+7",
+  "precision": 6,
+  "result": "xbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.67ffffffffffcp+7",
+  "precision": 11,
+  "result": "xbpbpbpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x1.67ffffffffffcp+7",
+  "precision": 12,
+  "result": "xbpbpbpbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.67ffffffffffcp+7",
+  "precision": 1,
+  "result": "8"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.67ffffffffffcp+7",
+  "precision": 2,
+  "result": "80"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.67ffffffffffcp+7",
+  "precision": 5,
+  "result": "80000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.67ffffffffffcp+7",
+  "precision": 6,
+  "result": "800000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.67ffffffffffcp+7",
+  "precision": 11,
+  "result": "80000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-0x1.67ffffffffffcp+7",
+  "precision": 12,
+  "result": "800000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 1,
+  "result": "u"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 2,
+  "result": "up"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 5,
+  "result": "upbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 6,
+  "result": "upbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 11,
+  "result": "upbpbpbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "result": "upbpbpbpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 1,
+  "result": "h"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 2,
+  "result": "h0"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 5,
+  "result": "h0000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 6,
+  "result": "h00000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 11,
+  "result": "h0000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.67ffffffffff9p+6",
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "result": "h00000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+5",
+  "lon": "-0x1.6800000000000p+5",
+  "precision": 1,
+  "result": "g"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+5",
+  "lon": "-0x1.6800000000000p+5",
+  "precision": 2,
+  "result": "g0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+5",
+  "lon": "-0x1.6800000000000p+5",
+  "precision": 5,
+  "result": "g0000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+5",
+  "lon": "-0x1.6800000000000p+5",
+  "precision": 6,
+  "result": "g00000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+5",
+  "lon": "-0x1.6800000000000p+5",
+  "precision": 11,
+  "result": "g0000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.6800000000000p+5",
+  "lon": "-0x1.6800000000000p+5",
+  "precision": 12,
+  "result": "g00000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.12e0be826d695p-30",
+  "lon": "-0x1.12e0be826d695p-30",
+  "precision": 1,
+  "result": "e"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.12e0be826d695p-30",
+  "lon": "-0x1.12e0be826d695p-30",
+  "precision": 2,
+  "result": "eb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.12e0be826d695p-30",
+  "lon": "-0x1.12e0be826d695p-30",
+  "precision": 5,
+  "result": "ebpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.12e0be826d695p-30",
+  "lon": "-0x1.12e0be826d695p-30",
+  "precision": 6,
+  "result": "ebpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.12e0be826d695p-30",
+  "lon": "-0x1.12e0be826d695p-30",
+  "precision": 11,
+  "result": "ebpbpbpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.12e0be826d695p-30",
+  "lon": "-0x1.12e0be826d695p-30",
+  "precision": 12,
+  "result": "ebpbpbpbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12e0be826d695p-30",
+  "lon": "0x1.12e0be826d695p-30",
+  "precision": 1,
+  "result": "k"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12e0be826d695p-30",
+  "lon": "0x1.12e0be826d695p-30",
+  "precision": 2,
+  "result": "kp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12e0be826d695p-30",
+  "lon": "0x1.12e0be826d695p-30",
+  "precision": 5,
+  "result": "kpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12e0be826d695p-30",
+  "lon": "0x1.12e0be826d695p-30",
+  "precision": 6,
+  "result": "kpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12e0be826d695p-30",
+  "lon": "0x1.12e0be826d695p-30",
+  "precision": 11,
+  "result": "kpbpbpbpbpb"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.12e0be826d695p-30",
+  "lon": "0x1.12e0be826d695p-30",
+  "precision": 12,
+  "result": "kpbpbpbpbpbp"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0000000000001p-1022",
+  "lon": "0x0.0000000000001p-1022",
+  "precision": 1,
+  "result": "s"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0000000000001p-1022",
+  "lon": "0x0.0000000000001p-1022",
+  "precision": 2,
+  "result": "s0"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0000000000001p-1022",
+  "lon": "0x0.0000000000001p-1022",
+  "precision": 5,
+  "result": "s0000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0000000000001p-1022",
+  "lon": "0x0.0000000000001p-1022",
+  "precision": 6,
+  "result": "s00000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0000000000001p-1022",
+  "lon": "0x0.0000000000001p-1022",
+  "precision": 11,
+  "result": "s0000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0000000000001p-1022",
+  "lon": "0x0.0000000000001p-1022",
+  "precision": 12,
+  "result": "s00000000000"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.54ccccccccccdp+5",
+  "lon": "-0x1.6666666666666p+2",
+  "precision": 1,
+  "result": "e"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.54ccccccccccdp+5",
+  "lon": "-0x1.6666666666666p+2",
+  "precision": 2,
+  "result": "ez"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.54ccccccccccdp+5",
+  "lon": "-0x1.6666666666666p+2",
+  "precision": 5,
+  "result": "ezs42"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.54ccccccccccdp+5",
+  "lon": "-0x1.6666666666666p+2",
+  "precision": 6,
+  "result": "ezs42e"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.54ccccccccccdp+5",
+  "lon": "-0x1.6666666666666p+2",
+  "precision": 11,
+  "result": "ezs42e44yx9"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.54ccccccccccdp+5",
+  "lon": "-0x1.6666666666666p+2",
+  "precision": 12,
+  "result": "ezs42e44yx96"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9c15360d02470p+5",
+  "lon": "0x1.d0f69878316a0p+2",
+  "precision": 1,
+  "result": "u"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9c15360d02470p+5",
+  "lon": "0x1.d0f69878316a0p+2",
+  "precision": 2,
+  "result": "u1"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9c15360d02470p+5",
+  "lon": "0x1.d0f69878316a0p+2",
+  "precision": 5,
+  "result": "u1jjj"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9c15360d02470p+5",
+  "lon": "0x1.d0f69878316a0p+2",
+  "precision": 6,
+  "result": "u1jjj3"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9c15360d02470p+5",
+  "lon": "0x1.d0f69878316a0p+2",
+  "precision": 11,
+  "result": "u1jjj34jxfw"
+ },
+ {
+  "kind": "encode",
+  "lat": "0x1.9c15360d02470p+5",
+  "lon": "0x1.d0f69878316a0p+2",
+  "precision": 12,
+  "result": "u1jjj34jxfw8"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ef15b573eab3p+5",
+  "lon": "0x1.2e6a25d8d79d1p+7",
+  "precision": 1,
+  "result": "r"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ef15b573eab3p+5",
+  "lon": "0x1.2e6a25d8d79d1p+7",
+  "precision": 2,
+  "result": "r3"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ef15b573eab3p+5",
+  "lon": "0x1.2e6a25d8d79d1p+7",
+  "precision": 5,
+  "result": "r3gx2"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ef15b573eab3p+5",
+  "lon": "0x1.2e6a25d8d79d1p+7",
+  "precision": 6,
+  "result": "r3gx2f"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ef15b573eab3p+5",
+  "lon": "0x1.2e6a25d8d79d1p+7",
+  "precision": 11,
+  "result": "r3gx2f9c3zj"
+ },
+ {
+  "kind": "encode",
+  "lat": "-0x1.0ef15b573eab3p+5",
+  "lon": "0x1.2e6a25d8d79d1p+7",
+  "precision": 12,
+  "result": "r3gx2f9c3zjt"
+ },
+ {
+  "kind": "encode",
+  "lat": true,
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be numbers, not booleans"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": false,
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be numbers, not booleans"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": true,
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be numbers, not booleans"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": false,
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be numbers, not booleans"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": true,
+  "error": [
+   "ValueError",
+   "precision must be an integer, not a boolean"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": false,
+  "error": [
+   "ValueError",
+   "precision must be an integer, not a boolean"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 0,
+  "error": [
+   "ValueError",
+   "precision must be between 1 and 12"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 13,
+  "error": [
+   "ValueError",
+   "precision must be between 1 and 12"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": -1,
+  "error": [
+   "ValueError",
+   "precision must be between 1 and 12"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "nan",
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be finite"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "nan",
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be finite"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "inf",
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be finite"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "-inf",
+  "precision": 12,
+  "error": [
+   "ValueError",
+   "latitude and longitude must be finite"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "not-a-number",
+  "lon": "0x0.0p+0",
+  "precision": 12,
+  "error": [
+   "TypeError",
+   "must be real number, not str"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": 6.5,
+  "error": [
+   "TypeError",
+   "'float' object cannot be interpreted as an integer"
+  ]
+ },
+ {
+  "kind": "encode",
+  "lat": "0x0.0p+0",
+  "lon": "0x0.0p+0",
+  "precision": "6",
+  "error": [
+   "TypeError",
+   "'str' object cannot be interpreted as an integer"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ezs42e44yx96",
+  "exactly": [
+   "0x1.54ccccd040000p+5",
+   "-0x1.6666664400000p+2",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.54ccccd040000p+5",
+   "-0x1.6666664400000p+2"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "EZS42E44YX96",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "u00000",
+  "exactly": [
+   "0x1.6805a00000000p+5",
+   "0x1.6800000000000p-8",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.6805a00000000p+5",
+   "0x1.6800000000000p-8"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "U00000",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "gbpbpb",
+  "exactly": [
+   "0x1.6805a00000000p+5",
+   "-0x1.6800000000000p-8",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.6805a00000000p+5",
+   "-0x1.6800000000000p-8"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "GBPBPB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "u",
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "U",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "z",
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Z",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0",
+  "exactly": [
+   "-0x1.0e00000000000p+6",
+   "-0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+6",
+   "-0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0",
+  "exactly": [
+   "-0x1.0e00000000000p+6",
+   "-0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+6",
+   "-0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "zzzzzzzzzzzz",
+  "exactly": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ZZZZZZZZZZZZ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "000000000000",
+  "exactly": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "000000000000",
+  "exactly": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "s00000000000",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "S00000000000",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "s00000000000",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "S00000000000",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "zzzzzzzzzzzz",
+  "exactly": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ZZZZZZZZZZZZ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "bpbpbpbpbpbp",
+  "exactly": [
+   "0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "BPBPBPBPBPBP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "pbpbpbpbpbpb",
+  "exactly": [
+   "-0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "PBPBPBPBPBPB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "000000000000",
+  "exactly": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "000000000000",
+  "exactly": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "xbpbpbpbpbpb",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "XBPBPBPBPBPB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "800000000000",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "800000000000",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "xbpbpbpbpbpb",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "XBPBPBPBPBPB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "800000000000",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "800000000000",
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "-0x1.67fffffa60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1n6ycmnydp44",
+  "exactly": [
+   "-0x1.ad076317c0000p+5",
+   "-0x1.0623156060000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.ad076317c0000p+5",
+   "-0x1.0623156060000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1N6YCMNYDP44",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "74vmwcs6tq",
+  "exactly": [
+   "-0x1.c8e4597000000p+4",
+   "-0x1.2a84131000000p+5",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.c8e4597000000p+4",
+   "-0x1.2a84131000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "74VMWCS6TQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "t5k8m1z0sp",
+  "exactly": [
+   "0x1.255be43000000p+4",
+   "0x1.9c760cd000000p+5",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.255be43000000p+4",
+   "0x1.9c760cd000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "T5K8M1Z0SP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5npev",
+  "exactly": [
+   "-0x1.bc8d000000000p+5",
+   "-0x1.11b1000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.bc8d000000000p+5",
+   "-0x1.11b1000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5NPEV",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3853cj3udu",
+  "exactly": [
+   "-0x1.654d4e5800000p+5",
+   "-0x1.af8869a800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.654d4e5800000p+5",
+   "-0x1.af8869a800000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3853CJ3UDU",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "gs3w691",
+  "exactly": [
+   "0x1.180b540000000p+6",
+   "-0x1.4475900000000p+4",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.180b540000000p+6",
+   "-0x1.4475900000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "GS3W691",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "27",
+  "exactly": [
+   "-0x1.9500000000000p+4",
+   "-0x1.4640000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.9500000000000p+4",
+   "-0x1.4640000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "27",
+  "exactly": [
+   "-0x1.9500000000000p+4",
+   "-0x1.4640000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.9500000000000p+4",
+   "-0x1.4640000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "49v",
+  "exactly": [
+   "-0x1.3dd0000000000p+6",
+   "-0x1.de20000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.3dd0000000000p+6",
+   "-0x1.de20000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "49V",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "s51n5n",
+  "exactly": [
+   "0x1.1f72400000000p+4",
+   "0x1.8b28000000000p+0",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.1f72400000000p+4",
+   "0x1.8b28000000000p+0"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "S51N5N",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "rfmyr",
+  "exactly": [
+   "-0x1.f392000000000p+4",
+   "0x1.6254c00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.f392000000000p+4",
+   "0x1.6254c00000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "RFMYR",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "xrwgj",
+  "exactly": [
+   "0x1.55e5000000000p+5",
+   "0x1.37f7c00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.55e5000000000p+5",
+   "0x1.37f7c00000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "XRWGJ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "g5crvbe2gbb",
+  "exactly": [
+   "0x1.0dd5f2fb00000p+6",
+   "-0x1.57e1074600000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.0dd5f2fb00000p+6",
+   "-0x1.57e1074600000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "G5CRVBE2GBB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "pgmp6",
+  "exactly": [
+   "-0x1.19b0800000000p+6",
+   "0x1.5fc8400000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.19b0800000000p+6",
+   "0x1.5fc8400000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "PGMP6",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "mu2t",
+  "exactly": [
+   "-0x1.4208000000000p+4",
+   "0x1.3e84000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.4208000000000p+4",
+   "0x1.3e84000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "MU2T",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "73nj1y3v",
+  "exactly": [
+   "-0x1.33afc10000000p+5",
+   "-0x1.93ba740000000p+4",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.33afc10000000p+5",
+   "-0x1.93ba740000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "73NJ1Y3V",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "mzztq6",
+  "exactly": [
+   "-0x1.e0f0000000000p-2",
+   "0x1.664ee00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.e0f0000000000p-2",
+   "0x1.664ee00000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "MZZTQ6",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7hg48pu1hur",
+  "exactly": [
+   "-0x1.1cc8d36400000p+4",
+   "-0x1.46344fda00000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.1cc8d36400000p+4",
+   "-0x1.46344fda00000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7HG48PU1HUR",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "kv3r345",
+  "exactly": [
+   "-0x1.c5d8600000000p+3",
+   "0x1.1c73d80000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.c5d8600000000p+3",
+   "0x1.1c73d80000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "KV3R345",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "jg9k4jzv9",
+  "exactly": [
+   "-0x1.164eaae000000p+6",
+   "0x1.426cf6e000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.164eaae000000p+6",
+   "0x1.426cf6e000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "JG9K4JZV9",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "b9ujt",
+  "exactly": [
+   "0x1.bea9000000000p+5",
+   "-0x1.2f44400000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.bea9000000000p+5",
+   "-0x1.2f44400000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "B9UJT",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "2y",
+  "exactly": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.1940000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.1940000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "2Y",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "spu70t",
+  "exactly": [
+   "0x1.6135e00000000p+5",
+   "0x1.8042000000000p+2",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.6135e00000000p+5",
+   "0x1.8042000000000p+2"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "SPU70T",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0nqkuxp13hdm",
+  "exactly": [
+   "-0x1.afc2c25c40000p+5",
+   "-0x1.5601cdf520000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.afc2c25c40000p+5",
+   "-0x1.5601cdf520000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0NQKUXP13HDM",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "en3",
+  "exactly": [
+   "0x1.1ee0000000000p+5",
+   "-0x1.5720000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.1ee0000000000p+5",
+   "-0x1.5720000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "EN3",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "t3ftg",
+  "exactly": [
+   "0x1.5c0c000000000p+3",
+   "0x1.df5b000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.5c0c000000000p+3",
+   "0x1.df5b000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "T3FTG",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "tkmtfgc78hq",
+  "exactly": [
+   "0x1.8f02ee9c00000p+4",
+   "0x1.006d844900000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.8f02ee9c00000p+4",
+   "0x1.006d844900000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "TKMTFGC78HQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3e0r",
+  "exactly": [
+   "-0x1.ace8000000000p+4",
+   "-0x1.bfe4000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.ace8000000000p+4",
+   "-0x1.bfe4000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3E0R",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "rmewpqxmb",
+  "exactly": [
+   "-0x1.9f133d0000000p+3",
+   "0x1.2f003bd000000p+7",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.9f133d0000000p+3",
+   "0x1.2f003bd000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "RMEWPQXMB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "f",
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "-0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "-0x1.0e00000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "F",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8",
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8",
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "k8fmzy5mr",
+  "exactly": [
+   "-0x1.3de49c4000000p+5",
+   "0x1.a026998000000p+4",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.3de49c4000000p+5",
+   "0x1.a026998000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "K8FMZY5MR",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "frfnh52mr627",
+  "exactly": [
+   "0x1.66ab379160000p+6",
+   "-0x1.2f0b544e40000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.66ab379160000p+6",
+   "-0x1.2f0b544e40000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "FRFNH52MR627",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "p13en",
+  "exactly": [
+   "-0x1.49ad800000000p+6",
+   "0x1.12ca400000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.49ad800000000p+6",
+   "0x1.12ca400000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "P13EN",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "dg6026b0np",
+  "exactly": [
+   "0x1.25720a3000000p+4",
+   "-0x1.ab68f63000000p+5",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.25720a3000000p+4",
+   "-0x1.ab68f63000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "DG6026B0NP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "33sxukbx70s1",
+  "exactly": [
+   "-0x1.196201f640000p+5",
+   "-0x1.d4efe8ccc0000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.196201f640000p+5",
+   "-0x1.d4efe8ccc0000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "33SXUKBX70S1",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "qvpzbwgm1d0b",
+  "exactly": [
+   "-0x1.ef31215300000p+3",
+   "0x1.0d59919760000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.ef31215300000p+3",
+   "0x1.0d59919760000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "QVPZBWGM1D0B",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "qr7",
+  "exactly": [
+   "-0x1.c200000000000p+1",
+   "0x1.a8b0000000000p+6",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.c200000000000p+1",
+   "0x1.a8b0000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "QR7",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7wttpxq",
+  "exactly": [
+   "-0x1.e128400000000p+2",
+   "-0x1.cdaae00000000p+3",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.e128400000000p+2",
+   "-0x1.cdaae00000000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7WTTPXQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5rp2kxf5p7",
+  "exactly": [
+   "-0x1.944db82800000p+5",
+   "-0x1.75a9742000000p+4",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.944db82800000p+5",
+   "-0x1.75a9742000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5RP2KXF5P7",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "x",
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "X",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "x0t27htdjwh7",
+  "exactly": [
+   "0x1.70d652ec00000p+1",
+   "0x1.1d0b7db4e0000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.70d652ec00000p+1",
+   "0x1.1d0b7db4e0000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "X0T27HTDJWH7",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "uyegcn42p",
+  "exactly": [
+   "0x1.4904c5a000000p+6",
+   "0x1.3890fcc000000p+5",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.4904c5a000000p+6",
+   "0x1.3890fcc000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "UYEGCN42P",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "bjgmks2e",
+  "exactly": [
+   "0x1.3929858000000p+6",
+   "-0x1.5e764f8000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.3929858000000p+6",
+   "-0x1.5e764f8000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "BJGMKS2E",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "rvzxqsryx5",
+  "exactly": [
+   "-0x1.6b6f74a000000p+3",
+   "0x1.672fdb1400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.6b6f74a000000p+3",
+   "0x1.672fdb1400000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "RVZXQSRYX5",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "59pv",
+  "exactly": [
+   "-0x1.4da2000000000p+6",
+   "-0x1.6da0000000000p+3",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.4da2000000000p+6",
+   "-0x1.6da0000000000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "59PV",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4e7wj19tq",
+  "exactly": [
+   "-0x1.1a9e9e2000000p+6",
+   "-0x1.f2d935c000000p+5",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.1a9e9e2000000p+6",
+   "-0x1.f2d935c000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4E7WJ19TQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "mu03eyhw",
+  "exactly": [
+   "-0x1.633c6e0000000p+4",
+   "0x1.3d17410000000p+6",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.633c6e0000000p+4",
+   "0x1.3d17410000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "MU03EYHW",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "w9",
+  "exactly": [
+   "0x1.0e00000000000p+3",
+   "0x1.d880000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+3",
+   "0x1.d880000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "W9",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "gzj",
+  "exactly": [
+   "0x1.5450000000000p+6",
+   "-0x1.c200000000000p+1",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.5450000000000p+6",
+   "-0x1.c200000000000p+1"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "GZJ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "xpxywvk2",
+  "exactly": [
+   "0x1.5adf3d0000000p+5",
+   "0x1.2466f38000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.5adf3d0000000p+5",
+   "0x1.2466f38000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "XPXYWVK2",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "c9s3",
+  "exactly": [
+   "0x1.ad9c000000000p+5",
+   "-0x1.a964000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.ad9c000000000p+5",
+   "-0x1.a964000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "C9S3",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "xrvq0ykjgg0",
+  "exactly": [
+   "0x1.65785e4a00000p+5",
+   "0x1.3357c52e80000p+7",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.65785e4a00000p+5",
+   "0x1.3357c52e80000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "XRVQ0YKJGG0",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "v7",
+  "exactly": [
+   "0x1.02c0000000000p+6",
+   "0x1.ef00000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.02c0000000000p+6",
+   "0x1.ef00000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "V7",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "6drux",
+  "exactly": [
+   "-0x1.f87e000000000p+4",
+   "-0x1.c22d000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.f87e000000000p+4",
+   "-0x1.c22d000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "6DRUX",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "vy793t5mrg0d",
+  "exactly": [
+   "0x1.419e109420000p+6",
+   "0x1.4ef8696840000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.419e109420000p+6",
+   "0x1.4ef8696840000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "VY793T5MRG0D",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "mcnn",
+  "exactly": [
+   "-0x1.31dc000000000p+5",
+   "0x1.5d74000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.31dc000000000p+5",
+   "0x1.5d74000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "MCNN",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "n",
+  "exactly": [
+   "-0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "N",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "46r33dxtk",
+  "exactly": [
+   "-0x1.346ffe2000000p+6",
+   "-0x1.11e9c16000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.346ffe2000000p+6",
+   "-0x1.11e9c16000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "46R33DXTK",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "c36xc",
+  "exactly": [
+   "0x1.ab53000000000p+5",
+   "-0x1.e0ac800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.ab53000000000p+5",
+   "-0x1.e0ac800000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "C36XC",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "76jhqxt3",
+  "exactly": [
+   "-0x1.07b1190000000p+5",
+   "-0x1.a6cfc40000000p+4",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.07b1190000000p+5",
+   "-0x1.a6cfc40000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "76JHQXT3",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "n2yrgmx",
+  "exactly": [
+   "-0x1.518d5c0000000p+6",
+   "0x1.b8c4cc0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.518d5c0000000p+6",
+   "0x1.b8c4cc0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "N2YRGMX",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "pnq3tr81",
+  "exactly": [
+   "-0x1.b44f190000000p+5",
+   "0x1.200a368000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.b44f190000000p+5",
+   "0x1.200a368000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "PNQ3TR81",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "kxbwtw1h9p7d",
+  "exactly": [
+   "-0x1.d6d663c000000p-3",
+   "0x1.7723d21900000p+4",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.d6d663c000000p-3",
+   "0x1.7723d21900000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "KXBWTW1H9P7D",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "zzcwpqtr",
+  "exactly": [
+   "0x1.66bde18000000p+6",
+   "0x1.565ee78000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.66bde18000000p+6",
+   "0x1.565ee78000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ZZCWPQTR",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "96tbkzm82",
+  "exactly": [
+   "0x1.c4aec70000000p+3",
+   "-0x1.cdca7e6000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.c4aec70000000p+3",
+   "-0x1.cdca7e6000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "96TBKZM82",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "438xnf",
+  "exactly": [
+   "-0x1.4145f00000000p+6",
+   "-0x1.36faa00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.4145f00000000p+6",
+   "-0x1.36faa00000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "438XNF",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "tp1vnnb",
+  "exactly": [
+   "0x1.4255580000000p+5",
+   "0x1.7dcd680000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.4255580000000p+5",
+   "0x1.7dcd680000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "TP1VNNB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "tb",
+  "exactly": [
+   "0x1.6800000000000p+1",
+   "0x1.5180000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.6800000000000p+1",
+   "0x1.5180000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "TB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "bvq3gq8u",
+  "exactly": [
+   "0x1.2b805a8000000p+6",
+   "-0x1.12a2428000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.2b805a8000000p+6",
+   "-0x1.12a2428000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "BVQ3GQ8U",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8xfd09ehkp",
+  "exactly": [
+   "0x1.5fa2739800000p+5",
+   "-0x1.33ea8ccc00000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.5fa2739800000p+5",
+   "-0x1.33ea8ccc00000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8XFD09EHKP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "pq",
+  "exactly": [
+   "-0x1.ab80000000000p+5",
+   "0x1.2fc0000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.ab80000000000p+5",
+   "0x1.2fc0000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "PQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8",
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8",
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "-0x1.3b00000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4p3k3w1v35",
+  "exactly": [
+   "-0x1.83809da800000p+5",
+   "-0x1.60b1fd5800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.83809da800000p+5",
+   "-0x1.60b1fd5800000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4P3K3W1V35",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "nyzzcde",
+  "exactly": [
+   "-0x1.953c780000000p+5",
+   "0x1.0d70360000000p+7",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.953c780000000p+5",
+   "0x1.0d70360000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "NYZZCDE",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "m41dp",
+  "exactly": [
+   "-0x1.0b03000000000p+5",
+   "0x1.7b83000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.0b03000000000p+5",
+   "0x1.7b83000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "M41DP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "fq1qn628b",
+  "exactly": [
+   "0x1.3f44cf6000000p+6",
+   "-0x1.32de066000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.3f44cf6000000p+6",
+   "-0x1.32de066000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "FQ1QN628B",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "54ukxdsx29k",
+  "exactly": [
+   "-0x1.26e6a7d100000p+6",
+   "-0x1.3580499600000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.26e6a7d100000p+6",
+   "-0x1.3580499600000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "54UKXDSX29K",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "m8r",
+  "exactly": [
+   "-0x1.5720000000000p+5",
+   "0x1.3830000000000p+6",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.5720000000000p+5",
+   "0x1.3830000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "M8R",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7",
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "-0x1.6800000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7",
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "-0x1.6800000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "u77x1p373772",
+  "exactly": [
+   "0x1.02355ed7a0000p+6",
+   "0x1.037b44ff00000p+4",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.02355ed7a0000p+6",
+   "0x1.037b44ff00000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "U77X1P373772",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "p7jk4ubb",
+  "exactly": [
+   "-0x1.2195318000000p+6",
+   "0x1.33827d8000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.2195318000000p+6",
+   "0x1.33827d8000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "P7JK4UBB",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "c",
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "-0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "-0x1.c200000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "C",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "yptefdp",
+  "exactly": [
+   "0x1.5f6ef40000000p+6",
+   "0x1.876b0c0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.5f6ef40000000p+6",
+   "0x1.876b0c0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "YPTEFDP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "rqvj5",
+  "exactly": [
+   "-0x1.8858000000000p+2",
+   "0x1.32dec00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.8858000000000p+2",
+   "0x1.32dec00000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "RQVJ5",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4h5h",
+  "exactly": [
+   "-0x1.0ad6000000000p+6",
+   "-0x1.566c000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.0ad6000000000p+6",
+   "-0x1.566c000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4H5H",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0s7p4x57",
+  "exactly": [
+   "-0x1.034c028000000p+6",
+   "-0x1.3255608000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.034c028000000p+6",
+   "-0x1.3255608000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0S7P4X57",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "d3mwnt4g7m4",
+  "exactly": [
+   "0x1.03a5cba800000p+3",
+   "-0x1.1ae77c8f00000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.03a5cba800000p+3",
+   "-0x1.1ae77c8f00000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "D3MWNT4G7M4",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "w2",
+  "exactly": [
+   "0x1.6800000000000p+1",
+   "0x1.ab80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.6800000000000p+1",
+   "0x1.ab80000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "W2",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "tn494ms6ynf",
+  "exactly": [
+   "0x1.0fa6ead600000p+5",
+   "0x1.84f6fcc200000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.0fa6ead600000p+5",
+   "0x1.84f6fcc200000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "TN494MS6YNF",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5rp4",
+  "exactly": [
+   "-0x1.917c000000000p+5",
+   "-0x1.7bb0000000000p+4",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.917c000000000p+5",
+   "-0x1.7bb0000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5RP4",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "e565jmp",
+  "exactly": [
+   "0x1.2d63500000000p+4",
+   "-0x1.4f92680000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.2d63500000000p+4",
+   "-0x1.4f92680000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "E565JMP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "vs6hkkz",
+  "exactly": [
+   "0x1.16b86c0000000p+6",
+   "0x1.1a09cc0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.16b86c0000000p+6",
+   "0x1.1a09cc0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "VS6HKKZ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8evy",
+  "exactly": [
+   "0x1.63c8000000000p+4",
+   "-0x1.2a7a000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.63c8000000000p+4",
+   "-0x1.2a7a000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "8EVY",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "nut",
+  "exactly": [
+   "-0x1.ffe0000000000p+5",
+   "0x1.06f8000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.ffe0000000000p+5",
+   "0x1.06f8000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "NUT",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5tyje",
+  "exactly": [
+   "-0x1.c557000000000p+5",
+   "-0x1.bd14000000000p+3",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.c557000000000p+5",
+   "-0x1.bd14000000000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5TYJE",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "gubpffntv",
+  "exactly": [
+   "0x1.245f486000000p+6",
+   "-0x1.63d6f10000000p+3",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.245f486000000p+6",
+   "-0x1.63d6f10000000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "GUBPFFNTV",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ztgp",
+  "exactly": [
+   "0x1.3aa6000000000p+6",
+   "0x1.43ca000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.3aa6000000000p+6",
+   "0x1.43ca000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ZTGP",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3pw9qvpew",
+  "exactly": [
+   "-0x1.48479c0000000p+1",
+   "-0x1.f6356ae000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.48479c0000000p+1",
+   "-0x1.f6356ae000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3PW9QVPEW",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "rjyu228561",
+  "exactly": [
+   "-0x1.7cfcdd2000000p+3",
+   "0x1.2101abf400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.7cfcdd2000000p+3",
+   "0x1.2101abf400000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "RJYU228561",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "f6",
+  "exactly": [
+   "0x1.d880000000000p+5",
+   "-0x1.2480000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.d880000000000p+5",
+   "-0x1.2480000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "F6",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "k",
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "K",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "2zhmg5d8m",
+  "exactly": [
+   "-0x1.2613f20000000p+2",
+   "-0x1.18469f1000000p+7",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.2613f20000000p+2",
+   "-0x1.18469f1000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "2ZHMG5D8M",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7d62yruz89",
+  "exactly": [
+   "-0x1.015828c800000p+5",
+   "-0x1.30e02be000000p+4",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.015828c800000p+5",
+   "-0x1.30e02be000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7D62YRUZ89",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3",
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "-0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "-0x1.c200000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3",
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "-0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "-0x1.c200000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1n",
+  "exactly": [
+   "-0x1.ab80000000000p+5",
+   "-0x1.02c0000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.ab80000000000p+5",
+   "-0x1.02c0000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1N",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3u",
+  "exactly": [
+   "-0x1.3b00000000000p+4",
+   "-0x1.7e80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.3b00000000000p+4",
+   "-0x1.7e80000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3U",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "66mcpt59vs",
+  "exactly": [
+   "-0x1.011f15d800000p+5",
+   "-0x1.195154b800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.011f15d800000p+5",
+   "-0x1.195154b800000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "66MCPT59VS",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "jn0u7e",
+  "exactly": [
+   "-0x1.bbdea00000000p+5",
+   "0x1.71b6400000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.bbdea00000000p+5",
+   "0x1.71b6400000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "JN0U7E",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "h",
+  "exactly": [
+   "-0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "H",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "16h79y4",
+  "exactly": [
+   "-0x1.38678c0000000p+6",
+   "-0x1.d6c5bc0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.38678c0000000p+6",
+   "-0x1.d6c5bc0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "16H79Y4",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "me4du",
+  "exactly": [
+   "-0x1.b9ea000000000p+4",
+   "0x1.1cda800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.b9ea000000000p+4",
+   "0x1.1cda800000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ME4DU",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0j65jdz3ww9",
+  "exactly": [
+   "-0x1.df68765e00000p+5",
+   "-0x1.61df022c80000p+7",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.df68765e00000p+5",
+   "-0x1.61df022c80000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "0J65JDZ3WW9",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "qk",
+  "exactly": [
+   "-0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "QK",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "10v4",
+  "exactly": [
+   "-0x1.555e000000000p+6",
+   "-0x1.ff2c000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.555e000000000p+6",
+   "-0x1.ff2c000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "10V4",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "shcrr10z4",
+  "exactly": [
+   "0x1.bfff828000000p+4",
+   "0x1.0885440000000p+1",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.bfff828000000p+4",
+   "0x1.0885440000000p+1"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "SHCRR10Z4",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "jnt",
+  "exactly": [
+   "-0x1.a5e0000000000p+5",
+   "0x1.a5e0000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.a5e0000000000p+5",
+   "0x1.a5e0000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "JNT",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "cr6fd",
+  "exactly": [
+   "0x1.58f8800000000p+6",
+   "-0x1.df17800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.58f8800000000p+6",
+   "-0x1.df17800000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "CR6FD",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "89h",
+  "exactly": [
+   "0x1.9500000000000p+2",
+   "-0x1.2e58000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.9500000000000p+2",
+   "-0x1.2e58000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "89H",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "vm3g4u14umj",
+  "exactly": [
+   "0x1.2c5302f500000p+6",
+   "0x1.d6aab37e00000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.2c5302f500000p+6",
+   "0x1.d6aab37e00000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "VM3G4U14UMJ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "x6ysvr91gz",
+  "exactly": [
+   "0x1.0586253000000p+4",
+   "0x1.373ee9cc00000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.0586253000000p+4",
+   "0x1.373ee9cc00000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "X6YSVR91GZ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4zybxjk",
+  "exactly": [
+   "-0x1.724f880000000p+5",
+   "-0x1.738d580000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.724f880000000p+5",
+   "-0x1.738d580000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4ZYBXJK",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ex7zm4g",
+  "exactly": [
+   "0x1.5092580000000p+5",
+   "-0x1.1008500000000p+4",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.5092580000000p+5",
+   "-0x1.1008500000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "EX7ZM4G",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "zn3v5p3gdnez",
+  "exactly": [
+   "0x1.444d6ef860000p+6",
+   "0x1.1330c6ee60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.444d6ef860000p+6",
+   "0x1.1330c6ee60000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ZN3V5P3GDNEZ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "9p5",
+  "exactly": [
+   "0x1.40a0000000000p+5",
+   "-0x1.0428000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.40a0000000000p+5",
+   "-0x1.0428000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "9P5",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "y30p",
+  "exactly": [
+   "0x1.9f8c000000000p+5",
+   "0x1.95b4000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.9f8c000000000p+5",
+   "0x1.95b4000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Y30P",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "nk80rr5b1hv",
+  "exactly": [
+   "-0x1.026b992500000p+6",
+   "0x1.964b932f00000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.026b992500000p+6",
+   "0x1.964b932f00000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "NK80RR5B1HV",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "cenvvx9frtny",
+  "exactly": [
+   "0x1.f76b392240000p+5",
+   "-0x1.9b0db33540000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.f76b392240000p+5",
+   "-0x1.9b0db33540000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "CENVVX9FRTNY",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "t6",
+  "exactly": [
+   "0x1.c200000000000p+3",
+   "0x1.ef00000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.c200000000000p+3",
+   "0x1.ef00000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "T6",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3eb7hn",
+  "exactly": [
+   "-0x1.757dc00000000p+4",
+   "-0x1.bfde600000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.757dc00000000p+4",
+   "-0x1.bfde600000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "3EB7HN",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1x5m",
+  "exactly": [
+   "-0x1.8d44000000000p+5",
+   "-0x1.af04000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.8d44000000000p+5",
+   "-0x1.af04000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1X5M",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "t",
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "T",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "vsufuk2y6",
+  "exactly": [
+   "0x1.20e806e000000p+6",
+   "0x1.29786a2000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.20e806e000000p+6",
+   "0x1.29786a2000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "VSUFUK2Y6",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "te35c3",
+  "exactly": [
+   "0x1.2f2dc00000000p+4",
+   "0x1.13dde00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.2f2dc00000000p+4",
+   "0x1.13dde00000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "TE35C3",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "j959nepe2rr",
+  "exactly": [
+   "-0x1.50ba836100000p+6",
+   "0x1.22df117300000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.50ba836100000p+6",
+   "0x1.22df117300000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "J959NEPE2RR",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "q4uhpve",
+  "exactly": [
+   "-0x1.ccc1700000000p+4",
+   "0x1.7fe1ac0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.ccc1700000000p+4",
+   "0x1.7fe1ac0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Q4UHPVE",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "69p",
+  "exactly": [
+   "-0x1.3560000000000p+5",
+   "-0x1.c7a0000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.3560000000000p+5",
+   "-0x1.c7a0000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "69P",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "w8qxwh205rs",
+  "exactly": [
+   "0x1.5fbe572000000p+1",
+   "0x1.e79e262500000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.5fbe572000000p+1",
+   "0x1.e79e262500000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "W8QXWH205RS",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "y41puhbvdtmj",
+  "exactly": [
+   "0x1.cd1d6e3fc0000p+5",
+   "0x1.6e552bed40000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.cd1d6e3fc0000p+5",
+   "0x1.6e552bed40000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Y41PUHBVDTMJ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "jpbguf",
+  "exactly": [
+   "-0x1.6ddde00000000p+5",
+   "0x1.7226c00000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.6ddde00000000p+5",
+   "0x1.7226c00000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "JPBGUF",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "h40wcw0f",
+  "exactly": [
+   "-0x1.361ecf8000000p+6",
+   "0x1.8a5d800000000p-1",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.361ecf8000000p+6",
+   "0x1.8a5d800000000p-1"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "H40WCW0F",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "m",
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "M",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "eu5d4shexs",
+  "exactly": [
+   "0x1.6dfc8f5000000p+4",
+   "-0x1.8d8d638000000p+2",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.6dfc8f5000000p+4",
+   "-0x1.8d8d638000000p+2"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "EU5D4SHEXS",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "egckp7",
+  "exactly": [
+   "0x1.5d0ec00000000p+4",
+   "-0x1.2561000000000p+3",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.5d0ec00000000p+4",
+   "-0x1.2561000000000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "EGCKP7",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "qqfbpsfx",
+  "exactly": [
+   "-0x1.c03f680000000p+2",
+   "0x1.a5cd310000000p+6",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.c03f680000000p+2",
+   "0x1.a5cd310000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "QQFBPSFX",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "pw9zcd",
+  "exactly": [
+   "-0x1.a07de00000000p+5",
+   "0x1.4010900000000p+7",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.a07de00000000p+5",
+   "0x1.4010900000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "PW9ZCD",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "w9r6t8b",
+  "exactly": [
+   "0x1.de6ec00000000p+2",
+   "0x1.ebc0340000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.de6ec00000000p+2",
+   "0x1.ebc0340000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "W9R6T8B",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "p9t8t8vk",
+  "exactly": [
+   "-0x1.45e0fd8000000p+6",
+   "0x1.4af7878000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.45e0fd8000000p+6",
+   "0x1.4af7878000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "P9T8T8VK",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "q0tww",
+  "exactly": [
+   "-0x1.482f000000000p+5",
+   "0x1.8814800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.482f000000000p+5",
+   "0x1.8814800000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Q0TWW",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "uhz4fxpm7r06",
+  "exactly": [
+   "0x1.20f7563420000p+6",
+   "0x1.3ed6b58e00000p+3",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.20f7563420000p+6",
+   "0x1.3ed6b58e00000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "UHZ4FXPM7R06",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "wj8g",
+  "exactly": [
+   "0x1.f8d8000000000p+4",
+   "0x1.6cec000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.f8d8000000000p+4",
+   "0x1.6cec000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "WJ8G",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "9gvr",
+  "exactly": [
+   "0x1.6698000000000p+4",
+   "-0x1.76c4000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.6698000000000p+4",
+   "-0x1.76c4000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "9GVR",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "467y134c8m",
+  "exactly": [
+   "-0x1.312214c400000p+6",
+   "-0x1.25abddc800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.312214c400000p+6",
+   "-0x1.25abddc800000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "467Y134C8M",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "npbkkz",
+  "exactly": [
+   "-0x1.6cf1a00000000p+5",
+   "0x1.6a43600000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.6cf1a00000000p+5",
+   "0x1.6a43600000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "NPBKKZ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "x9szr5mxd2rq",
+  "exactly": [
+   "0x1.3764d11900000p+3",
+   "0x1.48fd6bf3e0000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.3764d11900000p+3",
+   "0x1.48fd6bf3e0000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "X9SZR5MXD2RQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "fh8k6jh4",
+  "exactly": [
+   "0x1.1c59908000000p+6",
+   "-0x1.6638330000000p+6",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.1c59908000000p+6",
+   "-0x1.6638330000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "FH8K6JH4",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "j824w",
+  "exactly": [
+   "-0x1.6087800000000p+6",
+   "0x1.0f24800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.6087800000000p+6",
+   "0x1.0f24800000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "J824W",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "mrb2u",
+  "exactly": [
+   "-0x1.40a0000000000p+0",
+   "0x1.c665000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.40a0000000000p+0",
+   "0x1.c665000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "MRB2U",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "nq2fzycdpgtc",
+  "exactly": [
+   "-0x1.b295520640000p+5",
+   "0x1.9a973540c0000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.b295520640000p+5",
+   "0x1.9a973540c0000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "NQ2FZYCDPGTC",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "tc8yuug",
+  "exactly": [
+   "0x1.34d3600000000p+3",
+   "0x1.4012ac0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.34d3600000000p+3",
+   "0x1.4012ac0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "TC8YUUG",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7y",
+  "exactly": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.6800000000000p+2",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.6800000000000p+2"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "7Y",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "x1hz",
+  "exactly": [
+   "0x1.bc60000000000p+2",
+   "0x1.1bb6000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.bc60000000000p+2",
+   "0x1.1bb6000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "X1HZ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "dm7fe8y",
+  "exactly": [
+   "0x1.df9bb00000000p+4",
+   "-0x1.25415c0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.df9bb00000000p+4",
+   "-0x1.25415c0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "DM7FE8Y",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "rgd0sw179",
+  "exactly": [
+   "-0x1.930e738000000p+4",
+   "0x1.5786297000000p+7",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.930e738000000p+4",
+   "0x1.5786297000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "RGD0SW179",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "p9dtqw",
+  "exactly": [
+   "-0x1.426a700000000p+6",
+   "0x1.429d100000000p+7",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.426a700000000p+6",
+   "0x1.429d100000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "P9DTQW",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "x52n",
+  "exactly": [
+   "0x1.36c8000000000p+4",
+   "0x1.0e5a000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.36c8000000000p+4",
+   "0x1.0e5a000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "X52N",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "2m4sd339r38",
+  "exactly": [
+   "-0x1.013af5dc00000p+4",
+   "-0x1.4a44292180000p+7",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.013af5dc00000p+4",
+   "-0x1.4a44292180000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "2M4SD339R38",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5u944ckhckx",
+  "exactly": [
+   "-0x1.01501bbf00000p+6",
+   "-0x1.36f47a6800000p+3",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.01501bbf00000p+6",
+   "-0x1.36f47a6800000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5U944CKHCKX",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "xdwn5e1y84",
+  "exactly": [
+   "0x1.e450402000000p+3",
+   "0x1.4c2ffbb400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.e450402000000p+3",
+   "0x1.4c2ffbb400000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "XDWN5E1Y84",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1jec0u33ku",
+  "exactly": [
+   "-0x1.d6e7b2d800000p+5",
+   "-0x1.0362239400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.d6e7b2d800000p+5",
+   "-0x1.0362239400000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1JEC0U33KU",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "hwz2w",
+  "exactly": [
+   "-0x1.9f5f000000000p+5",
+   "0x1.07d9000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.9f5f000000000p+5",
+   "0x1.07d9000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "HWZ2W",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "yhut0ej",
+  "exactly": [
+   "0x1.2275940000000p+6",
+   "0x1.816e3c0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.2275940000000p+6",
+   "0x1.816e3c0000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "YHUT0EJ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "svbp7cq",
+  "exactly": [
+   "0x1.0d01780000000p+5",
+   "0x1.0f63c80000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.0d01780000000p+5",
+   "0x1.0f63c80000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "SVBP7CQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "w",
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "0x1.c200000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "W",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "183n9tq9rw",
+  "exactly": [
+   "-0x1.5db0369c00000p+6",
+   "-0x1.bc13063800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.5db0369c00000p+6",
+   "-0x1.bc13063800000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "183N9TQ9RW",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "c5341b4w9xde",
+  "exactly": [
+   "0x1.fd125e66c0000p+5",
+   "-0x1.0b06d519e0000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.fd125e66c0000p+5",
+   "-0x1.0b06d519e0000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "C5341B4W9XDE",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4bbdyy",
+  "exactly": [
+   "-0x1.550c700000000p+6",
+   "-0x1.b9f5400000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.550c700000000p+6",
+   "-0x1.b9f5400000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4BBDYY",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "mv",
+  "exactly": [
+   "-0x1.c200000000000p+3",
+   "0x1.5180000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.c200000000000p+3",
+   "0x1.5180000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "MV",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "vprfmknrbx4",
+  "exactly": [
+   "0x1.58cce6c500000p+6",
+   "0x1.c11a210200000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.58cce6c500000p+6",
+   "0x1.c11a210200000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "VPRFMKNRBX4",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "w7",
+  "exactly": [
+   "0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "W7",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "w3n4t4f19mxy",
+  "exactly": [
+   "0x1.851c385200000p+2",
+   "0x1.b7a3e0d4c0000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.851c385200000p+2",
+   "0x1.b7a3e0d4c0000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "W3N4T4F19MXY",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4g30sn",
+  "exactly": [
+   "-0x1.1e61700000000p+6",
+   "-0x1.b54cc00000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.1e61700000000p+6",
+   "-0x1.b54cc00000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4G30SN",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "zm2muv",
+  "exactly": [
+   "0x1.2e49f00000000p+6",
+   "0x1.25a1b00000000p+7",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.2e49f00000000p+6",
+   "0x1.25a1b00000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ZM2MUV",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "u6kkv",
+  "exactly": [
+   "0x1.d41b000000000p+5",
+   "0x1.177e000000000p+4",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.d41b000000000p+5",
+   "0x1.177e000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "U6KKV",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4p0",
+  "exactly": [
+   "-0x1.8f60000000000p+5",
+   "-0x1.6530000000000p+6",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.8f60000000000p+5",
+   "-0x1.6530000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "4P0",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "61",
+  "exactly": [
+   "-0x1.2480000000000p+5",
+   "-0x1.5180000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.2480000000000p+5",
+   "-0x1.5180000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "61",
+  "exactly": [
+   "-0x1.2480000000000p+5",
+   "-0x1.5180000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.2480000000000p+5",
+   "-0x1.5180000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "y",
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Y",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "kbw",
+  "exactly": [
+   "-0x1.4be0000000000p+5",
+   "0x1.5720000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.4be0000000000p+5",
+   "0x1.5720000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "KBW",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "31frnnu6",
+  "exactly": [
+   "-0x1.0f1b2f0000000p+5",
+   "-0x1.0721ec8000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.0f1b2f0000000p+5",
+   "-0x1.0721ec8000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "31FRNNU6",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "k67c325",
+  "exactly": [
+   "-0x1.00fc980000000p+5",
+   "0x1.0954b00000000p+4",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.00fc980000000p+5",
+   "0x1.0954b00000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "K67C325",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1p2",
+  "exactly": [
+   "-0x1.8420000000000p+5",
+   "-0x1.0c98000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.8420000000000p+5",
+   "-0x1.0c98000000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "1P2",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "6ypnkpz9vu5d",
+  "exactly": [
+   "-0x1.43789c1f00000p+3",
+   "-0x1.71c2641380000p+5",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.43789c1f00000p+3",
+   "-0x1.71c2641380000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "6YPNKPZ9VU5D",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "cwgcye9qmzy",
+  "exactly": [
+   "0x1.4d2fd45300000p+6",
+   "-0x1.abc17b0700000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.4d2fd45300000p+6",
+   "-0x1.abc17b0700000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "CWGCYE9QMZY",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "x8b3dt7k8p9w",
+  "exactly": [
+   "0x1.20c5d55200000p+2",
+   "0x1.3bee894920000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.20c5d55200000p+2",
+   "0x1.3bee894920000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "X8B3DT7K8P9W",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "9fqt2bsyr052",
+  "exactly": [
+   "0x1.b2a74a2d00000p+3",
+   "-0x1.7047421040000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.b2a74a2d00000p+3",
+   "-0x1.7047421040000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "9FQT2BSYR052",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "dy",
+  "exactly": [
+   "0x1.2480000000000p+5",
+   "-0x1.9500000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.2480000000000p+5",
+   "-0x1.9500000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "DY",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "j6przr",
+  "exactly": [
+   "-0x1.3562d00000000p+6",
+   "0x1.0b13e00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.3562d00000000p+6",
+   "0x1.0b13e00000000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "J6PRZR",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "nc1yyvvyz8b",
+  "exactly": [
+   "-0x1.4c9f770500000p+6",
+   "0x1.fa102a8d00000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.4c9f770500000p+6",
+   "0x1.fa102a8d00000p+6"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "NC1YYVVYZ8B",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5g9rdq",
+  "exactly": [
+   "-0x1.13d5700000000p+6",
+   "-0x1.2c69000000000p+3",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.13d5700000000p+6",
+   "-0x1.2c69000000000p+3"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "5G9RDQ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "bcn62",
+  "exactly": [
+   "0x1.9857000000000p+5",
+   "-0x1.12e0c00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.9857000000000p+5",
+   "-0x1.12e0c00000000p+7"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "BCN62",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "t1",
+  "exactly": [
+   "0x1.0e00000000000p+3",
+   "0x1.9500000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+3",
+   "0x1.9500000000000p+5"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "T1",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "",
+  "error": [
+   "ValueError",
+   "Geohash must be between 1 and 12 characters long"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "a",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "aaaaaaaaaaaa",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "i",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "l",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "o",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "!!!!!!!!!!!!",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ezs42e44yx9a",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "\u00e9zs42",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ezs42e44yx96z",
+  "error": [
+   "ValueError",
+   "Geohash must be between 1 and 12 characters long"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ezs42e44yx96z1",
+  "error": [
+   "ValueError",
+   "Geohash must be between 1 and 12 characters long"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": " ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ }
+]
