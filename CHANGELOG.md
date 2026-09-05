@@ -3,6 +3,8 @@
  * [perf] `is_valid_geohash` no longer builds a 32-character set on every call; the valid-character set is precomputed at import and the check runs as a single set operation, roughly 3x faster on typical inputs.
  * [perf] `get_adjacent` no longer emits per-call debug logging and no longer recurses on border characters: it walks the hash right-to-left using precomputed neighbor/border lookup tables. Typical lookups are ~2x faster and border-wrap (e.g. antimeridian-crossing) lookups several times faster. Validation outcomes, adjacency results (including the `u00000` -> `gbpbpb` wrap), case-insensitive input handling, and error messages are unchanged. Logging-plumbing tests that relied on `get_adjacent`'s per-call debug records now exercise other debug emitters or the module's error-path records.
  * [tests] added pytest-benchmark cases for `get_adjacent` (typical and border-wrap) and `is_valid_geohash`.
+ * [perf] `geohashes_in_box` now enumerates grid cells directly instead of sampling a half-cell-spaced point grid: it derives the cell size once, walks the covering index rectangle, includes interior cells without checks, and intersection-tests only boundary cells. A 0.1 deg x 0.2 deg box at precision 6 (361 cells) drops from ~2.3 ms to ~0.37-0.43 ms (>5x, 11x locally measured); small boxes improve ~6x. Membership is unchanged, verified against the previous implementation on 215 randomized and edge-case boxes across all precisions.
+ * [behavior] `geohashes_in_box` now returns a deterministically sorted list. The previous implementation returned `list(set(...))`, whose order varied across processes; existing callers that sorted the result no longer need to.
 
 v3.3.2
 ======
