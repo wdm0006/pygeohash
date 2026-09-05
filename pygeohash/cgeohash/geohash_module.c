@@ -254,6 +254,115 @@ static int convert_precision(PyObject *obj, void *addr) {
     return 1;
 }
 
+// Shared validation + normalization for the encoders: rejects non-finite
+// coordinates and out-of-range precision (same checks, same order, same
+// exceptions as before), clamps latitude to [-90, 90] and wraps longitude
+// into [-180, 180]. Returns 0 on success, -1 with an exception set.
+static int prepare_encode(double *latitude, double *longitude, int precision) {
+    if (!isfinite(*latitude) || !isfinite(*longitude)) {
+        PyErr_SetString(PyExc_ValueError, "latitude and longitude must be finite");
+        return -1;
+    }
+
+    if (precision < 1 || precision > 12) {
+        PyErr_SetString(PyExc_ValueError, "precision must be between 1 and 12");
+        return -1;
+    }
+
+    // Ensure latitude is between -90 and 90
+    if (*latitude < -90.0) *latitude = -90.0;
+    if (*latitude > 90.0) *latitude = 90.0;
+
+    // Ensure longitude is between -180 and 180
+    while (*longitude < -180.0) *longitude += 360.0;
+    while (*longitude > 180.0) *longitude -= 360.0;
+
+    return 0;
+}
+
+// Shared encode core: bisect the lat/lon intervals, emitting `precision`
+// base32 characters into `geohash` (must have room for precision + 1 bytes).
+//
+// The bit stream strictly alternates longitude/latitude starting with
+// longitude and each character covers 5 bits, so character parity alternates:
+// even-index characters bisect lon, lat, lon, lat, lon (masks 16, 8, 4, 2, 1),
+// odd-index characters lat, lon, lat, lon, lat. Characters are emitted in
+// pairs - always longitude-first - plus one trailing character for odd
+// precision, which makes the parity of every unrolled step a compile-time
+// constant. The midpoint arithmetic ((lo + hi) * 0.5), the >= midpoint
+// comparisons, and the interval replacements run in the original order, so
+// outputs are bit-identical to the previous loop (verified by
+// tests/test_c_codec_bit_identity.py).
+static void encode_core(double latitude, double longitude, int precision, char *geohash) {
+    double lat_lo = -90.0, lat_hi = 90.0;
+    double lon_lo = -180.0, lon_hi = 180.0;
+    int hash_index = 0;
+
+    while (hash_index + 1 < precision) {
+        double mid;
+        int ch;
+
+        // even-index character: lon, lat, lon, lat, lon
+        ch = 0;
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 16; lon_lo = mid; } else { lon_hi = mid; }
+        mid = (lat_lo + lat_hi) * 0.5;
+        if (latitude >= mid) { ch |= 8; lat_lo = mid; } else { lat_hi = mid; }
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 4; lon_lo = mid; } else { lon_hi = mid; }
+        mid = (lat_lo + lat_hi) * 0.5;
+        if (latitude >= mid) { ch |= 2; lat_lo = mid; } else { lat_hi = mid; }
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 1; lon_lo = mid; } else { lon_hi = mid; }
+        geohash[hash_index++] = BASE32[ch];
+
+        // odd-index character: lat, lon, lat, lon, lat
+        ch = 0;
+        mid = (lat_lo + lat_hi) * 0.5;
+        if (latitude >= mid) { ch |= 16; lat_lo = mid; } else { lat_hi = mid; }
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 8; lon_lo = mid; } else { lon_hi = mid; }
+        mid = (lat_lo + lat_hi) * 0.5;
+        if (latitude >= mid) { ch |= 4; lat_lo = mid; } else { lat_hi = mid; }
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 2; lon_lo = mid; } else { lon_hi = mid; }
+        mid = (lat_lo + lat_hi) * 0.5;
+        if (latitude >= mid) { ch |= 1; lat_lo = mid; } else { lat_hi = mid; }
+        geohash[hash_index++] = BASE32[ch];
+    }
+    if (hash_index < precision) {
+        // odd precision: final character, even index -> longitude first
+        double mid;
+        int ch = 0;
+
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 16; lon_lo = mid; } else { lon_hi = mid; }
+        mid = (lat_lo + lat_hi) * 0.5;
+        if (latitude >= mid) { ch |= 8; lat_lo = mid; } else { lat_hi = mid; }
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 4; lon_lo = mid; } else { lon_hi = mid; }
+        mid = (lat_lo + lat_hi) * 0.5;
+        if (latitude >= mid) { ch |= 2; lat_lo = mid; } else { lat_hi = mid; }
+        mid = (lon_lo + lon_hi) * 0.5;
+        if (longitude >= mid) { ch |= 1; lon_lo = mid; } else { lon_hi = mid; }
+        geohash[hash_index++] = BASE32[ch];
+    }
+
+    geohash[hash_index] = '\0';
+}
+// Build the output string directly: the result is pure-ASCII base32 with a
+// known length, so PyUnicode_New + copy skips the strlen and UTF-8 scanning
+// that PyUnicode_FromString performs. maxchar 127 forces the compact 1-byte
+// (ASCII) representation.
+static PyObject* make_hash_string(const char *geohash, int precision) {
+    PyObject *result = PyUnicode_New((Py_ssize_t)precision, 127);
+    if (result == NULL) {
+        return NULL;
+    }
+    memcpy((char *)PyUnicode_1BYTE_DATA(result), geohash, (size_t)precision);
+    return result;
+}
+
 // Encode coordinates to a geohash string
 static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs) {
     double latitude, longitude;
@@ -268,75 +377,21 @@ static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs
         return NULL;
     }
 
-    if (!isfinite(latitude) || !isfinite(longitude)) {
-        PyErr_SetString(PyExc_ValueError, "latitude and longitude must be finite");
+    if (prepare_encode(&latitude, &longitude, precision) != 0) {
         return NULL;
     }
 
-    // Bounds-check precision before writing into the fixed-size geohash[13]
-    // buffer below: any value > 12 would overrun it (stack buffer overflow).
-    if (precision < 1 || precision > 12) {
-        PyErr_SetString(PyExc_ValueError, "precision must be between 1 and 12");
-        return NULL;
-    }
-
-    // Ensure latitude is between -90 and 90
-    if (latitude < -90.0) latitude = -90.0;
-    if (latitude > 90.0) latitude = 90.0;
-    
-    // Ensure longitude is between -180 and 180
-    while (longitude < -180.0) longitude += 360.0;
-    while (longitude > 180.0) longitude -= 360.0;
-    
-    double lat_interval[2] = {-90.0, 90.0};
-    double lon_interval[2] = {-180.0, 180.0};
     char geohash[13] = {0};  // Maximum precision is 12 + null terminator
-    int bits[] = {16, 8, 4, 2, 1};
-    int bit = 0;
-    int ch = 0;
-    int is_even = 1;
-    int hash_index = 0;
-    
-    while (hash_index < precision) {
-        if (is_even) {  // longitude
-            double mid = (lon_interval[0] + lon_interval[1]) / 2.0;
-            if (longitude >= mid) {
-                ch |= bits[bit];
-                lon_interval[0] = mid;
-            } else {
-                lon_interval[1] = mid;
-            }
-        } else {  // latitude
-            double mid = (lat_interval[0] + lat_interval[1]) / 2.0;
-            if (latitude >= mid) {
-                ch |= bits[bit];
-                lat_interval[0] = mid;
-            } else {
-                lat_interval[1] = mid;
-            }
-        }
-        
-        is_even = !is_even;
-        
-        if (bit < 4) {
-            bit++;
-        } else {
-            geohash[hash_index++] = BASE32[ch];
-            bit = 0;
-            ch = 0;
-        }
-    }
-    
-    geohash[hash_index] = '\0';
-    return PyUnicode_FromString(geohash);
+    encode_core(latitude, longitude, precision, geohash);
+    return make_hash_string(geohash, precision);
 }
 
 // Encode coordinates to a geohash string.
 //
 // NOTE: This is intentionally identical to geohash_encode above. Despite the
-// "strictly" name, it performs the same interval-bisection encoding with the
-// same midpoint handling and produces the same output for every input. It is
-// kept as a separate entry point only for API/back-compatibility.
+// "strictly" name, it runs the same validation and the same interval-bisection
+// core and produces the same output for every input. It is kept as a separate
+// entry point only for API/back-compatibility.
 static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObject *kwargs) {
     double latitude, longitude;
     int precision = 12;
@@ -350,67 +405,13 @@ static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObjec
         return NULL;
     }
 
-    if (!isfinite(latitude) || !isfinite(longitude)) {
-        PyErr_SetString(PyExc_ValueError, "latitude and longitude must be finite");
+    if (prepare_encode(&latitude, &longitude, precision) != 0) {
         return NULL;
     }
 
-    // Bounds-check precision before writing into the fixed-size geohash[13]
-    // buffer below: any value > 12 would overrun it (stack buffer overflow).
-    if (precision < 1 || precision > 12) {
-        PyErr_SetString(PyExc_ValueError, "precision must be between 1 and 12");
-        return NULL;
-    }
-
-    // Ensure latitude is between -90 and 90
-    if (latitude < -90.0) latitude = -90.0;
-    if (latitude > 90.0) latitude = 90.0;
-    
-    // Ensure longitude is between -180 and 180
-    while (longitude < -180.0) longitude += 360.0;
-    while (longitude > 180.0) longitude -= 360.0;
-    
-    double lat_interval[2] = {-90.0, 90.0};
-    double lon_interval[2] = {-180.0, 180.0};
     char geohash[13] = {0};  // Maximum precision is 12 + null terminator
-    int bits[] = {16, 8, 4, 2, 1};
-    int bit = 0;
-    int ch = 0;
-    int is_even = 1;
-    int hash_index = 0;
-    
-    while (hash_index < precision) {
-        if (is_even) {  // longitude
-            double mid = (lon_interval[0] + lon_interval[1]) / 2.0;
-            if (longitude >= mid) {
-                ch |= bits[bit];
-                lon_interval[0] = mid;
-            } else {
-                lon_interval[1] = mid;
-            }
-        } else {  // latitude
-            double mid = (lat_interval[0] + lat_interval[1]) / 2.0;
-            if (latitude >= mid) {
-                ch |= bits[bit];
-                lat_interval[0] = mid;
-            } else {
-                lat_interval[1] = mid;
-            }
-        }
-        
-        is_even = !is_even;
-        
-        if (bit < 4) {
-            bit++;
-        } else {
-            geohash[hash_index++] = BASE32[ch];
-            bit = 0;
-            ch = 0;
-        }
-    }
-    
-    geohash[hash_index] = '\0';
-    return PyUnicode_FromString(geohash);
+    encode_core(latitude, longitude, precision, geohash);
+    return make_hash_string(geohash, precision);
 }
 
 // Module method definitions
