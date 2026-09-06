@@ -26,7 +26,7 @@ Deliberately excluded: ``geohash-hilbert`` (Hilbert-curve variant, not a
 standard geohash) and ``mzgeohash`` (no precision parameter, so equal work
 cannot be guaranteed).
 
-Eight operations are measured:
+Eleven operations are measured:
 
 ===============  ====================================================
 Operation        Work
@@ -39,7 +39,14 @@ adjacent         one cell north of ``ezs42e44y``
 adjacent-border  one cell west of ``u00000``, across the antimeridian
 box-small        ``geohashes_in_box`` over a 4-cell box, precision 9
 box-large        ``geohashes_in_box`` over a 361-cell box, precision 6
+to-quadkey       ``geohash_to_quadkey("ezs42e44y")`` (pygeohash only)
+from-quadkey     ``quadkey_to_geohash("0313332002220300122013")``
+tile-roundtrip   ``geohash_to_tile`` then ``tile_to_geohash``
 ===============  ====================================================
+
+The three interop operations are single-adapter by nature: none of the
+measured competitors ships a geohash/quadkey/slippy-tile conversion, so those
+groups list pygeohash only and no competitor adapter is fabricated for them.
 
 Every measured call asserts its result, decode and bounding box included, so
 no library can win by computing less: decode results must match
@@ -72,6 +79,7 @@ from typing import Callable, Optional
 import pytest
 
 import pygeohash as pgh
+from pygeohash import interop
 
 # Shared inputs so every library is measured on identical work.
 LAT, LON = 42.6, -5.6
@@ -104,6 +112,14 @@ BOX_LARGE_CELLS = 361
 BOX_LARGE_FIRST = "ezs42e"
 BOX_LARGE_LAST = "ezs4vj"
 
+# Interop: quadkey and slippy-tile conversions of the shared input cell.
+# quadkey_to_geohash and the tile round trip return the cell containing the
+# tile centre, which sits one equirectangular latitude cell north of the
+# input cell - the documented lossiness in pygeohash.interop, not a bug.
+QUADKEY = "0313332002220300122013"
+QUADKEY_GEOHASH = "ezs42e45n"
+TILE_ROUNDTRIP_GEOHASH = "ezs42e45n"
+
 
 @dataclass
 class Adapter:
@@ -118,6 +134,9 @@ class Adapter:
     adjacent_border: Optional[Callable[[], str]] = None
     box_small: Optional[Callable[[], list]] = None
     box_large: Optional[Callable[[], list]] = None
+    to_quadkey: Optional[Callable[[], str]] = None
+    from_quadkey: Optional[Callable[[], str]] = None
+    tile_roundtrip: Optional[Callable[[], str]] = None
 
 
 # pygeohash is this project; always present.
@@ -132,6 +151,9 @@ ADAPTERS = [
         adjacent_border=lambda: pgh.get_adjacent(ADJACENT_BORDER_INPUT, "left"),
         box_small=lambda: pgh.geohashes_in_box(BOX_SMALL_BBOX, precision=BOX_SMALL_PRECISION),
         box_large=lambda: pgh.geohashes_in_box(BOX_LARGE_BBOX, precision=BOX_LARGE_PRECISION),
+        to_quadkey=lambda: interop.geohash_to_quadkey(GEOHASH),
+        from_quadkey=lambda: interop.quadkey_to_geohash(QUADKEY),
+        tile_roundtrip=lambda: interop.tile_to_geohash(*interop.geohash_to_tile(GEOHASH)),
     )
 ]
 
@@ -237,6 +259,9 @@ _NEIGHBORS = [a for a in ADAPTERS if a.adjacent]
 _NEIGHBORS_BORDER = [a for a in ADAPTERS if a.adjacent_border]
 _SMALL_BOXERS = [a for a in ADAPTERS if a.box_small]
 _LARGE_BOXERS = [a for a in ADAPTERS if a.box_large]
+_TO_QUADKEY = [a for a in ADAPTERS if a.to_quadkey]
+_FROM_QUADKEY = [a for a in ADAPTERS if a.from_quadkey]
+_TILE_ROUNDTRIP = [a for a in ADAPTERS if a.tile_roundtrip]
 
 
 def normalized_decode(adapter, result):
@@ -319,6 +344,35 @@ def test_adjacent_border(benchmark, adapter):
     """Step west from a polar-border cell across the antimeridian."""
     benchmark.group = "adjacent-border"
     assert benchmark(adapter.adjacent_border) == ADJACENT_BORDER_EXPECTED
+
+
+@pytest.mark.parametrize("adapter", _TO_QUADKEY, ids=lambda a: a.name)
+def test_to_quadkey(benchmark, adapter):
+    """Convert the shared input cell to its Bing/OSM quadkey (pygeohash only)."""
+    benchmark.group = "to-quadkey"
+    assert benchmark(adapter.to_quadkey) == QUADKEY
+
+
+@pytest.mark.parametrize("adapter", _FROM_QUADKEY, ids=lambda a: a.name)
+def test_from_quadkey(benchmark, adapter):
+    """Convert the shared quadkey back to its containing cell (pygeohash only).
+
+    Pins the containing cell, not the original input: the tile centre falls
+    one equirectangular latitude cell north of the original cell centre.
+    """
+    benchmark.group = "from-quadkey"
+    assert benchmark(adapter.from_quadkey) == QUADKEY_GEOHASH
+
+
+@pytest.mark.parametrize("adapter", _TILE_ROUNDTRIP, ids=lambda a: a.name)
+def test_tile_roundtrip(benchmark, adapter):
+    """Round-trip the shared input cell through its slippy tile (pygeohash only).
+
+    geohash_to_tile -> tile_to_geohash: pins the documented lossy result
+    rather than assuming identity, so no adapter can win by doing less.
+    """
+    benchmark.group = "tile-roundtrip"
+    assert benchmark(adapter.tile_roundtrip) == TILE_ROUNDTRIP_GEOHASH
 
 
 @pytest.mark.parametrize("adapter", _SMALL_BOXERS, ids=lambda a: a.name)
