@@ -167,52 +167,42 @@ This project is licensed under the MIT license. See the LICENSE file for details
 
 Median time per call in nanoseconds — lower is better. The suite in
 `tests/test_benchmark_comparison.py` runs one discarded warmup pass and then
-three timed passes, and every measured call asserts its result. The figures
-below are from the published comparison run of 2026-09-06: the median of the
-per-run medians (Linux, Intel Xeon @ 2.60GHz, CPython 3.13.14). An em-dash (—)
-means the library does not expose that operation's API; the published page
-states each drop-out rather than omitting it.
+three timed passes, and every measured call asserts its result. All pygeohash
+columns are measured with the same 3.5.0 suite on one machine in one session.
+An em-dash (—) marks an API gap on either side: a competitor that does not
+expose the operation, or an operation that did not exist in an old pygeohash
+release.
 
-| Library | encode | decode | bounding box | validate | adjacent | adjacent (border) | box (4-cell, p9) | box (361-cell, p6) |
-|---|---|---|---|---|---|---|---|---|
-| **pygeohash** | 475 | 554 | 1,058 | 382 | 1,397 | 1,798 | 13,602 | 293,134 |
-| geohashr | 353 | 231 | 317 | — | 372 | 358 | — | — |
-| python-geohash | 635 | 791 | 929 | — | — | — | — | — |
-| pygeohash-fast | 455 | 545 | — | — | — | — | — | — |
-| libgeohash | 7,478 | 7,324 | 7,674 | — | 1,595 | 4,301 | — | — |
-| geohash-tools | 12,014 | 8,439 | — | — | 933 | 2,267 | — | — |
-| geolib | 30,681 | 173,471 | 127,827 | — | 2,427 | 6,694 | — | — |
+<!-- PLACEHOLDER — one merged comparison table, populated only from the paired
+multi-release measurement session. Rows: encode, decode, bounding box,
+is_valid_geohash, get_adjacent, get_adjacent (border), geohashes_in_box
+(4-cell, p9), geohashes_in_box (361-cell, p6). Columns: pygeohash 3.2.0,
+pygeohash 3.3.0, pygeohash 3.3.2, pygeohash 3.4.0, pygeohash 3.5.0, geohashr,
+python-geohash, pygeohash-fast. Em-dash for API gaps on both sides —
+competitor gaps and operations absent from old pygeohash releases. Do not
+populate any cell from memory, prior PR bodies, or the docs page: the
+old-release numbers exist nowhere else yet. -->
 
-Where the field stands on this run: pygeohash ranks 3rd of 7 measured libraries
-on encode (behind `geohashr` and `pygeohash-fast`) and 3rd of 7 on decode (the
-same two ahead); 3rd of 5 measured on bounding box (behind `geohashr` and
-`python-geohash`); 3rd of 5 on single-cell adjacency (behind `geohashr` and
-`geohash-tools`); and 2nd of 5 on the antimeridian border wrap, where only
-`geohashr` is ahead. No competitor exposes a standalone validity check or box
-enumeration, so those three tables list pygeohash alone. After warmup, every
-compiled library's per-run medians stay within a 20% spread across the repeats,
-with one disclosed exception: pygeohash's encode spread measured 21.6% on this
-run.
+*Measured figures are not published yet; this table will be filled from the
+paired multi-release measurement session when it lands.*
 
-These are medians from one machine and one set of runs. The full tables with
-per-run ranges and ops/sec, the stability section, the exact library versions,
-the caveats and the command to regenerate everything are on the
+Where the field stands on the published comparison run of 2026-09-06:
+pygeohash ranks 3rd of 7 measured libraries on encode (behind `geohashr` and
+`pygeohash-fast`) and 3rd of 7 on decode (the same two ahead); 3rd of 5
+measured on bounding box (behind `geohashr` and `python-geohash`); 3rd of 5 on
+single-cell adjacency (behind `geohashr` and `geohash-tools`); and 2nd of 5 on
+the antimeridian border wrap, where only `geohashr` is ahead. No competitor
+exposes a standalone validity check or box enumeration. The table above will
+place pygeohash's trajectory across releases alongside that field. After
+warmup, every compiled library's per-run medians stay within a 20% spread
+across the repeats, with one disclosed exception: pygeohash's encode spread
+measured 21.6% on the published run.
+
+The full published tables with per-run ranges and ops/sec, the stability
+section, the exact library versions, the caveats and the command to regenerate
+everything are on the
 [benchmarks page](https://pygeohash.mcginniscommawill.com/benchmarks.html) in
 the documentation.
-
-### Version-over-version: 3.3.2 → 3.4.0
-
-Paired installs of 3.3.2 and 3.4.0 measured back to back on the same suite,
-same machine, one operation at a time — this release against the previous one.
-
-<!-- PLACEHOLDER — paired-install 3.3.2 vs 3.4.0 figures pending from the
-parallel measurement session. When they land, insert a table with columns
-`Operation | 3.3.2 median (ns) | 3.4.0 median (ns) | change` covering all
-eight operations, taken only from the paired run. Do not estimate and do not
-copy cross-library figures into this table. -->
-
-*Paired-install figures are not published yet; this table will be filled from
-the paired 3.3.2/3.4.0 measurement run when it lands.*
 
 ## Version history
 
