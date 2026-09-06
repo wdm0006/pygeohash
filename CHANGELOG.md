@@ -1,4 +1,5 @@
-## Unreleased
+v3.4.0 (2026-09-06)
+===================
 
  * [perf] `is_valid_geohash` no longer builds a 32-character set on every call; the valid-character set is precomputed at import and the check runs as a single set operation, roughly 3x faster on typical inputs.
  * [perf] `get_adjacent` no longer emits per-call debug logging and no longer recurses on border characters: it walks the hash right-to-left using precomputed neighbor/border lookup tables. Typical lookups are ~2x faster and border-wrap (e.g. antimeridian-crossing) lookups several times faster. Validation outcomes, adjacency results (including the `u00000` -> `gbpbpb` wrap), case-insensitive input handling, and error messages are unchanged. Logging-plumbing tests that relied on `get_adjacent`'s per-call debug records now exercise other debug emitters or the module's error-path records.
