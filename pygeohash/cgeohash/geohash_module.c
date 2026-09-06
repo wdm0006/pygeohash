@@ -285,7 +285,8 @@ static PyObject* decode_cold(PyObject *const *args, Py_ssize_t nargs, PyObject *
     }
     for (Py_ssize_t i = 0; i < nargs; i++) {
         PyObject *item = (i == 0 && folded != NULL) ? folded : args[i];
-        PyTuple_SET_ITEM(tpl, i, Py_NewRef(item));
+        Py_INCREF(item);
+        PyTuple_SET_ITEM(tpl, i, item);
     }
     Py_XDECREF(folded);  // the tuple now holds its own reference
 
