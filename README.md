@@ -30,6 +30,9 @@ pip install pygeohash
 
 # With visualization support
 pip install pygeohash[viz]
+
+# With the cross-library benchmark comparison dependencies
+pip install pygeohash[benchmark]
 ```
 
 ## Quick Start
@@ -47,7 +50,7 @@ print(short_geohash)  # 'ezs42'
 
 # Decode geohash to coordinates
 lat, lng = pgh.decode(geohash="ezs42")
-print(lat, lng)  # '42.6', '-5.6'
+print(lat, lng)  # 42.60498046875 -5.60302734375
 
 # Calculate approximate distance between geohashes (in meters)
 distance = pgh.geohash_approximate_distance(geohash_1="bcd3u", geohash_2="bc83n")
@@ -114,7 +117,7 @@ This will create static images and interactive maps in the `docs/source/_static/
 
 PyGeoHash is extensively tested to ensure accuracy in geohash encoding and decoding:
 
-- **Comprehensive Test Suite**: Includes over 200 test cases covering various precision levels and geographic regions
+- **Comprehensive Test Suite**: Includes over 450 test cases covering various precision levels and geographic regions
 - **Validated Against geohash.org**: All test cases are validated against the reference implementation at geohash.org
 - **Edge Case Coverage**: Special attention to edge cases like poles, equator, date line, and precision boundaries
 - **Roundtrip Consistency**: Ensures encode->decode->encode operations produce consistent results
@@ -162,31 +165,34 @@ This project is licensed under the MIT license. See the LICENSE file for details
 
 ## How PyGeoHash compares to other geohash libraries
 
-Median time per call in nanoseconds — lower is better. Measured on an Apple M4
-(macOS, CPython 3.12.11) with the suite in `tests/test_benchmark_comparison.py`,
-run seven times.
+Median time per call in nanoseconds — lower is better. The suite in
+`tests/test_benchmark_comparison.py` warms up every measured callable and
+discards a full suite pass before its timed repeats, and every measured call
+asserts its result. The figures below are medians of three timed repeats with
+the per-run range in parentheses (Linux, Intel Xeon @ 2.60GHz, CPython 3.13.14).
 
-| Library | Implementation | encode | decode | bbox |
-|---|---|---|---|---|
-| geohashr | Rust extension | 86 | 81 | 104 |
-| pygeohash-fast | Rust extension | 125 | 167 | — |
-| **pygeohash** | **C extension** | **204** | **250** | **667** |
-| python-geohash | C++ extension | 208 | 250 | 250 |
-| libgeohash | pure Python | 2,750 | 2,625 | 2,750 |
-| geohash-tools | pure Python | 3,833 | 3,375 | — |
-| geolib | pure Python | 10,584 | 57,708 | 43,875 |
+| Operation | pygeohash | geohashr |
+|---|---|---|
+| encode | 480 (473–569) | 366 (362–367) |
+| decode | 642 (616–645) | 362 (334–366) |
+| bbox | 1,183 (1,140–1,238) | 327 (317–327) |
 
-PyGeoHash is 4.1x to 13.5x faster than the quickest pure-Python library, depending
-on the operation. Against `python-geohash` — the C++ extension it is commonly
-swapped in for when a build toolchain is not available — the repeated runs do not
-separate the two on `encode` or on `decode`; PyGeoHash takes 2.7x its time on
-bounding boxes. The two Rust extensions are faster than PyGeoHash on everything
-measured here, and they are within measurement noise of each other on `encode`.
+The comparison covers eight operations: encode, decode, bounding box,
+`is_valid_geohash`, `get_adjacent` (typical plus the antimeridian border wrap),
+and `geohashes_in_box` at two precisions. Other compiled libraries were measured
+in the same run: `python-geohash`'s encode run medians fell between 586 and
+664 ns, and `pygeohash-fast`'s decode between 532 and 581 ns. The drop-outs are
+API gaps, not omissions: `python-geohash` has no single-neighbor lookup,
+standalone validity check, or box enumeration, and `pygeohash-fast` ships only
+encode and decode. After warmup, every compiled library's per-run medians stay
+within ±20% spread across the repeats.
 
-These are medians from one machine and one set of runs. The full tables, the
-exact library versions, the caveats and the command to regenerate everything are
-on the [benchmarks page](https://pygeohash.mcginniscommawill.com/benchmarks.html)
-in the documentation.
+`geohashr` remains faster than PyGeoHash on every operation in the table. These
+are medians from one machine and one set of runs. The full tables for all eight
+operations, the exact library versions, the stability section, the caveats and
+the command to regenerate everything are on the
+[benchmarks page](https://pygeohash.mcginniscommawill.com/benchmarks.html) in
+the documentation.
 
 ## Version history
 
