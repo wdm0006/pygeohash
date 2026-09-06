@@ -25,7 +25,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Blog Posts" href="blog_posts.html" />
-    <link rel="prev" title="API Reference" href="api.html" />
+    <link rel="prev" title="Core Functions" href="api.html" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -225,56 +225,56 @@ median, and the final column is each library’s median divided by pygeohash’s
 <tbody>
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
-<td><p>353</p></td>
-<td><p>341 - 361</p></td>
-<td><p>2,832,858</p></td>
-<td><p>0.74x</p></td>
+<td><p>359</p></td>
+<td><p>358 - 378</p></td>
+<td><p>2,785,517</p></td>
+<td><p>0.63x</p></td>
 </tr>
 <tr class="row-odd"><td><p>pygeohash-fast</p></td>
 <td><p>Rust extension</p></td>
 <td><p>455</p></td>
-<td><p>451 - 455</p></td>
-<td><p>2,197,801</p></td>
-<td><p>0.96x</p></td>
+<td><p>454 - 467</p></td>
+<td><p>2,197,803</p></td>
+<td><p>0.80x</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>475</p></td>
-<td><p>473 - 576</p></td>
-<td><p>2,107,482</p></td>
+<td><p>571</p></td>
+<td><p>476 - 580</p></td>
+<td><p>1,751,314</p></td>
 <td><p>1.00x</p></td>
 </tr>
 <tr class="row-odd"><td><p>python-geohash</p></td>
 <td><p>C++ extension</p></td>
-<td><p>635</p></td>
-<td><p>630 - 644</p></td>
-<td><p>1,574,803</p></td>
-<td><p>1.34x</p></td>
+<td><p>627</p></td>
+<td><p>588 - 652</p></td>
+<td><p>1,594,897</p></td>
+<td><p>1.10x</p></td>
 </tr>
 <tr class="row-even"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
-<td><p>7,478</p></td>
-<td><p>7,416 - 7,497</p></td>
-<td><p>133,726</p></td>
-<td><p>15.76x</p></td>
+<td><p>7,662</p></td>
+<td><p>7,407 - 7,854</p></td>
+<td><p>130,514</p></td>
+<td><p>13.42x</p></td>
 </tr>
 <tr class="row-odd"><td><p>geohash-tools</p></td>
 <td><p>pure Python</p></td>
-<td><p>12,014</p></td>
-<td><p>11,994 - 12,183</p></td>
-<td><p>83,236</p></td>
-<td><p>25.32x</p></td>
+<td><p>12,124</p></td>
+<td><p>12,062 - 12,291</p></td>
+<td><p>82,481</p></td>
+<td><p>21.23x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
-<td><p>30,681</p></td>
-<td><p>30,638 - 35,012</p></td>
-<td><p>32,593</p></td>
-<td><p>64.66x</p></td>
+<td><p>34,495</p></td>
+<td><p>29,979 - 35,035</p></td>
+<td><p>28,990</p></td>
+<td><p>60.41x</p></td>
 </tr>
 </tbody>
 </table>
-<p>On this machine pygeohash is 1.34x faster than <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 15.8x faster
+<p>On this machine pygeohash is 1.10x faster than <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 13.4x faster
 than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>, <code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code>
 are faster still.</p>
 </section>
@@ -302,56 +302,56 @@ are faster still.</p>
 <tbody>
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
-<td><p>231</p></td>
-<td><p>228 - 234</p></td>
-<td><p>4,333,268</p></td>
-<td><p>0.42x</p></td>
+<td><p>238</p></td>
+<td><p>230 - 341</p></td>
+<td><p>4,204,089</p></td>
+<td><p>0.43x</p></td>
 </tr>
 <tr class="row-odd"><td><p>pygeohash-fast</p></td>
 <td><p>Rust extension</p></td>
-<td><p>545</p></td>
-<td><p>543 - 551</p></td>
-<td><p>1,834,862</p></td>
-<td><p>0.98x</p></td>
+<td><p>527</p></td>
+<td><p>513 - 552</p></td>
+<td><p>1,897,534</p></td>
+<td><p>0.95x</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>554</p></td>
-<td><p>553 - 558</p></td>
-<td><p>1,805,054</p></td>
+<td><p>556</p></td>
+<td><p>556 - 565</p></td>
+<td><p>1,798,561</p></td>
 <td><p>1.00x</p></td>
 </tr>
 <tr class="row-odd"><td><p>python-geohash</p></td>
 <td><p>C++ extension</p></td>
-<td><p>791</p></td>
-<td><p>781 - 826</p></td>
-<td><p>1,264,223</p></td>
-<td><p>1.43x</p></td>
+<td><p>814</p></td>
+<td><p>775 - 815</p></td>
+<td><p>1,228,501</p></td>
+<td><p>1.46x</p></td>
 </tr>
 <tr class="row-even"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
-<td><p>7,324</p></td>
-<td><p>7,269 - 7,399</p></td>
-<td><p>136,537</p></td>
-<td><p>13.22x</p></td>
+<td><p>7,465</p></td>
+<td><p>7,438 - 7,553</p></td>
+<td><p>133,958</p></td>
+<td><p>13.43x</p></td>
 </tr>
 <tr class="row-odd"><td><p>geohash-tools</p></td>
 <td><p>pure Python</p></td>
-<td><p>8,439</p></td>
-<td><p>8,416 - 8,453</p></td>
-<td><p>118,497</p></td>
-<td><p>15.23x</p></td>
+<td><p>8,531</p></td>
+<td><p>8,433 - 8,554</p></td>
+<td><p>117,220</p></td>
+<td><p>15.34x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
-<td><p>173,471</p></td>
-<td><p>172,115 - 174,218</p></td>
-<td><p>5,765</p></td>
-<td><p>313.12x</p></td>
+<td><p>175,127</p></td>
+<td><p>173,322 - 175,154</p></td>
+<td><p>5,710</p></td>
+<td><p>314.98x</p></td>
 </tr>
 </tbody>
 </table>
-<p>On this machine pygeohash is 1.43x faster than <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 13.2x faster
+<p>On this machine pygeohash is 1.46x faster than <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 13.4x faster
 than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code>, <code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code>
 are faster still.</p>
 </section>
@@ -379,42 +379,42 @@ are faster still.</p>
 <tbody>
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
-<td><p>317</p></td>
-<td><p>313 - 318</p></td>
-<td><p>3,155,569</p></td>
-<td><p>0.30x</p></td>
+<td><p>433</p></td>
+<td><p>432 - 465</p></td>
+<td><p>2,309,469</p></td>
+<td><p>0.40x</p></td>
 </tr>
 <tr class="row-odd"><td><p>python-geohash</p></td>
 <td><p>C++ extension</p></td>
-<td><p>929</p></td>
-<td><p>927 - 932</p></td>
-<td><p>1,076,426</p></td>
-<td><p>0.88x</p></td>
+<td><p>939</p></td>
+<td><p>923 - 972</p></td>
+<td><p>1,064,963</p></td>
+<td><p>0.87x</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>1,058</p></td>
-<td><p>1,043 - 1,125</p></td>
-<td><p>945,179</p></td>
+<td><p>1,078</p></td>
+<td><p>1,033 - 1,107</p></td>
+<td><p>927,644</p></td>
 <td><p>1.00x</p></td>
 </tr>
 <tr class="row-odd"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
-<td><p>7,674</p></td>
-<td><p>7,603 - 7,698</p></td>
-<td><p>130,310</p></td>
-<td><p>7.25x</p></td>
+<td><p>7,775</p></td>
+<td><p>7,770 - 7,895</p></td>
+<td><p>128,617</p></td>
+<td><p>7.21x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
-<td><p>127,827</p></td>
-<td><p>126,920 - 128,595</p></td>
-<td><p>7,823</p></td>
-<td><p>120.82x</p></td>
+<td><p>127,555</p></td>
+<td><p>125,373 - 129,692</p></td>
+<td><p>7,840</p></td>
+<td><p>118.33x</p></td>
 </tr>
 </tbody>
 </table>
-<p>On this machine pygeohash takes 1.14x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 7.3x
+<p>On this machine pygeohash takes 1.15x the median time of <code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> and is 7.2x
 faster than <code class="docutils literal notranslate"><span class="pre">libgeohash</span></code>, the quickest pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> is faster
 still.</p>
 </section>
@@ -442,9 +442,9 @@ still.</p>
 <tbody>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>382</p></td>
-<td><p>379 - 383</p></td>
-<td><p>2,618,144</p></td>
+<td><p>495</p></td>
+<td><p>380 - 497</p></td>
+<td><p>2,020,203</p></td>
 <td><p>1.00x</p></td>
 </tr>
 </tbody>
@@ -474,38 +474,38 @@ still.</p>
 <tbody>
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
-<td><p>372</p></td>
-<td><p>360 - 378</p></td>
-<td><p>2,688,171</p></td>
-<td><p>0.27x</p></td>
+<td><p>366</p></td>
+<td><p>270 - 388</p></td>
+<td><p>2,732,242</p></td>
+<td><p>0.26x</p></td>
 </tr>
 <tr class="row-odd"><td><p>geohash-tools</p></td>
 <td><p>pure Python</p></td>
-<td><p>933</p></td>
-<td><p>907 - 933</p></td>
-<td><p>1,071,811</p></td>
-<td><p>0.67x</p></td>
+<td><p>918</p></td>
+<td><p>913 - 924</p></td>
+<td><p>1,089,325</p></td>
+<td><p>0.66x</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>1,397</p></td>
-<td><p>1,379 - 1,406</p></td>
-<td><p>715,819</p></td>
+<td><p>1,400</p></td>
+<td><p>1,375 - 1,404</p></td>
+<td><p>714,286</p></td>
 <td><p>1.00x</p></td>
 </tr>
 <tr class="row-odd"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
-<td><p>1,595</p></td>
-<td><p>1,593 - 1,604</p></td>
-<td><p>626,959</p></td>
-<td><p>1.14x</p></td>
+<td><p>1,616</p></td>
+<td><p>1,579 - 1,683</p></td>
+<td><p>618,812</p></td>
+<td><p>1.15x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
-<td><p>2,427</p></td>
-<td><p>2,418 - 2,443</p></td>
-<td><p>412,031</p></td>
-<td><p>1.74x</p></td>
+<td><p>2,453</p></td>
+<td><p>2,430 - 2,489</p></td>
+<td><p>407,664</p></td>
+<td><p>1.75x</p></td>
 </tr>
 </tbody>
 </table>
@@ -536,42 +536,42 @@ pure-Python entry. <code class="docutils literal notranslate"><span class="pre">
 <tbody>
 <tr class="row-even"><td><p>geohashr</p></td>
 <td><p>Rust extension</p></td>
-<td><p>358</p></td>
-<td><p>356 - 366</p></td>
-<td><p>2,793,294</p></td>
+<td><p>365</p></td>
+<td><p>355 - 381</p></td>
+<td><p>2,739,728</p></td>
 <td><p>0.20x</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>1,798</p></td>
-<td><p>1,784 - 1,850</p></td>
-<td><p>556,174</p></td>
+<td><p>1,799</p></td>
+<td><p>1,757 - 1,804</p></td>
+<td><p>555,864</p></td>
 <td><p>1.00x</p></td>
 </tr>
 <tr class="row-even"><td><p>geohash-tools</p></td>
 <td><p>pure Python</p></td>
-<td><p>2,267</p></td>
-<td><p>2,253 - 2,293</p></td>
-<td><p>441,112</p></td>
-<td><p>1.26x</p></td>
+<td><p>2,163</p></td>
+<td><p>2,147 - 2,294</p></td>
+<td><p>462,321</p></td>
+<td><p>1.20x</p></td>
 </tr>
 <tr class="row-odd"><td><p>libgeohash</p></td>
 <td><p>pure Python</p></td>
-<td><p>4,301</p></td>
-<td><p>4,289 - 4,323</p></td>
-<td><p>232,504</p></td>
-<td><p>2.39x</p></td>
+<td><p>4,310</p></td>
+<td><p>4,256 - 4,363</p></td>
+<td><p>232,019</p></td>
+<td><p>2.40x</p></td>
 </tr>
 <tr class="row-even"><td><p>geolib</p></td>
 <td><p>pure Python</p></td>
-<td><p>6,694</p></td>
-<td><p>6,648 - 6,782</p></td>
-<td><p>149,388</p></td>
-<td><p>3.72x</p></td>
+<td><p>6,733</p></td>
+<td><p>6,700 - 6,820</p></td>
+<td><p>148,522</p></td>
+<td><p>3.74x</p></td>
 </tr>
 </tbody>
 </table>
-<p>On this machine pygeohash is 1.3x faster than <code class="docutils literal notranslate"><span class="pre">geohash-tools</span></code>, the quickest
+<p>On this machine pygeohash is 1.2x faster than <code class="docutils literal notranslate"><span class="pre">geohash-tools</span></code>, the quickest
 pure-Python entry. <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> is faster still.</p>
 </section>
 <section id="box-enumeration-small">
@@ -598,9 +598,9 @@ pure-Python entry. <code class="docutils literal notranslate"><span class="pre">
 <tbody>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>13,602</p></td>
-<td><p>13,542 - 13,703</p></td>
-<td><p>73,519</p></td>
+<td><p>14,094</p></td>
+<td><p>13,986 - 14,202</p></td>
+<td><p>70,952</p></td>
 <td><p>1.00x</p></td>
 </tr>
 </tbody>
@@ -630,9 +630,105 @@ pure-Python entry. <code class="docutils literal notranslate"><span class="pre">
 <tbody>
 <tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
 <td><p>C extension</p></td>
-<td><p>293,134</p></td>
-<td><p>291,317 - 294,377</p></td>
-<td><p>3,411</p></td>
+<td><p>293,906</p></td>
+<td><p>292,664 - 298,101</p></td>
+<td><p>3,402</p></td>
+<td><p>1.00x</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="quadkey-from-geohash">
+<h2>Quadkey (from geohash)<a class="headerlink" href="#quadkey-from-geohash" title="Link to this heading">¶</a></h2>
+<p>Convert <code class="docutils literal notranslate"><span class="pre">geohash_to_quadkey(&quot;ezs42e44y&quot;)</span></code>. pygeohash only: no competitor ships this conversion.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 14.0%" />
+<col style="width: 20.0%" />
+<col style="width: 14.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Median (ns)</p></th>
+<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Ops/sec</p></th>
+<th class="head"><p>vs pygeohash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>14,486</p></td>
+<td><p>14,316 - 14,640</p></td>
+<td><p>69,032</p></td>
+<td><p>1.00x</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="quadkey-to-geohash">
+<h2>Quadkey (to geohash)<a class="headerlink" href="#quadkey-to-geohash" title="Link to this heading">¶</a></h2>
+<p>Convert <code class="docutils literal notranslate"><span class="pre">quadkey_to_geohash(&quot;0313332002220300122013&quot;)</span></code> back to its containing cell. pygeohash only.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 14.0%" />
+<col style="width: 20.0%" />
+<col style="width: 14.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Median (ns)</p></th>
+<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Ops/sec</p></th>
+<th class="head"><p>vs pygeohash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>16,182</p></td>
+<td><p>16,028 - 16,329</p></td>
+<td><p>61,797</p></td>
+<td><p>1.00x</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tile-round-trip">
+<h2>Tile round trip<a class="headerlink" href="#tile-round-trip" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">geohash_to_tile</span></code> then <code class="docutils literal notranslate"><span class="pre">tile_to_geohash</span></code> over the shared input cell. pygeohash only.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 14.0%" />
+<col style="width: 20.0%" />
+<col style="width: 14.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Median (ns)</p></th>
+<th class="head"><p>Range over 3 runs (ns)</p></th>
+<th class="head"><p>Ops/sec</p></th>
+<th class="head"><p>vs pygeohash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>pygeohash</strong></p></td>
+<td><p>C extension</p></td>
+<td><p>21,889</p></td>
+<td><p>21,886 - 22,141</p></td>
+<td><p>45,685</p></td>
 <td><p>1.00x</p></td>
 </tr>
 </tbody>
@@ -665,134 +761,156 @@ move these figures between repeats before the suite warmed up; a spread within
 <tbody>
 <tr class="row-even"><td><p>adjacent</p></td>
 <td><p>geohashr</p></td>
-<td><p>378</p></td>
-<td><p>360</p></td>
-<td><p>372</p></td>
-<td><p>4.8%</p></td>
+<td><p>366</p></td>
+<td><p>270</p></td>
+<td><p>388</p></td>
+<td><p>32.3% (!)</p></td>
 </tr>
 <tr class="row-odd"><td><p>adjacent</p></td>
 <td><p>pygeohash</p></td>
-<td><p>1,406</p></td>
-<td><p>1,397</p></td>
-<td><p>1,379</p></td>
-<td><p>1.9%</p></td>
+<td><p>1,400</p></td>
+<td><p>1,404</p></td>
+<td><p>1,375</p></td>
+<td><p>2.1%</p></td>
 </tr>
 <tr class="row-even"><td><p>adjacent-border</p></td>
 <td><p>geohashr</p></td>
-<td><p>358</p></td>
-<td><p>356</p></td>
-<td><p>366</p></td>
-<td><p>2.8%</p></td>
+<td><p>355</p></td>
+<td><p>381</p></td>
+<td><p>365</p></td>
+<td><p>7.1%</p></td>
 </tr>
 <tr class="row-odd"><td><p>adjacent-border</p></td>
 <td><p>pygeohash</p></td>
-<td><p>1,798</p></td>
-<td><p>1,784</p></td>
-<td><p>1,850</p></td>
-<td><p>3.7%</p></td>
+<td><p>1,804</p></td>
+<td><p>1,799</p></td>
+<td><p>1,757</p></td>
+<td><p>2.6%</p></td>
 </tr>
 <tr class="row-even"><td><p>bbox</p></td>
 <td><p>geohashr</p></td>
-<td><p>318</p></td>
-<td><p>313</p></td>
-<td><p>317</p></td>
-<td><p>1.5%</p></td>
+<td><p>465</p></td>
+<td><p>433</p></td>
+<td><p>432</p></td>
+<td><p>7.6%</p></td>
 </tr>
 <tr class="row-odd"><td><p>bbox</p></td>
 <td><p>pygeohash</p></td>
-<td><p>1,125</p></td>
-<td><p>1,043</p></td>
-<td><p>1,058</p></td>
-<td><p>7.8%</p></td>
+<td><p>1,078</p></td>
+<td><p>1,033</p></td>
+<td><p>1,107</p></td>
+<td><p>6.9%</p></td>
 </tr>
 <tr class="row-even"><td><p>bbox</p></td>
 <td><p>python-geohash</p></td>
-<td><p>932</p></td>
-<td><p>927</p></td>
-<td><p>929</p></td>
-<td><p>0.5%</p></td>
+<td><p>972</p></td>
+<td><p>923</p></td>
+<td><p>939</p></td>
+<td><p>5.2%</p></td>
 </tr>
 <tr class="row-odd"><td><p>box-large</p></td>
 <td><p>pygeohash</p></td>
-<td><p>291,317</p></td>
-<td><p>293,134</p></td>
-<td><p>294,377</p></td>
-<td><p>1.0%</p></td>
+<td><p>292,664</p></td>
+<td><p>293,906</p></td>
+<td><p>298,101</p></td>
+<td><p>1.8%</p></td>
 </tr>
 <tr class="row-even"><td><p>box-small</p></td>
 <td><p>pygeohash</p></td>
-<td><p>13,602</p></td>
-<td><p>13,542</p></td>
-<td><p>13,703</p></td>
-<td><p>1.2%</p></td>
-</tr>
-<tr class="row-odd"><td><p>decode</p></td>
-<td><p>geohashr</p></td>
-<td><p>234</p></td>
-<td><p>228</p></td>
-<td><p>231</p></td>
-<td><p>2.4%</p></td>
-</tr>
-<tr class="row-even"><td><p>decode</p></td>
-<td><p>pygeohash</p></td>
-<td><p>553</p></td>
-<td><p>554</p></td>
-<td><p>558</p></td>
-<td><p>0.9%</p></td>
-</tr>
-<tr class="row-odd"><td><p>decode</p></td>
-<td><p>pygeohash-fast</p></td>
-<td><p>545</p></td>
-<td><p>543</p></td>
-<td><p>551</p></td>
+<td><p>13,986</p></td>
+<td><p>14,094</p></td>
+<td><p>14,202</p></td>
 <td><p>1.5%</p></td>
 </tr>
+<tr class="row-odd"><td><p>decode</p></td>
+<td><p>geohashr</p></td>
+<td><p>230</p></td>
+<td><p>341</p></td>
+<td><p>238</p></td>
+<td><p>46.7% (!)</p></td>
+</tr>
+<tr class="row-even"><td><p>decode</p></td>
+<td><p>pygeohash</p></td>
+<td><p>556</p></td>
+<td><p>556</p></td>
+<td><p>565</p></td>
+<td><p>1.6%</p></td>
+</tr>
+<tr class="row-odd"><td><p>decode</p></td>
+<td><p>pygeohash-fast</p></td>
+<td><p>552</p></td>
+<td><p>513</p></td>
+<td><p>527</p></td>
+<td><p>7.4%</p></td>
+</tr>
 <tr class="row-even"><td><p>decode</p></td>
 <td><p>python-geohash</p></td>
-<td><p>781</p></td>
-<td><p>791</p></td>
-<td><p>826</p></td>
-<td><p>5.7%</p></td>
+<td><p>814</p></td>
+<td><p>815</p></td>
+<td><p>775</p></td>
+<td><p>4.9%</p></td>
 </tr>
 <tr class="row-odd"><td><p>encode</p></td>
 <td><p>geohashr</p></td>
-<td><p>353</p></td>
-<td><p>341</p></td>
-<td><p>361</p></td>
-<td><p>5.7%</p></td>
+<td><p>359</p></td>
+<td><p>378</p></td>
+<td><p>358</p></td>
+<td><p>5.6%</p></td>
 </tr>
 <tr class="row-even"><td><p>encode</p></td>
 <td><p>pygeohash</p></td>
-<td><p>576</p></td>
-<td><p>473</p></td>
-<td><p>475</p></td>
-<td><p>21.6% (!)</p></td>
+<td><p>580</p></td>
+<td><p>571</p></td>
+<td><p>476</p></td>
+<td><p>18.3%</p></td>
 </tr>
 <tr class="row-odd"><td><p>encode</p></td>
 <td><p>pygeohash-fast</p></td>
 <td><p>455</p></td>
-<td><p>451</p></td>
-<td><p>455</p></td>
-<td><p>0.9%</p></td>
+<td><p>454</p></td>
+<td><p>467</p></td>
+<td><p>2.9%</p></td>
 </tr>
 <tr class="row-even"><td><p>encode</p></td>
 <td><p>python-geohash</p></td>
-<td><p>644</p></td>
-<td><p>630</p></td>
-<td><p>635</p></td>
+<td><p>627</p></td>
+<td><p>588</p></td>
+<td><p>652</p></td>
+<td><p>10.2%</p></td>
+</tr>
+<tr class="row-odd"><td><p>from-quadkey</p></td>
+<td><p>pygeohash</p></td>
+<td><p>16,028</p></td>
+<td><p>16,182</p></td>
+<td><p>16,329</p></td>
+<td><p>1.9%</p></td>
+</tr>
+<tr class="row-even"><td><p>tile-roundtrip</p></td>
+<td><p>pygeohash</p></td>
+<td><p>21,889</p></td>
+<td><p>21,886</p></td>
+<td><p>22,141</p></td>
+<td><p>1.2%</p></td>
+</tr>
+<tr class="row-odd"><td><p>to-quadkey</p></td>
+<td><p>pygeohash</p></td>
+<td><p>14,316</p></td>
+<td><p>14,486</p></td>
+<td><p>14,640</p></td>
 <td><p>2.2%</p></td>
 </tr>
-<tr class="row-odd"><td><p>validate</p></td>
+<tr class="row-even"><td><p>validate</p></td>
 <td><p>pygeohash</p></td>
-<td><p>382</p></td>
-<td><p>383</p></td>
-<td><p>379</p></td>
-<td><p>1.2%</p></td>
+<td><p>497</p></td>
+<td><p>380</p></td>
+<td><p>495</p></td>
+<td><p>23.6% (!)</p></td>
 </tr>
 </tbody>
 </table>
-<p>The spread of <code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> (encode) exceeded 20% on this run; treat those figures with
-suspicion and rerun before quoting them.</p>
+<p>The spread of <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> (adjacent), <code class="docutils literal notranslate"><span class="pre">geohashr</span></code> (decode), <code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> (validate)
+exceeded 20% on this run; treat those figures with suspicion and rerun before quoting
+them.</p>
 </section>
 <section id="environment">
 <h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">¶</a></h2>
@@ -812,7 +930,7 @@ absolute throughput you can expect elsewhere.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">geohashr</span></code> 1.6.0</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">geolib</span></code> 1.0.7</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">libgeohash</span></code> 0.1.1</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> 3.3.2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pygeohash</span></code> 3.5.1</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pygeohash-fast</span></code> 0.3.0</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">python-geohash</span></code> 0.9.2</p></li>
 </ul>
@@ -860,9 +978,17 @@ first place, but that is a packaging property rather than a speed result.</p></l
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grid_systems.html">Grid systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Core Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#grid-interoperability">Grid Interoperability</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Benchmarks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-is-measured">What is measured</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#encode">Encode</a></li>
@@ -873,6 +999,9 @@ first place, but that is a packaging property rather than a speed result.</p></l
 <li class="toctree-l2"><a class="reference internal" href="#adjacent-border">Adjacent (border)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#box-enumeration-small">Box enumeration (small)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#box-enumeration-large">Box enumeration (large)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quadkey-from-geohash">Quadkey (from geohash)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quadkey-to-geohash">Quadkey (to geohash)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tile-round-trip">Tile round trip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stability">Stability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#environment">Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reproducing-this-page">Reproducing this page</a></li>

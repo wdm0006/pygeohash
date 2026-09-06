@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z43R9PWW0B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z43R9PWW0B');
+    </script>
+    
+    <title>Grid systems &#8212; pygeohash 3.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
+    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=501c8ac3" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
+    <script src="_static/documentation_options.js?v=654eae90"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Type System" href="types.html" />
+    <link rel="prev" title="Usage Guide" href="usage.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+
+
+
+<meta name="description" content="Grid systems - pygeohash documentation">
+
+
+
+
+
+
+
+
+
+<meta property="og:title" content="Grid systems">
+<meta property="og:description" content="Grid systems - pygeohash documentation">
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://wdm0006.github.io/pygeohash/grid_systems.html">
+
+
+<meta property="og:site_name" content="pygeohash">
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Grid systems">
+<meta name="twitter:description" content="Grid systems - pygeohash documentation">
+
+<meta name="twitter:site" content="@willmcginniser">
+
+
+
+
+
+<link rel="canonical" href="https://wdm0006.github.io/pygeohash/grid_systems.html">
+
+
+ 
+
+  </head><body>
+<header class="header">
+  <div class="header__inner">
+    
+    <a href="https://mcginniscommawill.com" class="header__logo">
+      McGinnis, Will
+    </a>
+
+    
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+
+    
+    <nav class="nav" role="navigation">
+      
+      
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/guides/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Guides
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/topics/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Topics
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/posts/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Blog
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/about/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            About
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/coffee/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            Free Coffee
+          </a>
+        
+          
+          
+          
+          <a href="https://mcginniscommawill.com/oss/" class="nav__link"
+             target="_blank" rel="noopener noreferrer">
+            OSS
+          </a>
+        
+      
+
+      
+      
+      <a href="index.html" class="nav__link nav__link--active">
+        Docs
+      </a>
+      
+    </nav>
+  </div>
+</header>
+
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="breadcrumbs__inner">
+    
+    <a href="https://mcginniscommawill.com">Home</a>
+    <span class="breadcrumbs__separator">/</span>
+    
+    <a href="index.html">Docs</a>
+    
+    
+    <span class="breadcrumbs__separator">/</span>
+    <span>Grid systems</span>
+    
+  </div>
+</nav>
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="grid-systems">
+<h1>Grid systems<a class="headerlink" href="#grid-systems" title="Link to this heading">¶</a></h1>
+<p>pygeohash works with geohashes. Two other grids show up constantly in the
+same codebases - Bing/OSM map tiles (and their quadkey string form) and,
+less often, H3 and S2. The <code class="xref py py-mod docutils literal notranslate"><span class="pre">pygeohash.interop</span></code> module converts
+between geohashes, slippy tiles, quadkeys, and an integer form of the
+geohash, with no new dependencies. This page says what each grid is for,
+what the conversions guarantee, and what they cost.</p>
+<section id="choosing-a-grid">
+<h2>Choosing a grid<a class="headerlink" href="#choosing-a-grid" title="Link to this heading">¶</a></h2>
+<p><strong>Geohash</strong> encodes a latitude/longitude rectangle as a base32 string.
+The string sorts approximately by location, prefixes share prefixes of
+space, and the codec here is a C extension measured at hundreds of
+nanoseconds (see the <a class="reference internal" href="benchmarks.html"><span class="doc">Benchmarks</span></a> page). It is a good default for
+storage, sharding keys, and bounding queries, and the library around it
+in this package - neighbors, bounding boxes, statistics - needs nothing
+else installed.</p>
+<p><strong>Slippy tiles</strong> (<code class="docutils literal notranslate"><span class="pre">z</span></code>/<code class="docutils literal notranslate"><span class="pre">x</span></code>/<code class="docutils literal notranslate"><span class="pre">y</span></code>) and <strong>quadkeys</strong> are the grid of
+every major web map. Tiles nest by construction: a tile’s children are
+the four tiles of the next zoom inside it, and a quadkey is exactly that
+nesting path as a string of base-4 digits, so a quadkey prefix test
+replaces a bounding-box test in tile caches. Rows use Web Mercator
+latitude, which cuts the poles at about +/-85.05112878 degrees.</p>
+<p><strong>H3</strong> (hexagons) and <strong>S2</strong> (spherical cells) are separate ecosystems
+with their own indexes, indexes of indexes, and native libraries. They
+solve problems geohash does not try to: hexagon neighbourhood geometry,
+spherical region covering, cell hierarchy with controlled shapes. This
+library does not reimplement them and does not convert to them; if your
+problem is hexagons or spherical covering, use those libraries directly.
+Converting geohash to H3 through lat/lon floats would silently promise
+grid alignment that no conversion can deliver.</p>
+</section>
+<section id="what-pygeohash-interop-provides">
+<h2>What pygeohash.interop provides<a class="headerlink" href="#what-pygeohash-interop-provides" title="Link to this heading">¶</a></h2>
+<p>Seven public names, re-exported at the package root:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Tile(x,</span> <span class="pre">y,</span> <span class="pre">zoom)</span></code> - a slippy tile, row counted southward from the
+north pole.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geohash_to_tile</span></code> / <code class="docutils literal notranslate"><span class="pre">tile_to_geohash</span></code> - geohash cell to the tile
+containing its centre and back.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geohash_to_quadkey</span></code> / <code class="docutils literal notranslate"><span class="pre">quadkey_to_geohash</span></code> - the same through the
+quadkey string form.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geohash_to_int</span></code> / <code class="docutils literal notranslate"><span class="pre">geohash_from_int</span></code> - the geohash as an integer,
+5 bits per base32 character.</p></li>
+</ul>
+</section>
+<section id="conversion-semantics">
+<h2>Conversion semantics<a class="headerlink" href="#conversion-semantics" title="Link to this heading">¶</a></h2>
+<p>Both grids are interleaved latitude/longitude bit streams, so longitude
+is exact between them: an even-precision geohash at zoom <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">precision</span>
+<span class="pre">/</span> <span class="pre">2</span></code> maps cell-for-cell to a tile column and back, losslessly. Precision
+<code class="docutils literal notranslate"><span class="pre">p</span></code> maps to zoom <code class="docutils literal notranslate"><span class="pre">floor(5</span> <span class="pre">*</span> <span class="pre">p</span> <span class="pre">/</span> <span class="pre">2)</span></code>.</p>
+<p>Latitude is the honest caveat. Geohash latitude bands are equirectangular;
+tile rows are Web Mercator, a different partition of the axis. A round
+trip through a non-aligned zoom or precision therefore lands in the cell
+containing the tile centre, which can be a neighbouring geohash cell in
+latitude. The docstrings state plainly which directions are lossy, and
+boundary centres resolve deterministically to the lower-x, lower-y cell.</p>
+<p>The poles: geohashes cover +/-90 degrees and tiles do not exist beyond
+about +/-85.05112878 degrees. Converting a cell whose centre is outside
+the band raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>; <code class="docutils literal notranslate"><span class="pre">clip=True</span></code> maps it to the nearest
+in-band tile row instead. Nothing is silently clamped by default.</p>
+</section>
+<section id="measured-cost">
+<h2>Measured cost<a class="headerlink" href="#measured-cost" title="Link to this heading">¶</a></h2>
+<p>Median of medians from the committed comparison-session protocol
+(pygeohash 3.6.x development tree, all-Python conversions, shared input
+<code class="docutils literal notranslate"><span class="pre">ezs42e44y</span></code>; the codec’s C-backed encode/decode figures are on the
+<a class="reference internal" href="benchmarks.html"><span class="doc">Benchmarks</span></a> page):</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>to-quadkey</p></td>
+<td><p>~14.5 us</p></td>
+</tr>
+<tr class="row-even"><td><p>from-quadkey</p></td>
+<td><p>~16.2 us</p></td>
+</tr>
+<tr class="row-odd"><td><p>tile round trip</p></td>
+<td><p>~21.9 us</p></td>
+</tr>
+</tbody>
+</table>
+<p>The conversions are pure Python by design: they are one-shot adapters at
+tile-cache boundaries, not hot loops, and they add zero dependencies to
+the package. If you need millions of conversions per second, that work
+belongs in the systems this module talks to.</p>
+</section>
+<section id="when-to-reach-for-h3-or-s2">
+<h2>When to reach for H3 or S2<a class="headerlink" href="#when-to-reach-for-h3-or-s2" title="Link to this heading">¶</a></h2>
+<p>Reach for them when your problem is theirs - hexagonal indexing, spherical
+covering, cell hierarchies with shapes geohash’s rectangles cannot take.
+Use <code class="xref py py-mod docutils literal notranslate"><span class="pre">pygeohash.interop</span></code> when your problem is moving data between
+geohash storage and the map-tile ecosystem without adding a dependency.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Grid systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#choosing-a-grid">Choosing a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-pygeohash-interop-provides">What pygeohash.interop provides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conversion-semantics">Conversion semantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#measured-cost">Measured cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#when-to-reach-for-h3-or-s2">When to reach for H3 or S2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Core Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#grid-interoperability">Grid Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer class="footer">
+  <div class="footer__inner">
+    
+    
+    <div class="footer__links">
+      
+        <a href="https://github.com/wdm0006" class="footer__link" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+      
+        <a href="https://www.linkedin.com/in/wmcginnis/" class="footer__link" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+      
+        <a href="https://x.com/willmcginniser" class="footer__link" target="_blank" rel="noopener noreferrer">
+          Twitter
+        </a>
+      
+    </div>
+    
+
+    
+    <p class="footer__copy">
+      
+        &copy; 2016, Will McGinnis
+      
+    </p>
+  </div>
+</footer>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', function() {
+        nav.classList.toggle('is-open');
+        const isOpen = nav.classList.contains('is-open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  });
+</script>
+
+  </body>
+</html>

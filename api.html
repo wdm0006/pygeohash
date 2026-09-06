@@ -15,7 +15,7 @@
         gtag('config', 'G-Z43R9PWW0B');
     </script>
     
-    <title>API Reference &#8212; pygeohash 3.5.1 documentation</title>
+    <title>Core Functions &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
     <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=501c8ac3" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
@@ -33,7 +33,7 @@
 
 
 
-<meta name="description" content="API Reference - pygeohash documentation">
+<meta name="description" content="Core Functions - pygeohash documentation">
 
 
 
@@ -43,8 +43,8 @@
 
 
 
-<meta property="og:title" content="API Reference">
-<meta property="og:description" content="API Reference - pygeohash documentation">
+<meta property="og:title" content="Core Functions">
+<meta property="og:description" content="Core Functions - pygeohash documentation">
 <meta property="og:type" content="website">
 
 <meta property="og:url" content="https://wdm0006.github.io/pygeohash/api.html">
@@ -54,8 +54,8 @@
 
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="API Reference">
-<meta name="twitter:description" content="API Reference - pygeohash documentation">
+<meta name="twitter:title" content="Core Functions">
+<meta name="twitter:description" content="Core Functions - pygeohash documentation">
 
 <meta name="twitter:site" content="@willmcginniser">
 
@@ -159,7 +159,7 @@
     
     
     <span class="breadcrumbs__separator">/</span>
-    <span>API Reference</span>
+    <span>Core Functions</span>
     
   </div>
 </nav>
@@ -171,11 +171,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+  <p>API Reference
+API Reference
+=============</p>
 <p>This section provides detailed documentation for all functions available in the PyGeoHash library.</p>
 <section id="core-functions">
-<h2>Core Functions<a class="headerlink" href="#core-functions" title="Link to this heading">¶</a></h2>
+<h1>Core Functions<a class="headerlink" href="#core-functions" title="Link to this heading">¶</a></h1>
 <p>These core functions are implemented using a high-performance C extension for maximum efficiency.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.encode">
@@ -293,7 +294,7 @@ so <code class="docutils literal notranslate"><span class="pre">&quot;U4PRUYD&qu
 
 </section>
 <section id="data-types">
-<h2>Data Types<a class="headerlink" href="#data-types" title="Link to this heading">¶</a></h2>
+<h1>Data Types<a class="headerlink" href="#data-types" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">LatLong</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/geohash_types.html#LatLong"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -484,7 +485,7 @@ between -180 and 180.</p>
 
 </section>
 <section id="distance-calculations">
-<h2>Distance Calculations<a class="headerlink" href="#distance-calculations" title="Link to this heading">¶</a></h2>
+<h1>Distance Calculations<a class="headerlink" href="#distance-calculations" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.geohash_approximate_distance">
 <span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_approximate_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geohash_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_validity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/pygeohash/distances.html#geohash_approximate_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_approximate_distance" title="Link to this definition">¶</a></dt>
@@ -547,7 +548,7 @@ haversine formula, which accounts for the Earth’s curvature.</p>
 
 </section>
 <section id="geohash-navigation">
-<h2>Geohash Navigation<a class="headerlink" href="#geohash-navigation" title="Link to this heading">¶</a></h2>
+<h1>Geohash Navigation<a class="headerlink" href="#geohash-navigation" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.get_adjacent">
 <span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">get_adjacent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'right'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'left'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'top'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'bottom'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/neighbor.html#get_adjacent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.get_adjacent" title="Link to this definition">¶</a></dt>
@@ -587,7 +588,7 @@ other side of the grid.</p>
 
 </section>
 <section id="bounding-box-operations">
-<h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h2>
+<h1>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.get_bounding_box">
 <span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">get_bounding_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BoundingBox</span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#get_bounding_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.get_bounding_box" title="Link to this definition">¶</a></dt>
@@ -740,7 +741,7 @@ in a deterministically sorted order that is identical across processes.</p>
 
 </section>
 <section id="statistical-functions">
-<h2>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">¶</a></h2>
+<h1>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygeohash.mean">
 <span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Collection</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/stats.html#mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.mean" title="Link to this definition">¶</a></dt>
@@ -941,7 +942,7 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 
 </section>
 <section id="visualization-functions">
-<h2>Visualization Functions<a class="headerlink" href="#visualization-functions" title="Link to this heading">¶</a></h2>
+<h1>Visualization Functions<a class="headerlink" href="#visualization-functions" title="Link to this heading">¶</a></h1>
 <p>These functions require additional dependencies that can be installed with:
 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pygeohash[viz]</span></code></p>
 <p>The visualization module provides tools for creating static plots with Matplotlib and interactive maps with Folium:</p>
@@ -1020,6 +1021,282 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 
 <p>For detailed examples of how to use these functions, see the <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> section.</p>
 </section>
+<section id="grid-interoperability">
+<h1>Grid Interoperability<a class="headerlink" href="#grid-interoperability" title="Link to this heading">¶</a></h1>
+<p>Pure-Python conversions between geohashes and the Bing/OSM map-tile grid,
+plus an integer form of the geohash. See the <a class="reference internal" href="grid_systems.html"><span class="doc">Grid systems</span></a> guide for
+when to use each grid and what the conversions guarantee; the latitude
+direction between the two grids is documented as lossy, and polar cells
+require <code class="docutils literal notranslate"><span class="pre">clip=True</span></code> to reach the Mercator band.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">Tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygeohash/interop.html#Tile"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
+<p>A slippy-map tile index (the <code class="docutils literal notranslate"><span class="pre">z/x/y</span></code> of Bing/OSM tile caches).</p>
+<p><code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> index the <code class="docutils literal notranslate"><span class="pre">2**zoom</span> <span class="pre">×</span> <span class="pre">2**zoom</span></code> tile grid; <code class="docutils literal notranslate"><span class="pre">y</span></code> is counted
+southward from the north pole (the slippy convention), so <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> is the
+north-west tile of the grid.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Tile</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1984</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1511</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="go">Tile(x=1984, y=1511, zoom=12)</span>
+</pre></div>
+</div>
+<p>Create new instance of Tile(x, y, zoom)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">y</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zoom</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.geohash_to_tile">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_to_tile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tile</span></span></span><a class="reference internal" href="_modules/pygeohash/interop.html#geohash_to_tile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_to_tile" title="Link to this definition">¶</a></dt>
+<dd><p>Return the slippy tile containing a geohash cell’s centre.</p>
+<p>The zoom is <code class="docutils literal notranslate"><span class="pre">floor(5</span> <span class="pre">*</span> <span class="pre">precision</span> <span class="pre">/</span> <span class="pre">2)</span></code>. The tile column is the cell’s
+longitude-bit prefix — exact for every precision (an odd-precision cell is
+half a tile column wide and sits fully inside one column). The tile row
+contains the cell centre under the Web Mercator projection, so it is exact
+in longitude but generally lossless nowhere in latitude: geohash latitude
+bands are equirectangular and tile rows are not. Round-tripping cells
+through <a class="reference internal" href="#pygeohash.tile_to_geohash" title="pygeohash.tile_to_geohash"><code class="xref py py-func docutils literal notranslate"><span class="pre">tile_to_geohash()</span></code></a> therefore shifts latitude — see the
+containment notes there.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohash</strong> (<em>str</em>) – The geohash cell to map. Case-insensitive.</p></li>
+<li><p><strong>clip</strong> (<em>bool</em><em>, </em><em>optional</em>) – Behaviour when the cell centre lies poleward of
+the Web Mercator band (±85.05112878°), where tiles do not exist.
+<code class="docutils literal notranslate"><span class="pre">False</span></code> (the default) raises <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code>; <code class="docutils literal notranslate"><span class="pre">True</span></code> maps
+the cell to the nearest in-band tile row (row 0 northward,
+<code class="docutils literal notranslate"><span class="pre">2**zoom</span> <span class="pre">-</span> <span class="pre">1</span></code> southward).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The containing tile <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">zoom)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tile</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the geohash is not a valid 1-12 character base32 string,
+    or (with <code class="docutils literal notranslate"><span class="pre">clip=False</span></code>) if its centre lies outside the Web
+    Mercator latitude band.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_to_tile</span><span class="p">(</span><span class="s2">"ezs42"</span><span class="p">)</span>
+<span class="go">Tile(x=1984, y=1511, zoom=12)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_to_tile</span><span class="p">(</span><span class="s2">"ezs42"</span><span class="p">)</span><span class="o">.</span><span class="n">zoom</span>  <span class="c1"># floor(5 * 5 / 2)</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.tile_to_geohash">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">tile_to_geohash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/interop.html#tile_to_geohash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.tile_to_geohash" title="Link to this definition">¶</a></dt>
+<dd><p>Return the geohash cell containing a slippy tile’s centre.</p>
+<p>The precision defaults to <code class="docutils literal notranslate"><span class="pre">ceil(2</span> <span class="pre">*</span> <span class="pre">zoom</span> <span class="pre">/</span> <span class="pre">5)</span></code> (precision 1 for zoom 0):
+high enough that the cell’s longitude depth reaches the tile centre’s
+depth, so the longitude is pinned exactly, with boundary centres resolved
+to the lower-x, lower-y cell (west, north) per the tie rule. Latitude comes
+from the tile centre’s Web Mercator latitude, so the cell containing it is
+approximate — tile centres rarely land on equirectangular cell boundaries.</p>
+<p>Round trips are lossy in latitude by the nature of the two grids: feed the
+result back through <a class="reference internal" href="#pygeohash.geohash_to_tile" title="pygeohash.geohash_to_tile"><code class="xref py py-func docutils literal notranslate"><span class="pre">geohash_to_tile()</span></code></a> and the row can move whenever
+the cell straddles a row boundary. Nothing is lost in longitude at even
+precision and zoom <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">precision</span> <span class="pre">/</span> <span class="pre">2</span></code>, which map cell-for-cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – Tile column, <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">2**zoom</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Tile row, <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">2**zoom</span> <span class="pre">-</span> <span class="pre">1</span></code>, counted southward from
+the north pole (slippy convention).</p></li>
+<li><p><strong>zoom</strong> (<em>int</em>) – Zoom level, 0-30.</p></li>
+<li><p><strong>precision</strong> (<em>int</em><em>, </em><em>optional</em>) – Precision of the returned cell, 1-12.
+Defaults to <code class="docutils literal notranslate"><span class="pre">ceil(2</span> <span class="pre">*</span> <span class="pre">zoom</span> <span class="pre">/</span> <span class="pre">5)</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The geohash cell containing the tile centre, lowercase.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">zoom</span></code> is not an integer between 0 and 30, if <code class="docutils literal notranslate"><span class="pre">x</span></code>
+    or <code class="docutils literal notranslate"><span class="pre">y</span></code> is not an integer within <code class="docutils literal notranslate"><span class="pre">0..2**zoom</span> <span class="pre">-</span> <span class="pre">1</span></code>, or the
+    precision is not an integer between 1 and 12.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tile_to_geohash</span><span class="p">(</span><span class="mi">1984</span><span class="p">,</span> <span class="mi">1511</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">'ezs42'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tile_to_geohash</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># centre on a precision-1 boundary: resolves west</span>
+<span class="go">'d'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.geohash_to_quadkey">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_to_quadkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/interop.html#geohash_to_quadkey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_to_quadkey" title="Link to this definition">¶</a></dt>
+<dd><p>Return the Bing quadkey of the tile containing a geohash cell’s centre.</p>
+<p>The quadkey has <code class="docutils literal notranslate"><span class="pre">floor(5</span> <span class="pre">*</span> <span class="pre">precision</span> <span class="pre">/</span> <span class="pre">2)</span></code> digits — one per tile level,
+each digit the tile’s x-then-y bit pair. For even precision the quadkey
+addresses the column the cell lives in exactly; latitude rows follow the
+Web Mercator projection, so the mapping is lossy in latitude for every
+precision (see <a class="reference internal" href="#pygeohash.geohash_to_tile" title="pygeohash.geohash_to_tile"><code class="xref py py-func docutils literal notranslate"><span class="pre">geohash_to_tile()</span></code></a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohash</strong> (<em>str</em>) – The geohash cell to map. Case-insensitive.</p></li>
+<li><p><strong>clip</strong> (<em>bool</em><em>, </em><em>optional</em>) – Polar policy for the cell centre, exactly as in
+<a class="reference internal" href="#pygeohash.geohash_to_tile" title="pygeohash.geohash_to_tile"><code class="xref py py-func docutils literal notranslate"><span class="pre">geohash_to_tile()</span></code></a>: <code class="docutils literal notranslate"><span class="pre">False</span></code> raises outside the Web Mercator
+band, <code class="docutils literal notranslate"><span class="pre">True</span></code> maps to the nearest in-band row.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The quadkey, one <code class="docutils literal notranslate"><span class="pre">0</span></code>-<code class="docutils literal notranslate"><span class="pre">3</span></code> digit per zoom level. Never empty for
+a valid geohash (precision 1 already maps to zoom 2).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the geohash is invalid, or (with <code class="docutils literal notranslate"><span class="pre">clip=False</span></code>) if its
+    centre lies outside the Web Mercator latitude band.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_to_quadkey</span><span class="p">(</span><span class="s2">"ezs42"</span><span class="p">)</span>
+<span class="go">'031333200222'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.quadkey_to_geohash">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">quadkey_to_geohash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quadkey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/interop.html#quadkey_to_geohash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.quadkey_to_geohash" title="Link to this definition">¶</a></dt>
+<dd><p>Return the geohash cell containing a quadkey’s tile centre.</p>
+<p>The precision defaults to <code class="docutils literal notranslate"><span class="pre">ceil(2</span> <span class="pre">*</span> <span class="pre">zoom</span> <span class="pre">/</span> <span class="pre">5)</span></code> (one more bit pair than
+the tile has levels, rounded): the cell is finer than or equal to the tile
+in longitude and contains the tile centre in latitude. Cells returned this
+way are exact in longitude (the tile centre is a dyadic point there, with
+boundary cases resolved west) and approximate in latitude, because the
+tile centre’s Web Mercator latitude rarely lands on an equirectangular
+geohash boundary. Round trips through <a class="reference internal" href="#pygeohash.geohash_to_quadkey" title="pygeohash.geohash_to_quadkey"><code class="xref py py-func docutils literal notranslate"><span class="pre">geohash_to_quadkey()</span></code></a> are
+therefore lossy in latitude for every precision.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quadkey</strong> (<em>str</em>) – The quadkey to map, one <code class="docutils literal notranslate"><span class="pre">0</span></code>-<code class="docutils literal notranslate"><span class="pre">3</span></code> digit per zoom
+level. The empty string is the zoom-0 root tile.</p></li>
+<li><p><strong>precision</strong> (<em>int</em><em>, </em><em>optional</em>) – Precision of the returned cell, 1-12.
+Defaults to <code class="docutils literal notranslate"><span class="pre">ceil(2</span> <span class="pre">*</span> <span class="pre">zoom</span> <span class="pre">/</span> <span class="pre">5)</span></code> (precision 1 for the root tile).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The geohash cell containing the tile centre, lowercase.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the quadkey is not a string of at most 30 <code class="docutils literal notranslate"><span class="pre">0</span></code>-<code class="docutils literal notranslate"><span class="pre">3</span></code>
+    digits, or the precision is not an integer between 1 and 12.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quadkey_to_geohash</span><span class="p">(</span><span class="s2">"031333200222"</span><span class="p">)</span>
+<span class="go">'ezs42'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quadkey_to_geohash</span><span class="p">(</span><span class="s2">"03"</span><span class="p">)</span>  <span class="c1"># Bing's example tile (1, 1, 2): centre resolves west</span>
+<span class="go">'d'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.geohash_to_int">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_to_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/pygeohash/interop.html#geohash_to_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_to_int" title="Link to this definition">¶</a></dt>
+<dd><p>Return the integer form of a geohash: base32 digits, 5 bits each, MSB first.</p>
+<p>Lossless and exact for every valid geohash: the integer carries all
+<code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">precision</span></code> bits, and <a class="reference internal" href="#pygeohash.geohash_from_int" title="pygeohash.geohash_from_int"><code class="xref py py-func docutils literal notranslate"><span class="pre">geohash_from_int()</span></code></a> with the original
+precision recovers the string (lowercased) exactly. This is a pure
+re-encoding — no grid semantics involved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohash</strong> (<em>str</em>) – The geohash to convert. Case-insensitive.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The base32 bit value, <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">2**(5</span> <span class="pre">*</span> <span class="pre">precision)</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the geohash is not a valid 1-12 character base32 string.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_to_int</span><span class="p">(</span><span class="s2">"ezs42"</span><span class="p">)</span>
+<span class="go">14672002</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_from_int</span><span class="p">(</span><span class="n">geohash_to_int</span><span class="p">(</span><span class="s2">"EZS42"</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">'ezs42'</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.geohash_from_int">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohash_from_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pygeohash/interop.html#geohash_from_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohash_from_int" title="Link to this definition">¶</a></dt>
+<dd><p>Return the geohash string encoded in an integer’s low <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">precision</span></code> bits.</p>
+<p>The inverse of <a class="reference internal" href="#pygeohash.geohash_to_int" title="pygeohash.geohash_to_int"><code class="xref py py-func docutils literal notranslate"><span class="pre">geohash_to_int()</span></code></a>. <code class="docutils literal notranslate"><span class="pre">precision</span></code> is required because
+the integer form carries no length: leading zero bits are indistinguishable
+from a shorter hash, so the caller must say how wide the value was.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em>) – The bit value, <code class="docutils literal notranslate"><span class="pre">0</span></code> (inclusive) to <code class="docutils literal notranslate"><span class="pre">2**(5</span> <span class="pre">*</span> <span class="pre">precision)</span></code>
+(exclusive). Negative values and values that overflow the requested
+precision are rejected.</p></li>
+<li><p><strong>precision</strong> (<em>int</em>) – Character count of the result, 1-12.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The lowercase geohash string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">precision</span></code> is not an integer between 1 and 12, or
+    <code class="docutils literal notranslate"><span class="pre">value</span></code> is not an integer in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2**(5</span> <span class="pre">*</span> <span class="pre">precision))</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_from_int</span><span class="p">(</span><span class="mi">14672002</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">'ezs42'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">geohash_from_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">'0'</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -1035,16 +1312,57 @@ must be wrapped in a collection, for example <code class="docutils literal notra
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grid_systems.html">Grid systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-types">Data Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#distance-calculations">Distance Calculations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#geohash-navigation">Geohash Navigation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#visualization-functions">Visualization Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Core Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.encode"><code class="docutils literal notranslate"><span class="pre">encode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.encode_strictly"><code class="docutils literal notranslate"><span class="pre">encode_strictly()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.decode"><code class="docutils literal notranslate"><span class="pre">decode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.decode_exactly"><code class="docutils literal notranslate"><span class="pre">decode_exactly()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#data-types">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#distance-calculations">Distance Calculations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohash_approximate_distance"><code class="docutils literal notranslate"><span class="pre">geohash_approximate_distance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohash_haversine_distance"><code class="docutils literal notranslate"><span class="pre">geohash_haversine_distance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#geohash-navigation">Geohash Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.get_adjacent"><code class="docutils literal notranslate"><span class="pre">get_adjacent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.get_bounding_box"><code class="docutils literal notranslate"><span class="pre">get_bounding_box()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.is_point_in_box"><code class="docutils literal notranslate"><span class="pre">is_point_in_box()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.is_point_in_geohash"><code class="docutils literal notranslate"><span class="pre">is_point_in_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.do_boxes_intersect"><code class="docutils literal notranslate"><span class="pre">do_boxes_intersect()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohashes_in_box"><code class="docutils literal notranslate"><span class="pre">geohashes_in_box()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#statistical-functions">Statistical Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.mean"><code class="docutils literal notranslate"><span class="pre">mean()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.northern"><code class="docutils literal notranslate"><span class="pre">northern()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.southern"><code class="docutils literal notranslate"><span class="pre">southern()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.eastern"><code class="docutils literal notranslate"><span class="pre">eastern()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.western"><code class="docutils literal notranslate"><span class="pre">western()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.variance"><code class="docutils literal notranslate"><span class="pre">variance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.std"><code class="docutils literal notranslate"><span class="pre">std()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#visualization-functions">Visualization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.plot_geohash"><code class="docutils literal notranslate"><span class="pre">plot_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.plot_geohashes"><code class="docutils literal notranslate"><span class="pre">plot_geohashes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.folium_map"><code class="docutils literal notranslate"><span class="pre">folium_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#grid-interoperability">Grid Interoperability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohash_to_tile"><code class="docutils literal notranslate"><span class="pre">geohash_to_tile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.tile_to_geohash"><code class="docutils literal notranslate"><span class="pre">tile_to_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohash_to_quadkey"><code class="docutils literal notranslate"><span class="pre">geohash_to_quadkey()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.quadkey_to_geohash"><code class="docutils literal notranslate"><span class="pre">quadkey_to_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohash_to_int"><code class="docutils literal notranslate"><span class="pre">geohash_to_int()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohash_from_int"><code class="docutils literal notranslate"><span class="pre">geohash_from_int()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>

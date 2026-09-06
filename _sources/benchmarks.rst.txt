@@ -50,48 +50,48 @@ Encode ``(42.6, -5.6)`` to a precision-9 geohash.
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 353
-     - 341 - 361
-     - 2,832,858
-     - 0.74x
+     - 359
+     - 358 - 378
+     - 2,785,517
+     - 0.63x
    * - pygeohash-fast
      - Rust extension
      - 455
-     - 451 - 455
-     - 2,197,801
-     - 0.96x
+     - 454 - 467
+     - 2,197,803
+     - 0.80x
    * - **pygeohash**
      - C extension
-     - 475
-     - 473 - 576
-     - 2,107,482
+     - 571
+     - 476 - 580
+     - 1,751,314
      - 1.00x
    * - python-geohash
      - C++ extension
-     - 635
-     - 630 - 644
-     - 1,574,803
-     - 1.34x
+     - 627
+     - 588 - 652
+     - 1,594,897
+     - 1.10x
    * - libgeohash
      - pure Python
-     - 7,478
-     - 7,416 - 7,497
-     - 133,726
-     - 15.76x
+     - 7,662
+     - 7,407 - 7,854
+     - 130,514
+     - 13.42x
    * - geohash-tools
      - pure Python
-     - 12,014
-     - 11,994 - 12,183
-     - 83,236
-     - 25.32x
+     - 12,124
+     - 12,062 - 12,291
+     - 82,481
+     - 21.23x
    * - geolib
      - pure Python
-     - 30,681
-     - 30,638 - 35,012
-     - 32,593
-     - 64.66x
+     - 34,495
+     - 29,979 - 35,035
+     - 28,990
+     - 60.41x
 
-On this machine pygeohash is 1.34x faster than ``python-geohash`` and is 15.8x faster
+On this machine pygeohash is 1.10x faster than ``python-geohash`` and is 13.4x faster
 than ``libgeohash``, the quickest pure-Python entry. ``geohashr``, ``pygeohash-fast``
 are faster still.
 
@@ -112,48 +112,48 @@ Decode ``ezs42e44y`` back to coordinates.
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 231
-     - 228 - 234
-     - 4,333,268
-     - 0.42x
+     - 238
+     - 230 - 341
+     - 4,204,089
+     - 0.43x
    * - pygeohash-fast
      - Rust extension
-     - 545
-     - 543 - 551
-     - 1,834,862
-     - 0.98x
+     - 527
+     - 513 - 552
+     - 1,897,534
+     - 0.95x
    * - **pygeohash**
      - C extension
-     - 554
-     - 553 - 558
-     - 1,805,054
+     - 556
+     - 556 - 565
+     - 1,798,561
      - 1.00x
    * - python-geohash
      - C++ extension
-     - 791
-     - 781 - 826
-     - 1,264,223
-     - 1.43x
+     - 814
+     - 775 - 815
+     - 1,228,501
+     - 1.46x
    * - libgeohash
      - pure Python
-     - 7,324
-     - 7,269 - 7,399
-     - 136,537
-     - 13.22x
+     - 7,465
+     - 7,438 - 7,553
+     - 133,958
+     - 13.43x
    * - geohash-tools
      - pure Python
-     - 8,439
-     - 8,416 - 8,453
-     - 118,497
-     - 15.23x
+     - 8,531
+     - 8,433 - 8,554
+     - 117,220
+     - 15.34x
    * - geolib
      - pure Python
-     - 173,471
-     - 172,115 - 174,218
-     - 5,765
-     - 313.12x
+     - 175,127
+     - 173,322 - 175,154
+     - 5,710
+     - 314.98x
 
-On this machine pygeohash is 1.43x faster than ``python-geohash`` and is 13.2x faster
+On this machine pygeohash is 1.46x faster than ``python-geohash`` and is 13.4x faster
 than ``libgeohash``, the quickest pure-Python entry. ``geohashr``, ``pygeohash-fast``
 are faster still.
 
@@ -174,36 +174,36 @@ Look up the bounding box of the ``ezs42e44y`` cell.
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 317
-     - 313 - 318
-     - 3,155,569
-     - 0.30x
+     - 433
+     - 432 - 465
+     - 2,309,469
+     - 0.40x
    * - python-geohash
      - C++ extension
-     - 929
-     - 927 - 932
-     - 1,076,426
-     - 0.88x
+     - 939
+     - 923 - 972
+     - 1,064,963
+     - 0.87x
    * - **pygeohash**
      - C extension
-     - 1,058
-     - 1,043 - 1,125
-     - 945,179
+     - 1,078
+     - 1,033 - 1,107
+     - 927,644
      - 1.00x
    * - libgeohash
      - pure Python
-     - 7,674
-     - 7,603 - 7,698
-     - 130,310
-     - 7.25x
+     - 7,775
+     - 7,770 - 7,895
+     - 128,617
+     - 7.21x
    * - geolib
      - pure Python
-     - 127,827
-     - 126,920 - 128,595
-     - 7,823
-     - 120.82x
+     - 127,555
+     - 125,373 - 129,692
+     - 7,840
+     - 118.33x
 
-On this machine pygeohash takes 1.14x the median time of ``python-geohash`` and is 7.3x
+On this machine pygeohash takes 1.15x the median time of ``python-geohash`` and is 7.2x
 faster than ``libgeohash``, the quickest pure-Python entry. ``geohashr`` is faster
 still.
 
@@ -224,9 +224,9 @@ Check ``is_valid_geohash("ezs42e44y")``.
      - vs pygeohash
    * - **pygeohash**
      - C extension
-     - 382
-     - 379 - 383
-     - 2,618,144
+     - 495
+     - 380 - 497
+     - 2,020,203
      - 1.00x
 
 Adjacent
@@ -246,34 +246,34 @@ Step one cell north of ``ezs42e44y``.
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 372
-     - 360 - 378
-     - 2,688,171
-     - 0.27x
+     - 366
+     - 270 - 388
+     - 2,732,242
+     - 0.26x
    * - geohash-tools
      - pure Python
-     - 933
-     - 907 - 933
-     - 1,071,811
-     - 0.67x
+     - 918
+     - 913 - 924
+     - 1,089,325
+     - 0.66x
    * - **pygeohash**
      - C extension
-     - 1,397
-     - 1,379 - 1,406
-     - 715,819
+     - 1,400
+     - 1,375 - 1,404
+     - 714,286
      - 1.00x
    * - libgeohash
      - pure Python
-     - 1,595
-     - 1,593 - 1,604
-     - 626,959
-     - 1.14x
+     - 1,616
+     - 1,579 - 1,683
+     - 618,812
+     - 1.15x
    * - geolib
      - pure Python
-     - 2,427
-     - 2,418 - 2,443
-     - 412,031
-     - 1.74x
+     - 2,453
+     - 2,430 - 2,489
+     - 407,664
+     - 1.75x
 
 On this machine pygeohash is 0.7x faster than ``geohash-tools``, the quickest
 pure-Python entry. ``geohashr``, ``geohash-tools`` are faster still.
@@ -295,36 +295,36 @@ Step west of ``u00000``, across the antimeridian.
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 358
-     - 356 - 366
-     - 2,793,294
+     - 365
+     - 355 - 381
+     - 2,739,728
      - 0.20x
    * - **pygeohash**
      - C extension
-     - 1,798
-     - 1,784 - 1,850
-     - 556,174
+     - 1,799
+     - 1,757 - 1,804
+     - 555,864
      - 1.00x
    * - geohash-tools
      - pure Python
-     - 2,267
-     - 2,253 - 2,293
-     - 441,112
-     - 1.26x
+     - 2,163
+     - 2,147 - 2,294
+     - 462,321
+     - 1.20x
    * - libgeohash
      - pure Python
-     - 4,301
-     - 4,289 - 4,323
-     - 232,504
-     - 2.39x
+     - 4,310
+     - 4,256 - 4,363
+     - 232,019
+     - 2.40x
    * - geolib
      - pure Python
-     - 6,694
-     - 6,648 - 6,782
-     - 149,388
-     - 3.72x
+     - 6,733
+     - 6,700 - 6,820
+     - 148,522
+     - 3.74x
 
-On this machine pygeohash is 1.3x faster than ``geohash-tools``, the quickest
+On this machine pygeohash is 1.2x faster than ``geohash-tools``, the quickest
 pure-Python entry. ``geohashr`` is faster still.
 
 Box enumeration (small)
@@ -344,9 +344,9 @@ Enumerate ``geohashes_in_box`` over a 4-cell box at precision 9.
      - vs pygeohash
    * - **pygeohash**
      - C extension
-     - 13,602
-     - 13,542 - 13,703
-     - 73,519
+     - 14,094
+     - 13,986 - 14,202
+     - 70,952
      - 1.00x
 
 Box enumeration (large)
@@ -366,9 +366,75 @@ Enumerate ``geohashes_in_box`` over a 361-cell box at precision 6.
      - vs pygeohash
    * - **pygeohash**
      - C extension
-     - 293,134
-     - 291,317 - 294,377
-     - 3,411
+     - 293,906
+     - 292,664 - 298,101
+     - 3,402
+     - 1.00x
+
+Quadkey (from geohash)
+----------------------
+
+Convert ``geohash_to_quadkey("ezs42e44y")``. pygeohash only: no competitor ships this conversion.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - **pygeohash**
+     - C extension
+     - 14,486
+     - 14,316 - 14,640
+     - 69,032
+     - 1.00x
+
+Quadkey (to geohash)
+--------------------
+
+Convert ``quadkey_to_geohash("0313332002220300122013")`` back to its containing cell. pygeohash only.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - **pygeohash**
+     - C extension
+     - 16,182
+     - 16,028 - 16,329
+     - 61,797
+     - 1.00x
+
+Tile round trip
+---------------
+
+``geohash_to_tile`` then ``tile_to_geohash`` over the shared input cell. pygeohash only.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - **pygeohash**
+     - C extension
+     - 21,889
+     - 21,886 - 22,141
+     - 45,685
      - 1.00x
 
 Stability
@@ -392,115 +458,134 @@ move these figures between repeats before the suite warmed up; a spread within
 
    * - adjacent
      - geohashr
-     - 378
-     - 360
-     - 372
-     - 4.8%
+     - 366
+     - 270
+     - 388
+     - 32.3% (!)
    * - adjacent
      - pygeohash
-     - 1,406
-     - 1,397
-     - 1,379
-     - 1.9%
+     - 1,400
+     - 1,404
+     - 1,375
+     - 2.1%
    * - adjacent-border
      - geohashr
-     - 358
-     - 356
-     - 366
-     - 2.8%
+     - 355
+     - 381
+     - 365
+     - 7.1%
    * - adjacent-border
      - pygeohash
-     - 1,798
-     - 1,784
-     - 1,850
-     - 3.7%
+     - 1,804
+     - 1,799
+     - 1,757
+     - 2.6%
    * - bbox
      - geohashr
-     - 318
-     - 313
-     - 317
-     - 1.5%
+     - 465
+     - 433
+     - 432
+     - 7.6%
    * - bbox
      - pygeohash
-     - 1,125
-     - 1,043
-     - 1,058
-     - 7.8%
+     - 1,078
+     - 1,033
+     - 1,107
+     - 6.9%
    * - bbox
      - python-geohash
-     - 932
-     - 927
-     - 929
-     - 0.5%
+     - 972
+     - 923
+     - 939
+     - 5.2%
    * - box-large
      - pygeohash
-     - 291,317
-     - 293,134
-     - 294,377
-     - 1.0%
+     - 292,664
+     - 293,906
+     - 298,101
+     - 1.8%
    * - box-small
      - pygeohash
-     - 13,602
-     - 13,542
-     - 13,703
-     - 1.2%
-   * - decode
-     - geohashr
-     - 234
-     - 228
-     - 231
-     - 2.4%
-   * - decode
-     - pygeohash
-     - 553
-     - 554
-     - 558
-     - 0.9%
-   * - decode
-     - pygeohash-fast
-     - 545
-     - 543
-     - 551
+     - 13,986
+     - 14,094
+     - 14,202
      - 1.5%
    * - decode
+     - geohashr
+     - 230
+     - 341
+     - 238
+     - 46.7% (!)
+   * - decode
+     - pygeohash
+     - 556
+     - 556
+     - 565
+     - 1.6%
+   * - decode
+     - pygeohash-fast
+     - 552
+     - 513
+     - 527
+     - 7.4%
+   * - decode
      - python-geohash
-     - 781
-     - 791
-     - 826
-     - 5.7%
+     - 814
+     - 815
+     - 775
+     - 4.9%
    * - encode
      - geohashr
-     - 353
-     - 341
-     - 361
-     - 5.7%
+     - 359
+     - 378
+     - 358
+     - 5.6%
    * - encode
      - pygeohash
-     - 576
-     - 473
-     - 475
-     - 21.6% (!)
+     - 580
+     - 571
+     - 476
+     - 18.3%
    * - encode
      - pygeohash-fast
      - 455
-     - 451
-     - 455
-     - 0.9%
+     - 454
+     - 467
+     - 2.9%
    * - encode
      - python-geohash
-     - 644
-     - 630
-     - 635
+     - 627
+     - 588
+     - 652
+     - 10.2%
+   * - from-quadkey
+     - pygeohash
+     - 16,028
+     - 16,182
+     - 16,329
+     - 1.9%
+   * - tile-roundtrip
+     - pygeohash
+     - 21,889
+     - 21,886
+     - 22,141
+     - 1.2%
+   * - to-quadkey
+     - pygeohash
+     - 14,316
+     - 14,486
+     - 14,640
      - 2.2%
    * - validate
      - pygeohash
-     - 382
-     - 383
-     - 379
-     - 1.2%
+     - 497
+     - 380
+     - 495
+     - 23.6% (!)
 
-The spread of ``pygeohash`` (encode) exceeded 20% on this run; treat those figures with
-suspicion and rerun before quoting them.
+The spread of ``geohashr`` (adjacent), ``geohashr`` (decode), ``pygeohash`` (validate)
+exceeded 20% on this run; treat those figures with suspicion and rerun before quoting
+them.
 
 Environment
 -----------
@@ -521,7 +606,7 @@ Installed versions of every library measured:
 * ``geohashr`` 1.6.0
 * ``geolib`` 1.0.7
 * ``libgeohash`` 0.1.1
-* ``pygeohash`` 3.3.2
+* ``pygeohash`` 3.5.1
 * ``pygeohash-fast`` 0.3.0
 * ``python-geohash`` 0.9.2
 

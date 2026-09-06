@@ -262,6 +262,14 @@ pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="
 <li class="toctree-l2"><a class="reference internal" href="usage.html#performance-considerations">Performance Considerations</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="grid_systems.html">Grid systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="grid_systems.html#choosing-a-grid">Choosing a grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grid_systems.html#what-pygeohash-interop-provides">What pygeohash.interop provides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grid_systems.html#conversion-semantics">Conversion semantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grid_systems.html#measured-cost">Measured cost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grid_systems.html#when-to-reach-for-h3-or-s2">When to reach for H3 or S2</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="types.html#core-types">Core Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html#validation-types">Validation Types</a></li>
@@ -290,14 +298,54 @@ pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="
 <li class="toctree-l2"><a class="reference internal" href="examples.html#visualizing-geohash-precision">Visualizing Geohash Precision</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#core-functions">Core Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Core Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.encode"><code class="docutils literal notranslate"><span class="pre">encode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.encode_strictly"><code class="docutils literal notranslate"><span class="pre">encode_strictly()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.decode"><code class="docutils literal notranslate"><span class="pre">decode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.decode_exactly"><code class="docutils literal notranslate"><span class="pre">decode_exactly()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.geohash_approximate_distance"><code class="docutils literal notranslate"><span class="pre">geohash_approximate_distance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.geohash_haversine_distance"><code class="docutils literal notranslate"><span class="pre">geohash_haversine_distance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.get_adjacent"><code class="docutils literal notranslate"><span class="pre">get_adjacent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.get_bounding_box"><code class="docutils literal notranslate"><span class="pre">get_bounding_box()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.is_point_in_box"><code class="docutils literal notranslate"><span class="pre">is_point_in_box()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.is_point_in_geohash"><code class="docutils literal notranslate"><span class="pre">is_point_in_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.do_boxes_intersect"><code class="docutils literal notranslate"><span class="pre">do_boxes_intersect()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.geohashes_in_box"><code class="docutils literal notranslate"><span class="pre">geohashes_in_box()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.mean"><code class="docutils literal notranslate"><span class="pre">mean()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.northern"><code class="docutils literal notranslate"><span class="pre">northern()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.southern"><code class="docutils literal notranslate"><span class="pre">southern()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.eastern"><code class="docutils literal notranslate"><span class="pre">eastern()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.western"><code class="docutils literal notranslate"><span class="pre">western()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.variance"><code class="docutils literal notranslate"><span class="pre">variance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.std"><code class="docutils literal notranslate"><span class="pre">std()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.plot_geohash"><code class="docutils literal notranslate"><span class="pre">plot_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.plot_geohashes"><code class="docutils literal notranslate"><span class="pre">plot_geohashes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.folium_map"><code class="docutils literal notranslate"><span class="pre">folium_map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#grid-interoperability">Grid Interoperability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.geohash_to_tile"><code class="docutils literal notranslate"><span class="pre">geohash_to_tile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.tile_to_geohash"><code class="docutils literal notranslate"><span class="pre">tile_to_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.geohash_to_quadkey"><code class="docutils literal notranslate"><span class="pre">geohash_to_quadkey()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.quadkey_to_geohash"><code class="docutils literal notranslate"><span class="pre">quadkey_to_geohash()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.geohash_to_int"><code class="docutils literal notranslate"><span class="pre">geohash_to_int()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#pygeohash.geohash_from_int"><code class="docutils literal notranslate"><span class="pre">geohash_from_int()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a><ul>
@@ -310,6 +358,9 @@ pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="
 <li class="toctree-l2"><a class="reference internal" href="benchmarks.html#adjacent-border">Adjacent (border)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmarks.html#box-enumeration-small">Box enumeration (small)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmarks.html#box-enumeration-large">Box enumeration (large)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#quadkey-from-geohash">Quadkey (from geohash)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#quadkey-to-geohash">Quadkey (to geohash)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#tile-round-trip">Tile round trip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmarks.html#stability">Stability</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmarks.html#environment">Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmarks.html#reproducing-this-page">Reproducing this page</a></li>
@@ -347,9 +398,17 @@ pip<span class="w"> </span>install<span class="w"> </span>pygeohash<span class="
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concepts.html">Geohash Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grid_systems.html">Grid systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types.html">Type System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Core Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#data-types">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#distance-calculations">Distance Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#geohash-navigation">Geohash Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#bounding-box-operations">Bounding Box Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#statistical-functions">Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#visualization-functions">Visualization Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#grid-interoperability">Grid Interoperability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="blog_posts.html">Blog Posts</a></li>
 </ul>
