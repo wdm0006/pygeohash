@@ -3,6 +3,7 @@
 import builtins
 import unittest
 import warnings
+from pathlib import Path
 from typing import runtime_checkable
 from unittest.mock import MagicMock, patch
 
@@ -367,7 +368,10 @@ def test_check_viz_dependencies_warns_with_install_hint_when_matplotlib_missing(
         assert viz._check_viz_dependencies() is False
 
     # stacklevel=2 attributes the warning to this caller, not to viz.py internals.
-    assert record[0].filename == __file__
+    # Inside a mutmut mutants tree the trampoline adds a frame, shifting attribution
+    # by one; the content and return-value assertions above stay active there.
+    if Path.cwd().name != "mutants":
+        assert record[0].filename == __file__
 
 
 def test_check_folium_dependencies_warns_with_install_hint_when_folium_missing(monkeypatch):
@@ -377,7 +381,8 @@ def test_check_folium_dependencies_warns_with_install_hint_when_folium_missing(m
     with pytest.warns(UserWarning, match=r"pip install pygeohash\[viz\]") as record:
         assert viz._check_folium_dependencies() is False
 
-    assert record[0].filename == __file__
+    if Path.cwd().name != "mutants":
+        assert record[0].filename == __file__
 
 
 def test_check_viz_dependencies_is_silent_when_matplotlib_installed():
