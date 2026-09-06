@@ -1,8 +1,10 @@
 import math
+import statistics
 
 import pytest
 
 import pygeohash as pgh
+from pygeohash import stats
 
 # Two cells about 2 degrees apart, straddling the antimeridian.
 WEST_OF_LINE = pgh.encode(0.0, 179.0)
@@ -163,3 +165,132 @@ def test_single_element_collection_is_accepted():
 def test_empty_collection_is_still_accepted(function):
     """The guard rejects strings only; an empty collection keeps its documented result."""
     assert function([]) in ("", 0.0)
+
+
+# ---------------------------------------------------------------------------
+# Circular-mean cancellation fallback and boundary semantics. These target the
+# real (non-log-string) mutants of _circular_mean_longitude: a hypot that
+# drops one of its two arguments, and the <= / < tolerance boundary.
+# ---------------------------------------------------------------------------
+
+
+def test_circular_mean_longitude_falls_back_when_vectors_cancel():
+    """A pair symmetric about +/-90 cancels mean_sin exactly, so the arithmetic mean wins."""
+    # sin(90) and sin(-90) cancel to exactly 0.0 and the cosines sum to ~1.2e-16, so the
+    # resultant vector length is ~6.1e-17 -- far below the 1e-12 tolerance.
+    assert stats._circular_mean_longitude([90.0, -90.0]) == 0.0
+
+
+def test_circular_mean_longitude_vector_mean_survives_negligible_cosine():
+    """A large mean_sin with a negligible mean_cos still takes the vector-mean branch."""
+    # mean_sin = 1/3 while mean_cos = 6.1e-17. A hypot that dropped mean_sin would read
+    # ~0, wrongly trigger the fallback, and return the arithmetic mean of 30 instead.
+    result = stats._circular_mean_longitude([90.0, -90.0, 90.0])
+
+    assert result == pytest.approx(90.0, abs=1e-6)
+    assert result != pytest.approx(30.0, abs=1e-6)
+
+
+def test_circular_mean_longitude_vector_mean_survives_negligible_sine():
+    """A large mean_cos with a negligible mean_sin still takes the vector-mean branch."""
+    # mean_cos = 1/3 while mean_sin = 4.1e-17. A hypot that dropped mean_cos would read
+    # ~0, wrongly trigger the fallback, and return the arithmetic mean of 60 instead.
+    result = stats._circular_mean_longitude([0.0, 0.0, 180.0])
+
+    assert result == pytest.approx(0.0, abs=1e-6)
+    assert result != pytest.approx(60.0, abs=1e-6)
+
+
+def test_circular_mean_longitude_cancellation_boundary_is_inclusive(monkeypatch):
+    """A resultant vector length exactly at the tolerance still takes the fallback branch."""
+    radians = [math.radians(longitude) for longitude in (90.0, -90.0, 90.0)]
+    mean_sin = statistics.mean(math.sin(radian) for radian in radians)
+    mean_cos = statistics.mean(math.cos(radian) for radian in radians)
+    monkeypatch.setattr(stats, "_CIRCULAR_MEAN_TOLERANCE", math.hypot(mean_sin, mean_cos))
+
+    # At equality the <= comparison falls back to the arithmetic mean (exactly 30.0);
+    # a strict < would take the vector branch and return ~90 instead.
+    assert stats._circular_mean_longitude([90.0, -90.0, 90.0]) == 30.0
+
+
+def test_circular_mean_longitude_non_canceling_vectors_take_the_vector_mean():
+    """Vectors that do not cancel produce the circular mean, not the arithmetic one."""
+    assert stats._circular_mean_longitude([0.0, 90.0]) == pytest.approx(45.0, abs=1e-9)
+
+
+# ---------------------------------------------------------------------------
+# User-facing message surface: exception text is API, not a log string.
+# ---------------------------------------------------------------------------
+
+
+def test_bare_geohash_string_error_names_both_the_problem_and_the_fix():
+    """The bare-string TypeError message is asserted in full, anchors included."""
+    with pytest.raises(
+        TypeError,
+        match=(
+            r"^geohashes must be a collection of geohash strings, not a single geohash string\. "
+            r"Wrap a single geohash in a collection, for example \['u4pruyd'\]\.$"
+        ),
+    ):
+        pgh.mean("u4pruyd")
+
+
+# ---------------------------------------------------------------------------
+# Mean / variance / std precision on known inputs.
+# ---------------------------------------------------------------------------
+
+
+def test_variance_and_std_precision_on_known_cluster():
+    """Spread statistics match their known values with a tighter band than the doctest round."""
+    assert pgh.variance(CLUSTER) == pytest.approx(6665.510679876878, rel=1e-9)
+    assert pgh.std(CLUSTER) == pytest.approx(81.64257884141631, rel=1e-9)
+    # std is exactly the square root of the variance over the same collection.
+    assert pgh.std(CLUSTER) == pytest.approx(math.sqrt(pgh.variance(CLUSTER)), rel=1e-12)
+
+
+def test_mean_and_spread_precision_on_antimeridian_cluster():
+    """An asymmetric antimeridian cluster has an exact mean cell and known spread."""
+    cluster = [pgh.encode(10.0, 178.0), pgh.encode(10.0, 179.0), pgh.encode(10.0, -177.0)]
+
+    assert pgh.mean(cluster) == "xczbzury0zhe"
+    assert pgh.mean(cluster, 8) == "xczbzury"
+    assert pgh.variance(cluster) == pytest.approx(55959952279.75226, rel=1e-9)
+    assert pgh.std(cluster) == pytest.approx(236558.55993760246, rel=1e-9)
+
+
+# ---------------------------------------------------------------------------
+# Directional extremes.
+# ---------------------------------------------------------------------------
+
+
+def test_directional_extremes_keep_raw_longitudes_at_the_antimeridian():
+    """Eastern/western extremes compare raw longitudes; they do not wrap at the antimeridian."""
+    east_cell = pgh.encode(0.0, 179.0)
+    west_cell = pgh.encode(0.0, -179.0)
+
+    assert pgh.eastern([east_cell, west_cell]) == east_cell
+    assert pgh.western([east_cell, west_cell]) == west_cell
+
+
+def test_directional_extremes_break_latitude_ties_by_input_order():
+    """Equal-valued latitude extremes resolve to the first geohash in input order."""
+    first = pgh.encode(10.0, 5.0, 4)
+    second = pgh.encode(10.0, -5.0, 4)
+    assert pgh.decode(first).latitude == pgh.decode(second).latitude  # a genuine tie
+
+    assert pgh.northern([first, second]) == first
+    assert pgh.northern([second, first]) == second
+    assert pgh.southern([first, second]) == first
+    assert pgh.southern([second, first]) == second
+
+
+def test_directional_extremes_break_longitude_ties_by_input_order():
+    """Equal-valued longitude extremes resolve to the first geohash in input order."""
+    first = pgh.encode(5.0, 10.0, 4)
+    second = pgh.encode(-5.0, 10.0, 4)
+    assert pgh.decode(first).longitude == pgh.decode(second).longitude  # a genuine tie
+
+    assert pgh.eastern([first, second]) == first
+    assert pgh.eastern([second, first]) == second
+    assert pgh.western([first, second]) == first
+    assert pgh.western([second, first]) == second

@@ -13,7 +13,7 @@ from pygeohash.bounding_box import (
     is_point_in_box,
     is_point_in_geohash,
 )
-from pygeohash.geohash import encode
+from pygeohash.geohash import decode_exactly, encode
 
 # Fixed boxes whose corner cells were dropped before the corner pre-filter was removed.
 # Each one omits at least one intersecting cell at both precision 5 and precision 6
@@ -592,3 +592,118 @@ class TestGeohashesInBoxBenchmarks:
         """361-cell box (0.1 deg x 0.2 deg at precision 6)."""
         result = benchmark(lambda: geohashes_in_box(self.BENCHMARK_BOX_361, precision=6))
         assert len(result) == 361
+
+
+# ---------------------------------------------------------------------------
+# Comparison-operator semantics, pinned against the current implementation:
+# is_point_in_box uses inclusive <=/<= chains on both axes, and
+# do_boxes_intersect treats boxes that merely touch (shared edge or corner)
+# as intersecting. These tests assert that actual behavior; the mutation
+# rerun then proves the comparison operators are guarded.
+# ---------------------------------------------------------------------------
+
+
+def _cell_bounds(geohash: str) -> tuple:
+    """Exact (min_lat, min_lon, max_lat, max_lon) bounds of a geohash cell."""
+    lat, lon, lat_err, lon_err = decode_exactly(geohash)
+    return lat - lat_err, lon - lon_err, lat + lat_err, lon + lon_err
+
+
+def test_is_point_in_geohash_exact_corners_are_inclusive():
+    """All four exact bounding-box corners of a geohash cell are inside it."""
+    bbox = get_bounding_box("u4pruyd")
+
+    for lat in (bbox.min_lat, bbox.max_lat):
+        for lon in (bbox.min_lon, bbox.max_lon):
+            assert is_point_in_geohash(lat, lon, "u4pruyd") is True
+
+    # A hair beyond the same corners is outside on both axes at once.
+    assert is_point_in_geohash(bbox.min_lat - 1e-9, bbox.min_lon - 1e-9, "u4pruyd") is False
+    assert is_point_in_geohash(bbox.max_lat + 1e-9, bbox.max_lon + 1e-9, "u4pruyd") is False
+
+
+class TestDoBoxesIntersectTouchingSemantics:
+    """Boxes that share only an edge or a corner are treated as intersecting."""
+
+    BASE = BoundingBox(0.0, 0.0, 1.0, 1.0)
+
+    def test_boxes_sharing_a_latitude_edge_intersect(self):
+        """BASE's max_lat is the other box's min_lat, with overlapping longitudes."""
+        other = BoundingBox(1.0, 0.0, 2.0, 1.0)
+
+        assert do_boxes_intersect(self.BASE, other) is True
+        assert do_boxes_intersect(other, self.BASE) is True
+
+    def test_boxes_sharing_a_longitude_edge_intersect(self):
+        """BASE's max_lon is the other box's min_lon, with overlapping latitudes."""
+        other = BoundingBox(0.0, 1.0, 1.0, 2.0)
+
+        assert do_boxes_intersect(self.BASE, other) is True
+        assert do_boxes_intersect(other, self.BASE) is True
+
+    def test_boxes_touching_only_at_a_corner_intersect(self):
+        """A single shared corner point counts as an intersection."""
+        north_east = BoundingBox(1.0, 1.0, 2.0, 2.0)
+
+        assert do_boxes_intersect(self.BASE, north_east) is True
+
+    def test_a_hair_of_separation_does_not_intersect(self):
+        """Once the gap opens, even the smallest separation counts as disjoint."""
+        apart = BoundingBox(1.0000001, 0.0, 2.0, 1.0)
+
+        assert do_boxes_intersect(self.BASE, apart) is False
+
+    def test_degenerate_box_on_the_base_edge_intersects(self):
+        """A zero-area box sitting exactly on BASE's max_lat edge touches it."""
+        edge_point = BoundingBox(1.0, 0.5, 1.0, 0.5)
+
+        assert do_boxes_intersect(self.BASE, edge_point) is True
+
+    def test_degenerate_box_just_outside_does_not_intersect(self):
+        """A zero-area box a hair beyond BASE's edge is disjoint."""
+        outside = BoundingBox(1.0000001, 0.5, 1.0000001, 0.5)
+
+        assert do_boxes_intersect(self.BASE, outside) is False
+
+
+class TestGeohashesInBoxEdgeSemantics:
+    """Cells exactly on the box edge count; output stays deduplicated and sorted."""
+
+    # Exact bounds of one precision-6 cell: the box edges coincide with the
+    # geohash grid, so every neighbouring cell touches the box.
+    CELL = "u4pruy"
+    CELL_BOX = BoundingBox(*_cell_bounds("u4pruy"))
+
+    def test_single_cell_box_returns_the_three_by_three_neighborhood(self):
+        """A cell-aligned box also returns its eight touching neighbours, exactly once."""
+        result = geohashes_in_box(self.CELL_BOX, precision=6)
+
+        assert len(result) == 9
+        assert self.CELL in result
+        assert result == sorted(result)
+        assert len(result) == len(set(result))
+
+    @pytest.mark.parametrize("precision", range(1, 10))
+    def test_precision_sweep_returns_sorted_unique_intersecting_cells(self, precision):
+        """Precisions 1 through 9 all yield deterministic, minimal, intersecting coverings."""
+        bbox = BoundingBox(57.649, 10.407, 57.650, 10.408)
+        result = geohashes_in_box(bbox, precision=precision)
+
+        assert result
+        assert result == sorted(result)
+        assert len(result) == len(set(result))
+        assert all(len(geohash) == precision for geohash in result)
+        assert all(do_boxes_intersect(bbox, get_bounding_box(geohash)) for geohash in result)
+
+    def test_precision_sweep_cell_counts_are_pinned(self):
+        """Exact counts across the sweep pin the touching-edges-are-included semantics."""
+        bbox = BoundingBox(57.649, 10.407, 57.650, 10.408)
+
+        counts = [len(geohashes_in_box(bbox, precision=precision)) for precision in range(1, 10)]
+
+        assert counts == [1, 1, 1, 1, 1, 1, 2, 28, 576]
+
+    def test_precision_below_the_supported_minimum_is_rejected(self):
+        """Precision 0 is rejected by the center-cell encode instead of yielding cells."""
+        with pytest.raises(ValueError, match=r"Precision must be between 1 and 12, but got 0"):
+            geohashes_in_box(BoundingBox(57.649, 10.407, 57.650, 10.408), precision=0)
