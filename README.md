@@ -163,26 +163,24 @@ This project is licensed under the MIT license. See the LICENSE file for details
    
 # Benchmarks
 
-## How PyGeoHash compares to other geohash libraries
+## How PyGeoHash improved over time
 
-Median time per call in nanoseconds — lower is better. The suite in
-`tests/test_benchmark_comparison.py` runs one discarded warmup pass and then
-three timed passes, and every measured call asserts its result. All pygeohash
-columns are measured with the same 3.5.0 suite on one machine in one session.
-An em-dash (—) marks an API gap on either side: a competitor that does not
-expose the operation, or an operation that did not exist in an old pygeohash
-release.
+Median time per call in nanoseconds — lower is better. Every cell comes from
+one measured session: the suite in `tests/test_benchmark_comparison.py` runs
+one discarded warmup pass and then three timed passes, and every measured call
+asserts its result; all five pygeohash columns were captured with the same
+3.5.0 suite on one machine in one session.
 
-| Operation | pygeohash 3.2.0 † | pygeohash 3.3.0 † | pygeohash 3.3.2 † | pygeohash 3.4.0 | pygeohash 3.5.0 | geohashr | python-geohash | pygeohash-fast |
-|---|---|---|---|---|---|---|---|---|
-| encode | 735 (725–743) | 413 (413–417) | 602 (602–721) | 473 (472–476) | 470 (470–474) | … | … | … |
-| decode | 4,315 (4,276–4,400) | 944 (899–946) | 1,023 (1,011–1,070) | 616 (614–638) | 584 (579–1,011) ¹ | … | … | … |
-| bounding box | 4,267 (4,260–4,308) | 1,516 (1,456–1,520) | 2,455 (2,394–2,512) | 1,192 (1,175–1,222) | 1,067 (1,045–1,087) | … | … | … |
-| is_valid_geohash | 1,703 (1,639–1,710) | 1,672 (1,638–1,674) | 1,691 (1,681–1,703) | 490 (484–498) | 505 (499–510) | … | … | … |
-| get_adjacent | 2,580 (2,552–2,593) | 2,582 (2,572–2,613) | 5,924 (5,848–6,022) | 1,384 (1,378–1,393) | 1,382 (1,361–1,385) | … | … | … |
-| get_adjacent (border wrap) | 7,188 (7,163–7,209) | 7,134 (7,097–7,156) | 15,858 (15,680–16,266) | 1,810 (1,798–1,821) | 1,773 (1,710–1,774) | … | … | … |
-| geohashes_in_box (4-cell, p9) | 87,374 (87,124–88,156) | 40,156 (39,642–40,449) | 110,569 (107,392–110,930) | 14,117 (14,088–14,729) | 13,455 (13,312–13,583) | … | … | … |
-| geohashes_in_box (361-cell, p6) | 9,446,023 (9,248,468–9,485,611) | 4,158,630 (4,129,873–4,282,572) | 6,111,628 (5,925,939–6,130,139) | 300,203 (298,570–309,776) | 287,850 (286,010–289,168) | … | … | … |
+| Operation | pygeohash 3.2.0 † | pygeohash 3.3.0 † | pygeohash 3.3.2 † | pygeohash 3.4.0 | pygeohash 3.5.0 |
+|---|---|---|---|---|---|
+| encode | 735 (725–743) | 413 (413–417) | 602 (602–721) | 473 (472–476) | 470 (470–474) |
+| decode | 4,315 (4,276–4,400) | 944 (899–946) | 1,023 (1,011–1,070) | 616 (614–638) | 584 (579–1,011) ¹ |
+| bounding box | 4,267 (4,260–4,308) | 1,516 (1,456–1,520) | 2,455 (2,394–2,512) | 1,192 (1,175–1,222) | 1,067 (1,045–1,087) |
+| is_valid_geohash | 1,703 (1,639–1,710) | 1,672 (1,638–1,674) | 1,691 (1,681–1,703) | 490 (484–498) | 505 (499–510) |
+| get_adjacent | 2,580 (2,552–2,593) | 2,582 (2,572–2,613) | 5,924 (5,848–6,022) | 1,384 (1,378–1,393) | 1,382 (1,361–1,385) |
+| get_adjacent (border wrap) | 7,188 (7,163–7,209) | 7,134 (7,097–7,156) | 15,858 (15,680–16,266) | 1,810 (1,798–1,821) | 1,773 (1,710–1,774) |
+| geohashes_in_box (4-cell, p9) | 87,374 (87,124–88,156) | 40,156 (39,642–40,449) | 110,569 (107,392–110,930) | 14,117 (14,088–14,729) | 13,455 (13,312–13,583) |
+| geohashes_in_box (361-cell, p6) | 9,446,023 (9,248,468–9,485,611) | 4,158,630 (4,129,873–4,282,572) | 6,111,628 (5,925,939–6,130,139) | 300,203 (298,570–309,776) | 287,850 (286,010–289,168) |
 
 1. All five pygeohash columns were measured with the same 3.5.0 suite on one
    machine (Linux x86_64, Intel Xeon @ 2.60 GHz, 8 vCPUs) in one session, in
@@ -196,10 +194,6 @@ release.
    equality; every other assertion ran unchanged.
 3. ¹ The 3.5.0 decode range includes one disclosed transient pass; the quoted
    median is the suite's median-of-three aggregation, which is robust to it.
-4. The ellipsis (…) in the competitor columns is a placeholder, not an API
-   gap: geohashr 1.6.0, python-geohash 0.9.2, and pygeohash-fast 0.3.0 ran in
-   the same session under the same suite, and their aggregated medians will be
-   filled in when published. API gaps will be marked with an em-dash (—).
 
 Relative to 3.2.0, the 3.5.0 column improves every measured operation:
 geohashes_in_box on a 361-cell box 9.46 ms → 288 µs (−97%); decode
@@ -213,23 +207,41 @@ encode +46% — with the recoveries landing in 3.4.0. Between 3.4.0 and 3.5.0,
 decode improves 5.2% and bounding box 10.5%, while encode is unchanged within
 measurement resolution (−0.5%).
 
-Where the field stands on the published comparison run of 2026-09-06 — a
-separate published run, not the session behind the table above: pygeohash
-ranks 3rd of 7 measured libraries on encode (behind `geohashr` and
-`pygeohash-fast`) and 3rd of 7 on decode (the same two ahead); 3rd of 5
-measured on bounding box (behind `geohashr` and `python-geohash`); 3rd of 5 on
-single-cell adjacency (behind `geohashr` and `geohash-tools`); and 2nd of 5 on
-the antimeridian border wrap, where only `geohashr` is ahead. No competitor
-exposes a standalone validity check or box enumeration. After warmup, every
-compiled library's per-run medians stay within a 20% spread across the
-repeats, with one disclosed exception: pygeohash's encode spread measured
-21.6% on the published run.
+## How PyGeoHash compares to other libraries
 
-The full published tables with per-run ranges and ops/sec, the extended
-stability analysis, the exact library versions, the caveats and the command to
-regenerate everything are on the
-[benchmarks page](https://pygeohash.mcginniscommawill.com/benchmarks.html) in
-the documentation.
+Median time per call in nanoseconds — lower is better. Every cell comes from
+the published comparison run of 2026-09-06 — same machine class, CPython
+3.13.14, pytest-benchmark 5.3.0, one warmup pass plus three timed passes — a
+separate run from the session behind the over-time table above. An em-dash
+(—) marks a genuine API gap: the library does not expose the operation. An
+em-dash is never a placeholder.
+
+| Operation | geohashr 1.6.0 | pygeohash-fast 0.3.0 | python-geohash 0.9.2 | geohash-tools 0.2.0 | pygeohash 3.5.0 |
+|---|---|---|---|---|---|
+| encode | 353 (341–361) | 455 (451–455) | 635 (630–644) | 12,014 (11,994–12,183) | 475 (473–576) |
+| decode | 231 (228–234) | 545 (543–551) | 791 (781–826) | 8,439 (8,416–8,453) | 554 (553–558) |
+| bounding box | 317 (313–318) | — | 929 (927–932) | — | 1,058 (1,043–1,125) |
+| is_valid_geohash | — | — | — | — | 382 (379–383) |
+| get_adjacent | 372 (360–378) | — | — | 933 (907–933) | 1,397 (1,379–1,406) |
+| get_adjacent (border wrap) | 358 (356–366) | — | — | 2,267 (2,253–2,293) | 1,798 (1,784–1,850) |
+| geohashes_in_box (4-cell, p9) | — | — | — | — | 13,602 (13,542–13,703) |
+| geohashes_in_box (361-cell, p6) | — | — | — | — | 293,134 (291,317–294,377) |
+
+1. This table is backed by the separate published run (linked in the
+   paragraph below), not by the session behind the over-time table — the two
+   runs are distinct, and numbers are never mixed across them.
+2. The published run applies a 20% across-repeat stability gate after warmup
+   and flagged pygeohash's encode spread at 21.6%, over that gate.
+
+On this run, `geohashr` and `pygeohash-fast` are faster than pygeohash on
+encode and decode, `geohashr` and `geohash-tools` are faster on single-cell
+adjacency (on the border-wrap variant only `geohashr` is), and `geohashr` and
+`python-geohash` are faster on bounding box. No competitor exposes a
+standalone validity check (`is_valid_geohash`) or box enumeration
+(`geohashes_in_box`). The
+[benchmarks page](https://pygeohash.mcginniscommawill.com/benchmarks.html)
+also measures two further pure-Python libraries, `libgeohash` and `geolib`,
+which trail far behind the libraries shown here.
 
 ## Version history
 
