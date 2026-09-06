@@ -213,7 +213,7 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
 
     Example:
         >>> box = BoundingBox(57.64, 10.40, 57.65, 10.41)
-        >>> sorted(geohashes_in_box(box, precision=5))
+        >>> geohashes_in_box(box, precision=5)
         ['u4pru']
 
     Note:
