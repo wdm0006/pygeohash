@@ -273,7 +273,7 @@ def noise_note(rows):
     the table carries no information.
     """
     pairs = []
-    for faster, slower in zip(rows, rows[1:]):
+    for faster, slower in zip(rows, rows[1:], strict=False):
         if slower["low_ns"] <= faster["high_ns"]:
             pairs.append(f"``{faster['library']}`` and ``{slower['library']}``")
     if not pairs:
