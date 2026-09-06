@@ -33,7 +33,9 @@ static const char BASE32[] = "0123456789bcdefghjkmnpqrstuvwxyz";
 
 // Mapping from byte value to its 5-bit base32 index, -1 for every
 // non-alphabet byte. 256 entries so any char value (including bytes >= 128
-// from multibyte UTF-8) can index it without a separate range guard.
+// from multibyte UTF-8) can index it without a separate range guard. A-Z fold
+// onto their lowercase indices, so case normalization happens inside the table
+// and uppercase/mixed-case input decodes with no separate pass.
 static int base32_decode_map[256] = {0};
 
 // Initialize the base32 decode map. Called once from the module init function.
@@ -43,6 +45,12 @@ static void init_base32_decode_map(void) {
     }
     for (int i = 0; i < 32; i++) {
         base32_decode_map[(unsigned char)BASE32[i]] = i;
+    }
+    // Case-fold: every letter of the alphabet is lowercase in BASE32, so each
+    // uppercase byte decodes as its lowercase counterpart (letters excluded
+    // from base32, like 'i'/'l'/'o', keep folding to -1).
+    for (unsigned char c = 'A'; c <= 'Z'; c++) {
+        base32_decode_map[c] = base32_decode_map[(unsigned char)(c + 32)];
     }
 }
 
@@ -203,6 +211,8 @@ static PyObject* decode_from_utf8(const char *geohash, int exact) {
 // replaces: "function takes exactly 1 argument (N given)", "argument 1 must
 // be str, not X", ValueError("embedded null character"), and
 // "decode() takes no keyword arguments".
+static PyObject* decode_cold(PyObject *const *args, Py_ssize_t nargs, PyObject *folded, int exact);
+
 static PyObject* decode_call(PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames, int exact) {
     if (kwnames != NULL && PyTuple_GET_SIZE(kwnames) != 0) {
         // The METH_VARARGS parser rejected keyword arguments naming the bare
@@ -213,35 +223,82 @@ static PyObject* decode_call(PyObject *const *args, Py_ssize_t nargs, PyObject *
         return NULL;
     }
 
-    const char *geohash = NULL;
-
     if (nargs == 1 && PyUnicode_Check(args[0])) {
-        Py_ssize_t len;
-        geohash = PyUnicode_AsUTF8AndSize(args[0], &len);
-        if (geohash == NULL) {
-            return NULL;
+        PyObject *hash = args[0];
+        PyObject *folded = NULL;
+        if (Py_TYPE(hash) != &PyUnicode_Type
+            || !(PyUnicode_IS_COMPACT(hash) && PyUnicode_IS_ASCII(hash))) {
+            // Two shapes miss the table fast path: (1) str subclasses, whose
+            // lower() the old wrapper invoked and which may override it;
+            // (2) non-ASCII input, which the old wrapper lowered with
+            // str.lower() semantics (U+212A KELVIN SIGN -> 'k', U+0130 ->
+            // 'i' + U+0307, ...). There is no public C API for str.lower(),
+            // so call the method; a lowered-to-ASCII compact result
+            // re-enters the fast path below.
+            folded = PyObject_CallMethod(hash, "lower", NULL);
+            if (folded == NULL) {
+                return NULL;
+            }
+            if (PyUnicode_Check(folded)) {
+                hash = folded;
+            }
+            // A non-str lower() result falls through to decode_cold, where
+            // PyArg_ParseTuple raises the same TypeError the old
+            // wrapper-then-parser pipeline raised.
         }
-        if ((size_t)len == strlen(geohash)) {
-            return decode_from_utf8(geohash, exact);
+        if (Py_TYPE(hash) == &PyUnicode_Type
+            && PyUnicode_IS_COMPACT(hash) && PyUnicode_IS_ASCII(hash)) {
+            // O(1) interned flags; compact ASCII data is already UTF-8 and the
+            // decode table folds A-Z, so the bytes go straight to the walk
+            // with no normalization pass and no UTF-8 re-encoding.
+            const char *geohash = (const char *)PyUnicode_1BYTE_DATA(hash);
+            if ((size_t)PyUnicode_GET_LENGTH(hash) == strlen(geohash)) {
+                PyObject *result = decode_from_utf8(geohash, exact);
+                Py_XDECREF(folded);
+                return result;
+            }
+            // embedded null: historical error path below
         }
-        // embedded null: fall through to the historical error path
+        // Embedded null, a lower() result that is not an exact compact str,
+        // or lowering that left non-ASCII bytes: parse the folded object so
+        // byte-length, character-validation, and type-error outcomes match
+        // the old wrapper-level .lower() pipeline exactly.
+        return decode_cold(args, nargs, folded, exact);
     }
+    return decode_cold(args, nargs, NULL, exact);
+}
 
+// Cold path: wrong arity, non-str types, exotic (non-compact) strings, or
+// embedded nulls. Re-parses through PyArg_ParseTuple on a synthesized tuple so
+// every error stays byte-identical to the METH_VARARGS implementation this
+// replaces: "function takes exactly 1 argument (N given)", "argument 1 must
+// be str, not X", and ValueError("embedded null character"). `folded` (the
+// lower() result standing in for args[0], or NULL) is parsed in place of
+// args[0] when set, preserving the wrapper's historical .lower() semantics
+// for non-ASCII input (and any type error lower() itself used to provoke).
+// Consumes the `folded` reference.
+static PyObject* decode_cold(PyObject *const *args, Py_ssize_t nargs, PyObject *folded, int exact) {
     PyObject *tpl = PyTuple_New(nargs);
     if (tpl == NULL) {
+        Py_XDECREF(folded);
         return NULL;
     }
     for (Py_ssize_t i = 0; i < nargs; i++) {
-        PyTuple_SET_ITEM(tpl, i, Py_NewRef(args[i]));
+        PyObject *item = (i == 0 && folded != NULL) ? folded : args[i];
+        PyTuple_SET_ITEM(tpl, i, Py_NewRef(item));
     }
-    int ok = PyArg_ParseTuple(tpl, "s", &geohash);
-    Py_DECREF(tpl);
-    if (!ok) {
+    Py_XDECREF(folded);  // the tuple now holds its own reference
+
+    const char *geohash;
+    if (!PyArg_ParseTuple(tpl, "s", &geohash)) {
+        Py_DECREF(tpl);
         return NULL;
     }
-    // On success geohash points into a str argument's buffer; that argument is
-    // still referenced by the caller's args array for the rest of the call.
-    return decode_from_utf8(geohash, exact);
+    // geohash points into the parsed string's buffer; the tuple keeps that
+    // string alive until the decode walk has finished.
+    PyObject *result = decode_from_utf8(geohash, exact);
+    Py_DECREF(tpl);
+    return result;
 }
 
 // Decode a geohash string to exact latitude/longitude with error margins

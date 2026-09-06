@@ -261,8 +261,10 @@ def test_error_paths():
         cgm.decode("")
     with pytest.raises(ValueError, match="Geohash must be between 1 and 12 characters long"):
         cgm.decode("ezs42e44yx96z")
-    with pytest.raises(ValueError, match="Invalid character in geohash"):
-        cgm.decode("EZS42")  # direct call: no case normalization below the wrappers
+    # Case folding lives at the C level since the D5 round: direct extension
+    # calls accept uppercase and mixed case exactly like the wrappers do.
+    assert cgm.decode("EZS42") == cgm.decode("ezs42")
+    assert cgm.decode("U4pRuYd") == cgm.decode("u4pruyd")
     with pytest.raises(ValueError, match="Invalid character in geohash"):
         cgm.decode("ezs42e44yx9a")
 
