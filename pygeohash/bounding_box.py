@@ -291,7 +291,7 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
         row_center_lat: float = cell_min_lat + lat_err
         lat_interior: bool = cell_min_lat >= min_lat + margin and cell_max_lat <= max_lat - margin
 
-        for center_lon, lon_interior in zip(col_centers, col_interior):
+        for center_lon, lon_interior in zip(col_centers, col_interior, strict=True):
             cell_geohash: str = encode(row_center_lat, center_lon, precision)
             if lat_interior and lon_interior:
                 append(cell_geohash)  # interior cell: fully inside the box
