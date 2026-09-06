@@ -1,4 +1,5 @@
 API Reference
+API Reference
 =============
 
 This section provides detailed documentation for all functions available in the PyGeoHash library.
@@ -77,4 +78,26 @@ The visualization module provides tools for creating static plots with Matplotli
 .. autofunction:: pygeohash.plot_geohashes
 .. autofunction:: pygeohash.folium_map
 
-For detailed examples of how to use these functions, see the :doc:`examples` section. 
+For detailed examples of how to use these functions, see the :doc:`examples` section.
+
+Grid Interoperability
+---------------------
+
+Pure-Python conversions between geohashes and the Bing/OSM map-tile grid,
+plus an integer form of the geohash. See the :doc:`grid_systems` guide for
+when to use each grid and what the conversions guarantee; the latitude
+direction between the two grids is documented as lossy, and polar cells
+require ``clip=True`` to reach the Mercator band.
+
+.. autoclass:: pygeohash.Tile
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :noindex:
+
+.. autofunction:: pygeohash.geohash_to_tile
+.. autofunction:: pygeohash.tile_to_geohash
+.. autofunction:: pygeohash.geohash_to_quadkey
+.. autofunction:: pygeohash.quadkey_to_geohash
+.. autofunction:: pygeohash.geohash_to_int
+.. autofunction:: pygeohash.geohash_from_int
