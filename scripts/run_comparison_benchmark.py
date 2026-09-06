@@ -50,6 +50,21 @@ GROUPS = [
     ("adjacent-border", "Adjacent (border)", "Step west of ``u00000``, across the antimeridian."),
     ("box-small", "Box enumeration (small)", "Enumerate ``geohashes_in_box`` over a 4-cell box at precision 9."),
     ("box-large", "Box enumeration (large)", "Enumerate ``geohashes_in_box`` over a 361-cell box at precision 6."),
+    (
+        "to-quadkey",
+        "Quadkey (from geohash)",
+        'Convert ``geohash_to_quadkey("ezs42e44y")``. pygeohash only: no competitor ships this conversion.',
+    ),
+    (
+        "from-quadkey",
+        "Quadkey (to geohash)",
+        'Convert ``quadkey_to_geohash("0313332002220300122013")`` back to its containing cell. pygeohash only.',
+    ),
+    (
+        "tile-roundtrip",
+        "Tile round trip",
+        "``geohash_to_tile`` then ``tile_to_geohash`` over the shared input cell. pygeohash only.",
+    ),
 ]
 
 # Implementation of each measured library, mirroring the table in the test module.
@@ -475,8 +490,8 @@ def render_page(reports):
 
 def render_markdown_summary(reports):
     """Render a compact Markdown table for pasting into README.md."""
-    lines = ["| Library | encode | decode | bbox |", "|---|---|---|---|"]
     groups = [group for group, _, _ in GROUPS]
+    lines = ["| Library | " + " | ".join(groups) + " |", "|---|" + "---|" * len(groups)]
     per_group = {group: {row["library"]: row for row in collect_rows(reports, group)} for group in groups}
 
     order = sorted(

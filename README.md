@@ -20,6 +20,7 @@ It was originally based on Leonard Norrgård's [geohash](https://github.com/vins
 - **Python 3 Support**: Fully compatible with modern Python
 - **Robust Implementation**: Reliable geohash operations
 - **Optional Visualization**: Visualize geohashes with matplotlib and folium
+- **Map-tile interoperability**: converts geohashes to Bing/OSM quadkeys, slippy tiles, and integers (`pygeohash.interop`, pure Python, zero dependencies)
 - **Extensively Tested**: Comprehensive test suite validated against geohash.org
 
 ## Installation

@@ -61,6 +61,15 @@ if TYPE_CHECKING:
         is_valid_longitude,
     )
     from pygeohash.viz import folium_map, plot_geohash, plot_geohashes
+    from pygeohash.interop import (
+        Tile,
+        geohash_from_int,
+        geohash_to_int,
+        geohash_to_quadkey,
+        geohash_to_tile,
+        quadkey_to_geohash,
+        tile_to_geohash,
+    )
 
 __author__ = "willmcginnis"
 
@@ -128,6 +137,14 @@ __all__ = [
     "plot_geohash",
     "plot_geohashes",
     "folium_map",
+    # Grid interop (tiles, quadkeys, integer form)
+    "Tile",
+    "geohash_to_quadkey",
+    "quadkey_to_geohash",
+    "geohash_to_tile",
+    "tile_to_geohash",
+    "geohash_to_int",
+    "geohash_from_int",
 ]
 
 _LAZY_IMPORTS: Dict[str, str] = {
@@ -145,6 +162,18 @@ _LAZY_IMPORTS: Dict[str, str] = {
             ),
         ),
         ("pygeohash.distances", ("geohash_approximate_distance", "geohash_haversine_distance")),
+        (
+            "pygeohash.interop",
+            (
+                "Tile",
+                "geohash_from_int",
+                "geohash_to_int",
+                "geohash_to_quadkey",
+                "geohash_to_tile",
+                "quadkey_to_geohash",
+                "tile_to_geohash",
+            ),
+        ),
         ("pygeohash.neighbor", ("get_adjacent",)),
         ("pygeohash.stats", ("eastern", "mean", "northern", "southern", "std", "variance", "western")),
         (
