@@ -3,17 +3,22 @@
 The optimized C codec must produce bit-identical results to the pre-change
 implementation. Two independent oracles guard that:
 
-1. ``tests/fixtures/c_codec_bit_identity.json`` - a committed corpus of 1,178
+1. ``tests/fixtures/c_codec_bit_identity.json`` - a committed corpus of 1,187
    cases (encode strings, decoded values stored as ``float.hex()`` so bit
    patterns survive JSON, and full error paths) captured by running the
-   pre-change implementation on a seeded random + edge-case protocol.
+   pre-change implementation on a seeded random + edge-case protocol. The D5
+case-folding round added case-variant and non-ASCII decode probes (U+212A,
+U+0130, fullwidth characters, combining marks); their expectations record the
+   pre-D5 public (wrapper) contract, which the extension now reproduces
+   directly by folding case inside the C walk.
 2. A pure-Python transcription of the pre-change algorithm (identical
    floating point operation order), compared bit-exactly against the live
    extension on freshly randomized inputs at test time.
 
 The tests call the extension functions directly (not the package wrappers):
-the wrappers add case normalization that is out of scope here and is covered
-by the rest of the suite.
+since the D5 case-folding round the extension performs the case normalization
+the wrappers used to do, so raw-extension outcomes now match the pre-D5 public
+behavior on every input shape.
 """
 
 import json
@@ -130,6 +135,63 @@ def _outcome(call):
         return ("ok", call())
     except Exception as exc:  # noqa: BLE001 - oracle must see every failure
         return ("err", type(exc).__name__, str(exc))
+
+
+# Case-variant and non-ASCII decode probes with expectations recorded from the
+# pre-D5 build (77cd45b), which lowered input via str.lower() in the wrapper
+# before the C walk. U+212A KELVIN SIGN folds to 'k'; U+0130, fullwidth
+# characters, combining marks, and dotless-i inputs keep their exact pre-D5
+# results and error messages.
+CASE_FOLD_OK_PROBES = [
+    (
+        "\u212a",
+        ("-0x1.6800000000000p+4", "0x1.6800000000000p+4"),
+        ("-0x1.6800000000000p+4", "0x1.6800000000000p+4", "0x1.6800000000000p+4", "0x1.6800000000000p+4"),
+    ),
+    (
+        "ezs42\u212a",
+        ("0x1.54dca00000000p+5", "-0x1.66f2000000000p+2"),
+        ("0x1.54dca00000000p+5", "-0x1.66f2000000000p+2", "0x1.6800000000000p-9", "0x1.6800000000000p-8"),
+    ),
+    (
+        "EZS42E44YX96",
+        ("0x1.54ccccd040000p+5", "-0x1.6666664400000p+2"),
+        ("0x1.54ccccd040000p+5", "-0x1.6666664400000p+2", "0x1.6800000000000p-24", "0x1.6800000000000p-23"),
+    ),
+    (
+        "U4pRuYd",
+        ("0x1.cd30880000000p+5", "0x1.4d0a200000000p+3"),
+        ("0x1.cd30880000000p+5", "0x1.4d0a200000000p+3", "0x1.6800000000000p-11", "0x1.6800000000000p-11"),
+    ),
+]
+NONASCII_INVALID_PROBES = [
+    "\u0130",  # U+0130 lowers to 'i' + combining dot above; 'i' is not base32
+    "ezs42\u0130",
+    "\uff33\uff2d\uff2f\uff50",  # fullwidth uppercase: lowering keeps fullwidth
+    "\uff53\uff54\uff55\uff56",  # fullwidth lowercase: same non-ASCII bytes
+    "\u0045\u0301z",  # E + combining acute
+    "\u0131z",  # dotless i
+    "\u0399",  # Greek capital iota lowers to a Greek small letter
+]
+
+
+def test_decode_case_and_nonascii_probes():
+    """Case-variant and non-ASCII decode input matches the pre-D5 contract."""
+    for geohash, (lat, lon), exact in CASE_FOLD_OK_PROBES:
+        plain = cgm.decode(geohash)
+        assert (plain.latitude.hex(), plain.longitude.hex()) == (lat, lon), geohash
+        got = cgm.decode_exactly(geohash)
+        assert (
+            got.latitude.hex(),
+            got.longitude.hex(),
+            got.latitude_error.hex(),
+            got.longitude_error.hex(),
+        ) == exact, geohash
+    for geohash in NONASCII_INVALID_PROBES:
+        with pytest.raises(ValueError, match="Invalid character in geohash"):
+            cgm.decode(geohash)
+        with pytest.raises(ValueError, match="Invalid character in geohash"):
+            cgm.decode_exactly(geohash)
 
 
 def test_fixture_replay_encode():
