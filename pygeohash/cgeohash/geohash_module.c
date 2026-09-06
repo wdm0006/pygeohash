@@ -177,14 +177,11 @@ static int decode_to_doubles(const char *geohash, double *out_lat, double *out_l
     return 0;
 }
 
-// Decode a geohash string to exact latitude/longitude with error margins
-static PyObject* geohash_decode_exactly(PyObject *self, PyObject *args) {
-    const char *geohash;
 
-    if (!PyArg_ParseTuple(args, "s", &geohash)) {
-        return NULL;
-    }
 
+// Shared tail for both decode entries: run the walk on a NUL-terminated UTF-8
+// C string (owned by the caller's argument) and wrap the result.
+static PyObject* decode_from_utf8(const char *geohash, int exact) {
     double lat, lon, lat_err, lon_err;
     if (decode_to_doubles(geohash, &lat, &lon, &lat_err, &lon_err) != 0) {
         return NULL;
@@ -192,27 +189,71 @@ static PyObject* geohash_decode_exactly(PyObject *self, PyObject *args) {
     if (ensure_types() != 0) {
         return NULL;
     }
-    return make_named_tuple(ExactLatLong_type, Py_BuildValue("dddd", lat, lon, lat_err, lon_err));
+    if (exact) {
+        return make_named_tuple(ExactLatLong_type, Py_BuildValue("dddd", lat, lon, lat_err, lon_err));
+    }
+    return make_named_tuple(LatLong_type, Py_BuildValue("dd", lat, lon));
+}
+
+// The decode entries are METH_FASTCALL (they take no keywords). The hot path
+// handles the common case -- exactly one str argument -- without materializing
+// an argument tuple. Every other shape (wrong arity, non-str types, an
+// embedded null) is re-parsed through PyArg_ParseTuple on a synthesized tuple
+// so its errors stay byte-identical to the METH_VARARGS implementation this
+// replaces: "function takes exactly 1 argument (N given)", "argument 1 must
+// be str, not X", ValueError("embedded null character"), and
+// "decode() takes no keyword arguments".
+static PyObject* decode_call(PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames, int exact) {
+    if (kwnames != NULL && PyTuple_GET_SIZE(kwnames) != 0) {
+        // The METH_VARARGS parser rejected keyword arguments naming the bare
+        // method; reproduce that exact message (CPython's fastcall machinery
+        // would use the module-qualified name instead).
+        PyErr_Format(PyExc_TypeError, "%s() takes no keyword arguments",
+                     exact ? "decode_exactly" : "decode");
+        return NULL;
+    }
+
+    const char *geohash = NULL;
+
+    if (nargs == 1 && PyUnicode_Check(args[0])) {
+        Py_ssize_t len;
+        geohash = PyUnicode_AsUTF8AndSize(args[0], &len);
+        if (geohash == NULL) {
+            return NULL;
+        }
+        if ((size_t)len == strlen(geohash)) {
+            return decode_from_utf8(geohash, exact);
+        }
+        // embedded null: fall through to the historical error path
+    }
+
+    PyObject *tpl = PyTuple_New(nargs);
+    if (tpl == NULL) {
+        return NULL;
+    }
+    for (Py_ssize_t i = 0; i < nargs; i++) {
+        PyTuple_SET_ITEM(tpl, i, Py_NewRef(args[i]));
+    }
+    int ok = PyArg_ParseTuple(tpl, "s", &geohash);
+    Py_DECREF(tpl);
+    if (!ok) {
+        return NULL;
+    }
+    // On success geohash points into a str argument's buffer; that argument is
+    // still referenced by the caller's args array for the rest of the call.
+    return decode_from_utf8(geohash, exact);
+}
+
+// Decode a geohash string to exact latitude/longitude with error margins
+static PyObject* geohash_decode_exactly(PyObject *self, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    (void)self;
+    return decode_call(args, nargs, kwnames, 1);
 }
 
 // Python wrapper for decode function
-static PyObject* geohash_decode(PyObject *self, PyObject *args) {
-    const char *geohash;
-
-    if (!PyArg_ParseTuple(args, "s", &geohash)) {
-        return NULL;
-    }
-
-    // Decode straight into a LatLong: no intermediate ExactLatLong, no second
-    // module import, no attribute round-trip.
-    double lat, lon, lat_err, lon_err;
-    if (decode_to_doubles(geohash, &lat, &lon, &lat_err, &lon_err) != 0) {
-        return NULL;
-    }
-    if (ensure_types() != 0) {
-        return NULL;
-    }
-    return make_named_tuple(LatLong_type, Py_BuildValue("dd", lat, lon));
+static PyObject* geohash_decode(PyObject *self, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    (void)self;
+    return decode_call(args, nargs, kwnames, 0);
 }
 
 // Argument converters for the encoders. bool is a subclass of int, so the plain
@@ -416,9 +457,9 @@ static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObjec
 
 // Module method definitions
 static PyMethodDef GeohashMethods[] = {
-    {"decode_exactly", geohash_decode_exactly, METH_VARARGS, 
+    {"decode_exactly", (PyCFunction)(void (*)(void))geohash_decode_exactly, METH_FASTCALL | METH_KEYWORDS,
      "Decode a geohash to its exact values, including error margins."},
-    {"decode", geohash_decode, METH_VARARGS, 
+    {"decode", (PyCFunction)(void (*)(void))geohash_decode, METH_FASTCALL | METH_KEYWORDS,
      "Decode a geohash to latitude and longitude coordinates."},
     {"encode", (PyCFunction)geohash_encode, METH_VARARGS | METH_KEYWORDS, 
      "Encode coordinates to a geohash string."},
