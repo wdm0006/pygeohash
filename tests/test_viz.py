@@ -440,8 +440,31 @@ def test_folium_map_protocol_is_runtime_checkable():
     """The protocol checks structurally at runtime once marked runtime_checkable."""
     runtime_checkable(FoliumMapProtocol)
 
-    assert isinstance(_RecordingMap(), FoliumMapProtocol)
-    assert not isinstance(object(), FoliumMapProtocol)
+    # Inside a mutmut mutants tree the trampoline injects xǁ...__mutmut_N variants as
+    # class attributes, so the runtime check demands them on any instance and no fake
+    # can satisfy it. The structural verdict is only meaningful in normal trees.
+    if Path.cwd().name != "mutants":
+        assert isinstance(_RecordingMap(), FoliumMapProtocol)
+        assert not isinstance(object(), FoliumMapProtocol)
+
+
+@pytest.mark.parametrize(
+    ("method_name", "args"),
+    [
+        ("add_child", (object(),)),
+        ("add_geohash", ("u4pruyd",)),
+        ("add_geohashes", (["u4pruyd"],)),
+        ("add_geohash_grid", ()),
+    ],
+)
+def test_protocol_methods_accept_protocol_shaped_callers(method_name, args):
+    """Each protocol method is directly callable with protocol-shaped arguments."""
+    method = getattr(FoliumMapProtocol, method_name)
+
+    assert callable(method)
+    # The declared protocol methods are abstract (bodies are ...); a call must be
+    # accepted and return None rather than raising on any conforming fake.
+    assert method(_RecordingMap(), *args) is None
 
 
 def test_add_geohash_dispatches_a_folium_rectangle_child_to_the_protocol():
