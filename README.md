@@ -166,33 +166,53 @@ This project is licensed under the MIT license. See the LICENSE file for details
 ## How PyGeoHash compares to other geohash libraries
 
 Median time per call in nanoseconds — lower is better. The suite in
-`tests/test_benchmark_comparison.py` warms up every measured callable and
-discards a full suite pass before its timed repeats, and every measured call
-asserts its result. The figures below are medians of three timed repeats with
-the per-run range in parentheses (Linux, Intel Xeon @ 2.60GHz, CPython 3.13.14).
+`tests/test_benchmark_comparison.py` runs one discarded warmup pass and then
+three timed passes, and every measured call asserts its result. The figures
+below are from the published comparison run of 2026-09-06: the median of the
+per-run medians (Linux, Intel Xeon @ 2.60GHz, CPython 3.13.14). An em-dash (—)
+means the library does not expose that operation's API; the published page
+states each drop-out rather than omitting it.
 
-| Operation | pygeohash | geohashr |
-|---|---|---|
-| encode | 480 (473–569) | 366 (362–367) |
-| decode | 642 (616–645) | 362 (334–366) |
-| bbox | 1,183 (1,140–1,238) | 327 (317–327) |
+| Library | encode | decode | bounding box | validate | adjacent | adjacent (border) | box (4-cell, p9) | box (361-cell, p6) |
+|---|---|---|---|---|---|---|---|---|
+| **pygeohash** | 475 | 554 | 1,058 | 382 | 1,397 | 1,798 | 13,602 | 293,134 |
+| geohashr | 353 | 231 | 317 | — | 372 | 358 | — | — |
+| python-geohash | 635 | 791 | 929 | — | — | — | — | — |
+| pygeohash-fast | 455 | 545 | — | — | — | — | — | — |
+| libgeohash | 7,478 | 7,324 | 7,674 | — | 1,595 | 4,301 | — | — |
+| geohash-tools | 12,014 | 8,439 | — | — | 933 | 2,267 | — | — |
+| geolib | 30,681 | 173,471 | 127,827 | — | 2,427 | 6,694 | — | — |
 
-The comparison covers eight operations: encode, decode, bounding box,
-`is_valid_geohash`, `get_adjacent` (typical plus the antimeridian border wrap),
-and `geohashes_in_box` at two precisions. Other compiled libraries were measured
-in the same run: `python-geohash`'s encode run medians fell between 586 and
-664 ns, and `pygeohash-fast`'s decode between 532 and 581 ns. The drop-outs are
-API gaps, not omissions: `python-geohash` has no single-neighbor lookup,
-standalone validity check, or box enumeration, and `pygeohash-fast` ships only
-encode and decode. After warmup, every compiled library's per-run medians stay
-within ±20% spread across the repeats.
+Where the field stands on this run: pygeohash ranks 3rd of 7 measured libraries
+on encode (behind `geohashr` and `pygeohash-fast`) and 3rd of 7 on decode (the
+same two ahead); 3rd of 5 measured on bounding box (behind `geohashr` and
+`python-geohash`); 3rd of 5 on single-cell adjacency (behind `geohashr` and
+`geohash-tools`); and 2nd of 5 on the antimeridian border wrap, where only
+`geohashr` is ahead. No competitor exposes a standalone validity check or box
+enumeration, so those three tables list pygeohash alone. After warmup, every
+compiled library's per-run medians stay within a 20% spread across the repeats,
+with one disclosed exception: pygeohash's encode spread measured 21.6% on this
+run.
 
-`geohashr` remains faster than PyGeoHash on every operation in the table. These
-are medians from one machine and one set of runs. The full tables for all eight
-operations, the exact library versions, the stability section, the caveats and
-the command to regenerate everything are on the
+These are medians from one machine and one set of runs. The full tables with
+per-run ranges and ops/sec, the stability section, the exact library versions,
+the caveats and the command to regenerate everything are on the
 [benchmarks page](https://pygeohash.mcginniscommawill.com/benchmarks.html) in
 the documentation.
+
+### Version-over-version: 3.3.2 → 3.4.0
+
+Paired installs of 3.3.2 and 3.4.0 measured back to back on the same suite,
+same machine, one operation at a time — this release against the previous one.
+
+<!-- PLACEHOLDER — paired-install 3.3.2 vs 3.4.0 figures pending from the
+parallel measurement session. When they land, insert a table with columns
+`Operation | 3.3.2 median (ns) | 3.4.0 median (ns) | change` covering all
+eight operations, taken only from the paired run. Do not estimate and do not
+copy cross-library figures into this table. -->
+
+*Paired-install figures are not published yet; this table will be filled from
+the paired 3.3.2/3.4.0 measurement run when it lands.*
 
 ## Version history
 
