@@ -13,6 +13,10 @@ Usage:
 The ``benchmark`` extra must be installed for the competing libraries to appear:
 
     uv pip install -e ".[dev,benchmark]"
+
+Every timed pass is preceded by a discarded warmup pass of the full suite, so
+first-touch cost does not leak into the published medians (skip with
+``--no-warmup``).
 """
 
 import argparse
@@ -54,17 +58,37 @@ IMPLEMENTATIONS = {
     "geohash-tools": "pure Python",
 }
 
+# Implementation classes whose sub-microsecond medians are tracked for
+# run-to-run stability in the generated page.
+EXTENSION_LABELS = {"C extension", "C++ extension", "Rust extension"}
+
+# The published stability expectation: after warmup, a compiled library's
+# per-run medians stay within this relative spread.
+STABILITY_SPREAD_LIMIT = 0.20
+
 REPRODUCE_COMMAND = 'uv pip install -e ".[dev,benchmark]"\npython scripts/run_comparison_benchmark.py'
 
 
-def run_benchmarks(json_paths):
+def run_benchmarks(json_paths, warmup_passes=1):
     """Run the comparison suite once per path, writing a JSON report each time.
 
-    The suite is repeated so the page can report how much each figure moved
-    between runs rather than publishing a single draw from a noisy process.
+    ``warmup_passes`` discarded suite runs happen before the timed ones: a
+    library's first-touch cost used to land in the first run's medians and from
+    there in the median-of-medians the page publishes. The suite is then
+    repeated so the page can report how much each figure moved between runs
+    rather than publishing a single draw from a noisy process.
     """
-    for index, json_path in enumerate(json_paths, start=1):
-        print(f"Running the comparison benchmark suite ({index} of {len(json_paths)})...")
+    passes = []
+    for _ in range(max(0, warmup_passes)):
+        handle, path = tempfile.mkstemp(suffix=".json", prefix="pygeohash-benchmark-warmup-")
+        os.close(handle)
+        passes.append((path, False))
+    passes.extend((path, True) for path in json_paths)
+
+    total = len(passes)
+    for index, (json_path, keep) in enumerate(passes, start=1):
+        label = f"{index} of {total}" + ("" if keep else " (warmup, discarded)")
+        print(f"Running the comparison benchmark suite ({label})...")
         command = [
             sys.executable,
             "-m",
@@ -78,6 +102,8 @@ def run_benchmarks(json_paths):
         # pyproject's pytest addopts already carry -v; the JSON report is parsed
         # instead of the terminal tables, so stdout is only progress information.
         subprocess.run(command, cwd=REPO_ROOT, check=True)  # noqa: S603
+        if not keep:
+            os.remove(json_path)
 
 
 def library_name(benchmark):
@@ -126,6 +152,32 @@ def collect_rows(reports, group):
     return rows
 
 
+def stability_rows(reports):
+    """Per-run medians for the compiled libraries, for the stability table.
+
+    Sub-microsecond medians are the ones cold-start contamination used to move
+    between repeats, so that is what the stability table tracks. Returns one
+    row per (group, library) with each timed run's median and the largest
+    relative gap between any two runs.
+    """
+    per_key = {}
+    for run_index, report in enumerate(reports):
+        for benchmark in report["benchmarks"]:
+            key = (benchmark["group"], library_name(benchmark))
+            per_key.setdefault(key, {})[run_index] = benchmark["stats"]["median"] * 1e9
+
+    rows = []
+    for (group, library), medians in per_key.items():
+        if IMPLEMENTATIONS.get(library) not in EXTENSION_LABELS:
+            continue
+        values = [medians[run] for run in sorted(medians)]
+        middle = statistics.median(values)
+        spread = (max(values) - min(values)) / middle if middle else 0.0
+        rows.append({"group": group, "library": library, "medians": values, "spread": spread})
+    rows.sort(key=lambda row: (row["group"], row["library"]))
+    return rows
+
+
 def format_table(rows, repeats):
     """Render one group's rows as a reStructuredText list-table."""
     lines = [
@@ -152,6 +204,57 @@ def format_table(rows, repeats):
                 f"     - {row['low_ns']:,.0f} - {row['high_ns']:,.0f}",
                 f"     - {row['ops']:,.0f}",
                 f"     - {ratio}",
+            ]
+        )
+    return "\n".join(lines)
+
+
+def format_stability(rows, repeats):
+    """Render the run-to-run stability section, or an empty string if unused."""
+    if not rows:
+        return ""
+
+    lines = [
+        "Stability",
+        "---------",
+        "",
+        "Each compiled library's median on every timed run, after the warmup pass, with",
+        "the largest relative gap between any two runs. Cold-start contamination used to",
+        "move these figures between repeats before the suite warmed up; a spread within",
+        f"{STABILITY_SPREAD_LIMIT:.0%} is the expected steady state.",
+        "",
+        ".. list-table::",
+        "   :header-rows: 1",
+        f"   :widths: 18 22 {9 * repeats} 10",
+        "",
+        "   * - Group",
+        "     - Library",
+    ]
+    lines.extend(f"     - Run {run + 1} (ns)" for run in range(repeats))
+    lines.extend(["     - Spread", ""])
+
+    over_limit = []
+    for row in rows:
+        flag = " (!)" if row["spread"] > STABILITY_SPREAD_LIMIT else ""
+        if flag:
+            over_limit.append(row)
+        lines.append(f"   * - {row['group']}")
+        lines.append(f"     - {row['library']}")
+        lines.extend(f"     - {median:,.0f}" for median in row["medians"])
+        lines.append(f"     - {row['spread']:.1%}{flag}")
+
+    if over_limit:
+        names = ", ".join(f"``{row['library']}`` ({row['group']})" for row in over_limit)
+        lines.extend(
+            [
+                "",
+                textwrap.fill(
+                    f"The spread of {names} exceeded {STABILITY_SPREAD_LIMIT:.0%} on this run; "
+                    "treat those figures with suspicion and rerun before quoting them.",
+                    width=88,
+                    break_on_hyphens=False,
+                    break_long_words=False,
+                ),
             ]
         )
     return "\n".join(lines)
@@ -237,7 +340,7 @@ def format_provenance(reports, libraries):
     run_date = report["datetime"].split("T")[0]
 
     lines = [
-        f"* **Date of run**: {run_date} ({len(reports)} repeats of the suite)",
+        f"* **Date of run**: {run_date} ({len(reports)} repeats of the suite, after a warmup pass)",
         f"* **Machine**: {cpu.get('brand_raw', 'unknown CPU')} "
         f"({machine.get('machine', platform.machine())}, {cpu.get('count', '?')} cores)",
         f"* **Operating system**: {machine.get('system', platform.system())} "
@@ -284,11 +387,11 @@ def render_page(reports):
         "Hilbert-curve variant rather than a standard geohash, and ``mzgeohash`` takes no",
         "precision parameter, so equal work cannot be guaranteed.",
         "",
-        f"The whole suite was run {repeats} times. Each library's headline figure is the",
-        "median of its per-run medians, and the range column gives the lowest and highest",
-        "median it produced, so the run-to-run movement behind every number is visible.",
-        "Ops/sec is derived from the headline median, and the final column is each",
-        "library's median divided by pygeohash's.",
+        f"The suite runs one discarded warmup pass and then {repeats} timed passes. Each",
+        "library's headline figure is the median of its per-run medians, and the range",
+        "column gives the lowest and highest median it produced, so the run-to-run",
+        "movement behind every number is visible. Ops/sec is derived from the headline",
+        "median, and the final column is each library's median divided by pygeohash's.",
         "",
     ]
 
@@ -305,6 +408,10 @@ def render_page(reports):
         note = noise_note(rows)
         if note:
             parts.extend([note, ""])
+
+    stability = format_stability(stability_rows(reports), repeats)
+    if stability:
+        parts.extend([stability, ""])
 
     parts.extend(
         [
@@ -330,10 +437,10 @@ def render_page(reports):
     parts.extend(
         [
             "",
-            "The script runs the suite several times, reads the pytest-benchmark JSON",
-            "reports, and rewrites this page with the numbers and the environment it",
-            "observed. Rerun it on your own machine before quoting any of these figures as",
-            "your own.",
+            "The script runs a discarded warmup pass, then the suite several times, reads",
+            "the pytest-benchmark JSON reports, and rewrites this page with the numbers and",
+            "the environment it observed. Rerun it on your own machine before quoting any",
+            "of these figures as your own.",
             "",
             "Caveats",
             "-------",
@@ -390,6 +497,11 @@ def main():
         help=f"How many times to run the suite (default: {DEFAULT_REPEATS})",
     )
     parser.add_argument(
+        "--no-warmup",
+        action="store_true",
+        help="Skip the discarded warmup pass that normally precedes the timed repeats",
+    )
+    parser.add_argument(
         "--report",
         action="append",
         dest="reports",
@@ -405,7 +517,7 @@ def main():
             handle, path = tempfile.mkstemp(suffix=".json", prefix="pygeohash-benchmark-")
             os.close(handle)
             report_paths.append(path)
-        run_benchmarks(report_paths)
+        run_benchmarks(report_paths, warmup_passes=0 if args.no_warmup else 1)
 
     reports = []
     for path in report_paths:

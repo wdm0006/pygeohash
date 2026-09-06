@@ -159,6 +159,25 @@ _DECODERS = [a for a in ADAPTERS if a.decode]
 _BBOXERS = [a for a in ADAPTERS if a.bbox]
 
 
+@pytest.fixture(scope="session", autouse=True)
+def warmup():
+    """Run every measured callable once, untimed, before any benchmark executes.
+
+    First-touch cost (lazy imports, allocator growth, per-library caches) used
+    to leak into the first suite run's medians and from there into the
+    median-of-medians the docs publish: geohashr's encode median swung
+    149 -> 231 ns across whole-suite repeats on the reference machine before
+    this pass existed.
+    """
+    for adapter in ADAPTERS:
+        for operation in adapter.__dataclass_fields__:
+            if operation == "name":
+                continue
+            call = getattr(adapter, operation)
+            if call is not None:
+                call()
+
+
 @pytest.mark.parametrize("adapter", _ENCODERS, ids=lambda a: a.name)
 def test_encode(benchmark, adapter):
     """Encode (lat, lon) to a precision-9 geohash."""
