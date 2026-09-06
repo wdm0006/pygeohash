@@ -230,7 +230,7 @@ def format_stability(rows, repeats):
         "",
         ".. list-table::",
         "   :header-rows: 1",
-        f"   :widths: 18 22 {9 * repeats} 10",
+        f"   :widths: 18 20 {' '.join(['12'] * repeats)} 10",
         "",
         "   * - Group",
         "     - Library",

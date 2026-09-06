@@ -385,7 +385,7 @@ move these figures between repeats before the suite warmed up; a spread within
 
 .. list-table::
    :header-rows: 1
-   :widths: 18 22 27 10
+   :widths: 18 20 12 12 12 10
 
    * - Group
      - Library
