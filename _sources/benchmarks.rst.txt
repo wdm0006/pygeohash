@@ -11,21 +11,27 @@ What is measured
 ----------------
 
 Every library receives the same inputs: latitude ``42.6``, longitude ``-5.6`` and
-precision ``9`` for encoding, and the geohash ``ezs42e44y`` for decoding and
-bounding-box lookups. The encode cases assert that each library returns the same
-standard geohash, so the comparison is genuinely like for like.
+precision ``9`` for encoding, and the geohash ``ezs42e44y`` for decoding,
+bounding-box lookups, and adjacency. Every measured call asserts its result,
+decode and bounding-box lookups included, so the comparison is genuinely like
+for like.
 
-Two libraries offer no bounding-box helper (``pygeohash-fast`` and
-``geohash-tools``), so they appear only in the encode and decode tables. Two
-others are excluded from the suite entirely: ``geohash-hilbert`` computes a
-Hilbert-curve variant rather than a standard geohash, and ``mzgeohash`` takes no
-precision parameter, so equal work cannot be guaranteed.
+Adapters exist where a competitor's API allows one; where it does not, the
+library drops out of that operation's table. ``python-geohash`` has no
+single-neighbor lookup (``neighbors()`` computes all eight, which is not
+comparable work), no standalone validity check, and no box enumeration;
+``pygeohash-fast`` ships only encode and decode; ``geohash-tools`` offers no
+bounding box helper. No competitor exposes a standalone validity check or box
+enumeration, so those tables list pygeohash only. Two others are excluded from
+the suite entirely: ``geohash-hilbert`` computes a Hilbert-curve variant rather
+than a standard geohash, and ``mzgeohash`` takes no precision parameter, so
+equal work cannot be guaranteed.
 
-The whole suite was run 7 times. Each library's headline figure is the
-median of its per-run medians, and the range column gives the lowest and highest
-median it produced, so the run-to-run movement behind every number is visible.
-Ops/sec is derived from the headline median, and the final column is each
-library's median divided by pygeohash's.
+The suite runs one discarded warmup pass and then 3 timed passes. Each
+library's headline figure is the median of its per-run medians, and the range
+column gives the lowest and highest median it produced, so the run-to-run
+movement behind every number is visible. Ops/sec is derived from the headline
+median, and the final column is each library's median divided by pygeohash's.
 
 Encode
 ------
@@ -39,59 +45,55 @@ Encode ``(42.6, -5.6)`` to a precision-9 geohash.
    * - Library
      - Implementation
      - Median (ns)
-     - Range over 7 runs (ns)
+     - Range over 3 runs (ns)
      - Ops/sec
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 86
-     - 84 - 125
-     - 11,688,548
-     - 0.42x
+     - 353
+     - 341 - 361
+     - 2,832,858
+     - 0.74x
    * - pygeohash-fast
      - Rust extension
-     - 125
-     - 125 - 125
-     - 7,999,939
-     - 0.61x
+     - 455
+     - 451 - 455
+     - 2,197,801
+     - 0.96x
    * - **pygeohash**
      - C extension
-     - 204
-     - 202 - 206
-     - 4,898,352
+     - 475
+     - 473 - 576
+     - 2,107,482
      - 1.00x
    * - python-geohash
      - C++ extension
-     - 208
-     - 165 - 208
-     - 4,807,575
-     - 1.02x
+     - 635
+     - 630 - 644
+     - 1,574,803
+     - 1.34x
    * - libgeohash
      - pure Python
-     - 2,750
-     - 2,709 - 2,750
-     - 363,637
-     - 13.47x
+     - 7,478
+     - 7,416 - 7,497
+     - 133,726
+     - 15.76x
    * - geohash-tools
      - pure Python
-     - 3,833
-     - 3,792 - 3,834
-     - 260,892
-     - 18.78x
+     - 12,014
+     - 11,994 - 12,183
+     - 83,236
+     - 25.32x
    * - geolib
      - pure Python
-     - 10,584
-     - 10,542 - 10,834
-     - 94,482
-     - 51.84x
+     - 30,681
+     - 30,638 - 35,012
+     - 32,593
+     - 64.66x
 
-On this machine pygeohash is 1.02x faster than ``python-geohash`` and is 13.5x faster
+On this machine pygeohash is 1.34x faster than ``python-geohash`` and is 15.8x faster
 than ``libgeohash``, the quickest pure-Python entry. ``geohashr``, ``pygeohash-fast``
 are faster still.
-
-The repeated runs did not separate ``geohashr`` and ``pygeohash-fast``; ``pygeohash``
-and ``python-geohash``. Their ranges of medians overlap, so their relative order in the
-table is within measurement noise and swaps between runs: read them as tied.
 
 Decode
 ------
@@ -105,59 +107,55 @@ Decode ``ezs42e44y`` back to coordinates.
    * - Library
      - Implementation
      - Median (ns)
-     - Range over 7 runs (ns)
+     - Range over 3 runs (ns)
      - Ops/sec
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 81
-     - 81 - 81
-     - 12,339,577
-     - 0.32x
+     - 231
+     - 228 - 234
+     - 4,333,268
+     - 0.42x
    * - pygeohash-fast
      - Rust extension
-     - 167
-     - 167 - 167
-     - 5,988,104
-     - 0.67x
+     - 545
+     - 543 - 551
+     - 1,834,862
+     - 0.98x
    * - **pygeohash**
      - C extension
-     - 250
-     - 250 - 542
-     - 3,999,970
+     - 554
+     - 553 - 558
+     - 1,805,054
      - 1.00x
    * - python-geohash
      - C++ extension
-     - 250
-     - 250 - 250
-     - 3,999,970
-     - 1.00x
+     - 791
+     - 781 - 826
+     - 1,264,223
+     - 1.43x
    * - libgeohash
      - pure Python
-     - 2,625
-     - 2,625 - 2,666
-     - 380,954
-     - 10.50x
+     - 7,324
+     - 7,269 - 7,399
+     - 136,537
+     - 13.22x
    * - geohash-tools
      - pure Python
-     - 3,375
-     - 3,375 - 3,417
-     - 296,297
-     - 13.50x
+     - 8,439
+     - 8,416 - 8,453
+     - 118,497
+     - 15.23x
    * - geolib
      - pure Python
-     - 57,708
-     - 57,458 - 62,541
-     - 17,329
-     - 230.83x
+     - 173,471
+     - 172,115 - 174,218
+     - 5,765
+     - 313.12x
 
-On this machine pygeohash is 1.00x faster than ``python-geohash`` and is 10.5x faster
+On this machine pygeohash is 1.43x faster than ``python-geohash`` and is 13.2x faster
 than ``libgeohash``, the quickest pure-Python entry. ``geohashr``, ``pygeohash-fast``
 are faster still.
-
-The repeated runs did not separate ``pygeohash`` and ``python-geohash``. Their ranges of
-medians overlap, so their relative order in the table is within measurement noise and
-swaps between runs: read them as tied.
 
 Bounding box
 ------------
@@ -171,43 +169,338 @@ Look up the bounding box of the ``ezs42e44y`` cell.
    * - Library
      - Implementation
      - Median (ns)
-     - Range over 7 runs (ns)
+     - Range over 3 runs (ns)
      - Ops/sec
      - vs pygeohash
    * - geohashr
      - Rust extension
-     - 104
-     - 104 - 105
-     - 9,580,832
-     - 0.16x
+     - 317
+     - 313 - 318
+     - 3,155,569
+     - 0.30x
    * - python-geohash
      - C++ extension
-     - 250
-     - 250 - 291
-     - 3,999,970
-     - 0.37x
+     - 929
+     - 927 - 932
+     - 1,076,426
+     - 0.88x
    * - **pygeohash**
      - C extension
-     - 667
-     - 666 - 667
-     - 1,499,312
+     - 1,058
+     - 1,043 - 1,125
+     - 945,179
      - 1.00x
    * - libgeohash
      - pure Python
-     - 2,750
-     - 2,750 - 2,792
-     - 363,634
-     - 4.12x
+     - 7,674
+     - 7,603 - 7,698
+     - 130,310
+     - 7.25x
    * - geolib
      - pure Python
-     - 43,875
-     - 43,041 - 44,208
-     - 22,792
-     - 65.78x
+     - 127,827
+     - 126,920 - 128,595
+     - 7,823
+     - 120.82x
 
-On this machine pygeohash takes 2.67x the median time of ``python-geohash`` and is 4.1x
+On this machine pygeohash takes 1.14x the median time of ``python-geohash`` and is 7.3x
 faster than ``libgeohash``, the quickest pure-Python entry. ``geohashr`` is faster
 still.
+
+Validation
+----------
+
+Check ``is_valid_geohash("ezs42e44y")``.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - **pygeohash**
+     - C extension
+     - 382
+     - 379 - 383
+     - 2,618,144
+     - 1.00x
+
+Adjacent
+--------
+
+Step one cell north of ``ezs42e44y``.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - geohashr
+     - Rust extension
+     - 372
+     - 360 - 378
+     - 2,688,171
+     - 0.27x
+   * - geohash-tools
+     - pure Python
+     - 933
+     - 907 - 933
+     - 1,071,811
+     - 0.67x
+   * - **pygeohash**
+     - C extension
+     - 1,397
+     - 1,379 - 1,406
+     - 715,819
+     - 1.00x
+   * - libgeohash
+     - pure Python
+     - 1,595
+     - 1,593 - 1,604
+     - 626,959
+     - 1.14x
+   * - geolib
+     - pure Python
+     - 2,427
+     - 2,418 - 2,443
+     - 412,031
+     - 1.74x
+
+On this machine pygeohash is 0.7x faster than ``geohash-tools``, the quickest
+pure-Python entry. ``geohashr``, ``geohash-tools`` are faster still.
+
+Adjacent (border)
+-----------------
+
+Step west of ``u00000``, across the antimeridian.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - geohashr
+     - Rust extension
+     - 358
+     - 356 - 366
+     - 2,793,294
+     - 0.20x
+   * - **pygeohash**
+     - C extension
+     - 1,798
+     - 1,784 - 1,850
+     - 556,174
+     - 1.00x
+   * - geohash-tools
+     - pure Python
+     - 2,267
+     - 2,253 - 2,293
+     - 441,112
+     - 1.26x
+   * - libgeohash
+     - pure Python
+     - 4,301
+     - 4,289 - 4,323
+     - 232,504
+     - 2.39x
+   * - geolib
+     - pure Python
+     - 6,694
+     - 6,648 - 6,782
+     - 149,388
+     - 3.72x
+
+On this machine pygeohash is 1.3x faster than ``geohash-tools``, the quickest
+pure-Python entry. ``geohashr`` is faster still.
+
+Box enumeration (small)
+-----------------------
+
+Enumerate ``geohashes_in_box`` over a 4-cell box at precision 9.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - **pygeohash**
+     - C extension
+     - 13,602
+     - 13,542 - 13,703
+     - 73,519
+     - 1.00x
+
+Box enumeration (large)
+-----------------------
+
+Enumerate ``geohashes_in_box`` over a 361-cell box at precision 6.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 18 14 20 14 12
+
+   * - Library
+     - Implementation
+     - Median (ns)
+     - Range over 3 runs (ns)
+     - Ops/sec
+     - vs pygeohash
+   * - **pygeohash**
+     - C extension
+     - 293,134
+     - 291,317 - 294,377
+     - 3,411
+     - 1.00x
+
+Stability
+---------
+
+Each compiled library's median on every timed run, after the warmup pass, with
+the largest relative gap between any two runs. Cold-start contamination used to
+move these figures between repeats before the suite warmed up; a spread within
+20% is the expected steady state.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 18 20 12 12 12 10
+
+   * - Group
+     - Library
+     - Run 1 (ns)
+     - Run 2 (ns)
+     - Run 3 (ns)
+     - Spread
+
+   * - adjacent
+     - geohashr
+     - 378
+     - 360
+     - 372
+     - 4.8%
+   * - adjacent
+     - pygeohash
+     - 1,406
+     - 1,397
+     - 1,379
+     - 1.9%
+   * - adjacent-border
+     - geohashr
+     - 358
+     - 356
+     - 366
+     - 2.8%
+   * - adjacent-border
+     - pygeohash
+     - 1,798
+     - 1,784
+     - 1,850
+     - 3.7%
+   * - bbox
+     - geohashr
+     - 318
+     - 313
+     - 317
+     - 1.5%
+   * - bbox
+     - pygeohash
+     - 1,125
+     - 1,043
+     - 1,058
+     - 7.8%
+   * - bbox
+     - python-geohash
+     - 932
+     - 927
+     - 929
+     - 0.5%
+   * - box-large
+     - pygeohash
+     - 291,317
+     - 293,134
+     - 294,377
+     - 1.0%
+   * - box-small
+     - pygeohash
+     - 13,602
+     - 13,542
+     - 13,703
+     - 1.2%
+   * - decode
+     - geohashr
+     - 234
+     - 228
+     - 231
+     - 2.4%
+   * - decode
+     - pygeohash
+     - 553
+     - 554
+     - 558
+     - 0.9%
+   * - decode
+     - pygeohash-fast
+     - 545
+     - 543
+     - 551
+     - 1.5%
+   * - decode
+     - python-geohash
+     - 781
+     - 791
+     - 826
+     - 5.7%
+   * - encode
+     - geohashr
+     - 353
+     - 341
+     - 361
+     - 5.7%
+   * - encode
+     - pygeohash
+     - 576
+     - 473
+     - 475
+     - 21.6% (!)
+   * - encode
+     - pygeohash-fast
+     - 455
+     - 451
+     - 455
+     - 0.9%
+   * - encode
+     - python-geohash
+     - 644
+     - 630
+     - 635
+     - 2.2%
+   * - validate
+     - pygeohash
+     - 382
+     - 383
+     - 379
+     - 1.2%
+
+The spread of ``pygeohash`` (encode) exceeded 20% on this run; treat those figures with
+suspicion and rerun before quoting them.
 
 Environment
 -----------
@@ -216,10 +509,10 @@ These figures come from repeated runs on one machine. They are not an average
 across hardware, and they should be read as an ordering rather than as
 absolute throughput you can expect elsewhere.
 
-* **Date of run**: 2026-08-31 (7 repeats of the suite)
-* **Machine**: Apple M4 (arm64, 10 cores)
-* **Operating system**: Darwin 25.2.0
-* **Python**: CPython 3.12.11
+* **Date of run**: 2026-09-06 (3 repeats of the suite, after a warmup pass)
+* **Machine**: Intel(R) Xeon(R) Processor @ 2.60GHz (x86_64, 8 cores)
+* **Operating system**: Linux 6.1.158+
+* **Python**: CPython 3.13.14
 * **pytest-benchmark**: 5.3.0
 
 Installed versions of every library measured:
@@ -242,10 +535,10 @@ From a checkout, with the ``dev`` and ``benchmark`` extras installed:
     uv pip install -e ".[dev,benchmark]"
     python scripts/run_comparison_benchmark.py
 
-The script runs the suite several times, reads the pytest-benchmark JSON
-reports, and rewrites this page with the numbers and the environment it
-observed. Rerun it on your own machine before quoting any of these figures as
-your own.
+The script runs a discarded warmup pass, then the suite several times, reads
+the pytest-benchmark JSON reports, and rewrites this page with the numbers and
+the environment it observed. Rerun it on your own machine before quoting any
+of these figures as your own.
 
 Caveats
 -------
@@ -256,7 +549,7 @@ Caveats
   ticks of the platform timer, so their medians are coarsely quantized. Where
   two adjacent entries were not separated by the measurement, the note under
   the table says so and they should be read as tied.
-* Only the three operations above are measured. A library that is slower here
+* Only the eight operations above are measured. A library that is slower here
   may be faster on work this suite does not cover.
 * Install cost is not measured. ``pygeohash`` ships pre-built wheels and needs
   no compiler at install time, which is what motivated the comparison in the
