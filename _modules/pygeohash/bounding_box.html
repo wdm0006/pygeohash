@@ -14,11 +14,11 @@
         gtag('config', 'G-Z43R9PWW0B');
     </script>
     
-    <title>pygeohash.bounding_box &#8212; pygeohash 3.5.0 documentation</title>
+    <title>pygeohash.bounding_box &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=30d13653" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/wabi.css?v=501c8ac3" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a8d29c75" />
-    <script src="../../_static/documentation_options.js?v=c1362a89"></script>
+    <script src="../../_static/documentation_options.js?v=654eae90"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -484,7 +484,7 @@
         <span class="n">row_center_lat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">cell_min_lat</span> <span class="o">+</span> <span class="n">lat_err</span>
         <span class="n">lat_interior</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">cell_min_lat</span> <span class="o">&gt;=</span> <span class="n">min_lat</span> <span class="o">+</span> <span class="n">margin</span> <span class="ow">and</span> <span class="n">cell_max_lat</span> <span class="o">&lt;=</span> <span class="n">max_lat</span> <span class="o">-</span> <span class="n">margin</span>
 
-        <span class="k">for</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">lon_interior</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">col_centers</span><span class="p">,</span> <span class="n">col_interior</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">lon_interior</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">col_centers</span><span class="p">,</span> <span class="n">col_interior</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
             <span class="n">cell_geohash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">row_center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">lat_interior</span> <span class="ow">and</span> <span class="n">lon_interior</span><span class="p">:</span>
                 <span class="n">append</span><span class="p">(</span><span class="n">cell_geohash</span><span class="p">)</span>  <span class="c1"># interior cell: fully inside the box</span>
