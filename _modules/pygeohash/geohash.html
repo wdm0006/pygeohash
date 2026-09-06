@@ -411,8 +411,9 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">MAX_PRECISION</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geohash must be at most </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2"> characters long."</span><span class="p">)</span>
 
-    <span class="c1"># See decode(): the C extension validates characters and raises on its own.</span>
-    <span class="k">return</span> <span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
+    <span class="c1"># See decode(): the C extension folds case, validates characters, and</span>
+    <span class="c1"># raises on its own.</span>
+    <span class="k">return</span> <span class="n">c_decode_exactly</span><span class="p">(</span><span class="n">geohash</span><span class="p">)</span></div>
 
 
 
