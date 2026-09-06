@@ -224,8 +224,9 @@ def decode_exactly(geohash: str) -> ExactLatLong:
     if len(geohash) > MAX_PRECISION:
         raise ValueError(f"Geohash must be at most {MAX_PRECISION} characters long.")
 
-    # See decode(): the C extension validates characters and raises on its own.
-    return c_decode_exactly(geohash.lower())
+    # See decode(): the C extension folds case, validates characters, and
+    # raises on its own.
+    return c_decode_exactly(geohash)
 
 
 __all__ = [

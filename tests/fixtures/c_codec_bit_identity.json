@@ -5174,9 +5174,15 @@
  {
   "kind": "decode",
   "geohash": "EZS42E44YX96",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.54ccccd040000p+5",
+   "-0x1.6666664400000p+2",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.54ccccd040000p+5",
+   "-0x1.6666664400000p+2"
   ]
  },
  {
@@ -5196,9 +5202,15 @@
  {
   "kind": "decode",
   "geohash": "U00000",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6805a00000000p+5",
+   "0x1.6800000000000p-8",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.6805a00000000p+5",
+   "0x1.6800000000000p-8"
   ]
  },
  {
@@ -5218,9 +5230,15 @@
  {
   "kind": "decode",
   "geohash": "GBPBPB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6805a00000000p+5",
+   "-0x1.6800000000000p-8",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.6805a00000000p+5",
+   "-0x1.6800000000000p-8"
   ]
  },
  {
@@ -5240,9 +5258,15 @@
  {
   "kind": "decode",
   "geohash": "U",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4"
   ]
  },
  {
@@ -5262,9 +5286,15 @@
  {
   "kind": "decode",
   "geohash": "Z",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "0x1.3b00000000000p+7"
   ]
  },
  {
@@ -5312,9 +5342,15 @@
  {
   "kind": "decode",
   "geohash": "ZZZZZZZZZZZZ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7"
   ]
  },
  {
@@ -5362,9 +5398,15 @@
  {
   "kind": "decode",
   "geohash": "S00000000000",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
   ]
  },
  {
@@ -5384,9 +5426,15 @@
  {
   "kind": "decode",
   "geohash": "S00000000000",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
   ]
  },
  {
@@ -5406,9 +5454,15 @@
  {
   "kind": "decode",
   "geohash": "ZZZZZZZZZZZZ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7"
   ]
  },
  {
@@ -5428,9 +5482,15 @@
  {
   "kind": "decode",
   "geohash": "BPBPBPBPBPBP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.67fffffa60000p+6",
+   "-0x1.67fffffa60000p+7"
   ]
  },
  {
@@ -5450,9 +5510,15 @@
  {
   "kind": "decode",
   "geohash": "PBPBPBPBPBPB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.67fffffa60000p+6",
+   "0x1.67fffffa60000p+7"
   ]
  },
  {
@@ -5500,9 +5566,15 @@
  {
   "kind": "decode",
   "geohash": "XBPBPBPBPBPB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7"
   ]
  },
  {
@@ -5550,9 +5622,15 @@
  {
   "kind": "decode",
   "geohash": "XBPBPBPBPBPB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.6800000000000p-24",
+   "0x1.67fffffa60000p+7"
   ]
  },
  {
@@ -5600,9 +5678,15 @@
  {
   "kind": "decode",
   "geohash": "1N6YCMNYDP44",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.ad076317c0000p+5",
+   "-0x1.0623156060000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.ad076317c0000p+5",
+   "-0x1.0623156060000p+7"
   ]
  },
  {
@@ -5622,9 +5706,15 @@
  {
   "kind": "decode",
   "geohash": "74VMWCS6TQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.c8e4597000000p+4",
+   "-0x1.2a84131000000p+5",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.c8e4597000000p+4",
+   "-0x1.2a84131000000p+5"
   ]
  },
  {
@@ -5644,9 +5734,15 @@
  {
   "kind": "decode",
   "geohash": "T5K8M1Z0SP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.255be43000000p+4",
+   "0x1.9c760cd000000p+5",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.255be43000000p+4",
+   "0x1.9c760cd000000p+5"
   ]
  },
  {
@@ -5666,9 +5762,15 @@
  {
   "kind": "decode",
   "geohash": "5NPEV",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.bc8d000000000p+5",
+   "-0x1.11b1000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.bc8d000000000p+5",
+   "-0x1.11b1000000000p+5"
   ]
  },
  {
@@ -5688,9 +5790,15 @@
  {
   "kind": "decode",
   "geohash": "3853CJ3UDU",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.654d4e5800000p+5",
+   "-0x1.af8869a800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.654d4e5800000p+5",
+   "-0x1.af8869a800000p+6"
   ]
  },
  {
@@ -5710,9 +5818,15 @@
  {
   "kind": "decode",
   "geohash": "GS3W691",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.180b540000000p+6",
+   "-0x1.4475900000000p+4",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.180b540000000p+6",
+   "-0x1.4475900000000p+4"
   ]
  },
  {
@@ -5760,9 +5874,15 @@
  {
   "kind": "decode",
   "geohash": "49V",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.3dd0000000000p+6",
+   "-0x1.de20000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.3dd0000000000p+6",
+   "-0x1.de20000000000p+5"
   ]
  },
  {
@@ -5782,9 +5902,15 @@
  {
   "kind": "decode",
   "geohash": "S51N5N",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.1f72400000000p+4",
+   "0x1.8b28000000000p+0",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.1f72400000000p+4",
+   "0x1.8b28000000000p+0"
   ]
  },
  {
@@ -5804,9 +5930,15 @@
  {
   "kind": "decode",
   "geohash": "RFMYR",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.f392000000000p+4",
+   "0x1.6254c00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.f392000000000p+4",
+   "0x1.6254c00000000p+7"
   ]
  },
  {
@@ -5826,9 +5958,15 @@
  {
   "kind": "decode",
   "geohash": "XRWGJ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.55e5000000000p+5",
+   "0x1.37f7c00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.55e5000000000p+5",
+   "0x1.37f7c00000000p+7"
   ]
  },
  {
@@ -5848,9 +5986,15 @@
  {
   "kind": "decode",
   "geohash": "G5CRVBE2GBB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0dd5f2fb00000p+6",
+   "-0x1.57e1074600000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.0dd5f2fb00000p+6",
+   "-0x1.57e1074600000p+5"
   ]
  },
  {
@@ -5870,9 +6014,15 @@
  {
   "kind": "decode",
   "geohash": "PGMP6",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.19b0800000000p+6",
+   "0x1.5fc8400000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.19b0800000000p+6",
+   "0x1.5fc8400000000p+7"
   ]
  },
  {
@@ -5892,9 +6042,15 @@
  {
   "kind": "decode",
   "geohash": "MU2T",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.4208000000000p+4",
+   "0x1.3e84000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.4208000000000p+4",
+   "0x1.3e84000000000p+6"
   ]
  },
  {
@@ -5914,9 +6070,15 @@
  {
   "kind": "decode",
   "geohash": "73NJ1Y3V",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.33afc10000000p+5",
+   "-0x1.93ba740000000p+4",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.33afc10000000p+5",
+   "-0x1.93ba740000000p+4"
   ]
  },
  {
@@ -5936,9 +6098,15 @@
  {
   "kind": "decode",
   "geohash": "MZZTQ6",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.e0f0000000000p-2",
+   "0x1.664ee00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.e0f0000000000p-2",
+   "0x1.664ee00000000p+6"
   ]
  },
  {
@@ -5958,9 +6126,15 @@
  {
   "kind": "decode",
   "geohash": "7HG48PU1HUR",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.1cc8d36400000p+4",
+   "-0x1.46344fda00000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.1cc8d36400000p+4",
+   "-0x1.46344fda00000p+5"
   ]
  },
  {
@@ -5980,9 +6154,15 @@
  {
   "kind": "decode",
   "geohash": "KV3R345",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.c5d8600000000p+3",
+   "0x1.1c73d80000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.c5d8600000000p+3",
+   "0x1.1c73d80000000p+5"
   ]
  },
  {
@@ -6002,9 +6182,15 @@
  {
   "kind": "decode",
   "geohash": "JG9K4JZV9",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.164eaae000000p+6",
+   "0x1.426cf6e000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.164eaae000000p+6",
+   "0x1.426cf6e000000p+6"
   ]
  },
  {
@@ -6024,9 +6210,15 @@
  {
   "kind": "decode",
   "geohash": "B9UJT",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.bea9000000000p+5",
+   "-0x1.2f44400000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.bea9000000000p+5",
+   "-0x1.2f44400000000p+7"
   ]
  },
  {
@@ -6046,9 +6238,15 @@
  {
   "kind": "decode",
   "geohash": "2Y",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.1940000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.1940000000000p+7"
   ]
  },
  {
@@ -6068,9 +6266,15 @@
  {
   "kind": "decode",
   "geohash": "SPU70T",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6135e00000000p+5",
+   "0x1.8042000000000p+2",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.6135e00000000p+5",
+   "0x1.8042000000000p+2"
   ]
  },
  {
@@ -6090,9 +6294,15 @@
  {
   "kind": "decode",
   "geohash": "0NQKUXP13HDM",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.afc2c25c40000p+5",
+   "-0x1.5601cdf520000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.afc2c25c40000p+5",
+   "-0x1.5601cdf520000p+7"
   ]
  },
  {
@@ -6112,9 +6322,15 @@
  {
   "kind": "decode",
   "geohash": "EN3",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.1ee0000000000p+5",
+   "-0x1.5720000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.1ee0000000000p+5",
+   "-0x1.5720000000000p+5"
   ]
  },
  {
@@ -6134,9 +6350,15 @@
  {
   "kind": "decode",
   "geohash": "T3FTG",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5c0c000000000p+3",
+   "0x1.df5b000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.5c0c000000000p+3",
+   "0x1.df5b000000000p+5"
   ]
  },
  {
@@ -6156,9 +6378,15 @@
  {
   "kind": "decode",
   "geohash": "TKMTFGC78HQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.8f02ee9c00000p+4",
+   "0x1.006d844900000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.8f02ee9c00000p+4",
+   "0x1.006d844900000p+6"
   ]
  },
  {
@@ -6178,9 +6406,15 @@
  {
   "kind": "decode",
   "geohash": "3E0R",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.ace8000000000p+4",
+   "-0x1.bfe4000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.ace8000000000p+4",
+   "-0x1.bfe4000000000p+6"
   ]
  },
  {
@@ -6200,9 +6434,15 @@
  {
   "kind": "decode",
   "geohash": "RMEWPQXMB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.9f133d0000000p+3",
+   "0x1.2f003bd000000p+7",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.9f133d0000000p+3",
+   "0x1.2f003bd000000p+7"
   ]
  },
  {
@@ -6222,9 +6462,15 @@
  {
   "kind": "decode",
   "geohash": "F",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "-0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "-0x1.0e00000000000p+6"
   ]
  },
  {
@@ -6272,9 +6518,15 @@
  {
   "kind": "decode",
   "geohash": "K8FMZY5MR",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.3de49c4000000p+5",
+   "0x1.a026998000000p+4",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.3de49c4000000p+5",
+   "0x1.a026998000000p+4"
   ]
  },
  {
@@ -6294,9 +6546,15 @@
  {
   "kind": "decode",
   "geohash": "FRFNH52MR627",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.66ab379160000p+6",
+   "-0x1.2f0b544e40000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.66ab379160000p+6",
+   "-0x1.2f0b544e40000p+6"
   ]
  },
  {
@@ -6316,9 +6574,15 @@
  {
   "kind": "decode",
   "geohash": "P13EN",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.49ad800000000p+6",
+   "0x1.12ca400000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.49ad800000000p+6",
+   "0x1.12ca400000000p+7"
   ]
  },
  {
@@ -6338,9 +6602,15 @@
  {
   "kind": "decode",
   "geohash": "DG6026B0NP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.25720a3000000p+4",
+   "-0x1.ab68f63000000p+5",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.25720a3000000p+4",
+   "-0x1.ab68f63000000p+5"
   ]
  },
  {
@@ -6360,9 +6630,15 @@
  {
   "kind": "decode",
   "geohash": "33SXUKBX70S1",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.196201f640000p+5",
+   "-0x1.d4efe8ccc0000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.196201f640000p+5",
+   "-0x1.d4efe8ccc0000p+6"
   ]
  },
  {
@@ -6382,9 +6658,15 @@
  {
   "kind": "decode",
   "geohash": "QVPZBWGM1D0B",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.ef31215300000p+3",
+   "0x1.0d59919760000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.ef31215300000p+3",
+   "0x1.0d59919760000p+7"
   ]
  },
  {
@@ -6404,9 +6686,15 @@
  {
   "kind": "decode",
   "geohash": "QR7",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.c200000000000p+1",
+   "0x1.a8b0000000000p+6",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.c200000000000p+1",
+   "0x1.a8b0000000000p+6"
   ]
  },
  {
@@ -6426,9 +6714,15 @@
  {
   "kind": "decode",
   "geohash": "7WTTPXQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.e128400000000p+2",
+   "-0x1.cdaae00000000p+3",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.e128400000000p+2",
+   "-0x1.cdaae00000000p+3"
   ]
  },
  {
@@ -6448,9 +6742,15 @@
  {
   "kind": "decode",
   "geohash": "5RP2KXF5P7",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.944db82800000p+5",
+   "-0x1.75a9742000000p+4",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.944db82800000p+5",
+   "-0x1.75a9742000000p+4"
   ]
  },
  {
@@ -6470,9 +6770,15 @@
  {
   "kind": "decode",
   "geohash": "X",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "0x1.3b00000000000p+7",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "0x1.3b00000000000p+7"
   ]
  },
  {
@@ -6492,9 +6798,15 @@
  {
   "kind": "decode",
   "geohash": "X0T27HTDJWH7",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.70d652ec00000p+1",
+   "0x1.1d0b7db4e0000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.70d652ec00000p+1",
+   "0x1.1d0b7db4e0000p+7"
   ]
  },
  {
@@ -6514,9 +6826,15 @@
  {
   "kind": "decode",
   "geohash": "UYEGCN42P",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.4904c5a000000p+6",
+   "0x1.3890fcc000000p+5",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.4904c5a000000p+6",
+   "0x1.3890fcc000000p+5"
   ]
  },
  {
@@ -6536,9 +6854,15 @@
  {
   "kind": "decode",
   "geohash": "BJGMKS2E",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.3929858000000p+6",
+   "-0x1.5e764f8000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.3929858000000p+6",
+   "-0x1.5e764f8000000p+7"
   ]
  },
  {
@@ -6558,9 +6882,15 @@
  {
   "kind": "decode",
   "geohash": "RVZXQSRYX5",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.6b6f74a000000p+3",
+   "0x1.672fdb1400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.6b6f74a000000p+3",
+   "0x1.672fdb1400000p+7"
   ]
  },
  {
@@ -6580,9 +6910,15 @@
  {
   "kind": "decode",
   "geohash": "59PV",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.4da2000000000p+6",
+   "-0x1.6da0000000000p+3",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.4da2000000000p+6",
+   "-0x1.6da0000000000p+3"
   ]
  },
  {
@@ -6602,9 +6938,15 @@
  {
   "kind": "decode",
   "geohash": "4E7WJ19TQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.1a9e9e2000000p+6",
+   "-0x1.f2d935c000000p+5",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.1a9e9e2000000p+6",
+   "-0x1.f2d935c000000p+5"
   ]
  },
  {
@@ -6624,9 +6966,15 @@
  {
   "kind": "decode",
   "geohash": "MU03EYHW",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.633c6e0000000p+4",
+   "0x1.3d17410000000p+6",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.633c6e0000000p+4",
+   "0x1.3d17410000000p+6"
   ]
  },
  {
@@ -6646,9 +6994,15 @@
  {
   "kind": "decode",
   "geohash": "W9",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0e00000000000p+3",
+   "0x1.d880000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+3",
+   "0x1.d880000000000p+6"
   ]
  },
  {
@@ -6668,9 +7022,15 @@
  {
   "kind": "decode",
   "geohash": "GZJ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5450000000000p+6",
+   "-0x1.c200000000000p+1",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.5450000000000p+6",
+   "-0x1.c200000000000p+1"
   ]
  },
  {
@@ -6690,9 +7050,15 @@
  {
   "kind": "decode",
   "geohash": "XPXYWVK2",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5adf3d0000000p+5",
+   "0x1.2466f38000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.5adf3d0000000p+5",
+   "0x1.2466f38000000p+7"
   ]
  },
  {
@@ -6712,9 +7078,15 @@
  {
   "kind": "decode",
   "geohash": "C9S3",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.ad9c000000000p+5",
+   "-0x1.a964000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.ad9c000000000p+5",
+   "-0x1.a964000000000p+6"
   ]
  },
  {
@@ -6734,9 +7106,15 @@
  {
   "kind": "decode",
   "geohash": "XRVQ0YKJGG0",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.65785e4a00000p+5",
+   "0x1.3357c52e80000p+7",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.65785e4a00000p+5",
+   "0x1.3357c52e80000p+7"
   ]
  },
  {
@@ -6756,9 +7134,15 @@
  {
   "kind": "decode",
   "geohash": "V7",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.02c0000000000p+6",
+   "0x1.ef00000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.02c0000000000p+6",
+   "0x1.ef00000000000p+5"
   ]
  },
  {
@@ -6778,9 +7162,15 @@
  {
   "kind": "decode",
   "geohash": "6DRUX",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.f87e000000000p+4",
+   "-0x1.c22d000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.f87e000000000p+4",
+   "-0x1.c22d000000000p+5"
   ]
  },
  {
@@ -6800,9 +7190,15 @@
  {
   "kind": "decode",
   "geohash": "VY793T5MRG0D",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.419e109420000p+6",
+   "0x1.4ef8696840000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.419e109420000p+6",
+   "0x1.4ef8696840000p+6"
   ]
  },
  {
@@ -6822,9 +7218,15 @@
  {
   "kind": "decode",
   "geohash": "MCNN",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.31dc000000000p+5",
+   "0x1.5d74000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.31dc000000000p+5",
+   "0x1.5d74000000000p+6"
   ]
  },
  {
@@ -6844,9 +7246,15 @@
  {
   "kind": "decode",
   "geohash": "N",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6"
   ]
  },
  {
@@ -6866,9 +7274,15 @@
  {
   "kind": "decode",
   "geohash": "46R33DXTK",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.346ffe2000000p+6",
+   "-0x1.11e9c16000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.346ffe2000000p+6",
+   "-0x1.11e9c16000000p+6"
   ]
  },
  {
@@ -6888,9 +7302,15 @@
  {
   "kind": "decode",
   "geohash": "C36XC",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.ab53000000000p+5",
+   "-0x1.e0ac800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.ab53000000000p+5",
+   "-0x1.e0ac800000000p+6"
   ]
  },
  {
@@ -6910,9 +7330,15 @@
  {
   "kind": "decode",
   "geohash": "76JHQXT3",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.07b1190000000p+5",
+   "-0x1.a6cfc40000000p+4",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.07b1190000000p+5",
+   "-0x1.a6cfc40000000p+4"
   ]
  },
  {
@@ -6932,9 +7358,15 @@
  {
   "kind": "decode",
   "geohash": "N2YRGMX",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.518d5c0000000p+6",
+   "0x1.b8c4cc0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.518d5c0000000p+6",
+   "0x1.b8c4cc0000000p+6"
   ]
  },
  {
@@ -6954,9 +7386,15 @@
  {
   "kind": "decode",
   "geohash": "PNQ3TR81",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.b44f190000000p+5",
+   "0x1.200a368000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.b44f190000000p+5",
+   "0x1.200a368000000p+7"
   ]
  },
  {
@@ -6976,9 +7414,15 @@
  {
   "kind": "decode",
   "geohash": "KXBWTW1H9P7D",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.d6d663c000000p-3",
+   "0x1.7723d21900000p+4",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.d6d663c000000p-3",
+   "0x1.7723d21900000p+4"
   ]
  },
  {
@@ -6998,9 +7442,15 @@
  {
   "kind": "decode",
   "geohash": "ZZCWPQTR",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.66bde18000000p+6",
+   "0x1.565ee78000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.66bde18000000p+6",
+   "0x1.565ee78000000p+7"
   ]
  },
  {
@@ -7020,9 +7470,15 @@
  {
   "kind": "decode",
   "geohash": "96TBKZM82",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.c4aec70000000p+3",
+   "-0x1.cdca7e6000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.c4aec70000000p+3",
+   "-0x1.cdca7e6000000p+6"
   ]
  },
  {
@@ -7042,9 +7498,15 @@
  {
   "kind": "decode",
   "geohash": "438XNF",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.4145f00000000p+6",
+   "-0x1.36faa00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.4145f00000000p+6",
+   "-0x1.36faa00000000p+6"
   ]
  },
  {
@@ -7064,9 +7526,15 @@
  {
   "kind": "decode",
   "geohash": "TP1VNNB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.4255580000000p+5",
+   "0x1.7dcd680000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.4255580000000p+5",
+   "0x1.7dcd680000000p+5"
   ]
  },
  {
@@ -7086,9 +7554,15 @@
  {
   "kind": "decode",
   "geohash": "TB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p+1",
+   "0x1.5180000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.6800000000000p+1",
+   "0x1.5180000000000p+6"
   ]
  },
  {
@@ -7108,9 +7582,15 @@
  {
   "kind": "decode",
   "geohash": "BVQ3GQ8U",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.2b805a8000000p+6",
+   "-0x1.12a2428000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.2b805a8000000p+6",
+   "-0x1.12a2428000000p+7"
   ]
  },
  {
@@ -7130,9 +7610,15 @@
  {
   "kind": "decode",
   "geohash": "8XFD09EHKP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5fa2739800000p+5",
+   "-0x1.33ea8ccc00000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.5fa2739800000p+5",
+   "-0x1.33ea8ccc00000p+7"
   ]
  },
  {
@@ -7152,9 +7638,15 @@
  {
   "kind": "decode",
   "geohash": "PQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.ab80000000000p+5",
+   "0x1.2fc0000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.ab80000000000p+5",
+   "0x1.2fc0000000000p+7"
   ]
  },
  {
@@ -7202,9 +7694,15 @@
  {
   "kind": "decode",
   "geohash": "4P3K3W1V35",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.83809da800000p+5",
+   "-0x1.60b1fd5800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.83809da800000p+5",
+   "-0x1.60b1fd5800000p+6"
   ]
  },
  {
@@ -7224,9 +7722,15 @@
  {
   "kind": "decode",
   "geohash": "NYZZCDE",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.953c780000000p+5",
+   "0x1.0d70360000000p+7",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.953c780000000p+5",
+   "0x1.0d70360000000p+7"
   ]
  },
  {
@@ -7246,9 +7750,15 @@
  {
   "kind": "decode",
   "geohash": "M41DP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.0b03000000000p+5",
+   "0x1.7b83000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.0b03000000000p+5",
+   "0x1.7b83000000000p+5"
   ]
  },
  {
@@ -7268,9 +7778,15 @@
  {
   "kind": "decode",
   "geohash": "FQ1QN628B",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.3f44cf6000000p+6",
+   "-0x1.32de066000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.3f44cf6000000p+6",
+   "-0x1.32de066000000p+6"
   ]
  },
  {
@@ -7290,9 +7806,15 @@
  {
   "kind": "decode",
   "geohash": "54UKXDSX29K",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.26e6a7d100000p+6",
+   "-0x1.3580499600000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.26e6a7d100000p+6",
+   "-0x1.3580499600000p+5"
   ]
  },
  {
@@ -7312,9 +7834,15 @@
  {
   "kind": "decode",
   "geohash": "M8R",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.5720000000000p+5",
+   "0x1.3830000000000p+6",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.5720000000000p+5",
+   "0x1.3830000000000p+6"
   ]
  },
  {
@@ -7362,9 +7890,15 @@
  {
   "kind": "decode",
   "geohash": "U77X1P373772",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.02355ed7a0000p+6",
+   "0x1.037b44ff00000p+4",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.02355ed7a0000p+6",
+   "0x1.037b44ff00000p+4"
   ]
  },
  {
@@ -7384,9 +7918,15 @@
  {
   "kind": "decode",
   "geohash": "P7JK4UBB",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.2195318000000p+6",
+   "0x1.33827d8000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.2195318000000p+6",
+   "0x1.33827d8000000p+7"
   ]
  },
  {
@@ -7406,9 +7946,15 @@
  {
   "kind": "decode",
   "geohash": "C",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "-0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "-0x1.c200000000000p+6"
   ]
  },
  {
@@ -7428,9 +7974,15 @@
  {
   "kind": "decode",
   "geohash": "YPTEFDP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5f6ef40000000p+6",
+   "0x1.876b0c0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.5f6ef40000000p+6",
+   "0x1.876b0c0000000p+6"
   ]
  },
  {
@@ -7450,9 +8002,15 @@
  {
   "kind": "decode",
   "geohash": "RQVJ5",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.8858000000000p+2",
+   "0x1.32dec00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.8858000000000p+2",
+   "0x1.32dec00000000p+7"
   ]
  },
  {
@@ -7472,9 +8030,15 @@
  {
   "kind": "decode",
   "geohash": "4H5H",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.0ad6000000000p+6",
+   "-0x1.566c000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.0ad6000000000p+6",
+   "-0x1.566c000000000p+6"
   ]
  },
  {
@@ -7494,9 +8058,15 @@
  {
   "kind": "decode",
   "geohash": "0S7P4X57",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.034c028000000p+6",
+   "-0x1.3255608000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.034c028000000p+6",
+   "-0x1.3255608000000p+7"
   ]
  },
  {
@@ -7516,9 +8086,15 @@
  {
   "kind": "decode",
   "geohash": "D3MWNT4G7M4",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.03a5cba800000p+3",
+   "-0x1.1ae77c8f00000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.03a5cba800000p+3",
+   "-0x1.1ae77c8f00000p+6"
   ]
  },
  {
@@ -7538,9 +8114,15 @@
  {
   "kind": "decode",
   "geohash": "W2",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p+1",
+   "0x1.ab80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.6800000000000p+1",
+   "0x1.ab80000000000p+6"
   ]
  },
  {
@@ -7560,9 +8142,15 @@
  {
   "kind": "decode",
   "geohash": "TN494MS6YNF",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0fa6ead600000p+5",
+   "0x1.84f6fcc200000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.0fa6ead600000p+5",
+   "0x1.84f6fcc200000p+5"
   ]
  },
  {
@@ -7582,9 +8170,15 @@
  {
   "kind": "decode",
   "geohash": "5RP4",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.917c000000000p+5",
+   "-0x1.7bb0000000000p+4",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.917c000000000p+5",
+   "-0x1.7bb0000000000p+4"
   ]
  },
  {
@@ -7604,9 +8198,15 @@
  {
   "kind": "decode",
   "geohash": "E565JMP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.2d63500000000p+4",
+   "-0x1.4f92680000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.2d63500000000p+4",
+   "-0x1.4f92680000000p+5"
   ]
  },
  {
@@ -7626,9 +8226,15 @@
  {
   "kind": "decode",
   "geohash": "VS6HKKZ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.16b86c0000000p+6",
+   "0x1.1a09cc0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.16b86c0000000p+6",
+   "0x1.1a09cc0000000p+6"
   ]
  },
  {
@@ -7648,9 +8254,15 @@
  {
   "kind": "decode",
   "geohash": "8EVY",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.63c8000000000p+4",
+   "-0x1.2a7a000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.63c8000000000p+4",
+   "-0x1.2a7a000000000p+7"
   ]
  },
  {
@@ -7670,9 +8282,15 @@
  {
   "kind": "decode",
   "geohash": "NUT",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.ffe0000000000p+5",
+   "0x1.06f8000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.ffe0000000000p+5",
+   "0x1.06f8000000000p+7"
   ]
  },
  {
@@ -7692,9 +8310,15 @@
  {
   "kind": "decode",
   "geohash": "5TYJE",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.c557000000000p+5",
+   "-0x1.bd14000000000p+3",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.c557000000000p+5",
+   "-0x1.bd14000000000p+3"
   ]
  },
  {
@@ -7714,9 +8338,15 @@
  {
   "kind": "decode",
   "geohash": "GUBPFFNTV",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.245f486000000p+6",
+   "-0x1.63d6f10000000p+3",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.245f486000000p+6",
+   "-0x1.63d6f10000000p+3"
   ]
  },
  {
@@ -7736,9 +8366,15 @@
  {
   "kind": "decode",
   "geohash": "ZTGP",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.3aa6000000000p+6",
+   "0x1.43ca000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.3aa6000000000p+6",
+   "0x1.43ca000000000p+7"
   ]
  },
  {
@@ -7758,9 +8394,15 @@
  {
   "kind": "decode",
   "geohash": "3PW9QVPEW",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.48479c0000000p+1",
+   "-0x1.f6356ae000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.48479c0000000p+1",
+   "-0x1.f6356ae000000p+6"
   ]
  },
  {
@@ -7780,9 +8422,15 @@
  {
   "kind": "decode",
   "geohash": "RJYU228561",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.7cfcdd2000000p+3",
+   "0x1.2101abf400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.7cfcdd2000000p+3",
+   "0x1.2101abf400000p+7"
   ]
  },
  {
@@ -7802,9 +8450,15 @@
  {
   "kind": "decode",
   "geohash": "F6",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.d880000000000p+5",
+   "-0x1.2480000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.d880000000000p+5",
+   "-0x1.2480000000000p+6"
   ]
  },
  {
@@ -7824,9 +8478,15 @@
  {
   "kind": "decode",
   "geohash": "K",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
   ]
  },
  {
@@ -7846,9 +8506,15 @@
  {
   "kind": "decode",
   "geohash": "2ZHMG5D8M",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.2613f20000000p+2",
+   "-0x1.18469f1000000p+7",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.2613f20000000p+2",
+   "-0x1.18469f1000000p+7"
   ]
  },
  {
@@ -7868,9 +8534,15 @@
  {
   "kind": "decode",
   "geohash": "7D62YRUZ89",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.015828c800000p+5",
+   "-0x1.30e02be000000p+4",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.015828c800000p+5",
+   "-0x1.30e02be000000p+4"
   ]
  },
  {
@@ -7918,9 +8590,15 @@
  {
   "kind": "decode",
   "geohash": "1N",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.ab80000000000p+5",
+   "-0x1.02c0000000000p+7",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.ab80000000000p+5",
+   "-0x1.02c0000000000p+7"
   ]
  },
  {
@@ -7940,9 +8618,15 @@
  {
   "kind": "decode",
   "geohash": "3U",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.3b00000000000p+4",
+   "-0x1.7e80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.3b00000000000p+4",
+   "-0x1.7e80000000000p+6"
   ]
  },
  {
@@ -7962,9 +8646,15 @@
  {
   "kind": "decode",
   "geohash": "66MCPT59VS",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.011f15d800000p+5",
+   "-0x1.195154b800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.011f15d800000p+5",
+   "-0x1.195154b800000p+6"
   ]
  },
  {
@@ -7984,9 +8674,15 @@
  {
   "kind": "decode",
   "geohash": "JN0U7E",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.bbdea00000000p+5",
+   "0x1.71b6400000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.bbdea00000000p+5",
+   "0x1.71b6400000000p+5"
   ]
  },
  {
@@ -8006,9 +8702,15 @@
  {
   "kind": "decode",
   "geohash": "H",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4"
   ]
  },
  {
@@ -8028,9 +8730,15 @@
  {
   "kind": "decode",
   "geohash": "16H79Y4",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.38678c0000000p+6",
+   "-0x1.d6c5bc0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.38678c0000000p+6",
+   "-0x1.d6c5bc0000000p+6"
   ]
  },
  {
@@ -8050,9 +8758,15 @@
  {
   "kind": "decode",
   "geohash": "ME4DU",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.b9ea000000000p+4",
+   "0x1.1cda800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.b9ea000000000p+4",
+   "0x1.1cda800000000p+6"
   ]
  },
  {
@@ -8072,9 +8786,15 @@
  {
   "kind": "decode",
   "geohash": "0J65JDZ3WW9",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.df68765e00000p+5",
+   "-0x1.61df022c80000p+7",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.df68765e00000p+5",
+   "-0x1.61df022c80000p+7"
   ]
  },
  {
@@ -8094,9 +8814,15 @@
  {
   "kind": "decode",
   "geohash": "QK",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6"
   ]
  },
  {
@@ -8116,9 +8842,15 @@
  {
   "kind": "decode",
   "geohash": "10V4",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.555e000000000p+6",
+   "-0x1.ff2c000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.555e000000000p+6",
+   "-0x1.ff2c000000000p+6"
   ]
  },
  {
@@ -8138,9 +8870,15 @@
  {
   "kind": "decode",
   "geohash": "SHCRR10Z4",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.bfff828000000p+4",
+   "0x1.0885440000000p+1",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.bfff828000000p+4",
+   "0x1.0885440000000p+1"
   ]
  },
  {
@@ -8160,9 +8898,15 @@
  {
   "kind": "decode",
   "geohash": "JNT",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.a5e0000000000p+5",
+   "0x1.a5e0000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.a5e0000000000p+5",
+   "0x1.a5e0000000000p+5"
   ]
  },
  {
@@ -8182,9 +8926,15 @@
  {
   "kind": "decode",
   "geohash": "CR6FD",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.58f8800000000p+6",
+   "-0x1.df17800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.58f8800000000p+6",
+   "-0x1.df17800000000p+6"
   ]
  },
  {
@@ -8204,9 +8954,15 @@
  {
   "kind": "decode",
   "geohash": "89H",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.9500000000000p+2",
+   "-0x1.2e58000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.9500000000000p+2",
+   "-0x1.2e58000000000p+7"
   ]
  },
  {
@@ -8226,9 +8982,15 @@
  {
   "kind": "decode",
   "geohash": "VM3G4U14UMJ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.2c5302f500000p+6",
+   "0x1.d6aab37e00000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.2c5302f500000p+6",
+   "0x1.d6aab37e00000p+5"
   ]
  },
  {
@@ -8248,9 +9010,15 @@
  {
   "kind": "decode",
   "geohash": "X6YSVR91GZ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0586253000000p+4",
+   "0x1.373ee9cc00000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.0586253000000p+4",
+   "0x1.373ee9cc00000p+7"
   ]
  },
  {
@@ -8270,9 +9038,15 @@
  {
   "kind": "decode",
   "geohash": "4ZYBXJK",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.724f880000000p+5",
+   "-0x1.738d580000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.724f880000000p+5",
+   "-0x1.738d580000000p+5"
   ]
  },
  {
@@ -8292,9 +9066,15 @@
  {
   "kind": "decode",
   "geohash": "EX7ZM4G",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5092580000000p+5",
+   "-0x1.1008500000000p+4",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.5092580000000p+5",
+   "-0x1.1008500000000p+4"
   ]
  },
  {
@@ -8314,9 +9094,15 @@
  {
   "kind": "decode",
   "geohash": "ZN3V5P3GDNEZ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.444d6ef860000p+6",
+   "0x1.1330c6ee60000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.444d6ef860000p+6",
+   "0x1.1330c6ee60000p+7"
   ]
  },
  {
@@ -8336,9 +9122,15 @@
  {
   "kind": "decode",
   "geohash": "9P5",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.40a0000000000p+5",
+   "-0x1.0428000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "0x1.40a0000000000p+5",
+   "-0x1.0428000000000p+7"
   ]
  },
  {
@@ -8358,9 +9150,15 @@
  {
   "kind": "decode",
   "geohash": "Y30P",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.9f8c000000000p+5",
+   "0x1.95b4000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.9f8c000000000p+5",
+   "0x1.95b4000000000p+6"
   ]
  },
  {
@@ -8380,9 +9178,15 @@
  {
   "kind": "decode",
   "geohash": "NK80RR5B1HV",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.026b992500000p+6",
+   "0x1.964b932f00000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.026b992500000p+6",
+   "0x1.964b932f00000p+6"
   ]
  },
  {
@@ -8402,9 +9206,15 @@
  {
   "kind": "decode",
   "geohash": "CENVVX9FRTNY",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.f76b392240000p+5",
+   "-0x1.9b0db33540000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.f76b392240000p+5",
+   "-0x1.9b0db33540000p+6"
   ]
  },
  {
@@ -8424,9 +9234,15 @@
  {
   "kind": "decode",
   "geohash": "T6",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.c200000000000p+3",
+   "0x1.ef00000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.c200000000000p+3",
+   "0x1.ef00000000000p+5"
   ]
  },
  {
@@ -8446,9 +9262,15 @@
  {
   "kind": "decode",
   "geohash": "3EB7HN",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.757dc00000000p+4",
+   "-0x1.bfde600000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.757dc00000000p+4",
+   "-0x1.bfde600000000p+6"
   ]
  },
  {
@@ -8468,9 +9290,15 @@
  {
   "kind": "decode",
   "geohash": "1X5M",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.8d44000000000p+5",
+   "-0x1.af04000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "-0x1.8d44000000000p+5",
+   "-0x1.af04000000000p+6"
   ]
  },
  {
@@ -8490,9 +9318,15 @@
  {
   "kind": "decode",
   "geohash": "T",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6"
   ]
  },
  {
@@ -8512,9 +9346,15 @@
  {
   "kind": "decode",
   "geohash": "VSUFUK2Y6",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.20e806e000000p+6",
+   "0x1.29786a2000000p+6",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "0x1.20e806e000000p+6",
+   "0x1.29786a2000000p+6"
   ]
  },
  {
@@ -8534,9 +9374,15 @@
  {
   "kind": "decode",
   "geohash": "TE35C3",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.2f2dc00000000p+4",
+   "0x1.13dde00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.2f2dc00000000p+4",
+   "0x1.13dde00000000p+6"
   ]
  },
  {
@@ -8556,9 +9402,15 @@
  {
   "kind": "decode",
   "geohash": "J959NEPE2RR",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.50ba836100000p+6",
+   "0x1.22df117300000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.50ba836100000p+6",
+   "0x1.22df117300000p+6"
   ]
  },
  {
@@ -8578,9 +9430,15 @@
  {
   "kind": "decode",
   "geohash": "Q4UHPVE",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.ccc1700000000p+4",
+   "0x1.7fe1ac0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.ccc1700000000p+4",
+   "0x1.7fe1ac0000000p+6"
   ]
  },
  {
@@ -8600,9 +9458,15 @@
  {
   "kind": "decode",
   "geohash": "69P",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.3560000000000p+5",
+   "-0x1.c7a0000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.3560000000000p+5",
+   "-0x1.c7a0000000000p+5"
   ]
  },
  {
@@ -8622,9 +9486,15 @@
  {
   "kind": "decode",
   "geohash": "W8QXWH205RS",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5fbe572000000p+1",
+   "0x1.e79e262500000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.5fbe572000000p+1",
+   "0x1.e79e262500000p+6"
   ]
  },
  {
@@ -8644,9 +9514,15 @@
  {
   "kind": "decode",
   "geohash": "Y41PUHBVDTMJ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.cd1d6e3fc0000p+5",
+   "0x1.6e552bed40000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.cd1d6e3fc0000p+5",
+   "0x1.6e552bed40000p+6"
   ]
  },
  {
@@ -8666,9 +9542,15 @@
  {
   "kind": "decode",
   "geohash": "JPBGUF",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.6ddde00000000p+5",
+   "0x1.7226c00000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.6ddde00000000p+5",
+   "0x1.7226c00000000p+5"
   ]
  },
  {
@@ -8688,9 +9570,15 @@
  {
   "kind": "decode",
   "geohash": "H40WCW0F",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.361ecf8000000p+6",
+   "0x1.8a5d800000000p-1",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.361ecf8000000p+6",
+   "0x1.8a5d800000000p-1"
   ]
  },
  {
@@ -8710,9 +9598,15 @@
  {
   "kind": "decode",
   "geohash": "M",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "0x1.0e00000000000p+6"
   ]
  },
  {
@@ -8732,9 +9626,15 @@
  {
   "kind": "decode",
   "geohash": "EU5D4SHEXS",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6dfc8f5000000p+4",
+   "-0x1.8d8d638000000p+2",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.6dfc8f5000000p+4",
+   "-0x1.8d8d638000000p+2"
   ]
  },
  {
@@ -8754,9 +9654,15 @@
  {
   "kind": "decode",
   "geohash": "EGCKP7",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.5d0ec00000000p+4",
+   "-0x1.2561000000000p+3",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.5d0ec00000000p+4",
+   "-0x1.2561000000000p+3"
   ]
  },
  {
@@ -8776,9 +9682,15 @@
  {
   "kind": "decode",
   "geohash": "QQFBPSFX",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.c03f680000000p+2",
+   "0x1.a5cd310000000p+6",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.c03f680000000p+2",
+   "0x1.a5cd310000000p+6"
   ]
  },
  {
@@ -8798,9 +9710,15 @@
  {
   "kind": "decode",
   "geohash": "PW9ZCD",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.a07de00000000p+5",
+   "0x1.4010900000000p+7",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.a07de00000000p+5",
+   "0x1.4010900000000p+7"
   ]
  },
  {
@@ -8820,9 +9738,15 @@
  {
   "kind": "decode",
   "geohash": "W9R6T8B",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.de6ec00000000p+2",
+   "0x1.ebc0340000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.de6ec00000000p+2",
+   "0x1.ebc0340000000p+6"
   ]
  },
  {
@@ -8842,9 +9766,15 @@
  {
   "kind": "decode",
   "geohash": "P9T8T8VK",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.45e0fd8000000p+6",
+   "0x1.4af7878000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.45e0fd8000000p+6",
+   "0x1.4af7878000000p+7"
   ]
  },
  {
@@ -8864,9 +9794,15 @@
  {
   "kind": "decode",
   "geohash": "Q0TWW",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.482f000000000p+5",
+   "0x1.8814800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.482f000000000p+5",
+   "0x1.8814800000000p+6"
   ]
  },
  {
@@ -8886,9 +9822,15 @@
  {
   "kind": "decode",
   "geohash": "UHZ4FXPM7R06",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.20f7563420000p+6",
+   "0x1.3ed6b58e00000p+3",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.20f7563420000p+6",
+   "0x1.3ed6b58e00000p+3"
   ]
  },
  {
@@ -8908,9 +9850,15 @@
  {
   "kind": "decode",
   "geohash": "WJ8G",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.f8d8000000000p+4",
+   "0x1.6cec000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.f8d8000000000p+4",
+   "0x1.6cec000000000p+6"
   ]
  },
  {
@@ -8930,9 +9878,15 @@
  {
   "kind": "decode",
   "geohash": "9GVR",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6698000000000p+4",
+   "-0x1.76c4000000000p+6",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.6698000000000p+4",
+   "-0x1.76c4000000000p+6"
   ]
  },
  {
@@ -8952,9 +9906,15 @@
  {
   "kind": "decode",
   "geohash": "467Y134C8M",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.312214c400000p+6",
+   "-0x1.25abddc800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.312214c400000p+6",
+   "-0x1.25abddc800000p+6"
   ]
  },
  {
@@ -8974,9 +9934,15 @@
  {
   "kind": "decode",
   "geohash": "NPBKKZ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.6cf1a00000000p+5",
+   "0x1.6a43600000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.6cf1a00000000p+5",
+   "0x1.6a43600000000p+6"
   ]
  },
  {
@@ -8996,9 +9962,15 @@
  {
   "kind": "decode",
   "geohash": "X9SZR5MXD2RQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.3764d11900000p+3",
+   "0x1.48fd6bf3e0000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.3764d11900000p+3",
+   "0x1.48fd6bf3e0000p+7"
   ]
  },
  {
@@ -9018,9 +9990,15 @@
  {
   "kind": "decode",
   "geohash": "FH8K6JH4",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.1c59908000000p+6",
+   "-0x1.6638330000000p+6",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "0x1.1c59908000000p+6",
+   "-0x1.6638330000000p+6"
   ]
  },
  {
@@ -9040,9 +10018,15 @@
  {
   "kind": "decode",
   "geohash": "J824W",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.6087800000000p+6",
+   "0x1.0f24800000000p+6",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.6087800000000p+6",
+   "0x1.0f24800000000p+6"
   ]
  },
  {
@@ -9062,9 +10046,15 @@
  {
   "kind": "decode",
   "geohash": "MRB2U",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.40a0000000000p+0",
+   "0x1.c665000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.40a0000000000p+0",
+   "0x1.c665000000000p+5"
   ]
  },
  {
@@ -9084,9 +10074,15 @@
  {
   "kind": "decode",
   "geohash": "NQ2FZYCDPGTC",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.b295520640000p+5",
+   "0x1.9a973540c0000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.b295520640000p+5",
+   "0x1.9a973540c0000p+6"
   ]
  },
  {
@@ -9106,9 +10102,15 @@
  {
   "kind": "decode",
   "geohash": "TC8YUUG",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.34d3600000000p+3",
+   "0x1.4012ac0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.34d3600000000p+3",
+   "0x1.4012ac0000000p+6"
   ]
  },
  {
@@ -9128,9 +10130,15 @@
  {
   "kind": "decode",
   "geohash": "7Y",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.6800000000000p+2",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.0e00000000000p+3",
+   "-0x1.6800000000000p+2"
   ]
  },
  {
@@ -9150,9 +10158,15 @@
  {
   "kind": "decode",
   "geohash": "X1HZ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.bc60000000000p+2",
+   "0x1.1bb6000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.bc60000000000p+2",
+   "0x1.1bb6000000000p+7"
   ]
  },
  {
@@ -9172,9 +10186,15 @@
  {
   "kind": "decode",
   "geohash": "DM7FE8Y",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.df9bb00000000p+4",
+   "-0x1.25415c0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.df9bb00000000p+4",
+   "-0x1.25415c0000000p+6"
   ]
  },
  {
@@ -9194,9 +10214,15 @@
  {
   "kind": "decode",
   "geohash": "RGD0SW179",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.930e738000000p+4",
+   "0x1.5786297000000p+7",
+   "0x1.6800000000000p-16",
+   "0x1.6800000000000p-16"
+  ],
+  "decode": [
+   "-0x1.930e738000000p+4",
+   "0x1.5786297000000p+7"
   ]
  },
  {
@@ -9216,9 +10242,15 @@
  {
   "kind": "decode",
   "geohash": "P9DTQW",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.426a700000000p+6",
+   "0x1.429d100000000p+7",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.426a700000000p+6",
+   "0x1.429d100000000p+7"
   ]
  },
  {
@@ -9238,9 +10270,15 @@
  {
   "kind": "decode",
   "geohash": "X52N",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.36c8000000000p+4",
+   "0x1.0e5a000000000p+7",
+   "0x1.6800000000000p-4",
+   "0x1.6800000000000p-3"
+  ],
+  "decode": [
+   "0x1.36c8000000000p+4",
+   "0x1.0e5a000000000p+7"
   ]
  },
  {
@@ -9260,9 +10298,15 @@
  {
   "kind": "decode",
   "geohash": "2M4SD339R38",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.013af5dc00000p+4",
+   "-0x1.4a44292180000p+7",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.013af5dc00000p+4",
+   "-0x1.4a44292180000p+7"
   ]
  },
  {
@@ -9282,9 +10326,15 @@
  {
   "kind": "decode",
   "geohash": "5U944CKHCKX",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.01501bbf00000p+6",
+   "-0x1.36f47a6800000p+3",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.01501bbf00000p+6",
+   "-0x1.36f47a6800000p+3"
   ]
  },
  {
@@ -9304,9 +10354,15 @@
  {
   "kind": "decode",
   "geohash": "XDWN5E1Y84",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.e450402000000p+3",
+   "0x1.4c2ffbb400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "0x1.e450402000000p+3",
+   "0x1.4c2ffbb400000p+7"
   ]
  },
  {
@@ -9326,9 +10382,15 @@
  {
   "kind": "decode",
   "geohash": "1JEC0U33KU",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.d6e7b2d800000p+5",
+   "-0x1.0362239400000p+7",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.d6e7b2d800000p+5",
+   "-0x1.0362239400000p+7"
   ]
  },
  {
@@ -9348,9 +10410,15 @@
  {
   "kind": "decode",
   "geohash": "HWZ2W",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.9f5f000000000p+5",
+   "0x1.07d9000000000p+5",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "-0x1.9f5f000000000p+5",
+   "0x1.07d9000000000p+5"
   ]
  },
  {
@@ -9370,9 +10438,15 @@
  {
   "kind": "decode",
   "geohash": "YHUT0EJ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.2275940000000p+6",
+   "0x1.816e3c0000000p+6",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.2275940000000p+6",
+   "0x1.816e3c0000000p+6"
   ]
  },
  {
@@ -9392,9 +10466,15 @@
  {
   "kind": "decode",
   "geohash": "SVBP7CQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0d01780000000p+5",
+   "0x1.0f63c80000000p+5",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "0x1.0d01780000000p+5",
+   "0x1.0f63c80000000p+5"
   ]
  },
  {
@@ -9414,9 +10494,15 @@
  {
   "kind": "decode",
   "geohash": "W",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.6800000000000p+4",
+   "0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.6800000000000p+4",
+   "0x1.c200000000000p+6"
   ]
  },
  {
@@ -9436,9 +10522,15 @@
  {
   "kind": "decode",
   "geohash": "183N9TQ9RW",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.5db0369c00000p+6",
+   "-0x1.bc13063800000p+6",
+   "0x1.6800000000000p-19",
+   "0x1.6800000000000p-18"
+  ],
+  "decode": [
+   "-0x1.5db0369c00000p+6",
+   "-0x1.bc13063800000p+6"
   ]
  },
  {
@@ -9458,9 +10550,15 @@
  {
   "kind": "decode",
   "geohash": "C5341B4W9XDE",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.fd125e66c0000p+5",
+   "-0x1.0b06d519e0000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.fd125e66c0000p+5",
+   "-0x1.0b06d519e0000p+7"
   ]
  },
  {
@@ -9480,9 +10578,15 @@
  {
   "kind": "decode",
   "geohash": "4BBDYY",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.550c700000000p+6",
+   "-0x1.b9f5400000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.550c700000000p+6",
+   "-0x1.b9f5400000000p+5"
   ]
  },
  {
@@ -9502,9 +10606,15 @@
  {
   "kind": "decode",
   "geohash": "MV",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.c200000000000p+3",
+   "0x1.5180000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "-0x1.c200000000000p+3",
+   "0x1.5180000000000p+6"
   ]
  },
  {
@@ -9524,9 +10634,15 @@
  {
   "kind": "decode",
   "geohash": "VPRFMKNRBX4",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.58cce6c500000p+6",
+   "0x1.c11a210200000p+5",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.58cce6c500000p+6",
+   "0x1.c11a210200000p+5"
   ]
  },
  {
@@ -9546,9 +10662,15 @@
  {
   "kind": "decode",
   "geohash": "W7",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.3b00000000000p+4",
+   "0x1.ab80000000000p+6"
   ]
  },
  {
@@ -9568,9 +10690,15 @@
  {
   "kind": "decode",
   "geohash": "W3N4T4F19MXY",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.851c385200000p+2",
+   "0x1.b7a3e0d4c0000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.851c385200000p+2",
+   "0x1.b7a3e0d4c0000p+6"
   ]
  },
  {
@@ -9590,9 +10718,15 @@
  {
   "kind": "decode",
   "geohash": "4G30SN",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.1e61700000000p+6",
+   "-0x1.b54cc00000000p+5",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.1e61700000000p+6",
+   "-0x1.b54cc00000000p+5"
   ]
  },
  {
@@ -9612,9 +10746,15 @@
  {
   "kind": "decode",
   "geohash": "ZM2MUV",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.2e49f00000000p+6",
+   "0x1.25a1b00000000p+7",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "0x1.2e49f00000000p+6",
+   "0x1.25a1b00000000p+7"
   ]
  },
  {
@@ -9634,9 +10774,15 @@
  {
   "kind": "decode",
   "geohash": "U6KKV",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.d41b000000000p+5",
+   "0x1.177e000000000p+4",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.d41b000000000p+5",
+   "0x1.177e000000000p+4"
   ]
  },
  {
@@ -9656,9 +10802,15 @@
  {
   "kind": "decode",
   "geohash": "4P0",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.8f60000000000p+5",
+   "-0x1.6530000000000p+6",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.8f60000000000p+5",
+   "-0x1.6530000000000p+6"
   ]
  },
  {
@@ -9706,9 +10858,15 @@
  {
   "kind": "decode",
   "geohash": "Y",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+6",
+   "0x1.c200000000000p+6"
   ]
  },
  {
@@ -9728,9 +10886,15 @@
  {
   "kind": "decode",
   "geohash": "KBW",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.4be0000000000p+5",
+   "0x1.5720000000000p+5",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.4be0000000000p+5",
+   "0x1.5720000000000p+5"
   ]
  },
  {
@@ -9750,9 +10914,15 @@
  {
   "kind": "decode",
   "geohash": "31FRNNU6",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.0f1b2f0000000p+5",
+   "-0x1.0721ec8000000p+7",
+   "0x1.6800000000000p-14",
+   "0x1.6800000000000p-13"
+  ],
+  "decode": [
+   "-0x1.0f1b2f0000000p+5",
+   "-0x1.0721ec8000000p+7"
   ]
  },
  {
@@ -9772,9 +10942,15 @@
  {
   "kind": "decode",
   "geohash": "K67C325",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.00fc980000000p+5",
+   "0x1.0954b00000000p+4",
+   "0x1.6800000000000p-11",
+   "0x1.6800000000000p-11"
+  ],
+  "decode": [
+   "-0x1.00fc980000000p+5",
+   "0x1.0954b00000000p+4"
   ]
  },
  {
@@ -9794,9 +10970,15 @@
  {
   "kind": "decode",
   "geohash": "1P2",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.8420000000000p+5",
+   "-0x1.0c98000000000p+7",
+   "0x1.6800000000000p-1",
+   "0x1.6800000000000p-1"
+  ],
+  "decode": [
+   "-0x1.8420000000000p+5",
+   "-0x1.0c98000000000p+7"
   ]
  },
  {
@@ -9816,9 +10998,15 @@
  {
   "kind": "decode",
   "geohash": "6YPNKPZ9VU5D",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.43789c1f00000p+3",
+   "-0x1.71c2641380000p+5",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "-0x1.43789c1f00000p+3",
+   "-0x1.71c2641380000p+5"
   ]
  },
  {
@@ -9838,9 +11026,15 @@
  {
   "kind": "decode",
   "geohash": "CWGCYE9QMZY",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.4d2fd45300000p+6",
+   "-0x1.abc17b0700000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "0x1.4d2fd45300000p+6",
+   "-0x1.abc17b0700000p+6"
   ]
  },
  {
@@ -9860,9 +11054,15 @@
  {
   "kind": "decode",
   "geohash": "X8B3DT7K8P9W",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.20c5d55200000p+2",
+   "0x1.3bee894920000p+7",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.20c5d55200000p+2",
+   "0x1.3bee894920000p+7"
   ]
  },
  {
@@ -9882,9 +11082,15 @@
  {
   "kind": "decode",
   "geohash": "9FQT2BSYR052",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.b2a74a2d00000p+3",
+   "-0x1.7047421040000p+6",
+   "0x1.6800000000000p-24",
+   "0x1.6800000000000p-23"
+  ],
+  "decode": [
+   "0x1.b2a74a2d00000p+3",
+   "-0x1.7047421040000p+6"
   ]
  },
  {
@@ -9904,9 +11110,15 @@
  {
   "kind": "decode",
   "geohash": "DY",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.2480000000000p+5",
+   "-0x1.9500000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.2480000000000p+5",
+   "-0x1.9500000000000p+5"
   ]
  },
  {
@@ -9926,9 +11138,15 @@
  {
   "kind": "decode",
   "geohash": "J6PRZR",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.3562d00000000p+6",
+   "0x1.0b13e00000000p+6",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.3562d00000000p+6",
+   "0x1.0b13e00000000p+6"
   ]
  },
  {
@@ -9948,9 +11166,15 @@
  {
   "kind": "decode",
   "geohash": "NC1YYVVYZ8B",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.4c9f770500000p+6",
+   "0x1.fa102a8d00000p+6",
+   "0x1.6800000000000p-21",
+   "0x1.6800000000000p-21"
+  ],
+  "decode": [
+   "-0x1.4c9f770500000p+6",
+   "0x1.fa102a8d00000p+6"
   ]
  },
  {
@@ -9970,9 +11194,15 @@
  {
   "kind": "decode",
   "geohash": "5G9RDQ",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "-0x1.13d5700000000p+6",
+   "-0x1.2c69000000000p+3",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ],
+  "decode": [
+   "-0x1.13d5700000000p+6",
+   "-0x1.2c69000000000p+3"
   ]
  },
  {
@@ -9992,9 +11222,15 @@
  {
   "kind": "decode",
   "geohash": "BCN62",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.9857000000000p+5",
+   "-0x1.12e0c00000000p+7",
+   "0x1.6800000000000p-6",
+   "0x1.6800000000000p-6"
+  ],
+  "decode": [
+   "0x1.9857000000000p+5",
+   "-0x1.12e0c00000000p+7"
   ]
  },
  {
@@ -10014,9 +11250,15 @@
  {
   "kind": "decode",
   "geohash": "T1",
-  "error": [
-   "ValueError",
-   "Invalid character in geohash"
+  "exactly": [
+   "0x1.0e00000000000p+3",
+   "0x1.9500000000000p+5",
+   "0x1.6800000000000p+1",
+   "0x1.6800000000000p+2"
+  ],
+  "decode": [
+   "0x1.0e00000000000p+3",
+   "0x1.9500000000000p+5"
   ]
  },
  {
@@ -10085,7 +11327,7 @@
  },
  {
   "kind": "decode",
-  "geohash": "\u00e9zs42",
+  "geohash": "ézs42",
   "error": [
    "ValueError",
    "Invalid character in geohash"
@@ -10110,6 +11352,90 @@
  {
   "kind": "decode",
   "geohash": " ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "K",
+  "decode": [
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ],
+  "exactly": [
+   "-0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4",
+   "0x1.6800000000000p+4"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ezs42K",
+  "decode": [
+   "0x1.54dca00000000p+5",
+   "-0x1.66f2000000000p+2"
+  ],
+  "exactly": [
+   "0x1.54dca00000000p+5",
+   "-0x1.66f2000000000p+2",
+   "0x1.6800000000000p-9",
+   "0x1.6800000000000p-8"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "İ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ezs42İ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ＳＭＯｐ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ｓｔｕｖ",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Éz",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "ız",
+  "error": [
+   "ValueError",
+   "Invalid character in geohash"
+  ]
+ },
+ {
+  "kind": "decode",
+  "geohash": "Ι",
   "error": [
    "ValueError",
    "Invalid character in geohash"

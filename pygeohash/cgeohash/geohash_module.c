@@ -33,7 +33,9 @@ static const char BASE32[] = "0123456789bcdefghjkmnpqrstuvwxyz";
 
 // Mapping from byte value to its 5-bit base32 index, -1 for every
 // non-alphabet byte. 256 entries so any char value (including bytes >= 128
-// from multibyte UTF-8) can index it without a separate range guard.
+// from multibyte UTF-8) can index it without a separate range guard. A-Z fold
+// onto their lowercase indices, so case normalization happens inside the table
+// and uppercase/mixed-case input decodes with no separate pass.
 static int base32_decode_map[256] = {0};
 
 // Initialize the base32 decode map. Called once from the module init function.
@@ -43,6 +45,12 @@ static void init_base32_decode_map(void) {
     }
     for (int i = 0; i < 32; i++) {
         base32_decode_map[(unsigned char)BASE32[i]] = i;
+    }
+    // Case-fold: every letter of the alphabet is lowercase in BASE32, so each
+    // uppercase byte decodes as its lowercase counterpart (letters excluded
+    // from base32, like 'i'/'l'/'o', keep folding to -1).
+    for (unsigned char c = 'A'; c <= 'Z'; c++) {
+        base32_decode_map[c] = base32_decode_map[(unsigned char)(c + 32)];
     }
 }
 
@@ -177,14 +185,11 @@ static int decode_to_doubles(const char *geohash, double *out_lat, double *out_l
     return 0;
 }
 
-// Decode a geohash string to exact latitude/longitude with error margins
-static PyObject* geohash_decode_exactly(PyObject *self, PyObject *args) {
-    const char *geohash;
 
-    if (!PyArg_ParseTuple(args, "s", &geohash)) {
-        return NULL;
-    }
 
+// Shared tail for both decode entries: run the walk on a NUL-terminated UTF-8
+// C string (owned by the caller's argument) and wrap the result.
+static PyObject* decode_from_utf8(const char *geohash, int exact) {
     double lat, lon, lat_err, lon_err;
     if (decode_to_doubles(geohash, &lat, &lon, &lat_err, &lon_err) != 0) {
         return NULL;
@@ -192,27 +197,120 @@ static PyObject* geohash_decode_exactly(PyObject *self, PyObject *args) {
     if (ensure_types() != 0) {
         return NULL;
     }
-    return make_named_tuple(ExactLatLong_type, Py_BuildValue("dddd", lat, lon, lat_err, lon_err));
+    if (exact) {
+        return make_named_tuple(ExactLatLong_type, Py_BuildValue("dddd", lat, lon, lat_err, lon_err));
+    }
+    return make_named_tuple(LatLong_type, Py_BuildValue("dd", lat, lon));
+}
+
+// The decode entries are METH_FASTCALL (they take no keywords). The hot path
+// handles the common case -- exactly one str argument -- without materializing
+// an argument tuple. Every other shape (wrong arity, non-str types, an
+// embedded null) is re-parsed through PyArg_ParseTuple on a synthesized tuple
+// so its errors stay byte-identical to the METH_VARARGS implementation this
+// replaces: "function takes exactly 1 argument (N given)", "argument 1 must
+// be str, not X", ValueError("embedded null character"), and
+// "decode() takes no keyword arguments".
+static PyObject* decode_cold(PyObject *const *args, Py_ssize_t nargs, PyObject *folded, int exact);
+
+static PyObject* decode_call(PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames, int exact) {
+    if (kwnames != NULL && PyTuple_GET_SIZE(kwnames) != 0) {
+        // The METH_VARARGS parser rejected keyword arguments naming the bare
+        // method; reproduce that exact message (CPython's fastcall machinery
+        // would use the module-qualified name instead).
+        PyErr_Format(PyExc_TypeError, "%s() takes no keyword arguments",
+                     exact ? "decode_exactly" : "decode");
+        return NULL;
+    }
+
+    if (nargs == 1 && PyUnicode_Check(args[0])) {
+        PyObject *hash = args[0];
+        PyObject *folded = NULL;
+        if (Py_TYPE(hash) != &PyUnicode_Type
+            || !(PyUnicode_IS_COMPACT(hash) && PyUnicode_IS_ASCII(hash))) {
+            // Two shapes miss the table fast path: (1) str subclasses, whose
+            // lower() the old wrapper invoked and which may override it;
+            // (2) non-ASCII input, which the old wrapper lowered with
+            // str.lower() semantics (U+212A KELVIN SIGN -> 'k', U+0130 ->
+            // 'i' + U+0307, ...). There is no public C API for str.lower(),
+            // so call the method; a lowered-to-ASCII compact result
+            // re-enters the fast path below.
+            folded = PyObject_CallMethod(hash, "lower", NULL);
+            if (folded == NULL) {
+                return NULL;
+            }
+            if (PyUnicode_Check(folded)) {
+                hash = folded;
+            }
+            // A non-str lower() result falls through to decode_cold, where
+            // PyArg_ParseTuple raises the same TypeError the old
+            // wrapper-then-parser pipeline raised.
+        }
+        if (Py_TYPE(hash) == &PyUnicode_Type
+            && PyUnicode_IS_COMPACT(hash) && PyUnicode_IS_ASCII(hash)) {
+            // O(1) interned flags; compact ASCII data is already UTF-8 and the
+            // decode table folds A-Z, so the bytes go straight to the walk
+            // with no normalization pass and no UTF-8 re-encoding.
+            const char *geohash = (const char *)PyUnicode_1BYTE_DATA(hash);
+            if ((size_t)PyUnicode_GET_LENGTH(hash) == strlen(geohash)) {
+                PyObject *result = decode_from_utf8(geohash, exact);
+                Py_XDECREF(folded);
+                return result;
+            }
+            // embedded null: historical error path below
+        }
+        // Embedded null, a lower() result that is not an exact compact str,
+        // or lowering that left non-ASCII bytes: parse the folded object so
+        // byte-length, character-validation, and type-error outcomes match
+        // the old wrapper-level .lower() pipeline exactly.
+        return decode_cold(args, nargs, folded, exact);
+    }
+    return decode_cold(args, nargs, NULL, exact);
+}
+
+// Cold path: wrong arity, non-str types, exotic (non-compact) strings, or
+// embedded nulls. Re-parses through PyArg_ParseTuple on a synthesized tuple so
+// every error stays byte-identical to the METH_VARARGS implementation this
+// replaces: "function takes exactly 1 argument (N given)", "argument 1 must
+// be str, not X", and ValueError("embedded null character"). `folded` (the
+// lower() result standing in for args[0], or NULL) is parsed in place of
+// args[0] when set, preserving the wrapper's historical .lower() semantics
+// for non-ASCII input (and any type error lower() itself used to provoke).
+// Consumes the `folded` reference.
+static PyObject* decode_cold(PyObject *const *args, Py_ssize_t nargs, PyObject *folded, int exact) {
+    PyObject *tpl = PyTuple_New(nargs);
+    if (tpl == NULL) {
+        Py_XDECREF(folded);
+        return NULL;
+    }
+    for (Py_ssize_t i = 0; i < nargs; i++) {
+        PyObject *item = (i == 0 && folded != NULL) ? folded : args[i];
+        PyTuple_SET_ITEM(tpl, i, Py_NewRef(item));
+    }
+    Py_XDECREF(folded);  // the tuple now holds its own reference
+
+    const char *geohash;
+    if (!PyArg_ParseTuple(tpl, "s", &geohash)) {
+        Py_DECREF(tpl);
+        return NULL;
+    }
+    // geohash points into the parsed string's buffer; the tuple keeps that
+    // string alive until the decode walk has finished.
+    PyObject *result = decode_from_utf8(geohash, exact);
+    Py_DECREF(tpl);
+    return result;
+}
+
+// Decode a geohash string to exact latitude/longitude with error margins
+static PyObject* geohash_decode_exactly(PyObject *self, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    (void)self;
+    return decode_call(args, nargs, kwnames, 1);
 }
 
 // Python wrapper for decode function
-static PyObject* geohash_decode(PyObject *self, PyObject *args) {
-    const char *geohash;
-
-    if (!PyArg_ParseTuple(args, "s", &geohash)) {
-        return NULL;
-    }
-
-    // Decode straight into a LatLong: no intermediate ExactLatLong, no second
-    // module import, no attribute round-trip.
-    double lat, lon, lat_err, lon_err;
-    if (decode_to_doubles(geohash, &lat, &lon, &lat_err, &lon_err) != 0) {
-        return NULL;
-    }
-    if (ensure_types() != 0) {
-        return NULL;
-    }
-    return make_named_tuple(LatLong_type, Py_BuildValue("dd", lat, lon));
+static PyObject* geohash_decode(PyObject *self, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    (void)self;
+    return decode_call(args, nargs, kwnames, 0);
 }
 
 // Argument converters for the encoders. bool is a subclass of int, so the plain
@@ -416,9 +514,9 @@ static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObjec
 
 // Module method definitions
 static PyMethodDef GeohashMethods[] = {
-    {"decode_exactly", geohash_decode_exactly, METH_VARARGS, 
+    {"decode_exactly", (PyCFunction)(void (*)(void))geohash_decode_exactly, METH_FASTCALL | METH_KEYWORDS,
      "Decode a geohash to its exact values, including error margins."},
-    {"decode", geohash_decode, METH_VARARGS, 
+    {"decode", (PyCFunction)(void (*)(void))geohash_decode, METH_FASTCALL | METH_KEYWORDS,
      "Decode a geohash to latitude and longitude coordinates."},
     {"encode", (PyCFunction)geohash_encode, METH_VARARGS | METH_KEYWORDS, 
      "Encode coordinates to a geohash string."},
