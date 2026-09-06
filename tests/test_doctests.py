@@ -7,7 +7,7 @@ from typing import Tuple
 
 import pytest
 
-from pygeohash import bounding_box, distances, geohash, geohash_types, neighbor, stats, types
+from pygeohash import bounding_box, distances, geohash, geohash_types, interop, neighbor, stats, types
 
 
 def test_docstring_examples() -> None:
@@ -17,11 +17,20 @@ def test_docstring_examples() -> None:
     if Path.cwd().name == "mutants":
         pytest.skip("doctest inventory is not meaningful in a mutmut mutants tree")
 
-    modules: Tuple[ModuleType, ...] = (geohash, distances, neighbor, bounding_box, stats, types, geohash_types)
+    modules: Tuple[ModuleType, ...] = (
+        geohash,
+        distances,
+        neighbor,
+        bounding_box,
+        stats,
+        types,
+        geohash_types,
+        interop,
+    )
     results = {module.__name__: doctest.testmod(module, raise_on_error=False) for module in modules}
     failures = {name: result.failed for name, result in results.items() if result.failed}
 
     assert failures == {}
-    assert sum(result.attempted for result in results.values()) == 21
-    for module in (distances, bounding_box, stats, neighbor):
+    assert sum(result.attempted for result in results.values()) == 33
+    for module in (distances, bounding_box, stats, neighbor, interop):
         assert results[module.__name__].attempted > 0
