@@ -263,7 +263,11 @@ def test_add_geohash_grid_ordinary_viewport():
     geohash_map.add_geohash_grid(precision=2)
 
     bounds = _grid_rectangle_bounds(folium, geohash_map)
-    assert len(bounds) > 0
+    # Independent derivation: the zoom-3 viewport spans +/-45 degrees, giving
+    # lat [-7.2251, 82.7749] and lon [-167.4194, -77.4194]; that is 17 rows x 9
+    # columns of precision-2 cells (5.625 deg x 11.25 deg). A mutant that widens
+    # or shifts the viewport changes this count (world-wide would be 1024).
+    assert len(bounds) == 153
     assert any(min_lat <= 37.7749 <= max_lat for min_lat, _, max_lat, _ in bounds)
     assert any(min_lon <= -122.4194 <= max_lon for _, min_lon, _, max_lon in bounds)
 
@@ -364,7 +368,10 @@ def test_check_viz_dependencies_warns_with_install_hint_when_matplotlib_missing(
     """A missing matplotlib warns a UserWarning naming the pip extra and returns False."""
     _hide_module(monkeypatch, "matplotlib")
 
-    with pytest.warns(UserWarning, match=r"pip install pygeohash\[viz\]") as record:
+    with pytest.warns(
+        UserWarning,
+        match=r"^Matplotlib is required for visualization functions\. Install with: pip install pygeohash\[viz\]$",
+    ) as record:
         assert viz._check_viz_dependencies() is False
 
     # stacklevel=2 attributes the warning to this caller, not to viz.py internals.
@@ -378,7 +385,10 @@ def test_check_folium_dependencies_warns_with_install_hint_when_folium_missing(m
     """A missing folium warns a UserWarning naming the pip extra and returns False."""
     _hide_module(monkeypatch, "folium")
 
-    with pytest.warns(UserWarning, match=r"pip install pygeohash\[viz\]") as record:
+    with pytest.warns(
+        UserWarning,
+        match=r"^Folium is required for interactive maps\. Install with: pip install pygeohash\[viz\]$",
+    ) as record:
         assert viz._check_folium_dependencies() is False
 
     if Path.cwd().name != "mutants":
@@ -465,6 +475,17 @@ def test_protocol_methods_accept_protocol_shaped_callers(method_name, args):
     # The declared protocol methods are abstract (bodies are ...); a call must be
     # accepted and return None rather than raising on any conforming fake.
     assert method(_RecordingMap(), *args) is None
+
+
+def test_add_geohashes_cycles_short_fill_colors_list():
+    """A fill_colors list shorter than the geohash set cycles like colors do."""
+    fake = _RecordingMap()
+
+    result = viz.add_geohashes(fake, ["9q8yyk", "9q8yym", "9q8yxn"], fill_colors=["red", "blue"])
+
+    assert result is fake
+    assert [geohash for geohash, _ in fake.added] == ["9q8yyk", "9q8yym", "9q8yxn"]
+    assert [kwargs["fill_color"] for _, kwargs in fake.added] == ["red", "blue", "red"]
 
 
 def test_add_geohash_dispatches_a_folium_rectangle_child_to_the_protocol():
