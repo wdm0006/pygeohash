@@ -1,9 +1,15 @@
 """Tests for the visualization module."""
 
+import builtins
 import unittest
-from unittest.mock import patch, MagicMock
+import warnings
+from typing import runtime_checkable
+from unittest.mock import MagicMock, patch
 
 import pytest
+
+import pygeohash.viz as viz
+from pygeohash.viz import FoliumMapProtocol
 
 
 class TestViz(unittest.TestCase):
@@ -333,6 +339,146 @@ def test_add_geohashes_cycles_short_color_list():
 
     rectangles = [child for child in geohash_map._children.values() if isinstance(child, folium.Rectangle)]
     assert [rectangle.options["color"] for rectangle in rectangles] == ["red", "blue", "red"]
+
+
+# ---------------------------------------------------------------------------
+# Dependency checks: user-facing warning content, category, stacklevel, and
+# return values under missing and installed dependencies.
+# ---------------------------------------------------------------------------
+
+
+def _hide_module(monkeypatch, name):
+    """Make `import name` raise ImportError inside the patched scope, even if cached."""
+    real_import = builtins.__import__
+
+    def fake_import(module_name, *args, **kwargs):
+        if module_name == name or module_name.startswith(name + "."):
+            raise ImportError(f"No module named {module_name!r}")
+        return real_import(module_name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", fake_import)
+
+
+def test_check_viz_dependencies_warns_with_install_hint_when_matplotlib_missing(monkeypatch):
+    """A missing matplotlib warns a UserWarning naming the pip extra and returns False."""
+    _hide_module(monkeypatch, "matplotlib")
+
+    with pytest.warns(UserWarning, match=r"pip install pygeohash\[viz\]") as record:
+        assert viz._check_viz_dependencies() is False
+
+    # stacklevel=2 attributes the warning to this caller, not to viz.py internals.
+    assert record[0].filename == __file__
+
+
+def test_check_folium_dependencies_warns_with_install_hint_when_folium_missing(monkeypatch):
+    """A missing folium warns a UserWarning naming the pip extra and returns False."""
+    _hide_module(monkeypatch, "folium")
+
+    with pytest.warns(UserWarning, match=r"pip install pygeohash\[viz\]") as record:
+        assert viz._check_folium_dependencies() is False
+
+    assert record[0].filename == __file__
+
+
+def test_check_viz_dependencies_is_silent_when_matplotlib_installed():
+    """With matplotlib importable the check returns True without warning."""
+    pytest.importorskip("matplotlib")
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        assert viz._check_viz_dependencies() is True
+
+
+def test_check_folium_dependencies_is_silent_when_folium_installed():
+    """With folium importable the check returns True without warning."""
+    pytest.importorskip("folium")
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        assert viz._check_folium_dependencies() is True
+
+
+# ---------------------------------------------------------------------------
+# FoliumMapProtocol conformance: a recording fake satisfies the protocol and
+# every protocol method is exercised through the real dispatching callers.
+# ---------------------------------------------------------------------------
+
+
+class _RecordingMap:
+    """Minimal FoliumMapProtocol implementation that records dispatch calls."""
+
+    def __init__(self, location=(0.0, 0.0), zoom_start=13):
+        self.location = location
+        self._zoom_start = zoom_start
+        self.children = []
+        self.added = []
+        self.grid_precisions = []
+
+    def add_child(self, child, name=None, index=None):
+        self.children.append(child)
+        return child
+
+    def add_geohash(self, geohash, **kwargs):
+        self.added.append((geohash, kwargs))
+        return self
+
+    def add_geohashes(self, geohashes, **kwargs):
+        self.added.extend(geohashes)
+        return self
+
+    def add_geohash_grid(self, precision=6, bbox=None, **kwargs):
+        self.grid_precisions.append((precision, bbox))
+        return self
+
+
+def test_folium_map_protocol_is_runtime_checkable():
+    """The protocol checks structurally at runtime once marked runtime_checkable."""
+    runtime_checkable(FoliumMapProtocol)
+
+    assert isinstance(_RecordingMap(), FoliumMapProtocol)
+    assert not isinstance(object(), FoliumMapProtocol)
+
+
+def test_add_geohash_dispatches_a_folium_rectangle_child_to_the_protocol():
+    """add_geohash builds a Rectangle and hands it to add_child, returning self."""
+    folium = pytest.importorskip("folium")
+    fake = _RecordingMap()
+
+    result = viz.add_geohash(fake, "u4pruyd", color="red", popup=None, tooltip=None)
+
+    assert result is fake
+    assert len(fake.children) == 1
+    assert isinstance(fake.children[0], folium.Rectangle)
+
+
+def test_add_geohashes_dispatches_per_geohash_colors_to_the_protocol():
+    """add_geohashes cycles short color lists and dispatches one call per geohash."""
+    fake = _RecordingMap()
+
+    result = viz.add_geohashes(fake, ["9q8yyk", "9q8yym"], colors=["red", "blue"])
+
+    assert result is fake
+    assert [geohash for geohash, _ in fake.added] == ["9q8yyk", "9q8yym"]
+    assert [kwargs["color"] for _, kwargs in fake.added] == ["red", "blue"]
+
+
+def test_add_geohash_grid_dispatches_the_cells_for_an_explicit_bbox():
+    """add_geohash_grid enumerates an explicit box and dispatches to add_geohashes."""
+    fake = _RecordingMap()
+
+    result = viz.add_geohash_grid(fake, precision=3, bbox=(57.649, 10.407, 57.650, 10.408))
+
+    assert result is fake
+    assert fake.added == ["u4p"]
+
+
+def test_add_geohash_grid_derives_the_viewport_from_the_protocol_location():
+    """With no bbox the viewport comes from the protocol object's location and zoom."""
+    fake = _RecordingMap(location=(57.649, 10.407), zoom_start=5)
+
+    viz.add_geohash_grid(fake, precision=2)
+
+    assert fake.added  # the derived viewport is non-empty
 
 
 if __name__ == "__main__":
