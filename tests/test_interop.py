@@ -483,3 +483,122 @@ def test_repeated_calls_are_deterministic():
 
 def _load_fixture():
     return json.loads(FIXTURE.read_text(encoding="utf-8"))
+
+
+# --- error-message contracts (pinned exactly; mutation-hardening) --------------
+# Every user-facing ValueError message in the module is asserted with its full
+# text and the concrete offending type, so message-corruption mutants die.
+# Full-equality assertions (not regex ``match=``) also pin the types named in
+# each message, which is exactly what several mutation survivors mutated.
+
+
+def test_geohash_error_messages_are_pinned():
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_to_tile(123)  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Geohash must be a string, but got int."
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_to_quadkey("")
+    assert str(excinfo.value) == "Geohash cannot be empty."
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_to_tile("z" * 13)
+    assert str(excinfo.value) == "Geohash must be at most 12 characters long."
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_to_int("ez!")
+    assert str(excinfo.value) == (
+        "Invalid character '!' in geohash 'ez!': characters must come from the "
+        "geohash base32 alphabet '0123456789bcdefghjkmnpqrstuvwxyz'"
+    )
+
+
+def test_precision_and_zoom_error_messages_are_pinned():
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(0, 0, 0, precision="2")  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Precision must be an integer, but got str."
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(0, 0, 0, precision=0)
+    assert str(excinfo.value) == "Precision must be between 1 and 12, but got 0."
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(0, 0, "5")  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Zoom must be an integer, but got str."
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(0, 0, 31)
+    assert str(excinfo.value) == "Zoom must be between 0 and 30, but got 31."
+
+
+def test_tile_axis_error_messages_are_pinned():
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash("1", 0, 5)  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Tile x must be an integer, but got str."
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(True, 0, 5)  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Tile x must be an integer, but got bool."
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(0, None, 5)  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Tile y must be an integer, but got NoneType."
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(8, 0, 3)
+    assert str(excinfo.value) == "Tile x must be between 0 and 7 at zoom 3, but got 8."
+    with pytest.raises(ValueError) as excinfo:
+        interop.tile_to_geohash(0, 8, 3)
+    assert str(excinfo.value) == (
+        "Tile y must be between 0 and 7 at zoom 3, but got 8."
+        " Tile y counts southward from the north pole (slippy convention)."
+    )
+
+
+def test_quadkey_error_messages_are_pinned():
+    with pytest.raises(ValueError) as excinfo:
+        interop.quadkey_to_geohash(123)  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Quadkey must be a string, but got int."
+    with pytest.raises(ValueError) as excinfo:
+        interop.quadkey_to_geohash("0" * 31)
+    assert str(excinfo.value) == "Quadkey must be at most 30 characters long (zoom 30), but got 31 characters."
+    with pytest.raises(ValueError) as excinfo:
+        interop.quadkey_to_geohash("X")
+    assert str(excinfo.value) == "Invalid character 'X' in quadkey 'X': quadkeys use only the digits 0, 1, 2 and 3."
+
+
+def test_polar_error_messages_are_pinned():
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_to_tile("zz")
+    assert str(excinfo.value) == (
+        "Geohash 'zz' cell centre latitude 87.1875 degrees is outside the Web Mercator band "
+        "±85.05112878 degrees. Slippy tiles and quadkeys do not exist for the polar caps; "
+        "pass clip=True to map the cell to the nearest in-band tile row."
+    )
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_to_tile("00")
+    assert str(excinfo.value) == (
+        "Geohash '00' cell centre latitude -87.1875 degrees is outside the Web Mercator band "
+        "±85.05112878 degrees. Slippy tiles and quadkeys do not exist for the polar caps; "
+        "pass clip=True to map the cell to the nearest in-band tile row."
+    )
+
+
+def test_geohash_from_int_error_messages_are_pinned():
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_from_int("3", 1)  # type: ignore[arg-type]
+    assert str(excinfo.value) == "Value must be an integer, but got str."
+    with pytest.raises(ValueError) as excinfo:
+        interop.geohash_from_int(-1, 1)
+    assert str(excinfo.value) == "Value must be non-negative, but got -1."
+
+
+def test_polar_quadkey_raise_by_default_and_clip():
+    # geohash_to_quadkey shares geohash_to_tile's polar policy: raise by
+    # default, clip only on request. The clipped quadkey keeps the cell's
+    # longitude column at the nearest in-band edge row.
+    with pytest.raises(ValueError, match="85.05112878"):
+        interop.geohash_to_quadkey("zz")
+    assert interop.geohash_to_quadkey("zz", clip=True) == "11111"
+    with pytest.raises(ValueError, match="85.05112878"):
+        interop.geohash_to_quadkey("00")
+    assert interop.geohash_to_quadkey("00", clip=True) == "22222"
+
+
+def test_equator_epsilon_straddle_pins_mercantile_parity():
+    # At precision 12, zoom 30, this cell centre's Web Mercator y fraction
+    # sits within 1e-14 of an exact tile-row boundary; the committed formula's
+    # epsilon resolves it to row 749520808, agreeing with mercantile
+    # (verified: mercantile.tile(-179.99966455623507, -57.853870214894414, 30)).
+    assert interop.geohash_to_tile("0j8nbh00zbfj") == Tile(x=1000, y=749520808, zoom=30)
