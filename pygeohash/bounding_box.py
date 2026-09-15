@@ -18,6 +18,28 @@ logger = get_logger(__name__)
 _FIELD_ORDER = "BoundingBox fields are (min_lat, min_lon, max_lat, max_lon)"
 
 
+def _validate_point_coordinates(lat: float, lon: float) -> None:
+    """Validate coordinates supplied to point-containment operations."""
+    for name, value, lower, upper in (
+        ("latitude", lat, -90.0, 90.0),
+        ("longitude", lon, -180.0, 180.0),
+    ):
+        if isinstance(value, bool):
+            raise ValueError(f"{name} ({value}) must be a number, not a bool")
+        try:
+            is_finite = math.isfinite(value)
+        except TypeError:
+            is_finite = False
+        if not is_finite:
+            raise ValueError(f"{name} ({value}) must be a finite number")
+        try:
+            is_in_range = lower <= value <= upper
+        except TypeError:
+            is_in_range = False
+        if not is_in_range:
+            raise ValueError(f"{name} ({value}) must be between {lower:g} and {upper:g}")
+
+
 class _BoundingBoxFields(NamedTuple):
     """Field layout for :class:`BoundingBox`; ``typing.NamedTuple`` forbids overriding ``__new__``."""
 
@@ -139,6 +161,10 @@ def is_point_in_box(lat: float, lon: float, bbox: BoundingBox) -> bool:
     Returns:
         bool: True if the point is within the bounding box, False otherwise.
 
+    Raises:
+        ValueError: If latitude or longitude is a boolean, non-numeric, non-finite,
+            or outside its geographic bounds.
+
     Example:
         >>> bbox = get_bounding_box("u4pruyd")
         >>> is_point_in_box(57.649, 10.407, bbox)
@@ -146,6 +172,7 @@ def is_point_in_box(lat: float, lon: float, bbox: BoundingBox) -> bool:
         >>> is_point_in_box(40.0, 10.0, bbox)
         False
     """
+    _validate_point_coordinates(lat, lon)
     logger.debug("Checking if point (lat=%f, lon=%f) is in box: %s", lat, lon, bbox)
     result = bbox.min_lat <= lat <= bbox.max_lat and bbox.min_lon <= lon <= bbox.max_lon
     logger.debug("Point is %s the box", "inside" if result else "outside")
@@ -162,6 +189,10 @@ def is_point_in_geohash(lat: float, lon: float, geohash: str) -> bool:
 
     Returns:
         bool: True if the point is within the geohash's bounding box, False otherwise.
+
+    Raises:
+        ValueError: If latitude or longitude is a boolean, non-numeric, non-finite,
+            or outside its geographic bounds, or if ``geohash`` is invalid.
 
     Example:
         >>> is_point_in_geohash(57.649, 10.407, "u4pruyd")
