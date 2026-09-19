@@ -331,6 +331,46 @@ def test_error_paths():
         cgm.decode("ezs42e44yx9a")
 
 
+@pytest.mark.parametrize("encoder", [cgm.encode, cgm.encode_strictly])
+@pytest.mark.parametrize(
+    "args, kwargs, exc_type, message",
+    [
+        ((), {}, TypeError, "function missing required argument 'latitude' (pos 1)"),
+        ((45.0,), {}, TypeError, "function missing required argument 'longitude' (pos 2)"),
+        ((45.0, 10.0, 6, None), {}, TypeError, "function takes at most 3 arguments (4 given)"),
+        (
+            (),
+            {"latitude": 45.0, "longitude": 10.0, "unknown": 6},
+            TypeError,
+            "'unknown' is an invalid keyword argument for this function",
+        ),
+        (
+            (45.0, 10.0),
+            {"latitude": 45.0},
+            TypeError,
+            "argument for function given by name ('latitude') and position (1)",
+        ),
+        ((True, 10.0, 6), {}, ValueError, "latitude and longitude must be numbers, not booleans"),
+        ((45.0, False, 6), {}, ValueError, "latitude and longitude must be numbers, not booleans"),
+        ((45.0, 10.0, True), {}, ValueError, "precision must be an integer, not a boolean"),
+        (("north", 10.0, 6), {}, TypeError, "must be real number, not str"),
+        ((45.0, 10.0, 6.5), {}, TypeError, "'float' object cannot be interpreted as an integer"),
+        ((45.0, 10.0, 13), {}, ValueError, "precision must be between 1 and 12"),
+    ],
+)
+def test_encode_call_error_contract(encoder, args, kwargs, exc_type, message):
+    with pytest.raises(exc_type) as exc_info:
+        encoder(*args, **kwargs)
+    assert str(exc_info.value) == message
+
+
+@pytest.mark.parametrize("encoder", [cgm.encode, cgm.encode_strictly])
+def test_encode_keyword_call_contract(encoder):
+    expected = encoder(45.0, 10.0, 6)
+    assert encoder(latitude=45.0, longitude=10.0, precision=6) == expected
+    assert encoder(45.0, longitude=10.0, precision=6) == expected
+
+
 def _load_fixture():
     with FIXTURE.open() as fh:
         return json.load(fh)
