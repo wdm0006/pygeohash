@@ -14,7 +14,7 @@ Attributes:
 from importlib import import_module
 from typing import TYPE_CHECKING, Dict, List
 
-from pygeohash.geohash import decode, decode_exactly, encode, encode_strictly
+from pygeohash.geohash import decode, decode_exactly, decode_many, encode, encode_many, encode_strictly
 from pygeohash.geohash_types import ExactLatLong, GeohashPrecision, LatLong
 from pygeohash.logging import (
     add_file_handler,
@@ -79,6 +79,8 @@ __all__ = [
     "encode_strictly",
     "decode",
     "decode_exactly",
+    "encode_many",
+    "decode_many",
     # Distance calculations
     "geohash_approximate_distance",
     "geohash_haversine_distance",
