@@ -461,20 +461,7 @@ static PyObject* make_hash_string(const char *geohash, int precision) {
     return result;
 }
 
-// Encode coordinates to a geohash string
-static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs) {
-    double latitude, longitude;
-    int precision = 12;
-
-    static char *kwlist[] = {"latitude", "longitude", "precision", NULL};
-
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O&O&|O&", kwlist,
-                                    convert_coordinate, &latitude,
-                                    convert_coordinate, &longitude,
-                                    convert_precision, &precision)) {
-        return NULL;
-    }
-
+static PyObject* encode_result(double latitude, double longitude, int precision) {
     if (prepare_encode(&latitude, &longitude, precision) != 0) {
         return NULL;
     }
@@ -482,6 +469,69 @@ static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs
     char geohash[13] = {0};  // Maximum precision is 12 + null terminator
     encode_core(latitude, longitude, precision, geohash);
     return make_hash_string(geohash, precision);
+}
+
+static PyObject* encode_cold(PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    double latitude, longitude;
+    int precision = 12;
+    static char *kwlist[] = {"latitude", "longitude", "precision", NULL};
+
+    PyObject *tpl = PyTuple_New(nargs);
+    if (tpl == NULL) {
+        return NULL;
+    }
+    for (Py_ssize_t i = 0; i < nargs; i++) {
+        PyTuple_SET_ITEM(tpl, i, Py_NewRef(args[i]));
+    }
+
+    PyObject *kwargs = NULL;
+    if (kwnames != NULL) {
+        Py_ssize_t nkwargs = PyTuple_GET_SIZE(kwnames);
+        kwargs = PyDict_New();
+        if (kwargs == NULL) {
+            Py_DECREF(tpl);
+            return NULL;
+        }
+        for (Py_ssize_t i = 0; i < nkwargs; i++) {
+            if (PyDict_SetItem(kwargs, PyTuple_GET_ITEM(kwnames, i), args[nargs + i]) != 0) {
+                Py_DECREF(kwargs);
+                Py_DECREF(tpl);
+                return NULL;
+            }
+        }
+    }
+
+    int parsed = PyArg_ParseTupleAndKeywords(tpl, kwargs, "O&O&|O&", kwlist,
+                                    convert_coordinate, &latitude,
+                                    convert_coordinate, &longitude,
+                                    convert_precision, &precision);
+    Py_XDECREF(kwargs);
+    Py_DECREF(tpl);
+    if (!parsed) {
+        return NULL;
+    }
+
+    return encode_result(latitude, longitude, precision);
+}
+
+static PyObject* encode_call(PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    if (kwnames == NULL && (nargs == 2 || nargs == 3)) {
+        double latitude, longitude;
+        int precision = 12;
+        if (!convert_coordinate(args[0], &latitude)
+            || !convert_coordinate(args[1], &longitude)
+            || (nargs == 3 && !convert_precision(args[2], &precision))) {
+            return NULL;
+        }
+        return encode_result(latitude, longitude, precision);
+    }
+    return encode_cold(args, nargs, kwnames);
+}
+
+// Encode coordinates to a geohash string
+static PyObject* geohash_encode(PyObject *self, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    (void)self;
+    return encode_call(args, nargs, kwnames);
 }
 
 // Encode coordinates to a geohash string.
@@ -490,26 +540,9 @@ static PyObject* geohash_encode(PyObject *self, PyObject *args, PyObject *kwargs
 // "strictly" name, it runs the same validation and the same interval-bisection
 // core and produces the same output for every input. It is kept as a separate
 // entry point only for API/back-compatibility.
-static PyObject* geohash_encode_strictly(PyObject *self, PyObject *args, PyObject *kwargs) {
-    double latitude, longitude;
-    int precision = 12;
-
-    static char *kwlist[] = {"latitude", "longitude", "precision", NULL};
-
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O&O&|O&", kwlist,
-                                    convert_coordinate, &latitude,
-                                    convert_coordinate, &longitude,
-                                    convert_precision, &precision)) {
-        return NULL;
-    }
-
-    if (prepare_encode(&latitude, &longitude, precision) != 0) {
-        return NULL;
-    }
-
-    char geohash[13] = {0};  // Maximum precision is 12 + null terminator
-    encode_core(latitude, longitude, precision, geohash);
-    return make_hash_string(geohash, precision);
+static PyObject* geohash_encode_strictly(PyObject *self, PyObject *const *args, Py_ssize_t nargs, PyObject *kwnames) {
+    (void)self;
+    return encode_call(args, nargs, kwnames);
 }
 
 // Module method definitions
@@ -518,9 +551,9 @@ static PyMethodDef GeohashMethods[] = {
      "Decode a geohash to its exact values, including error margins."},
     {"decode", (PyCFunction)(void (*)(void))geohash_decode, METH_FASTCALL | METH_KEYWORDS,
      "Decode a geohash to latitude and longitude coordinates."},
-    {"encode", (PyCFunction)geohash_encode, METH_VARARGS | METH_KEYWORDS, 
+    {"encode", (PyCFunction)(void (*)(void))geohash_encode, METH_FASTCALL | METH_KEYWORDS,
      "Encode coordinates to a geohash string."},
-    {"encode_strictly", (PyCFunction)geohash_encode_strictly, METH_VARARGS | METH_KEYWORDS, 
+    {"encode_strictly", (PyCFunction)(void (*)(void))geohash_encode_strictly, METH_FASTCALL | METH_KEYWORDS,
      "Encode coordinates to a geohash string with strict midpoint handling."},
     {"get_base32", geohash_get_base32, METH_NOARGS, 
      "Get the base32 alphabet used for geohash encoding."},
