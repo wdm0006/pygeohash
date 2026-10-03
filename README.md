@@ -53,6 +53,11 @@ print(short_geohash)  # 'ezs42'
 lat, lng = pgh.decode(geohash="ezs42")
 print(lat, lng)  # 42.60498046875 -5.60302734375
 
+# Encode or decode many items in one call (list, tuple, array.array, NumPy, generators)
+geohashes = pgh.encode_many([42.6, 57.64911], [-5.6, 10.40744], precision=5)
+print(geohashes)  # ['ezs42', 'u4prs']
+points = pgh.decode_many(geohashes)  # list of LatLong, same as [pgh.decode(g) for g in geohashes]
+
 # Calculate approximate distance between geohashes (in meters)
 distance = pgh.geohash_approximate_distance(geohash_1="bcd3u", geohash_2="bc83n")
 print(distance)  # 625441

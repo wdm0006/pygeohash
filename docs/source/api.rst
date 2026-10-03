@@ -13,6 +13,8 @@ These core functions are implemented using a high-performance C extension for ma
 .. autofunction:: pygeohash.encode_strictly
 .. autofunction:: pygeohash.decode
 .. autofunction:: pygeohash.decode_exactly
+.. autofunction:: pygeohash.encode_many
+.. autofunction:: pygeohash.decode_many
 
 Data Types
 ----------

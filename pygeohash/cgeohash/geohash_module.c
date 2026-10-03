@@ -545,6 +545,204 @@ static PyObject* geohash_encode_strictly(PyObject *self, PyObject *const *args, 
     return encode_call(args, nargs, kwnames);
 }
 
+// Bulk entry points. Elements that match the scalar fast path (exact-type
+// floats in range / compact ASCII geohashes) are handled in C with the same
+// helpers as the scalar calls; every other element is delegated to the
+// caller-supplied scalar function so its result and exception are exactly the
+// scalar call's. A failure from either path is re-raised as the same exception
+// type with " (at index N)" appended.
+static void annotate_index(Py_ssize_t index) {
+    PyObject *type, *value, *tb;
+    PyErr_Fetch(&type, &value, &tb);
+    PyErr_NormalizeException(&type, &value, &tb);
+    PyObject *msg = value ? PyObject_Str(value) : NULL;
+    PyObject *text = msg ? PyUnicode_FromFormat("%U (at index %zd)", msg, index) : NULL;
+    Py_XDECREF(msg);
+    PyObject *replacement = text ? PyObject_CallOneArg(type, text) : NULL;
+    Py_XDECREF(text);
+    if (replacement != NULL) {
+        Py_XSETREF(value, replacement);
+        if (tb != NULL) {
+            PyException_SetTraceback(value, tb);
+        }
+    } else {
+        PyErr_Clear();
+    }
+    PyErr_Restore(type, value, tb);
+}
+
+static PyObject* geohash_encode_many(PyObject *self, PyObject *args) {
+    (void)self;
+    PyObject *lats, *lons, *scalar;
+    PyObject *precision_obj;
+    if (!PyArg_ParseTuple(args, "OOOO", &lats, &lons, &precision_obj, &scalar)) {
+        return NULL;
+    }
+    int precision;
+    if (!convert_precision(precision_obj, &precision)) {
+        return NULL;
+    }
+    if (precision < 1 || precision > 12) {
+        PyErr_SetString(PyExc_ValueError, "precision must be between 1 and 12");
+        return NULL;
+    }
+
+    Py_ssize_t n_lat = PyObject_Size(lats);
+    if (n_lat < 0) {
+        if (!PyErr_ExceptionMatches(PyExc_TypeError)) {
+            return NULL;
+        }
+        PyErr_Clear();
+    }
+    Py_ssize_t n_lon = PyObject_Size(lons);
+    if (n_lon < 0) {
+        if (!PyErr_ExceptionMatches(PyExc_TypeError)) {
+            return NULL;
+        }
+        PyErr_Clear();
+    }
+    if (n_lat >= 0 && n_lon >= 0 && n_lat != n_lon) {
+        PyErr_Format(PyExc_ValueError,
+                     "latitudes and longitudes must have the same length, but got %zd and %zd.",
+                     n_lat, n_lon);
+        return NULL;
+    }
+
+    PyObject *lat_it = PyObject_GetIter(lats);
+    if (lat_it == NULL) {
+        return NULL;
+    }
+    PyObject *lon_it = PyObject_GetIter(lons);
+    PyObject *result = lon_it ? PyList_New(0) : NULL;
+    if (result == NULL) {
+        Py_DECREF(lat_it);
+        Py_XDECREF(lon_it);
+        return NULL;
+    }
+
+    for (Py_ssize_t i = 0;; i++) {
+        PyObject *lat = PyIter_Next(lat_it);
+        if (lat == NULL) {
+            if (PyErr_Occurred()) {
+                goto fail;
+            }
+            PyObject *extra = PyIter_Next(lon_it);
+            if (extra != NULL) {
+                Py_DECREF(extra);
+                PyErr_SetString(PyExc_ValueError, "latitudes and longitudes must have the same length.");
+                goto fail;
+            }
+            if (PyErr_Occurred()) {
+                goto fail;
+            }
+            break;
+        }
+        PyObject *lon = PyIter_Next(lon_it);
+        if (lon == NULL) {
+            Py_DECREF(lat);
+            if (!PyErr_Occurred()) {
+                PyErr_SetString(PyExc_ValueError, "latitudes and longitudes must have the same length.");
+            }
+            goto fail;
+        }
+
+        PyObject *item;
+        if (PyFloat_CheckExact(lat) && PyFloat_CheckExact(lon)) {
+            double la = PyFloat_AS_DOUBLE(lat);
+            double lo = PyFloat_AS_DOUBLE(lon);
+            if (la >= -90.0 && la <= 90.0 && lo >= -180.0 && lo <= 180.0) {
+                char geohash[13] = {0};
+                encode_core(la, lo, precision, geohash);
+                item = make_hash_string(geohash, precision);
+            } else {
+                item = NULL;
+            }
+        } else {
+            item = NULL;
+        }
+        if (item == NULL && !PyErr_Occurred()) {
+            PyObject *prec = PyLong_FromLong(precision);
+            item = prec ? PyObject_CallFunctionObjArgs(scalar, lat, lon, prec, NULL) : NULL;
+            Py_XDECREF(prec);
+        }
+        Py_DECREF(lat);
+        Py_DECREF(lon);
+        if (item == NULL) {
+            annotate_index(i);
+            goto fail;
+        }
+        int rc = PyList_Append(result, item);
+        Py_DECREF(item);
+        if (rc != 0) {
+            goto fail;
+        }
+    }
+    Py_DECREF(lat_it);
+    Py_DECREF(lon_it);
+    return result;
+
+fail:
+    Py_DECREF(lat_it);
+    Py_DECREF(lon_it);
+    Py_DECREF(result);
+    return NULL;
+}
+
+static PyObject* geohash_decode_many(PyObject *self, PyObject *args) {
+    (void)self;
+    PyObject *geohashes, *scalar;
+    if (!PyArg_ParseTuple(args, "OO", &geohashes, &scalar)) {
+        return NULL;
+    }
+    PyObject *it = PyObject_GetIter(geohashes);
+    if (it == NULL) {
+        return NULL;
+    }
+    PyObject *result = PyList_New(0);
+    if (result == NULL) {
+        Py_DECREF(it);
+        return NULL;
+    }
+
+    for (Py_ssize_t i = 0;; i++) {
+        PyObject *hash = PyIter_Next(it);
+        if (hash == NULL) {
+            if (PyErr_Occurred()) {
+                goto fail;
+            }
+            break;
+        }
+        PyObject *item = NULL;
+        if (Py_TYPE(hash) == &PyUnicode_Type && PyUnicode_IS_COMPACT(hash) && PyUnicode_IS_ASCII(hash)) {
+            Py_ssize_t length = PyUnicode_GET_LENGTH(hash);
+            const char *geohash = (const char *)PyUnicode_1BYTE_DATA(hash);
+            if (length >= 1 && length <= 12 && (size_t)length == strlen(geohash)) {
+                item = decode_from_utf8(geohash, 0);
+            }
+        }
+        if (item == NULL && !PyErr_Occurred()) {
+            item = PyObject_CallOneArg(scalar, hash);
+        }
+        Py_DECREF(hash);
+        if (item == NULL) {
+            annotate_index(i);
+            goto fail;
+        }
+        int rc = PyList_Append(result, item);
+        Py_DECREF(item);
+        if (rc != 0) {
+            goto fail;
+        }
+    }
+    Py_DECREF(it);
+    return result;
+
+fail:
+    Py_DECREF(it);
+    Py_DECREF(result);
+    return NULL;
+}
+
 // Module method definitions
 static PyMethodDef GeohashMethods[] = {
     {"decode_exactly", (PyCFunction)(void (*)(void))geohash_decode_exactly, METH_FASTCALL | METH_KEYWORDS,
@@ -555,6 +753,10 @@ static PyMethodDef GeohashMethods[] = {
      "Encode coordinates to a geohash string."},
     {"encode_strictly", (PyCFunction)(void (*)(void))geohash_encode_strictly, METH_FASTCALL | METH_KEYWORDS,
      "Encode coordinates to a geohash string with strict midpoint handling."},
+    {"encode_many", geohash_encode_many, METH_VARARGS,
+     "Encode two equal-length coordinate iterables; (latitudes, longitudes, precision, scalar_encode)."},
+    {"decode_many", geohash_decode_many, METH_VARARGS,
+     "Decode an iterable of geohashes; (geohashes, scalar_decode)."},
     {"get_base32", geohash_get_base32, METH_NOARGS, 
      "Get the base32 alphabet used for geohash encoding."},
     {NULL, NULL, 0, NULL}  // Sentinel
