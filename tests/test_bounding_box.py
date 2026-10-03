@@ -28,6 +28,10 @@ CORNER_BOXES = [
 BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz"
 
 
+class Coordinate(float):
+    """Numeric subclass used to preserve the containment input contract."""
+
+
 def _brute_force_geohashes(bbox: BoundingBox, precision: int, samples: int = 100) -> set:
     """Encode a dense grid of points inside ``bbox``; every result must be enumerated."""
     lat_span = bbox.max_lat - bbox.min_lat
@@ -128,6 +132,49 @@ class TestBoundingBox:
         assert is_point_in_geohash(bbox.max_lat + 1.0, center_lon, geohash) is False
         assert is_point_in_geohash(center_lat, bbox.min_lon - 1.0, geohash) is False
         assert is_point_in_geohash(center_lat, bbox.max_lon + 1.0, geohash) is False
+
+    @pytest.mark.parametrize(
+        "operation",
+        [
+            pytest.param(lambda lat, lon: is_point_in_box(lat, lon, BoundingBox(-1, -1, 1, 1)), id="box"),
+            pytest.param(lambda lat, lon: is_point_in_geohash(lat, lon, "s00"), id="geohash"),
+        ],
+    )
+    @pytest.mark.parametrize(
+        ("lat", "lon"),
+        [
+            (True, 0),
+            (0, False),
+            (float("nan"), 0),
+            (float("inf"), 0),
+            (float("-inf"), 0),
+            (0, float("nan")),
+            (0, float("inf")),
+            (0, float("-inf")),
+            (-90.1, 0),
+            (90.1, 0),
+            (0, -180.1),
+            (0, 180.1),
+            ("0", 0),
+            (0, "0"),
+        ],
+    )
+    def test_point_containment_rejects_invalid_coordinates(self, operation, lat, lon):
+        """Both public containment functions reject invalid coordinates before comparison."""
+        with pytest.raises(ValueError):
+            operation(lat, lon)
+
+    @pytest.mark.parametrize(
+        "operation",
+        [
+            pytest.param(lambda lat, lon: is_point_in_box(lat, lon, BoundingBox(-90, -180, 90, 180)), id="box"),
+            pytest.param(lambda lat, lon: is_point_in_geohash(lat, lon, "s00"), id="geohash"),
+        ],
+    )
+    @pytest.mark.parametrize(("lat", "lon"), [(-90, -180), (90, 180), (0, 0), (Coordinate(0), Coordinate(0))])
+    def test_point_containment_accepts_integer_world_coordinates(self, operation, lat, lon):
+        """Integer coordinates and exact world boundaries remain valid inputs."""
+        assert operation(lat, lon) in (True, False)
 
     def test_do_boxes_intersect(self):
         """Test the do_boxes_intersect function."""
