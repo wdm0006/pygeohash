@@ -194,6 +194,28 @@
 <span class="n">_FIELD_ORDER</span> <span class="o">=</span> <span class="s2">"BoundingBox fields are (min_lat, min_lon, max_lat, max_lon)"</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_point_coordinates</span><span class="p">(</span><span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Validate coordinates supplied to point-containment operations."""</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="ow">in</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s2">"latitude"</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="o">-</span><span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"longitude"</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">),</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be a number, not a bool"</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">is_finite</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">is_finite</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_finite</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be a finite number"</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">is_in_range</span> <span class="o">=</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">upper</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">is_in_range</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_in_range</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) must be between </span><span class="si">{</span><span class="n">lower</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">upper</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
 <span class="k">class</span><span class="w"> </span><span class="nc">_BoundingBoxFields</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Field layout for :class:`BoundingBox`; ``typing.NamedTuple`` forbids overriding ``__new__``."""</span>
 
@@ -323,6 +345,10 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: True if the point is within the bounding box, False otherwise.</span>
 
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If latitude or longitude is a boolean, non-numeric, non-finite,</span>
+<span class="sd">            or outside its geographic bounds.</span>
+
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; bbox = get_bounding_box("u4pruyd")</span>
 <span class="sd">        &gt;&gt;&gt; is_point_in_box(57.649, 10.407, bbox)</span>
@@ -330,6 +356,7 @@
 <span class="sd">        &gt;&gt;&gt; is_point_in_box(40.0, 10.0, bbox)</span>
 <span class="sd">        False</span>
 <span class="sd">    """</span>
+    <span class="n">_validate_point_coordinates</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Checking if point (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">) is in box: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">&lt;=</span> <span class="n">lat</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="ow">and</span> <span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">&lt;=</span> <span class="n">lon</span> <span class="o">&lt;=</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Point is </span><span class="si">%s</span><span class="s2"> the box"</span><span class="p">,</span> <span class="s2">"inside"</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">"outside"</span><span class="p">)</span>
@@ -349,6 +376,10 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: True if the point is within the geohash's bounding box, False otherwise.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If latitude or longitude is a boolean, non-numeric, non-finite,</span>
+<span class="sd">            or outside its geographic bounds, or if ``geohash`` is invalid.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; is_point_in_geohash(57.649, 10.407, "u4pruyd")</span>
