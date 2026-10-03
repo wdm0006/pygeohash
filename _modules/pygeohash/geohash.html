@@ -16,7 +16,7 @@
     
     <title>pygeohash.geohash &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=30d13653" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/wabi.css?v=501c8ac3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/wabi.css?v=c49ddd0e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a8d29c75" />
     <script src="../../_static/documentation_options.js?v=654eae90"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -185,12 +185,14 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.cgeohash.geohash_module</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">decode</span> <span class="k">as</span> <span class="n">c_decode</span><span class="p">,</span>
     <span class="n">decode_exactly</span> <span class="k">as</span> <span class="n">c_decode_exactly</span><span class="p">,</span>
+    <span class="n">decode_many</span> <span class="k">as</span> <span class="n">c_decode_many</span><span class="p">,</span>
     <span class="n">encode</span> <span class="k">as</span> <span class="n">c_encode</span><span class="p">,</span>
+    <span class="n">encode_many</span> <span class="k">as</span> <span class="n">c_encode_many</span><span class="p">,</span>
     <span class="n">encode_strictly</span> <span class="k">as</span> <span class="n">c_encode_strictly</span><span class="p">,</span>
     <span class="n">get_base32</span><span class="p">,</span>
 <span class="p">)</span>
@@ -417,10 +419,78 @@
 
 
 
+<div class="viewcode-block" id="encode_many">
+<a class="viewcode-back" href="../../api.html#pygeohash.encode_many">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">encode_many</span><span class="p">(</span><span class="n">latitudes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">longitudes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">precision</span><span class="p">:</span> <span class="n">GeohashPrecision</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Encode many coordinate pairs into geohashes in one call.</span>
+
+<span class="sd">    The result equals ``[encode(a, b, precision) for a, b in zip(latitudes, longitudes)]``</span>
+<span class="sd">    element for element, but the shared ``precision`` is validated once and the loop</span>
+<span class="sd">    runs in C. Each pair gets exactly the validation :func:`encode` applies, and a</span>
+<span class="sd">    rejected pair raises the same exception type and message as the scalar call with</span>
+<span class="sd">    ``" (at index N)"`` appended. NumPy is not imported; NumPy arrays work through</span>
+<span class="sd">    ordinary iteration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        latitudes (Iterable[float]): Latitudes, as a list, tuple, ``array.array``,</span>
+<span class="sd">            NumPy array, generator, or any other iterable.</span>
+<span class="sd">        longitudes (Iterable[float]): Longitudes, with the same length as ``latitudes``.</span>
+<span class="sd">        precision (GeohashPrecision, optional): The number of characters in each geohash.</span>
+<span class="sd">            Defaults to 12. Must be between 1 and 12, inclusive.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[str]: One lowercase geohash per pair; an empty list for empty input.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If ``precision`` is invalid (reported without an index), if the two</span>
+<span class="sd">            inputs have different lengths, or if any pair is rejected by :func:`encode`.</span>
+<span class="sd">        TypeError: If an input is not iterable, or if a pair fails with ``TypeError``</span>
+<span class="sd">            in :func:`encode`.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be an integer, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">MIN_PRECISION</span> <span class="o">&lt;=</span> <span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">MAX_PRECISION</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Precision must be between </span><span class="si">{</span><span class="n">MIN_PRECISION</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">MAX_PRECISION</span><span class="si">}</span><span class="s2">, but got </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c_encode_many</span><span class="p">(</span><span class="n">latitudes</span><span class="p">,</span> <span class="n">longitudes</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">encode</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="decode_many">
+<a class="viewcode-back" href="../../api.html#pygeohash.decode_many">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_many</span><span class="p">(</span><span class="n">geohashes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">LatLong</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Decode many geohashes into cell centers in one call.</span>
+
+<span class="sd">    The result equals ``[decode(g) for g in geohashes]`` element for element. Each</span>
+<span class="sd">    geohash gets exactly the validation :func:`decode` applies (including its</span>
+<span class="sd">    case-insensitivity), and a rejected geohash raises the same exception type and</span>
+<span class="sd">    message as the scalar call with ``" (at index N)"`` appended.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohashes (Iterable[str]): Geohash strings, as a list, tuple, generator, or any</span>
+<span class="sd">            other iterable. A single ``str`` is rejected.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[LatLong]: One :class:`~pygeohash.geohash_types.LatLong` per geohash; an</span>
+<span class="sd">            empty list for empty input.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If ``geohashes`` is a bare ``str`` or is not iterable.</span>
+<span class="sd">        ValueError: If any element is rejected by :func:`decode`.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">"geohashes must be an iterable of geohash strings, not a single str; pass [geohash] to decode one geohash."</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">c_decode_many</span><span class="p">(</span><span class="n">geohashes</span><span class="p">,</span> <span class="n">decode</span><span class="p">)</span></div>
+
+
+
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"decode"</span><span class="p">,</span>
     <span class="s2">"decode_exactly"</span><span class="p">,</span>
+    <span class="s2">"decode_many"</span><span class="p">,</span>
     <span class="s2">"encode"</span><span class="p">,</span>
+    <span class="s2">"encode_many"</span><span class="p">,</span>
     <span class="s2">"encode_strictly"</span><span class="p">,</span>
     <span class="s2">"LatLong"</span><span class="p">,</span>
     <span class="s2">"ExactLatLong"</span><span class="p">,</span>

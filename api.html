@@ -17,7 +17,7 @@
     
     <title>Core Functions &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
-    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=501c8ac3" />
+    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=c49ddd0e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
     <script src="_static/documentation_options.js?v=654eae90"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
@@ -288,6 +288,75 @@ so <code class="docutils literal notranslate"><span class="pre">&quot;U4PRUYD&qu
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If the geohash is not a string, is not between 1 and 12 characters,
     or contains invalid characters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.encode_many">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">encode_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitudes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitudes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">5</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">6</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">7</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">8</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">9</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">11</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">12</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">12</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#encode_many"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.encode_many" title="Link to this definition">¶</a></dt>
+<dd><p>Encode many coordinate pairs into geohashes in one call.</p>
+<p>The result equals <code class="docutils literal notranslate"><span class="pre">[encode(a,</span> <span class="pre">b,</span> <span class="pre">precision)</span> <span class="pre">for</span> <span class="pre">a,</span> <span class="pre">b</span> <span class="pre">in</span> <span class="pre">zip(latitudes,</span> <span class="pre">longitudes)]</span></code>
+element for element, but the shared <code class="docutils literal notranslate"><span class="pre">precision</span></code> is validated once and the loop
+runs in C. Each pair gets exactly the validation <a class="reference internal" href="#pygeohash.encode" title="pygeohash.encode"><code class="xref py py-func docutils literal notranslate"><span class="pre">encode()</span></code></a> applies, and a
+rejected pair raises the same exception type and message as the scalar call with
+<code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">(at</span> <span class="pre">index</span> <span class="pre">N)&quot;</span></code> appended. NumPy is not imported; NumPy arrays work through
+ordinary iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitudes</strong> (<em>Iterable</em><em>[</em><em>float</em><em>]</em>) – Latitudes, as a list, tuple, <code class="docutils literal notranslate"><span class="pre">array.array</span></code>,
+NumPy array, generator, or any other iterable.</p></li>
+<li><p><strong>longitudes</strong> (<em>Iterable</em><em>[</em><em>float</em><em>]</em>) – Longitudes, with the same length as <code class="docutils literal notranslate"><span class="pre">latitudes</span></code>.</p></li>
+<li><p><strong>precision</strong> (<em>GeohashPrecision</em><em>, </em><em>optional</em>) – The number of characters in each geohash.
+Defaults to 12. Must be between 1 and 12, inclusive.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>One lowercase geohash per pair; an empty list for empty input.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">precision</span></code> is invalid (reported without an index), if the two
+    inputs have different lengths, or if any pair is rejected by <a class="reference internal" href="#pygeohash.encode" title="pygeohash.encode"><code class="xref py py-func docutils literal notranslate"><span class="pre">encode()</span></code></a>.</p></li>
+<li><p><strong>TypeError</strong> – If an input is not iterable, or if a pair fails with <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>
+    in <a class="reference internal" href="#pygeohash.encode" title="pygeohash.encode"><code class="xref py py-func docutils literal notranslate"><span class="pre">encode()</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.decode_many">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">decode_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohashes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">LatLong</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/geohash.html#decode_many"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.decode_many" title="Link to this definition">¶</a></dt>
+<dd><p>Decode many geohashes into cell centers in one call.</p>
+<p>The result equals <code class="docutils literal notranslate"><span class="pre">[decode(g)</span> <span class="pre">for</span> <span class="pre">g</span> <span class="pre">in</span> <span class="pre">geohashes]</span></code> element for element. Each
+geohash gets exactly the validation <a class="reference internal" href="#pygeohash.decode" title="pygeohash.decode"><code class="xref py py-func docutils literal notranslate"><span class="pre">decode()</span></code></a> applies (including its
+case-insensitivity), and a rejected geohash raises the same exception type and
+message as the scalar call with <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">(at</span> <span class="pre">index</span> <span class="pre">N)&quot;</span></code> appended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>geohashes</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – Geohash strings, as a list, tuple, generator, or any
+other iterable. A single <code class="docutils literal notranslate"><span class="pre">str</span></code> is rejected.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>One <code class="xref py py-class docutils literal notranslate"><span class="pre">LatLong</span></code> per geohash; an</dt><dd><p>empty list for empty input.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[LatLong]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">geohashes</span></code> is a bare <code class="docutils literal notranslate"><span class="pre">str</span></code> or is not iterable.</p></li>
+<li><p><strong>ValueError</strong> – If any element is rejected by <a class="reference internal" href="#pygeohash.decode" title="pygeohash.decode"><code class="xref py py-func docutils literal notranslate"><span class="pre">decode()</span></code></a>.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1328,6 +1397,8 @@ precision are rejected.</p></li>
 <li class="toctree-l2"><a class="reference internal" href="#pygeohash.encode_strictly"><code class="docutils literal notranslate"><span class="pre">encode_strictly()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pygeohash.decode"><code class="docutils literal notranslate"><span class="pre">decode()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pygeohash.decode_exactly"><code class="docutils literal notranslate"><span class="pre">decode_exactly()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.encode_many"><code class="docutils literal notranslate"><span class="pre">encode_many()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.decode_many"><code class="docutils literal notranslate"><span class="pre">decode_many()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#data-types">Data Types</a></li>
