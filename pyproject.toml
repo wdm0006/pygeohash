@@ -13,13 +13,34 @@ authors = [
     {name = "Will McGinnis", email = "will@mcginniscommawill.com"},
 ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: GIS",
     "Typing :: Typed",
 ]
-keywords = ["geohash", "gis"]
+keywords = [
+    "geohash",
+    "geospatial",
+    "gis",
+    "spatial indexing",
+    "location",
+    "coordinates",
+    "latitude",
+    "longitude",
+    "geocoding",
+    "proximity search",
+    "bounding box",
+    "geographic data",
+    "mapping",
+    "python geohash",
+    "location encoding",
+]
 dependencies = []
 
 [project.urls]

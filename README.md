@@ -3,7 +3,8 @@
 [![PyPI version](https://badge.fury.io/py/pygeohash.svg)](https://badge.fury.io/py/pygeohash)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pygeohash.svg)](https://pypi.org/project/pygeohash/)
 
-A simple, lightweight, and dependency-free Python library for working with geohashes.
+A typed Python library for working with geohashes, with a compiled C core and
+prebuilt wheels for mainstream Linux, macOS, and Windows environments.
 
 Full docs at [pygeohash.mcginniscommawill.com](https://pygeohash.mcginniscommawill.com)
 ## What is PyGeoHash?
@@ -14,14 +15,19 @@ It was originally based on Leonard Norrgård's [geohash](https://github.com/vins
 
 ## Why PyGeoHash?
 
-- **Zero Dependencies**: Works with just the Python standard library
-- **Simple API**: Clean, intuitive functions that are easy to understand
-- **Lightweight**: Minimal overhead for your projects
-- **Python 3 Support**: Fully compatible with modern Python
-- **Robust Implementation**: Reliable geohash operations
-- **Optional Visualization**: Visualize geohashes with matplotlib and folium
-- **Map-tile interoperability**: converts geohashes to Bing/OSM quadkeys, slippy tiles, and integers (`pygeohash.interop`, pure Python, zero dependencies)
-- **Extensively Tested**: Comprehensive test suite validated against geohash.org
+- **Installs across mainstream platforms:** Prebuilt wheels cover Linux x86_64
+  and arm64, macOS Intel and Apple Silicon, and Windows. Alpine/musl users build
+  from source.
+- **Compiled core:** Geohash encoding and decoding run through the bundled
+  CPython C extension.
+- **Typed package:** PyGeoHash ships a `py.typed` marker and type stubs for the C
+  extension, with strict mypy checks in CI.
+- **Zero runtime dependencies in the base install:** Mapping features remain
+  available separately through `pygeohash[viz]`.
+- **Geohash utilities beyond encode/decode:** Work with neighbors, bounding
+  boxes, approximate distances, statistical helpers, and optional maps.
+- **Map-tile interoperability (unreleased):** The default branch includes tile,
+  quadkey, and integer conversions; these are not in PyPI 3.5.1.
 
 ## Installation
 
@@ -52,6 +58,11 @@ print(short_geohash)  # 'ezs42'
 # Decode geohash to coordinates
 lat, lng = pgh.decode(geohash="ezs42")
 print(lat, lng)  # 42.60498046875 -5.60302734375
+
+# Encode or decode many items in one call (list, tuple, array.array, NumPy, generators)
+geohashes = pgh.encode_many([42.6, 57.64911], [-5.6, 10.40744], precision=5)
+print(geohashes)  # ['ezs42', 'u4prs']
+points = pgh.decode_many(geohashes)  # list of LatLong, same as [pgh.decode(g) for g in geohashes]
 
 # Calculate approximate distance between geohashes (in meters)
 distance = pgh.geohash_approximate_distance(geohash_1="bcd3u", geohash_2="bc83n")
@@ -118,8 +129,7 @@ This will create static images and interactive maps in the `docs/source/_static/
 
 PyGeoHash is extensively tested to ensure accuracy in geohash encoding and decoding:
 
-- **Comprehensive Test Suite**: Includes over 450 test cases covering various precision levels and geographic regions
-- **Validated Against geohash.org**: All test cases are validated against the reference implementation at geohash.org
+- **Known Vectors and Precision Coverage**: Fixed coordinate/geohash pairs and randomized checks exercise supported precision levels
 - **Edge Case Coverage**: Special attention to edge cases like poles, equator, date line, and precision boundaries
 - **Roundtrip Consistency**: Ensures encode->decode->encode operations produce consistent results
 - **Regional Coverage**: Test cases span all continents and major geographic features
