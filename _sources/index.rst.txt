@@ -69,6 +69,10 @@ Visualization:
    :align: center
    :alt: Geohash visualization example
 
+Convert existing geohash rows for a tile cache with
+:doc:`geohash-to-tiles-and-quadkeys`, or keep precision with
+:doc:`geohash-integer-storage` for numeric database keys.
+
 Contents
 --------
 
