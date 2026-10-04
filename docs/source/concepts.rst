@@ -65,7 +65,9 @@ Consider the following visualization of how geohashing divides the world:
 Precision and Cell Size
 -----------------------
 
-The precision of a geohash depends on its length:
+The precision of a geohash depends on its length. For where these sizes come
+from, how width changes with latitude, and what truncation does for privacy, see
+:doc:`geohash-precision-reference`:
 
 .. list-table::
    :header-rows: 1
@@ -182,4 +184,6 @@ Compared to other geocoding systems:
 - **Maidenhead Locator System**: Used by amateur radio operators; less precise
 - **Military Grid Reference System (MGRS)**: Used by NATO militaries; more complex
 
-Geohashes are particularly well-suited for computer systems due to their hierarchical nature and simple implementation. 
+Geohashes are particularly well-suited for computer systems due to their hierarchical nature and simple implementation.
+
+For H3 and S2, see :ref:`geohash-vs-h3-vs-s2`. 

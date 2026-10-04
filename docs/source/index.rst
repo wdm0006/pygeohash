@@ -84,6 +84,8 @@ Contents
    concepts
    usage
    grid_systems
+   migrating
+   geohash-precision-reference
    types
    examples
    api
