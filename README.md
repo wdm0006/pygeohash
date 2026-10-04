@@ -26,8 +26,8 @@ It was originally based on Leonard Norrgård's [geohash](https://github.com/vins
   available separately through `pygeohash[viz]`.
 - **Geohash utilities beyond encode/decode:** Work with neighbors, bounding
   boxes, approximate distances, statistical helpers, and optional maps.
-- **Map-tile interoperability (unreleased):** The default branch includes tile,
-  quadkey, and integer conversions; these are not in PyPI 3.5.1.
+- **Map-tile interoperability:** Convert geohashes to tile, quadkey, and integer
+  forms (new in 3.6.0).
 
 ## Installation
 
