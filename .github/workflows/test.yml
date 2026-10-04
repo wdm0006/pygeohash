@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  matrix:
     name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
@@ -51,3 +51,15 @@ jobs:
         
     - name: Run tests with tox
       run: .venv/bin/python -m tox -e "${{ matrix.tox-env }}"
+
+  # Stable gate named `test`: the branch ruleset requires a status check with
+  # this exact name, so it must keep reporting now that the job is a matrix.
+  test:
+    name: test
+    needs: matrix
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Require every Python version to pass
+      run: |
+        test "${{ needs.matrix.result }}" = "success"
