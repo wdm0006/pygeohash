@@ -1,0 +1,11 @@
+# .obvious/config.yml — repository policy for wdm0006/pygeohash
+# Auto-detected from GitHub repo settings and merge history on 2026-09-05.
+
+defaultBranch: master
+
+# GitHub enables merge commits, rebase, and squash; recent PRs (#131–#140)
+# were squash-merged, so squash is the working convention.
+mergeMethod: squash
+
+# Setup/PR work waits for a human merge decision.
+requireHumanMerge: true
