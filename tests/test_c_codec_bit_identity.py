@@ -23,6 +23,7 @@ behavior on every input shape.
 
 import json
 import random
+import sys
 from functools import partial
 from pathlib import Path
 
@@ -342,7 +343,11 @@ def test_error_paths():
             (),
             {"latitude": 45.0, "longitude": 10.0, "unknown": 6},
             TypeError,
-            "'unknown' is an invalid keyword argument for this function",
+            (
+                "this function got an unexpected keyword argument 'unknown'"
+                if sys.version_info >= (3, 13)
+                else "'unknown' is an invalid keyword argument for this function"
+            ),
         ),
         (
             (45.0, 10.0),
