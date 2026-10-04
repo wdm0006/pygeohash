@@ -143,15 +143,15 @@ line-ending = "auto"
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = py310, py311, py312
+envlist = py310, py311, py312, py313, py314
 isolated_build = True
-skip_missing_interpreters = True
+skip_missing_interpreters = False
 
 [testenv]
-# Install the package itself with the 'dev' extras
-deps =
-    .[dev]
+package = editable
+extras = dev,viz
 commands =
+    python -c "import pygeohash.cgeohash.geohash_module"
     pytest {posargs:tests}
 """
 
