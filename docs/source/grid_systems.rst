@@ -95,3 +95,15 @@ Reach for them when your problem is theirs - hexagonal indexing, spherical
 covering, cell hierarchies with shapes geohash's rectangles cannot take.
 Use :mod:`pygeohash.interop` when your problem is moving data between
 geohash storage and the map-tile ecosystem without adding a dependency.
+
+Practical guides
+----------------
+
+Start with these standalone task pages for runnable code and operational
+caveats; the sections above explain the grid choices.
+
+.. toctree::
+   :maxdepth: 1
+
+   geohash-to-tiles-and-quadkeys
+   geohash-integer-storage
