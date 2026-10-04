@@ -11,7 +11,22 @@ concurrency:
 
 jobs:
   test:
+    name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python-version: '3.10'
+            tox-env: py310
+          - python-version: '3.11'
+            tox-env: py311
+          - python-version: '3.12'
+            tox-env: py312
+          - python-version: '3.13'
+            tox-env: py313
+          - python-version: '3.14'
+            tox-env: py314
     
     steps:
     - uses: actions/checkout@v5
@@ -19,7 +34,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'  # Use the latest Python for running tox
+        python-version: ${{ matrix.python-version }}
         
     - name: Install uv
       run: |
@@ -28,11 +43,11 @@ jobs:
         
     - name: Create virtual environment
       run: |
-        uv venv
+        uv venv --python "${{ matrix.python-version }}"
         
     - name: Install dependencies
       run: |
-        uv pip install -e ".[dev,viz]"
+        uv pip install tox
         
     - name: Run tests with tox
-      run: uv run tox 
+      run: .venv/bin/python -m tox -e "${{ matrix.tox-env }}"
