@@ -1,5 +1,6 @@
 """Tests for the bounding box module."""
 
+import random
 from itertools import product
 
 import pytest
@@ -12,7 +13,7 @@ from pygeohash.bounding_box import (
     is_point_in_box,
     is_point_in_geohash,
 )
-from pygeohash.geohash import encode
+from pygeohash.geohash import decode_exactly, encode
 
 # Fixed boxes whose corner cells were dropped before the corner pre-filter was removed.
 # Each one omits at least one intersecting cell at both precision 5 and precision 6
@@ -25,6 +26,10 @@ CORNER_BOXES = [
 ]
 
 BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz"
+
+
+class Coordinate(float):
+    """Numeric subclass used to preserve the containment input contract."""
 
 
 def _brute_force_geohashes(bbox: BoundingBox, precision: int, samples: int = 100) -> set:
@@ -127,6 +132,49 @@ class TestBoundingBox:
         assert is_point_in_geohash(bbox.max_lat + 1.0, center_lon, geohash) is False
         assert is_point_in_geohash(center_lat, bbox.min_lon - 1.0, geohash) is False
         assert is_point_in_geohash(center_lat, bbox.max_lon + 1.0, geohash) is False
+
+    @pytest.mark.parametrize(
+        "operation",
+        [
+            pytest.param(lambda lat, lon: is_point_in_box(lat, lon, BoundingBox(-1, -1, 1, 1)), id="box"),
+            pytest.param(lambda lat, lon: is_point_in_geohash(lat, lon, "s00"), id="geohash"),
+        ],
+    )
+    @pytest.mark.parametrize(
+        ("lat", "lon"),
+        [
+            (True, 0),
+            (0, False),
+            (float("nan"), 0),
+            (float("inf"), 0),
+            (float("-inf"), 0),
+            (0, float("nan")),
+            (0, float("inf")),
+            (0, float("-inf")),
+            (-90.1, 0),
+            (90.1, 0),
+            (0, -180.1),
+            (0, 180.1),
+            ("0", 0),
+            (0, "0"),
+        ],
+    )
+    def test_point_containment_rejects_invalid_coordinates(self, operation, lat, lon):
+        """Both public containment functions reject invalid coordinates before comparison."""
+        with pytest.raises(ValueError):
+            operation(lat, lon)
+
+    @pytest.mark.parametrize(
+        "operation",
+        [
+            pytest.param(lambda lat, lon: is_point_in_box(lat, lon, BoundingBox(-90, -180, 90, 180)), id="box"),
+            pytest.param(lambda lat, lon: is_point_in_geohash(lat, lon, "s00"), id="geohash"),
+        ],
+    )
+    @pytest.mark.parametrize(("lat", "lon"), [(-90, -180), (90, 180), (0, 0), (Coordinate(0), Coordinate(0))])
+    def test_point_containment_accepts_integer_world_coordinates(self, operation, lat, lon):
+        """Integer coordinates and exact world boundaries remain valid inputs."""
+        assert operation(lat, lon) in (True, False)
 
     def test_do_boxes_intersect(self):
         """Test the do_boxes_intersect function."""
@@ -423,3 +471,286 @@ class TestBoundingBox:
             bbox = get_bounding_box(encode(lat, lon, precision))
             # Reconstructing exercises __new__ on values get_bounding_box just produced.
             assert BoundingBox(*bbox) == bbox
+
+
+# ---------------------------------------------------------------------------
+# Reference oracle: the pre-change sampling implementation of
+# geohashes_in_box, kept verbatim. Every interval-walk test below asserts set
+# equality against it. Box spans in the randomized sweep are bounded in cell
+# units: the oracle samples every half-cell (quadratic in span/cell), so
+# world-spanning boxes at high precisions are infeasible for it -- and their
+# billion-cell outputs would be infeasible for any exact enumeration.
+# ---------------------------------------------------------------------------
+
+
+def _float_range(start: float, stop: float, step: float):
+    """Inclusive float range used by the reference oracle."""
+    current = start
+    while current <= stop:
+        yield current
+        current += step
+
+
+def _reference_geohashes_in_box(bbox: BoundingBox, precision: int) -> set:
+    """The pre-change sampling implementation, verbatim, as the oracle."""
+    center_lat = (bbox.min_lat + bbox.max_lat) / 2
+    center_lon = (bbox.min_lon + bbox.max_lon) / 2
+    center_geohash = encode(center_lat, center_lon, precision)
+    center_bbox = get_bounding_box(center_geohash)
+    lat_step = center_bbox.max_lat - center_bbox.min_lat
+    lon_step = center_bbox.max_lon - center_bbox.min_lon
+    result = set()
+    start_lat = max(bbox.min_lat - lat_step, -90.0)
+    end_lat = min(bbox.max_lat + lat_step, 90.0)
+    start_lon = max(bbox.min_lon - lon_step, -180.0)
+    end_lon = min(bbox.max_lon + lon_step, 180.0)
+    for lat in _float_range(start_lat, end_lat, lat_step / 2):
+        for lon in _float_range(start_lon, end_lon, lon_step / 2):
+            geohash = encode(lat, lon, precision)
+            geohash_bbox = get_bounding_box(geohash)
+            if do_boxes_intersect(bbox, geohash_bbox):
+                result.add(geohash)
+    return result
+
+
+def _assert_membership_matches_reference(box: BoundingBox, precision: int) -> int:
+    """Assert the interval-walk output matches the oracle exactly.
+
+    Also asserts the output is a deterministically sorted list of unique
+    hashes -- a strict improvement over the old implementation's
+    ``list(set(...))``, whose order varied across processes.
+    """
+    result = geohashes_in_box(box, precision=precision)
+    reference = _reference_geohashes_in_box(box, precision)
+    assert set(result) == reference
+    assert result == sorted(result)
+    assert len(result) == len(set(result))
+    return len(result)
+
+
+EXPLORATORY_BOXES = [
+    ("antimeridian-east", BoundingBox(0.0, 179.9, 0.1, 180.0), 4),
+    ("antimeridian-west", BoundingBox(0.0, -180.0, 0.1, -179.9), 4),
+    ("polar-south", BoundingBox(-90.0, 0.0, -89.9, 0.1), 4),
+    ("polar-north", BoundingBox(89.9, 0.0, 90.0, 0.1), 4),
+    ("zero-area", BoundingBox(57.649, 10.407, 57.649, 10.407), 6),
+    ("sub-cell", BoundingBox(50.0001, 4.0001, 50.0002, 4.0002), 6),
+    ("p1", BoundingBox(57.6, 10.4, 57.7, 10.5), 1),
+    ("p12-small", BoundingBox(57.649, 10.407, 57.649001, 10.407001), 12),
+    ("p1-world", BoundingBox(-90.0, -180.0, 90.0, 180.0), 1),
+    ("p2-world", BoundingBox(-90.0, -180.0, 90.0, 180.0), 2),
+]
+
+
+class TestGeohashesInBoxAgainstReference:
+    """The interval-walk implementation must match the old sampling loop."""
+
+    def test_explicit_edge_cases(self):
+        """Polar, antimeridian, degenerate, and extreme-precision boxes."""
+        counts = [_assert_membership_matches_reference(box, precision) for _, box, precision in EXPLORATORY_BOXES]
+        # Sanity: the boxes exercise the expected shapes (measured values).
+        assert counts[0] == 2  # antimeridian-east touches two edge cells
+        assert counts[4] == 1  # zero-area box degenerates to one cell
+        assert counts[8] == 32  # the whole world at precision 1
+        assert counts[9] == 1024  # the whole world at precision 2
+
+    def test_randomized_membership(self):
+        """205 seeded randomized boxes across precisions 1-12."""
+        rng = random.Random(20260905)  # noqa: S311
+        precisions = [1, 2, 3, 4, 5, 6, 7, 8, 12]
+        checked = 0
+        for i in range(205):
+            precision = rng.choice(precisions)
+            lat_rows = 1 << ((5 * precision) // 2)
+            lon_cols = 1 << ((5 * precision + 1) // 2)
+            lat_cell = 180.0 / lat_rows
+            lon_cell = 360.0 / lon_cols
+            max_cells = 12 if precision <= 6 else 4
+            mode = i % 5
+            if mode == 0:  # random box, bounded span
+                lat_c = rng.uniform(-89.0, 89.0)
+                lon_c = rng.uniform(-179.0, 179.0)
+                half_lat = rng.uniform(0, max_cells / 2) * lat_cell
+                half_lon = rng.uniform(0, max_cells / 2) * lon_cell
+                box = BoundingBox(
+                    max(-90.0, lat_c - half_lat),
+                    max(-180.0, lon_c - half_lon),
+                    min(90.0, lat_c + half_lat),
+                    min(180.0, lon_c + half_lon),
+                )
+            elif mode == 1:  # cell-aligned edges with a small index span
+                r1 = rng.randrange(0, max(1, lat_rows - 2))
+                c1 = rng.randrange(0, max(1, lon_cols - 2))
+                r2 = min(lat_rows - 1, r1 + rng.randint(0, max_cells))
+                c2 = min(lon_cols - 1, c1 + rng.randint(0, max_cells))
+                box = BoundingBox(-90 + r1 * lat_cell, -180 + c1 * lon_cell, -90 + r2 * lat_cell, -180 + c2 * lon_cell)
+            elif mode == 2:  # near-boundary jitter far below the 1e-12 margin
+                r = rng.randrange(0, max(1, lat_rows - 2))
+                c = rng.randrange(0, max(1, lon_cols - 2))
+                eps_lat = rng.uniform(-1e-13, 1e-13)
+                eps_lon = rng.uniform(-1e-13, 1e-13)
+                box = BoundingBox(
+                    max(-90.0, min(90.0, -90 + r * lat_cell + eps_lat)),
+                    max(-180.0, min(180.0, -180 + c * lon_cell + eps_lon)),
+                    max(-90.0, min(90.0, -90 + min(lat_rows, r + rng.randint(1, max_cells)) * lat_cell + eps_lat)),
+                    max(-180.0, min(180.0, -180 + min(lon_cols, c + rng.randint(1, max_cells)) * lon_cell + eps_lon)),
+                )
+            elif mode == 3:  # degenerate zero-area box
+                lat = rng.uniform(-90, 90)
+                lon = rng.uniform(-180, 180)
+                box = BoundingBox(lat, lon, lat, lon)
+            else:  # polar / antimeridian bands, all spans bounded in cells
+                band = rng.choice(["south", "north", "east", "west"])
+                span_lat = rng.uniform(0, max_cells / 2) * lat_cell
+                span_lon = rng.uniform(0, max_cells / 2) * lon_cell
+                if band == "south":
+                    lon_mid = rng.uniform(-180, 180)
+                    box = BoundingBox(
+                        -90.0, max(-180.0, lon_mid - span_lon), -90 + span_lat, min(180.0, lon_mid + span_lon)
+                    )
+                elif band == "north":
+                    lon_mid = rng.uniform(-180, 180)
+                    box = BoundingBox(
+                        max(-90.0, 90 - span_lat), max(-180.0, lon_mid - span_lon), 90.0, min(180.0, lon_mid + span_lon)
+                    )
+                elif band == "east":
+                    lat_g = rng.uniform(-89.0, 89.0)
+                    box = BoundingBox(lat_g, 180.0 - span_lon, min(90.0, lat_g + span_lat), 180.0)
+                else:
+                    lat_g = rng.uniform(-89.0, 89.0)
+                    box = BoundingBox(lat_g, -180.0, min(90.0, lat_g + span_lat), -180.0 + span_lon)
+            _assert_membership_matches_reference(box, precision)
+            checked += 1
+        assert checked == 205
+
+
+class TestGeohashesInBoxBenchmarks:
+    """Track enumeration throughput so CI flags regressions."""
+
+    BENCHMARK_BOX_4 = BoundingBox(50.0, 4.0, 50.008, 4.016)
+    BENCHMARK_BOX_361 = BoundingBox(57.60, 10.30, 57.70, 10.50)
+
+    def test_benchmark_geohashes_in_box_small(self, benchmark):
+        """4-cell box (0.008 deg x 0.016 deg at precision 6)."""
+        result = benchmark(lambda: geohashes_in_box(self.BENCHMARK_BOX_4, precision=6))
+        assert len(result) == 4
+
+    def test_benchmark_geohashes_in_box_large(self, benchmark):
+        """361-cell box (0.1 deg x 0.2 deg at precision 6)."""
+        result = benchmark(lambda: geohashes_in_box(self.BENCHMARK_BOX_361, precision=6))
+        assert len(result) == 361
+
+
+# ---------------------------------------------------------------------------
+# Comparison-operator semantics, pinned against the current implementation:
+# is_point_in_box uses inclusive <=/<= chains on both axes, and
+# do_boxes_intersect treats boxes that merely touch (shared edge or corner)
+# as intersecting. These tests assert that actual behavior; the mutation
+# rerun then proves the comparison operators are guarded.
+# ---------------------------------------------------------------------------
+
+
+def _cell_bounds(geohash: str) -> tuple:
+    """Exact (min_lat, min_lon, max_lat, max_lon) bounds of a geohash cell."""
+    lat, lon, lat_err, lon_err = decode_exactly(geohash)
+    return lat - lat_err, lon - lon_err, lat + lat_err, lon + lon_err
+
+
+def test_is_point_in_geohash_exact_corners_are_inclusive():
+    """All four exact bounding-box corners of a geohash cell are inside it."""
+    bbox = get_bounding_box("u4pruyd")
+
+    for lat in (bbox.min_lat, bbox.max_lat):
+        for lon in (bbox.min_lon, bbox.max_lon):
+            assert is_point_in_geohash(lat, lon, "u4pruyd") is True
+
+    # A hair beyond the same corners is outside on both axes at once.
+    assert is_point_in_geohash(bbox.min_lat - 1e-9, bbox.min_lon - 1e-9, "u4pruyd") is False
+    assert is_point_in_geohash(bbox.max_lat + 1e-9, bbox.max_lon + 1e-9, "u4pruyd") is False
+
+
+class TestDoBoxesIntersectTouchingSemantics:
+    """Boxes that share only an edge or a corner are treated as intersecting."""
+
+    BASE = BoundingBox(0.0, 0.0, 1.0, 1.0)
+
+    def test_boxes_sharing_a_latitude_edge_intersect(self):
+        """BASE's max_lat is the other box's min_lat, with overlapping longitudes."""
+        other = BoundingBox(1.0, 0.0, 2.0, 1.0)
+
+        assert do_boxes_intersect(self.BASE, other) is True
+        assert do_boxes_intersect(other, self.BASE) is True
+
+    def test_boxes_sharing_a_longitude_edge_intersect(self):
+        """BASE's max_lon is the other box's min_lon, with overlapping latitudes."""
+        other = BoundingBox(0.0, 1.0, 1.0, 2.0)
+
+        assert do_boxes_intersect(self.BASE, other) is True
+        assert do_boxes_intersect(other, self.BASE) is True
+
+    def test_boxes_touching_only_at_a_corner_intersect(self):
+        """A single shared corner point counts as an intersection."""
+        north_east = BoundingBox(1.0, 1.0, 2.0, 2.0)
+
+        assert do_boxes_intersect(self.BASE, north_east) is True
+
+    def test_a_hair_of_separation_does_not_intersect(self):
+        """Once the gap opens, even the smallest separation counts as disjoint."""
+        apart = BoundingBox(1.0000001, 0.0, 2.0, 1.0)
+
+        assert do_boxes_intersect(self.BASE, apart) is False
+
+    def test_degenerate_box_on_the_base_edge_intersects(self):
+        """A zero-area box sitting exactly on BASE's max_lat edge touches it."""
+        edge_point = BoundingBox(1.0, 0.5, 1.0, 0.5)
+
+        assert do_boxes_intersect(self.BASE, edge_point) is True
+
+    def test_degenerate_box_just_outside_does_not_intersect(self):
+        """A zero-area box a hair beyond BASE's edge is disjoint."""
+        outside = BoundingBox(1.0000001, 0.5, 1.0000001, 0.5)
+
+        assert do_boxes_intersect(self.BASE, outside) is False
+
+
+class TestGeohashesInBoxEdgeSemantics:
+    """Cells exactly on the box edge count; output stays deduplicated and sorted."""
+
+    # Exact bounds of one precision-6 cell: the box edges coincide with the
+    # geohash grid, so every neighbouring cell touches the box.
+    CELL = "u4pruy"
+    CELL_BOX = BoundingBox(*_cell_bounds("u4pruy"))
+
+    def test_single_cell_box_returns_the_three_by_three_neighborhood(self):
+        """A cell-aligned box also returns its eight touching neighbours, exactly once."""
+        result = geohashes_in_box(self.CELL_BOX, precision=6)
+
+        assert len(result) == 9
+        assert self.CELL in result
+        assert result == sorted(result)
+        assert len(result) == len(set(result))
+
+    @pytest.mark.parametrize("precision", range(1, 10))
+    def test_precision_sweep_returns_sorted_unique_intersecting_cells(self, precision):
+        """Precisions 1 through 9 all yield deterministic, minimal, intersecting coverings."""
+        bbox = BoundingBox(57.649, 10.407, 57.650, 10.408)
+        result = geohashes_in_box(bbox, precision=precision)
+
+        assert result
+        assert result == sorted(result)
+        assert len(result) == len(set(result))
+        assert all(len(geohash) == precision for geohash in result)
+        assert all(do_boxes_intersect(bbox, get_bounding_box(geohash)) for geohash in result)
+
+    def test_precision_sweep_cell_counts_are_pinned(self):
+        """Exact counts across the sweep pin the touching-edges-are-included semantics."""
+        bbox = BoundingBox(57.649, 10.407, 57.650, 10.408)
+
+        counts = [len(geohashes_in_box(bbox, precision=precision)) for precision in range(1, 10)]
+
+        assert counts == [1, 1, 1, 1, 1, 1, 2, 28, 576]
+
+    def test_precision_below_the_supported_minimum_is_rejected(self):
+        """Precision 0 is rejected by the center-cell encode instead of yielding cells."""
+        with pytest.raises(ValueError, match=r"Precision must be between 1 and 12, but got 0"):
+            geohashes_in_box(BoundingBox(57.649, 10.407, 57.650, 10.408), precision=0)

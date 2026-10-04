@@ -6,7 +6,7 @@ in different directions (right, left, top, bottom).
 
 from __future__ import annotations
 
-from typing import Dict, Final, Literal, Tuple
+from typing import Dict, Final, FrozenSet, Literal, Tuple
 
 from pygeohash.geohash import __base32
 from pygeohash.types import Direction, is_valid_geohash
@@ -56,6 +56,25 @@ BORDERS: Final[Dict[Direction, Dict[Literal["even", "odd"], str]]] = {
 
 DIRECTIONS: Final[Tuple[Direction, ...]] = ("right", "left", "top", "bottom")
 
+# Precomputed lookups so the hot path avoids per-call construction, str.index scans,
+# and recursion on border characters. Indexed [direction][parity_bit] where bit 0 =
+# even-length hash and bit 1 = odd-length hash (a prefix of length i + 1 has parity
+# bit (i + 1) & 1).
+_BORDER_SETS: Final[Dict[Direction, Tuple[FrozenSet[str], FrozenSet[str]]]] = {
+    direction: (
+        frozenset(BORDERS[direction]["even"]),
+        frozenset(BORDERS[direction]["odd"]),
+    )
+    for direction in DIRECTIONS
+}
+_NEIGHBOR_MAPS: Final[Dict[Direction, Tuple[Dict[str, str], Dict[str, str]]]] = {
+    direction: (
+        {char: __base32[i] for i, char in enumerate(NEIGHBORS[direction]["even"])},
+        {char: __base32[i] for i, char in enumerate(NEIGHBORS[direction]["odd"])},
+    )
+    for direction in DIRECTIONS
+}
+
 
 def get_adjacent(geohash: str, direction: Direction) -> str:
     """Calculate the adjacent geohash in the specified direction.
@@ -81,8 +100,6 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
         >>> get_adjacent("u4pruyd", "top")
         'u4pruyf'
     """
-    logger.debug("Finding adjacent geohash for %s in direction %s", geohash, direction)
-
     if len(geohash) == 0:
         logger.error("Cannot find adjacent geohash: input geohash length is 0")
         raise ValueError("The geohash length cannot be 0. Possible when close to poles")
@@ -99,30 +116,29 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
         raise ValueError(f"Invalid direction: {direction!r}. Must be one of 'right', 'left', 'top', 'bottom'")
 
     source_hash = geohash.lower()
-    last_char = source_hash[-1]
-    base = source_hash[:-1]
-    logger.debug("Processing: base=%s, last_char=%s", base, last_char)
+    border_sets = _BORDER_SETS[direction]
+    neighbor_maps = _NEIGHBOR_MAPS[direction]
 
-    split_direction: Literal["even", "odd"] = "even" if len(source_hash) % 2 == 0 else "odd"
-    logger.debug("Using %s lookup tables based on hash length", split_direction)
-
-    if last_char in BORDERS[direction][split_direction]:
-        if base:
-            logger.debug("Last character %s is on border, recursively finding parent neighbor", last_char)
-            base = get_adjacent(base, direction)
-        elif direction in ("top", "bottom"):
-            pole = "north" if direction == "top" else "south"
-            logger.error("Cannot find adjacent geohash: the %s neighbor lies beyond the %s pole", direction, pole)
-            raise ValueError(f"No adjacent geohash to the {direction}: it would lie beyond the {pole} pole")
-        else:
+    # Walk right-to-left through border characters instead of recursing: position i
+    # ends a substring of length i + 1, so its parity bit is (i + 1) & 1. Reaching
+    # the first character on a border means the neighbor crosses into the parent tile.
+    i = len(source_hash) - 1
+    while source_hash[i] in border_sets[(i + 1) & 1]:
+        if i == 0:
+            if direction in ("top", "bottom"):
+                pole = "north" if direction == "top" else "south"
+                logger.error("Cannot find adjacent geohash: the %s neighbor lies beyond the %s pole", direction, pole)
+                raise ValueError(f"No adjacent geohash to the {direction}: it would lie beyond the {pole} pole")
             # Longitude is cyclic, so the top-level tables already encode the antimeridian wrap.
-            logger.debug("Last character %s is on the antimeridian, wrapping longitude", last_char)
-    else:
-        logger.debug("Last character %s is not on border, using direct neighbor lookup", last_char)
+            break
+        i -= 1
 
-    neighbor_str = NEIGHBORS[direction][split_direction]
-    idx = neighbor_str.index(last_char)
-    base32_char = __base32[idx]
-    result = base + base32_char
-    logger.debug("Found adjacent geohash: %s", result)
-    return result
+    translated = neighbor_maps[(i + 1) & 1][source_hash[i]]
+    if i == len(source_hash) - 1:
+        # Common case: the last character is not on a border, no parent lookup needed.
+        return source_hash[:-1] + translated
+
+    parts = [source_hash[:i], translated]
+    for j in range(i + 1, len(source_hash)):
+        parts.append(neighbor_maps[(j + 1) & 1][source_hash[j]])
+    return "".join(parts)

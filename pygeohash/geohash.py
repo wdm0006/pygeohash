@@ -9,12 +9,14 @@ This implementation uses a high-performance C extension for all operations.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, Iterable
 
 from pygeohash.cgeohash.geohash_module import (
     decode as c_decode,
     decode_exactly as c_decode_exactly,
+    decode_many as c_decode_many,
     encode as c_encode,
+    encode_many as c_encode_many,
     encode_strictly as c_encode_strictly,
     get_base32,
 )
@@ -49,6 +51,23 @@ def encode(latitude: float, longitude: float, precision: GeohashPrecision = 12) 
             rejected for all three arguments, even though ``bool`` is a subclass of
             ``int``.
     """
+    # Fast path: the common case (exact-type floats in range, an in-range int
+    # precision) goes straight to the C codec. The ``type(x) is ...`` identity
+    # checks are cheaper than isinstance and naturally reject bool (type(True) is
+    # bool, not int); NaN/inf fail the range comparisons. Anything else (ints,
+    # bools, numeric subclasses, non-finite, out-of-range values) falls through
+    # to the full validation below, which raises exactly the same errors as
+    # before, in the same order.
+    if (
+        type(latitude) is float
+        and type(longitude) is float
+        and -90.0 <= latitude <= 90.0
+        and -180.0 <= longitude <= 180.0
+        and type(precision) is int
+        and MIN_PRECISION <= precision <= MAX_PRECISION
+    ):
+        return c_encode(latitude, longitude, precision)
+
     # bool is a subclass of int, so it has to be rejected explicitly.
     if isinstance(precision, bool) or not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
@@ -96,6 +115,31 @@ def encode_strictly(latitude: float, longitude: float, precision: GeohashPrecisi
             rejected for all three arguments, even though ``bool`` is a subclass of
             ``int``.
     """
+    # Same fast path as encode(): exact-type floats in range with an in-range int
+    # precision go straight to the C codec; anything else falls through to the
+    # full validation below, which raises exactly the same errors as before. The
+    # error log on a C-level failure is part of this function's contract, so the
+    # fast path keeps it.
+    if (
+        type(latitude) is float
+        and type(longitude) is float
+        and -90.0 <= latitude <= 90.0
+        and -180.0 <= longitude <= 180.0
+        and type(precision) is int
+        and MIN_PRECISION <= precision <= MAX_PRECISION
+    ):
+        try:
+            return c_encode_strictly(latitude, longitude, precision)
+        except ValueError as e:
+            logger.error(
+                "Failed to strictly encode coordinates: lat=%f, lon=%f with precision %d: %s",
+                latitude,
+                longitude,
+                precision,
+                str(e),
+            )
+            raise
+
     # bool is a subclass of int, so it has to be rejected explicitly.
     if isinstance(precision, bool) or not isinstance(precision, int):
         raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
@@ -182,14 +226,77 @@ def decode_exactly(geohash: str) -> ExactLatLong:
     if len(geohash) > MAX_PRECISION:
         raise ValueError(f"Geohash must be at most {MAX_PRECISION} characters long.")
 
-    # See decode(): the C extension validates characters and raises on its own.
-    return c_decode_exactly(geohash.lower())
+    # See decode(): the C extension folds case, validates characters, and
+    # raises on its own.
+    return c_decode_exactly(geohash)
+
+
+def encode_many(latitudes: Iterable[float], longitudes: Iterable[float], precision: GeohashPrecision = 12) -> list[str]:
+    """Encode many coordinate pairs into geohashes in one call.
+
+    The result equals ``[encode(a, b, precision) for a, b in zip(latitudes, longitudes)]``
+    element for element, but the shared ``precision`` is validated once and the loop
+    runs in C. Each pair gets exactly the validation :func:`encode` applies, and a
+    rejected pair raises the same exception type and message as the scalar call with
+    ``" (at index N)"`` appended. NumPy is not imported; NumPy arrays work through
+    ordinary iteration.
+
+    Args:
+        latitudes (Iterable[float]): Latitudes, as a list, tuple, ``array.array``,
+            NumPy array, generator, or any other iterable.
+        longitudes (Iterable[float]): Longitudes, with the same length as ``latitudes``.
+        precision (GeohashPrecision, optional): The number of characters in each geohash.
+            Defaults to 12. Must be between 1 and 12, inclusive.
+
+    Returns:
+        list[str]: One lowercase geohash per pair; an empty list for empty input.
+
+    Raises:
+        ValueError: If ``precision`` is invalid (reported without an index), if the two
+            inputs have different lengths, or if any pair is rejected by :func:`encode`.
+        TypeError: If an input is not iterable, or if a pair fails with ``TypeError``
+            in :func:`encode`.
+    """
+    if isinstance(precision, bool) or not isinstance(precision, int):
+        raise ValueError(f"Precision must be an integer, but got {type(precision).__name__}.")
+    if not (MIN_PRECISION <= precision <= MAX_PRECISION):
+        raise ValueError(f"Precision must be between {MIN_PRECISION} and {MAX_PRECISION}, but got {precision}.")
+    return c_encode_many(latitudes, longitudes, precision, encode)
+
+
+def decode_many(geohashes: Iterable[str]) -> list[LatLong]:
+    """Decode many geohashes into cell centers in one call.
+
+    The result equals ``[decode(g) for g in geohashes]`` element for element. Each
+    geohash gets exactly the validation :func:`decode` applies (including its
+    case-insensitivity), and a rejected geohash raises the same exception type and
+    message as the scalar call with ``" (at index N)"`` appended.
+
+    Args:
+        geohashes (Iterable[str]): Geohash strings, as a list, tuple, generator, or any
+            other iterable. A single ``str`` is rejected.
+
+    Returns:
+        list[LatLong]: One :class:`~pygeohash.geohash_types.LatLong` per geohash; an
+            empty list for empty input.
+
+    Raises:
+        TypeError: If ``geohashes`` is a bare ``str`` or is not iterable.
+        ValueError: If any element is rejected by :func:`decode`.
+    """
+    if isinstance(geohashes, str):
+        raise TypeError(
+            "geohashes must be an iterable of geohash strings, not a single str; pass [geohash] to decode one geohash."
+        )
+    return c_decode_many(geohashes, decode)
 
 
 __all__ = [
     "decode",
     "decode_exactly",
+    "decode_many",
     "encode",
+    "encode_many",
     "encode_strictly",
     "LatLong",
     "ExactLatLong",

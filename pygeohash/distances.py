@@ -90,7 +90,7 @@ def geohash_approximate_distance(geohash_1: str, geohash_2: str, check_validity:
 
     # find how many leading characters are matching
     matching = 0
-    for g1, g2 in zip(geohash_1, geohash_2):
+    for g1, g2 in zip(geohash_1, geohash_2, strict=True):
         if g1 == g2:
             matching += 1
         else:

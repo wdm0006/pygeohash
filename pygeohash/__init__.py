@@ -14,7 +14,7 @@ Attributes:
 from importlib import import_module
 from typing import TYPE_CHECKING, Dict, List
 
-from pygeohash.geohash import decode, decode_exactly, encode, encode_strictly
+from pygeohash.geohash import decode, decode_exactly, decode_many, encode, encode_many, encode_strictly
 from pygeohash.geohash_types import ExactLatLong, GeohashPrecision, LatLong
 from pygeohash.logging import (
     add_file_handler,
@@ -61,6 +61,15 @@ if TYPE_CHECKING:
         is_valid_longitude,
     )
     from pygeohash.viz import folium_map, plot_geohash, plot_geohashes
+    from pygeohash.interop import (
+        Tile,
+        geohash_from_int,
+        geohash_to_int,
+        geohash_to_quadkey,
+        geohash_to_tile,
+        quadkey_to_geohash,
+        tile_to_geohash,
+    )
 
 __author__ = "willmcginnis"
 
@@ -70,6 +79,8 @@ __all__ = [
     "encode_strictly",
     "decode",
     "decode_exactly",
+    "encode_many",
+    "decode_many",
     # Distance calculations
     "geohash_approximate_distance",
     "geohash_haversine_distance",
@@ -128,6 +139,14 @@ __all__ = [
     "plot_geohash",
     "plot_geohashes",
     "folium_map",
+    # Grid interop (tiles, quadkeys, integer form)
+    "Tile",
+    "geohash_to_quadkey",
+    "quadkey_to_geohash",
+    "geohash_to_tile",
+    "tile_to_geohash",
+    "geohash_to_int",
+    "geohash_from_int",
 ]
 
 _LAZY_IMPORTS: Dict[str, str] = {
@@ -145,6 +164,18 @@ _LAZY_IMPORTS: Dict[str, str] = {
             ),
         ),
         ("pygeohash.distances", ("geohash_approximate_distance", "geohash_haversine_distance")),
+        (
+            "pygeohash.interop",
+            (
+                "Tile",
+                "geohash_from_int",
+                "geohash_to_int",
+                "geohash_to_quadkey",
+                "geohash_to_tile",
+                "quadkey_to_geohash",
+                "tile_to_geohash",
+            ),
+        ),
         ("pygeohash.neighbor", ("get_adjacent",)),
         ("pygeohash.stats", ("eastern", "mean", "northern", "southern", "std", "variance", "western")),
         (

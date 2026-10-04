@@ -79,6 +79,7 @@ Contents
    introduction
    concepts
    usage
+   grid_systems
    types
    examples
    api
