@@ -47,6 +47,7 @@ Geohash Navigation
 ------------------
 
 .. autofunction:: pygeohash.get_adjacent
+.. autofunction:: pygeohash.get_neighbors
 
 Bounding Box Operations
 -----------------------

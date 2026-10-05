@@ -16,7 +16,7 @@
     
     <title>pygeohash.neighbor &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=30d13653" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/wabi.css?v=c49ddd0e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/wabi.css?v=3eeb95f0" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a8d29c75" />
     <script src="../../_static/documentation_options.js?v=654eae90"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -182,7 +182,7 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">FrozenSet</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">FrozenSet</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">__base32</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">is_valid_geohash</span>
@@ -321,6 +321,57 @@
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbor_maps</span><span class="p">[(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">][</span><span class="n">source_hash</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span>
     <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span></div>
 
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_adjacent_or_none</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">Direction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="c1"># Input was validated by the caller, so the only failure left is a pole.</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="get_neighbors">
+<a class="viewcode-back" href="../../api.html#pygeohash.get_neighbors">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_neighbors</span><span class="p">(</span><span class="n">geohash</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">include_self</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Return the cells surrounding a geohash, optionally with the cell itself.</span>
+
+<span class="sd">    Composes :func:`get_adjacent` for the four cardinal cells and the four diagonals.</span>
+<span class="sd">    Longitude wraps across the antimeridian. Cells that would lie beyond a pole do not</span>
+<span class="sd">    exist and are omitted, so a cell in the top or bottom row has five neighbors</span>
+<span class="sd">    rather than raising.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        geohash (str): The input geohash string.</span>
+<span class="sd">        include_self (bool): If True, also include the input geohash, lowercased.</span>
+<span class="sd">        Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: Sorted, unique, lowercase geohashes of the same precision as the</span>
+<span class="sd">        input: up to eight neighbors, plus the input when ``include_self`` is True.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: Under the same conditions as :func:`get_adjacent` for an empty or</span>
+<span class="sd">        invalid geohash.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Validate (and raise the same errors) up front, even if every step below is skipped.</span>
+    <span class="n">get_adjacent</span><span class="p">(</span><span class="n">geohash</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">)</span>
+
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">cell</span><span class="p">}</span> <span class="k">if</span> <span class="n">include_self</span> <span class="k">else</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">vertical</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">_adjacent_or_none</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">vertical</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">row</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">horizontal</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">get_adjacent</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">horizontal</span><span class="p">))</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_self</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -329,7 +380,10 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h3><a href="../../index.html">Table of Contents</a></h3>
+
+
+<h3 class="sr-only">Table of Contents</h3>
+
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>

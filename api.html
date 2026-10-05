@@ -17,7 +17,7 @@
     
     <title>Core Functions &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
-    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=c49ddd0e" />
+    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=3eeb95f0" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
     <script src="_static/documentation_options.js?v=654eae90"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
@@ -653,6 +653,38 @@ other side of the grid.</p>
 <span class="go">'u4pruyf'</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.get_neighbors">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">get_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geohash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/neighbor.html#get_neighbors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.get_neighbors" title="Link to this definition">¶</a></dt>
+<dd><p>Return the cells surrounding a geohash, optionally with the cell itself.</p>
+<p>Composes <a class="reference internal" href="#pygeohash.get_adjacent" title="pygeohash.get_adjacent"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_adjacent()</span></code></a> for the four cardinal cells and the four diagonals.
+Longitude wraps across the antimeridian. Cells that would lie beyond a pole do not
+exist and are omitted, so a cell in the top or bottom row has five neighbors
+rather than raising.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geohash</strong> (<em>str</em>) – The input geohash string.</p></li>
+<li><p><strong>include_self</strong> (<em>bool</em>) – If True, also include the input geohash, lowercased.</p></li>
+<li><p><strong>False.</strong> (<em>Defaults to</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sorted, unique, lowercase geohashes of the same precision as the
+input: up to eight neighbors, plus the input when <code class="docutils literal notranslate"><span class="pre">include_self</span></code> is True.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – Under the same conditions as <a class="reference internal" href="#pygeohash.get_adjacent" title="pygeohash.get_adjacent"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_adjacent()</span></code></a> for an empty or</p></li>
+<li><p><strong>invalid geohash.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -1383,7 +1415,10 @@ precision are rejected.</p></li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h3><a href="index.html">Table of Contents</a></h3>
+
+
+<h3 class="sr-only">Table of Contents</h3>
+
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
@@ -1409,6 +1444,7 @@ precision are rejected.</p></li>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#geohash-navigation">Geohash Navigation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#pygeohash.get_adjacent"><code class="docutils literal notranslate"><span class="pre">get_adjacent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.get_neighbors"><code class="docutils literal notranslate"><span class="pre">get_neighbors()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a><ul>
