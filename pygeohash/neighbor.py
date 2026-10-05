@@ -6,7 +6,7 @@ in different directions (right, left, top, bottom).
 
 from __future__ import annotations
 
-from typing import Dict, Final, FrozenSet, Literal, Tuple
+from typing import Dict, Final, FrozenSet, List, Literal, Optional, Tuple
 
 from pygeohash.geohash import __base32
 from pygeohash.types import Direction, is_valid_geohash
@@ -142,3 +142,51 @@ def get_adjacent(geohash: str, direction: Direction) -> str:
     for j in range(i + 1, len(source_hash)):
         parts.append(neighbor_maps[(j + 1) & 1][source_hash[j]])
     return "".join(parts)
+
+
+def _adjacent_or_none(geohash: str, direction: Direction) -> Optional[str]:
+    try:
+        return get_adjacent(geohash, direction)
+    except ValueError:
+        # Input was validated by the caller, so the only failure left is a pole.
+        return None
+
+
+def get_neighbors(geohash: str, include_self: bool = False) -> List[str]:
+    """Return the cells surrounding a geohash, optionally with the cell itself.
+
+    Composes :func:`get_adjacent` for the four cardinal cells and the four diagonals.
+    Longitude wraps across the antimeridian. Cells that would lie beyond a pole do not
+    exist and are omitted, so a cell in the top or bottom row has five neighbors
+    rather than raising.
+
+    Args:
+        geohash (str): The input geohash string.
+        include_self (bool): If True, also include the input geohash, lowercased.
+        Defaults to False.
+
+    Returns:
+        List[str]: Sorted, unique, lowercase geohashes of the same precision as the
+        input: up to eight neighbors, plus the input when ``include_self`` is True.
+
+    Raises:
+        ValueError: Under the same conditions as :func:`get_adjacent` for an empty or
+        invalid geohash.
+    """
+    # Validate (and raise the same errors) up front, even if every step below is skipped.
+    get_adjacent(geohash, "right")
+
+    cell = geohash.lower()
+    result = {cell} if include_self else set()
+    columns = [cell]
+    for vertical in ("top", "bottom"):
+        row = _adjacent_or_none(cell, vertical)
+        if row is not None:
+            columns.append(row)
+    for base in columns:
+        for horizontal in ("left", "right"):
+            result.add(get_adjacent(base, horizontal))
+    result.update(columns)
+    if not include_self:
+        result.discard(cell)
+    return sorted(result)

@@ -219,21 +219,8 @@ Implementing a simple geospatial search using geohashes:
             # Get the geohash of the search point
             center_geohash = pgh.encode(lat, lng, precision=self.precision)
             
-            # Get adjacent geohashes
-            adjacent = [center_geohash]
-            for direction in ['top', 'right', 'bottom', 'left']:
-                adjacent.append(pgh.get_adjacent(center_geohash, direction))
-            
-            # Add diagonal adjacents
-            top = pgh.get_adjacent(center_geohash, 'top')
-            right = pgh.get_adjacent(center_geohash, 'right')
-            bottom = pgh.get_adjacent(center_geohash, 'bottom')
-            left = pgh.get_adjacent(center_geohash, 'left')
-            
-            adjacent.append(pgh.get_adjacent(top, 'right'))     # top-right
-            adjacent.append(pgh.get_adjacent(right, 'bottom'))  # bottom-right
-            adjacent.append(pgh.get_adjacent(bottom, 'left'))   # bottom-left
-            adjacent.append(pgh.get_adjacent(left, 'top'))      # top-left
+            # The cell plus its (up to) eight neighbors
+            adjacent = pgh.get_neighbors(center_geohash, include_self=True)
             
             # Collect all points in the search geohashes
             results = []
