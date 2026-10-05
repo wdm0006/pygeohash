@@ -1,3 +1,8 @@
+v3.7.0 (unreleased)
+===================
+
+ * [feature] `get_neighbors(geohash, include_self=False)` returns the sorted, unique cells surrounding a geohash (up to eight; five in the polar rows, where cells beyond a pole are omitted rather than raising), composed from `get_adjacent`.
+
 v3.6.0 (2026-09-06)
 ===================
 

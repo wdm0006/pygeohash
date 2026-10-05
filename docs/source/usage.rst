@@ -119,6 +119,14 @@ To find geohashes adjacent to a given geohash:
     print(f"Bottom: {adjacent_bottom}")
     print(f"Left: {adjacent_left}")
 
+    # Get the cell plus all eight surrounding cells for a proximity lookup
+    cells = pgh.get_neighbors('kd3ybyu', include_self=True)
+
+``get_neighbors`` returns a sorted list of unique, same-precision, lowercase
+geohashes. Longitude wraps across the antimeridian, and cells beyond a pole do
+not exist, so a cell in the top or bottom row has five neighbors instead of
+raising ``ValueError``.
+
 Bounding Box Operations
 -----------------------
 
