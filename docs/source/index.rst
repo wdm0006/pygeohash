@@ -33,6 +33,12 @@ Installation:
 
     pip install pygeohash
 
+or, with conda:
+
+.. code-block:: bash
+
+    conda install -c conda-forge pygeohash
+
 Basic usage:
 
 .. code-block:: python

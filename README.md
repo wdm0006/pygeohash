@@ -2,6 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/pygeohash.svg)](https://badge.fury.io/py/pygeohash)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pygeohash.svg)](https://pypi.org/project/pygeohash/)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/pygeohash.svg)](https://anaconda.org/conda-forge/pygeohash)
 
 A typed Python library for working with geohashes, with a compiled C core and
 prebuilt wheels for mainstream Linux, macOS, and Windows environments.
@@ -34,6 +35,9 @@ It was originally based on Leonard Norrgård's [geohash](https://github.com/vins
 ```bash
 # Basic installation
 pip install pygeohash
+
+# Or from conda-forge
+conda install -c conda-forge pygeohash
 
 # With visualization support
 pip install pygeohash[viz]
