@@ -35,7 +35,7 @@ if TYPE_CHECKING:
         is_point_in_geohash,
     )
     from pygeohash.distances import geohash_approximate_distance, geohash_haversine_distance
-    from pygeohash.neighbor import get_adjacent
+    from pygeohash.neighbor import get_adjacent, get_neighbors
     from pygeohash.stats import eastern, mean, northern, southern, std, variance, western
     from pygeohash.types import (
         EARTH_RADIUS,
@@ -121,6 +121,7 @@ __all__ = [
     "std",
     # Neighbor operations
     "get_adjacent",
+    "get_neighbors",
     # Validation functions
     "assert_valid_geohash",
     "assert_valid_latitude",
@@ -176,7 +177,7 @@ _LAZY_IMPORTS: Dict[str, str] = {
                 "tile_to_geohash",
             ),
         ),
-        ("pygeohash.neighbor", ("get_adjacent",)),
+        ("pygeohash.neighbor", ("get_adjacent", "get_neighbors")),
         ("pygeohash.stats", ("eastern", "mean", "northern", "southern", "std", "variance", "western")),
         (
             "pygeohash.types",
