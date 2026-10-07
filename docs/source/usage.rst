@@ -127,6 +127,24 @@ geohashes. Longitude wraps across the antimeridian, and cells beyond a pole do
 not exist, so a cell in the top or bottom row has five neighbors instead of
 raising ``ValueError``.
 
+Radius Coverage
+---------------
+
+Use ``geohashes_in_radius(latitude, longitude, radius_m, precision=6)`` to
+select candidate cells for a proximity query. For example, a one-kilometer
+search around Copenhagen can use:
+
+.. code-block:: python
+
+    cells = pgh.geohashes_in_radius(55.6761, 12.5683, 1000, precision=6)
+
+The result is sorted and unique, and includes every cell intersecting the
+spherical circle, including boundary contact. Antimeridian crossings and
+circles containing a pole are handled automatically. Query records by these
+keys, then filter individual coordinates by their distance to the center.
+Distances use ``EARTH_RADIUS`` in meters. Choose precision carefully: large
+radii at high precision produce large lists.
+
 Bounding Box Operations
 -----------------------
 

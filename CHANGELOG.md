@@ -1,6 +1,7 @@
 v3.7.0 (unreleased)
 ===================
 
+ * [feature] `geohashes_in_radius(latitude, longitude, radius_m, precision=6)` returns sorted, unique cells intersecting a spherical radius, including antimeridian crossings and polar caps, with no new dependencies.
  * [feature] `get_neighbors(geohash, include_self=False)` returns the sorted, unique cells surrounding a geohash (up to eight; five in the polar rows, where cells beyond a pole are omitted rather than raising), composed from `get_adjacent`.
 
 v3.6.0 (2026-09-06)
