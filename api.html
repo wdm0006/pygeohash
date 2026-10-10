@@ -17,7 +17,7 @@
     
     <title>Core Functions &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
-    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=3eeb95f0" />
+    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=9adde7c3" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
     <script src="_static/documentation_options.js?v=654eae90"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
@@ -848,6 +848,39 @@ in a deterministically sorted order that is identical across processes.</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="pygeohash.geohashes_in_radius">
+<span class="sig-prename descclassname"><span class="pre">pygeohash.</span></span><span class="sig-name descname"><span class="pre">geohashes_in_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pygeohash/bounding_box.html#geohashes_in_radius"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygeohash.geohashes_in_radius" title="Link to this definition">¶</a></dt>
+<dd><p>Find all geohash cells intersecting a spherical circle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> (<em>float</em>) – Center latitude in degrees, between -90 and 90.</p></li>
+<li><p><strong>longitude</strong> (<em>float</em>) – Center longitude in degrees, between -180 and 180.</p></li>
+<li><p><strong>radius_m</strong> (<em>float</em>) – Finite, positive radius in meters. Booleans are rejected.</p></li>
+<li><p><strong>precision</strong> (<em>int</em>) – Cell precision from 1 to 12. Defaults to 6.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sorted, unique cells whose nearest point is within the radius,
+including cells touching the circle. Antimeridian crossings and polar caps
+are supported. Distances use the spherical <code class="docutils literal notranslate"><span class="pre">EARTH_RADIUS</span></code> constant.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If coordinates, radius, or precision are invalid.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These are candidate cells for proximity queries; filter individual records
+by their distance afterwards. Output size grows with radius and precision;
+large circles at high precision can require very large lists.</p>
+</div>
+</dd></dl>
+
 </section>
 <section id="statistical-functions">
 <h1>Statistical Functions<a class="headerlink" href="#statistical-functions" title="Link to this heading">¶</a></h1>
@@ -1453,6 +1486,7 @@ precision are rejected.</p></li>
 <li class="toctree-l2"><a class="reference internal" href="#pygeohash.is_point_in_geohash"><code class="docutils literal notranslate"><span class="pre">is_point_in_geohash()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pygeohash.do_boxes_intersect"><code class="docutils literal notranslate"><span class="pre">do_boxes_intersect()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohashes_in_box"><code class="docutils literal notranslate"><span class="pre">geohashes_in_box()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygeohash.geohashes_in_radius"><code class="docutils literal notranslate"><span class="pre">geohashes_in_radius()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#statistical-functions">Statistical Functions</a><ul>

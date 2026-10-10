@@ -17,7 +17,7 @@
     
     <title>Usage Guide &#8212; pygeohash 3.5.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
-    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=3eeb95f0" />
+    <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=9adde7c3" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
     <script src="_static/documentation_options.js?v=654eae90"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
@@ -284,6 +284,21 @@
 geohashes. Longitude wraps across the antimeridian, and cells beyond a pole do
 not exist, so a cell in the top or bottom row has five neighbors instead of
 raising <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+</section>
+<section id="radius-coverage">
+<h2>Radius Coverage<a class="headerlink" href="#radius-coverage" title="Link to this heading">¶</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">geohashes_in_radius(latitude,</span> <span class="pre">longitude,</span> <span class="pre">radius_m,</span> <span class="pre">precision=6)</span></code> to
+select candidate cells for a proximity query. For example, a one-kilometer
+search around Copenhagen can use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cells</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">geohashes_in_radius</span><span class="p">(</span><span class="mf">55.6761</span><span class="p">,</span> <span class="mf">12.5683</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is sorted and unique, and includes every cell intersecting the
+spherical circle, including boundary contact. Antimeridian crossings and
+circles containing a pole are handled automatically. Query records by these
+keys, then filter individual coordinates by their distance to the center.
+Distances use <code class="docutils literal notranslate"><span class="pre">EARTH_RADIUS</span></code> in meters. Choose precision carefully: large
+radii at high precision produce large lists.</p>
 </section>
 <section id="bounding-box-operations">
 <h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h2>
@@ -624,6 +639,7 @@ raising <code class="docutils literal notranslate"><span class="pre">ValueError<
 <li class="toctree-l2"><a class="reference internal" href="#working-with-geohash-precision">Working with Geohash Precision</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#calculating-distances">Calculating Distances</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#finding-adjacent-geohashes">Finding Adjacent Geohashes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#radius-coverage">Radius Coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bounding-box-operations">Bounding Box Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#statistical-functions">Statistical Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#practical-examples">Practical Examples</a></li>
