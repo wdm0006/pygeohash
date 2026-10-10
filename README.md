@@ -26,6 +26,9 @@ It was originally based on Leonard Norrgård's [geohash](https://github.com/vins
   available separately through `pygeohash[viz]`.
 - **Geohash utilities beyond encode/decode:** Work with neighbors, bounding
   boxes, approximate distances, statistical helpers, and optional maps.
+- **Radius coverage:** `geohashes_in_radius(lat, lon, radius_m, precision=6)`
+  selects proximity candidate cells, including across the antimeridian and near poles
+  (new in 3.6.0).
 - **Map-tile interoperability:** Convert geohashes to tile, quadkey, and integer
   forms (new in 3.6.0).
 

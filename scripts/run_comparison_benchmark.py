@@ -67,6 +67,18 @@ GROUPS = [
     ),
 ]
 
+# Batch workloads: one group per (operation, batch size). Sizes must match
+# BATCH_SIZES in the test module; the sizes actually measured are read from each
+# benchmark's recorded extra_info, so a mismatch shows up as a missing group.
+BATCH_SIZES = (100, 10_000)
+BATCH_OPERATIONS = [("encode", "Encode"), ("decode", "Decode")]
+BATCH_GROUPS = [(f"{op}-batch-{size}", op, label, size) for op, label in BATCH_OPERATIONS for size in BATCH_SIZES]
+BATCH_GROUP_NAMES = {group for group, *_ in BATCH_GROUPS}
+
+MODE_BULK = "bulk"
+MODE_LOOP = "scalar-loop"
+MODE_LABELS = {MODE_BULK: "native bulk call", MODE_LOOP: "scalar loop"}
+
 # Implementation of each measured library, mirroring the table in the test module.
 IMPLEMENTATIONS = {
     "pygeohash": "C extension",
@@ -135,7 +147,12 @@ def library_name(benchmark):
     """
     name = benchmark["name"]
     start = name.index("[") + 1
-    return name[start : name.rindex("]")]
+    return name[start : name.rindex("]")].split("@")[0]
+
+
+def entry_mode(benchmark):
+    """Return the execution mode a batch benchmark recorded (bulk or scalar-loop)."""
+    return benchmark.get("extra_info", {}).get("mode", MODE_LOOP)
 
 
 def collect_rows(reports, group):
@@ -172,6 +189,138 @@ def collect_rows(reports, group):
     return rows
 
 
+def collect_batch_rows(reports, group):
+    """Return one row per (library, mode) of a batch group, fastest batch first.
+
+    ``median_ns`` is the median over runs of the whole-batch median; per-item
+    figures divide by the batch size recorded with each benchmark. The ratio is
+    against pygeohash's native bulk call.
+    """
+    per_entry = {}
+    for report in reports:
+        for benchmark in report["benchmarks"]:
+            if benchmark["group"] != group:
+                continue
+            info = benchmark["extra_info"]
+            key = (library_name(benchmark), entry_mode(benchmark))
+            entry = per_entry.setdefault(key, {"size": info["size"], "precision": info["precision"], "medians": []})
+            entry["medians"].append(benchmark["stats"]["median"] * 1e9)
+
+    rows = []
+    for (library, mode), entry in per_entry.items():
+        size = entry["size"]
+        median_ns = statistics.median(entry["medians"])
+        low_ns, high_ns = min(entry["medians"]), max(entry["medians"])
+        rows.append(
+            {
+                "library": library,
+                "mode": mode,
+                "size": size,
+                "precision": entry["precision"],
+                "median_ns": median_ns,
+                "low_ns": low_ns,
+                "high_ns": high_ns,
+                "per_item_ns": median_ns / size,
+                "per_item_low_ns": low_ns / size,
+                "per_item_high_ns": high_ns / size,
+            }
+        )
+    rows.sort(key=lambda row: row["median_ns"])
+
+    baseline = next((r["median_ns"] for r in rows if r["library"] == "pygeohash" and r["mode"] == MODE_BULK), None)
+    for row in rows:
+        row["ratio"] = row["median_ns"] / baseline if baseline else None
+    return rows
+
+
+def format_batch_table(rows, repeats):
+    """Render one batch group's rows as a reStructuredText list-table."""
+    lines = [
+        ".. list-table::",
+        "   :header-rows: 1",
+        "   :widths: 18 16 12 8 10 20 20 12",
+        "",
+        "   * - Library",
+        "     - Mode",
+        "     - Implementation",
+        "     - Records",
+        "     - Precision",
+        f"     - Batch time (us), range over {repeats} runs",
+        "     - Time per item (ns)",
+        "     - vs pygeohash bulk",
+    ]
+    for row in rows:
+        library = row["library"]
+        label = f"**{library}**" if library == "pygeohash" else library
+        ratio = f"{row['ratio']:.2f}x" if row["ratio"] is not None else "n/a"
+        lines.extend(
+            [
+                f"   * - {label}",
+                f"     - {MODE_LABELS[row['mode']]}",
+                f"     - {IMPLEMENTATIONS.get(library, 'unknown')}",
+                f"     - {row['size']:,}",
+                f"     - {row['precision']}",
+                f"     - {row['median_ns'] / 1e3:,.1f} ({row['low_ns'] / 1e3:,.1f} - {row['high_ns'] / 1e3:,.1f})",
+                f"     - {row['per_item_ns']:,.1f} ({row['per_item_low_ns']:,.1f} - {row['per_item_high_ns']:,.1f})",
+                f"     - {ratio}",
+            ]
+        )
+    return "\n".join(lines)
+
+
+def batch_summary(rows):
+    """State, from the measured medians, where bulk and scalar loops land.
+
+    Reports the comparison in both directions: pygeohash's bulk call against its
+    own scalar loop, and against every scalar-loop competitor that beat it.
+    """
+    by_key = {(row["library"], row["mode"]): row for row in rows}
+    bulk = by_key.get(("pygeohash", MODE_BULK))
+    loop = by_key.get(("pygeohash", MODE_LOOP))
+    if bulk is None or loop is None:
+        return ""
+    sentence = (
+        f"On this machine pygeohash's native bulk call takes {bulk['median_ns'] / loop['median_ns']:.2f}x the "
+        f"time of its own scalar loop ({bulk['per_item_ns']:,.1f} ns versus {loop['per_item_ns']:,.1f} ns per item)."
+    )
+    faster = [row for row in rows if row["median_ns"] < bulk["median_ns"] and row is not bulk]
+    if faster:
+        names = ", ".join(f"``{row['library']}`` ({MODE_LABELS[row['mode']]})" for row in faster)
+        sentence += f" Faster than the bulk call here: {names}."
+    else:
+        sentence += " No measured entry was faster than the bulk call."
+    return textwrap.fill(sentence, width=88, break_on_hyphens=False, break_long_words=False)
+
+
+def batch_noise_note(rows):
+    """Name adjacent batch entries whose ranges of medians overlap across runs."""
+    pairs = []
+    for faster, slower in zip(rows, rows[1:], strict=False):
+        if slower["low_ns"] <= faster["high_ns"]:
+            names = [f"``{r['library']}`` ({MODE_LABELS[r['mode']]})" for r in (faster, slower)]
+            pairs.append(" and ".join(names))
+    if not pairs:
+        return ""
+    return textwrap.fill(
+        f"The repeated runs did not separate {'; '.join(pairs)}: their ranges of batch medians overlap, "
+        "so read them as tied.",
+        width=88,
+        break_on_hyphens=False,
+        break_long_words=False,
+    )
+
+
+def batch_spread(reports):
+    """Largest relative spread (max - min over median) of any batch entry, with its identity."""
+    worst = None
+    for group, *_ in BATCH_GROUPS:
+        for row in collect_batch_rows(reports, group):
+            spread = (row["high_ns"] - row["low_ns"]) / row["median_ns"] if row["median_ns"] else 0.0
+            if worst is None or spread > worst[0]:
+                worst = (spread, group, row["library"], row["mode"])
+    return worst
+
+
 def stability_rows(reports):
     """Per-run medians for the compiled libraries, for the stability table.
 
@@ -183,6 +332,8 @@ def stability_rows(reports):
     per_key = {}
     for run_index, report in enumerate(reports):
         for benchmark in report["benchmarks"]:
+            if benchmark["group"] in BATCH_GROUP_NAMES:
+                continue
             key = (benchmark["group"], library_name(benchmark))
             per_key.setdefault(key, {})[run_index] = benchmark["stats"]["median"] * 1e9
 
@@ -378,6 +529,70 @@ def format_provenance(reports, libraries):
     return "\n".join(lines)
 
 
+def render_batch_section(reports, repeats):
+    """Build the batch encode/decode section, or nothing if the reports have none."""
+    if not any(collect_batch_rows(reports, group) for group, *_ in BATCH_GROUPS):
+        return []
+    first = next(rows for group, *_ in BATCH_GROUPS if (rows := collect_batch_rows(reports, group)))[0]
+    parts = [
+        "Batch encode and decode",
+        "-----------------------",
+        "",
+        "These groups time one call over a whole batch, at 100 and at 10,000 records, and",
+        "report the batch time together with the time per item (batch time divided by the",
+        "number of records). Every library is measured on the same ordered fixtures: a",
+        f"seeded set of varied latitude/longitude pairs encoded at precision {first['precision']}, and the",
+        "geohashes those pairs produce for decoding. The fixtures are built before timing,",
+        "and the full result of every call is checked against the expected geohashes or",
+        "decoded coordinates outside the timed operation, so a constant or reordered",
+        "result fails. The timed operation includes allocating the result list.",
+        "",
+        "Two execution modes appear. **Native bulk call** is pygeohash's ``encode_many`` or",
+        "``decode_many``, which loops in C. **Scalar loop** is a list comprehension over",
+        "the library's ordinary one-record function; it is measured for pygeohash and for",
+        "every competitor. Only pygeohash's bulk entry points are measured natively: this",
+        "page does not claim that any competitor lacks a native batch API, because that was",
+        "not investigated. Rows are sorted by batch time, and the last column divides each",
+        "by pygeohash's bulk call, so rows where pygeohash loses read below 1.00x.",
+        "",
+    ]
+    for group, _op, label, size in BATCH_GROUPS:
+        rows = collect_batch_rows(reports, group)
+        if not rows:
+            continue
+        heading = f"{label}, {size:,} records"
+        parts.extend([heading, "~" * len(heading), "", format_batch_table(rows, repeats), ""])
+        summary = batch_summary(rows)
+        if summary:
+            parts.extend([summary, ""])
+        note = batch_noise_note(rows)
+        if note:
+            parts.extend([note, ""])
+
+    worst = batch_spread(reports)
+    if worst is not None:
+        spread, group, library, mode = worst
+        parts.extend(
+            [
+                textwrap.fill(
+                    "About the variation: the range columns are the lowest and highest whole-batch "
+                    f"median seen across the {repeats} timed runs. The widest relative spread in the "
+                    f"batch groups was {spread:.1%}, for ``{library}`` ({MODE_LABELS[mode]}) in "
+                    f"``{group}``. Batches of 100 records finish in microseconds, so timer "
+                    "granularity, allocator state and other load on the machine move them "
+                    "proportionally more than the 10,000-record batches. Per-item figures are "
+                    "derived by dividing the batch figures, so they inherit the same spread and "
+                    "no timing threshold is asserted anywhere.",
+                    width=88,
+                    break_on_hyphens=False,
+                    break_long_words=False,
+                ),
+                "",
+            ]
+        )
+    return parts
+
+
 def render_page(reports):
     """Build the whole reStructuredText page from the benchmark reports."""
     libraries = sorted({library_name(b) for report in reports for b in report["benchmarks"]})
@@ -400,7 +615,7 @@ def render_page(reports):
         "precision ``9`` for encoding, and the geohash ``ezs42e44y`` for decoding,",
         "bounding-box lookups, and adjacency. Every measured call asserts its result,",
         "decode and bounding-box lookups included, so the comparison is genuinely like",
-        "for like.",
+        "for like. The batch groups below use their own seeded fixtures, described there.",
         "",
         "Adapters exist where a competitor's API allows one; where it does not, the",
         "library drops out of that operation's table. ``python-geohash`` has no",
@@ -434,6 +649,10 @@ def render_page(reports):
         note = noise_note(rows)
         if note:
             parts.extend([note, ""])
+
+    batch_parts = render_batch_section(reports, repeats)
+    if batch_parts:
+        parts.extend(batch_parts)
 
     stability = format_stability(stability_rows(reports), repeats)
     if stability:
@@ -477,7 +696,8 @@ def render_page(reports):
             "  ticks of the platform timer, so their medians are coarsely quantized. Where",
             "  two adjacent entries were not separated by the measurement, the note under",
             "  the table says so and they should be read as tied.",
-            "* Only the eight operations above are measured. A library that is slower here",
+            "* Only the operations above are measured; the batch groups cover only encode and",
+            "  decode. A library that is slower here",
             "  may be faster on work this suite does not cover.",
             "* Install cost is not measured. ``pygeohash`` ships pre-built wheels and needs",
             "  no compiler at install time, which is what motivated the comparison in the",
@@ -506,6 +726,33 @@ def render_markdown_summary(reports):
             cells.append(f"{row['median_ns']:,.0f}" if row else "—")
         lines.append(f"| {label} | " + " | ".join(cells) + " |")
     return "\n".join(lines)
+
+
+def render_markdown_batch_summary(reports):
+    """Render the compact batch tables for pasting into README.md."""
+    lines = []
+    for group, _op, label, size in BATCH_GROUPS:
+        rows = collect_batch_rows(reports, group)
+        if not rows:
+            continue
+        lines.extend(
+            [
+                f"**{label}, {size:,} records** (precision {rows[0]['precision']})",
+                "",
+                "| Library | Mode | Batch time (us) | Per item (ns) | vs pygeohash bulk |",
+                "|---|---|---|---|---|",
+            ]
+        )
+        for row in rows:
+            library = f"**{row['library']}**" if row["library"] == "pygeohash" else row["library"]
+            ratio = f"{row['ratio']:.2f}x" if row["ratio"] is not None else "n/a"
+            lines.append(
+                f"| {library} | {MODE_LABELS[row['mode']]} | "
+                f"{row['median_ns'] / 1e3:,.1f} ({row['low_ns'] / 1e3:,.1f}-{row['high_ns'] / 1e3:,.1f}) | "
+                f"{row['per_item_ns']:,.1f} | {ratio} |"
+            )
+        lines.append("")
+    return "\n".join(lines).rstrip("\n")
 
 
 def main():
@@ -556,6 +803,10 @@ def main():
 
     print("\nMedian times in nanoseconds, for README.md:\n")
     print(render_markdown_summary(reports))
+    batch_markdown = render_markdown_batch_summary(reports)
+    if batch_markdown:
+        print("\nBatch medians, for README.md:\n")
+        print(batch_markdown)
 
 
 if __name__ == "__main__":

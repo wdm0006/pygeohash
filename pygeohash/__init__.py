@@ -30,6 +30,7 @@ if TYPE_CHECKING:
         BoundingBox,
         do_boxes_intersect,
         geohashes_in_box,
+        geohashes_in_radius,
         get_bounding_box,
         is_point_in_box,
         is_point_in_geohash,
@@ -111,6 +112,7 @@ __all__ = [
     "is_point_in_geohash",
     "do_boxes_intersect",
     "geohashes_in_box",
+    "geohashes_in_radius",
     # Statistical operations
     "mean",
     "northern",
@@ -159,6 +161,7 @@ _LAZY_IMPORTS: Dict[str, str] = {
                 "BoundingBox",
                 "do_boxes_intersect",
                 "geohashes_in_box",
+                "geohashes_in_radius",
                 "get_bounding_box",
                 "is_point_in_box",
                 "is_point_in_geohash",

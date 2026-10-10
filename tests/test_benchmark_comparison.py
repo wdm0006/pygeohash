@@ -55,6 +55,16 @@ pygeohash's cell, adjacency must produce the pinned neighbor (including the
 antimeridian wrap ``u00000`` -> ``gbpbpb``), and box enumeration must return
 the pinned cells.
 
+Two further groups per batch size (100 and 10,000 records) measure batch
+workloads, ``encode-batch-N`` and ``decode-batch-N``. Every library is timed on
+identical, ordered, varied fixtures built before timing. PyGeoHash is measured
+twice: as a native bulk call (``encode_many`` / ``decode_many``, mode ``bulk``)
+and as a list comprehension over its scalar call (mode ``scalar-loop``).
+Competitors are measured only as scalar-loop list comprehensions; whether any
+of them ships a native batch API was not investigated and nothing here claims
+they do not. The timed operation is the whole call including allocation of the
+result list; fixture creation and the full-result assertions are untimed.
+
 Adapters exist wherever a competitor's API allows one; where it does not, the
 library drops out of that operation's table and the generated page says so.
 ``python-geohash`` has no single-neighbor lookup (``neighbors()`` computes
@@ -73,6 +83,7 @@ Run with::
         --benchmark-group-by=group --benchmark-sort=mean
 """
 
+import random
 from dataclasses import dataclass
 from typing import Callable, Optional
 
@@ -121,6 +132,35 @@ QUADKEY_GEOHASH = "ezs42e45n"
 TILE_ROUNDTRIP_GEOHASH = "ezs42e45n"
 
 
+# Batch fixtures: fixed seed, built once at import, shared by every adapter.
+# Coordinates are drawn from the Mercator-safe band so that every library,
+# including those that mishandle the poles, sees valid input.
+BATCH_SIZES = (100, 10_000)
+BATCH_PRECISION = PRECISION
+BATCH_SEED = 20261010
+
+
+def _build_batch_fixtures(size):
+    rng = random.Random(BATCH_SEED)  # noqa: S311 - deterministic benchmark data, not security
+    pairs = [(rng.uniform(-85.0, 85.0), rng.uniform(-180.0, 180.0)) for _ in range(size)]
+    return [lat for lat, _ in pairs], [lon for _, lon in pairs]
+
+
+# size -> (latitudes, longitudes, expected geohashes, expected (lat, lon) per geohash).
+# Expected values come from pygeohash's scalar calls; every other library's
+# output is asserted equal to them, so the cross-library agreement is the check.
+BATCH_FIXTURES = {}
+for _size in BATCH_SIZES:
+    _lats, _lons = _build_batch_fixtures(_size)
+    _hashes = [pgh.encode(la, lo, BATCH_PRECISION) for la, lo in zip(_lats, _lons, strict=True)]
+    _centers = [tuple(pgh.decode(h)) for h in _hashes]
+    BATCH_FIXTURES[_size] = (_lats, _lons, _hashes, _centers)
+
+# Native-bulk and scalar-loop modes, as published in the generated page.
+MODE_BULK = "bulk"
+MODE_LOOP = "scalar-loop"
+
+
 @dataclass
 class Adapter:
     """Normalizes one library's API to zero-arg callables over shared inputs."""
@@ -137,6 +177,13 @@ class Adapter:
     to_quadkey: Optional[Callable[[], str]] = None
     from_quadkey: Optional[Callable[[], str]] = None
     tile_roundtrip: Optional[Callable[[], str]] = None
+    # Batch workloads take the shared fixtures as arguments and return a list.
+    # *_loop is a list comprehension over the library's scalar call;
+    # *_bulk is a native bulk call (pygeohash only).
+    encode_loop: Optional[Callable[[list, list], list]] = None
+    decode_loop: Optional[Callable[[list], list]] = None
+    encode_bulk: Optional[Callable[[list, list], list]] = None
+    decode_bulk: Optional[Callable[[list], list]] = None
 
 
 # pygeohash is this project; always present.
@@ -154,6 +201,10 @@ ADAPTERS = [
         to_quadkey=lambda: interop.geohash_to_quadkey(GEOHASH),
         from_quadkey=lambda: interop.quadkey_to_geohash(QUADKEY),
         tile_roundtrip=lambda: interop.tile_to_geohash(*interop.geohash_to_tile(GEOHASH)),
+        encode_loop=lambda lats, lons: [pgh.encode(la, lo, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)],
+        decode_loop=lambda hashes: [pgh.decode(h) for h in hashes],
+        encode_bulk=lambda lats, lons: pgh.encode_many(lats, lons, BATCH_PRECISION),
+        decode_bulk=lambda hashes: pgh.decode_many(hashes),
     )
 ]
 
@@ -166,6 +217,10 @@ try:
             encode=lambda: _python_geohash.encode(LAT, LON, PRECISION),
             decode=lambda: _python_geohash.decode(GEOHASH),
             bbox=lambda: _python_geohash.bbox(GEOHASH),
+            encode_loop=lambda lats, lons: [
+                _python_geohash.encode(la, lo, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)
+            ],
+            decode_loop=lambda hashes: [_python_geohash.decode(h) for h in hashes],
         )
     )
 except ImportError:  # pragma: no cover - depends on a C++ toolchain at install
@@ -182,6 +237,10 @@ try:
             bbox=lambda: _geohashr.bbox(GEOHASH),
             adjacent=lambda: _geohashr.neighbor(ADJACENT_INPUT, "n"),
             adjacent_border=lambda: _geohashr.neighbor(ADJACENT_BORDER_INPUT, "w"),
+            encode_loop=lambda lats, lons: [
+                _geohashr.encode(la, lo, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)
+            ],
+            decode_loop=lambda hashes: [_geohashr.decode(h) for h in hashes],
         )
     )
 except ImportError:  # pragma: no cover - optional comparison dependency
@@ -196,6 +255,10 @@ try:
             "pygeohash-fast",
             encode=lambda: _pygeohash_fast.encode(LON, LAT, PRECISION),
             decode=lambda: _pygeohash_fast.decode(GEOHASH),
+            encode_loop=lambda lats, lons: [
+                _pygeohash_fast.encode(lo, la, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)
+            ],
+            decode_loop=lambda hashes: [_pygeohash_fast.decode(h) for h in hashes],
         )
     )
 except ImportError:  # pragma: no cover - optional comparison dependency
@@ -212,6 +275,10 @@ try:
             bbox=lambda: _libgeohash.bbox(GEOHASH),
             adjacent=lambda: _libgeohash.adjacent(ADJACENT_INPUT, "n"),
             adjacent_border=lambda: _libgeohash.adjacent(ADJACENT_BORDER_INPUT, "w"),
+            encode_loop=lambda lats, lons: [
+                _libgeohash.encode(la, lo, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)
+            ],
+            decode_loop=lambda hashes: [_libgeohash.decode(h) for h in hashes],
         )
     )
 except ImportError:  # pragma: no cover - optional comparison dependency
@@ -228,6 +295,10 @@ try:
             bbox=lambda: _geolib_geohash.bounds(GEOHASH),
             adjacent=lambda: _geolib_geohash.adjacent(ADJACENT_INPUT, "n"),
             adjacent_border=lambda: _geolib_geohash.adjacent(ADJACENT_BORDER_INPUT, "w"),
+            encode_loop=lambda lats, lons: [
+                _geolib_geohash.encode(la, lo, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)
+            ],
+            decode_loop=lambda hashes: [_geolib_geohash.decode(h) for h in hashes],
         )
     )
 except ImportError:  # pragma: no cover - optional comparison dependency
@@ -245,6 +316,10 @@ try:
             # geohash-tools offers no bounding box helper.
             adjacent=lambda: _geohash_tools.adjacent(ADJACENT_INPUT, "top"),
             adjacent_border=lambda: _geohash_tools.adjacent(ADJACENT_BORDER_INPUT, "left"),
+            encode_loop=lambda lats, lons: [
+                _geohash_tools.encode(la, lo, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)
+            ],
+            decode_loop=lambda hashes: [_geohash_tools.decode(h) for h in hashes],
         )
     )
 except ImportError:  # pragma: no cover - optional comparison dependency
@@ -262,6 +337,20 @@ _LARGE_BOXERS = [a for a in ADAPTERS if a.box_large]
 _TO_QUADKEY = [a for a in ADAPTERS if a.to_quadkey]
 _FROM_QUADKEY = [a for a in ADAPTERS if a.from_quadkey]
 _TILE_ROUNDTRIP = [a for a in ADAPTERS if a.tile_roundtrip]
+
+# (adapter, mode, callable) entries for the batch groups. Ids carry
+# "<library>@<mode>" so the report generator can recover both.
+_BATCH_ENCODE = [(a, MODE_LOOP, a.encode_loop) for a in ADAPTERS if a.encode_loop] + [
+    (a, MODE_BULK, a.encode_bulk) for a in ADAPTERS if a.encode_bulk
+]
+_BATCH_DECODE = [(a, MODE_LOOP, a.decode_loop) for a in ADAPTERS if a.decode_loop] + [
+    (a, MODE_BULK, a.decode_bulk) for a in ADAPTERS if a.decode_bulk
+]
+
+
+def _batch_id(entry):
+    adapter, mode, _ = entry
+    return f"{adapter.name}@{mode}"
 
 
 def normalized_decode(adapter, result):
@@ -294,11 +383,16 @@ def warmup():
     """
     for adapter in ADAPTERS:
         for operation in adapter.__dataclass_fields__:
-            if operation == "name":
+            if operation == "name" or operation.endswith(("_loop", "_bulk")):
                 continue
             call = getattr(adapter, operation)
             if call is not None:
                 call()
+    lats, lons, hashes, _ = BATCH_FIXTURES[BATCH_SIZES[0]]
+    for _, _, call in _BATCH_ENCODE:
+        call(lats, lons)
+    for _, _, call in _BATCH_DECODE:
+        call(hashes)
 
 
 @pytest.mark.parametrize("adapter", _ENCODERS, ids=lambda a: a.name)
@@ -397,3 +491,60 @@ def test_geohashes_in_box_large(benchmark, adapter):
         cell = pgh.get_bounding_box(geohash)
         assert cell.min_lat <= BOX_LARGE_BBOX.max_lat and cell.max_lat >= BOX_LARGE_BBOX.min_lat
         assert cell.min_lon <= BOX_LARGE_BBOX.max_lon and cell.max_lon >= BOX_LARGE_BBOX.min_lon
+
+
+def _assert_decoded(adapter, results, centers):
+    """Compare a batch decode to the expected centers, outside the timed call."""
+    assert len(results) == len(centers)
+    for result, expected in zip(results, centers, strict=True):
+        assert normalized_decode(adapter, result) == expected
+
+
+@pytest.mark.parametrize("size", BATCH_SIZES, ids=lambda n: f"n{n}")
+@pytest.mark.parametrize("entry", _BATCH_ENCODE, ids=_batch_id)
+def test_encode_batch(benchmark, entry, size):
+    """Encode a shared, ordered batch of varied coordinates at precision 9."""
+    adapter, mode, call = entry
+    lats, lons, hashes, _ = BATCH_FIXTURES[size]
+    benchmark.group = f"encode-batch-{size}"
+    benchmark.extra_info.update(library=adapter.name, mode=mode, size=size, precision=BATCH_PRECISION)
+    result = benchmark(call, lats, lons)
+    assert isinstance(result, list)
+    assert result == hashes  # complete, ordered results: constant or reordered output fails
+    assert len(set(result)) > size // 2  # the fixture itself is varied
+
+
+@pytest.mark.parametrize("size", BATCH_SIZES, ids=lambda n: f"n{n}")
+@pytest.mark.parametrize("entry", _BATCH_DECODE, ids=_batch_id)
+def test_decode_batch(benchmark, entry, size):
+    """Decode a shared, ordered batch of varied geohashes back to coordinates."""
+    adapter, mode, call = entry
+    _, _, hashes, centers = BATCH_FIXTURES[size]
+    benchmark.group = f"decode-batch-{size}"
+    benchmark.extra_info.update(library=adapter.name, mode=mode, size=size, precision=BATCH_PRECISION)
+    result = benchmark(call, hashes)
+    assert isinstance(result, list)
+    _assert_decoded(adapter, result, centers)
+    assert len({normalized_decode(adapter, r) for r in result}) > size // 2
+
+
+def test_batch_fixtures_are_varied_and_ordered():
+    """Guard the fixtures themselves: distinct points, literal pins on known values."""
+    for size, (lats, lons, hashes, centers) in BATCH_FIXTURES.items():
+        assert len(lats) == len(lons) == len(hashes) == len(centers) == size
+        assert len(set(hashes)) > size // 2
+        assert hashes == [pgh.encode(la, lo, BATCH_PRECISION) for la, lo in zip(lats, lons, strict=True)]
+    small = BATCH_FIXTURES[BATCH_SIZES[0]]
+    large = BATCH_FIXTURES[BATCH_SIZES[1]]
+    assert large[2][: len(small[2])] == small[2]  # shared seed: the small batch prefixes the large one
+    assert hashes_have_precision(large[2])
+    # Literal pins: all seven libraries agree on these (asserted by the batch tests),
+    # so a drifting seed or codec cannot silently change what is being timed.
+    assert small[2][:3] == ["m73rpgg3r", "ndhvhpxe1", "70wv073j8"]
+    assert small[2][-1] == "tyd4rjdyw"
+    assert large[2][-1] == "28yguuyv8"
+    assert small[3][0] == (-25.467445850372314, 58.35317373275757)
+
+
+def hashes_have_precision(hashes):
+    return all(len(h) == BATCH_PRECISION for h in hashes)

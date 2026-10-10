@@ -58,6 +58,8 @@ Bounding Box Operations
 .. autofunction:: pygeohash.do_boxes_intersect
 .. autofunction:: pygeohash.geohashes_in_box
 
+.. autofunction:: pygeohash.geohashes_in_radius
+
 Statistical Functions
 ---------------------
 

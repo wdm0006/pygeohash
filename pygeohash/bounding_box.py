@@ -331,3 +331,91 @@ def geohashes_in_box(bbox: BoundingBox, precision: int = 6) -> List[str]:
 
     logger.debug("Found %d intersecting geohashes", len(result))
     return sorted(result)
+
+
+def _distance_to_box(latitude: float, longitude: float, bbox: BoundingBox) -> float:
+    """Return the spherical distance to the closest point in a cell."""
+    from pygeohash.types import EARTH_RADIUS
+
+    if latitude == 90.0:
+        return EARTH_RADIUS * math.radians(90.0 - bbox.max_lat)
+    if latitude == -90.0:
+        return EARTH_RADIUS * math.radians(bbox.min_lat + 90.0)
+
+    if bbox.min_lon <= longitude <= bbox.max_lon:
+        delta_lon = 0.0
+    else:
+        delta_lon = min(abs((edge - longitude + 180.0) % 360.0 - 180.0) for edge in (bbox.min_lon, bbox.max_lon))
+    phi = math.radians(latitude)
+    delta = math.radians(delta_lon)
+    closest_lat = math.degrees(math.atan2(math.sin(phi), math.cos(phi) * math.cos(delta)))
+    candidates = (bbox.min_lat, bbox.max_lat, max(bbox.min_lat, min(bbox.max_lat, closest_lat)))
+    distances = []
+    for lat in candidates:
+        target_phi = math.radians(lat)
+        a = math.sin((target_phi - phi) / 2.0) ** 2 + math.cos(phi) * math.cos(target_phi) * math.sin(delta / 2.0) ** 2
+        distances.append(2.0 * EARTH_RADIUS * math.asin(math.sqrt(max(0.0, min(1.0, a)))))
+    return min(distances)
+
+
+def geohashes_in_radius(latitude: float, longitude: float, radius_m: float, precision: int = 6) -> List[str]:
+    """Find all geohash cells intersecting a spherical circle.
+
+    Args:
+        latitude (float): Center latitude in degrees, between -90 and 90.
+        longitude (float): Center longitude in degrees, between -180 and 180.
+        radius_m (float): Finite, positive radius in meters. Booleans are rejected.
+        precision (int): Cell precision from 1 to 12. Defaults to 6.
+
+    Returns:
+        List[str]: Sorted, unique cells whose nearest point is within the radius,
+        including cells touching the circle. Antimeridian crossings and polar caps
+        are supported. Distances use the spherical ``EARTH_RADIUS`` constant.
+
+    Raises:
+        ValueError: If coordinates, radius, or precision are invalid.
+
+    Note:
+        These are candidate cells for proximity queries; filter individual records
+        by their distance afterwards. Output size grows with radius and precision;
+        large circles at high precision can require very large lists.
+    """
+    from pygeohash.types import EARTH_RADIUS
+
+    _validate_point_coordinates(latitude, longitude)
+    if isinstance(precision, bool) or not isinstance(precision, int):
+        raise ValueError("Precision must be an integer, not a bool")
+    if not 1 <= precision <= 12:
+        raise ValueError("Precision must be between 1 and 12")
+    if isinstance(radius_m, bool):
+        raise ValueError("radius_m must be a number, not a bool")
+    try:
+        finite_radius = math.isfinite(radius_m)
+    except TypeError:
+        finite_radius = False
+    if not finite_radius:
+        raise ValueError("radius_m must be a finite number")
+    if radius_m <= 0:
+        raise ValueError("radius_m must be positive")
+
+    angular_radius = min(math.pi, radius_m / EARTH_RADIUS)
+    lat_span = math.degrees(angular_radius)
+    min_lat = max(-90.0, latitude - lat_span)
+    max_lat = min(90.0, latitude + lat_span)
+    if lat_span >= 90.0 - abs(latitude):
+        intervals = [(-180.0, 180.0)]
+    else:
+        lon_span = math.degrees(math.asin(min(1.0, math.sin(angular_radius) / math.cos(math.radians(latitude)))))
+        west, east = longitude - lon_span, longitude + lon_span
+        if west <= -180.0:
+            intervals = [(-180.0, east), (west + 360.0, 180.0)]
+        elif east >= 180.0:
+            intervals = [(west, 180.0), (-180.0, east - 360.0)]
+        else:
+            intervals = [(west, east)]
+    candidates = set()
+    for west, east in intervals:
+        candidates.update(geohashes_in_box(BoundingBox._unvalidated(min_lat, west, max_lat, east), precision))
+    return sorted(
+        cell for cell in candidates if _distance_to_box(latitude, longitude, get_bounding_box(cell)) <= radius_m
+    )
