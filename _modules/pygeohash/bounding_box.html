@@ -184,7 +184,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.geohash</span><span class="w"> </span><span class="kn">import</span> <span class="n">decode_exactly</span><span class="p">,</span> <span class="n">encode</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pygeohash.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
@@ -423,14 +423,65 @@
 
 
 
+<span class="n">DEFAULT_MAX_CELLS</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5_000_000</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_max_cells</span><span class="p">(</span><span class="n">max_cells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">max_cells</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_cells</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_cells</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"max_cells must be an integer or None, not a bool or other type"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_cells</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"max_cells must be at least 1"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_cell_count</span><span class="p">(</span><span class="n">estimated</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_cells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">max_cells</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">estimated</span> <span class="o">&gt;</span> <span class="n">max_cells</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Region would enumerate about </span><span class="si">{</span><span class="n">estimated</span><span class="si">}</span><span class="s2"> candidate cells at precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"which exceeds max_cells=</span><span class="si">{</span><span class="n">max_cells</span><span class="si">}</span><span class="s2">. Lower the precision, use a smaller region, "</span>
+            <span class="s2">"or pass max_cells=None to disable the limit."</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_box_lattice</span><span class="p">(</span><span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Return ``(first_row, last_row, first_col, last_col, lat_step, lon_step, lat_err, lon_err)``."""</span>
+    <span class="n">center_lat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">center_lon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">center_geohash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Center geohash: </span><span class="si">%s</span><span class="s2"> at (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">)"</span><span class="p">,</span> <span class="n">center_geohash</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">)</span>
+
+    <span class="n">_cell_lat</span><span class="p">,</span> <span class="n">_cell_lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">)</span>
+    <span class="n">lat_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lat_err</span>
+    <span class="n">lon_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lon_err</span>
+    <span class="n">lat_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">precision</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">lon_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">precision</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">first_row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="mf">90.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lat_step</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">last_row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lat_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="mf">90.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lat_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">first_col</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lon_step</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">last_col</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lon_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lon_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">first_row</span><span class="p">,</span> <span class="n">last_row</span><span class="p">,</span> <span class="n">first_col</span><span class="p">,</span> <span class="n">last_col</span><span class="p">,</span> <span class="n">lat_step</span><span class="p">,</span> <span class="n">lon_step</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_lattice_size</span><span class="p">(</span><span class="n">lattice</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">first_row</span><span class="p">,</span> <span class="n">last_row</span><span class="p">,</span> <span class="n">first_col</span><span class="p">,</span> <span class="n">last_col</span> <span class="o">=</span> <span class="n">lattice</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">last_row</span> <span class="o">-</span> <span class="n">first_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">last_col</span> <span class="o">-</span> <span class="n">first_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+
 <div class="viewcode-block" id="geohashes_in_box">
 <a class="viewcode-back" href="../../api.html#pygeohash.geohashes_in_box">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">geohashes_in_box</span><span class="p">(</span><span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">geohashes_in_box</span><span class="p">(</span>
+    <span class="n">bbox</span><span class="p">:</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_cells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_CELLS</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Find geohashes that intersect with a given bounding box.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        bbox (BoundingBox): The bounding box to find geohashes for.</span>
 <span class="sd">        precision (int, optional): The precision of the geohashes to return. Defaults to 6.</span>
+<span class="sd">        max_cells (Optional[int]): Keyword-only upper bound on the number of grid</span>
+<span class="sd">            cells the enumeration may visit, estimated from the covering row and</span>
+<span class="sd">            column counts before any allocation. Defaults to 5,000,000; ``None``</span>
+<span class="sd">            disables the check.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        List[str]: A sorted list of geohashes that intersect with the bounding box.</span>
@@ -440,6 +491,11 @@
 <span class="sd">        &gt;&gt;&gt; geohashes_in_box(box, precision=5)</span>
 <span class="sd">        ['u4pru']</span>
 
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If ``precision`` or ``max_cells`` is invalid, or if the estimated</span>
+<span class="sd">            cell count exceeds ``max_cells``; lower the precision, shrink the box, or</span>
+<span class="sd">            pass ``max_cells=None``.</span>
+
 <span class="sd">    Note:</span>
 <span class="sd">        The number of geohashes returned depends on the size of the bounding box</span>
 <span class="sd">        and the precision requested. Higher precision values will result in more</span>
@@ -447,35 +503,14 @@
 <span class="sd">        the geohash grid instead of sampling points, so the result is returned</span>
 <span class="sd">        in a deterministically sorted order that is identical across processes.</span>
 <span class="sd">    """</span>
+    <span class="n">_validate_max_cells</span><span class="p">(</span><span class="n">max_cells</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Finding geohashes in box </span><span class="si">%s</span><span class="s2"> with precision </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
 
-    <span class="c1"># Encode the center first: this validates the precision argument exactly as</span>
-    <span class="c1"># the previous sampling implementation did, and anchors the enumeration.</span>
-    <span class="n">center_lat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">center_lon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">center_geohash</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Center geohash: </span><span class="si">%s</span><span class="s2"> at (lat=</span><span class="si">%f</span><span class="s2">, lon=</span><span class="si">%f</span><span class="s2">)"</span><span class="p">,</span> <span class="n">center_geohash</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">)</span>
-
-    <span class="c1"># Cell size at this precision. The C decoder refines intervals by exact</span>
-    <span class="c1"># halving, so the decoded error margins are exact half-cell sizes.</span>
-    <span class="n">_cell_lat</span><span class="p">,</span> <span class="n">_cell_lon</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">decode_exactly</span><span class="p">(</span><span class="n">center_geohash</span><span class="p">)</span>
-    <span class="n">lat_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lat_err</span>
-    <span class="n">lon_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">lon_err</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Geohash size at precision </span><span class="si">%d</span><span class="s2">: lat_step=</span><span class="si">%f</span><span class="s2">, lon_step=</span><span class="si">%f</span><span class="s2">"</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">lat_step</span><span class="p">,</span> <span class="n">lon_step</span><span class="p">)</span>
-
-    <span class="c1"># The geohash grid is uniform at a given precision: 2 ** (5p // 2) latitude</span>
-    <span class="c1"># rows and 2 ** ((5p + 1) // 2) longitude columns (bits alternate</span>
-    <span class="c1"># longitude/latitude per character, so odd and even precisions differ).</span>
-    <span class="n">lat_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">precision</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">lon_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">precision</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
-
-    <span class="c1"># Covering index rectangle. The +/- 1 slack absorbs the rounding of the</span>
-    <span class="c1"># index division for coordinates that sit within a rounding error of a</span>
-    <span class="c1"># cell boundary; extra candidate rows and columns are filtered per cell.</span>
-    <span class="n">first_row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lat</span> <span class="o">+</span> <span class="mf">90.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lat_step</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">last_row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lat_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lat</span> <span class="o">+</span> <span class="mf">90.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lat_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">first_col</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">min_lon</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lon_step</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">last_col</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lon_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">bbox</span><span class="o">.</span><span class="n">max_lon</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">lon_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Building the lattice encodes the box center first, which validates the</span>
+    <span class="c1"># precision argument exactly as the previous sampling implementation did.</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">_box_lattice</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">_check_cell_count</span><span class="p">(</span><span class="n">_lattice_size</span><span class="p">(</span><span class="n">lattice</span><span class="p">),</span> <span class="n">max_cells</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">first_row</span><span class="p">,</span> <span class="n">last_row</span><span class="p">,</span> <span class="n">first_col</span><span class="p">,</span> <span class="n">last_col</span><span class="p">,</span> <span class="n">lat_step</span><span class="p">,</span> <span class="n">lon_step</span><span class="p">,</span> <span class="n">lat_err</span><span class="p">,</span> <span class="n">lon_err</span> <span class="o">=</span> <span class="n">lattice</span>
 
     <span class="c1"># A cell is classified interior (fully inside the box) or exterior (clear</span>
     <span class="c1"># of it) only when the decision clears this margin on both axes; anything</span>
@@ -554,7 +589,14 @@
 
 <div class="viewcode-block" id="geohashes_in_radius">
 <a class="viewcode-back" href="../../api.html#pygeohash.geohashes_in_radius">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">geohashes_in_radius</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">radius_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">geohashes_in_radius</span><span class="p">(</span>
+    <span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">radius_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">max_cells</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_CELLS</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Find all geohash cells intersecting a spherical circle.</span>
 
 <span class="sd">    Args:</span>
@@ -562,6 +604,10 @@
 <span class="sd">        longitude (float): Center longitude in degrees, between -180 and 180.</span>
 <span class="sd">        radius_m (float): Finite, positive radius in meters. Booleans are rejected.</span>
 <span class="sd">        precision (int): Cell precision from 1 to 12. Defaults to 6.</span>
+<span class="sd">        max_cells (Optional[int]): Keyword-only upper bound on the total number of</span>
+<span class="sd">            grid cells the enumeration may visit, summed over antimeridian</span>
+<span class="sd">            intervals and estimated before any allocation. Defaults to 5,000,000;</span>
+<span class="sd">            ``None`` disables the check.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        List[str]: Sorted, unique cells whose nearest point is within the radius,</span>
@@ -569,7 +615,10 @@
 <span class="sd">        are supported. Distances use the spherical ``EARTH_RADIUS`` constant.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If coordinates, radius, or precision are invalid.</span>
+<span class="sd">        ValueError: If coordinates, radius, precision, or ``max_cells`` are invalid,</span>
+<span class="sd">            or if the estimated cell count exceeds ``max_cells``. A circle touching a</span>
+<span class="sd">            pole spans every longitude, so small radii at high precision can exceed</span>
+<span class="sd">            the limit; lower the precision or pass ``max_cells=None``.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        These are candidate cells for proximity queries; filter individual records</span>
@@ -593,6 +642,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"radius_m must be a finite number"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">radius_m</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"radius_m must be positive"</span><span class="p">)</span>
+    <span class="n">_validate_max_cells</span><span class="p">(</span><span class="n">max_cells</span><span class="p">)</span>
 
     <span class="n">angular_radius</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">radius_m</span> <span class="o">/</span> <span class="n">EARTH_RADIUS</span><span class="p">)</span>
     <span class="n">lat_span</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">angular_radius</span><span class="p">)</span>
@@ -609,9 +659,11 @@
             <span class="n">intervals</span> <span class="o">=</span> <span class="p">[(</span><span class="n">west</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">180.0</span><span class="p">,</span> <span class="n">east</span> <span class="o">-</span> <span class="mf">360.0</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">intervals</span> <span class="o">=</span> <span class="p">[(</span><span class="n">west</span><span class="p">,</span> <span class="n">east</span><span class="p">)]</span>
+    <span class="n">boxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">BoundingBox</span><span class="o">.</span><span class="n">_unvalidated</span><span class="p">(</span><span class="n">min_lat</span><span class="p">,</span> <span class="n">west</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="n">east</span><span class="p">)</span> <span class="k">for</span> <span class="n">west</span><span class="p">,</span> <span class="n">east</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">]</span>
+    <span class="n">_check_cell_count</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">_lattice_size</span><span class="p">(</span><span class="n">_box_lattice</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">precision</span><span class="p">))</span> <span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="n">boxes</span><span class="p">),</span> <span class="n">max_cells</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
     <span class="n">candidates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">west</span><span class="p">,</span> <span class="n">east</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
-        <span class="n">candidates</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">BoundingBox</span><span class="o">.</span><span class="n">_unvalidated</span><span class="p">(</span><span class="n">min_lat</span><span class="p">,</span> <span class="n">west</span><span class="p">,</span> <span class="n">max_lat</span><span class="p">,</span> <span class="n">east</span><span class="p">),</span> <span class="n">precision</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="n">boxes</span><span class="p">:</span>
+        <span class="n">candidates</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">geohashes_in_box</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">max_cells</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
         <span class="n">cell</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">candidates</span> <span class="k">if</span> <span class="n">_distance_to_box</span><span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">,</span> <span class="n">get_bounding_box</span><span class="p">(</span><span class="n">cell</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">radius_m</span>
     <span class="p">)</span></div>
