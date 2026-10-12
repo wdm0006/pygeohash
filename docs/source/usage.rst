@@ -149,6 +149,11 @@ keys, then filter individual coordinates by their distance to the center.
 Distances use ``EARTH_RADIUS`` in meters. Choose precision carefully: large
 radii at high precision produce large lists.
 
+Both ``geohashes_in_radius`` and ``geohashes_in_box`` accept a keyword-only
+``max_cells`` (default 5,000,000). If the estimated cell count exceeds it, a
+``ValueError`` is raised before any cells are enumerated; lower the precision,
+use a smaller region, or pass ``max_cells=None`` to disable the limit.
+
 Bounding Box Operations
 -----------------------
 
