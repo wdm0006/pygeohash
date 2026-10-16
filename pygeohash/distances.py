@@ -150,6 +150,7 @@ def geohash_haversine_distance(geohash_1: str, geohash_2: str) -> float:
     a: float = math.sin(delta_phi / 2.0) * math.sin(delta_phi / 2.0) + math.cos(phi_1) * math.cos(phi_2) * math.sin(
         delta_lambda / 2
     ) * math.sin(delta_lambda / 2)
+    a = min(1.0, max(0.0, a))
     c: float = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
     result = _EARTH_RADIUS * c
