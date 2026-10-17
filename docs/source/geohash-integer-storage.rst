@@ -20,14 +20,8 @@ restriction.
 The integer is ``14672002``. All 1–12-character geohashes fit in at most
 60 bits, within a signed SQL ``BIGINT``.
 
-As verified on 2026-10-04, interop is in the development source and is
-absent from the published 3.5.1 release. To run these examples now,
-install this pinned source revision (a compiler is needed for the
-package's C core):
-
-.. code:: bash
-
-   pip install "pygeohash @ git+https://github.com/wdm0006/pygeohash.git@b0c06ed723a58bab372ac6fbfe8bda953448d637"
+These conversions were added in pygeohash 3.6.0 and are not in earlier
+releases; upgrade with ``pip install -U pygeohash``.
 
 Exact storage contract
 ----------------------
