@@ -1,5 +1,7 @@
 """Tests for the distance module: known pairs, precision-table tiers, and extremes."""
 
+import math
+
 import pytest
 
 from pygeohash import geohash_approximate_distance, geohash_haversine_distance
@@ -40,6 +42,29 @@ def test_haversine_antipodal_cells_exceed_half_the_equatorial_circumference():
 
     assert distance == pytest.approx(20013720.978927333, rel=1e-6)
     assert distance > 20_000_000.0
+
+
+# Antipodal cell centers whose haversine intermediate rounds above 1.0. The first
+# pair is the reported one; the rest were selected by sweeping 20,000 random
+# antipodal pairs and keeping ones that raised "math domain error" before the fix.
+ROUNDOFF_ANTIPODAL_PAIRS = [
+    ("q2mvksje0kv6", "drtfsevsb7jm"),
+    ("cnwssqgjbqd1", "j1qek354036n"),
+    ("d4g722mky2s9", "qj5k8rt7nrkw"),
+    ("10n8ppthw5xh", "vpyxz0m5qhr5"),
+    ("vedhp1rvcvj8", "1s65znxf1fvx"),
+]
+
+
+@pytest.mark.parametrize("geohash_1, geohash_2", ROUNDOFF_ANTIPODAL_PAIRS)
+def test_haversine_antipodal_roundoff_does_not_raise(geohash_1, geohash_2):
+    half_circumference = math.pi * 6_371_000
+
+    forward = geohash_haversine_distance(geohash_1, geohash_2)
+    reverse = geohash_haversine_distance(geohash_2, geohash_1)
+
+    assert forward == pytest.approx(half_circumference, abs=1.0)
+    assert reverse == pytest.approx(half_circumference, abs=1.0)
 
 
 def test_haversine_pole_to_pole_is_half_a_meridian():
