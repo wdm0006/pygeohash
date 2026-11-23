@@ -15,11 +15,11 @@
         gtag('config', 'G-Z43R9PWW0B');
     </script>
     
-    <title>Usage Guide &#8212; pygeohash 3.5.1 documentation</title>
+    <title>Usage Guide &#8212; pygeohash 3.6.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
     <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=9adde7c3" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
-    <script src="_static/documentation_options.js?v=654eae90"></script>
+    <script src="_static/documentation_options.js?v=5349f462"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -280,6 +280,9 @@
 <span class="n">cells</span> <span class="o">=</span> <span class="n">pgh</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">(</span><span class="s1">'kd3ybyu'</span><span class="p">,</span> <span class="n">include_self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.6.0.</span></p>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">get_neighbors</span></code> returns a sorted list of unique, same-precision, lowercase
 geohashes. Longitude wraps across the antimeridian, and cells beyond a pole do
 not exist, so a cell in the top or bottom row has five neighbors instead of
@@ -287,6 +290,9 @@ raising <code class="docutils literal notranslate"><span class="pre">ValueError<
 </section>
 <section id="radius-coverage">
 <h2>Radius Coverage<a class="headerlink" href="#radius-coverage" title="Link to this heading">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.6.0.</span></p>
+</div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">geohashes_in_radius(latitude,</span> <span class="pre">longitude,</span> <span class="pre">radius_m,</span> <span class="pre">precision=6)</span></code> to
 select candidate cells for a proximity query. For example, a one-kilometer
 search around Copenhagen can use:</p>
@@ -299,6 +305,10 @@ circles containing a pole are handled automatically. Query records by these
 keys, then filter individual coordinates by their distance to the center.
 Distances use <code class="docutils literal notranslate"><span class="pre">EARTH_RADIUS</span></code> in meters. Choose precision carefully: large
 radii at high precision produce large lists.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">geohashes_in_radius</span></code> and <code class="docutils literal notranslate"><span class="pre">geohashes_in_box</span></code> accept a keyword-only
+<code class="docutils literal notranslate"><span class="pre">max_cells</span></code> (default 5,000,000). If the estimated cell count exceeds it, a
+<code class="docutils literal notranslate"><span class="pre">ValueError</span></code> is raised before any cells are enumerated; lower the precision,
+use a smaller region, or pass <code class="docutils literal notranslate"><span class="pre">max_cells=None</span></code> to disable the limit.</p>
 </section>
 <section id="bounding-box-operations">
 <h2>Bounding Box Operations<a class="headerlink" href="#bounding-box-operations" title="Link to this heading">¶</a></h2>

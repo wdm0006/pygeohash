@@ -16,11 +16,11 @@
         gtag('config', 'G-Z43R9PWW0B');
     </script>
     
-    <title>Geohash to map tiles and Bing quadkeys in Python &#8212; pygeohash 3.5.1 documentation</title>
+    <title>Geohash to map tiles and Bing quadkeys in Python &#8212; pygeohash 3.6.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=30d13653" />
     <link rel="stylesheet" type="text/css" href="_static/css/wabi.css?v=9adde7c3" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8d29c75" />
-    <script src="_static/documentation_options.js?v=654eae90"></script>
+    <script src="_static/documentation_options.js?v=5349f462"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -192,13 +192,8 @@ tile cache.</p>
 <code class="docutils literal notranslate"><span class="pre">&quot;031333200222&quot;</span></code>. Use <code class="docutils literal notranslate"><span class="pre">tile.zoom</span></code>, <code class="docutils literal notranslate"><span class="pre">tile.x</span></code>, and <code class="docutils literal notranslate"><span class="pre">tile.y</span></code> for a
 slippy <code class="docutils literal notranslate"><span class="pre">z/x/y</span></code> address; the tuple itself is ordered <strong>x, y, zoom</strong>. No
 visualization extra or new runtime dependency is needed.</p>
-<p>As verified on 2026-10-04, interop is in the development source and is
-absent from the published 3.5.1 release. To run these examples now,
-install this pinned source revision (a compiler is needed for the
-package’s C core):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"pygeohash @ git+https://github.com/wdm0006/pygeohash.git@b0c06ed723a58bab372ac6fbfe8bda953448d637"</span>
-</pre></div>
-</div>
+<p>These conversions were added in pygeohash 3.6.0 and are not in earlier
+releases; upgrade with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">pygeohash</span></code>.</p>
 <section id="derive-the-zoom-before-building-cache-keys">
 <h2>Derive the zoom before building cache keys<a class="headerlink" href="#derive-the-zoom-before-building-cache-keys" title="Link to this heading">¶</a></h2>
 <p>A precision-p geohash contains 5p bits, alternating longitude first,
