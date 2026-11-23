@@ -122,6 +122,8 @@ To find geohashes adjacent to a given geohash:
     # Get the cell plus all eight surrounding cells for a proximity lookup
     cells = pgh.get_neighbors('kd3ybyu', include_self=True)
 
+.. versionadded:: 3.6.0
+
 ``get_neighbors`` returns a sorted list of unique, same-precision, lowercase
 geohashes. Longitude wraps across the antimeridian, and cells beyond a pole do
 not exist, so a cell in the top or bottom row has five neighbors instead of
@@ -129,6 +131,8 @@ raising ``ValueError``.
 
 Radius Coverage
 ---------------
+
+.. versionadded:: 3.6.0
 
 Use ``geohashes_in_radius(latitude, longitude, radius_m, precision=6)`` to
 select candidate cells for a proximity query. For example, a one-kilometer
@@ -144,6 +148,11 @@ circles containing a pole are handled automatically. Query records by these
 keys, then filter individual coordinates by their distance to the center.
 Distances use ``EARTH_RADIUS`` in meters. Choose precision carefully: large
 radii at high precision produce large lists.
+
+Both ``geohashes_in_radius`` and ``geohashes_in_box`` accept a keyword-only
+``max_cells`` (default 5,000,000). If the estimated cell count exceeds it, a
+``ValueError`` is raised before any cells are enumerated; lower the precision,
+use a smaller region, or pass ``max_cells=None`` to disable the limit.
 
 Bounding Box Operations
 -----------------------
